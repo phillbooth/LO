@@ -1,0 +1,25 @@
+enum PaymentStatus {
+  Paid
+  Unpaid
+  Pending
+  Failed
+  Refunded
+  Unknown
+}
+
+enum Decision {
+  ALOw
+  Deny
+  Review
+}
+
+secure flow paymentDecision(status: PaymentStatus) -> Decision {
+  match status {
+    Paid => ALOw
+    Unpaid => Review
+    Pending => Review
+    Failed => Deny
+    Refunded => Review
+    Unknown => Review
+  }
+}

@@ -1,0 +1,42 @@
+type OrderId = String
+type CustomerId = String
+
+type OrderItem {
+  sku: String
+  quantity: Int
+}
+
+type CreateOrderRequest {
+  customerId: CustomerId
+  items: Array<OrderItem>
+  currency: String
+}
+
+type CreateOrderResponse {
+  id: OrderId
+  decision: Decision
+  status: String
+}
+
+enum Decision {
+  ALOw
+  Deny
+  Review
+}
+
+api OrdersApi {
+  POST "/orders" {
+    request CreateOrderRequest
+    response CreateOrderResponse
+    errors [ValidationError, PaymentError]
+    timeout 5s
+    max_body_size 1mb
+    handler createOrder
+  }
+}
+
+secure flow createOrder(req: Request) -> Result<Response, ApiError>
+effects [network.inbound] {
+  let input: CreateOrderRequest = json.decode<CreateOrderRequest>(req.body)
+  return JsonResponse(input)
+}

@@ -1,0 +1,11 @@
+type CustomerId = String
+
+type Customer {
+  id: CustomerId
+  name: String
+  email: Option<String>
+}
+
+flow displayName(customer: Customer) -> String {
+  return customer.name
+}

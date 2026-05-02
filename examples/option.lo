@@ -1,0 +1,19 @@
+type CustomerId = String
+
+type Customer {
+  id: CustomerId
+  email: Option<String>
+}
+
+flow findCustomer(id: CustomerId) -> Option<Customer> {
+  return None
+}
+
+secure flow requireCustomer(id: CustomerId) -> Result<Customer, Error> {
+  let customer: Option<Customer> = findCustomer(id)
+
+  match customer {
+    Some(c) => return Ok(c)
+    None => return Err(Error.NotFound)
+  }
+}

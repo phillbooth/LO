@@ -1,0 +1,14 @@
+type OrderId = String
+
+type Order {
+  id: OrderId
+}
+
+enum OrderError {
+  NotFound
+  InvalidStatus
+}
+
+flow loadOrder(id: OrderId) -> Result<Order, OrderError> {
+  return Err(OrderError.NotFound)
+}

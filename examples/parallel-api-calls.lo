@@ -1,0 +1,34 @@
+type EnrichedOrder {
+  customer: Customer
+  stock: StockStatus
+  risk: RiskScore
+}
+
+type Customer {
+  id: CustomerId
+}
+
+type StockStatus {
+  available: Bool
+}
+
+type RiskScore {
+  score: Float
+}
+
+secure flow enrichOrder(input: CreateOrderRequest) -> Result<EnrichedOrder, ApiError>
+effects [network.outbound] {
+  parallel {
+    customer = await CustomersApi.get(input.customerId)
+    stock = await StockApi.check(input.items)
+    risk = await RiskApi.score(input)
+  } timeout 5s catch error {
+    return Err(ApiError.ExternalServiceFailed(error))
+  }
+
+  return Ok(EnrichedOrder {
+    customer: customer
+    stock: stock
+    risk: risk
+  })
+}

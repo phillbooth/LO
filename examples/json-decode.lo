@@ -1,0 +1,17 @@
+type CustomerId = String
+
+type OrderItem {
+  sku: String
+  quantity: Int
+}
+
+type CreateOrderRequest {
+  customerId: CustomerId
+  items: Array<OrderItem>
+  currency: String
+}
+
+secure flow decodeOrder(req: Request) -> Result<CreateOrderRequest, ApiError> {
+  let input: CreateOrderRequest = json.decode<CreateOrderRequest>(req.body)
+  return Ok(input)
+}

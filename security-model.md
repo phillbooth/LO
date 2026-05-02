@@ -1,0 +1,1280 @@
+# LO Security Model
+
+This document describes the proposed security model for **LO / Logic Omni**.
+
+LO is a strict, memory-safe, security-first, JSON-native, API-native and accelerator-aware programming language concept.
+
+Security in LO should be part of the language, compiler, runtime, package system, build process and deployment model.
+
+---
+
+## Security Model Summary
+
+LO should be secure by default.
+
+The security model should protect against:
+
+```text
+unsafe memory
+silent null values
+undefined values
+unhandled errors
+implicit type coercion
+truthy/falsy mistakes
+unsafe JSON payloads
+unverified webhooks
+secret leakage
+unsafe dependency behaviour
+unsafe target fallback
+compiled-in secrets
+unsafe source-map exposure
+```
+
+The goal is not to make all software automatically secure.
+
+The goal is to make safe code easier to write and unsafe code harder to write.
+
+---
+
+## Core Security Rule
+
+The core rule is:
+
+```text
+Safe by default.
+Explicit when risky.
+Reported when changed.
+Source-mapped when broken.
+```
+
+---
+
+## Default Security Profile
+
+A new LO project should begin with strong defaults.
+
+Example:
+
+```LO
+security {
+  memory_safe true
+  strict_types true
+  null "deny"
+  undefined "deny"
+  unsafe "deny"
+  unhandled_errors "deny"
+  implicit_casts "deny"
+  truthy_falsy "deny"
+  secret_logging "deny"
+  source_maps true
+}
+```
+
+---
+
+## No Undefined
+
+LO should not include JavaScript-style `undefined`.
+
+Invalid:
+
+```LO
+let value = undefined
+```
+
+Use:
+
+```LO
+Option<T>
+```
+
+Example:
+
+```LO
+let customer: Option<Customer> = findCustomer(customerId)
+
+match customer {
+  Some(c) => processCustomer(c)
+  None => return Review("Customer missing")
+}
+```
+
+---
+
+## No Silent Null
+
+LO should avoid silent null behaviour.
+
+Missing values should be explicit.
+
+Use:
+
+```LO
+Option<T>
+```
+
+Not:
+
+```text
+Customer | null | undefined
+```
+
+If JSON contains `null`, LO should decode it into `Option<T>` where aLOwed.
+
+---
+
+## Explicit Errors
+
+LO should use explicit error handling.
+
+Use:
+
+```LO
+Result<T, Error>
+```
+
+Example:
+
+```LO
+flow loadOrder(id: OrderId) -> Result<Order, OrderError> {
+  let order: Option<Order> = database.findOrder(id)
+
+  match order {
+    Some(o) => return Ok(o)
+    None => return Err(OrderError.NotFound)
+  }
+}
+```
+
+Unhandled `Result` values should fail compilation or produce strong warnings.
+
+---
+
+## Strict Types
+
+LO should reject implicit type coercion.
+
+Invalid:
+
+```LO
+let total = "10" + 5
+```
+
+Valid:
+
+```LO
+let total: Int = toInt("10") + 5
+```
+
+Strict typing helps prevent:
+
+```text
+payment bugs
+JSON bugs
+API bugs
+security decision bugs
+date/time bugs
+currency bugs
+target compatibility bugs
+```
+
+---
+
+## No Truthy / Falsy Logic
+
+Only `Bool` should be used in boolean conditions.
+
+Invalid:
+
+```LO
+if customer {
+  process(customer)
+}
+```
+
+Valid:
+
+```LO
+match customer {
+  Some(c) => process(c)
+  None => return Review("Customer missing")
+}
+```
+
+This avoids mistakes common in loosely typed languages.
+
+---
+
+## Memory Safety
+
+LO should be memory safe by default.
+
+The language should protect against:
+
+```text
+buffer overflows
+use-after-free
+double free
+dangling references
+out-of-bounds access
+uninitialised memory
+unsafe shared mutation
+data races
+null pointer errors
+```
+
+Normal LO code should not use raw pointers.
+
+Unsafe behaviour should be denied by default.
+
+---
+
+## Unsafe Code
+
+Default:
+
+```LO
+security {
+  unsafe "deny"
+}
+```
+
+If unsafe code is ever supported, it should be:
+
+```text
+explicit
+auditable
+source-mapped
+permission-checked
+reported in security reports
+blocked in strict profiles
+```
+
+Possible future syntax:
+
+```LO
+unsafe flow callNativeLibrary()
+permissions [native_bindings] {
+  ...
+}
+```
+
+---
+
+## SecureString
+
+Secrets should use:
+
+```LO
+SecureString
+```
+
+Example:
+
+```LO
+let apiKey: SecureString = env.secret("API_KEY")
+```
+
+Rules:
+
+```text
+SecureString cannot be printed by default
+SecureString cannot be logged by default
+SecureString cannot be accidentally converted to String
+SecureString should be redacted in reports
+SecureString should be cleared from memory where possible
+```
+
+Invalid:
+
+```LO
+print(apiKey)
+```
+
+Valid:
+
+```LO
+log.info("API key loaded", { key: redact(apiKey) })
+```
+
+---
+
+## Secrets Outside Compiled Files
+
+LO should never compile real secrets into output files.
+
+Do not put secrets inside:
+
+```text
+app.bin
+app.wasm
+app.gpu.plan
+app.photonic.plan
+app.ternary.sim
+app.omni-logic.sim
+```
+
+Use:
+
+```text
+.env for local development
+server environment variables
+container secrets
+cloud secrets managers
+deployment platform secrets
+```
+
+Rule:
+
+```text
+Compiled files are not secret.
+Secrets live outside compiled files.
+```
+
+---
+
+## Environment Access
+
+Environment access should be explicit.
+
+Example:
+
+```LO
+let port: Int = env.int("APP_PORT", default: 8080)
+let apiKey: SecureString = env.secret("API_KEY")
+```
+
+Accessing environment variables should be controlled by permissions.
+
+Example:
+
+```LO
+permissions {
+  environment "restricted"
+}
+```
+
+---
+
+## Permission Model
+
+LO should support project-level permissions.
+
+Example:
+
+```LO
+permissions {
+  network "restricted"
+  file_read "aLOw"
+  file_write "restricted"
+  environment "restricted"
+  native_bindings "deny"
+}
+```
+
+Permissions may apply to:
+
+```text
+network access
+file reads
+file writes
+database access
+environment access
+secret access
+native bindings
+external processes
+package behaviour
+```
+
+---
+
+## Package Permissions
+
+Packages should declare the permissions they need.
+
+Example:
+
+```LO
+package_policy {
+  aLOw_network false
+  aLOw_file_write false
+  aLOw_native false
+  aLOw_unsafe false
+}
+```
+
+The package manager should warn when a dependency asks for risky permissions.
+
+Example warning:
+
+```text
+Package LO-http-client requests network.outbound permission.
+Review before aLOwing.
+```
+
+---
+
+## Effect System
+
+LO should include an effect system.
+
+Effects show what a flow can do.
+
+Example pure flow:
+
+```LO
+pure flow calculateTax(amount: Money<GBP>) -> Money<GBP> {
+  return amount * 0.20
+}
+```
+
+A pure flow must not:
+
+```text
+read files
+write files
+use network
+read environment variables
+read time
+generate random numbers
+change global state
+```
+
+Example effectful flow:
+
+```LO
+flow sendEmail(email: Email) -> Result<Void, EmailError>
+effects [network.external] {
+  return mailer.send(email)
+}
+```
+
+---
+
+## JSON Security
+
+LO should be JSON-native but strict.
+
+Preferred:
+
+```LO
+let input: CreateOrderRequest = json.decode<CreateOrderRequest>(req.body)
+```
+
+ALOwed when needed:
+
+```LO
+let raw: Json = req.json()
+let eventType: String = raw.path("$.type").asString()
+```
+
+Production code should prefer typed JSON decoding.
+
+---
+
+## JSON Safety Policy
+
+LO should support JSON safety limits.
+
+Example:
+
+```LO
+json_policy {
+  max_body_size 1mb
+  max_depth 32
+  duplicate_keys "deny"
+  unknown_fields "warn"
+  null_fields "deny"
+  date_format "iso8601"
+}
+```
+
+This protects against:
+
+```text
+oversized payloads
+deep nesting attacks
+duplicate key ambiguity
+unexpected null
+missing fields
+wrong types
+unsafe number conversion
+date parsing ambiguity
+schema drift
+```
+
+---
+
+## API Security
+
+API routes should be explicit and typed.
+
+Example:
+
+```LO
+api OrdersApi {
+  POST "/orders" {
+    request CreateOrderRequest
+    response CreateOrderResponse
+    errors [ValidationError, PaymentError]
+    timeout 5s
+    max_body_size 1mb
+    handler createOrder
+  }
+}
+```
+
+API security should include:
+
+```text
+typed request bodies
+typed response bodies
+timeouts
+payload size limits
+rate limiting
+safe error responses
+structured logging
+safe JSON validation
+```
+
+---
+
+## Webhook Security
+
+Webhooks should be secure by default.
+
+A webhook should usually include:
+
+```text
+HMAC verification
+secret from environment
+max age
+max body size
+replay protection
+idempotency key
+handler
+```
+
+Example:
+
+```LO
+webhook PaymentWebhook {
+  path "/webhooks/payment"
+  method POST
+
+  security {
+    hmac_header "Payment-Signature"
+    secret env.secret("PAYMENT_WEBHOOK_SECRET")
+    max_age 5m
+    max_body_size 512kb
+    replay_protection true
+  }
+
+  idempotency_key json.path("$.id")
+  handler handlePaymentWebhook
+}
+```
+
+---
+
+## Idempotency
+
+Idempotency prevents duplicate processing.
+
+This matters for:
+
+```text
+webhooks
+payment captures
+order creation
+refunds
+stock reservation
+external API calls
+```
+
+Example:
+
+```LO
+idempotency_key json.path("$.id")
+```
+
+The runtime should detect repeated keys and avoid repeating unsafe side effects.
+
+---
+
+## Replay Protection
+
+Webhook replay protection should include:
+
+```text
+signature verification
+timestamp validation
+maximum event age
+idempotency key
+duplicate detection
+body hash verification where useful
+```
+
+Old or duplicated webhook events should be rejected or ignored safely.
+
+---
+
+## Rate Limiting
+
+LO should support rate limiting for APIs.
+
+Example:
+
+```LO
+rate_limit {
+  requests 100
+  window 1m
+  overflow "reject"
+}
+```
+
+Rate limiting protects against:
+
+```text
+abuse
+brute force attempts
+traffic spikes
+resource exhaustion
+```
+
+---
+
+## Backpressure
+
+Backpressure is a security feature.
+
+Unbounded queues can exhaust memory.
+
+Example:
+
+```LO
+channel webhooks: Channel<WebhookEvent> {
+  buffer 5000
+  overflow "dead_letter"
+  dead_letter "./storage/dead/webhooks.jsonl"
+}
+```
+
+Overflow behaviour should always be explicit.
+
+---
+
+## Safe Concurrency
+
+LO should prevent data races and unsafe shared mutation.
+
+Concurrency should support:
+
+```text
+structured tasks
+timeouts
+cancellation
+safe channels
+worker pools
+restricted shared state
+immutable data by default
+```
+
+Shared mutable state should require explicit protection.
+
+---
+
+## Rollback Security
+
+Rollback should be explicit.
+
+Example:
+
+```LO
+secure flow completeOrder(order: Order) -> Result<Order, OrderError> {
+  checkpoint beforeOrderComplete
+
+  reserveStock(order)
+  takePayment(order)
+  dispatchOrder(order)
+
+  return Ok(order)
+
+} rollback error {
+  restore beforeOrderComplete
+  releaseStock(order)
+  refundPayment(order)
+
+  return Err(error)
+}
+```
+
+Important rule:
+
+```text
+Rollback should not pretend all side effects are reversible.
+```
+
+External actions should declare whether they can be reversed.
+
+---
+
+## Compute Block Security
+
+Compute blocks should only contain accelerator-suitable work.
+
+ALOwed:
+
+```text
+pure maths
+matrix operations
+vector operations
+tensor operations
+model inference
+signal processing
+```
+
+Rejected:
+
+```text
+file I/O
+network I/O
+database access
+environment secret access
+mutable global state
+random side effects
+```
+
+Invalid:
+
+```LO
+compute target photonic {
+  data = readFile("./data.json")
+}
+```
+
+Valid:
+
+```LO
+data = readFile("./data.json")
+
+compute target photonic fallback gpu fallback cpu {
+  result = model(data)
+}
+```
+
+---
+
+## Target Fallback Security
+
+Target fallback must be explicit and reported.
+
+Example:
+
+```LO
+compute target best {
+  prefer photonic
+  fallback gpu
+  fallback cpu
+
+  score = fraudModel(features)
+}
+```
+
+The compiler should report:
+
+```text
+preferred target
+selected target
+fallback reason
+unsupported operations
+precision changes
+security implications
+```
+
+Fallback must never silently change behaviour.
+
+---
+
+## AI Context Security
+
+AI context files must not contain secret values.
+
+Generated files:
+
+```text
+app.ai-context.json
+app.ai-context.md
+```
+
+ALOwed:
+
+```text
+route summaries
+type summaries
+target summaries
+security settings
+secret variable names
+redacted placeholders
+```
+
+Not aLOwed:
+
+```text
+API key values
+passwords
+tokens
+private keys
+database passwords
+webhook secret values
+```
+
+---
+
+## `LO explain --for-ai` Security
+
+The command:
+
+```bash
+LO explain --for-ai
+```
+
+should produce useful debugging context without leaking secrets.
+
+It should include:
+
+```text
+error type
+file
+line
+column
+problem
+why
+suggested fix
+safe example
+```
+
+It should not include:
+
+```text
+real secrets
+raw tokens
+private keys
+full `.env` contents
+production data
+```
+
+---
+
+## Source Map Security
+
+Source maps are useful but can reveal source structure.
+
+LO should support:
+
+```text
+debug source maps
+release source maps
+external source maps
+restricted source-map access
+source-map stripping
+```
+
+Production source maps should usually be stored privately.
+
+Do not expose production source maps publicly unless intentionally reviewed.
+
+---
+
+## Error Reporting Security
+
+Public API errors should not expose internals.
+
+Good public response:
+
+```json
+{
+  "error": "validation_failed",
+  "message": "Request payload is invalid."
+}
+```
+
+Bad public response:
+
+```json
+{
+  "error": "src/payment-service.lo:42 DATABASE_PASSWORD failed"
+}
+```
+
+Detailed source-mapped errors should be internal.
+
+---
+
+## Logging Security
+
+Logs should be structured and redacted.
+
+Bad:
+
+```LO
+log.info("API key", apiKey)
+```
+
+Good:
+
+```LO
+log.info("API key loaded", { key: redact(apiKey) })
+```
+
+`SecureString` should not be loggable unless explicitly redacted.
+
+---
+
+## Dependency Security
+
+LO should support supply-chain safety through:
+
+```text
+LO.lock
+dependency hashes
+package permissions
+licence tracking
+native binding warnings
+unsafe code warnings
+network permission warnings
+file write permission warnings
+```
+
+The lockfile should include:
+
+```text
+package name
+version
+hash
+licence
+permissions
+target compatibility
+```
+
+---
+
+## Native Binding Security
+
+Native bindings should be denied by default.
+
+Example:
+
+```LO
+permissions {
+  native_bindings "deny"
+}
+```
+
+If enabled, native bindings should be:
+
+```text
+explicit
+auditable
+permission-checked
+source-mapped
+included in security reports
+```
+
+---
+
+## Kernel and Driver Development
+
+Kernel and driver development is last-stage work and is blocked by default.
+
+It requires explicit maintainer or project permission before design, examples,
+compiler support, runtime support, native bindings, backend targets or generated
+stubs are added.
+
+Kernel and driver work should wait until LO has:
+
+```text
+stable language specification
+stable memory model
+stable security model
+stable effect and permission model
+native binding policy
+target and capability reports
+source-map support
+audit-friendly diagnostics
+```
+
+Blocked unless explicitly approved:
+
+```text
+kernel modules
+operating-system drivers
+privileged runtimes
+raw device memory access
+raw hardware I/O
+vendor SDK driver bindings
+direct accelerator driver control
+```
+
+Normal LO applications should use safe runtime APIs, package permissions and
+accelerator planning reports instead of privileged driver access.
+
+---
+
+## Build Security
+
+LO should generate build security metadata.
+
+Recommended files:
+
+```text
+app.security-report.json
+app.build-manifest.json
+app.failure-report.json
+```
+
+The build manifest should include:
+
+```text
+source hash
+output hash
+dependency hashes
+compiler version
+build mode
+target outputs
+created timestamp
+```
+
+---
+
+## Deterministic Builds
+
+LO should support deterministic builds where possible.
+
+This helps with:
+
+```text
+release verification
+supply-chain security
+auditability
+multi-server deployment
+rollback
+```
+
+---
+
+## Deployment Security
+
+LO should support build-once, deploy-many.
+
+Flow:
+
+```text
+1. Build once
+2. Generate manifest
+3. Generate hashes
+4. Verify artefact
+5. Deploy same artefact to many servers
+6. Each server loads its own environment variables
+7. Health check
+8. Roll back if needed
+```
+
+Do not build separately on each server unless necessary.
+
+---
+
+## Decompilation Reality
+
+Compiled output can potentially be reverse engineered.
+
+LO may support:
+
+```text
+symbol stripping
+source-map separation
+build signing
+checksums
+optional obfuscation
+```
+
+But the main rule is:
+
+```text
+Do not put secrets in compiled output.
+```
+
+---
+
+## Security Reports
+
+LO should generate:
+
+```text
+app.security-report.json
+```
+
+The report should include:
+
+```text
+security settings
+permissions
+unsafe usage
+secret access
+package permissions
+webhook security checks
+JSON policy checks
+API timeout checks
+native binding usage
+source-map status
+target fallback security notes
+```
+
+---
+
+## Failure Reports
+
+LO should generate:
+
+```text
+app.failure-report.json
+```
+
+Failure reports should include:
+
+```text
+error type
+source file
+source line
+source column
+target
+build stage
+suggested fix
+safe example where possible
+```
+
+---
+
+## Security Profiles
+
+LO may support security profiles.
+
+Possible profiles:
+
+```text
+development
+strict
+production
+sandboxed
+research
+```
+
+### Development
+
+```text
+detailed errors
+source maps enabled
+safe local .env
+strict types enabled
+unsafe denied
+```
+
+### Production
+
+```text
+optimised output
+secret logging denied
+source maps external
+debug symbols stripped
+strict permissions
+runtime config external
+```
+
+### Sandboxed
+
+```text
+network denied
+file write denied
+native bindings denied
+environment restricted
+```
+
+---
+
+## CI Security Checks
+
+LO should support security checks in CI.
+
+Example:
+
+```bash
+LO check --security
+LO lint --security
+LO verify build/release/app.build-manifest.json
+```
+
+CI should fail if:
+
+```text
+unsafe code is introduced
+secret logging is detected
+webhooks lack verification
+API routes lack timeouts
+JSON policies are missing
+dependencies request risky permissions
+target fallback is unsafe
+```
+
+---
+
+## Security Non-Goals
+
+LO should not claim to make every application secure automatically.
+
+Developers still need:
+
+```text
+secure infrastructure
+safe deployments
+good monitoring
+dependency updates
+code reviews
+secret management
+testing
+threat modelling
+```
+
+LO should reduce common mistakes, not remove all responsibility.
+
+---
+
+## Open Security Questions
+
+```text
+Should unsafe code exist at all?
+Should production source maps be generated by default?
+Should package permissions be enforced at compile time or install time?
+Should SecureString attempt memory zeroing?
+Should LO include built-in CSRF support for browser apps?
+Should API authentication be a language feature or framework feature?
+Should all webhooks require HMAC by default?
+Should AI context generation require an explicit flag in production?
+```
+
+---
+
+## Final Security Principle
+
+LO security should be practical, strict and visible.
+
+The language should make unsafe behaviour:
+
+```text
+harder to write
+easy to detect
+easy to report
+easy to trace
+easy to reject in CI
+```
+
+The best LO security model is one where developers can build real JSON/API systems while avoiding common mistakes by default.
