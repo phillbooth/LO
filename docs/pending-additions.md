@@ -134,6 +134,46 @@ Startup order:
 
 ---
 
+## 2B. Safe Pattern Matching and Regex
+
+Status: documented in `docs/safe-pattern-matching-and-regex.md` and
+`docs/sytax/patterns-and-regex.md`, with usage examples in
+`docs/sytax-examples/patterns-and-regex.md`; parser support, safe engine
+integration, UnsafeRegex production gates, pattern reports and denied-feature
+diagnostics remain pending.
+
+Core rule:
+
+```text
+Pattern is safe, fast and default.
+UnsafeRegex is advanced, explicit and audited.
+Default regex must be bounded and ReDoS-resistant.
+```
+
+Pending implementation examples:
+
+```text
+parse Pattern declarations
+parse pattern_policy
+parse unsafe regex blocks
+parse pattern_set blocks
+define denied feature diagnostics
+define compile-inside-loop warnings
+define pattern report schema
+define pattern map-manifest entries
+define UnsafeRegex production gates
+integrate or wrap a safe pattern engine
+```
+
+Documentation rule:
+
+```text
+When pattern syntax changes, update docs/sytax/patterns-and-regex.md.
+When pattern examples change, update docs/sytax-examples/patterns-and-regex.md.
+```
+
+---
+
 ## 3. AI Token Reduction
 
 Status: documented in `docs/ai-token-reduction.md`; prototype includes `LO ai-context`, `LO explain --for-ai` and token reports.

@@ -18,6 +18,8 @@ language-supported-primitives.md
 language-non-supported-primitives.md
 backend-language-gap-analysis.md
 syntax.md
+sytax/
+safe-pattern-matching-and-regex.md
 tri-logic
 type-system.md
 lessons-from-rust.md
@@ -93,6 +95,16 @@ ai-token-reduction.md
 testing.md
 observability.md
 ```
+
+## Per-Syntax Reference
+
+The `docs/sytax/` folder contains one-file-per-feature syntax notes.
+
+When adding or changing LO syntax, update both the relevant design document and
+the matching file under `docs/sytax/`.
+
+The `docs/sytax-examples/` folder contains matching good/bad usage examples for
+each syntax feature. Update it at the same time as `docs/sytax/`.
 
 ## Generated Build Documentation
 

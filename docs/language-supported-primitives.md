@@ -602,7 +602,41 @@ LO should provide the safety model around them.
 
 ---
 
-## 17. Provider and Service Boundaries
+## 17. Safe Pattern and Regex Boundaries
+
+LO should support safe pattern matching without making unsafe backtracking regex the default.
+
+Supported primitives:
+
+```text
+Pattern
+pattern.compile
+pattern.matches
+pattern.scan
+pattern_policy
+pattern_set
+PatternCache
+pattern reports
+```
+
+Advanced regex should be explicit:
+
+```text
+UnsafeRegex
+unsafe regex block
+reason requirement
+timeout requirement
+input length limit
+security report entry
+```
+
+Detailed design lives in `docs/safe-pattern-matching-and-regex.md`.
+
+Syntax details live in `docs/sytax/patterns-and-regex.md`.
+
+---
+
+## 18. Provider and Service Boundaries
 
 LO should support safe provider boundaries.
 
@@ -660,7 +694,7 @@ These are not required LO core primitives.
 
 ---
 
-## 18. Browser, WASM and Frontend Runtime Boundaries
+## 19. Browser, WASM and Frontend Runtime Boundaries
 
 LO may support browser and frontend output through runtime profiles and targets.
 
@@ -690,7 +724,7 @@ primitive planning lives in `docs/browser-dom-and-web-platform-primitives.md`.
 
 ---
 
-## 19. Accessibility Tooling Hooks
+## 20. Accessibility Tooling Hooks
 
 LO should support tooling hooks that help packages and build tools produce accessible output.
 
@@ -713,7 +747,7 @@ LO should provide the safe metadata and reporting foundation.
 
 ---
 
-## 20. Compute Targets
+## 21. Compute Targets
 
 LO may support multiple compile and compute targets.
 
@@ -750,7 +784,7 @@ The compiler and tooling should decide what targets are available and safe.
 
 ---
 
-## 21. AI-Readable Documentation and Reports
+## 22. AI-Readable Documentation and Reports
 
 LO should be designed so AI coding assistants can understand projects safely.
 

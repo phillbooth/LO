@@ -50,6 +50,7 @@ Every major LO feature should be labelled Implemented, Prototype, Draft, Planned
 | OpenAPI/schema output | Prototype | Works for current API examples |
 | Strict comments | Prototype | Extracted and checked for basic mismatches |
 | Strict Global Registry | Prototype | Parsed and reported with secret redaction |
+| Safe pattern matching and regex | Draft | Pattern, UnsafeRegex, pattern policy, pattern sets, streaming scans and reports documented; parser/runtime engine support pending |
 | Omni-logic planning | Draft | Prototype emits planning/simulation artefacts |
 | Ternary simulation | Draft | Planning/simulation output, not hardware execution |
 | CPU/native output | Prototype | CPU-compatible placeholder output |
@@ -89,6 +90,8 @@ When adding a major new LO concept, update:
 ```text
 docs/feature-status.md
 docs/pending-additions.md
+docs/sytax/ when syntax is added or changed
+docs/sytax-examples/ when syntax examples are added or changed
 TODO.md
 CHANGELOG.md
 ```

@@ -158,6 +158,11 @@ Git workflow
 [ ] Create docs/ai-context.md
 [ ] Create docs/deployment.md
 [ ] Create docs/package-system.md
+[x] Create docs/safe-pattern-matching-and-regex.md
+[x] Create docs/sytax/README.md
+[x] Create docs/sytax/patterns-and-regex.md
+[x] Create docs/sytax-examples/README.md
+[x] Create docs/sytax-examples/patterns-and-regex.md
 [x] Create docs/browser-dom-and-web-platform-primitives.md
 [x] Create docs/image-ai-package-boundaries-and-compute-auto.md
 [x] Create docs/search-and-translation-provider-boundaries.md
@@ -168,6 +173,10 @@ Git workflow
 [ ] Define image package effects and image policy schemas
 [ ] Define image memory, security, target and precision report schemas
 [ ] Define image package map-manifest and AI guide summaries
+[ ] Define Pattern, UnsafeRegex and pattern_set parser support
+[ ] Define pattern denied-feature diagnostics and compile-inside-loop warnings
+[ ] Define pattern report and map-manifest schemas
+[ ] Add docs/sytax and docs/sytax-examples files for existing syntax features
 [ ] Define package-defined provider effects for search and translation packages
 [ ] Define video package effects and runtime media permissions
 [ ] Define search and translation provider report schemas
