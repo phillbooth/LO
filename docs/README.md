@@ -16,7 +16,9 @@ feature-status.md
 language-rules.md
 language-supported-primitives.md
 language-non-supported-primitives.md
+backend-language-gap-analysis.md
 syntax.md
+tri-logic
 type-system.md
 lessons-from-rust.md
 modules-and-visibility.md
