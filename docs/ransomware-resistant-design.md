@@ -1,6 +1,6 @@
 # LO Ransomware-Resistant Design
 
-This document describes the proposed **Ransomware-Resistant Design** model for **LO / Photonic Logic 3**.
+This document describes the proposed **Ransomware-Resistant Design** model for **LO / Logic Omni**.
 
 LO is a strict, memory-safe, security-first, JSON-native, API-native and accelerator-aware programming language concept.
 

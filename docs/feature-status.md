@@ -58,11 +58,16 @@ Every major LO feature should be labelled Implemented, Prototype, Draft, Planned
 | Photonic target | Research | Future hardware/backend-dependent |
 | Wavelength compute | Research | Hybrid analogue photonic compute model documented, no backend support |
 | Hardware feature detection and reporting | Research | Modern CPU/GPU speed and security feature planning documented, no host/backend support |
+| Backend compute support targets | Draft | CPU/GPU/AI accelerator/photonic/memory-interconnect target catalogue documented; discovery/report support pending |
 | Browser target | Prototype | Syntax parses and server-only import blocking has initial checks |
 | Capability block | Prototype | `aLOw`/`block` syntax parses and blocked capabilities can reject imports |
 | Package Use Registry | Draft | `import` vs `use`, package approval and package report model documented |
+| Search and translation provider boundaries | Draft | Boundary model documented; search, translation, vector search, image search and provider-specific engines remain package/framework/external-service areas |
+| Image AI package boundaries and compute auto | Draft | Image AI, vision model, decoder, generation, search and compute-auto boundary model documented; package/report/runtime enforcement pending |
+| Video package boundaries and compute auto | Draft | Video package/provider/privacy/compute boundary model documented; video engines, codecs, AI tasks and camera/screen APIs remain package/runtime/framework areas |
 | Frontend JavaScript output | Planned | Design documented, compiler output pending |
 | Browser JavaScript placeholder output | Prototype | Browser target builds can emit a placeholder `app.browser.js` |
+| Browser, DOM and web platform primitives | Draft | Safe HTML, DOM, browser effects, permissions, storage, push/service worker and report model documented; parser/runtime enforcement pending |
 | Debug console | Draft | Safe console syntax and redaction rules documented |
 | Hybrid JavaScript + WebAssembly | Planned | Depends on browser target and WASM wrapper support |
 | Vector model | Draft | Security-first model documented, parser support pending |

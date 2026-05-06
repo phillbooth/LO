@@ -80,11 +80,17 @@ Example:
 - Added docs/omni-logic.md, docs/logic-widths.md and docs/logic-targets.md for future-compatible logic-width planning.
 - Added docs/ransomware-resistant-design.md for ransomware-resistant security policy planning.
 - Added docs/simple-vector-and-compute-auto.md for beginner-friendly vector syntax and compute auto target planning.
+- Added docs/backend-compute-support-targets.md for CPU, GPU, AI accelerator, photonic and memory/interconnect backend target planning.
+- Added docs/search-and-translation-provider-boundaries.md to classify search, translation, vector search, image search and embeddings as package/provider areas rather than LO core features.
+- Added docs/video-package-boundaries-and-compute-auto.md to classify video processing, video AI, camera/screen capture and video search as package/runtime/provider areas rather than LO core features.
 - Added docs/memory-error-correction.md for memory detection, recovery, rollback, fallback and structured report planning.
 - Added docs/warnings-and-diagnostics.md, docs/system-health-warnings.md, docs/disk-memory-and-cache-warnings.md and docs/error-codes.md for standard diagnostic planning.
 - Added docs/contracts.md, docs/modules-and-visibility.md, docs/standard-library.md, docs/testing.md, docs/observability.md and docs/compiler-backends.md.
 - Added docs/package-use-registry.md for `import` versus `use`, package approval, package permissions and package reports.
+- Added docs/language-supported-primitives.md and docs/language-non-supported-primitives.md for supported primitive and native non-support boundaries.
 - Added docs/api-native-design.md, docs/webhooks.md, docs/pure-flow-caching.md, docs/interoperability.md, docs/xml-support.md and docs/graphql-support.md.
+- Added docs/browser-dom-and-web-platform-primitives.md for SafeHtml, DOM effects, browser permissions, fetch/storage/cookie policy, push notifications, service workers and browser reports.
+- Added docs/image-ai-package-boundaries-and-compute-auto.md to classify image AI, vision models, image generation, image search, decoders and compute-auto image workflows as package/provider areas rather than LO core features.
 - Added docs/LO-vs-python-and-generated-outputs.md to position LO against Python and summarise generated build outputs.
 - Added docs/pending-additions.md to track pending LO concepts, current status and remaining implementation work.
 - Added docs/pending-LO-additions.md as a planning snapshot of core pending LO additions.
@@ -192,6 +198,8 @@ Example:
 - Updated docs/README.md with the runnable prototype entry points and generated documentation outputs.
 - Updated docs/run-and-compile-modes.md with current prototype build commands and report output lists.
 - Updated docs/pending-LO-additions.md as a current planning snapshot with prototype status and recent package, vector and wavelength concepts.
+- Refactored search and translation wording so LO provides safe package/provider boundaries instead of native search, translation, vector search, image search or provider SDK features.
+- Refactored video wording so LO provides safe file, stream, effect, privacy, memory and compute boundaries instead of native video processing, codec, AI, camera or streaming features.
 - Corrected compiler and examples README command paths for running from the repository root.
 - Reduced repeated README prototype status content by keeping the top status section authoritative.
 - Added README repository-root structure showing source directories and generated output directories.

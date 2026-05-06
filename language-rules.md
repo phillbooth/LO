@@ -143,6 +143,8 @@ Strict typing should apply to:
 numbers
 strings
 booleans
+Tri
+Omni
 money
 dates
 JSON payloads

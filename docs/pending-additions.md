@@ -363,6 +363,38 @@ Browser output must block server-only imports, private environment access and se
 
 ---
 
+## 11B.1. Browser, DOM and Web Platform Primitives
+
+Status: documented in `docs/browser-dom-and-web-platform-primitives.md`;
+SafeHtml, DOM effects, browser permission policy, fetch/storage/cookie policy,
+push/service worker primitives, browser security reports and AI guide summaries
+remain pending.
+
+Core rule:
+
+```text
+LO provides safe browser/web primitives.
+Frameworks provide UI structure and developer opinions.
+Browsers provide the actual Web APIs.
+```
+
+Pending implementation examples:
+
+```text
+define SafeHtml and safe HTML policy schema
+define dom.read/dom.write effect checking
+define browser permission policy schema
+define browser fetch/storage/cookie policy schemas
+define typed browser event syntax
+define typed form validation syntax
+define push notification and service worker report schemas
+define browser security report schema
+define browser map-manifest entries
+define AI guide browser summary output
+```
+
+---
+
 ## 11C. Hybrid Scalar + Vector Model
 
 Status: documented in `docs/vector-model.md` and
@@ -490,6 +522,33 @@ hardware feature reporting in app.target-report.json
 
 ---
 
+## 11C.3. Backend Compute Support Targets
+
+Status: documented in `docs/backend-compute-support-targets.md`; target discovery, capability maps, parser support and expanded target reports remain pending.
+
+The backend target catalogue includes:
+
+```text
+CPU and CPU SIMD/vector targets
+GPU targets and APIs
+AI accelerators such as TPU, Trainium, Inferentia and NPU-style targets
+photonic targets such as photonic_mzi, photonic_wdm and photonic_interconnect
+hybrid CPU/GPU and memory/interconnect targets
+```
+
+Pending implementation examples:
+
+```text
+parse compute auto
+parse target chains with ai_accelerator and memory_interconnect
+detect CPU/GPU/AI/photonic target capabilities
+report target calibration/health/precision/fallback status
+estimate data movement cost
+expand app.target-report.json schema for backend target catalogue
+```
+
+---
+
 ## 11D. Target and Capability Model
 
 Status: documented in `docs/target-and-capability-model.md`; feature status labels, browser target syntax, capability block syntax, import classification, browser import blocking and target/capability reporting have initial prototype support.
@@ -574,6 +633,95 @@ packages {
     version "1.4.2"
   }
 }
+```
+
+---
+
+## 11E.1. Search and Translation Provider Boundaries
+
+Status: documented in `docs/search-and-translation-provider-boundaries.md`;
+package-defined effects, provider policy schemas, redaction schemas,
+rate-limit enforcement and package report schemas remain pending.
+
+Core rule:
+
+```text
+Search and translation are not native LO language features.
+Search and translation are package/provider/framework areas.
+LO provides safe typed boundaries, effects, permissions, limits and reports.
+```
+
+Pending implementation examples:
+
+```text
+define package-defined effect registration
+define search provider package report schema
+define translation provider package report schema
+define provider redaction policy schema
+define provider rate-limit policy schema
+define AI guide provider-boundary summaries
+add provider-boundary examples after package parser support exists
+```
+
+---
+
+## 11E.2. Video Package Boundaries and Compute Auto
+
+Status: documented in `docs/video-package-boundaries-and-compute-auto.md`;
+video package effects, browser/runtime media permissions, privacy reports,
+memory reports, target stage reports and package report schemas remain
+pending.
+
+Core rule:
+
+```text
+Video processing is not a native LO language feature.
+Video processing is a package/provider/framework/runtime area.
+LO provides safe file, stream, effect, permission, privacy, memory and compute boundaries.
+```
+
+Pending implementation examples:
+
+```text
+define video package effect registration
+define camera/screen/media runtime permission policy schema
+define video privacy report schema
+define video memory report schema
+define video package target-stage report schema
+define video package map-manifest entries
+define video AI guide package summary output
+add video package examples after package parser support exists
+```
+
+---
+
+## 11E.3. Image AI Package Boundaries and Compute Auto
+
+Status: documented in `docs/image-ai-package-boundaries-and-compute-auto.md`;
+image package effects, image policy schemas, decoder sandbox rules, image
+memory/security/target/precision reports and package report schemas remain
+pending.
+
+Core rule:
+
+```text
+Image AI tasks are not native LO language features.
+Image AI is a package/provider/framework area.
+LO provides safe file, stream, effect, permission, memory and compute boundaries.
+```
+
+Pending implementation examples:
+
+```text
+define image package effect registration
+define image policy and validation schema
+define image decoder sandbox policy schema
+define image memory report schema
+define image security report schema
+define image package target and precision report schemas
+define image package map-manifest entries
+define AI guide image package summary output
+add image package examples after package parser support exists
 ```
 
 ---

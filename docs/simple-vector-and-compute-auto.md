@@ -1,6 +1,6 @@
 # LO Simple Vector Syntax and Compute Auto
 
-This document describes the proposed **Simple Vector Syntax** and **Compute Auto** model for **LO / Photonic Logic 3**.
+This document describes the proposed **Simple Vector Syntax** and **Compute Auto** model for **LO / Logic Omni**.
 
 LO is a strict, memory-safe, security-first, JSON-native, API-native and accelerator-aware programming language concept.
 

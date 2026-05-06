@@ -158,6 +158,21 @@ Git workflow
 [ ] Create docs/ai-context.md
 [ ] Create docs/deployment.md
 [ ] Create docs/package-system.md
+[x] Create docs/browser-dom-and-web-platform-primitives.md
+[x] Create docs/image-ai-package-boundaries-and-compute-auto.md
+[x] Create docs/search-and-translation-provider-boundaries.md
+[x] Create docs/video-package-boundaries-and-compute-auto.md
+[ ] Define SafeHtml, DOM effect and browser permission schemas
+[ ] Define push notification and service worker browser report schemas
+[ ] Define browser map-manifest and AI guide summaries
+[ ] Define image package effects and image policy schemas
+[ ] Define image memory, security, target and precision report schemas
+[ ] Define image package map-manifest and AI guide summaries
+[ ] Define package-defined provider effects for search and translation packages
+[ ] Define video package effects and runtime media permissions
+[ ] Define search and translation provider report schemas
+[ ] Define video privacy, memory and target-stage report schemas
+[ ] Define provider redaction and rate-limit policy schemas
 [ ] Create docs/examples.md
 [ ] Create docs/glossary.md
 ```
@@ -440,11 +455,21 @@ Tasks:
 [x] Define ternary simulation target rules
 [x] Define unsupported operation errors
 [x] Define compute purity requirements
+[ ] Define compute auto parser support
+[ ] Define backend compute target catalogue parser support
+[ ] Define AI accelerator target rules
+[ ] Define memory/interconnect target rules
+[ ] Define photonic variant target discovery
+[ ] Define CPU/GPU/AI/photonic capability map
+[ ] Define data movement cost reporting
+[ ] Define target calibration and health reporting
+[ ] Define precision/tolerance report for backend compute targets
 [x] Define matrix operation rules
 [x] Define vector operation rules
 [x] Define tensor operation rules
 [ ] Define ONNX support possibility
 [x] Define accelerator report schema
+[ ] Expand accelerator report schema for backend compute support targets
 ```
 
 ---

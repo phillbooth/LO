@@ -14,6 +14,8 @@ pending-additions.md
 pending-LO-additions.md
 feature-status.md
 language-rules.md
+language-supported-primitives.md
+language-non-supported-primitives.md
 syntax.md
 type-system.md
 lessons-from-rust.md
@@ -36,6 +38,7 @@ target-and-capability-model.md
 vector-model.md
 vectorised-dataset-syntax.md
 simple-vector-and-compute-auto.md
+backend-compute-support-targets.md
 compiler-backends.md
 kernel-and-driver-boundary.md
 ```
@@ -65,8 +68,12 @@ lazy-compact-json.md
 api-native-design.md
 webhooks.md
 frontend-compilation-js-wasm.md
+browser-dom-and-web-platform-primitives.md
 xml-support.md
 graphql-support.md
+search-and-translation-provider-boundaries.md
+image-ai-package-boundaries-and-compute-auto.md
+video-package-boundaries-and-compute-auto.md
 interoperability.md
 LO-vs-python-and-generated-outputs.md
 ```

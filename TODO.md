@@ -168,6 +168,12 @@ Reason for additions:
 [x] Add docs/modules-and-visibility.md
 [x] Add docs/standard-library.md
 [x] Add docs/package-use-registry.md
+[x] Add docs/language-supported-primitives.md
+[x] Add docs/language-non-supported-primitives.md
+[x] Add docs/search-and-translation-provider-boundaries.md
+[x] Add docs/video-package-boundaries-and-compute-auto.md
+[x] Add docs/browser-dom-and-web-platform-primitives.md
+[x] Add docs/image-ai-package-boundaries-and-compute-auto.md
 [x] Add docs/memory-and-variable-use.md
 [x] Add docs/lazy-compact-json.md
 [x] Add docs/pure-flow-caching.md
@@ -371,6 +377,33 @@ Reason for additions:
 [x] Define package loading modes
 [x] Define package lock hash checks
 [x] Define package use report
+[x] Document search and translation provider boundaries
+[x] Document image AI package boundaries and compute auto
+[x] Document video package boundaries and compute auto
+[ ] Define package-defined effect registration for provider packages
+[ ] Define image package effect registration
+[ ] Define image policy and validation schema
+[ ] Define image decoder sandbox policy schema
+[ ] Define image memory report schema
+[ ] Define image security report schema
+[ ] Define image package target and precision report schemas
+[ ] Define image package map-manifest entries
+[ ] Define AI guide image package summary output
+[ ] Add image package examples after package parser support exists
+[ ] Define video package effect registration
+[ ] Define camera/screen/media runtime permission policy schema
+[ ] Define video privacy report schema
+[ ] Define video memory report schema
+[ ] Define video package target-stage report schema
+[ ] Define video package map-manifest entries
+[ ] Define AI guide video package summary output
+[ ] Add video package examples after package parser support exists
+[ ] Define search provider package report schema
+[ ] Define translation provider package report schema
+[ ] Define provider redaction policy schema
+[ ] Define provider rate-limit policy schema
+[ ] Define AI guide provider-boundary summary output
+[ ] Add search/translation provider examples after package parser support exists
 [x] Define secret handling
 [x] Define SecureString restrictions
 [x] Define safe logging rules
@@ -482,12 +515,22 @@ Reason for additions:
 ## Compute / Accelerator TODO
 
 ```text
+[x] Add docs/backend-compute-support-targets.md
 [x] Define compute target best
 [x] Define prefer photonic
 [x] Define fallback gpu
 [x] Define fallback cpu
 [x] Define CPU target rules
 [ ] Define WASM target rules
+[ ] Define compute auto parser support
+[ ] Define backend compute target catalogue parser support
+[ ] Define AI accelerator target rules
+[ ] Define memory/interconnect target rules
+[ ] Define photonic variant target discovery
+[ ] Define CPU/GPU/AI/photonic capability map
+[ ] Define data movement cost reporting
+[ ] Define target calibration and health reporting
+[ ] Define precision/tolerance report for backend compute targets
 [x] Define GPU plan output
 [x] Define photonic plan output
 [x] Document wavelength compute planning
@@ -501,6 +544,7 @@ Reason for additions:
 [x] Define model inference support
 [ ] Define ONNX import possibility
 [x] Define target compatibility report
+[ ] Expand target compatibility report for backend compute support targets
 ```
 
 ---
@@ -553,6 +597,7 @@ Reason for additions:
 
 ```text
 [x] Add frontend JavaScript/WebAssembly target documentation
+[x] Add browser DOM and web platform primitives documentation
 [x] Define browser target syntax
 [x] Define browser-safe imports
 [ ] Define browser security report schema
@@ -561,8 +606,15 @@ Reason for additions:
 [ ] Define WebAssembly frontend wrapper output
 [ ] Define hybrid JavaScript + WebAssembly output
 [ ] Define frontend source-map output
+[ ] Define SafeHtml and safe HTML policy schema
+[ ] Define dom.read/dom.write effect checking
+[ ] Define browser permission policy schema
+[ ] Define browser fetch/storage/cookie policy schemas
 [ ] Define DOM event syntax
 [ ] Define form validation syntax
+[ ] Define push notification and service worker report schemas
+[ ] Define browser map-manifest entries
+[ ] Define AI guide browser summary output
 [ ] Define browser fetch/http rules
 [x] Define server-only import blocking for browser target
 ```
@@ -601,6 +653,8 @@ Reason for additions:
 [x] Define compute-safe import list
 [x] Implement browser target import blocking
 [x] Generate target/capability report
+[ ] Expand target/capability report for backend compute support targets
+[ ] Add parser tests for compute auto target catalogue syntax
 [x] Add v0.1 browser target parser tests
 ```
 

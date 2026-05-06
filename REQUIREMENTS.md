@@ -253,6 +253,8 @@ money
 dates
 times
 booleans
+Tri
+Omni
 decisions
 errors
 JSON payloads
