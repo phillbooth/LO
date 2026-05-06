@@ -1,31 +1,26 @@
+
+---
+
+# `docs/TESTING.md`
+
+```md
 # Testing
 
-LO should support tests for source code, generated reports and target planning.
+## Summary
 
-## Planned Test Types
+Describe the testing approach for this app.
 
-```text
-unit tests
-integration tests
-API tests
-webhook tests
-JSON validation tests
-security tests
-memory safety tests
-diagnostic format tests
-target fallback tests
-source-map tests
-AI context tests
-```
+## Test Types
 
-## Required Test Behaviour
+- Unit tests
+- Integration tests
+- Security checks
+- Manual testing
+- Build verification
 
-Tests should be able to assert:
+## Test Structure
 
 ```text
-expected success
-expected diagnostics
-expected target fallback
-expected source-map location
-expected generated report fields
-```
+packages/app/tests/
+├── unit/
+└── integration/

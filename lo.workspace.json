@@ -1,0 +1,27 @@
+{
+    "name": "LO-app",
+    "version": "0.1.0",
+    "description": "A clean LO app workspace template.",
+    "packages": [
+        "packages/lo-core",
+        "packages/lo-app-kernel",
+        "packages/app"
+    ],
+    "defaultPackage": "packages/app",
+    "languagePackage": "packages/lo-core",
+    "runtimeKernelPackage": "packages/lo-app-kernel",
+    "strict": true,
+    "targets": [
+        "cpu",
+        "wasm",
+        "ternary-sim"
+    ],
+    "docs": {
+        "app": "docs",
+        "language": "packages/lo-core",
+        "runtimeKernel": "packages/lo-app-kernel"
+    },
+    "tools": {
+        "root": "tools"
+    }
+}
