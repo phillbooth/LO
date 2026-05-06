@@ -174,6 +174,11 @@ Reason for additions:
 [x] Add docs/video-package-boundaries-and-compute-auto.md
 [x] Add docs/browser-dom-and-web-platform-primitives.md
 [x] Add docs/image-ai-package-boundaries-and-compute-auto.md
+[x] Add docs/safe-pattern-matching-and-regex.md
+[x] Add docs/sytax/README.md
+[x] Add docs/sytax/patterns-and-regex.md
+[x] Add docs/sytax-examples/README.md
+[x] Add docs/sytax-examples/patterns-and-regex.md
 [x] Add docs/memory-and-variable-use.md
 [x] Add docs/lazy-compact-json.md
 [x] Add docs/pure-flow-caching.md
@@ -267,6 +272,20 @@ Reason for additions:
 [x] Decide secure flow syntax
 [x] Decide pure flow syntax
 [x] Decide effects syntax
+[x] Start per-feature syntax files under docs/sytax
+[x] Document Pattern and UnsafeRegex syntax in docs/sytax
+[x] Start per-feature syntax example files under docs/sytax-examples
+[x] Document Pattern and UnsafeRegex good/bad examples in docs/sytax-examples
+[ ] Add docs/sytax examples for existing syntax features
+[ ] Define Pattern parser support
+[ ] Define pattern_policy parser support
+[ ] Define unsafe regex parser support
+[ ] Define pattern_set parser support
+[ ] Define denied regex feature diagnostics
+[ ] Define regex compile-inside-loop warning
+[ ] Define pattern report schema
+[ ] Define pattern map-manifest entries
+[ ] Define UnsafeRegex production gates
 [x] Decide match syntax
 [x] Decide if syntax
 [x] Decide loop syntax

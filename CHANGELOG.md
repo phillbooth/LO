@@ -91,6 +91,9 @@ Example:
 - Added docs/api-native-design.md, docs/webhooks.md, docs/pure-flow-caching.md, docs/interoperability.md, docs/xml-support.md and docs/graphql-support.md.
 - Added docs/browser-dom-and-web-platform-primitives.md for SafeHtml, DOM effects, browser permissions, fetch/storage/cookie policy, push notifications, service workers and browser reports.
 - Added docs/image-ai-package-boundaries-and-compute-auto.md to classify image AI, vision models, image generation, image search, decoders and compute-auto image workflows as package/provider areas rather than LO core features.
+- Added docs/safe-pattern-matching-and-regex.md for ReDoS-resistant Pattern defaults, UnsafeRegex audit gates, pattern sets, streaming scans and pattern reports.
+- Added docs/sytax/README.md and docs/sytax/patterns-and-regex.md to start one-file-per-feature syntax documentation.
+- Added docs/sytax-examples/README.md and docs/sytax-examples/patterns-and-regex.md to start one-file-per-feature good/bad syntax usage examples.
 - Added docs/LO-vs-python-and-generated-outputs.md to position LO against Python and summarise generated build outputs.
 - Added docs/pending-additions.md to track pending LO concepts, current status and remaining implementation work.
 - Added docs/pending-LO-additions.md as a planning snapshot of core pending LO additions.
@@ -200,6 +203,8 @@ Example:
 - Updated docs/pending-LO-additions.md as a current planning snapshot with prototype status and recent package, vector and wavelength concepts.
 - Refactored search and translation wording so LO provides safe package/provider boundaries instead of native search, translation, vector search, image search or provider SDK features.
 - Refactored video wording so LO provides safe file, stream, effect, privacy, memory and compute boundaries instead of native video processing, codec, AI, camera or streaming features.
+- Added a documentation rule that syntax changes should update the per-feature files under docs/sytax/.
+- Added a documentation rule that syntax examples should be updated under docs/sytax-examples/ alongside docs/sytax/.
 - Corrected compiler and examples README command paths for running from the repository root.
 - Reduced repeated README prototype status content by keeping the top status section authoritative.
 - Added README repository-root structure showing source directories and generated output directories.

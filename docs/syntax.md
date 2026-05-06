@@ -8,6 +8,34 @@ The syntax is currently a design proposal and may change as the language develop
 
 ---
 
+## Per-Syntax Files
+
+Detailed one-file-per-feature syntax notes live in:
+
+```text
+docs/sytax/
+```
+
+When syntax changes, update both this overview and the relevant file under
+`docs/sytax/`.
+
+Matching good/bad usage examples live in:
+
+```text
+docs/sytax-examples/
+```
+
+Update the matching examples file whenever syntax changes.
+
+Current syntax files:
+
+```text
+docs/sytax/patterns-and-regex.md
+docs/sytax-examples/patterns-and-regex.md
+```
+
+---
+
 ## Syntax Goals
 
 LO syntax should be:
