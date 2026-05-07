@@ -211,6 +211,7 @@ localStorage
 Node target
 WebAssembly
 React adapters
+React Native adapters
 Angular adapters
 Dart/Flutter interop
 platform channels
@@ -244,6 +245,7 @@ behaviour.
 | DOM/browser APIs                   | Browser package/effects boundary     | Web apps require DOM, fetch and events    | Keep safe primitives and reports                    |
 | browser storage                    | Browser boundary                     | Existing apps use it                      | Deny secrets and `SecureString` storage             |
 | React/Angular adapters             | Generated package output             | Existing frontend ecosystems              | Keep as generators, not LO Core                     |
+| React Native adapters              | Generated mobile package output      | Existing mobile ecosystem                 | Keep like Dart/Flutter interop, not LO Core UI      |
 | Node target                        | Backend target                       | Existing backend ecosystem                | Keep ESM/WASM/worker-compatible output              |
 | Dart/Flutter target                | Generated package/plugin output      | Flutter ecosystem                         | Keep as interop output, not Flutter-native core     |
 | `Dart.Uint8List`                   | Boundary-only type                   | Dart APIs use it                          | Use `Bytes` in LO, convert at Dart boundary         |
@@ -379,6 +381,7 @@ email protocol implementation details
 payment provider details
 cloud SDK details
 UI framework details
+mobile framework details
 ```
 
 Move them to:

@@ -128,6 +128,7 @@ javascript = generated ESM JavaScript module output
 typescript = generated TypeScript declaration or TS-compatible output
 node    = Node-compatible ESM/WASM/worker output
 react-adapter = optional React-friendly wrapper output
+react-native-adapter = optional React Native-friendly wrapper output
 angular-adapter = optional Angular-friendly wrapper output
 wasm    = WebAssembly output planning
 worker  = browser/Node worker-compatible compute output
@@ -169,11 +170,16 @@ Flutter FFI and platform-channel targets are explicit interop targets. They must
 declare platform support, permissions, generated bindings, source maps and
 unsupported-platform diagnostics.
 
-JavaScript, TypeScript, Node, React adapter and Angular adapter targets are
-framework-facing output targets. They must keep LO framework-neutral: generated
-ESM, declarations, schemas, source maps, WASM bridges and adapter manifests are
-allowed; native React/Angular component syntax and framework routing are not
-core LO features.
+JavaScript, TypeScript, Node, React adapter, React Native adapter and Angular
+adapter targets are framework-facing output targets. They must keep LO
+framework-neutral: generated ESM, declarations, schemas, source maps, WASM
+bridges and adapter manifests are allowed; native React/React Native/Angular
+component syntax and framework routing are not core LO features.
+
+React Native targets should be treated like Dart/Flutter interop: generated
+mobile package output plus explicit native-module, permission, storage and
+platform capability reports. React Native screens, JSX/TSX, navigation, Metro,
+Babel and app lifecycle are host-framework concerns.
 
 Mobile-native targets and device capability packages must not turn LO into a
 mobile framework or operating-system API layer. They should expose explicit

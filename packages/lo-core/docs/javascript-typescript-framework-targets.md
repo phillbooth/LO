@@ -2,13 +2,15 @@
 
 Status: Draft.
 
-This document defines how LO should support Node.js, React, Angular and similar
-JavaScript/TypeScript frameworks without becoming those frameworks.
+This document defines how LO should support Node.js, React, React Native,
+Angular and similar JavaScript/TypeScript frameworks without becoming those
+frameworks.
 
-LO is a programming language and compiler/toolchain. React, Angular, Node.js,
-Express, Fastify, Next-style frameworks, Vite, Webpack and Angular CLI are
-external runtimes, frameworks or build tools. LO should generate safe code,
-types, schemas, reports and bindings that those tools can consume.
+LO is a programming language and compiler/toolchain. React, React Native,
+Angular, Node.js, Express, Fastify, Next-style frameworks, Vite, Webpack, Metro,
+Babel and Angular CLI are external runtimes, frameworks or build tools. LO
+should generate safe code, types, schemas, reports and bindings that those tools
+can consume.
 
 Reference facts checked against official Node, React and Angular documentation
 on 2026-05-06:
@@ -59,12 +61,15 @@ Frameworks and packages should provide:
 
 ```text
 React components
+React Native components
 Angular components
 JSX syntax
+TSX syntax
 Angular decorators
 client-side routers
 virtual DOM
 state management
+mobile screens/navigation
 template engines
 Next/Nuxt-style app frameworks
 Express/Fastify server conventions
@@ -83,6 +88,7 @@ target node              = Node-compatible JavaScript/WASM output
 target browser           = browser-compatible JavaScript/WASM output
 target wasm              = WebAssembly output with JS bridge
 target react-adapter     = optional generated React-friendly wrappers
+target react-native-adapter = optional generated React Native-friendly wrappers
 target angular-adapter   = optional generated Angular-friendly wrappers
 target worker            = browser/Node worker-compatible compute output
 ```
@@ -93,7 +99,8 @@ The first practical framework target should be:
 LO logic/types/API contracts -> ESM JavaScript + TypeScript declarations + schemas
 ```
 
-LO should not generate React or Angular components as a required core feature.
+LO should not generate React, React Native or Angular components as a required
+core feature.
 
 ---
 
@@ -198,6 +205,7 @@ These outputs help:
 
 ```text
 React forms
+React Native forms
 Angular forms
 Node API clients
 validation libraries
@@ -323,6 +331,52 @@ export function useOrderApi() {
 ```
 
 This should be a generator/package output, not required LO syntax.
+
+---
+
+## React Native Adapter Output
+
+LO should support React Native like Dart/Flutter interop: generated package and
+adapter output, not native mobile framework syntax in LO Core.
+
+Examples:
+
+```text
+TypeScript types
+React Native hook wrappers
+API clients
+form schemas
+permission manifests
+native module boundary manifests
+storage policy helpers
+source maps
+AI adapter guide
+```
+
+Possible generated hook:
+
+```ts
+export function useOrdersApi() {
+  return {
+    createOrder,
+    getOrder
+  };
+}
+```
+
+React Native components, JSX/TSX, screens, navigation, state management, Metro
+configuration, native project files and app lifecycle stay in React Native.
+
+Native modules, JSI/TurboModule-style bindings, device permissions and secure
+storage must be explicit boundaries with reports.
+
+Required report direction:
+
+```text
+react-native-adapter-manifest.json
+react-native-permissions-report.json
+react-native-native-boundary-report.json
+```
 
 ---
 
@@ -504,12 +558,17 @@ This prevents accidental misuse by generated framework adapters.
 
 ```text
 React components
+React Native components
 Angular components
 JSX syntax as a required core feature
+TSX syntax as a required core feature
 Angular decorators
 client-side router
+mobile navigation framework
 virtual DOM
 state management framework
+Metro/Babel configuration
+native mobile project files
 template engine
 Next/Nuxt-style app framework
 Express/Fastify framework conventions
@@ -517,4 +576,3 @@ Vite/Webpack plugin implementation details
 ```
 
 These belong in packages, generators, framework adapters or external tools.
-

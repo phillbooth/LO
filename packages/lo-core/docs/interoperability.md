@@ -20,6 +20,7 @@ TypeScript declarations
 Node packages
 React adapter packages
 Angular adapter packages
+React Native adapter packages
 browser/Node WASM bridges
 worker modules
 Dart packages
@@ -28,6 +29,8 @@ Dart Uint8List byte interop
 Flutter plugin and FFI boundaries
 Flutter platform channels
 Pigeon-style typed platform APIs
+React Native native-module boundaries
+React Native device permission reports
 device capability packages
 mobile platform APIs
 sensor/native hardware bindings
@@ -83,8 +86,21 @@ Rule:
 ESM should be the preferred JavaScript module output for modern framework interop.
 TypeScript declarations should describe generated JS/WASM APIs.
 React and Angular adapters should be optional package/generator outputs.
+React Native adapters should be optional mobile package/generator outputs.
 client_safe, server_only and worker_safe markers must control what adapters expose.
 Worker outputs must report structured-clone, transfer and shared-memory decisions.
+```
+
+React Native interop should follow the same boundary model as Dart/Flutter:
+
+```text
+React Native is an external mobile framework.
+Generated adapters may expose LO API clients, hooks, schemas and native-boundary
+metadata.
+React Native components, JSX/TSX, navigation, state management, Metro/Babel and
+app lifecycle stay outside LO Core.
+Native modules, JSI/TurboModule-style bindings and device capabilities require
+explicit permissions, source maps and reports.
 ```
 
 Text AI interop should remain package/provider based.

@@ -187,6 +187,8 @@ Suggested fix:
 | `localStorage` / cookies        | 3    | Secret leakage                            | Boundary only                      | Deny `SecureString`, storage policy reports         |
 | Camera/microphone/location      | 4    | Privacy breach                            | Denied by default                  | Explicit permissions and platform reports           |
 | React/Angular adapters          | 3    | Framework injection and lifecycle bugs    | Generated package output           | Safe props, SafeHtml, source maps                   |
+| React Native adapters           | 3    | Mobile framework injection/lifecycle bugs | Generated package output           | Permission reports, native boundary reports         |
+| React Native native modules     | 4    | Native permission and memory boundary     | Explicit boundary only             | Ownership, platform and source-map reports          |
 | Flutter platform channels       | 4    | Native permission and platform mismatch   | Generated boundary contracts       | Permission reports, unsupported-platform reports    |
 | `Dart.Uint8List`                | 3    | Mutable binary boundary confusion         | Dart boundary only                 | Convert from/to LO `Bytes`                          |
 

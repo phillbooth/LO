@@ -110,6 +110,7 @@ Current syntax/target documentation additions:
 [ ] Implement client/server split diagnostics for forbidden effects
 [ ] Implement worker-safe export diagnostics for clone/transfer unsafe data
 [ ] Implement React adapter manifest/hook/client generator as package output
+[ ] Implement React Native adapter manifest/hook/client/native-boundary generator as package output
 [ ] Implement Angular adapter manifest/service/client generator as package output
 [ ] Implement framework-adapter-manifest.json
 [x] Add docs/device-capability-boundaries.md

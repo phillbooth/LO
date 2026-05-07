@@ -2,12 +2,12 @@
 
 Status: Draft.
 
-This file defines syntax direction for JavaScript, TypeScript, Node, WASM and
-framework adapter targets.
+This file defines syntax direction for JavaScript, TypeScript, Node, WASM,
+React Native and framework adapter targets.
 
-LO is a language and compiler/toolchain. React, Angular, Node.js and similar
-systems are external frameworks, runtimes and build tools that consume generated
-outputs.
+LO is a language and compiler/toolchain. React, React Native, Angular, Node.js
+and similar systems are external frameworks, runtimes and build tools that
+consume generated outputs.
 
 ---
 
@@ -19,7 +19,7 @@ generate TypeScript declarations
 generate browser/Node WASM bridges
 mark exports as client_safe, server_only or worker_safe
 generate framework adapter metadata
-keep React, Angular and Node framework conventions outside core LO syntax
+keep React, React Native, Angular and Node framework conventions outside core LO syntax
 ```
 
 ---
@@ -30,7 +30,7 @@ keep React, Angular and Node framework conventions outside core LO syntax
 target_js       = target "javascript" block
 target_node     = target "node" block
 target_wasm     = target "wasm" block
-target_adapter  = target ("react-adapter" | "angular-adapter") block
+target_adapter  = target ("react-adapter" | "react-native-adapter" | "angular-adapter") block
 export_marker   = "client_safe" | "server_only" | "worker_safe"
 export_decl     = "export" export_marker* (flow_decl | type_decl)
 package_targets = "targets" "[" identifier_list "]"
@@ -108,6 +108,15 @@ target react-adapter {
   source_maps true
 }
 
+target react-native-adapter {
+  hooks true
+  fetch_clients true
+  validation_schemas true
+  native_boundary_manifest true
+  permissions_report true
+  source_maps true
+}
+
 target angular-adapter {
   services true
   validators true
@@ -140,6 +149,7 @@ server_only exports cannot be emitted into browser bundles
 worker_safe exports cannot use DOM, secret, database or uncontrolled filesystem effects
 worker_safe exports must be structured-clone/transfer safe
 React and Angular adapters must respect export markers
+React Native adapters must respect export markers and device permission policy
 Node adapters must preserve declared module format
 WASM bridges must report memory and JS boundary conversions
 ```
@@ -155,6 +165,8 @@ js-target-report.json
 typescript-declarations-report.json
 framework-boundary-report.json
 framework-adapter-manifest.json
+react-native-native-boundary-report.json
+react-native-permissions-report.json
 wasm-bridge-report.json
 worker-bridge-report.json
 client-server-split-report.json
@@ -172,6 +184,7 @@ forbidden effects rejected from client bundles
 WASM bridge functions
 worker transfer/clone decisions
 framework adapter files
+React Native native boundary files
 source-map links back to .lo files
 ```
 
@@ -183,7 +196,7 @@ source-map links back to .lo files
 parse target javascript
 parse target node
 parse target wasm bridge settings
-parse react-adapter and angular-adapter target blocks
+parse react-adapter, react-native-adapter and angular-adapter target blocks
 parse client_safe, server_only and worker_safe export markers
 reject forbidden effects in client_safe exports
 reject unsafe captures in worker_safe exports
@@ -192,4 +205,5 @@ emit framework adapter manifests
 emit source maps for JS and WASM outputs
 generate Node/browser worker-compatible module reports
 keep React/Angular component syntax out of core LO
+keep React Native component, JSX/TSX, navigation and native project syntax out of core LO
 ```

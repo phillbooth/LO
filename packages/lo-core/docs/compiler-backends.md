@@ -12,6 +12,7 @@ Node-compatible JavaScript/WASM
 Dart package
 Flutter-compatible Dart package
 Flutter FFI native library plus Dart bindings
+React Native-compatible TypeScript/JavaScript package
 mobile native binding/package output
 WebAssembly
 browser/Node WASM bridge
@@ -47,12 +48,13 @@ Implementation order:
 5. Node-compatible ESM and worker-safe module output planning.
 6. Dart package output for Dart/Flutter-compatible business logic.
 7. Flutter package/plugin output planning, including permission and source-map reports.
-8. WebAssembly output for isolated compute-heavy frontend/backend code.
-9. Browser/Node WASM bridge output and worker-compatible compute modules.
-10. Native/CPU backend once IR, memory rules and security rules stabilise.
-11. Flutter FFI/native-library output after native ABI and memory rules stabilise.
-12. Mobile native binding/package output after platform permission and native boundary rules stabilise.
-13. GPU, photonic, wavelength and omni-logic backends as planning/report targets first.
+8. React Native adapter/package output planning, including permission and native-boundary reports.
+9. WebAssembly output for isolated compute-heavy frontend/backend code.
+10. Browser/Node WASM bridge output and worker-compatible compute modules.
+11. Native/CPU backend once IR, memory rules and security rules stabilise.
+12. Flutter FFI/native-library output after native ABI and memory rules stabilise.
+13. Mobile native binding/package output after platform permission and native boundary rules stabilise.
+14. GPU, photonic, wavelength and omni-logic backends as planning/report targets first.
 ```
 
 This means early LO should run through a checked interpreter/prototype first, not compile directly to WASM or a native binary as the first production path.
@@ -73,7 +75,7 @@ Flutter render reports must describe Skia/Impeller assumptions instead of assumi
 Flutter package/plugin output must preserve normal Flutter build workflows.
 Flutter FFI output must declare platform support, native memory ownership and unsupported targets.
 JavaScript/TypeScript output should prefer ESM for modern framework and Node interop.
-React, Angular, Express/Fastify and similar adapters must be generated package/tool outputs, not core language frameworks.
+React, React Native, Angular, Express/Fastify and similar adapters must be generated package/tool outputs, not core language frameworks.
 Worker-compatible outputs must report clone/transfer decisions and forbidden effects.
 Mobile-native outputs must not provide built-in phone features; they must report device permissions, native bindings and platform capability assumptions.
 Backend compute outputs must keep vendor-specific GPU, AI accelerator, cloud and photonic behaviour in target plugins or deployment profiles.

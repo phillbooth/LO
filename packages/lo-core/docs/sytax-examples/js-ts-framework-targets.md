@@ -3,8 +3,8 @@
 Status: Draft.
 
 These examples show how LO should expose safe JavaScript, TypeScript, Node, WASM
-and framework-adapter outputs without becoming React, Angular or Node framework
-syntax.
+and framework-adapter outputs without becoming React, React Native, Angular or
+Node framework syntax.
 
 ---
 
@@ -75,6 +75,18 @@ target react-adapter {
   hooks true
   fetch_clients true
   validation_schemas true
+}
+```
+
+React Native adapter output:
+
+```LO
+target react-native-adapter {
+  hooks true
+  fetch_clients true
+  validation_schemas true
+  native_boundary_manifest true
+  permissions_report true
 }
 ```
 
@@ -195,6 +207,29 @@ React components and JSX belong in React packages or adapter output, not core LO
 
 ---
 
+React Native screen syntax in LO core:
+
+```LO
+react_native screen OrderScreen {
+  tsx "<View><Text>{order.id}</Text></View>"
+}
+```
+
+Expected diagnostic:
+
+```text
+mobile_framework_syntax_not_core_language
+```
+
+Reason:
+
+```text
+React Native screens, JSX/TSX, navigation and native project files belong in
+React Native packages or adapter output, not core LO.
+```
+
+---
+
 Angular decorator syntax in LO core:
 
 ```LO
@@ -226,6 +261,8 @@ js-target-report.json
 typescript-declarations-report.json
 framework-boundary-report.json
 framework-adapter-manifest.json
+react-native-native-boundary-report.json
+react-native-permissions-report.json
 wasm-bridge-report.json
 worker-bridge-report.json
 client-server-split-report.json
@@ -238,8 +275,8 @@ which exports are client_safe, server_only or worker_safe
 which effects caused rejected client exports
 which TypeScript declarations were generated
 which framework adapter files were generated
+which React Native native boundaries and permissions were declared
 which WASM bridge functions exist
 which worker exports transfer, clone or reject data
 which generated locations map back to .lo source
 ```
-

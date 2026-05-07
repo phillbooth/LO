@@ -66,6 +66,7 @@ Every major LO feature should be labelled Implemented, Prototype, Draft, Planned
 | Browser target | Prototype | Syntax parses and server-only import blocking has initial checks |
 | JavaScript/TypeScript framework targets | Draft | ESM, TypeScript declarations, Node/browser/WASM bridge, worker-safe exports and framework adapter boundaries documented; generator pending |
 | React adapter output | Draft | Hook/client/schema adapter output documented as generator/package work, not core component syntax |
+| React Native adapter output | Draft | Mobile hook/client/schema/native-boundary adapter output documented as generator/package work, not core component syntax |
 | Angular adapter output | Draft | Service/client/form/signal-friendly adapter output documented as generator/package work, not core component syntax |
 | Node target | Draft | ESM, worker-compatible modules and WASM loader target direction documented; compiler output pending |
 | Dart target | Draft | Generated Dart library/package output documented; compiler output pending |

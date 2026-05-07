@@ -21,6 +21,7 @@ backend-language-gap-analysis.md
 syntax.md
 sytax/
 dart-flutter-target.md
+react-native-target.md
 device-capability-boundaries.md
 javascript-typescript-framework-targets.md
 safe-pattern-matching-and-regex.md
