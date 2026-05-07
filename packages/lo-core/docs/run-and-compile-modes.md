@@ -273,6 +273,10 @@ app.build-manifest.json
 docs/docs-manifest.json
 ```
 
+In the v0.1 prototype, `app.bin` and `app.wasm` are placeholder artefacts, not
+real Windows, Linux or WebAssembly executables. Check `app.build-manifest.json`
+and its `artifactStatus` section before treating any output as runnable.
+
 ## Suggested Workflow
 
 ```text

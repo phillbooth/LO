@@ -49,6 +49,11 @@ node compiler/lo.js explain examples/source-map-error.lo --for-ai
 The generated `app.bin` and `app.wasm` files are placeholders. They prove the
 build layout and report contracts, not native execution.
 
+`app.build-manifest.json` includes an `artifactStatus` section that marks these
+outputs as non-executable placeholders. In the v0.1 prototype, `app.bin` is not
+a Windows `.exe` or Linux ELF binary, and `app.wasm` is not a runnable
+WebAssembly module.
+
 ## Lexer
 
 The lexer lives in `compiler/lexer.js` and emits `app.tokens.json` during build.

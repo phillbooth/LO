@@ -1308,6 +1308,17 @@ effects [database.write] {
     assert(aiGuideMarkdown(result).includes("If the code compiles"), "Expected AI guide rule.");
   });
 
+  test("build manifest marks prototype artefacts as non-executable placeholders", () => {
+    const result = analyseProject(loadProject(root, ["source-map-error.lo"]));
+    const manifest = buildManifest(result, {
+      "app.bin": "placeholder",
+      "app.wasm": "placeholder"
+    });
+    assert(manifest.artifactStatus["app.bin"].executable === false, "Expected app.bin to be marked non-executable.");
+    assert(manifest.artifactStatus["app.bin"].platform === "not-windows-or-linux", "Expected app.bin platform status to be explicit.");
+    assert(manifest.artifactStatus["app.wasm"].runtimeStatus === "placeholder", "Expected app.wasm to be marked as placeholder.");
+  });
+
   test("runtime report describes memory pressure and spill policy", () => {
     const result = analyseProject(loadProject(path.join(root, "boot.lo")));
     const report = buildRuntimeReport(result);
@@ -4620,6 +4631,7 @@ function buildManifest(result, outputs = {}) {
       ternarySimulation: "app.ternary.sim",
       omniLogicSimulation: "app.omni-logic.sim"
     },
+    artifactStatus: buildArtifactStatus(result),
     reports: [
       "app.api-report.json",
       "app.global-report.json",
@@ -4653,6 +4665,71 @@ function buildManifest(result, outputs = {}) {
     requiredOutputs: requiredOutputs(result),
     outputHashes
   };
+}
+
+function buildArtifactStatus(result) {
+  const status = {
+    "app.bin": {
+      kind: "cpu-compatible-placeholder",
+      format: "text-placeholder",
+      executable: false,
+      platform: "not-windows-or-linux",
+      runtimeStatus: "placeholder",
+      runCommand: null,
+      note: "This is not a Windows .exe, Linux ELF binary or macOS executable in the v0.1 prototype."
+    },
+    "app.wasm": {
+      kind: "webassembly-placeholder",
+      format: "text-placeholder",
+      executable: false,
+      platform: "wasm-planning-target",
+      runtimeStatus: "placeholder",
+      runCommand: null,
+      note: "This is not a runnable WebAssembly module in the v0.1 prototype."
+    },
+    "app.gpu.plan": {
+      kind: "target-plan",
+      format: "text-report",
+      executable: false,
+      platform: "planning-only",
+      runtimeStatus: "report"
+    },
+    "app.photonic.plan": {
+      kind: "target-plan",
+      format: "text-report",
+      executable: false,
+      platform: "planning-only",
+      runtimeStatus: "report"
+    },
+    "app.ternary.sim": {
+      kind: "logic-simulation-plan",
+      format: "text-report",
+      executable: false,
+      platform: "simulation-only",
+      runtimeStatus: "report"
+    },
+    "app.omni-logic.sim": {
+      kind: "logic-simulation-plan",
+      format: "text-report",
+      executable: false,
+      platform: "simulation-only",
+      runtimeStatus: "report"
+    }
+  };
+
+  if (hasEnabledTarget(result.ast, "browser")) {
+    status["app.browser.js"] = {
+      kind: "browser-javascript-placeholder",
+      format: "javascript-placeholder",
+      executable: false,
+      platform: "browser-planning-target",
+      runtimeStatus: "placeholder",
+      runCommand: null,
+      note: "This is a browser target placeholder, not a production JavaScript bundle."
+    };
+  }
+
+  return status;
 }
 
 function diagnosticSummary(diagnostics) {
