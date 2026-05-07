@@ -1561,7 +1561,7 @@ secure flow main() -> Result<Void, Error> {
   console.log("vector total: " . total)
   console.log("sum: " . sum)
   console.log("decimal sum: " . decimalTotal)
-  console.log("json payload: " . payload)
+  console.log("json payload:\\n" . json.pretty(payload))
   print(2 + 2)
   print("dot total: " . total)
   return Ok()
@@ -1573,7 +1573,7 @@ secure flow main() -> Result<Void, Error> {
     assert(run.output[0] === "vector total: 6", "Expected plus concatenation output.");
     assert(run.output[1] === "sum: 5", "Expected function sum output.");
     assert(run.output[2] === "decimal sum: 3.50", "Expected decimal function sum output.");
-    assert(run.output[3] === "json payload: {\"items\":[{\"id\":1,\"test\":\"xxx\"},{\"id\":2,\"test\":\"xxx\"},{\"id\":3,\"test\":\"xxx\"}]}", "Expected JSON payload output.");
+    assert(run.output[3] === "json payload:\n{\n  \"items\": [\n    {\n      \"id\": 1,\n      \"test\": \"xxx\"\n    },\n    {\n      \"id\": 2,\n      \"test\": \"xxx\"\n    },\n    {\n      \"id\": 3,\n      \"test\": \"xxx\"\n    }\n  ]\n}", "Expected pretty JSON payload output.");
     assert(run.output[4] === "4", "Expected plus to remain numeric addition.");
     assert(run.output[5] === "dot total: 6", "Expected dot concatenation output.");
   });
@@ -5202,8 +5202,17 @@ function collectRunVariables(content, functions) {
 }
 
 function collectRunOutput(content, variables, functions) {
-  return matches(content, /\b(?:print|console\.log)\s*\(([^)]*)\)/g)
-    .map((match) => evaluateRunExpression(match[1], variables, functions));
+  const output = [];
+  const regex = /\b(?:print|console\.log)\s*\(/g;
+  let match;
+  while ((match = regex.exec(content)) !== null) {
+    const open = content.indexOf("(", match.index);
+    const close = findMatchingParen(content, open);
+    if (close === -1) continue;
+    output.push(evaluateRunExpression(content.slice(open + 1, close), variables, functions));
+    regex.lastIndex = close + 1;
+  }
+  return output;
 }
 
 function evaluateRunExpression(expression, variables, functions) {
@@ -5219,10 +5228,15 @@ function evaluateRunExpression(expression, variables, functions) {
     return text;
   }
   const stringMatch = text.match(/^"([^"]*)"$/);
-  if (stringMatch) return stringMatch[1];
+  if (stringMatch) return unescapeRunString(stringMatch[1]);
   if (text.startsWith("{") && text.endsWith("}")) return compactRunJson(text);
   if (/^-?\d+(?:\.\d+)?$/.test(text)) return text;
   const simpleCall = text.match(/^([A-Za-z_][A-Za-z0-9_]*)\((.*)\)$/);
+  const dottedCall = text.match(/^([A-Za-z_][A-Za-z0-9_]*)\.([A-Za-z_][A-Za-z0-9_]*)\((.*)\)$/);
+  if (dottedCall && dottedCall[1] === "json" && dottedCall[2] === "pretty") {
+    const value = evaluateRunExpression(dottedCall[3], variables, functions);
+    return prettyRunJson(value);
+  }
   if (simpleCall && functions.has(simpleCall[1])) {
     return evaluateRunFunction(simpleCall[1], simpleCall[2], variables, functions);
   }
@@ -5290,6 +5304,18 @@ function compactRunJson(text) {
   }
 }
 
+function prettyRunJson(text) {
+  try {
+    return JSON.stringify(JSON.parse(text), null, 2);
+  } catch (error) {
+    return text;
+  }
+}
+
+function unescapeRunString(text) {
+  return text.replace(/\\n/g, "\n").replace(/\\"/g, "\"").replace(/\\\\/g, "\\");
+}
+
 function splitRunOperator(text, operator) {
   const parts = [];
   let current = "";
@@ -5307,6 +5333,22 @@ function splitRunOperator(text, operator) {
   }
   if (current.trim()) parts.push(current.trim());
   return parts;
+}
+
+function findMatchingParen(text, open) {
+  let depth = 0;
+  let inString = false;
+  for (let index = open; index < text.length; index += 1) {
+    const char = text[index];
+    if (char === "\"" && text[index - 1] !== "\\") inString = !inString;
+    if (inString) continue;
+    if (char === "(") depth += 1;
+    if (char === ")") {
+      depth -= 1;
+      if (depth === 0) return index;
+    }
+  }
+  return -1;
 }
 
 function serveProject(result, options = {}) {
