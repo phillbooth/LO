@@ -48,6 +48,8 @@ Use this file as a practical checklist while the project moves from concept to d
 [x] Create GOVERNANCE.md
 [x] Create OMNI_LOGIC.md
 [x] Create COMPATIBILITY.md
+[x] Create docs/legacy-and-compatibility-boundaries.md
+[x] Create docs/security-risk-feature-ranking.md
 [x] Create .env.example
 [x] Create .gitignore
 ```
@@ -227,7 +229,6 @@ Reason for additions:
 [x] Decide language short name: LO
 [x] Decide full meaning: Logic Omni
 [x] Decide file extension: .lo
-[x] Reject old .language file extension
 [?] Decide whether the entry file should always be boot.lo
 [?] Decide whether main.lo should be aLOwed as an alternative entry file
 [?] Decide whether project config should live inside boot.lo or LO.config

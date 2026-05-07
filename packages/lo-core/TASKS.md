@@ -65,7 +65,6 @@ Git workflow
 ```text
 [x] Project name: LO / Logic Omni
 [x] Source file extension: .lo
-[x] Old .language extension rejected
 [x] Language should be strict typed
 [x] Language should be memory safe
 [x] Language should be security-first

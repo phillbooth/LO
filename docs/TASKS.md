@@ -4,6 +4,7 @@
 
 - [x] Update workspace documentation for the `packages/lo-core/` language package move
 - [x] Split partial framework guidance into `packages/lo-app-kernel/`
+- [x] Add LO logic, compute type and secure runtime future-support proposal
 - [ ] Complete `docs/REQUIREMENTS.md`
 - [ ] Complete `docs/DESIGN.md`
 - [ ] Complete `docs/ARCHITECTURE.md`

@@ -18,3 +18,8 @@ These files describe the app being built, not the LO language itself.
 - `TODO.md` — smaller reminders
 - `DECISIONS.md` — technical decisions
 - `CHANGELOG.md` — project changes
+
+## Language and Runtime Proposals
+
+- `lo-logic-compute-runtime-proposal.md` - future LO logic, compute type and
+  secure runtime support proposal.

@@ -16,6 +16,7 @@ feature-status.md
 language-rules.md
 language-supported-primitives.md
 language-non-supported-primitives.md
+legacy-and-compatibility-boundaries.md
 backend-language-gap-analysis.md
 syntax.md
 sytax/
@@ -57,6 +58,7 @@ memory-safety.md
 memory-and-variable-use.md
 memory-error-correction.md
 memory-pressure-and-disk-spill.md
+security-risk-feature-ranking.md
 warnings-and-diagnostics.md
 system-health-warnings.md
 disk-memory-and-cache-warnings.md

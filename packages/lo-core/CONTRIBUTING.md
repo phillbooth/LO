@@ -113,16 +113,6 @@ order-service.lo
 payment-webhook.lo
 ```
 
-Do not reintroduce:
-
-```text
-.language
-```
-
-The `.language` extension was an early idea and is no longer part of the current LO direction.
-
----
-
 ## Good First Contributions
 
 Good first contributions include:
@@ -489,7 +479,6 @@ Before opening a pull request, check:
 ```text
 [ ] The change supports the LO project goals.
 [ ] `.lo` is used for source examples.
-[ ] No `.language` examples were added.
 [ ] No undefined or silent null behaviour was introduced.
 [ ] Strict typing was preserved.
 [ ] Security defaults were preserved.

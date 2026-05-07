@@ -10,6 +10,8 @@ All notable changes to this app should be documented here.
 - Added `packages/lo-app-kernel/` as the optional partial framework
   layer for secure runtime boundaries.
 - Added a checked Run Mode hello-world test fixture for the app kernel package.
+- Added the LO logic, compute type and secure runtime future-support proposal.
+- Removed active legacy extension warning comments from LO core documentation.
 
 ### Changed
 

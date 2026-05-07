@@ -91,9 +91,11 @@ Example:
 - Added docs/video-package-boundaries-and-compute-auto.md to classify video processing, video AI, camera/screen capture and video search as package/runtime/provider areas rather than LO core features.
 - Added docs/memory-error-correction.md for memory detection, recovery, rollback, fallback and structured report planning.
 - Added docs/warnings-and-diagnostics.md, docs/system-health-warnings.md, docs/disk-memory-and-cache-warnings.md and docs/error-codes.md for standard diagnostic planning.
+- Added docs/security-risk-feature-ranking.md for feature-by-feature security risk ranking, memory failsafes and fail-closed defaults.
 - Added docs/contracts.md, docs/modules-and-visibility.md, docs/standard-library.md, docs/testing.md, docs/observability.md and docs/compiler-backends.md.
 - Added docs/package-use-registry.md for `import` versus `use`, package approval, package permissions and package reports.
 - Added docs/language-supported-primitives.md and docs/language-non-supported-primitives.md for supported primitive and native non-support boundaries.
+- Added docs/legacy-and-compatibility-boundaries.md for deprecated ideas, rejected legacy behaviours and explicit ecosystem compatibility boundaries.
 - Added docs/dart-flutter-target.md plus matching docs/sytax/ and docs/sytax-examples/ entries for layered Dart/Flutter target support, explicit async flows and Bytes/Uint8List interop boundaries.
 - Expanded Dart/Flutter target planning with support levels for Dart logic packages, Flutter package/plugin output, platform-channel contracts, Pigeon-style typed APIs, Flutter FFI/native libraries, permission reports, source maps and deferred widget syntax.
 - Added docs/javascript-typescript-framework-targets.md plus matching docs/sytax/ and docs/sytax-examples/ entries for JavaScript, TypeScript, Node, WASM, worker and React/Angular adapter target planning.
@@ -657,17 +659,6 @@ changing security defaults
 ```
 
 Breaking changes should include migration notes.
-
-Example:
-
-```text
-Breaking change:
-`.language` files are no longer used.
-
-Migration:
-Rename source files from `.language` to `.lo`.
-Rename `main.language` to `boot.lo` or `main.lo`.
-```
 
 ---
 

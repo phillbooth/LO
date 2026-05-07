@@ -157,16 +157,6 @@ payment-webhook.lo
 fraud-check.lo
 ```
 
-Do not use:
-
-```text
-.language
-```
-
-The `.language` extension was an early idea and should not be used in current LO documentation or examples.
-
----
-
 ## Entry File Rule
 
 For full projects, prefer:
@@ -206,8 +196,6 @@ build/
 Avoid vague names such as:
 
 ```text
-script.language
-main.language
 future-safe-language
 my-new-lang
 ```

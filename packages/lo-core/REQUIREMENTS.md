@@ -177,10 +177,6 @@ payment-webhook.lo
 fraud-check.lo
 ```
 
-The older `.language` extension MUST NOT be used for LO source files.
-
----
-
 ### REQ-PROJECT-002: Project Entry File
 
 A LO project SHOULD use:

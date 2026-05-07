@@ -49,16 +49,6 @@ payment-webhook.lo
 fraud-check.lo
 ```
 
-Do not use:
-
-```text
-.language
-```
-
-The `.language` extension was an early idea and is no longer part of the current LO design.
-
----
-
 ## Rule 2: Prefer `boot.lo` for Project Entry
 
 Full LO projects should use:

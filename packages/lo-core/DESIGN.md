@@ -92,10 +92,6 @@ payment-webhook.lo
 fraud-check.lo
 ```
 
-The old `.language` idea should not be used.
-
----
-
 ## Entry File Design
 
 The recommended project entry file is:

@@ -279,7 +279,6 @@ Good:
 docs: add API-native design section
 security: define SecureString logging rules
 design: add compute block restrictions
-fix: replace .language examples with .lo
 ```
 
 Poor:
@@ -356,7 +355,6 @@ Why is this needed?
 ## Checklist
 
 - [ ] Uses `.lo` for source examples
-- [ ] Does not reintroduce `.language`
 - [ ] Preserves strict typing
 - [ ] Preserves no undefined / no silent null
 - [ ] Preserves source-map requirements
@@ -663,7 +661,6 @@ Before committing:
 ```text
 [ ] No real secrets added
 [ ] `.lo` extension used correctly
-[ ] No `.language` examples added
 [ ] Documentation is consistent
 [ ] Strict typing rules preserved
 [ ] Security defaults preserved
@@ -782,18 +779,6 @@ changing security defaults
 ```
 
 Migration notes should be included.
-
-Example:
-
-```text
-Breaking change:
-`.language` is no longer used.
-
-Migration:
-Rename source files to `.lo`.
-```
-
----
 
 ## GitHub Discussions
 

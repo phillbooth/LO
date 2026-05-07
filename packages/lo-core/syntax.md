@@ -48,14 +48,6 @@ payment-webhook.lo
 fraud-check.lo
 ```
 
-Do not use:
-
-```text
-.language
-```
-
----
-
 ## Entry File
 
 Recommended project entry file:
