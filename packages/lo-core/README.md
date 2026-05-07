@@ -41,6 +41,12 @@ App Kernel package in the surrounding workspace:
 packages/lo-app-kernel/
 ```
 
+HTTP API serving belongs in the built-in API server package:
+
+```text
+packages/lo-api-server/
+```
+
 The intended layering is:
 
 ```text
@@ -53,14 +59,19 @@ LO Standard Library
 LO Secure App Kernel
   optional runtime layer for APIs, validation, auth, rate limits, jobs and reports
 
+LO API Server
+  built-in HTTP API server that loads route manifests and calls the app kernel
+
 Full Frameworks
   CMS, admin panels, UI systems, templates, ORM, page builders and frontend adapters
 ```
 
 LO core may define syntax, checks and reports for safe API, webhook, job and
 security contracts. The Secure App Kernel enforces those contracts at runtime
-when an application opts into it. Full frameworks provide opinionated
-application structure above the kernel.
+when an application opts into it. `lo-api-server` provides the default HTTP
+transport for API services by loading route manifests, normalising requests and
+passing them to the kernel. Full frameworks provide opinionated application
+structure above or beside the kernel.
 
 LO core must not become a Laravel, Django, React or WordPress-style framework.
 
@@ -187,6 +198,10 @@ effects [database.write] {
 
 LO core checks the contract. A kernel-backed runtime can enforce request
 validation, auth, limits, idempotency and typed handler dispatch.
+
+The built-in `lo-api-server` package can serve the compiled API route manifest
+over HTTP, but it should not own auth policy, business logic, persistence,
+frontend rendering or framework conventions.
 
 ## Example Compute Block
 

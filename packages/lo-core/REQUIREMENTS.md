@@ -52,7 +52,9 @@ The build folder should also include `app.memory-report.json` and
 
 LO core defines language safety. Runtime enforcement for request handling,
 auth, rate limits, idempotency, jobs and workload control belongs in the
-optional LO Secure App Kernel. Full frameworks should build above that kernel.
+optional LO Secure App Kernel. Built-in HTTP API serving belongs in
+`packages/lo-api-server/`, which should load route manifests and delegate to the
+kernel. Full frameworks should build above or beside that kernel.
 
 ---
 

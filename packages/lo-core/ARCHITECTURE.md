@@ -58,6 +58,9 @@ LO Core
 LO Secure App Kernel
   request lifecycle, validation, security, auth, rate limits, jobs and reports
 
+LO API Server
+  HTTP listening, route manifest loading, request normalisation and safe responses
+
 LO Standard Packages
   HTTP adapters, SQL adapters, Redis queues, OpenAPI generators, JS/WASM generators
 
@@ -70,6 +73,12 @@ the layer that receives requests, validates input, applies security policy,
 checks auth, controls workload, queues heavy work and routes to typed flows.
 
 The kernel is a partial framework layer, not a full application framework.
+
+The built-in `lo-api-server` package is the HTTP transport layer for LO API
+services. It should load compiler-generated API route manifests, enforce
+server-level request limits, pass requests into the Secure App Kernel and write
+safe HTTP responses. It is not part of LO core and must not become a full web
+framework.
 
 ---
 

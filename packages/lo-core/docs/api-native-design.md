@@ -48,6 +48,17 @@ Service blocks may mount api and webhook blocks.
 API and webhook blocks must generate report entries with distinct kinds.
 ```
 
+Runtime positioning:
+
+```text
+LO Core checks service/api/webhook contracts.
+lo-api-server serves HTTP and loads generated route manifests.
+lo-app-kernel enforces validation, auth, idempotency and typed execution.
+```
+
+`lo-api-server` may be the default implementation for `lo serve`, but it remains
+an HTTP server package, not a full web framework.
+
 Example relationship:
 
 ```LO

@@ -74,6 +74,7 @@ dependencies.md
 ## API and Interop
 
 ```text
+../../lo-api-server/README.md
 json-native-design.md
 lazy-compact-json.md
 api-native-design.md

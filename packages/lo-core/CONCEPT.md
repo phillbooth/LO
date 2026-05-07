@@ -61,6 +61,9 @@ LO Standard Library
 LO Secure App Kernel
   optional runtime layer for APIs, validation, auth, rate limits, jobs and reports
 
+LO API Server
+  built-in HTTP API server that loads route manifests and calls the app kernel
+
 Full Frameworks
   CMS, admin panels, UI systems, templates, ORM, page builders and frontend adapters
 ```
@@ -70,6 +73,7 @@ Final rule:
 ```text
 LO the language defines safety.
 LO the kernel enforces safe runtime boundaries.
+LO the API server serves HTTP for kernel-backed APIs.
 Frameworks provide opinions and user-facing structure.
 ```
 
@@ -167,6 +171,11 @@ source-mapped API reports
 ```
 
 The Secure App Kernel can enforce those contracts at runtime.
+
+The `lo-api-server` package can serve compiled API route manifests over HTTP by
+normalising requests and passing them into the Secure App Kernel. This keeps the
+HTTP server separate from LO core and keeps auth, validation and typed handler
+execution in the kernel.
 
 Example:
 

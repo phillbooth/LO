@@ -46,6 +46,7 @@ Describe the problem this app solves.
 
 - The LO language core must live in `packages/lo-core/`.
 - The optional LO Secure App Kernel must live in `packages/lo-app-kernel/`.
+- The built-in LO HTTP API server must live in `packages/lo-api-server/`.
 - Bespoke app source must live in `packages/app/`.
 - App documentation must live in `docs/`.
 - Language documentation must stay within `packages/lo-core/`.
@@ -66,6 +67,21 @@ Describe the problem this app solves.
   mandatory ORM design, mandatory template engines or frontend framework syntax.
 - The kernel package must support a non-compiled checked Run Mode smoke test
   for validating simple `.lo` execution during framework development.
+
+## API Server Requirements
+
+- `lo-api-server` must be an HTTP serving package, not a full web framework.
+- `lo-api-server` must load route manifests generated from LO API contracts.
+- `lo-api-server` must normalise HTTP requests before passing them to
+  `lo-app-kernel`.
+- `lo-api-server` must enforce server-level limits such as body size, timeout,
+  connection shutdown and safe response writing.
+- `lo-api-server` must ask `lo-app-kernel` for auth, validation, idempotency and
+  typed route execution decisions.
+- `lo-api-server` must redact secrets, bearer tokens, cookies and SecureString
+  values from logs and reports.
+- Bespoke frameworks may either use `lo-api-server` or call `lo-app-kernel`
+  directly from their own HTTP layer.
 
 ## Out of Scope
 

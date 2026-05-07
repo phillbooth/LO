@@ -5,7 +5,8 @@
 This workspace separates the LO language core from the bespoke app that uses it.
 Language documentation, compiler notes, examples and schemas live in
 `packages/lo-core/`. The optional Secure App Kernel design lives in
-`packages/lo-app-kernel/`. App source and build configuration live in
+`packages/lo-app-kernel/`. The built-in HTTP API server package lives in
+`packages/lo-api-server/`. App source and build configuration live in
 `packages/app/`. App planning and operational documentation live in `docs/`.
 
 ## Main Structure
@@ -16,6 +17,7 @@ LO-app/
 |-- packages/
 |   |-- lo-core/
 |   |-- lo-app-kernel/
+|   |-- lo-api-server/
 |   `-- app/
 `-- tools/
 ```
@@ -29,6 +31,9 @@ LO Core
 LO Secure App Kernel
   request lifecycle, validation, security, auth, rate limits, jobs and reports
 
+LO API Server
+  HTTP listening, request normalisation, route manifest loading, safe responses
+
 LO Standard Packages
   HTTP adapters, SQL adapters, Redis queue, OpenAPI generator, JS/WASM generators
 
@@ -39,6 +44,11 @@ LO Full Frameworks
 The Secure App Kernel is a partial framework layer. It enforces safe runtime
 boundaries, but it must not become a full Laravel, Django, React or WordPress
 style framework.
+
+`lo-api-server` is the built-in HTTP transport package for API services. It
+serves HTTP, loads route manifests, applies server-level limits and passes
+normalised requests into `lo-app-kernel`. It must not own auth decisions,
+business logic, ORM design, CMS features or frontend rendering.
 
 ## Checked Run Smoke Tests
 
