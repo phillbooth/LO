@@ -901,7 +901,7 @@ Reason for additions:
 [x] Generate docs manifest
 [ ] Define build signing possibility
 [ ] Define source-map output rules
-[ ] Define generated file naming
+[x] Define generated file naming
 [x] Define generated file cleanup
 ```
 

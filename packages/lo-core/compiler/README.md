@@ -63,6 +63,10 @@ prevents stale target files such as `app.browser.js` from surviving after a
 later build that no longer enables that target, while preserving unrelated files
 in the output directory.
 
+Generated output names are defined by the compiler as stable, root-relative
+manifest paths using `/` separators. The naming policy is emitted as
+`generatedOutputNaming` in `app.build-manifest.json` and checked by `LO verify`.
+
 ## Lexer
 
 The lexer lives in `compiler/lexer.js` and emits `app.tokens.json` during build.

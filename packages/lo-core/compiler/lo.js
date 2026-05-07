@@ -1357,6 +1357,17 @@ effects [database.write] {
     assert(manifest.artifactStatus["app.wasm"].runtimeStatus === "placeholder", "Expected app.wasm to be marked as placeholder.");
   });
 
+  test("build manifest includes generated output naming policy", () => {
+    const result = analyseProject(loadProject(root, ["source-map-error.lo"]));
+    const manifest = buildManifest(result, {
+      "app.bin": "placeholder",
+      "app.wasm": "placeholder"
+    });
+    assert(validGeneratedOutputNaming(manifest.generatedOutputNaming), "Expected valid generated output naming policy.");
+    assert(manifest.generatedOutputNaming.outputs.some((item) => item.path === "app.build-manifest.json"), "Expected build manifest name in policy.");
+    assert(manifest.generatedOutputNaming.outputs.every((item) => !path.isAbsolute(item.path) && !item.path.includes("\\")), "Expected portable relative output names.");
+  });
+
   test("verify checks build artifact status metadata", () => {
     const result = analyseProject(loadProject(root, ["source-map-error.lo"]));
     const outDir = fs.mkdtempSync(path.join(os.tmpdir(), "LO-verify-artifacts-"));
@@ -1366,6 +1377,7 @@ effects [database.write] {
       assert(report.failed === 0, `Expected verified build, found ${report.failed} failures.`);
       assert(report.checks.some((item) => item.name === "artifact status: app.bin" && item.ok), "Expected app.bin artifact status check.");
       assert(report.checks.some((item) => item.name === "artifact status: app.wasm" && item.ok), "Expected app.wasm artifact status check.");
+      assert(report.checks.some((item) => item.name === "generated output naming policy" && item.ok), "Expected generated output naming check.");
     } finally {
       fs.rmSync(outDir, { recursive: true, force: true });
     }
@@ -2949,44 +2961,7 @@ function cleanGeneratedOutputs(outDir) {
 }
 
 function knownGeneratedOutputPaths() {
-  return [
-    "app.bin",
-    "app.wasm",
-    "app.browser.js",
-    "app.gpu.plan",
-    "app.photonic.plan",
-    "app.ternary.sim",
-    "app.omni-logic.sim",
-    "app.precision-report.json",
-    "app.schemas.json",
-    "app.openapi.json",
-    "app.api-report.json",
-    "app.global-report.json",
-    "app.map-manifest.json",
-    "app.runtime-report.json",
-    "app.memory-report.json",
-    "app.execution-report.json",
-    "app.target-report.json",
-    "app.security-report.json",
-    "app.failure-report.json",
-    "app.source-map.json",
-    "app.tokens.json",
-    "app.ai-context.json",
-    "app.ai-context.md",
-    "app.ai-guide.md",
-    "app.build-manifest.json",
-    "docs/api-guide.md",
-    "docs/webhook-guide.md",
-    "docs/type-reference.md",
-    "docs/global-registry-guide.md",
-    "docs/security-guide.md",
-    "docs/runtime-guide.md",
-    "docs/memory-pressure-guide.md",
-    "docs/run-compile-mode-guide.md",
-    "docs/deployment-guide.md",
-    "docs/ai-summary.md",
-    "docs/docs-manifest.json"
-  ];
+  return GENERATED_OUTPUTS.filter((item) => item.cleanup).map((item) => item.path);
 }
 
 function verifyBuild(input) {
@@ -3033,6 +3008,7 @@ function verifyBuild(input) {
       if (!fileName || typeof fileName !== "string") continue;
       check(`artifact status: ${fileName}`, () => validArtifactStatus(fileName, manifest.artifactStatus[fileName]), `Invalid artifactStatus entry for ${fileName}.`);
     }
+    check("generated output naming policy", () => validGeneratedOutputNaming(manifest.generatedOutputNaming), "Manifest has an invalid generatedOutputNaming policy.");
 
     for (const fileName of manifest.reports || []) {
       check(`report JSON parses: ${fileName}`, () => {
@@ -3066,6 +3042,25 @@ function validArtifactStatus(fileName, status) {
   if (fileName === "app.bin" && status.platform !== "not-windows-or-linux") return false;
   if (fileName === "app.wasm" && status.runtimeStatus !== "placeholder") return false;
   return true;
+}
+
+function validGeneratedOutputNaming(policy) {
+  if (!policy || typeof policy !== "object") return false;
+  if (policy.owner !== "LO compiler") return false;
+  if (policy.pathSeparator !== "/") return false;
+  if (!Array.isArray(policy.outputs) || policy.outputs.length === 0) return false;
+  const paths = new Set();
+  for (const output of policy.outputs) {
+    if (!output || typeof output !== "object") return false;
+    if (typeof output.path !== "string" || output.path.length === 0) return false;
+    if (path.isAbsolute(output.path) || output.path.includes("\\") || output.path.includes("..")) return false;
+    if (paths.has(output.path)) return false;
+    paths.add(output.path);
+    if (typeof output.kind !== "string" || output.kind.length === 0) return false;
+    if (typeof output.format !== "string" || output.format.length === 0) return false;
+    if (typeof output.cleanup !== "boolean") return false;
+  }
+  return paths.has("app.build-manifest.json");
 }
 
 function resolveManifestPath(input) {
@@ -4768,6 +4763,7 @@ function buildManifest(result, outputs = {}) {
       ternarySimulation: "app.ternary.sim",
       omniLogicSimulation: "app.omni-logic.sim"
     },
+    generatedOutputNaming: generatedOutputNamingPolicy(),
     artifactStatus: buildArtifactStatus(result),
     reports: [
       "app.api-report.json",
@@ -4801,6 +4797,17 @@ function buildManifest(result, outputs = {}) {
     },
     requiredOutputs: requiredOutputs(result),
     outputHashes
+  };
+}
+
+function generatedOutputNamingPolicy() {
+  return {
+    owner: "LO compiler",
+    pathSeparator: "/",
+    rootFiles: "app.*",
+    docsDirectory: "docs/",
+    rule: "Generated output names are stable, root-relative and use forward slashes in manifests.",
+    outputs: GENERATED_OUTPUTS.map((item) => ({ ...item }))
   };
 }
 

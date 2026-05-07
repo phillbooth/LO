@@ -284,6 +284,10 @@ from the output directory so stale target outputs do not survive a later build
 with different targets. Files outside the known generated-output list are left
 alone.
 
+Generated names are stable manifest paths such as `app.build-manifest.json` and
+`docs/api-guide.md`. They are recorded in the build manifest under
+`generatedOutputNaming` and use `/` separators even on Windows.
+
 ## Suggested Workflow
 
 ```text
