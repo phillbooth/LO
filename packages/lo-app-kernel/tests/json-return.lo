@@ -10,6 +10,6 @@ secure flow responsePayload() -> Json {
 
 secure flow main() -> Result<Void, Error> {
   let payload: Json = responsePayload()
-  console.log("json ids: 1,2,3 test: xxx")
+  console.log("json payload: " . payload)
   return Ok()
 }

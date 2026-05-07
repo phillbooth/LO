@@ -4,6 +4,6 @@ pure vector flow vectorTotal(input: Int) -> Int {
 
 secure flow main() -> Result<Void, Error> {
   let total: Int = vectorTotal(6)
-  console.log("vector total: " + total)
+  console.log("vector total: " . total)
   return Ok()
 }

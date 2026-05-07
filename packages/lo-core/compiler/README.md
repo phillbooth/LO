@@ -13,7 +13,9 @@ It is not a production compiler. It is a practical v0.1 scaffold that can:
 - check `undefined`, silent `null`, truthy/falsy conditions and compute-block I/O
 - type-check declared type references, generic arity and simple exhaustive matches
 - run simple checked `main` scripts through `LO run`
-- print simple Run Mode output with `print("...")` or `console.log("...")`
+- print simple Run Mode output with `print(...)` or `console.log(...)`,
+  including literal strings, simple let bindings, pure-flow calls, numeric
+  addition with `+` and explicit string concatenation with `.`
 - report planned development serve mode through `LO serve --dev`
 - generate JSON Schema drafts and OpenAPI drafts from LO declarations
 - generate Strict Global Registry reports with secret redaction

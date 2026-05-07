@@ -1535,9 +1535,34 @@ secure flow main() -> Result<Void, Error> {
   return input
 }
 
+pure flow add(a: Int, b: Int) -> Int {
+  return a + b
+}
+
+pure flow addDecimal(a: Decimal, b: Decimal) -> Decimal {
+  return a + b
+}
+
+secure flow responsePayload() -> Json {
+  return {
+    "items": [
+      { "id": 1, "test": "xxx" },
+      { "id": 2, "test": "xxx" },
+      { "id": 3, "test": "xxx" }
+    ]
+  }
+}
+
 secure flow main() -> Result<Void, Error> {
   let total: Int = vectorTotal(6)
-  console.log("vector total: " + total)
+  let sum: Int = add(2, 3)
+  let decimalTotal: Decimal = addDecimal(1.20, 2.30)
+  let payload: Json = responsePayload()
+  console.log("vector total: " . total)
+  console.log("sum: " . sum)
+  console.log("decimal sum: " . decimalTotal)
+  console.log("json payload: " . payload)
+  print(2 + 2)
   print("dot total: " . total)
   return Ok()
 }
@@ -1546,7 +1571,11 @@ secure flow main() -> Result<Void, Error> {
     const run = runProject(source, result);
     assert(run.ok === true, "Expected checked run mode to pass.");
     assert(run.output[0] === "vector total: 6", "Expected plus concatenation output.");
-    assert(run.output[1] === "dot total: 6", "Expected dot concatenation output.");
+    assert(run.output[1] === "sum: 5", "Expected function sum output.");
+    assert(run.output[2] === "decimal sum: 3.50", "Expected decimal function sum output.");
+    assert(run.output[3] === "json payload: {\"items\":[{\"id\":1,\"test\":\"xxx\"},{\"id\":2,\"test\":\"xxx\"},{\"id\":3,\"test\":\"xxx\"}]}", "Expected JSON payload output.");
+    assert(run.output[4] === "4", "Expected plus to remain numeric addition.");
+    assert(run.output[5] === "dot total: 6", "Expected dot concatenation output.");
   });
 
   test("development generate writes reports without production binaries", () => {
@@ -5152,8 +5181,9 @@ function runProject(project, result) {
 
   const source = project.files.find((file) => file.relativePath === mainFlow.file) || project.files[0];
   const content = stripComments(source.content);
-  const variables = collectRunVariables(content);
-  const output = collectRunOutput(content, variables);
+  const functions = collectRunFunctions(content);
+  const variables = collectRunVariables(content, functions);
+  const output = collectRunOutput(content, variables, functions);
   return {
     ok: true,
     mode: (result.ast.runtime || defaultRuntimeContract()).runMode || "checked",
@@ -5163,43 +5193,112 @@ function runProject(project, result) {
   };
 }
 
-function collectRunVariables(content) {
+function collectRunVariables(content, functions) {
   const variables = new Map();
   for (const match of matches(content, /\blet\s+([A-Za-z_][A-Za-z0-9_]*)\s*:\s*[A-Za-z_][A-Za-z0-9_<>, ]*\s*=\s*([^\r\n]+)/g)) {
-    variables.set(match[1], evaluateRunExpression(match[2], variables));
+    variables.set(match[1], evaluateRunExpression(match[2], variables, functions));
   }
   return variables;
 }
 
-function collectRunOutput(content, variables) {
+function collectRunOutput(content, variables, functions) {
   return matches(content, /\b(?:print|console\.log)\s*\(([^)]*)\)/g)
-    .map((match) => evaluateRunExpression(match[1], variables));
+    .map((match) => evaluateRunExpression(match[1], variables, functions));
 }
 
-function evaluateRunExpression(expression, variables) {
+function evaluateRunExpression(expression, variables, functions) {
   const text = expression.trim().replace(/;$/, "");
-  const parts = splitRunConcat(text);
-  if (parts.length > 1) {
-    return parts.map((part) => evaluateRunExpression(part, variables)).join("");
+  const concatParts = splitRunOperator(text, ".");
+  if (concatParts.length > 1) {
+    return concatParts.map((part) => evaluateRunExpression(part, variables, functions)).join("");
+  }
+  const additionParts = splitRunOperator(text, "+");
+  if (additionParts.length > 1) {
+    const values = additionParts.map((part) => evaluateRunExpression(part, variables, functions));
+    if (values.every(isNumericText)) return sumNumericText(values);
+    return text;
   }
   const stringMatch = text.match(/^"([^"]*)"$/);
   if (stringMatch) return stringMatch[1];
+  if (text.startsWith("{") && text.endsWith("}")) return compactRunJson(text);
   if (/^-?\d+(?:\.\d+)?$/.test(text)) return text;
-  const simpleCall = text.match(/^[A-Za-z_][A-Za-z0-9_]*\(\s*(-?\d+(?:\.\d+)?)\s*\)$/);
-  if (simpleCall) return simpleCall[1];
+  const simpleCall = text.match(/^([A-Za-z_][A-Za-z0-9_]*)\((.*)\)$/);
+  if (simpleCall && functions.has(simpleCall[1])) {
+    return evaluateRunFunction(simpleCall[1], simpleCall[2], variables, functions);
+  }
   if (variables.has(text)) return variables.get(text);
   return text;
 }
 
-function splitRunConcat(text) {
+function evaluateRunFunction(name, argsText, outerVariables, functions) {
+  const flow = functions.get(name);
+  const localVariables = new Map(outerVariables);
+  const args = splitTopLevel(argsText).map((arg) => evaluateRunExpression(arg, outerVariables, functions));
+  flow.params.forEach((param, index) => {
+    localVariables.set(param.name, args[index] || "");
+  });
+  return evaluateRunExpression(flow.returnExpression, localVariables, functions);
+}
+
+function collectRunFunctions(content) {
+  const functions = new Map();
+  const regex = /\b(?:(secure|pure(?:\s+vector(?:\s+required)?)?)\s+)?flow\s+([A-Za-z_][A-Za-z0-9_]*)\s*\(([^)]*)\)\s*->\s*[A-Za-z_][A-Za-z0-9_<>, ]*\s*\{/g;
+  let match;
+  while ((match = regex.exec(content)) !== null) {
+    const open = content.indexOf("{", match.index);
+    const close = findMatchingBrace(content, open);
+    if (open === -1 || close === -1) continue;
+    const body = content.slice(open + 1, close);
+    const returnExpression = extractRunReturnExpression(body);
+    if (returnExpression) {
+      functions.set(match[2], {
+        params: parseParams(match[3]),
+        returnExpression
+      });
+    }
+    regex.lastIndex = close + 1;
+  }
+  return functions;
+}
+
+function extractRunReturnExpression(body) {
+  const index = body.indexOf("return ");
+  if (index === -1) return null;
+  return body.slice(index + "return ".length).trim().replace(/;$/, "");
+}
+
+function isNumericText(value) {
+  return /^-?\d+(?:\.\d+)?$/.test(String(value));
+}
+
+function sumNumericText(values) {
+  const decimals = Math.max(0, ...values.map((value) => {
+    const match = String(value).match(/\.(\d+)$/);
+    return match ? match[1].length : 0;
+  }));
+  const scale = 10 ** decimals;
+  const total = values.reduce((sum, value) => sum + Math.round(Number(value) * scale), 0);
+  const result = String(total / scale);
+  return decimals > 0 ? Number(result).toFixed(decimals) : result;
+}
+
+function compactRunJson(text) {
+  try {
+    return JSON.stringify(JSON.parse(text));
+  } catch (error) {
+    return text;
+  }
+}
+
+function splitRunOperator(text, operator) {
   const parts = [];
   let current = "";
   let inString = false;
   for (let index = 0; index < text.length; index += 1) {
     const char = text[index];
     if (char === "\"") inString = !inString;
-    const isDotConcat = char === "." && /\s/.test(text[index - 1] || "") && /\s/.test(text[index + 1] || "");
-    if (!inString && (char === "+" || isDotConcat)) {
+    const spacedOperator = char === operator && /\s/.test(text[index - 1] || "") && /\s/.test(text[index + 1] || "");
+    if (!inString && spacedOperator) {
       parts.push(current.trim());
       current = "";
       continue;

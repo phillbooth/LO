@@ -738,8 +738,8 @@ Reason for additions:
 [x] Define vector report schema
 [x] Define AI guide vector section
 [ ] Define vector suggestion command
-[ ] Add vector examples after parser support exists
-[ ] Add vector parser tests
+[x] Add vector examples after parser support exists
+[x] Add vector parser tests
 ```
 
 ---
