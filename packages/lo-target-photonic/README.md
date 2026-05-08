@@ -3,6 +3,10 @@
 `lo-target-photonic` is the compiler target package for photonic hardware,
 photonic simulators and photonic planning output.
 
+Status: early package scaffold. The current package defines boundaries and
+initial TypeScript contracts only; it does not provide a real photonic hardware
+backend.
+
 It belongs in:
 
 ```text
@@ -44,6 +48,34 @@ What plan/report should be generated?
 What simulator or hardware backend should receive the output?
 ```
 
+## Target Role
+
+`lo-target-photonic` sits after language checking and compute planning.
+
+```text
+.lo source
+  ->
+lo-core / lo-compiler
+  ->
+lo-compute
+  ->
+lo-target-photonic
+  ->
+photonic plan, simulator output or hardware mapping report
+```
+
+The package should accept checked compiler/compute output and decide whether a
+flow can be represented as a photonic target plan.
+
+It should be able to return:
+
+```text
+photonic-compatible
+photonic-simulation-only
+fallback-required
+unsupported
+```
+
 ## Boundary
 
 `lo-target-photonic` should use `lo-photonic` concepts such as wavelength,
@@ -53,11 +85,46 @@ general photonic vocabulary itself.
 `lo-target-photonic` should consume plans from `lo-compute` and concepts from
 `lo-photonic`, then produce target-specific outputs.
 
+It should not own:
+
+```text
+Tri or Logic<N> semantics
+vector/matrix operation semantics
+compute target selection policy
+photonic vocabulary
+runtime API/auth policy
+general compiler parsing/checking
+```
+
+Those belong in `lo-logic`, `lo-vector`, `lo-compute`, `lo-photonic`,
+`lo-app-kernel` and `lo-compiler`.
+
+## Inputs
+
+Expected inputs:
+
+```text
+checked flow or IR summary from lo-compiler
+compute plan from lo-compute
+vector/matrix operation summary from lo-vector
+photonic concepts from lo-photonic
+target preferences from project config
+available target capability map
+```
+
+The first implementation should start with planning and reports rather than
+hardware execution.
+
+## Outputs
+
 Example outputs:
 
 ```text
 /build/photonic/app.photonic.plan.json
 /build/reports/photonic-target-report.json
+/build/reports/photonic-fallback-report.json
+/build/reports/photonic-channel-layout-report.json
+/build/reports/photonic-matrix-mapping-report.json
 ```
 
 Example report:
@@ -76,6 +143,42 @@ Example report:
     "Generated photonic simulation plan. No physical hardware backend selected."
   ]
 }
+```
+
+## Target Report Fields
+
+A photonic target report should include:
+
+```text
+flow name
+requested target
+actual target
+simulator or backend name
+fallback status
+fallback target
+mapped operations
+unsupported operations
+optical channels
+wavelength layout
+precision notes
+hardware assumptions
+diagnostics
+safe suggested fixes
+```
+
+## Fallback Rules
+
+Photonic targeting must fail safely.
+
+Rules:
+
+```text
+do not silently claim hardware execution
+fall back only when fallback is declared
+report every fallback decision
+require CPU reference verification where precision matters
+deny side effects inside photonic compute regions
+do not expose secrets or environment values in reports
 ```
 
 Example source using both packages:
@@ -115,6 +218,36 @@ lo-target-photonic
 | `lo-vector` | Vector, matrix, tensor types and operations |
 | `lo-compute` | `compute auto`, target selection and fallback planning |
 | `lo-target-binary` | Normal CPU/native binary output |
+| `lo-target-gpu` | GPU target planning and output contracts |
+| `lo-reports` | Shared report schemas and report-writing contracts |
+
+## First Version Scope
+
+The first version should support:
+
+```text
+define photonic target capability model
+define input contract from lo-compute
+define photonic plan output format
+define simulation target report format
+define unsupported-operation diagnostics
+define fallback report format
+define optical channel layout report format
+define matrix operation mapping report format
+add examples
+add tests
+```
+
+Do not start with:
+
+```text
+real hardware execution
+vendor SDK integration
+automatic deployment to photonic hardware
+opaque precision claims
+runtime auth/API enforcement
+general photonic vocabulary ownership
+```
 
 Final rule:
 
