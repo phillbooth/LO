@@ -101,6 +101,10 @@ Example:
 - Expanded Dart/Flutter target planning with support levels for Dart logic packages, Flutter package/plugin output, platform-channel contracts, Pigeon-style typed APIs, Flutter FFI/native libraries, permission reports, source maps and deferred widget syntax.
 - Added docs/react-native-target.md and updated framework target planning so React Native is supported as generated mobile adapter/package interop, not LO Core UI syntax.
 - Added `packages/lo-api-server/` positioning across LO core docs as the built-in HTTP API server that delegates to the Secure App Kernel.
+- Added `docs/package-boundaries.md` and cross-references from LO core docs to
+  sibling packages: `lo-logic`, `lo-vector`, `lo-compute`, `lo-photonic`,
+  `lo-target-binary`, `lo-target-photonic`, `lo-app-kernel`, `lo-api-server`,
+  `lo-cli` and `lo-tasks`.
 - Added docs/javascript-typescript-framework-targets.md plus matching docs/sytax/ and docs/sytax-examples/ entries for JavaScript, TypeScript, Node, WASM, worker and React/Angular adapter target planning.
 - Added docs/device-capability-boundaries.md plus matching docs/sytax/ and docs/sytax-examples/ entries for phone/device capability boundaries, permissions, streams, buffers, compute targets, FFI and reports.
 - Added docs/text-ai-package-boundaries-and-compute-auto.md plus matching docs/sytax/ and docs/sytax-examples/ entries for text AI package/provider boundaries, token policy, prompt safety, redaction, generated text safety and compute-auto reporting.

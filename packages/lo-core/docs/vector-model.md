@@ -1,5 +1,9 @@
 # LO Hybrid Scalar + Vector Model
 
+Ownership note: `lo-core` may document vector syntax and compiler checks, but
+vector values, lanes, dimensions, operations and vector reports belong in
+`packages/lo-vector/`.
+
 This document defines a security-first design for adding vector-aware execution to **LO / Logic Omni**.
 
 The goal is not to make LO a pure vector language. The goal is to let LO support normal readable application logic while giving developers and the compiler a safe way to optimise repeated, data-heavy work.

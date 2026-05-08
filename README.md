@@ -5,11 +5,18 @@ This repository is a starter template for building a bespoke application using L
 The project is split into package areas:
 
 - `packages/lo-core/` - the LO language package, compiler rules, syntax notes and examples.
+- `packages/lo-compiler/` - compiler pipeline contracts for parser, checkers, IR, diagnostics and reports.
+- `packages/lo-runtime/` - execution engine contracts for checked or compiled LO code.
+- `packages/lo-security/` - reusable security primitives, redaction, permissions and security reports.
+- `packages/lo-config/` - project configuration, environment mode and policy loading contracts.
+- `packages/lo-reports/` - shared LO report schemas and report-writing contracts.
 - `packages/lo-logic/` - LO multi-state logic concepts such as `Tri`, `Logic<N>` and future Omni logic.
 - `packages/lo-vector/` - vector value, vector operation and vector report concepts.
 - `packages/lo-compute/` - compute planning concepts shared across CPU, WASM, vector and hardware targets.
 - `packages/lo-photonic/` - photonic and wavelength hardware concepts and mappings.
 - `packages/lo-target-binary/` - binary/native target planning and artefact metadata.
+- `packages/lo-target-wasm/` - WebAssembly target planning and output contracts.
+- `packages/lo-target-gpu/` - GPU target planning and output contracts.
 - `packages/lo-target-photonic/` - photonic target backend planning that uses `lo-photonic`.
 - `packages/lo-app-kernel/` - the optional secure runtime foundation for typed APIs, validation, auth, workload controls, jobs and reports.
 - `packages/lo-api-server/` - the built-in HTTP API serving package for LO App Kernel.
@@ -25,11 +32,18 @@ LO-app/
 |-- docs/
 |-- packages/
 |   |-- lo-core/
+|   |-- lo-compiler/
+|   |-- lo-runtime/
+|   |-- lo-security/
+|   |-- lo-config/
+|   |-- lo-reports/
 |   |-- lo-logic/
 |   |-- lo-vector/
 |   |-- lo-compute/
 |   |-- lo-photonic/
 |   |-- lo-target-binary/
+|   |-- lo-target-wasm/
+|   |-- lo-target-gpu/
 |   |-- lo-target-photonic/
 |   |-- lo-app-kernel/
 |   |-- lo-api-server/
@@ -45,6 +59,18 @@ LO-app/
 LO Core
   language, compiler, type system, effects, memory safety, compute planning
 
+LO Compiler
+  parser, checker pipeline, IR, diagnostics, source maps and compiler reports
+
+LO Runtime
+  execution engine for checked or compiled LO code, separate from the app kernel
+
+LO Security
+  SecureString helpers, redaction, permissions, diagnostics and security reports
+
+LO Config and Reports
+  project configuration, environment modes and shared report schemas
+
 LO Logic
   Tri, Logic<N>, Decision, RiskLevel, Omni logic and multi-state truth tables
 
@@ -58,16 +84,13 @@ LO Photonic
   wavelength, phase, amplitude, optical channels and photonic target mapping
 
 LO Target Packages
-  binary/native target planning and photonic backend planning
+  binary/native, WASM, GPU and photonic backend planning
 
 LO Standard Library
   Json, Xml, SafeHtml, File, Stream, Request, Response, DateTime, Money, SecureString
 
 LO Secure App Kernel
   optional runtime layer for APIs, routing, validation, auth, rate limits, jobs and reports
-
-LO Runtime
-  future execution engine for compiled or checked LO code, separate from the app kernel
 
 Full Frameworks
   CMS, admin UI, UI systems, templates, ORM, page builders and frontend adapters

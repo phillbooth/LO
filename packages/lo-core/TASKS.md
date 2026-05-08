@@ -84,6 +84,8 @@ Git workflow
 [x] First practical implementation target: Node.js-hosted checked interpreter/prototype
 [x] Separate LO core language concerns from the optional Secure App Kernel layer
 [x] Support simple `console.log("...")` output in checked Run Mode
+[x] Document package boundaries from `lo-core` to `lo-logic`, `lo-vector`,
+    `lo-compute`, `lo-photonic`, target packages, CLI and task packages
 ```
 
 ---
@@ -122,6 +124,19 @@ Git workflow
 [ ] Specify C ABI and foreign-call boundaries
 [ ] Specify matrix/vector shape rules with scalar fallback
 [ ] Standardise diagnostics and AI report schemas
+```
+
+Package-boundary note:
+
+```text
+Tri / Logic<N> / Omni work should update packages/lo-logic first.
+Vector work should update packages/lo-vector first.
+Compute planning work should update packages/lo-compute first.
+Photonic vocabulary should update packages/lo-photonic first.
+Target backend work should update packages/lo-target-binary or
+packages/lo-target-photonic first.
+lo-core should be updated when syntax, compiler validation or report contracts
+change.
 ```
 
 ---

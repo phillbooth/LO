@@ -56,6 +56,23 @@ optional LO Secure App Kernel. Built-in HTTP API serving belongs in
 `packages/lo-api-server/`, which should load route manifests and delegate to the
 kernel. Full frameworks should build above or beside that kernel.
 
+Specialised LO concepts belong in sibling packages. `lo-core` may define syntax,
+compiler checks and report contracts for them, but detailed package semantics
+must be updated in the owning package first:
+
+```text
+packages/lo-logic
+packages/lo-vector
+packages/lo-compute
+packages/lo-photonic
+packages/lo-target-binary
+packages/lo-target-photonic
+packages/lo-app-kernel
+packages/lo-api-server
+packages/lo-cli
+packages/lo-tasks
+```
+
 ---
 
 ## Backend Language Evolution Requirements
@@ -1875,6 +1892,30 @@ Recommended structure:
 packages/ = LO ecosystem packages
 vendor/   = external third-party code, native libraries, SDKs or generated files
 ```
+
+### REQ-PACKAGE-004: LO Workspace Package Boundaries
+
+LO package-specific behaviour SHOULD live in the owning package.
+
+Ownership:
+
+```text
+lo-core              = language syntax, compiler contracts and core safety rules
+lo-logic             = Tri, Logic<N>, Decision, RiskLevel and Omni logic
+lo-vector            = vector values, dimensions, lanes and vector operations
+lo-compute           = compute planning, capabilities, budgets and target selection
+lo-photonic          = wavelength, phase, amplitude and optical signal concepts
+lo-target-binary     = binary/native target planning and artefact metadata
+lo-target-photonic   = photonic backend target planning
+lo-app-kernel        = secure application/API runtime boundary
+lo-api-server        = built-in HTTP transport package
+lo-cli               = developer command-line tooling
+lo-tasks             = safe project automation
+```
+
+If a change affects only package semantics, update that package documentation.
+If a change affects `.lo` syntax, compiler validation, report schemas or package
+registry behaviour, update `lo-core` documentation as well.
 
 ---
 

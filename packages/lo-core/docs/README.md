@@ -31,9 +31,39 @@ lessons-from-rust.md
 modules-and-visibility.md
 standard-library.md
 package-use-registry.md
+package-boundaries.md
 contracts.md
 glossary.md
 ```
+
+## Package Boundary References
+
+`lo-core` documentation may describe syntax, compiler checks and report
+contracts for package-owned concepts, but the package-specific docs should be
+updated first:
+
+```text
+../../lo-logic/README.md
+../../lo-compiler/README.md
+../../lo-runtime/README.md
+../../lo-security/README.md
+../../lo-config/README.md
+../../lo-reports/README.md
+../../lo-vector/README.md
+../../lo-compute/README.md
+../../lo-photonic/README.md
+../../lo-target-binary/README.md
+../../lo-target-wasm/README.md
+../../lo-target-gpu/README.md
+../../lo-target-photonic/README.md
+../../lo-app-kernel/README.md
+../../lo-api-server/README.md
+../../lo-cli/README.md
+../../lo-tasks/README.md
+```
+
+Use `package-boundaries.md` to decide whether a change belongs in `lo-core` or
+one of the sibling packages.
 
 ## Logic and Targets
 

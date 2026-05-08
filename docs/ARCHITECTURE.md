@@ -4,11 +4,17 @@
 
 This workspace separates the LO language core from the bespoke app that uses it.
 Language documentation, compiler notes, examples and schemas live in
-`packages/lo-core/`. Multi-state logic concepts live in `packages/lo-logic/`.
+`packages/lo-core/`. Compiler pipeline contracts live in
+`packages/lo-compiler/`. Runtime execution contracts live in
+`packages/lo-runtime/`. Security primitives live in `packages/lo-security/`.
+Configuration and shared reports live in `packages/lo-config/` and
+`packages/lo-reports/`. Multi-state logic concepts live in `packages/lo-logic/`.
 Vector concepts live in `packages/lo-vector/`. Compute planning concepts live in
 `packages/lo-compute/`. Photonic and wavelength concepts live in
 `packages/lo-photonic/`. Binary/native target planning lives in
-`packages/lo-target-binary/`, and photonic target backend planning lives in
+`packages/lo-target-binary/`, WebAssembly target planning lives in
+`packages/lo-target-wasm/`, GPU target planning lives in
+`packages/lo-target-gpu/`, and photonic target backend planning lives in
 `packages/lo-target-photonic/`. The
 optional Secure App Kernel design lives in `packages/lo-app-kernel/`. The
 built-in HTTP API server package lives in `packages/lo-api-server/`. Developer command
@@ -25,11 +31,18 @@ LO-app/
 |-- docs/
 |-- packages/
 |   |-- lo-core/
+|   |-- lo-compiler/
+|   |-- lo-runtime/
+|   |-- lo-security/
+|   |-- lo-config/
+|   |-- lo-reports/
 |   |-- lo-logic/
 |   |-- lo-vector/
 |   |-- lo-compute/
 |   |-- lo-photonic/
 |   |-- lo-target-binary/
+|   |-- lo-target-wasm/
+|   |-- lo-target-gpu/
 |   |-- lo-target-photonic/
 |   |-- lo-app-kernel/
 |   |-- lo-api-server/
@@ -47,11 +60,18 @@ light-framework/
 |-- packages/
 |   |-- .git
 |   |-- lo-core/
+|   |-- lo-compiler/
+|   |-- lo-runtime/
+|   |-- lo-security/
+|   |-- lo-config/
+|   |-- lo-reports/
 |   |-- lo-logic/
 |   |-- lo-vector/
 |   |-- lo-compute/
 |   |-- lo-photonic/
 |   |-- lo-target-binary/
+|   |-- lo-target-wasm/
+|   |-- lo-target-gpu/
 |   |-- lo-target-photonic/
 |   |-- lo-app-kernel/
 |   |-- lo-api-server/
@@ -72,6 +92,21 @@ remains its own repository.
 LO Core
   language/compiler/type system/effects/memory/compute
 
+LO Compiler
+  parser, checker pipeline, IR, diagnostics, source maps and compiler reports
+
+LO Runtime
+  execution engine for compiled or checked LO code
+
+LO Security
+  SecureString helpers, redaction, permission models and security report contracts
+
+LO Config
+  project configuration, environment modes and production policy loading
+
+LO Reports
+  shared report schemas and report-writing contracts
+
 LO Logic
   Tri, Logic<N>, Decision, RiskLevel, Omni logic and multi-state truth tables
 
@@ -87,14 +122,17 @@ LO Photonic
 LO Target Binary
   binary/native target planning, platform triples, ABI constraints and artefacts
 
+LO Target WASM
+  WebAssembly target planning, module metadata and import/export contracts
+
+LO Target GPU
+  GPU target planning, kernel mapping, precision and data movement reports
+
 LO Target Photonic
   photonic backend target plans that use lo-photonic concepts
 
 LO Secure App Kernel
   request lifecycle, validation, security, auth, rate limits, jobs and reports
-
-LO Runtime
-  future execution engine for compiled or checked LO code
 
 LO API Server
   HTTP listening, request normalisation, route manifest loading, safe responses
@@ -133,9 +171,13 @@ owns photonic representation and target planning. Photonic mappings may consume
 logic states, but logic semantics stay in `lo-logic`.
 
 `lo-vector` owns vector values and vector operation concepts. `lo-compute` owns
-compute planning and target selection. `lo-target-binary` and
-`lo-target-photonic` own target-specific planning for binary/native and
-photonic backends.
+compute planning and target selection. `lo-target-binary`, `lo-target-wasm`,
+`lo-target-gpu` and `lo-target-photonic` own target-specific planning for
+binary/native, WebAssembly, GPU and photonic backends.
+
+`lo-security` owns shared security primitives and report contracts. Runtime auth
+and API policy enforcement remain in `lo-app-kernel`. `lo-config` owns
+configuration loading contracts, and `lo-reports` owns shared report shapes.
 
 `lo-app-kernel` should not be renamed to `lo-runtime`. A future `lo-runtime`
 package should execute compiled or checked LO code. The app kernel should

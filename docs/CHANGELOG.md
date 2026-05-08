@@ -23,7 +23,20 @@ All notable changes to this app should be documented here.
 - Added `packages/lo-compute/` for compute planning and target selection
   concepts.
 - Added `packages/lo-target-binary/` for binary/native target planning.
+- Added `packages/lo-target-wasm/` for WebAssembly target planning.
+- Added `packages/lo-target-gpu/` for GPU target planning.
 - Added `packages/lo-target-photonic/` for photonic backend target planning.
+- Added `packages/lo-compiler/` for compiler pipeline contracts.
+- Added `packages/lo-runtime/` for checked and compiled execution contracts.
+- Added `packages/lo-security/` for reusable security primitives and report
+  contracts.
+- Added `packages/lo-config/` for project configuration and environment mode
+  contracts.
+- Added `packages/lo-reports/` for shared report schemas and report-writing
+  contracts.
+- Added TODO documents for `packages/lo-api-server/` and
+  `packages/lo-app-kernel/`.
+- Added README and TODO documents for `packages/app/`.
 - Added CLI and task runner requirements in
   `packages/lo-cli-and-lo-tasks-requirements.md`.
 

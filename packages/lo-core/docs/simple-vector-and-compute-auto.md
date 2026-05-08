@@ -1,5 +1,9 @@
 # LO Simple Vector Syntax and Compute Auto
 
+Ownership note: `lo-core` may document language syntax for vector flows and
+`compute auto`, but vector semantics belong in `packages/lo-vector/` and compute
+planning semantics belong in `packages/lo-compute/`.
+
 This document describes the proposed **Simple Vector Syntax** and **Compute Auto** model for **LO / Logic Omni**.
 
 LO is a strict, memory-safe, security-first, JSON-native, API-native and accelerator-aware programming language concept.

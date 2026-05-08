@@ -1,5 +1,10 @@
 # LO Hybrid Logic and Wavelength Compute
 
+Ownership note: logic semantics belong in `packages/lo-logic/`, vector concepts
+belong in `packages/lo-vector/`, compute planning belongs in
+`packages/lo-compute/`, photonic vocabulary belongs in `packages/lo-photonic/`
+and photonic backend target planning belongs in `packages/lo-target-photonic/`.
+
 This document describes the proposed **Hybrid Logic and Wavelength Compute**
 model for **LO / Logic Omni**.
 

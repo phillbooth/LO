@@ -55,6 +55,24 @@ Application runtime enforcement belongs in the optional LO Secure App Kernel:
 LO Core
   language/compiler/type system/effects/memory/compute
 
+LO Logic
+  Tri, Logic<N>, Decision, RiskLevel, Omni logic and logic reports
+
+LO Vector
+  vector values, dimensions, lanes, operations and vector reports
+
+LO Compute
+  compute planning, capabilities, budgets, offload and target selection
+
+LO Photonic
+  wavelength, phase, amplitude, optical channels and photonic vocabulary
+
+LO Target Binary
+  binary/native target planning and artefact metadata
+
+LO Target Photonic
+  photonic backend target plans that use lo-photonic concepts
+
 LO Secure App Kernel
   request lifecycle, validation, security, auth, rate limits, jobs and reports
 
@@ -79,6 +97,21 @@ services. It should load compiler-generated API route manifests, enforce
 server-level request limits, pass requests into the Secure App Kernel and write
 safe HTTP responses. It is not part of LO core and must not become a full web
 framework.
+
+Specialised concepts are split into sibling packages. `lo-core` should keep
+language syntax, compiler checks and report contracts, while package-specific
+semantics belong in the owning package:
+
+```text
+Tri / Logic<N> / Omni      -> packages/lo-logic
+vector values and lanes    -> packages/lo-vector
+compute target selection   -> packages/lo-compute
+photonic concepts          -> packages/lo-photonic
+binary target backend      -> packages/lo-target-binary
+photonic target backend    -> packages/lo-target-photonic
+developer commands         -> packages/lo-cli
+safe automation tasks      -> packages/lo-tasks
+```
 
 ---
 
@@ -1483,6 +1516,26 @@ Recommended package folders:
 packages/ = LO ecosystem packages
 vendor/   = external third-party code
 ```
+
+Current LO workspace package boundaries:
+
+```text
+packages/lo-core
+packages/lo-logic
+packages/lo-vector
+packages/lo-compute
+packages/lo-photonic
+packages/lo-target-binary
+packages/lo-target-photonic
+packages/lo-app-kernel
+packages/lo-api-server
+packages/lo-cli
+packages/lo-tasks
+```
+
+When these packages are edited, update the owning package documentation first.
+Update `lo-core` only when the language syntax, compiler contract, report schema
+or package registry behaviour changes.
 
 Lockfile:
 

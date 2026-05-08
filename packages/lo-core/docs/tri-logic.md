@@ -1,5 +1,9 @@
 # LO Tri Logic
 
+Ownership note: `lo-core` may document syntax and compiler checking for `Tri`
+and `Logic<N>`, but detailed logic semantics, conversion rules, truth tables and
+logic reports belong in `packages/lo-logic/`.
+
 ## Summary
 
 Most programming languages use two-state Boolean logic:

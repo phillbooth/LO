@@ -45,6 +45,11 @@ Describe the problem this app solves.
 ## Workspace Requirements
 
 - The LO language core must live in `packages/lo-core/`.
+- Compiler pipeline contracts must live in `packages/lo-compiler/`.
+- Runtime execution contracts must live in `packages/lo-runtime/`.
+- Shared security primitives must live in `packages/lo-security/`.
+- Project configuration contracts must live in `packages/lo-config/`.
+- Shared report contracts must live in `packages/lo-reports/`.
 - LO multi-state logic concepts such as `Tri`, `Logic<N>` and future Omni
   logic must live in `packages/lo-logic/`.
 - LO vector value, lane and operation concepts must live in
@@ -54,6 +59,8 @@ Describe the problem this app solves.
 - Photonic and wavelength hardware concepts must live in
   `packages/lo-photonic/`.
 - Binary/native target planning must live in `packages/lo-target-binary/`.
+- WebAssembly target planning must live in `packages/lo-target-wasm/`.
+- GPU target planning must live in `packages/lo-target-gpu/`.
 - Photonic backend target planning must live in
   `packages/lo-target-photonic/`.
 - The optional LO Secure App Kernel must live in `packages/lo-app-kernel/`.
@@ -131,8 +138,23 @@ Describe the problem this app solves.
   target selection concepts.
 - `lo-target-binary` must own binary/native target planning and artefact
   metadata.
+- `lo-target-wasm` must own WebAssembly target planning, module metadata and
+  import/export contracts.
+- `lo-target-gpu` must own GPU target planning, kernel mapping, precision and
+  data movement reports.
 - `lo-target-photonic` must own photonic backend target planning and may use
   `lo-photonic` concepts.
+
+## Compiler, Runtime, Security, Config and Report Requirements
+
+- `lo-compiler` must own compiler pipeline contracts for lexing, parsing, AST,
+  checkers, IR, diagnostics, source maps and compiler reports.
+- `lo-runtime` must own execution contracts for checked and compiled LO code.
+- `lo-security` must own reusable security primitives, redaction rules,
+  permission models, security diagnostics and security report contracts.
+- `lo-config` must own project config, environment mode and policy loading
+  contracts.
+- `lo-reports` must own shared report schemas and report-writing contracts.
 
 ## Runtime Naming Requirement
 

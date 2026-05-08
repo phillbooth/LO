@@ -2,6 +2,11 @@
 
 Status: Draft.
 
+Ownership note: `lo-core` may document compute block syntax, compiler checks and
+report contracts. Detailed compute planning, capabilities, budgets, offload and
+target selection belong in `packages/lo-compute/`. Target-specific planning
+belongs in `packages/lo-target-binary/` and `packages/lo-target-photonic/`.
+
 LO, short for **Logic Omni**, is a strict, memory-safe, security-first
 programming language and compiler/toolchain.
 

@@ -56,6 +56,35 @@ the compiler owns dependency checking and reporting.
 This keeps developer code readable while still giving LO strong security and
 memory control.
 
+## LO Workspace Packages
+
+The workspace contains first-party LO packages that should be referenced by
+package name and updated in their owning docs:
+
+```text
+lo-core              = language syntax, compiler contracts and core safety rules
+lo-compiler          = compiler pipeline contracts
+lo-runtime           = checked and compiled LO execution contracts
+lo-security          = reusable security primitives and security report contracts
+lo-config            = project config and environment mode contracts
+lo-reports           = shared report schemas and writer contracts
+lo-logic             = Tri, Logic<N>, Decision, RiskLevel and Omni logic
+lo-vector            = vector values, lanes, dimensions and vector operations
+lo-compute           = compute planning, capabilities, budgets and target selection
+lo-photonic          = wavelength, phase, amplitude and optical signal concepts
+lo-target-binary     = binary/native target planning and artefact metadata
+lo-target-wasm       = WebAssembly target planning and output contracts
+lo-target-gpu        = GPU target planning and output contracts
+lo-target-photonic   = photonic backend target planning
+lo-app-kernel        = secure application/API runtime boundary
+lo-api-server        = built-in HTTP transport package
+lo-cli               = developer command-line tooling
+lo-tasks             = safe project automation
+```
+
+`lo-core` owns the package registry syntax and compiler/report contract.
+Package-specific semantics belong in the owning package.
+
 ---
 
 ## Why This Matters

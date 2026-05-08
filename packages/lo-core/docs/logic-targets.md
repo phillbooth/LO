@@ -1,5 +1,10 @@
 # Logic Targets
 
+Ownership note: logic widths, truth tables and logic reports belong in
+`packages/lo-logic/`. Photonic representation belongs in
+`packages/lo-photonic/`, and photonic backend target planning belongs in
+`packages/lo-target-photonic/`.
+
 Logic targets describe which logic widths a compiler backend, runtime, simulator or accelerator can support.
 
 ## Target Examples

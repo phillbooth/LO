@@ -33,9 +33,61 @@ planning, simulation or compatibility-report artefacts until real backends exist
 
 ## Layer Boundary
 
-LO core is the language, compiler and standard safety contract. Runtime
-enforcement for application request handling belongs in the optional LO Secure
-App Kernel package in the surrounding workspace:
+LO core is the language, compiler and standard safety contract. It may define
+syntax, type-checking rules and report contracts, but specialised package
+semantics should live in sibling packages.
+
+Package ownership:
+
+```text
+packages/lo-core/
+  Bool, Option, Result, basic flow syntax, basic type rules, compiler contracts
+
+packages/lo-compiler/
+  lexer, parser, AST, checker pipeline, IR, diagnostics, source maps, compiler reports
+
+packages/lo-runtime/
+  checked execution, compiled execution, effect dispatch, runtime errors, runtime reports
+
+packages/lo-security/
+  SecureString helpers, redaction primitives, permission models, security reports
+
+packages/lo-config/
+  project config, environment modes, config validation, production policy loading
+
+packages/lo-reports/
+  shared report metadata, diagnostics, schemas and writer contracts
+
+packages/lo-logic/
+  Tri, Logic<N>, Decision, RiskLevel, Omni logic, truth tables, logic reports
+
+packages/lo-vector/
+  Vector<T, N>, lanes, dimensions, vector operations and vector reports
+
+packages/lo-compute/
+  compute planning, capabilities, budgets, offload and target selection
+
+packages/lo-photonic/
+  Wavelength, Phase, Amplitude, OpticalSignal, OpticalChannel
+
+packages/lo-target-binary/
+  binary/native target planning and artefact metadata
+
+packages/lo-target-wasm/
+  WebAssembly target planning, module metadata and import/export contracts
+
+packages/lo-target-gpu/
+  GPU target planning, kernel mapping, precision and data movement reports
+
+packages/lo-target-photonic/
+  photonic backend target plans using lo-photonic concepts
+```
+
+Detailed package-boundary guidance lives in
+`docs/package-boundaries.md`.
+
+Runtime enforcement for application request handling belongs in the optional LO
+Secure App Kernel package in the surrounding workspace:
 
 ```text
 packages/lo-app-kernel/
@@ -52,6 +104,12 @@ The intended layering is:
 ```text
 LO Core
   language, compiler, type system, effects, memory safety, compute planning, reports
+
+LO Compiler / Runtime / Security / Config / Reports
+  compiler pipeline, execution, shared security, configuration and report contracts
+
+LO Logic / Vector / Compute / Photonic / Target Packages
+  specialised LO concepts and target planning outside the core language package
 
 LO Standard Library
   Json, Xml, SafeHtml, File, Stream, Request, Response, DateTime, Money, SecureString

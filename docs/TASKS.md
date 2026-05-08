@@ -32,6 +32,10 @@
   `lo-photonic`
 - [x] Add package scaffolds for `lo-vector`, `lo-compute`,
   `lo-target-binary` and `lo-target-photonic`
+- [x] Add package scaffolds for `lo-compiler`, `lo-runtime`, `lo-security`,
+  `lo-config`, `lo-reports`, `lo-target-wasm` and `lo-target-gpu`
+- [x] Add TODO documents for `lo-api-server` and `lo-app-kernel`
+- [x] Add README and TODO documents for `packages/app`
 - [ ] Add unit tests
 - [ ] Add integration tests
 - [ ] Add manual test checklist
@@ -62,9 +66,19 @@
 - [ ] Define `lo-vector` vector value and operation rules
 - [ ] Define `lo-compute` compute planning and target selection rules
 - [ ] Define `lo-target-binary` binary/native target plans
+- [ ] Define `lo-target-wasm` WebAssembly target plans
+- [ ] Define `lo-target-gpu` GPU target plans
 - [ ] Define `lo-target-photonic` photonic backend target plans
 
-## Phase 8: Repository Split
+## Phase 8: Core Infrastructure Packages
+
+- [ ] Define `lo-compiler` compiler pipeline contracts
+- [ ] Define `lo-runtime` execution contracts
+- [ ] Define `lo-security` primitives, redaction and permission models
+- [ ] Define `lo-config` project config and environment mode contracts
+- [ ] Define `lo-reports` shared report schemas
+
+## Phase 9: Repository Split
 
 - [ ] Decide when `packages/` is stable enough to become a reusable package
   repository

@@ -1,5 +1,9 @@
 # Omni-Logic Design
 
+Ownership note: `lo-core` may document syntax and compatibility constraints for
+Omni logic, but detailed Omni logic semantics, widths, truth tables and reports
+belong in `packages/lo-logic/`.
+
 LO should be Omni-logic compatible from the start.
 
 Omni-logic means LO can describe and report logic behaviour through a general logic-width abstraction instead of hard-coding every system as ternary-only.

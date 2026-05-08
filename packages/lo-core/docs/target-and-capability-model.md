@@ -1,5 +1,11 @@
 # LO Target and Capability Model
 
+Ownership note: `lo-core` may document target declaration syntax and compiler
+report contracts. Binary/native target planning belongs in
+`packages/lo-target-binary/`; photonic backend target planning belongs in
+`packages/lo-target-photonic/`; compute target selection belongs in
+`packages/lo-compute/`.
+
 This document defines the proposed **Target and Capability Model** for **LO / Logic Omni**.
 
 It is the foundation for browser targets, server targets, WebAssembly, native output, GPU planning, vector execution, offload nodes and future accelerator support.
