@@ -37,10 +37,12 @@ Example:
 Current stage:
 
 ```text
-Concept and documentation planning
+Concept, documentation, package-boundary and v0.1 prototype planning
 ```
 
-The project is not yet at compiler implementation stage.
+The project has an early Node.js-hosted checked interpreter/prototype. The
+current task list should distinguish core language/compiler contracts from
+package-owned implementation details.
 
 The current priority is to define:
 
@@ -56,6 +58,7 @@ AI-friendly reports
 security model
 licence model
 Git workflow
+package boundaries
 ```
 
 ---
@@ -86,6 +89,8 @@ Git workflow
 [x] Support simple `console.log("...")` output in checked Run Mode
 [x] Document package boundaries from `lo-core` to `lo-logic`, `lo-vector`,
     `lo-compute`, `lo-photonic`, target packages, CLI and task packages
+[x] Split compiler, runtime, security, config, reports, WASM target and GPU
+    target responsibilities into dedicated package TODOs
 ```
 
 ---
@@ -115,14 +120,14 @@ Git workflow
 
 ```text
 [ ] Define language edition metadata and compatibility diagnostics
-[ ] Finalise Bool, Tri, Decision and Logic<N> conversion rules
+[ ] Define compiler-facing Bool, Tri, Decision and Logic<N> syntax/report contracts
 [ ] Specify algebraic variants, sealed state and exhaustive match requirements
 [ ] Specify explicit generic constraints, traits or protocols
 [ ] Specify structured concurrency, cancellation and typed streams
 [ ] Specify deterministic cleanup for files, sockets, locks and FFI handles
 [ ] Specify safe compile-time metadata and attributes
 [ ] Specify C ABI and foreign-call boundaries
-[ ] Specify matrix/vector shape rules with scalar fallback
+[ ] Specify compiler-facing matrix/vector shape syntax and diagnostics
 [ ] Standardise diagnostics and AI report schemas
 ```
 
@@ -134,9 +139,39 @@ Vector work should update packages/lo-vector first.
 Compute planning work should update packages/lo-compute first.
 Photonic vocabulary should update packages/lo-photonic first.
 Target backend work should update packages/lo-target-binary or
-packages/lo-target-photonic first.
+packages/lo-target-wasm, packages/lo-target-gpu or packages/lo-target-photonic
+first.
+Compiler pipeline work should update packages/lo-compiler first.
+Runtime execution work should update packages/lo-runtime first.
+Security primitive work should update packages/lo-security first.
+Config and report shape work should update packages/lo-config or
+packages/lo-reports first.
 lo-core should be updated when syntax, compiler validation or report contracts
 change.
+```
+
+## Moved to Package TODOs
+
+These areas are intentionally tracked outside `lo-core` first:
+
+```text
+Tri, Logic<N>, Decision and Omni semantics -> packages/lo-logic/TODO.md
+Vector values, lanes and operation semantics -> packages/lo-vector/TODO.md
+Compute planning and target selection -> packages/lo-compute/TODO.md
+Photonic concepts and simulation helpers -> packages/lo-photonic/TODO.md
+Binary/native target output -> packages/lo-target-binary/TODO.md
+WASM target output -> packages/lo-target-wasm/TODO.md
+GPU target output -> packages/lo-target-gpu/TODO.md
+Photonic target output -> packages/lo-target-photonic/TODO.md
+Compiler pipeline implementation -> packages/lo-compiler/TODO.md
+Runtime execution contracts -> packages/lo-runtime/TODO.md
+Security primitives and report contracts -> packages/lo-security/TODO.md
+Config loading contracts -> packages/lo-config/TODO.md
+Shared report schemas -> packages/lo-reports/TODO.md
+CLI command UX and dispatch -> packages/lo-cli/TODO.md
+Safe task automation -> packages/lo-tasks/TODO.md
+API transport -> packages/lo-api-server/TODO.md
+Application boundary enforcement -> packages/lo-app-kernel/TODO.md
 ```
 
 ---
@@ -175,19 +210,19 @@ change.
 ## Additional Documentation Tasks
 
 ```text
-[ ] Create docs/language-rules.md
-[ ] Create docs/syntax.md
-[ ] Create docs/type-system.md
-[ ] Create docs/memory-safety.md
-[ ] Create docs/security-model.md
-[ ] Create docs/json-native-design.md
-[ ] Create docs/api-native-design.md
-[ ] Create docs/webhooks.md
+[x] Create docs/language-rules.md
+[x] Create docs/syntax.md
+[x] Create docs/type-system.md
+[x] Create docs/memory-safety.md
+[x] Create docs/security-model.md
+[x] Create docs/json-native-design.md
+[x] Create docs/api-native-design.md
+[x] Create docs/webhooks.md
 [ ] Create docs/concurrency.md
-[ ] Create docs/compute-blocks.md
-[ ] Create docs/gpu-target.md
-[ ] Create docs/photonic-target.md
-[ ] Create docs/ternary-logic.md
+[ ] Create docs/compute-blocks.md as language syntax and compiler contract reference
+[ ] Create docs/gpu-target.md as target declaration/report contract reference
+[ ] Create docs/photonic-target.md as target declaration/report contract reference
+[ ] Create docs/ternary-logic.md as syntax/report reference to lo-logic
 [ ] Create docs/source-maps.md
 [ ] Create docs/compiler-reports.md
 [ ] Create docs/ai-context.md
@@ -218,7 +253,7 @@ change.
 [ ] Define video privacy, memory and target-stage report schemas
 [ ] Define provider redaction and rate-limit policy schemas
 [ ] Create docs/examples.md
-[ ] Create docs/glossary.md
+[x] Create docs/glossary.md
 ```
 
 ---
@@ -345,14 +380,14 @@ Tasks:
 [x] Define Map<K, V>
 [x] Define Option<T>
 [x] Define Result<T, E>
-[x] Define Decision
-[x] Define Tri
+[x] Define Decision syntax and compiler-facing contract
+[x] Define Tri syntax and compiler-facing contract
 [x] Define Json
 [x] Define SecureString
 [x] Define Money<Currency>
-[x] Define Vector<N, T>
-[x] Define Matrix<R, C, T>
-[x] Define Tensor<Shape, T>
+[x] Define Vector<N, T> syntax and compiler-facing contract
+[x] Define Matrix<R, C, T> syntax and compiler-facing contract
+[x] Define Tensor<Shape, T> syntax and compiler-facing contract
 [x] Define Timestamp
 [x] Define Duration
 [x] Define type inference rules
@@ -492,28 +527,28 @@ Tasks:
 [x] Define compute target best
 [x] Define prefer target syntax
 [x] Define fallback target syntax
-[x] Define CPU target rules
-[x] Define WASM target rules
-[x] Define GPU plan target rules
-[x] Define photonic plan target rules
-[x] Define ternary simulation target rules
+[x] Define CPU target syntax/report contract
+[x] Define WASM target syntax/report contract
+[x] Define GPU plan target syntax/report contract
+[x] Define photonic plan target syntax/report contract
+[x] Define ternary simulation target syntax/report contract
 [x] Define unsupported operation errors
 [x] Define compute purity requirements
 [ ] Define compute auto parser support
 [ ] Define backend compute target catalogue parser support
-[ ] Define AI accelerator target rules
-[ ] Define memory/interconnect target rules
-[ ] Define photonic variant target discovery
-[ ] Define CPU/GPU/AI/photonic capability map
-[ ] Define data movement cost reporting
-[ ] Define target calibration and health reporting
-[ ] Define precision/tolerance report for backend compute targets
-[x] Define matrix operation rules
-[x] Define vector operation rules
-[x] Define tensor operation rules
+[ ] Define AI accelerator target syntax/report contract
+[ ] Define memory/interconnect target syntax/report contract
+[ ] Define photonic variant target discovery report contract
+[ ] Define CPU/GPU/AI/photonic capability map report contract
+[ ] Define data movement cost reporting contract
+[ ] Define target calibration and health reporting contract
+[ ] Define precision/tolerance report contract for backend compute targets
+[x] Define matrix operation syntax/report contract
+[x] Define vector operation syntax/report contract
+[x] Define tensor operation syntax/report contract
 [ ] Define ONNX support possibility
-[x] Define accelerator report schema
-[ ] Expand accelerator report schema for backend compute support targets
+[x] Define accelerator report schema contract
+[ ] Expand accelerator report schema contract for backend compute support targets
 ```
 
 ---

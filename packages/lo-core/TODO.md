@@ -49,6 +49,7 @@ Use this file as a practical checklist while the project moves from concept to d
 [x] Create OMNI_LOGIC.md
 [x] Create COMPATIBILITY.md
 [x] Create docs/legacy-and-compatibility-boundaries.md
+[x] Create docs/package-boundaries.md
 [x] Create docs/security-risk-feature-ranking.md
 [x] Create packages/lo-api-server README and positioning docs
 [x] Create .env.example
@@ -280,6 +281,7 @@ Reason for additions:
 [x] Add docs/modules-and-visibility.md
 [x] Add docs/standard-library.md
 [x] Add docs/package-use-registry.md
+[x] Add docs/package-boundaries.md
 [x] Add docs/language-supported-primitives.md
 [x] Add docs/language-non-supported-primitives.md
 [x] Add docs/search-and-translation-provider-boundaries.md
@@ -686,36 +688,36 @@ Reason for additions:
 [x] Define prefer photonic
 [x] Define fallback gpu
 [x] Define fallback cpu
-[x] Define CPU target rules
-[ ] Define WASM target rules
+[x] Define CPU target syntax/report contract
+[ ] Define WASM target syntax/report contract
 [ ] Define compute auto parser support
 [ ] Define generic compute target category parser support
-[ ] Define target plugin boundary schema
-[ ] Define runtime compute capability map schema
-[ ] Define fallback report schema
+[ ] Define target plugin boundary schema contract
+[ ] Define runtime compute capability map schema contract
+[ ] Define fallback report schema contract
 [ ] Define cloud deployment profile mapping report
 [ ] Define backend compute target catalogue parser support
-[ ] Define AI accelerator target rules
-[ ] Define memory/interconnect target rules
-[ ] Define photonic variant target discovery
-[ ] Define CPU/GPU/AI/photonic capability map
-[ ] Define data movement cost reporting
-[ ] Define target calibration and health reporting
-[ ] Define precision/tolerance report for backend compute targets
-[x] Define GPU plan output
-[x] Define photonic plan output
+[ ] Define AI accelerator target syntax/report contract
+[ ] Define memory/interconnect target syntax/report contract
+[ ] Define photonic variant target discovery report contract
+[ ] Define CPU/GPU/AI/photonic capability map report contract
+[ ] Define data movement cost reporting contract
+[ ] Define target calibration and health reporting contract
+[ ] Define precision/tolerance report contract for backend compute targets
+[x] Define GPU plan output contract
+[x] Define photonic plan output contract
 [x] Document wavelength compute planning
 [x] Define ternary simulation output
 [x] Define compute purity rules
 [x] Define aLOwed compute operations
 [x] Define rejected compute operations
-[x] Define matrix operation support
-[x] Define vector operation support
-[x] Define tensor operation support
+[x] Define matrix operation syntax/report contract
+[x] Define vector operation syntax/report contract
+[x] Define tensor operation syntax/report contract
 [x] Define model inference support
 [ ] Define ONNX import possibility
-[x] Define target compatibility report
-[ ] Expand target compatibility report for backend compute support targets
+[x] Define target compatibility report contract
+[ ] Expand target compatibility report contract for backend compute support targets
 ```
 
 ---
