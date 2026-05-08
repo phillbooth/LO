@@ -66,6 +66,9 @@ All notable changes to this app should be documented here.
   resolving dependency order and running dry-run task plans.
 - Added `lo-tasks` task file parsing, dependency resolution, cycle detection
   and tests.
+- Added task run report generation for `lo task`, writing
+  `build/reports/task-report.json` by default with `--report-out` and
+  `--no-report` controls.
 
 ### Changed
 

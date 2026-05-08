@@ -3,7 +3,7 @@ export { resolveTaskDependencies } from "./dependency-graph.js";
 export { createDryRunPlan, dryRunTask } from "./dry-run.js";
 export { loadTasks, parseTasksSource } from "./load-tasks.js";
 export { runTask } from "./run-task.js";
-export { createTaskReport } from "./task-report.js";
+export { createTaskReport, createTaskRunReport } from "./task-report.js";
 export type {
   TaskDependencyPlan
 } from "./dependency-graph.js";
@@ -16,6 +16,11 @@ export type {
 export type {
   RunTaskOptions
 } from "./run-task.js";
+export type {
+  CreateTaskRunReportInput,
+  TaskReport,
+  TaskRunReport
+} from "./task-report.js";
 export type {
   TaskDefinition,
   TaskEffect,

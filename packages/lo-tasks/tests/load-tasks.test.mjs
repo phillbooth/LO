@@ -5,6 +5,7 @@ import { join } from "node:path";
 import { describe, it } from "node:test";
 
 import {
+  createTaskRunReport,
   loadTasks,
   parseTasksSource,
   resolveTaskDependencies,
@@ -78,6 +79,33 @@ task build {
 
     const result = await runTask(plan.order[1], { dryRun: true });
     assert.equal(result.status, "dry-run");
+  });
+
+  it("creates task run reports", () => {
+    const task = {
+      name: "build",
+      effects: ["compiler"],
+      permissions: []
+    };
+    const report = createTaskRunReport({
+      taskFile: "tasks.lo",
+      requestedTask: "build",
+      dryRun: true,
+      dependencyOrder: [task],
+      results: [
+        {
+          task: "build",
+          status: "dry-run",
+          durationMs: 0,
+          warnings: []
+        }
+      ],
+      generatedAt: "2026-05-08T00:00:00.000Z"
+    });
+
+    assert.equal(report.status, "dry-run");
+    assert.deepEqual(report.dependencyOrder, ["build"]);
+    assert.equal(report.tasks[0]?.task, "build");
   });
 
   it("rejects circular dependencies", () => {

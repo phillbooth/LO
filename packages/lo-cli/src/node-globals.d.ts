@@ -23,6 +23,7 @@ declare module "node:fs/promises" {
 }
 
 declare module "node:path" {
+  export function dirname(path: string): string;
   export function join(...paths: readonly string[]): string;
   export function resolve(...paths: readonly string[]): string;
   export function relative(from: string, to: string): string;

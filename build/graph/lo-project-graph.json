@@ -1,6 +1,6 @@
 {
   "version": "0.1.0",
-  "generatedAt": "2026-05-08T20:07:17.616Z",
+  "generatedAt": "2026-05-08T20:11:56.688Z",
   "nodes": [
     {
       "id": "package:lo-core",
@@ -6401,6 +6401,16 @@
       ]
     },
     {
+      "id": "flow:lo-cli:dirname",
+      "kind": "Flow",
+      "label": "dirname",
+      "sourcePath": "packages/lo-cli/src/node-globals.d.ts",
+      "tags": [
+        "function",
+        "lo-cli"
+      ]
+    },
+    {
       "id": "flow:lo-cli:join",
       "kind": "Flow",
       "label": "join",
@@ -6641,9 +6651,39 @@
       ]
     },
     {
+      "id": "type:lo-tasks:TaskRunReport",
+      "kind": "Type",
+      "label": "TaskRunReport",
+      "sourcePath": "packages/lo-tasks/src/task-report.ts",
+      "tags": [
+        "type",
+        "lo-tasks"
+      ]
+    },
+    {
       "id": "flow:lo-tasks:createTaskReport",
       "kind": "Flow",
       "label": "createTaskReport",
+      "sourcePath": "packages/lo-tasks/src/task-report.ts",
+      "tags": [
+        "function",
+        "lo-tasks"
+      ]
+    },
+    {
+      "id": "type:lo-tasks:CreateTaskRunReportInput",
+      "kind": "Type",
+      "label": "CreateTaskRunReportInput",
+      "sourcePath": "packages/lo-tasks/src/task-report.ts",
+      "tags": [
+        "type",
+        "lo-tasks"
+      ]
+    },
+    {
+      "id": "flow:lo-tasks:createTaskRunReport",
+      "kind": "Flow",
+      "label": "createTaskRunReport",
       "sourcePath": "packages/lo-tasks/src/task-report.ts",
       "tags": [
         "function",
@@ -16218,6 +16258,13 @@
     },
     {
       "from": "package:lo-cli",
+      "to": "flow:lo-cli:dirname",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages/lo-cli/src/node-globals.d.ts"
+    },
+    {
+      "from": "package:lo-cli",
       "to": "flow:lo-cli:join",
       "kind": "provides",
       "confidence": "EXTRACTED",
@@ -16414,7 +16461,28 @@
     },
     {
       "from": "package:lo-tasks",
+      "to": "type:lo-tasks:TaskRunReport",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages/lo-tasks/src/task-report.ts"
+    },
+    {
+      "from": "package:lo-tasks",
       "to": "flow:lo-tasks:createTaskReport",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages/lo-tasks/src/task-report.ts"
+    },
+    {
+      "from": "package:lo-tasks",
+      "to": "type:lo-tasks:CreateTaskRunReportInput",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages/lo-tasks/src/task-report.ts"
+    },
+    {
+      "from": "package:lo-tasks",
+      "to": "flow:lo-tasks:createTaskRunReport",
       "kind": "provides",
       "confidence": "EXTRACTED",
       "evidencePath": "packages/lo-tasks/src/task-report.ts"

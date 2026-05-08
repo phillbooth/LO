@@ -84,6 +84,29 @@ Dependency resolution is deterministic and rejects missing or circular task
 dependencies before execution. Current execution can dry-run task plans and
 perform permission checks; built-in operation execution is still future work.
 
+## Task Reports
+
+Task runs produce a structured report that records:
+
+```text
+generated time
+task file
+requested task
+dry-run mode
+overall status
+dependency order
+per-task status, effects, permissions, warnings and errors
+```
+
+The CLI writes this report to:
+
+```text
+build/reports/task-report.json
+```
+
+Use `--report-out <path>` to choose another path or `--no-report` to skip report
+writing for a task command.
+
 ## Unsafe Shell
 
 Raw shell is disabled by default. If added later, it must require an `unsafe`

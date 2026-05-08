@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { mkdtemp, writeFile } from "node:fs/promises";
+import { mkdtemp, readFile, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { describe, it } from "node:test";
@@ -40,6 +40,13 @@ task build {
     assert.equal(dryRun.ok, true);
     assert.match(dryRun.details?.join("\n") ?? "", /prepare -> build/);
     assert.match(dryRun.details?.join("\n") ?? "", /build: dry-run/);
+    assert.match(dryRun.details?.join("\n") ?? "", /build[/\\]reports[/\\]task-report\.json/);
+
+    const report = JSON.parse(
+      await readFile(join(cwd, "build", "reports", "task-report.json"), "utf8"),
+    );
+    assert.equal(report.status, "dry-run");
+    assert.deepEqual(report.dependencyOrder, ["prepare", "build"]);
   });
 
   it("reports missing task files safely", async () => {

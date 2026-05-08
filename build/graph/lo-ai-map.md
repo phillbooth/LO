@@ -270,8 +270,8 @@ Provides:
 - readFile
 - stat
 - writeFile
+- dirname
 - join
-- resolve
 
 ## lo-tasks
 
@@ -289,7 +289,7 @@ Provides:
 - readFile
 - RunTaskOptions
 - TaskReport
-- createTaskReport
+- TaskRunReport
 
 ## lo-project-graph
 

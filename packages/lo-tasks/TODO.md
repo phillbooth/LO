@@ -21,6 +21,6 @@
 [x] Detect circular dependencies
 [ ] Add filesystem permissions
 [ ] Add environment permissions
-[ ] Write task-report.json output
+[x] Write task-report.json output
 [x] Add tests
 ```

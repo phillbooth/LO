@@ -59,7 +59,7 @@
 - [x] Implement `lo-tasks` task file loading
 - [x] Implement `lo-tasks` dependency graph and cycle detection
 - [x] Add CLI and task runner tests
-- [ ] Add report generation for CLI and task runs
+- [x] Add report generation for CLI and task runs
 - [x] Define `lo-project-graph` project knowledge graph contracts
 - [x] Define backend-neutral `lo-project-graph` backend policy contracts
 - [x] Add LO-native `lo-project-graph` workspace mapping support

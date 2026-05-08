@@ -1,5 +1,7 @@
-import { resolve } from "node:path";
+import { mkdir, writeFile } from "node:fs/promises";
+import { dirname, relative, resolve } from "node:path";
 import {
+  createTaskRunReport,
   loadTasks,
   resolveTaskDependencies,
   runTask,
@@ -10,8 +12,10 @@ import type { CliContext, CliResult } from "./types.js";
 
 export async function runTaskCommand(context: CliContext): Promise<CliResult> {
   const taskFile = resolveTaskFile(context);
+  const reportPath = resolveReportPath(context);
   const taskName = positionalArgs(context.args)[0];
   const dryRun = context.args.includes("--dry-run");
+  const skipReport = context.args.includes("--no-report");
   let loadedTasks: LoadedTasks;
 
   try {
@@ -59,6 +63,18 @@ export async function runTaskCommand(context: CliContext): Promise<CliResult> {
   }
 
   const failed = results.find((result) => result.status === "failed");
+  const report = createTaskRunReport({
+    taskFile: relativePath(context, taskFile),
+    requestedTask: taskName,
+    dryRun,
+    dependencyOrder: plan.order,
+    results
+  });
+
+  if (!skipReport) {
+    await mkdir(dirname(reportPath), { recursive: true });
+    await writeFile(reportPath, `${JSON.stringify(report, null, 2)}\n`, "utf8");
+  }
 
   return {
     ok: failed === undefined,
@@ -69,6 +85,7 @@ export async function runTaskCommand(context: CliContext): Promise<CliResult> {
     details: [
       `Task file: ${relativeTaskFile(context, taskFile)}`,
       `Dependency order: ${plan.order.map((task) => task.name).join(" -> ")}`,
+      ...(skipReport ? [] : [`Task report: ${relativePath(context, reportPath)}`]),
       ...results.flatMap(formatTaskResult)
     ]
   };
@@ -80,10 +97,19 @@ function resolveTaskFile(context: CliContext): string {
   return resolve(context.cwd, fileValue ?? "tasks.lo");
 }
 
+function resolveReportPath(context: CliContext): string {
+  const reportFlagIndex = context.args.findIndex((arg) => arg === "--report-out");
+  const reportValue = reportFlagIndex >= 0 ? context.args[reportFlagIndex + 1] : undefined;
+  return resolve(context.cwd, reportValue ?? "build/reports/task-report.json");
+}
+
 function relativeTaskFile(context: CliContext, taskFile: string): string {
-  return taskFile.startsWith(context.cwd)
-    ? taskFile.slice(context.cwd.length + 1)
-    : taskFile;
+  return relativePath(context, taskFile);
+}
+
+function relativePath(context: CliContext, path: string): string {
+  const output = relative(context.cwd, path);
+  return output.length === 0 ? "." : output;
 }
 
 function positionalArgs(args: readonly string[]): readonly string[] {
@@ -94,7 +120,7 @@ function positionalArgs(args: readonly string[]): readonly string[] {
     if (arg === undefined) {
       continue;
     }
-    if (arg === "--file" || arg === "--env") {
+    if (arg === "--file" || arg === "--env" || arg === "--report-out") {
       index += 1;
       continue;
     }

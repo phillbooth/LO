@@ -91,11 +91,15 @@ Examples:
 lo task
 lo task buildApi --dry-run
 lo task generateReports --file packages/lo-tasks/examples/tasks.lo --dry-run
+lo task buildApi --report-out build/reports/task-report.json
 ```
 
 Current task execution supports loading task definitions, listing tasks,
 resolving dependency order, rejecting missing or circular dependencies and
-running dry-run plans. Built-in operation execution remains in `lo-tasks`.
+running dry-run plans. Task runs write a structured report to
+`build/reports/task-report.json` by default. Use `--report-out <path>` to choose
+a different path, or `--no-report` to skip writing the report. Built-in
+operation execution remains in `lo-tasks`.
 
 ## Security Rules
 
