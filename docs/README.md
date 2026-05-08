@@ -18,6 +18,7 @@ These files describe the app being built, not the LO language itself.
 - `TODO.md` — smaller reminders
 - `DECISIONS.md` — technical decisions
 - `CHANGELOG.md` — project changes
+- `BITNET_CPU_FALLBACK.md` - BitNet CPU fallback architecture note
 
 ## Language and Runtime Proposals
 

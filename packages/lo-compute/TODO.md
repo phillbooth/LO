@@ -5,9 +5,10 @@
 [x] Document package boundary
 [x] Add package metadata
 [x] Add initial typed exports
-[ ] Define compute capability model
-[ ] Define compute budget model
-[ ] Define target selection rules
+[x] Define compute capability model
+[x] Define compute budget model
+[x] Define target selection rules
+[x] Add CPU BitNet fallback target concept
 [ ] Define offload planning reports
 [ ] Add examples
 [ ] Add tests

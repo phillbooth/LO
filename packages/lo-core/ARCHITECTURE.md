@@ -64,8 +64,20 @@ LO Vector
 LO Compute
   compute planning, capabilities, budgets, offload and target selection
 
+LO AI
+  generic AI inference contracts, model metadata, safety policy and reports
+
+LO BitNet
+  BitNet-style 1.58-bit / ternary model references and CPU inference plans
+
 LO Photonic
   wavelength, phase, amplitude, optical channels and photonic vocabulary
+
+LO Target CPU
+  CPU capability, SIMD, threading, memory and fallback reports
+
+LO CPU Kernels
+  low-bit, ternary, vector and matrix CPU kernel contracts
 
 LO Target Binary
   binary/native target planning and artefact metadata
@@ -106,7 +118,11 @@ semantics belong in the owning package:
 Tri / Logic<N> / Omni      -> packages/lo-logic
 vector values and lanes    -> packages/lo-vector
 compute target selection   -> packages/lo-compute
+AI inference contracts     -> packages/lo-ai
+BitNet CPU fallback        -> packages/lo-bitnet
 photonic concepts          -> packages/lo-photonic
+CPU target planning        -> packages/lo-target-cpu
+CPU kernel contracts       -> packages/lo-cpu-kernels
 binary target backend      -> packages/lo-target-binary
 photonic target backend    -> packages/lo-target-photonic
 developer commands         -> packages/lo-cli

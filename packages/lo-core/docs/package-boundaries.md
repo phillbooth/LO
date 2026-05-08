@@ -88,6 +88,20 @@ packages/lo-compute
   target selection
   compute reports
 
+packages/lo-ai
+  AI model metadata
+  prompt and response contracts
+  inference options
+  AI safety policy
+  AI inference reports
+
+packages/lo-bitnet
+  BitNet model references
+  GGUF model metadata
+  1.58-bit and ternary quantization declarations
+  CPU BitNet inference plans
+  BitNet inference reports
+
 packages/lo-photonic
   Wavelength
   Phase
@@ -96,6 +110,20 @@ packages/lo-photonic
   OpticalChannel
   photonic simulation concepts
   logic-to-light vocabulary
+
+packages/lo-target-cpu
+  CPU architecture metadata
+  SIMD capability reports
+  threading policy
+  memory limits
+  CPU fallback reports
+
+packages/lo-cpu-kernels
+  GEMM and GEMV kernel contracts
+  vector and matrix kernel plans
+  low-bit operation contracts
+  ternary operation contracts
+  tiling and threading plans
 
 packages/lo-target-binary
   binary target metadata
@@ -171,6 +199,14 @@ Compute target selection
   update packages/lo-compute first
   update lo-core docs only if compute block syntax changes
 
+AI inference contracts
+  update packages/lo-ai first
+  update lo-core docs only if package registry or effect syntax changes
+
+BitNet CPU fallback
+  update packages/lo-bitnet, packages/lo-target-cpu or packages/lo-cpu-kernels first
+  update lo-core docs only if compute target syntax or report contracts change
+
 Photonic wavelength model
   update packages/lo-photonic first
   update lo-core docs only if language-level target declarations change
@@ -221,6 +257,8 @@ auth provider implementation
 task runner execution
 photonic hardware backend code
 binary emitter implementation
+AI model runtime implementation
+BitNet adapter implementation
 vector runtime kernels
 compute scheduler implementation
 CLI command UX details

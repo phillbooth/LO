@@ -51,7 +51,11 @@ updated first:
 ../../lo-reports/README.md
 ../../lo-vector/README.md
 ../../lo-compute/README.md
+../../lo-ai/README.md
+../../lo-bitnet/README.md
 ../../lo-photonic/README.md
+../../lo-target-cpu/README.md
+../../lo-cpu-kernels/README.md
 ../../lo-target-binary/README.md
 ../../lo-target-wasm/README.md
 ../../lo-target-gpu/README.md

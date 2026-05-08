@@ -1,0 +1,26 @@
+{
+  "flow": "summariseText",
+  "requested": "compute auto",
+  "selectedTarget": "cpu.bitnet",
+  "reason": "GPU unavailable; model supports BitNet b1.58 CPU inference",
+  "model": {
+    "name": "BitNet-b1.58-2B-4T",
+    "path": "./models/BitNet-b1.58-2B-4T/ggml-model-i2_s.gguf",
+    "format": "gguf",
+    "weightSet": "ternary-b1.58",
+    "quantization": "i2_s",
+    "embeddingQuantization": "q6_k",
+    "maxContextTokens": 2048,
+    "maxOutputTokens": 256,
+    "memoryEstimateBytes": 4294967296
+  },
+  "limits": {
+    "threads": 8,
+    "timeoutMs": 30000,
+    "maxPromptTokens": 1024,
+    "maxOutputTokens": 256,
+    "memoryLimitBytes": 4294967296
+  },
+  "fallback": true,
+  "warnings": []
+}

@@ -13,7 +13,11 @@ The project is split into package areas:
 - `packages/lo-logic/` - LO multi-state logic concepts such as `Tri`, `Logic<N>` and future Omni logic.
 - `packages/lo-vector/` - vector value, vector operation and vector report concepts.
 - `packages/lo-compute/` - compute planning concepts shared across CPU, WASM, vector and hardware targets.
+- `packages/lo-ai/` - generic AI inference contracts, model metadata, safety policy and reports.
+- `packages/lo-bitnet/` - BitNet-style 1.58-bit and ternary AI inference contracts.
 - `packages/lo-photonic/` - photonic and wavelength hardware concepts and mappings.
+- `packages/lo-target-cpu/` - CPU target capability, fallback and execution planning contracts.
+- `packages/lo-cpu-kernels/` - optimized CPU kernel contracts for low-bit, vector and matrix workloads.
 - `packages/lo-target-binary/` - binary/native target planning and artefact metadata.
 - `packages/lo-target-wasm/` - WebAssembly target planning and output contracts.
 - `packages/lo-target-gpu/` - GPU target planning and output contracts.
@@ -40,7 +44,11 @@ LO-app/
 |   |-- lo-logic/
 |   |-- lo-vector/
 |   |-- lo-compute/
+|   |-- lo-ai/
+|   |-- lo-bitnet/
 |   |-- lo-photonic/
+|   |-- lo-target-cpu/
+|   |-- lo-cpu-kernels/
 |   |-- lo-target-binary/
 |   |-- lo-target-wasm/
 |   |-- lo-target-gpu/
@@ -80,11 +88,20 @@ LO Vector
 LO Compute
   compute planning, capabilities, effects, budgets and target selection
 
+LO AI
+  generic AI inference contracts, safety policy, memory estimates and reports
+
+LO BitNet
+  BitNet-style 1.58-bit / ternary model metadata and CPU inference plans
+
 LO Photonic
   wavelength, phase, amplitude, optical channels and photonic target mapping
 
+LO Target CPU and CPU Kernels
+  CPU capability detection, fallback planning, SIMD, threading and low-bit kernels
+
 LO Target Packages
-  binary/native, WASM, GPU and photonic backend planning
+  CPU, binary/native, WASM, GPU and photonic backend planning
 
 LO Standard Library
   Json, Xml, SafeHtml, File, Stream, Request, Response, DateTime, Money, SecureString

@@ -91,6 +91,8 @@ package boundaries
     `lo-compute`, `lo-photonic`, target packages, CLI and task packages
 [x] Split compiler, runtime, security, config, reports, WASM target and GPU
     target responsibilities into dedicated package TODOs
+[x] Split AI inference, BitNet CPU fallback, CPU target and CPU kernel
+    responsibilities into dedicated package TODOs
 ```
 
 ---
@@ -137,10 +139,13 @@ Package-boundary note:
 Tri / Logic<N> / Omni work should update packages/lo-logic first.
 Vector work should update packages/lo-vector first.
 Compute planning work should update packages/lo-compute first.
+AI inference work should update packages/lo-ai first.
+BitNet CPU fallback work should update packages/lo-bitnet first.
 Photonic vocabulary should update packages/lo-photonic first.
 Target backend work should update packages/lo-target-binary or
-packages/lo-target-wasm, packages/lo-target-gpu or packages/lo-target-photonic
-first.
+packages/lo-target-cpu, packages/lo-target-wasm, packages/lo-target-gpu or
+packages/lo-target-photonic first.
+CPU kernel work should update packages/lo-cpu-kernels first.
 Compiler pipeline work should update packages/lo-compiler first.
 Runtime execution work should update packages/lo-runtime first.
 Security primitive work should update packages/lo-security first.
@@ -158,7 +163,11 @@ These areas are intentionally tracked outside `lo-core` first:
 Tri, Logic<N>, Decision and Omni semantics -> packages/lo-logic/TODO.md
 Vector values, lanes and operation semantics -> packages/lo-vector/TODO.md
 Compute planning and target selection -> packages/lo-compute/TODO.md
+AI inference contracts -> packages/lo-ai/TODO.md
+BitNet CPU fallback -> packages/lo-bitnet/TODO.md
 Photonic concepts and simulation helpers -> packages/lo-photonic/TODO.md
+CPU target planning -> packages/lo-target-cpu/TODO.md
+CPU kernel planning -> packages/lo-cpu-kernels/TODO.md
 Binary/native target output -> packages/lo-target-binary/TODO.md
 WASM target output -> packages/lo-target-wasm/TODO.md
 GPU target output -> packages/lo-target-gpu/TODO.md

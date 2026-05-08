@@ -5,7 +5,11 @@ Status: Draft.
 Ownership note: `lo-core` may document compute block syntax, compiler checks and
 report contracts. Detailed compute planning, capabilities, budgets, offload and
 target selection belong in `packages/lo-compute/`. Target-specific planning
-belongs in `packages/lo-target-binary/` and `packages/lo-target-photonic/`.
+belongs in `packages/lo-target-cpu/`, `packages/lo-target-binary/`,
+`packages/lo-target-gpu/` and `packages/lo-target-photonic/`. Optimized CPU
+kernel contracts belong in `packages/lo-cpu-kernels/`. AI inference contracts
+belong in `packages/lo-ai/`, with BitNet-specific CPU fallback in
+`packages/lo-bitnet/`.
 
 LO, short for **Logic Omni**, is a strict, memory-safe, security-first
 programming language and compiler/toolchain.
@@ -109,6 +113,8 @@ LO compiler/runtime:
   memory/interconnect planning
 
 LO target plugins:
+  CPU backend
+  BitNet CPU inference backend
   CUDA backend
   ROCm backend
   Vulkan backend
@@ -190,6 +196,8 @@ LO may support broad target categories:
 
 ```text
 cpu
+cpu.bitnet
+cpu.generic
 cpu_vector
 gpu
 ai_accelerator

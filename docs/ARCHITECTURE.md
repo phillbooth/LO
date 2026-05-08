@@ -10,8 +10,12 @@ Language documentation, compiler notes, examples and schemas live in
 Configuration and shared reports live in `packages/lo-config/` and
 `packages/lo-reports/`. Multi-state logic concepts live in `packages/lo-logic/`.
 Vector concepts live in `packages/lo-vector/`. Compute planning concepts live in
-`packages/lo-compute/`. Photonic and wavelength concepts live in
-`packages/lo-photonic/`. Binary/native target planning lives in
+`packages/lo-compute/`. Generic AI inference contracts live in
+`packages/lo-ai/`, and BitNet-style 1.58-bit/ternary AI inference support lives
+in `packages/lo-bitnet/`. Photonic and wavelength concepts live in
+`packages/lo-photonic/`. CPU target planning lives in
+`packages/lo-target-cpu/`, optimized CPU kernel contracts live in
+`packages/lo-cpu-kernels/`, and binary/native target planning lives in
 `packages/lo-target-binary/`, WebAssembly target planning lives in
 `packages/lo-target-wasm/`, GPU target planning lives in
 `packages/lo-target-gpu/`, and photonic target backend planning lives in
@@ -39,7 +43,11 @@ LO-app/
 |   |-- lo-logic/
 |   |-- lo-vector/
 |   |-- lo-compute/
+|   |-- lo-ai/
+|   |-- lo-bitnet/
 |   |-- lo-photonic/
+|   |-- lo-target-cpu/
+|   |-- lo-cpu-kernels/
 |   |-- lo-target-binary/
 |   |-- lo-target-wasm/
 |   |-- lo-target-gpu/
@@ -68,7 +76,11 @@ light-framework/
 |   |-- lo-logic/
 |   |-- lo-vector/
 |   |-- lo-compute/
+|   |-- lo-ai/
+|   |-- lo-bitnet/
 |   |-- lo-photonic/
+|   |-- lo-target-cpu/
+|   |-- lo-cpu-kernels/
 |   |-- lo-target-binary/
 |   |-- lo-target-wasm/
 |   |-- lo-target-gpu/
@@ -116,8 +128,20 @@ LO Vector
 LO Compute
   compute planning, capabilities, budgets, effects and target selection
 
+LO AI
+  target-neutral AI inference, model metadata, safety policy and reports
+
+LO BitNet
+  BitNet-style 1.58-bit / ternary model references and CPU inference plans
+
 LO Photonic
   wavelength, phase, amplitude, optical channels and logic-to-light mapping
+
+LO Target CPU
+  CPU capabilities, SIMD features, memory limits, threading and fallback reports
+
+LO CPU Kernels
+  GEMM, GEMV, vector, matrix, low-bit and ternary CPU kernel contracts
 
 LO Target Binary
   binary/native target planning, platform triples, ABI constraints and artefacts
@@ -171,9 +195,22 @@ owns photonic representation and target planning. Photonic mappings may consume
 logic states, but logic semantics stay in `lo-logic`.
 
 `lo-vector` owns vector values and vector operation concepts. `lo-compute` owns
-compute planning and target selection. `lo-target-binary`, `lo-target-wasm`,
-`lo-target-gpu` and `lo-target-photonic` own target-specific planning for
-binary/native, WebAssembly, GPU and photonic backends.
+compute planning and target selection. `lo-ai` owns generic AI inference
+contracts and safety policy. `lo-bitnet` owns BitNet-style model references and
+CPU inference plans for 1.58-bit/ternary models. `lo-target-cpu` owns CPU
+capability and fallback planning, while `lo-cpu-kernels` owns optimized CPU
+kernel contracts. `lo-target-binary`, `lo-target-wasm`, `lo-target-gpu` and
+`lo-target-photonic` own target-specific planning for binary/native,
+WebAssembly, GPU and photonic backends.
+
+BitNet is a CPU fallback path for AI inference, not a core language feature.
+When a compute policy requests AI inference, LO can prefer GPU or NPU targets
+and fall back to `cpu.bitnet` only when the model supports BitNet-style
+1.58-bit/ternary inference and CPU capability checks pass. If BitNet is not
+available, the policy may fall back again to `cpu.generic` with a warning or
+reject the plan when fallback is required. Target selection reports must record
+the selected backend, fallback reason, token and memory limits, thread limit and
+warnings.
 
 `lo-security` owns shared security primitives and report contracts. Runtime auth
 and API policy enforcement remain in `lo-app-kernel`. `lo-config` owns

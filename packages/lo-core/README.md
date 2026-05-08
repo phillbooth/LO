@@ -67,8 +67,20 @@ packages/lo-vector/
 packages/lo-compute/
   compute planning, capabilities, budgets, offload and target selection
 
+packages/lo-ai/
+  generic AI inference contracts, model metadata, safety policy, AI reports
+
+packages/lo-bitnet/
+  BitNet-style 1.58-bit / ternary AI model references and CPU inference plans
+
 packages/lo-photonic/
   Wavelength, Phase, Amplitude, OpticalSignal, OpticalChannel
+
+packages/lo-target-cpu/
+  CPU capability detection, SIMD features, threading and fallback reports
+
+packages/lo-cpu-kernels/
+  optimized CPU kernel contracts for vector, matrix, low-bit and ternary work
 
 packages/lo-target-binary/
   binary/native target planning and artefact metadata
@@ -108,7 +120,7 @@ LO Core
 LO Compiler / Runtime / Security / Config / Reports
   compiler pipeline, execution, shared security, configuration and report contracts
 
-LO Logic / Vector / Compute / Photonic / Target Packages
+LO Logic / Vector / Compute / AI / Photonic / Target Packages
   specialised LO concepts and target planning outside the core language package
 
 LO Standard Library
@@ -150,6 +162,7 @@ machine-readable reports
 AI-readable project context
 multi-target planning
 CPU compatibility by default
+AI inference as an optional package layer
 GPU planning
 photonic planning
 ternary and Omni-logic simulation

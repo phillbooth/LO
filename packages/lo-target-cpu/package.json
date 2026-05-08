@@ -1,0 +1,21 @@
+{
+  "name": "@lo/target-cpu",
+  "version": "0.1.0",
+  "description": "LO CPU target capability, fallback and execution planning contracts.",
+  "license": "Apache-2.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "build": "tsc -p tsconfig.json",
+    "test": "npm run typecheck"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.0"
+  }
+}

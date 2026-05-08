@@ -56,8 +56,15 @@ Describe the problem this app solves.
   `packages/lo-vector/`.
 - LO compute planning, capability, budget and target selection concepts must
   live in `packages/lo-compute/`.
+- Generic AI inference contracts, model metadata, safety policy and AI reports
+  must live in `packages/lo-ai/`.
+- BitNet-style 1.58-bit and ternary AI inference contracts must live in
+  `packages/lo-bitnet/`.
 - Photonic and wavelength hardware concepts must live in
   `packages/lo-photonic/`.
+- CPU target planning, feature detection and fallback reports must live in
+  `packages/lo-target-cpu/`.
+- Optimized CPU kernel contracts must live in `packages/lo-cpu-kernels/`.
 - Binary/native target planning must live in `packages/lo-target-binary/`.
 - WebAssembly target planning must live in `packages/lo-target-wasm/`.
 - GPU target planning must live in `packages/lo-target-gpu/`.
@@ -136,8 +143,18 @@ Describe the problem this app solves.
   and vector reports.
 - `lo-compute` must own compute planning, capability, budget, offload and
   target selection concepts.
+- `lo-ai` must own generic AI inference contracts, prompt/response shapes,
+  model capability metadata, memory estimates, safety policy and AI reports.
+- `lo-bitnet` must own BitNet-style model references, GGUF metadata,
+  1.58-bit/ternary quantization declarations, CPU inference limits and
+  BitNet-specific inference reports.
 - `lo-target-binary` must own binary/native target planning and artefact
   metadata.
+- `lo-target-cpu` must own CPU capability, feature, thread, memory and
+  fallback planning contracts.
+- `lo-cpu-kernels` must own CPU kernel contracts for GEMM, GEMV, vector dot
+  products, matrix multiplication, low-bit operations, ternary operations,
+  tiling and threading plans.
 - `lo-target-wasm` must own WebAssembly target planning, module metadata and
   import/export contracts.
 - `lo-target-gpu` must own GPU target planning, kernel mapping, precision and
@@ -160,6 +177,20 @@ Describe the problem this app solves.
 - `lo-config` must provide production strictness checks for strict project
   mode, required environment variables and unsafe secret defaults.
 - `lo-reports` must own shared report schemas and report-writing contracts.
+
+## AI and BitNet Requirements
+
+- AI inference must be target-neutral at the `lo-ai` layer.
+- BitNet support must be optional and must not be required by `lo-core`.
+- BitNet should be treated as a CPU AI inference fallback when GPU, NPU or
+  other accelerator targets are unavailable or not permitted.
+- BitNet ternary weights must not be treated as LO `Tri` truth semantics.
+- AI inference declarations must include explicit model reference, context
+  limit, output token limit, timeout, thread limit and memory estimate.
+- AI output must be untrusted by default and must not directly authorize
+  security, payment, access-control or other high-impact decisions.
+- Compute target selection reports must record when `cpu.bitnet` was selected
+  as a fallback and why higher-preference targets were not selected.
 
 ## Runtime Naming Requirement
 

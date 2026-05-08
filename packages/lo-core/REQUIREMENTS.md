@@ -64,7 +64,11 @@ must be updated in the owning package first:
 packages/lo-logic
 packages/lo-vector
 packages/lo-compute
+packages/lo-ai
+packages/lo-bitnet
 packages/lo-photonic
+packages/lo-target-cpu
+packages/lo-cpu-kernels
 packages/lo-target-binary
 packages/lo-target-photonic
 packages/lo-app-kernel
@@ -1904,7 +1908,11 @@ lo-core              = language syntax, compiler contracts and core safety rules
 lo-logic             = Tri, Logic<N>, Decision, RiskLevel and Omni logic
 lo-vector            = vector values, dimensions, lanes and vector operations
 lo-compute           = compute planning, capabilities, budgets and target selection
+lo-ai                = generic AI inference contracts and safety policy
+lo-bitnet            = BitNet-style 1.58-bit / ternary AI inference contracts
 lo-photonic          = wavelength, phase, amplitude and optical signal concepts
+lo-target-cpu        = CPU target capability and fallback planning
+lo-cpu-kernels       = optimized CPU kernel contracts
 lo-target-binary     = binary/native target planning and artefact metadata
 lo-target-photonic   = photonic backend target planning
 lo-app-kernel        = secure application/API runtime boundary

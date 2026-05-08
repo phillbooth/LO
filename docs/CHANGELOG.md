@@ -42,6 +42,14 @@ All notable changes to this app should be documented here.
 - Added `lo-config` project config parsing, environment mode loading,
   production strictness policy, safe environment variable references, runtime
   handoff contracts, examples and tests.
+- Added `packages/lo-ai/` for generic AI inference contracts, safety policy and
+  AI inference reports.
+- Added `packages/lo-bitnet/` for BitNet-style 1.58-bit and ternary AI
+  inference contracts.
+- Added `packages/lo-target-cpu/` for CPU capability, fallback and execution
+  planning contracts.
+- Added `packages/lo-cpu-kernels/` for optimized CPU kernel contracts.
+- Added a BitNet CPU fallback architecture note.
 
 ### Changed
 
@@ -55,6 +63,11 @@ All notable changes to this app should be documented here.
 - Documented the future split-repository layout where `packages/` can become
   its own reusable Git repository imported by multiple frameworks.
 - Added simple `console.log("...")` output support to LO core checked Run Mode.
+- Expanded `lo-compute` target selection contracts with `cpu.bitnet`,
+  `cpu.generic`, AI inference workload planning and compute-auto selection
+  reporting.
+- Clarified that BitNet ternary model weights are separate from LO `Tri`
+  semantics.
 
 ### Removed
 

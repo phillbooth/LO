@@ -119,6 +119,8 @@ LO standard library:
   low-level utilities such as Text, Unicode handling, streams, errors, time and reports
 
 LO packages:
+  generic AI inference contracts
+  BitNet-style local CPU inference adapters
   text classifiers
   summarisation clients
   embedding clients
@@ -154,6 +156,10 @@ External services:
   moderation APIs
   search providers
 ```
+
+BitNet-style support belongs in `packages/lo-bitnet/`, with generic AI
+contracts in `packages/lo-ai/`. It should be selected through compute target
+planning, for example `cpu.bitnet`, rather than added to LO core.
 
 ---
 
@@ -1232,4 +1238,3 @@ Report target, token, precision, memory and security decisions clearly.
 ```
 
 Text AI systems should be built on top of LO, not inside LO.
-
