@@ -5,6 +5,7 @@ import { join } from "node:path";
 import { describe, it } from "node:test";
 
 import {
+  checkTaskPermissions,
   createTaskRunReport,
   loadTasks,
   parseTasksSource,
@@ -119,5 +120,49 @@ task build {
     const plan = resolveTaskDependencies(loaded, "a");
 
     assert.equal(plan.error?.code, "LO_TASK_DEPENDENCY_CYCLE");
+  });
+
+  it("requires filesystem permissions for filesystem effects", async () => {
+    const task = {
+      name: "copy",
+      effects: ["filesystem"],
+      permissions: []
+    };
+    const result = await runTask(task, { dryRun: true });
+
+    assert.equal(result.status, "failed");
+    assert.equal(result.error?.code, "LO_TASK_FILESYSTEM_PERMISSION_REQUIRED");
+  });
+
+  it("rejects unsafe filesystem permission paths", () => {
+    const error = checkTaskPermissions({
+      name: "writeOutside",
+      effects: ["filesystem"],
+      permissions: [{ kind: "write", values: ["../outside"] }]
+    });
+
+    assert.equal(error?.code, "LO_TASK_FILESYSTEM_PERMISSION_INVALID");
+  });
+
+  it("requires explicit environment variable permissions", () => {
+    const missing = checkTaskPermissions({
+      name: "readEnv",
+      effects: ["environment"],
+      permissions: []
+    });
+    const invalid = checkTaskPermissions({
+      name: "readEnv",
+      effects: ["environment"],
+      permissions: [{ kind: "environment", values: ["*"] }]
+    });
+    const valid = checkTaskPermissions({
+      name: "readEnv",
+      effects: ["environment"],
+      permissions: [{ kind: "environment", values: ["NODE_ENV", "LO_ENV"] }]
+    });
+
+    assert.equal(missing?.code, "LO_TASK_ENVIRONMENT_PERMISSION_REQUIRED");
+    assert.equal(invalid?.code, "LO_TASK_ENVIRONMENT_PERMISSION_INVALID");
+    assert.equal(valid, undefined);
   });
 });

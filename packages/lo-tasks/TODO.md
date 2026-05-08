@@ -19,8 +19,8 @@
 [ ] Run named task operations
 [x] Support task dependencies
 [x] Detect circular dependencies
-[ ] Add filesystem permissions
-[ ] Add environment permissions
+[x] Add filesystem permissions
+[x] Add environment permissions
 [x] Write task-report.json output
 [x] Add tests
 ```

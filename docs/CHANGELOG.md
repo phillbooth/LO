@@ -69,6 +69,8 @@ All notable changes to this app should be documented here.
 - Added task run report generation for `lo task`, writing
   `build/reports/task-report.json` by default with `--report-out` and
   `--no-report` controls.
+- Added `lo-tasks` filesystem and environment permission validation, including
+  safe relative path checks and explicit environment variable permissions.
 
 ### Changed
 

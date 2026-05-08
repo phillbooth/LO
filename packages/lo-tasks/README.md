@@ -84,6 +84,39 @@ Dependency resolution is deterministic and rejects missing or circular task
 dependencies before execution. Current execution can dry-run task plans and
 perform permission checks; built-in operation execution is still future work.
 
+## Permission Checks
+
+Dry-run and execution both validate permissions before a task is accepted.
+
+Filesystem tasks must declare at least one `read` or `write` permission with a
+safe repository-relative path:
+
+```lo
+permissions {
+  read "./src"
+  write "./build"
+}
+```
+
+Invalid filesystem permissions include empty paths, absolute paths and parent
+traversal such as `../outside`.
+
+Environment tasks must declare exact environment variable names:
+
+```lo
+task readMode {
+  effects [environment]
+
+  permissions {
+    environment "NODE_ENV" "LO_ENV"
+  }
+}
+```
+
+Environment wildcards and empty values are rejected. Network, database and shell
+effects also require matching explicit permissions. Shell remains denied unless
+the task is marked `unsafe` and includes a reason.
+
 ## Task Reports
 
 Task runs produce a structured report that records:

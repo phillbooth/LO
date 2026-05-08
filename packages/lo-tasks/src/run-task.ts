@@ -7,10 +7,6 @@ export interface RunTaskOptions {
 }
 
 export async function runTask(task: TaskDefinition, options: RunTaskOptions = {}): Promise<TaskResult> {
-  if (options.dryRun === true) {
-    return dryRunTask(task);
-  }
-
   const permissionError = checkTaskPermissions(task);
 
   if (permissionError !== undefined) {
@@ -21,6 +17,10 @@ export async function runTask(task: TaskDefinition, options: RunTaskOptions = {}
       warnings: [],
       error: permissionError
     };
+  }
+
+  if (options.dryRun === true) {
+    return dryRunTask(task);
   }
 
   return {
