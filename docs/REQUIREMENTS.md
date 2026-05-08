@@ -153,6 +153,9 @@ Describe the problem this app solves.
 - Project graph outputs should include JSON, human-readable report and AI map
   paths so assistants can query project relationships without rereading every
   file.
+- The native project graph mapper should map workspace packages, package docs,
+  exported TypeScript contracts, package metadata, project docs and generated
+  graph report outputs.
 
 ## Logic and Photonic Package Requirements
 

@@ -1,9 +1,14 @@
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, readFile, readdir, stat, writeFile } from "node:fs/promises";
 import { join, relative, resolve } from "node:path";
+import {
+  createDefaultProjectGraphOutputManifest,
+  createWorkspaceProjectGraph,
+  renderProjectGraphAiMap,
+  renderProjectGraphMarkdownReport,
+  type ProjectGraphWorkspaceConfig,
+  type ProjectGraphWorkspaceFile,
+} from "../../lo-project-graph/dist/index.js";
 import type { CliContext, CliResult } from "./types.js";
-
-type GraphNodeKind = "Package" | "Document" | "Report";
-type GraphEdgeKind = "documents" | "generates";
 
 interface WorkspaceConfig {
   readonly name: string;
@@ -11,49 +16,38 @@ interface WorkspaceConfig {
   readonly docs?: Readonly<Record<string, string>>;
 }
 
-interface GraphNode {
-  readonly id: string;
-  readonly kind: GraphNodeKind;
-  readonly label: string;
-  readonly sourcePath?: string;
-  readonly tags: readonly string[];
-}
-
-interface GraphEdge {
-  readonly from: string;
-  readonly to: string;
-  readonly kind: GraphEdgeKind;
-  readonly confidence: "EXTRACTED" | "INFERRED";
-  readonly evidencePath?: string;
-}
-
-interface ProjectGraph {
-  readonly version: string;
-  readonly generatedAt: string;
-  readonly nodes: readonly GraphNode[];
-  readonly edges: readonly GraphEdge[];
-}
-
 interface GraphOutputPaths {
   readonly directory: string;
   readonly jsonPath: string;
+  readonly htmlPath: string;
   readonly reportPath: string;
+  readonly aiMapPath: string;
 }
 
 export async function runGraphCommand(context: CliContext): Promise<CliResult> {
   const outputDirectory = resolveOutputDirectory(context);
   const workspacePath = join(context.cwd, "lo.workspace.json");
   const workspace = parseWorkspaceConfig(await readFile(workspacePath, "utf8"));
-  const graph = createWorkspaceGraph(workspace);
-  const paths: GraphOutputPaths = {
-    directory: outputDirectory,
-    jsonPath: join(outputDirectory, "lo-project-graph.json"),
-    reportPath: join(outputDirectory, "LO_GRAPH_REPORT.md"),
-  };
+  const graphWorkspace = toProjectGraphWorkspace(workspace);
+  const files = await collectProjectGraphFiles(context.cwd, workspace);
+  const graph = createWorkspaceProjectGraph({
+    workspace: graphWorkspace,
+    files,
+  });
+  const paths = createGraphOutputPaths(context.cwd, outputDirectory);
+  const manifest = createDefaultProjectGraphOutputManifest(
+    relative(context.cwd, outputDirectory).replace(/\\/g, "/"),
+  );
 
   await mkdir(paths.directory, { recursive: true });
   await writeFile(paths.jsonPath, `${JSON.stringify(graph, null, 2)}\n`, "utf8");
-  await writeFile(paths.reportPath, renderGraphReport(workspace, graph), "utf8");
+  await writeFile(
+    paths.reportPath,
+    renderProjectGraphMarkdownReport(graphWorkspace, graph),
+    "utf8",
+  );
+  await writeFile(paths.aiMapPath, renderProjectGraphAiMap(graph), "utf8");
+  await writeFile(paths.htmlPath, renderProjectGraphHtml(graph), "utf8");
 
   return {
     ok: true,
@@ -62,6 +56,10 @@ export async function runGraphCommand(context: CliContext): Promise<CliResult> {
     details: [
       `Graph JSON: ${relative(context.cwd, paths.jsonPath)}`,
       `Graph report: ${relative(context.cwd, paths.reportPath)}`,
+      `Graph AI map: ${relative(context.cwd, paths.aiMapPath)}`,
+      `Graph HTML: ${relative(context.cwd, paths.htmlPath)}`,
+      `Manifest files: ${manifest.generatedFiles.length}`,
+      `Scanned files: ${files.length}`,
       `Nodes: ${graph.nodes.length}`,
       `Edges: ${graph.edges.length}`,
     ],
@@ -72,6 +70,19 @@ function resolveOutputDirectory(context: CliContext): string {
   const outIndex = context.args.findIndex((arg) => arg === "--out");
   const outValue = outIndex >= 0 ? context.args[outIndex + 1] : undefined;
   return resolve(context.cwd, outValue ?? "build/graph");
+}
+
+function createGraphOutputPaths(
+  cwd: string,
+  outputDirectory: string,
+): GraphOutputPaths {
+  return {
+    directory: outputDirectory,
+    jsonPath: join(outputDirectory, "lo-project-graph.json"),
+    htmlPath: join(outputDirectory, "lo-project-graph.html"),
+    reportPath: join(outputDirectory, "LO_GRAPH_REPORT.md"),
+    aiMapPath: join(outputDirectory, "lo-ai-map.md"),
+  };
 }
 
 function parseWorkspaceConfig(rawJson: string): WorkspaceConfig {
@@ -94,117 +105,157 @@ function parseWorkspaceConfig(rawJson: string): WorkspaceConfig {
   };
 }
 
-function createWorkspaceGraph(workspace: WorkspaceConfig): ProjectGraph {
-  const packageNodes = workspace.packages.map((packagePath) =>
-    createPackageNode(packagePath),
-  );
-  const documentNodes = Object.entries(workspace.docs ?? {}).map(([name, path]) =>
-    createDocumentNode(name, path),
-  );
-  const reportNode: GraphNode = {
-    id: "report:project-graph",
-    kind: "Report",
-    label: "LO Project Graph Report",
-    sourcePath: "build/graph/LO_GRAPH_REPORT.md",
-    tags: ["report", "project-graph"],
-  };
-
+function toProjectGraphWorkspace(
+  workspace: WorkspaceConfig,
+): ProjectGraphWorkspaceConfig {
   return {
-    version: "0.1.0",
-    generatedAt: new Date().toISOString(),
-    nodes: [...packageNodes, ...documentNodes, reportNode],
-    edges: [
-      ...createDocumentEdges(documentNodes, packageNodes),
-      {
-        from: "package:lo-project-graph",
-        to: reportNode.id,
-        kind: "generates",
-        confidence: "INFERRED",
-        evidencePath: "packages/lo-project-graph/README.md",
-      },
-    ],
+    name: workspace.name,
+    packages: workspace.packages.map((path) => ({ path })),
+    ...(workspace.docs === undefined ? {} : { docs: workspace.docs }),
   };
 }
 
-function createPackageNode(packagePath: string): GraphNode {
-  const label = packagePath.split("/").at(-1) ?? packagePath;
+async function collectProjectGraphFiles(
+  cwd: string,
+  workspace: WorkspaceConfig,
+): Promise<readonly ProjectGraphWorkspaceFile[]> {
+  const roots = uniqueStrings([
+    "README.md",
+    "lo.workspace.json",
+    "docs",
+    ...workspace.packages,
+  ]);
+  const files: ProjectGraphWorkspaceFile[] = [];
 
-  return {
-    id: `package:${label}`,
-    kind: "Package",
-    label,
-    sourcePath: `${packagePath}/README.md`,
-    tags: ["package"],
-  };
-}
-
-function createDocumentNode(name: string, sourcePath: string): GraphNode {
-  return {
-    id: `doc:${name}`,
-    kind: "Document",
-    label: name,
-    sourcePath,
-    tags: ["document"],
-  };
-}
-
-function createDocumentEdges(
-  documents: readonly GraphNode[],
-  packages: readonly GraphNode[],
-): readonly GraphEdge[] {
-  const edges: GraphEdge[] = [];
-
-  for (const document of documents) {
-    const packageNode = packages.find(
-      (node) =>
-        document.sourcePath !== undefined &&
-        node.sourcePath !== undefined &&
-        document.sourcePath.startsWith(node.sourcePath.replace(/\/README\.md$/, "")),
-    );
-
-    if (packageNode !== undefined) {
-      edges.push({
-        from: document.id,
-        to: packageNode.id,
-        kind: "documents",
-        confidence: "EXTRACTED",
-        ...(document.sourcePath === undefined
-          ? {}
-          : { evidencePath: document.sourcePath }),
-      });
-    }
+  for (const root of roots) {
+    await collectPath(cwd, root, files);
   }
 
-  return edges;
+  return files;
 }
 
-function renderGraphReport(workspace: WorkspaceConfig, graph: ProjectGraph): string {
-  const packages = graph.nodes.filter((node) => node.kind === "Package");
-  const documents = graph.nodes.filter((node) => node.kind === "Document");
+async function collectPath(
+  cwd: string,
+  path: string,
+  files: ProjectGraphWorkspaceFile[],
+): Promise<void> {
+  const absolutePath = resolve(cwd, path);
+  let pathStat;
+
+  try {
+    pathStat = await stat(absolutePath);
+  } catch {
+    return;
+  }
+
+  if (pathStat.isDirectory()) {
+    const entries = await readdir(absolutePath, { withFileTypes: true });
+    for (const entry of entries) {
+      const childPath = join(path, entry.name);
+      const normalizedChildPath = childPath.replace(/\\/g, "/");
+      if (shouldSkipPath(normalizedChildPath)) {
+        continue;
+      }
+      await collectPath(cwd, normalizedChildPath, files);
+    }
+    return;
+  }
+
+  if (!pathStat.isFile() || shouldSkipPath(path)) {
+    return;
+  }
+
+  const kind = classifyGraphFile(path);
+  if (kind === "other") {
+    return;
+  }
+
+  files.push({
+    path: path.replace(/\\/g, "/"),
+    kind,
+    text: await readFile(absolutePath, "utf8"),
+  });
+}
+
+function classifyGraphFile(path: string): ProjectGraphWorkspaceFile["kind"] {
+  const lowerPath = path.toLowerCase();
+
+  if (lowerPath.endsWith(".md")) {
+    return "markdown";
+  }
+
+  if (lowerPath.endsWith(".ts") || lowerPath.endsWith(".mts")) {
+    return "typescript";
+  }
+
+  if (lowerPath.endsWith(".json")) {
+    return "json";
+  }
+
+  if (lowerPath.endsWith(".lo")) {
+    return "lo-source";
+  }
+
+  return "other";
+}
+
+function shouldSkipPath(path: string): boolean {
+  const normalizedPath = path.replace(/\\/g, "/");
+  return (
+    normalizedPath.includes("/dist/") ||
+    normalizedPath.includes("/node_modules/") ||
+    normalizedPath.includes("/.git/") ||
+    normalizedPath.endsWith(".env") ||
+    normalizedPath.endsWith(".log")
+  );
+}
+
+function renderProjectGraphHtml(graph: {
+  readonly nodes: readonly { readonly id: string; readonly label: string; readonly kind: string }[];
+  readonly edges: readonly { readonly from: string; readonly to: string; readonly kind: string }[];
+}): string {
+  const nodeItems = graph.nodes
+    .map((node) => `<li><strong>${escapeHtml(node.label)}</strong> <span>${escapeHtml(node.kind)}</span></li>`)
+    .join("\n");
+  const edgeItems = graph.edges
+    .slice(0, 500)
+    .map(
+      (edge) =>
+        `<li>${escapeHtml(edge.from)} <code>${escapeHtml(edge.kind)}</code> ${escapeHtml(edge.to)}</li>`,
+    )
+    .join("\n");
 
   return [
-    "# LO Graph Report",
-    "",
-    `Workspace: ${workspace.name}`,
-    `Generated: ${graph.generatedAt}`,
-    "",
-    "## Summary",
-    "",
-    `- Packages: ${packages.length}`,
-    `- Documents: ${documents.length}`,
-    `- Relationships: ${graph.edges.length}`,
-    "",
-    "## Package Nodes",
-    "",
-    ...packages.map((node) => `- ${node.label} (${node.sourcePath ?? "no source"})`),
-    "",
-    "## Suggested Questions",
-    "",
-    "- Which package owns a concept?",
-    "- Which documents describe a package?",
-    "- Which packages generate project reports?",
+    "<!doctype html>",
+    '<html lang="en">',
+    "<head>",
+    '<meta charset="utf-8">',
+    "<title>LO Project Graph</title>",
+    "<style>body{font-family:system-ui,sans-serif;margin:2rem;line-height:1.45}code{background:#eee;padding:.1rem .25rem}span{color:#666}</style>",
+    "</head>",
+    "<body>",
+    "<h1>LO Project Graph</h1>",
+    `<p>${graph.nodes.length} nodes, ${graph.edges.length} relationships.</p>`,
+    "<h2>Nodes</h2>",
+    `<ul>${nodeItems}</ul>`,
+    "<h2>Relationships</h2>",
+    `<ul>${edgeItems}</ul>`,
+    "</body>",
+    "</html>",
     "",
   ].join("\n");
+}
+
+function escapeHtml(value: string): string {
+  return value
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;");
+}
+
+function uniqueStrings(values: readonly string[]): readonly string[] {
+  return [...new Set(values)];
 }
 
 function isRecord(value: unknown): value is Readonly<Record<string, unknown>> {

@@ -20,6 +20,8 @@ report output manifests
 AI assistant map files
 graph query, path and explain request contracts
 backend selection policy
+workspace package/doc scanner
+Markdown report and AI map rendering
 ```
 
 ## Backend Role
@@ -61,6 +63,29 @@ or production runtime.
 
 `lo-project-graph` explains relationships. It does not enforce security,
 compile source code, run tasks, serve HTTP or replace compiler checks.
+
+## Native Mapper
+
+The package includes a LO-native workspace graph builder that can consume:
+
+```text
+lo.workspace.json package paths
+README and TODO documents
+package.json metadata
+TypeScript exported contracts
+top-level docs
+generated JSON report examples
+```
+
+It maps packages, documents, exported contracts and package references into a
+stable graph. The CLI can render:
+
+```text
+build/graph/lo-project-graph.json
+build/graph/LO_GRAPH_REPORT.md
+build/graph/lo-ai-map.md
+build/graph/lo-project-graph.html
+```
 
 Final rule:
 

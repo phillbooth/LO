@@ -10,6 +10,8 @@
 [x] Define swappable backend policy contracts
 [x] Define query, path and explain request contracts
 [x] Define graph validation diagnostics
+[x] Define LO-native workspace graph builder
+[x] Add Markdown report and AI map renderers
 [x] Add examples
 [x] Add tests
 ```

@@ -39,6 +39,11 @@ describe("lo graph command", () => {
       join(cwd, "graph-out", "LO_GRAPH_REPORT.md"),
       "utf8",
     );
+    const aiMap = await readFile(join(cwd, "graph-out", "lo-ai-map.md"), "utf8");
+    const html = await readFile(
+      join(cwd, "graph-out", "lo-project-graph.html"),
+      "utf8",
+    );
 
     assert.equal(result.ok, true);
     assert.equal(graph.nodes.some((node) => node.id === "package:lo-core"), true);
@@ -47,5 +52,7 @@ describe("lo graph command", () => {
       true,
     );
     assert.match(report, /LO Graph Report/);
+    assert.match(aiMap, /LO AI Map/);
+    assert.match(html, /LO Project Graph/);
   });
 });

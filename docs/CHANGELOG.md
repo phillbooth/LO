@@ -88,6 +88,9 @@ All notable changes to this app should be documented here.
   a Markdown graph report from `lo.workspace.json`.
 - Clarified that project graph syntax and CLI commands are backend-neutral, with
   Graphify treated as an optional swappable backend rather than LO syntax.
+- Expanded `lo-project-graph` with a LO-native workspace scanner that maps
+  packages, documents, exported TypeScript contracts, package references and
+  generated graph report outputs.
 
 ### Removed
 

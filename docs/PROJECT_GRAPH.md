@@ -124,6 +124,23 @@ record generated output paths
 distinguish source facts from inferred relationships
 ```
 
+## Native Mapper
+
+The first implementation is the LO-native mapper in `packages/lo-project-graph`.
+It can scan workspace package paths and project docs, then map:
+
+```text
+packages
+README/TODO/docs files
+package.json descriptions and dependencies
+TypeScript exported types, interfaces and functions
+generated graph report outputs
+package mentions in documentation
+```
+
+This is intentionally lightweight and deterministic. Richer external tools can
+be added later as backend adapters without changing `lo graph`.
+
 ## Boundary
 
 The graph explains LO. It does not enforce LO.

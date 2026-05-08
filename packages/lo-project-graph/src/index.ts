@@ -90,6 +90,18 @@ export interface ProjectGraph {
   readonly edges: readonly ProjectGraphEdge[];
 }
 
+export interface ProjectGraphWorkspacePackage {
+  readonly path: string;
+  readonly name?: string;
+  readonly role?: string;
+}
+
+export interface ProjectGraphWorkspaceConfig {
+  readonly name: string;
+  readonly packages: readonly ProjectGraphWorkspacePackage[];
+  readonly docs?: Readonly<Record<string, string>>;
+}
+
 export type ProjectGraphScanSource =
   | "markdown"
   | "lo-source"
@@ -151,6 +163,25 @@ export interface ProjectGraphBuildPlan {
   readonly backendPolicy?: ProjectGraphBackendPolicy;
   readonly backend?: ProjectGraphBackendSelection;
   readonly output: ProjectGraphOutputManifest;
+}
+
+export type ProjectGraphFileKind =
+  | "markdown"
+  | "typescript"
+  | "json"
+  | "lo-source"
+  | "other";
+
+export interface ProjectGraphWorkspaceFile {
+  readonly path: string;
+  readonly kind: ProjectGraphFileKind;
+  readonly text: string;
+}
+
+export interface WorkspaceProjectGraphBuildInput {
+  readonly workspace: ProjectGraphWorkspaceConfig;
+  readonly files: readonly ProjectGraphWorkspaceFile[];
+  readonly generatedAt?: string;
 }
 
 export interface ProjectGraphQueryRequest {
@@ -331,6 +362,206 @@ export function createProjectGraphReport(
   };
 }
 
+export function createWorkspaceProjectGraph(
+  input: WorkspaceProjectGraphBuildInput,
+): ProjectGraph {
+  const nodes = new Map<string, ProjectGraphNode>();
+  const edges = new Map<string, ProjectGraphEdge>();
+  const packages = input.workspace.packages.map((item) =>
+    normalizeWorkspacePackage(item),
+  );
+
+  for (const packageEntry of packages) {
+    const packageFile = findFile(input.files, `${packageEntry.path}/package.json`);
+    const readmeFile = findFile(input.files, `${packageEntry.path}/README.md`);
+    const packageSummary =
+      readPackageDescription(packageFile?.text) ??
+      readMarkdownSummary(readmeFile?.text) ??
+      packageEntry.role;
+
+    addNode(
+      nodes,
+      createPackageNode(
+        packageNodeId(packageEntry.name),
+        packageEntry.name,
+        `${packageEntry.path}/README.md`,
+        packageSummary,
+      ),
+    );
+  }
+
+  for (const file of input.files) {
+    const owner = findOwningPackage(file.path, packages);
+    const documentNode = createFileNode(file, owner);
+
+    if (documentNode !== undefined) {
+      addNode(nodes, documentNode);
+
+      if (owner !== undefined) {
+        addEdge(
+          edges,
+          createProjectGraphEdge(
+            packageNodeId(owner.name),
+            documentNode.id,
+            "owns",
+            "EXTRACTED",
+            file.path,
+          ),
+        );
+      }
+    }
+
+    if (file.kind === "typescript") {
+      for (const exportNode of extractTypeScriptExports(file, owner)) {
+        addNode(nodes, exportNode);
+
+        if (owner !== undefined) {
+          addEdge(
+            edges,
+            createProjectGraphEdge(
+              packageNodeId(owner.name),
+              exportNode.id,
+              "provides",
+              "EXTRACTED",
+              file.path,
+            ),
+          );
+        }
+      }
+    }
+
+    if (file.kind === "markdown") {
+      addMarkdownPackageReferenceEdges(file, packages, nodes, edges);
+    }
+
+    if (file.path.endsWith("package.json") && owner !== undefined) {
+      addPackageDependencyEdges(file, owner, packages, edges);
+    }
+  }
+
+  for (const [docName, docPath] of Object.entries(input.workspace.docs ?? {})) {
+    const docNodeId = documentNodeId(docPath);
+    if (!nodes.has(docNodeId)) {
+      addNode(
+        nodes,
+        createDocumentNode(docNodeId, docName, docPath, ["document", "workspace-doc"]),
+      );
+    }
+  }
+
+  const graphPackage = packages.find((item) => item.name === "lo-project-graph");
+  const reportNode: ProjectGraphNode = {
+    id: "report:project-graph",
+    kind: "Report",
+    label: "LO Project Graph Report",
+    sourcePath: "build/graph/LO_GRAPH_REPORT.md",
+    tags: ["report", "project-graph"],
+  };
+  addNode(nodes, reportNode);
+
+  if (graphPackage !== undefined) {
+    addEdge(
+      edges,
+      createProjectGraphEdge(
+        packageNodeId(graphPackage.name),
+        reportNode.id,
+        "generates",
+        "INFERRED",
+        `${graphPackage.path}/README.md`,
+      ),
+    );
+  }
+
+  return {
+    version: "0.1.0",
+    generatedAt: input.generatedAt ?? new Date().toISOString(),
+    nodes: [...nodes.values()],
+    edges: [...edges.values()],
+  };
+}
+
+export function createDefaultProjectGraphOutputManifest(
+  outputDirectory = "build/graph",
+): ProjectGraphOutputManifest {
+  return {
+    jsonPath: `${outputDirectory}/lo-project-graph.json`,
+    htmlPath: `${outputDirectory}/lo-project-graph.html`,
+    reportPath: `${outputDirectory}/LO_GRAPH_REPORT.md`,
+    aiMapPath: `${outputDirectory}/lo-ai-map.md`,
+    generatedFiles: [
+      `${outputDirectory}/lo-project-graph.json`,
+      `${outputDirectory}/lo-project-graph.html`,
+      `${outputDirectory}/LO_GRAPH_REPORT.md`,
+      `${outputDirectory}/lo-ai-map.md`,
+    ],
+  };
+}
+
+export function renderProjectGraphMarkdownReport(
+  workspace: ProjectGraphWorkspaceConfig,
+  graph: ProjectGraph,
+): string {
+  const packages = graph.nodes.filter((node) => node.kind === "Package");
+  const documents = graph.nodes.filter((node) => node.kind === "Document");
+  const types = graph.nodes.filter((node) => node.kind === "Type");
+  const functions = graph.nodes.filter((node) => node.kind === "Flow");
+
+  return [
+    "# LO Graph Report",
+    "",
+    `Workspace: ${workspace.name}`,
+    `Generated: ${graph.generatedAt}`,
+    "",
+    "## Summary",
+    "",
+    `- Packages: ${packages.length}`,
+    `- Documents: ${documents.length}`,
+    `- Types/interfaces: ${types.length}`,
+    `- Functions: ${functions.length}`,
+    `- Relationships: ${graph.edges.length}`,
+    "",
+    "## Package Nodes",
+    "",
+    ...packages.map((node) => `- ${node.label} (${node.sourcePath ?? "no source"})`),
+    "",
+    "## High-Signal Questions",
+    "",
+    "- Which package owns a concept?",
+    "- Which package provides a type or helper?",
+    "- Which docs mention a package?",
+    "- Which packages depend on each other?",
+    "",
+  ].join("\n");
+}
+
+export function renderProjectGraphAiMap(graph: ProjectGraph): string {
+  const lines = ["# LO AI Map", ""];
+
+  for (const node of graph.nodes) {
+    if (node.kind !== "Package") {
+      continue;
+    }
+
+    const provides = graph.edges
+      .filter((edge) => edge.from === node.id && edge.kind === "provides")
+      .map((edge) => graph.nodes.find((candidate) => candidate.id === edge.to))
+      .filter((candidate): candidate is ProjectGraphNode => candidate !== undefined)
+      .slice(0, 12);
+
+    lines.push(`## ${node.label}`);
+    if (node.summary !== undefined) {
+      lines.push("", node.summary);
+    }
+    if (provides.length > 0) {
+      lines.push("", "Provides:");
+      lines.push(...provides.map((item) => `- ${item.label}`));
+    }
+    lines.push("");
+  }
+
+  return lines.join("\n");
+}
+
 export function validateProjectGraph(
   graph: ProjectGraph,
 ): readonly ProjectGraphDiagnostic[] {
@@ -437,4 +668,233 @@ export function createProjectGraphEdge(
     confidence,
     ...(evidencePath === undefined ? {} : { evidencePath }),
   };
+}
+
+function normalizeWorkspacePackage(
+  input: ProjectGraphWorkspacePackage,
+): Required<Pick<ProjectGraphWorkspacePackage, "path" | "name">> &
+  Pick<ProjectGraphWorkspacePackage, "role"> {
+  const normalizedPath = normalizePath(input.path);
+  const name = input.name ?? normalizedPath.split("/").at(-1) ?? normalizedPath;
+
+  return {
+    path: normalizedPath,
+    name,
+    ...(input.role === undefined ? {} : { role: input.role }),
+  };
+}
+
+function createFileNode(
+  file: ProjectGraphWorkspaceFile,
+  owner?: ReturnType<typeof normalizeWorkspacePackage>,
+): ProjectGraphNode | undefined {
+  if (file.kind !== "markdown" && file.kind !== "json") {
+    return undefined;
+  }
+
+  const label = file.path.split("/").at(-1) ?? file.path;
+  const tags = [
+    file.kind === "markdown" ? "document" : "report",
+    ...(owner === undefined ? [] : [owner.name]),
+  ];
+
+  if (file.kind === "json" && file.path.toLowerCase().includes("report")) {
+    return {
+      id: reportNodeId(file.path),
+      kind: "Report",
+      label,
+      sourcePath: file.path,
+      tags,
+    };
+  }
+
+  return createDocumentNode(documentNodeId(file.path), label, file.path, tags);
+}
+
+function extractTypeScriptExports(
+  file: ProjectGraphWorkspaceFile,
+  owner?: ReturnType<typeof normalizeWorkspacePackage>,
+): readonly ProjectGraphNode[] {
+  const nodes: ProjectGraphNode[] = [];
+  const exportPattern =
+    /export\s+(?:declare\s+)?(?:interface|type|class|const|function)\s+([A-Za-z_][A-Za-z0-9_]*)/g;
+
+  for (const match of file.text.matchAll(exportPattern)) {
+    const name = match[1];
+    if (name === undefined) {
+      continue;
+    }
+
+    const declaration = match[0];
+    const kind = declaration.includes("function") ? "Flow" : "Type";
+    nodes.push({
+      id: `${kind.toLowerCase()}:${owner?.name ?? "workspace"}:${name}`,
+      kind,
+      label: name,
+      sourcePath: file.path,
+      tags: [
+        kind === "Flow" ? "function" : "type",
+        ...(owner === undefined ? [] : [owner.name]),
+      ],
+    });
+  }
+
+  return nodes;
+}
+
+function addMarkdownPackageReferenceEdges(
+  file: ProjectGraphWorkspaceFile,
+  packages: readonly ReturnType<typeof normalizeWorkspacePackage>[],
+  nodes: Map<string, ProjectGraphNode>,
+  edges: Map<string, ProjectGraphEdge>,
+): void {
+  const documentId = documentNodeId(file.path);
+  if (!nodes.has(documentId)) {
+    return;
+  }
+
+  for (const packageEntry of packages) {
+    if (
+      file.text.includes(packageEntry.name) ||
+      file.text.includes(packageEntry.path)
+    ) {
+      addEdge(
+        edges,
+        createProjectGraphEdge(
+          documentId,
+          packageNodeId(packageEntry.name),
+          "documents",
+          "INFERRED",
+          file.path,
+        ),
+      );
+    }
+  }
+}
+
+function addPackageDependencyEdges(
+  file: ProjectGraphWorkspaceFile,
+  owner: ReturnType<typeof normalizeWorkspacePackage>,
+  packages: readonly ReturnType<typeof normalizeWorkspacePackage>[],
+  edges: Map<string, ProjectGraphEdge>,
+): void {
+  const dependencies = readPackageDependencies(file.text);
+
+  for (const dependency of dependencies) {
+    const targetPackage = packages.find(
+      (item) => `@lo/${item.name.replace(/^lo-/, "")}` === dependency,
+    );
+    if (targetPackage === undefined) {
+      continue;
+    }
+
+    addEdge(
+      edges,
+      createProjectGraphEdge(
+        packageNodeId(owner.name),
+        packageNodeId(targetPackage.name),
+        "depends_on",
+        "EXTRACTED",
+        file.path,
+      ),
+    );
+  }
+}
+
+function readPackageDescription(text?: string): string | undefined {
+  if (text === undefined) {
+    return undefined;
+  }
+
+  try {
+    const parsed = JSON.parse(text) as unknown;
+    if (
+      typeof parsed === "object" &&
+      parsed !== null &&
+      "description" in parsed &&
+      typeof parsed.description === "string"
+    ) {
+      return parsed.description;
+    }
+  } catch {
+    return undefined;
+  }
+
+  return undefined;
+}
+
+function readPackageDependencies(text: string): readonly string[] {
+  try {
+    const parsed = JSON.parse(text) as {
+      readonly dependencies?: Readonly<Record<string, string>>;
+      readonly devDependencies?: Readonly<Record<string, string>>;
+    };
+    return [
+      ...Object.keys(parsed.dependencies ?? {}),
+      ...Object.keys(parsed.devDependencies ?? {}),
+    ];
+  } catch {
+    return [];
+  }
+}
+
+function readMarkdownSummary(text?: string): string | undefined {
+  if (text === undefined) {
+    return undefined;
+  }
+
+  return text
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .find((line) => line.length > 0 && !line.startsWith("#"));
+}
+
+function findFile(
+  files: readonly ProjectGraphWorkspaceFile[],
+  path: string,
+): ProjectGraphWorkspaceFile | undefined {
+  const normalizedPath = normalizePath(path);
+  return files.find((file) => normalizePath(file.path) === normalizedPath);
+}
+
+function findOwningPackage(
+  path: string,
+  packages: readonly ReturnType<typeof normalizeWorkspacePackage>[],
+): ReturnType<typeof normalizeWorkspacePackage> | undefined {
+  const normalizedPath = normalizePath(path);
+  return packages
+    .filter((item) => normalizedPath.startsWith(`${item.path}/`))
+    .sort((left, right) => right.path.length - left.path.length)[0];
+}
+
+function addNode(
+  nodes: Map<string, ProjectGraphNode>,
+  node: ProjectGraphNode,
+): void {
+  if (!nodes.has(node.id)) {
+    nodes.set(node.id, node);
+  }
+}
+
+function addEdge(
+  edges: Map<string, ProjectGraphEdge>,
+  edge: ProjectGraphEdge,
+): void {
+  edges.set(`${edge.from}->${edge.kind}->${edge.to}`, edge);
+}
+
+function packageNodeId(name: string): string {
+  return `package:${name}`;
+}
+
+function documentNodeId(path: string): string {
+  return `doc:${normalizePath(path)}`;
+}
+
+function reportNodeId(path: string): string {
+  return `report:${normalizePath(path)}`;
+}
+
+function normalizePath(path: string): string {
+  return path.replace(/\\/g, "/").replace(/^\.\//, "");
 }

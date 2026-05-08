@@ -4,6 +4,7 @@ import { describe, it } from "node:test";
 import {
   createDocumentNode,
   createPackageNode,
+  createWorkspaceProjectGraph,
   createProjectGraphEdge,
   createProjectGraphReport,
   defineProjectGraphBackendPolicy,
@@ -141,5 +142,67 @@ describe("lo-project-graph contracts", () => {
       diagnostics[0]?.code,
       "LO_PROJECT_GRAPH_GIT_BACKEND_REF_REQUIRED",
     );
+  });
+
+  it("builds a workspace graph from package files and exported contracts", () => {
+    const workspaceGraph = createWorkspaceProjectGraph({
+      workspace: {
+        name: "LO-test",
+        packages: [
+          { path: "packages/lo-security" },
+          { path: "packages/lo-project-graph" },
+        ],
+        docs: {
+          security: "docs/SECURITY.md",
+        },
+      },
+      generatedAt: "2026-05-08T00:00:00.000Z",
+      files: [
+        {
+          path: "packages/lo-security/package.json",
+          kind: "json",
+          text: JSON.stringify({
+            name: "@lo/security",
+            description: "Reusable security primitives.",
+          }),
+        },
+        {
+          path: "packages/lo-security/README.md",
+          kind: "markdown",
+          text: "# LO Security\n\nReusable security primitives.",
+        },
+        {
+          path: "packages/lo-security/src/index.ts",
+          kind: "typescript",
+          text: "export interface SecureStringReference {}\nexport function redactText() {}",
+        },
+        {
+          path: "docs/SECURITY.md",
+          kind: "markdown",
+          text: "Security docs mention packages/lo-security and lo-project-graph.",
+        },
+      ],
+    });
+
+    assert.equal(
+      workspaceGraph.nodes.some((node) => node.id === "package:lo-security"),
+      true,
+    );
+    assert.equal(
+      workspaceGraph.nodes.some(
+        (node) => node.id === "type:lo-security:SecureStringReference",
+      ),
+      true,
+    );
+    assert.equal(
+      workspaceGraph.edges.some(
+        (edge) =>
+          edge.from === "package:lo-security" &&
+          edge.to === "type:lo-security:SecureStringReference" &&
+          edge.kind === "provides",
+      ),
+      true,
+    );
+    assert.equal(validateProjectGraph(workspaceGraph).length, 0);
   });
 });
