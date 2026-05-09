@@ -58,6 +58,7 @@ packages/lo-reports
   shared report metadata
   shared diagnostics
   report schema contracts
+  processing report contracts
   report writer contracts
 
 packages/lo-logic
@@ -288,6 +289,12 @@ Security primitive changes
 Runtime execution changes
   update packages/lo-runtime first
   update lo-core docs only if language runtime contracts change
+
+Resilient flow or controlled recovery changes
+  update docs/RESILIENT_FLOWS.md first for workspace-level policy
+  update packages/lo-runtime first for supervision, retry and checkpoint behavior
+  update packages/lo-reports first for processing report shape changes
+  update lo-core docs only if resilient/recover syntax changes
 
 Compiler pipeline changes
   update packages/lo-compiler first

@@ -4,6 +4,7 @@ import { describe, it } from "node:test";
 import {
   createAiGuideReport,
   createBuildReport,
+  createProcessingReport,
   createReportDiagnostic,
   createReportMetadata,
   createSecurityReport,
@@ -112,6 +113,36 @@ describe("lo-reports contracts", () => {
     assert.equal(securityReport.redactedSecrets, 2);
     assert.equal(targetReport.fallbackUsed, true);
     assert.equal(aiGuideReport.sections[0]?.title, "Packages");
+  });
+
+  it("creates processing reports for resilient batch flows", () => {
+    const report = createProcessingReport({
+      metadata: createReportMetadata({
+        ...metadata,
+        kind: "processing",
+        name: "Import customers report",
+      }),
+      flow: "importCustomers",
+      totalItems: 10000,
+      successfulItems: 9972,
+      failedItems: 28,
+      retriedItems: 11,
+      quarantinedItems: 28,
+      failureTypes: [
+        {
+          errorType: "ValidationError",
+          count: 18,
+          retryable: false,
+          action: "quarantine",
+        },
+      ],
+    });
+
+    assert.equal(report.kind, "processing");
+    assert.equal(report.summary.status, "ok");
+    assert.equal(report.failedItems, 28);
+    assert.equal(report.failureTypes[0]?.action, "quarantine");
+    assert.deepEqual(validateLoReport(report), []);
   });
 
   it("validates report metadata and diagnostic shape", () => {

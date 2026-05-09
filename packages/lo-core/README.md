@@ -56,7 +56,7 @@ packages/lo-config/
   project config, environment modes, config validation, production policy loading
 
 packages/lo-reports/
-  shared report metadata, diagnostics, schemas and writer contracts
+  shared report metadata, diagnostics, processing reports, schemas and writer contracts
 
 packages/lo-logic/
   Tri, Logic<N>, Decision, RiskLevel, Omni logic, truth tables, logic reports

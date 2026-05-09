@@ -20,6 +20,7 @@ security report contracts
 target report contracts
 runtime report contracts
 task report contracts
+processing report contracts
 AI guide report contracts
 report writer interface
 JSON serialization helper
@@ -52,6 +53,8 @@ SecurityReport
 TargetReport
 RuntimeReport
 TaskReport
+ProcessingReport
+BatchResultReport
 AiGuideReport
 CustomReport
 ReportWriter
@@ -59,6 +62,11 @@ ReportWriter
 
 Use these contracts to keep package-specific reports consistent while leaving
 the actual analysis in the owning package.
+
+Processing reports are for resilient/batch flows that can continue after
+item-level failures. They record totals, successes, failures, retries,
+quarantined items, checkpoints and failure-type summaries. They must not be used
+to hide system/runtime integrity failures.
 
 Final rule:
 

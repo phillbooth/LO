@@ -270,6 +270,14 @@ flags, scopes and optional non-secret defaults. Production strictness policy
 checks belong here, while secret protection and redaction remain in
 `lo-security`.
 
+Controlled recovery belongs across language, runtime and report layers.
+`lo-core` may describe resilient flow syntax direction, but `lo-runtime` owns
+supervision, cancellation, retry scheduling and checkpoint/resume hooks.
+`lo-reports` owns processing report shapes for partial success, retries,
+quarantine and failure summaries. `lo-app-kernel` should still prefer
+transactions, rollback, idempotency and hold-for-review for security-sensitive
+API workflows.
+
 `lo-app-kernel` should not be renamed to `lo-runtime`. A future `lo-runtime`
 package should execute compiled or checked LO code. The app kernel should
 remain the secure application/API boundary that controls validation, auth,

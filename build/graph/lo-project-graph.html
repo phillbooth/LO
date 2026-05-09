@@ -7,7 +7,7 @@
 </head>
 <body>
 <h1>LO Project Graph</h1>
-<p>821 nodes, 1494 relationships.</p>
+<p>827 nodes, 1506 relationships.</p>
 <h2>Nodes</h2>
 <ul><li><strong>lo-core</strong> <span>Package</span></li>
 <li><strong>lo-compiler</strong> <span>Package</span></li>
@@ -56,6 +56,7 @@
 <li><strong>PROJECT_GRAPH.md</strong> <span>Document</span></li>
 <li><strong>README.md</strong> <span>Document</span></li>
 <li><strong>REQUIREMENTS.md</strong> <span>Document</span></li>
+<li><strong>RESILIENT_FLOWS.md</strong> <span>Document</span></li>
 <li><strong>SECURITY.md</strong> <span>Document</span></li>
 <li><strong>TASKS.md</strong> <span>Document</span></li>
 <li><strong>testing.md</strong> <span>Document</span></li>
@@ -391,6 +392,10 @@
 <li><strong>TargetReport</strong> <span>Type</span></li>
 <li><strong>RuntimeReport</strong> <span>Type</span></li>
 <li><strong>TaskReport</strong> <span>Type</span></li>
+<li><strong>RecoveryAction</strong> <span>Type</span></li>
+<li><strong>ProcessingFailureSummary</strong> <span>Type</span></li>
+<li><strong>ProcessingReport</strong> <span>Type</span></li>
+<li><strong>BatchResultReport</strong> <span>Type</span></li>
 <li><strong>AiGuideReport</strong> <span>Type</span></li>
 <li><strong>CustomReport</strong> <span>Type</span></li>
 <li><strong>LoReport</strong> <span>Type</span></li>
@@ -409,6 +414,7 @@
 <li><strong>createTargetReport</strong> <span>Flow</span></li>
 <li><strong>createRuntimeReport</strong> <span>Flow</span></li>
 <li><strong>createTaskReport</strong> <span>Flow</span></li>
+<li><strong>createProcessingReport</strong> <span>Flow</span></li>
 <li><strong>createAiGuideReport</strong> <span>Flow</span></li>
 <li><strong>createCustomReport</strong> <span>Flow</span></li>
 <li><strong>validateLoReport</strong> <span>Flow</span></li>
@@ -1002,6 +1008,13 @@
 <li>doc:docs/REQUIREMENTS.md <code>documents</code> package:lo-tasks</li>
 <li>doc:docs/REQUIREMENTS.md <code>documents</code> package:lo-project-graph</li>
 <li>doc:docs/REQUIREMENTS.md <code>documents</code> package:app</li>
+<li>doc:docs/RESILIENT_FLOWS.md <code>documents</code> package:lo-core</li>
+<li>doc:docs/RESILIENT_FLOWS.md <code>documents</code> package:lo-runtime</li>
+<li>doc:docs/RESILIENT_FLOWS.md <code>documents</code> package:lo-security</li>
+<li>doc:docs/RESILIENT_FLOWS.md <code>documents</code> package:lo-reports</li>
+<li>doc:docs/RESILIENT_FLOWS.md <code>documents</code> package:lo-app-kernel</li>
+<li>doc:docs/RESILIENT_FLOWS.md <code>documents</code> package:lo-tasks</li>
+<li>doc:docs/RESILIENT_FLOWS.md <code>documents</code> package:app</li>
 <li>doc:docs/SECURITY.md <code>documents</code> package:lo-lowbit-ai</li>
 <li>doc:docs/SECURITY.md <code>documents</code> package:app</li>
 <li>doc:docs/TASKS.md <code>documents</code> package:lo-core</li>
@@ -1323,13 +1336,6 @@
 <li>doc:packages/lo-core/docs/package-boundaries.md <code>documents</code> package:lo-lowbit-ai</li>
 <li>doc:packages/lo-core/docs/package-boundaries.md <code>documents</code> package:lo-agent</li>
 <li>doc:packages/lo-core/docs/package-boundaries.md <code>documents</code> package:lo-neural</li>
-<li>doc:packages/lo-core/docs/package-boundaries.md <code>documents</code> package:lo-neuromorphic</li>
-<li>doc:packages/lo-core/docs/package-boundaries.md <code>documents</code> package:lo-photonic</li>
-<li>doc:packages/lo-core/docs/package-boundaries.md <code>documents</code> package:lo-target-cpu</li>
-<li>doc:packages/lo-core/docs/package-boundaries.md <code>documents</code> package:lo-cpu-kernels</li>
-<li>doc:packages/lo-core/docs/package-boundaries.md <code>documents</code> package:lo-target-binary</li>
-<li>doc:packages/lo-core/docs/package-boundaries.md <code>documents</code> package:lo-target-wasm</li>
-<li>doc:packages/lo-core/docs/package-boundaries.md <code>documents</code> package:lo-target-gpu</li>
-<li>doc:packages/lo-core/docs/package-boundaries.md <code>documents</code> package:lo-target-ai-accelerator</li></ul>
+<li>doc:packages/lo-core/docs/package-boundaries.md <code>documents</code> package:lo-neuromorphic</li></ul>
 </body>
 </html>

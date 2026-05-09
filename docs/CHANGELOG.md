@@ -94,6 +94,10 @@ All notable changes to this app should be documented here.
 - Added `packages/lo-agent-parallel-compute.md` documenting parallel AI agents,
   CPU/GPU compute separation, supervised task groups, target fallback and agent
   safety rules.
+- Added `docs/RESILIENT_FLOWS.md` documenting controlled recovery, resilient
+  flows, retries, quarantine, checkpoints, memory/system failure policy and
+  partial success reporting.
+- Added `lo-reports` processing report contracts for resilient/batch flows.
 
 ### Changed
 

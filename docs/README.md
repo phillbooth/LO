@@ -21,6 +21,8 @@ These files describe the app being built, not the LO language itself.
 - `LOWBIT_AI_BACKENDS.md` - low-bit AI backend architecture note
 - `NEURAL_ACCELERATOR_PACKAGES.md` - neural, neuromorphic and AI accelerator package split
 - `PROJECT_GRAPH.md` - project knowledge graph tooling note
+- `RESILIENT_FLOWS.md` - controlled recovery, resilient flows and partial
+  success reporting
 
 ## Package-Level Architecture Notes
 

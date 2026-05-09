@@ -25,6 +25,8 @@ must not be treated as implemented app functionality.
   not by making neural networks part of normal app syntax.
 - Support parallel AI agents only as supervised, bounded, permissioned,
   cancelable and reportable workloads.
+- Support controlled recovery for batch/data flows while stopping safely on
+  unsafe system or runtime integrity failures.
 - Give AI coding tools enough generated context to understand package ownership
   without replacing compiler, runtime, security or test checks.
 - Provide safe task automation with explicit effects, permissions and reports.
@@ -277,6 +279,25 @@ The app package must remain deliberately small until a product domain is chosen.
 - Shared report contracts must include common metadata, generator metadata,
   diagnostic summaries and typed build, security, target, runtime, task and AI
   guide report shapes.
+- Shared report contracts must include processing report shapes for resilient
+  flows, partial success, retries, quarantined items and failure summaries.
+
+## Resilient Flow Requirements
+
+- `resilient flow` must mean controlled recovery, not silent error ignoring.
+- Item-level failures may continue only when the flow declares an explicit
+  recovery policy.
+- System/runtime failures such as memory corruption, unsafe native failure or
+  runtime integrity failure must stop the affected flow or restart safely under
+  supervision.
+- Recoverable item failures must be classified, recorded and reported.
+- Retry must apply only to errors marked retryable.
+- Quarantined items must be retained safely for review rather than discarded.
+- Long-running resilient flows should support checkpoint and resume where safe.
+- Security-sensitive workflows should fail fast or use transactions, rollback,
+  idempotency and hold-for-review policy instead of continuing.
+- Recovery reports must include total, success, failed, retried, quarantined,
+  stopped and failure-type summary fields.
 
 ## AI and Low-Bit Backend Requirements
 

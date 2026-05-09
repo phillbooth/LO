@@ -14,6 +14,7 @@
 [x] Define target report contract
 [x] Define runtime report contract
 [x] Define task report contract
+[x] Define processing report contract
 [x] Define AI guide report contract
 [x] Add examples
 [x] Add tests

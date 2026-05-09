@@ -8,6 +8,7 @@ export type ReportKind =
   | "target"
   | "runtime"
   | "task"
+  | "processing"
   | "ai-guide"
   | "config"
   | "compiler"
@@ -101,6 +102,47 @@ export interface TaskReport extends LoReportBase {
   readonly changedFiles: readonly string[];
 }
 
+export type RecoveryAction =
+  | "stop"
+  | "continue"
+  | "retry"
+  | "quarantine"
+  | "checkpoint"
+  | "rollback"
+  | "resume"
+  | "hold_for_review";
+
+export interface ProcessingFailureSummary {
+  readonly errorType: string;
+  readonly count: number;
+  readonly retryable: boolean;
+  readonly action: RecoveryAction;
+}
+
+export interface ProcessingReport extends LoReportBase {
+  readonly kind: "processing";
+  readonly flow: string;
+  readonly totalItems: number;
+  readonly successfulItems: number;
+  readonly failedItems: number;
+  readonly retriedItems: number;
+  readonly quarantinedItems: number;
+  readonly stopped: boolean;
+  readonly checkpoint?: string;
+  readonly failureTypes: readonly ProcessingFailureSummary[];
+}
+
+export interface BatchResultReport<TItem = unknown> {
+  readonly successful: readonly TItem[];
+  readonly failed: readonly {
+    readonly itemId?: string;
+    readonly errorType: string;
+    readonly message: string;
+    readonly action: RecoveryAction;
+  }[];
+  readonly report: ProcessingReport;
+}
+
 export interface AiGuideReport extends LoReportBase {
   readonly kind: "ai-guide";
   readonly sections: readonly AiGuideSection[];
@@ -118,6 +160,7 @@ export type LoReport =
   | TargetReport
   | RuntimeReport
   | TaskReport
+  | ProcessingReport
   | AiGuideReport
   | CustomReport;
 
@@ -330,6 +373,35 @@ export function createTaskReport(input: {
     dryRun: input.dryRun ?? false,
     effects: input.effects ?? [],
     changedFiles: input.changedFiles ?? [],
+  };
+}
+
+export function createProcessingReport(input: {
+  readonly metadata: ReportMetadata;
+  readonly diagnostics?: readonly ReportDiagnostic[];
+  readonly flow: string;
+  readonly totalItems: number;
+  readonly successfulItems: number;
+  readonly failedItems: number;
+  readonly retriedItems?: number;
+  readonly quarantinedItems?: number;
+  readonly stopped?: boolean;
+  readonly checkpoint?: string;
+  readonly failureTypes?: readonly ProcessingFailureSummary[];
+}): ProcessingReport {
+  return {
+    kind: "processing",
+    metadata: normalizeMetadataKind(input.metadata, "processing"),
+    ...baseReportFields(input.diagnostics ?? []),
+    flow: input.flow,
+    totalItems: input.totalItems,
+    successfulItems: input.successfulItems,
+    failedItems: input.failedItems,
+    retriedItems: input.retriedItems ?? 0,
+    quarantinedItems: input.quarantinedItems ?? 0,
+    stopped: input.stopped ?? false,
+    ...(input.checkpoint === undefined ? {} : { checkpoint: input.checkpoint }),
+    failureTypes: input.failureTypes ?? [],
   };
 }
 

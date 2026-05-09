@@ -94,6 +94,7 @@
 
 - [ ] Define `lo-compiler` compiler pipeline contracts
 - [ ] Define `lo-runtime` execution contracts
+- [x] Define resilient flow controlled recovery and processing report direction
 - [x] Define `lo-security` primitives, redaction and permission models
 - [x] Define `lo-config` project config and environment mode contracts
 - [x] Define `lo-reports` shared report schemas
