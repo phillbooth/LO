@@ -400,6 +400,6 @@ Provides:
 
 Grouped LO finance package contracts for financial maths, market data, FIX, audit, risk and pricing planning.
 
-## app
+## lo-example-app
 
-`packages/app` is the bespoke application package for this workspace.
+`packages-lo/lo-example-app` is the bespoke application package for this workspace.

@@ -5,9 +5,8 @@
 This document describes the proposed split between normal app/vendor packages
 and reusable LO packages.
 
-The current beta workspace still keeps most packages under `packages/`, but the
-intended direction is to let applications separate normal ecosystem packages
-from LO language/runtime packages.
+The current beta workspace has moved LO packages under `packages-lo/`. The
+`packages/` directory is reserved for normal app/vendor package space.
 
 ## Proposed App Layout
 
@@ -26,7 +25,8 @@ my-lo-app/
     |-- lo-compiler/
     |-- lo-runtime/
     |-- lo-security/
-    `-- lo-finance/
+    |-- lo-finance/
+    `-- lo-example-app/
 ```
 
 ## Package Responsibilities
@@ -54,8 +54,9 @@ commit when it contains no secrets.
 `packages/` should be for normal app/vendor packages used by the host
 ecosystem.
 
-`packages-lo/` should be for LO packages. It may later be a Git submodule or
-standalone nested repository, but that must be intentional.
+`packages-lo/` is for LO packages. It may later be a Git submodule or
+standalone nested repository, but that must be intentional. In this beta repo it
+also contains `lo-example-app/`, a clearly named example/template app package.
 
 ## Production Resolution Rule
 
@@ -74,9 +75,8 @@ Development and staging packages should be excluded unless explicitly selected.
 
 ## Migration Rule
 
-Do not move all current `packages/lo-*` directories into `packages-lo/` until
-the manifest, lockfile, graph scanner and package resolver all understand the
-split.
+Do not add root `package-lo.json` or `lo.lock.json` as decorative files. Add
+them only when their schemas and resolver behaviour are documented and tested.
 
 Current beta work may add new experimental LO packages under `packages-lo/` as
 long as documentation states their status clearly.

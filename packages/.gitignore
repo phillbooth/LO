@@ -1,6 +1,0 @@
-.env
-build/
-dist/
-node_modules/
-logs/
-*.log

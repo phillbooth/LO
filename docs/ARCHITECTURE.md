@@ -4,36 +4,36 @@
 
 This workspace separates the LO language core from the bespoke app that uses it.
 Language documentation, compiler notes, examples and schemas live in
-`packages/lo-core/`. Compiler pipeline contracts live in
-`packages/lo-compiler/`. Runtime execution contracts live in
-`packages/lo-runtime/`. Security primitives live in `packages/lo-security/`.
-Configuration and shared reports live in `packages/lo-config/` and
-`packages/lo-reports/`. Multi-state logic concepts live in `packages/lo-logic/`.
-Vector concepts live in `packages/lo-vector/`. Compute planning concepts live in
-`packages/lo-compute/`. Generic AI inference contracts live in
-`packages/lo-ai/`, and low-bit/ternary AI inference support lives in
-`packages/lo-lowbit-ai/`. Supervised AI agent contracts live in
-`packages/lo-agent/`. Neural-network workload contracts live in
-`packages/lo-neural/`, and neuromorphic spike/event contracts live in
-`packages/lo-neuromorphic/`. BitNet is one optional backend for low-bit AI.
+`packages-lo/lo-core/`. Compiler pipeline contracts live in
+`packages-lo/lo-compiler/`. Runtime execution contracts live in
+`packages-lo/lo-runtime/`. Security primitives live in `packages-lo/lo-security/`.
+Configuration and shared reports live in `packages-lo/lo-config/` and
+`packages-lo/lo-reports/`. Multi-state logic concepts live in `packages-lo/lo-logic/`.
+Vector concepts live in `packages-lo/lo-vector/`. Compute planning concepts live in
+`packages-lo/lo-compute/`. Generic AI inference contracts live in
+`packages-lo/lo-ai/`, and low-bit/ternary AI inference support lives in
+`packages-lo/lo-lowbit-ai/`. Supervised AI agent contracts live in
+`packages-lo/lo-agent/`. Neural-network workload contracts live in
+`packages-lo/lo-neural/`, and neuromorphic spike/event contracts live in
+`packages-lo/lo-neuromorphic/`. BitNet is one optional backend for low-bit AI.
 Photonic and wavelength concepts live in
-`packages/lo-photonic/`. CPU target planning lives in
-`packages/lo-target-cpu/`, optimized CPU kernel contracts live in
-`packages/lo-cpu-kernels/`, and binary/native target planning lives in
-`packages/lo-target-binary/`, WebAssembly target planning lives in
-`packages/lo-target-wasm/`, GPU target planning lives in
-`packages/lo-target-gpu/`, AI accelerator target planning lives in
-`packages/lo-target-ai-accelerator/` with passive backend profiles for devices
+`packages-lo/lo-photonic/`. CPU target planning lives in
+`packages-lo/lo-target-cpu/`, optimized CPU kernel contracts live in
+`packages-lo/lo-cpu-kernels/`, and binary/native target planning lives in
+`packages-lo/lo-target-binary/`, WebAssembly target planning lives in
+`packages-lo/lo-target-wasm/`, GPU target planning lives in
+`packages-lo/lo-target-gpu/`, AI accelerator target planning lives in
+`packages-lo/lo-target-ai-accelerator/` with passive backend profiles for devices
 such as Intel Gaudi 3, and photonic target backend planning lives in
-`packages/lo-target-photonic/`, including optical I/O interconnect planning as a
+`packages-lo/lo-target-photonic/`, including optical I/O interconnect planning as a
 data-movement target. The
-optional Secure App Kernel design lives in `packages/lo-app-kernel/`. The
-built-in HTTP API server package lives in `packages/lo-api-server/`. Developer command
-tooling lives in `packages/lo-cli/`, and safe project automation lives in
-`packages/lo-tasks/`. Development benchmark diagnostics live in
-`packages/lo-benchmark/`. Project knowledge graph tooling lives in
-`packages/lo-project-graph/`. App source and build configuration live in
-`packages/app/`. Beta finance package planning lives in
+optional Secure App Kernel design lives in `packages-lo/lo-app-kernel/`. The
+built-in HTTP API server package lives in `packages-lo/lo-api-server/`. Developer command
+tooling lives in `packages-lo/lo-cli/`, and safe project automation lives in
+`packages-lo/lo-tasks/`. Development benchmark diagnostics live in
+`packages-lo/lo-benchmark/`. Project knowledge graph tooling lives in
+`packages-lo/lo-project-graph/`. App source and build configuration live in
+`packages-lo/lo-example-app/`. Beta finance package planning lives in
 `packages-lo/lo-finance/`. App planning and operational documentation live in `docs/`. A
 future development-only package collection may live outside the production
 package tree as `packages-lo/lo-developer/`; it should be used for staging,
@@ -47,7 +47,8 @@ Current single-repository structure:
 ```text
 LO-app/
 |-- docs/
-|-- packages/
+|-- packages/               # normal app/vendor package space
+|-- packages-lo/
 |   |-- lo-core/
 |   |-- lo-compiler/
 |   |-- lo-runtime/
@@ -76,10 +77,9 @@ LO-app/
 |   |-- lo-tasks/
 |   |-- lo-benchmark/
 |   |-- lo-project-graph/
-|   `-- app/
-|-- packages-lo/
-|   |-- lo-developer/
-|   `-- lo-finance/
+|   |-- lo-finance/
+|   |-- lo-example-app/
+|   `-- lo-developer/
 `-- tools/
 ```
 
@@ -89,6 +89,8 @@ Future split-repository structure:
 light-framework/
 |-- .git
 |-- packages/
+|   `-- normal app/vendor packages
+|-- packages-lo/
 |   |-- .git
 |   |-- lo-core/
 |   |-- lo-compiler/
@@ -117,18 +119,18 @@ light-framework/
 |   |-- lo-cli/
 |   |-- lo-tasks/
 |   |-- lo-benchmark/
-|   `-- lo-project-graph/
+|   |-- lo-project-graph/
+|   |-- lo-finance/
+|   `-- lo-example-app/
 |-- app/
-|-- packages-lo/
-|   |-- lo-developer/
-|   `-- lo-finance/
 `-- framework files
 ```
 
-In the future structure, `packages/` is a reusable LO package repository that
+In the current and future structure, `packages-lo/` is the reusable LO package repository that
 can be imported by multiple frameworks. It should be mounted intentionally, for
 example as a Git submodule or standalone nested repository. The framework root
-remains its own repository.
+remains its own repository. `packages/` is reserved for normal app/vendor
+packages from the host ecosystem.
 
 `packages-lo/lo-developer/` is a proposed separate developer-package repository
 or optional mount. It must not be required by production runtime installs. It
@@ -374,16 +376,16 @@ idempotency, limits, jobs and runtime reports.
 The current template keeps all files in one root Git repository while the
 package boundaries are still being shaped.
 
-Later, split reusable LO packages into their own `packages/` repository:
+Later, split reusable LO packages into their own `packages-lo/` repository:
 
 ```text
 light-framework/.git
-light-framework/packages/.git
+light-framework/packages-lo/.git
 ```
 
 This is appropriate when the same packages need to be imported into different
 framework repositories. At that point, the root framework repository should
-treat `packages/` as an external dependency, not as ordinary tracked child
+treat `packages-lo/` as an external dependency, not as ordinary tracked child
 files.
 
 ## Checked Run Smoke Tests
@@ -392,12 +394,12 @@ The framework layer can be exercised without compiling by running LO core
 checked Run Mode against `.lo` test fixtures.
 
 ```text
-packages/lo-app-kernel/tests/
+packages-lo/lo-app-kernel/tests/
 `-- hello-world.lo
 ```
 
 The current smoke test runs through the LO core prototype:
 
 ```bash
-npm.cmd --prefix packages/lo-app-kernel run test:hello
+npm.cmd --prefix packages-lo/lo-app-kernel run test:hello
 ```

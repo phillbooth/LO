@@ -6,6 +6,11 @@ All notable changes to this app should be documented here.
 
 ### Added
 
+- Documented the completed move of LO packages from `packages/` to
+  `packages-lo/`, with `packages/` reserved for normal app/vendor package
+  space.
+- Added `docs/PACKAGE_NAMING.md` with naming prefix rules, staged rename
+  candidates and future `lo-io-*` package guidance.
 - Documented the current workspace as a beta prototype rather than a stable
   release.
 - Documented repository-maintained structure as authoritative over generated
@@ -18,42 +23,42 @@ All notable changes to this app should be documented here.
 - Added `docs/FINANCE_PACKAGES.md` and `packages-lo/lo-finance/` as a grouped
   beta finance package area covering finance maths, market data, FIX, audit,
   risk, pricing and desktop interoperability boundaries.
-- Added `packages/lo-core/docs/lo-vs-fsharp.md` to position LO honestly against
+- Added `packages-lo/lo-core/docs/lo-vs-fsharp.md` to position LO honestly against
   F# as a beta, security-first, AI-readable and target-aware backend language
   concept rather than a production .NET competitor.
 - Initial documentation structure.
-- Added `packages/lo-app-kernel/` as the optional partial framework
+- Added `packages-lo/lo-app-kernel/` as the optional partial framework
   layer for secure runtime boundaries.
 - Added a checked Run Mode hello-world test fixture for the app kernel package.
 - Added the LO logic, compute type and secure runtime future-support proposal.
 - Removed active legacy extension warning comments from LO core documentation.
-- Added `packages/lo-api-server/` documentation as the built-in HTTP API
+- Added `packages-lo/lo-api-server/` documentation as the built-in HTTP API
   serving layer for LO App Kernel.
-- Added `packages/lo-cli/` as the LO developer command-line package scaffold.
-- Added `packages/lo-tasks/` as the safe typed project automation package
+- Added `packages-lo/lo-cli/` as the LO developer command-line package scaffold.
+- Added `packages-lo/lo-tasks/` as the safe typed project automation package
   scaffold.
-- Added `packages/lo-logic/` for `Tri`, `Logic<N>` and future Omni logic.
-- Added `packages/lo-photonic/` for photonic and wavelength hardware concepts.
-- Added `packages/lo-vector/` for vector value, lane and operation concepts.
-- Added `packages/lo-compute/` for compute planning and target selection
+- Added `packages-lo/lo-logic/` for `Tri`, `Logic<N>` and future Omni logic.
+- Added `packages-lo/lo-photonic/` for photonic and wavelength hardware concepts.
+- Added `packages-lo/lo-vector/` for vector value, lane and operation concepts.
+- Added `packages-lo/lo-compute/` for compute planning and target selection
   concepts.
-- Added `packages/lo-target-binary/` for binary/native target planning.
-- Added `packages/lo-target-wasm/` for WebAssembly target planning.
-- Added `packages/lo-target-gpu/` for GPU target planning.
-- Added `packages/lo-target-photonic/` for photonic backend target planning.
-- Added `packages/lo-compiler/` for compiler pipeline contracts.
-- Added `packages/lo-runtime/` for checked and compiled execution contracts.
-- Added `packages/lo-security/` for reusable security primitives and report
+- Added `packages-lo/lo-target-binary/` for binary/native target planning.
+- Added `packages-lo/lo-target-wasm/` for WebAssembly target planning.
+- Added `packages-lo/lo-target-gpu/` for GPU target planning.
+- Added `packages-lo/lo-target-photonic/` for photonic backend target planning.
+- Added `packages-lo/lo-compiler/` for compiler pipeline contracts.
+- Added `packages-lo/lo-runtime/` for checked and compiled execution contracts.
+- Added `packages-lo/lo-security/` for reusable security primitives and report
   contracts.
-- Added `packages/lo-config/` for project configuration and environment mode
+- Added `packages-lo/lo-config/` for project configuration and environment mode
   contracts.
-- Added `packages/lo-reports/` for shared report schemas and report-writing
+- Added `packages-lo/lo-reports/` for shared report schemas and report-writing
   contracts.
-- Added TODO documents for `packages/lo-api-server/` and
-  `packages/lo-app-kernel/`.
-- Added README and TODO documents for `packages/app/`.
+- Added TODO documents for `packages-lo/lo-api-server/` and
+  `packages-lo/lo-app-kernel/`.
+- Added README and TODO documents for `packages-lo/lo-example-app/`.
 - Added CLI and task runner requirements in
-  `packages/lo-cli-and-lo-tasks-requirements.md`.
+  `packages-lo/lo-cli-and-lo-tasks-requirements.md`.
 - Added `lo-config` project config parsing, environment mode loading,
   production strictness policy, safe environment variable references, runtime
   handoff contracts, examples and tests.
@@ -63,17 +68,17 @@ All notable changes to this app should be documented here.
 - Added `lo-security` SecureString references, redaction helpers, permission
   decisions, safe token/cookie/header references, crypto policy validation,
   security reports, examples and tests.
-- Added `packages/lo-ai/` for generic AI inference contracts, safety policy and
+- Added `packages-lo/lo-ai/` for generic AI inference contracts, safety policy and
   AI inference reports.
-- Added `packages/lo-lowbit-ai/` for low-bit and ternary AI inference contracts,
+- Added `packages-lo/lo-lowbit-ai/` for low-bit and ternary AI inference contracts,
   with BitNet represented as an optional backend.
-- Added `packages/lo-target-cpu/` for CPU capability, fallback and execution
+- Added `packages-lo/lo-target-cpu/` for CPU capability, fallback and execution
   planning contracts.
-- Added `packages/lo-cpu-kernels/` for optimized CPU kernel contracts.
+- Added `packages-lo/lo-cpu-kernels/` for optimized CPU kernel contracts.
 - Added a low-bit AI backend architecture note.
-- Added `packages/lo-project-graph/` for project knowledge graph contracts,
+- Added `packages-lo/lo-project-graph/` for project knowledge graph contracts,
   graph scan policy, output manifests and AI assistant map support.
-- Added local `node packages\lo-cli\dist\index.js graph --out build\graph`
+- Added local `node packages-lo\lo-cli\dist\index.js graph --out build\graph`
   run instructions for project graph generation.
 - Added AI-facing instructions to consult and regenerate `build\graph` project
   graph outputs when graph data is missing or stale.
@@ -94,26 +99,26 @@ All notable changes to this app should be documented here.
 - Reworked `docs/DESIGN.md` from generic UI placeholders into a template and
   developer-experience design guide for docs, tooling, reports and future app
   UX boundaries.
-- Added `packages/lo-neural/` for neural model, layer, inference and training
+- Added `packages-lo/lo-neural/` for neural model, layer, inference and training
   boundary contracts.
-- Added `packages/lo-neuromorphic/` for spike, event-signal and spiking model
+- Added `packages-lo/lo-neuromorphic/` for spike, event-signal and spiking model
   contracts.
-- Added `packages/lo-target-ai-accelerator/` for NPU, TPU and AI-chip target
+- Added `packages-lo/lo-target-ai-accelerator/` for NPU, TPU and AI-chip target
   planning contracts.
 - Added `docs/NEURAL_ACCELERATOR_PACKAGES.md` to document neural,
   neuromorphic, low-bit, AI accelerator and photonic package boundaries.
 - Expanded `lo-vector` with matrix, tensor, shape and numeric element contract
   placeholders.
-- Added `packages/lo-agent/` for supervised AI agent, tool permission, task
+- Added `packages-lo/lo-agent/` for supervised AI agent, tool permission, task
   group, merge policy and report contracts.
-- Added `packages/lo-agent-parallel-compute.md` documenting parallel AI agents,
+- Added `packages-lo/lo-agent-parallel-compute.md` documenting parallel AI agents,
   CPU/GPU compute separation, supervised task groups, target fallback and agent
   safety rules.
 - Added `docs/RESILIENT_FLOWS.md` documenting controlled recovery, resilient
   flows, retries, quarantine, checkpoints, memory/system failure policy and
   partial success reporting.
 - Added `lo-reports` processing report contracts for resilient/batch flows.
-- Added `packages/lo-benchmark/` for LO benchmark and diagnostics contracts,
+- Added `packages-lo/lo-benchmark/` for LO benchmark and diagnostics contracts,
   including light/full modes, target fallback checks, privacy-safe reports and
   optional future sharing payloads.
 - Added a placeholder `lo benchmark` CLI command entry for the future benchmark
@@ -129,14 +134,17 @@ All notable changes to this app should be documented here.
 
 ### Changed
 
-- Updated workspace documentation and configuration to use `packages/lo-core/`
+- Renamed the generic `packages-lo/app/` folder to
+  `packages-lo/lo-example-app/` so the package collection does not contain an
+  ambiguous `app` package name.
+- Updated workspace documentation and configuration to use `packages-lo/lo-core/`
   for the LO language package.
 - Renamed the legacy language install script to `install-lo.sh`.
 - Clarified that LO core is the language/compiler layer, while the Secure App
   Kernel is the optional runtime layer and full frameworks remain separate.
 - Clarified that `lo-api-server` serves HTTP and delegates validation, auth and
   typed execution to `lo-app-kernel`.
-- Documented the future split-repository layout where `packages/` can become
+- Documented the future split-repository layout where `packages-lo/` can become
   its own reusable Git repository imported by multiple frameworks.
 - Added simple `console.log("...")` output support to LO core checked Run Mode.
 - Expanded `lo-compute` target selection contracts with `low_bit_ai`,

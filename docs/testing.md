@@ -11,17 +11,17 @@ artefacts.
 The app-kernel package has checked Run Mode fixtures:
 
 ```text
-packages/lo-app-kernel/tests/hello-world.lo
-packages/lo-app-kernel/tests/vector-function.lo
-packages/lo-app-kernel/tests/sum.lo
-packages/lo-app-kernel/tests/decimal-sum.lo
-packages/lo-app-kernel/tests/json-return.lo
+packages-lo/lo-app-kernel/tests/hello-world.lo
+packages-lo/lo-app-kernel/tests/vector-function.lo
+packages-lo/lo-app-kernel/tests/sum.lo
+packages-lo/lo-app-kernel/tests/decimal-sum.lo
+packages-lo/lo-app-kernel/tests/json-return.lo
 ```
 
 Run all app-kernel fixtures from the workspace root:
 
 ```bash
-npm.cmd --prefix packages/lo-app-kernel test
+npm.cmd --prefix packages-lo/lo-app-kernel test
 ```
 
 Expected output includes:
@@ -46,11 +46,11 @@ json ids: 1,2,3 test: xxx
 ## Test Structure
 
 ```text
-packages/app/tests/
+packages-lo/lo-example-app/tests/
 |-- unit/
 `-- integration/
 
-packages/lo-app-kernel/tests/
+packages-lo/lo-app-kernel/tests/
 |-- hello-world.lo
 |-- vector-function.lo
 |-- sum.lo

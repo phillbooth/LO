@@ -10,17 +10,17 @@ This is a LO application template.
 
 The repository contains:
 
-- LO language/package files in `packages/lo-core/`
+- LO language/package files in `packages-lo/lo-core/`
 - Proposed reusable LO package collection files in `packages-lo/`
-- LO secure runtime kernel design files in `packages/lo-app-kernel/`
-- Bespoke app files in `packages/app/`
+- LO secure runtime kernel design files in `packages-lo/lo-app-kernel/`
+- Bespoke app files in `packages-lo/lo-example-app/`
 - App documentation in `docs/`
 - Helper scripts and generators in `tools/`
 
 ## Important Rules
 
-- Do not place app-specific documentation inside `packages/lo-core/`.
-- Do not place full-framework, CMS, admin UI, ORM or frontend framework design inside `packages/lo-core/`.
+- Do not place app-specific documentation inside `packages-lo/lo-core/`.
+- Do not place full-framework, CMS, admin UI, ORM or frontend framework design inside `packages-lo/lo-core/`.
 - Do not place LO language documentation inside `docs/`.
 - Do not treat `packages-lo/` as production-installed by default; use it for
   explicit LO package collection planning or selected LO domain packages.
@@ -47,15 +47,15 @@ READMEs, package TODOs, package manifests or package source contracts, run from
 the repository root:
 
 ```powershell
-node packages\lo-cli\dist\index.js graph --out build\graph
+node packages-lo\lo-cli\dist\index.js graph --out build\graph
 ```
 
 Use graph query commands when package ownership or relationships are unclear:
 
 ```powershell
-node packages\lo-cli\dist\index.js graph query lo-security --out build\graph
-node packages\lo-cli\dist\index.js graph explain package:lo-security --out build\graph
-node packages\lo-cli\dist\index.js graph path package:lo-project-graph report:project-graph --out build\graph
+node packages-lo\lo-cli\dist\index.js graph query lo-security --out build\graph
+node packages-lo\lo-cli\dist\index.js graph explain package:lo-security --out build\graph
+node packages-lo\lo-cli\dist\index.js graph path package:lo-project-graph report:project-graph --out build\graph
 ```
 
 The project graph is advisory. It helps AI and humans navigate the repository,
@@ -90,7 +90,7 @@ When adding or changing features, update:
 
 ## Package Boundaries
 
-### `packages/lo-core/`
+### `packages-lo/lo-core/`
 
 Use for:
 
@@ -102,7 +102,7 @@ Use for:
 - examples
 - standard library notes
 
-### `packages/lo-app-kernel/`
+### `packages-lo/lo-app-kernel/`
 
 Use for:
 
@@ -123,7 +123,7 @@ Do not use for:
 - mandatory template engines
 - React, Angular or other frontend framework syntax
 
-### `packages/app/`
+### `packages-lo/lo-example-app/`
 
 Use for:
 
@@ -146,7 +146,7 @@ Use for:
 Do not use for:
 
 - normal npm/vendor app packages
-- app-specific source
+- app-specific source, except the current template `lo-example-app/`
 - secrets
 - production-only packages that have not been selected by a LO package profile
 

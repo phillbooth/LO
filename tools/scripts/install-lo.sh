@@ -2,7 +2,7 @@
 
 set -e
 
-LO_DIR="packages/lo-core"
+LO_DIR="packages-lo/lo-core"
 LO_REPO="https://github.com/phillbooth/LO.git"
 
 if [ -d "$LO_DIR/.git" ]; then

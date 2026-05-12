@@ -19,28 +19,28 @@ target packages map planned work to CPU, GPU, AI accelerator or photonic plans.
 ## Package Split
 
 ```text
-packages/lo-vector
+packages-lo/lo-vector
   Vector<T, N>, Matrix<T, R, C>, Tensor<T, Shape>, numeric element contracts
 
-packages/lo-neural
+packages-lo/lo-neural
   neural models, layers, activations, inference, training boundaries
 
-packages/lo-neuromorphic
+packages-lo/lo-neuromorphic
   Spike, SpikeTrain, EventSignal<T>, spiking models
 
-packages/lo-ai
+packages-lo/lo-ai
   generic AI model metadata, safety policy and AI inference reports
 
-packages/lo-lowbit-ai
+packages-lo/lo-lowbit-ai
   low-bit, quantized and ternary AI backend contracts
 
-packages/lo-compute
+packages-lo/lo-compute
   compute auto, target selection and fallback reports
 
-packages/lo-target-ai-accelerator
+packages-lo/lo-target-ai-accelerator
   NPU, TPU, AI-chip and passive accelerator backend profile planning
 
-packages/lo-target-photonic
+packages-lo/lo-target-photonic
   future photonic target planning
 ```
 

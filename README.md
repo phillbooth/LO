@@ -30,7 +30,7 @@ toolchain, package boundaries and documentation contracts are release-ready.
 The mature language introduction lives in:
 
 ```text
-packages/lo-core/README.md
+packages-lo/lo-core/README.md
 ```
 
 The root of this repository is the workspace entry point. Use it to understand
@@ -104,24 +104,24 @@ cd C:\laragon\www\LO
 Generate or refresh the project graph:
 
 ```powershell
-node packages\lo-cli\dist\index.js graph --out build\graph
+node packages-lo\lo-cli\dist\index.js graph --out build\graph
 ```
 
 Inspect task automation with a dry run:
 
 ```powershell
-node packages\lo-cli\dist\index.js task buildApi --file packages\lo-tasks\examples\tasks.lo --dry-run
+node packages-lo\lo-cli\dist\index.js task buildApi --file packages-lo\lo-tasks\examples\tasks.lo --dry-run
 ```
 
 Run the package tests that currently have executable coverage:
 
 ```powershell
-npm.cmd --prefix packages\lo-project-graph test
-npm.cmd --prefix packages\lo-tasks test
-npm.cmd --prefix packages\lo-cli test
+npm.cmd --prefix packages-lo\lo-project-graph test
+npm.cmd --prefix packages-lo\lo-tasks test
+npm.cmd --prefix packages-lo\lo-cli test
 ```
 
-For the prototype LO core compiler, work from `packages/lo-core/` and see that
+For the prototype LO core compiler, work from `packages-lo/lo-core/` and see that
 package README for the supported commands.
 
 ## Project Structure
@@ -134,7 +134,8 @@ LO-app/
 |-- docs/
 |-- build/
 |   `-- graph/
-|-- packages/
+|-- packages/               # normal app/vendor package space
+|-- packages-lo/
 |   |-- lo-core/
 |   |-- lo-compiler/
 |   |-- lo-runtime/
@@ -163,69 +164,68 @@ LO-app/
 |   |-- lo-tasks/
 |   |-- lo-benchmark/
 |   |-- lo-project-graph/
-|   `-- app/
-|-- packages-lo/
-|   |-- lo-developer/        # proposed future dev-only package collection
-|   `-- lo-finance/          # grouped beta finance package contracts
+|   |-- lo-finance/
+|   |-- lo-example-app/
+|   `-- lo-developer/        # proposed future dev-only package collection
 `-- tools/
 ```
 
 ## Package Map
 
-- `packages/lo-core/` - LO language rules, syntax, type system, prototype
+- `packages-lo/lo-core/` - LO language rules, syntax, type system, prototype
   compiler notes, memory safety model, examples and core documentation.
-- `packages/lo-compiler/` - compiler pipeline contracts for lexer, parser, AST,
+- `packages-lo/lo-compiler/` - compiler pipeline contracts for lexer, parser, AST,
   checkers, IR, diagnostics, source maps and compiler reports.
-- `packages/lo-runtime/` - execution contracts for checked or compiled LO code.
-- `packages/lo-security/` - reusable security primitives, redaction,
+- `packages-lo/lo-runtime/` - execution contracts for checked or compiled LO code.
+- `packages-lo/lo-security/` - reusable security primitives, redaction,
   permissions, crypto policy and security reports.
-- `packages/lo-config/` - project configuration, environment mode and production
+- `packages-lo/lo-config/` - project configuration, environment mode and production
   strictness contracts.
-- `packages/lo-reports/` - shared report schemas and report-writing contracts.
-- `packages/lo-logic/` - `Tri`, `Logic<N>`, Decision, RiskLevel and future Omni
+- `packages-lo/lo-reports/` - shared report schemas and report-writing contracts.
+- `packages-lo/lo-logic/` - `Tri`, `Logic<N>`, Decision, RiskLevel and future Omni
   logic concepts.
-- `packages/lo-vector/` - vector, matrix, tensor, lane, dimension and numeric
+- `packages-lo/lo-vector/` - vector, matrix, tensor, lane, dimension and numeric
   operation concepts.
-- `packages/lo-compute/` - compute planning, capabilities, effects, budgets and
+- `packages-lo/lo-compute/` - compute planning, capabilities, effects, budgets and
   target selection.
-- `packages/lo-ai/` - generic AI inference contracts, model metadata, safety
+- `packages-lo/lo-ai/` - generic AI inference contracts, model metadata, safety
   policy and AI reports.
-- `packages/lo-lowbit-ai/` - low-bit and ternary AI inference contracts, with
+- `packages-lo/lo-lowbit-ai/` - low-bit and ternary AI inference contracts, with
   BitNet represented as one optional backend rather than LO syntax.
-- `packages/lo-agent/` - supervised AI agent, tool permission, task group,
+- `packages-lo/lo-agent/` - supervised AI agent, tool permission, task group,
   merge policy and agent report contracts.
-- `packages/lo-neural/` - neural model, layer, inference and training boundary
+- `packages-lo/lo-neural/` - neural model, layer, inference and training boundary
   contracts.
-- `packages/lo-neuromorphic/` - spike, event-signal and spiking model
+- `packages-lo/lo-neuromorphic/` - spike, event-signal and spiking model
   contracts.
-- `packages/lo-photonic/` - photonic and wavelength concepts, simulation and
+- `packages-lo/lo-photonic/` - photonic and wavelength concepts, simulation and
   logic-to-light mapping contracts.
-- `packages/lo-target-cpu/` - CPU capability detection, threading, memory limits
+- `packages-lo/lo-target-cpu/` - CPU capability detection, threading, memory limits
   and fallback planning.
-- `packages/lo-cpu-kernels/` - optimized CPU kernel contracts for vector,
+- `packages-lo/lo-cpu-kernels/` - optimized CPU kernel contracts for vector,
   matrix, low-bit and ternary workloads.
-- `packages/lo-target-binary/` - binary/native target planning and artefact
+- `packages-lo/lo-target-binary/` - binary/native target planning and artefact
   metadata.
-- `packages/lo-target-wasm/` - WebAssembly target planning and module metadata.
-- `packages/lo-target-gpu/` - GPU target planning, kernel mapping and data
+- `packages-lo/lo-target-wasm/` - WebAssembly target planning and module metadata.
+- `packages-lo/lo-target-gpu/` - GPU target planning, kernel mapping and data
   movement reports.
-- `packages/lo-target-ai-accelerator/` - NPU, TPU, AI-chip and passive
+- `packages-lo/lo-target-ai-accelerator/` - NPU, TPU, AI-chip and passive
   accelerator backend profile planning contracts.
-- `packages/lo-target-photonic/` - photonic backend target planning and
+- `packages-lo/lo-target-photonic/` - photonic backend target planning and
   optical I/O interconnect planning that uses `lo-photonic`.
-- `packages/lo-app-kernel/` - optional secure application kernel for typed API
+- `packages-lo/lo-app-kernel/` - optional secure application kernel for typed API
   boundaries, validation, auth, rate limits, jobs and runtime reports.
-- `packages/lo-api-server/` - built-in HTTP API transport that delegates typed
+- `packages-lo/lo-api-server/` - built-in HTTP API transport that delegates typed
   execution and policy decisions to `lo-app-kernel`.
-- `packages/lo-cli/` - developer command tooling for graph, tasks, future check,
+- `packages-lo/lo-cli/` - developer command tooling for graph, tasks, future check,
   build, run, serve, reports, routes and security commands.
-- `packages/lo-tasks/` - safe typed project automation with declared effects,
+- `packages-lo/lo-tasks/` - safe typed project automation with declared effects,
   permissions, dependency planning and reports.
-- `packages/lo-benchmark/` - development diagnostics and benchmark contracts
+- `packages-lo/lo-benchmark/` - development diagnostics and benchmark contracts
   for logic, CPU/GPU/low-bit fallback, privacy-safe reports and comparisons.
-- `packages/lo-project-graph/` - project graph contracts and mapper for package,
+- `packages-lo/lo-project-graph/` - project graph contracts and mapper for package,
   document, policy and report relationships.
-- `packages/app/` - bespoke application source, routes, modules, tests and app
+- `packages-lo/lo-example-app/` - bespoke application source, routes, modules, tests and app
   configuration.
 - `packages-lo/lo-developer/` - proposed future location for staging,
   diagnostics, experiments and development-only packages that should not be
@@ -305,27 +305,32 @@ packages/          normal app/vendor packages
 packages-lo/       LO packages, optionally a nested repository
 ```
 
-The current beta still keeps most LO packages under `packages/`. Do not move
-the existing packages into `packages-lo/` until the manifest, lockfile, graph
-scanner and package resolver understand the split.
+The current beta has moved LO packages under `packages-lo/`. `packages/` is now
+reserved for normal app/vendor package space. `package-lo.json` and
+`lo.lock.json` remain planned files; do not rely on them until the manifest,
+lockfile and package resolver are implemented.
+
+Package naming guidance lives in `docs/PACKAGE_NAMING.md`. The current move
+renamed only the ambiguous app folder to `packages-lo/lo-example-app`; other
+package renames should be staged separately.
 
 ## Current Tooling
 
 The currently implemented root-level CLI paths are:
 
 ```powershell
-node packages\lo-cli\dist\index.js graph --out build\graph
-node packages\lo-cli\dist\index.js graph query lo-security --out build\graph
-node packages\lo-cli\dist\index.js graph explain package:lo-security --out build\graph
-node packages\lo-cli\dist\index.js graph path package:lo-project-graph report:project-graph --out build\graph
+node packages-lo\lo-cli\dist\index.js graph --out build\graph
+node packages-lo\lo-cli\dist\index.js graph query lo-security --out build\graph
+node packages-lo\lo-cli\dist\index.js graph explain package:lo-security --out build\graph
+node packages-lo\lo-cli\dist\index.js graph path package:lo-project-graph report:project-graph --out build\graph
 
-node packages\lo-cli\dist\index.js task --file packages\lo-tasks\examples\tasks.lo
-node packages\lo-cli\dist\index.js task buildApi --file packages\lo-tasks\examples\tasks.lo --dry-run
+node packages-lo\lo-cli\dist\index.js task --file packages-lo\lo-tasks\examples\tasks.lo
+node packages-lo\lo-cli\dist\index.js task buildApi --file packages-lo\lo-tasks\examples\tasks.lo --dry-run
 ```
 
 `lo benchmark` is registered as a future command placeholder. Benchmark modes,
 report shapes and safety rules are documented in
-`packages/lo-benchmark/README.md`; the runnable benchmark runner is still on
+`packages-lo/lo-benchmark/README.md`; the runnable benchmark runner is still on
 the package TODO list.
 
 Once `lo-cli` is installed or linked, the intended shorthand is:
@@ -350,7 +355,7 @@ build/graph/lo-project-graph.html
 If the graph is missing or out of date, regenerate it from the repository root:
 
 ```powershell
-node packages\lo-cli\dist\index.js graph --out build\graph
+node packages-lo\lo-cli\dist\index.js graph --out build\graph
 ```
 
 The graph is navigation tooling only. It does not replace the compiler, tests,
@@ -387,7 +392,7 @@ build/reports/task-report.json
 
 ## Documentation Guide
 
-- Use `packages/lo-core/` for language documentation.
+- Use `packages-lo/lo-core/` for language documentation.
 - Use package READMEs and TODOs for package-specific contracts and work.
 - Use `docs/` for app/workspace requirements, architecture, security,
   deployment, decisions and changelog.
@@ -406,21 +411,23 @@ The intended future split is:
 light-framework/
 |-- .git
 |-- packages/
+|   `-- normal app/vendor packages
+|-- packages-lo/
 |   `-- .git
 `-- app/framework files
 ```
 
-Use that layout only when `packages/` becomes a reusable package collection that
+Use that layout only when `packages-lo/` becomes a reusable LO package collection that
 is imported by different frameworks.
 
 Recommended implementation:
 
 ```text
 light-framework/.git
-packages/.git
+packages-lo/.git
 ```
 
-with `packages/` added to the framework as an intentional Git submodule or
-standalone nested repository. Do not create `packages/.git` accidentally inside
-the current app template, because the parent repository will not track package
-contents in the normal way once `packages/` is its own repository.
+with `packages-lo/` added to the framework as an intentional Git submodule or
+standalone nested repository. Do not create `packages-lo/.git` accidentally
+inside the current app template, because the parent repository will not track
+package contents in the normal way once `packages-lo/` is its own repository.

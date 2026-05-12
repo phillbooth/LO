@@ -15,7 +15,7 @@ Primary references:
 ## Package
 
 ```text
-packages/lo-project-graph
+packages-lo/lo-project-graph
 ```
 
 The package owns graph contracts for:
@@ -87,7 +87,7 @@ Run from the repository root:
 
 ```powershell
 cd C:\laragon\www\LO
-node packages\lo-cli\dist\index.js graph --out build\graph
+node packages-lo\lo-cli\dist\index.js graph --out build\graph
 ```
 
 This writes the graph outputs under `build\graph`. Once `lo-cli` is linked or
@@ -117,9 +117,9 @@ lo graph path lo-api-server lo-security
 Current local Node equivalents:
 
 ```powershell
-node packages\lo-cli\dist\index.js graph query lo-security --out build\graph
-node packages\lo-cli\dist\index.js graph explain package:lo-security --out build\graph
-node packages\lo-cli\dist\index.js graph path package:lo-project-graph report:project-graph --out build\graph
+node packages-lo\lo-cli\dist\index.js graph query lo-security --out build\graph
+node packages-lo\lo-cli\dist\index.js graph explain package:lo-security --out build\graph
+node packages-lo\lo-cli\dist\index.js graph path package:lo-project-graph report:project-graph --out build\graph
 ```
 
 ## Safety Rules
@@ -147,11 +147,11 @@ distinguish source facts from inferred relationships
 
 ## Native Mapper
 
-The first implementation is the LO-native mapper in `packages/lo-project-graph`.
+The first implementation is the LO-native mapper in `packages-lo/lo-project-graph`.
 It can scan workspace package paths and project docs, then map:
 
 ```text
-packages
+workspace package paths from `lo.workspace.json`, including `packages-lo/`
 README/TODO/docs files
 package.json descriptions and dependencies
 TypeScript exported types, interfaces and functions

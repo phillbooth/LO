@@ -1,13 +1,13 @@
 # LO Package Collection
 
-`packages-lo/` is the proposed home for reusable LO packages when the workspace
-is split from ordinary app/vendor packages.
+`packages-lo/` is the home for reusable LO packages in this beta workspace.
+It is split from ordinary app/vendor packages.
 
 Current beta rule:
 
 ```text
-packages/       current mixed workspace packages and app package
-packages-lo/    proposed LO package collection for beta package experiments
+packages/       normal app/vendor package space
+packages-lo/    LO package collection and beta LO package experiments
 ```
 
 The long-term direction is:
@@ -23,8 +23,8 @@ my-lo-app/
 `-- main.lo
 ```
 
-`packages-lo/` may later become its own Git repository or submodule. It should
-not be created as a nested repository accidentally.
+`packages-lo/` may later become its own Git repository or submodule. If a
+`.git` directory is added, it must be intentional and documented.
 
 ## Production Boundary
 
@@ -35,5 +35,8 @@ staging profile.
 
 ## Current Packages
 
+- `lo-example-app/` - minimal example/template app package for this workspace.
 - `lo-finance/` - grouped beta planning package for finance types, FIX,
   market-data, audit, risk, pricing and related finance-package contracts.
+- Core language, compiler, runtime, security, target, tooling and report
+  packages live here as `lo-*` directories.

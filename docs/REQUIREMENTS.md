@@ -8,14 +8,14 @@ the template, package boundaries and developer tooling must provide so a
 bespoke application can be built on top of LO safely.
 
 Product-specific requirements belong in this file once an app domain is chosen.
-Until then, `packages/app/` remains a minimal app area and feature placeholders
+Until then, `packages-lo/lo-example-app/` remains a minimal app area and feature placeholders
 must not be treated as implemented app functionality.
 
 ## Template Goals
 
 - Provide a clear workspace for LO language, compiler/runtime contracts,
   security primitives, tooling packages and bespoke app code.
-- Keep language documentation in `packages/lo-core/` and app/workspace
+- Keep language documentation in `packages-lo/lo-core/` and app/workspace
   documentation in `docs/`.
 - Support CPU-compatible checked execution and deterministic reports as the
   practical baseline.
@@ -35,8 +35,8 @@ must not be treated as implemented app functionality.
 
 | User Type | Description |
 |---|---|
-| App developer | Builds bespoke application source in `packages/app/` using LO packages. |
-| Package maintainer | Evolves reusable LO package contracts under `packages/`. |
+| App developer | Builds bespoke application source in `packages-lo/lo-example-app/` using LO packages. |
+| Package maintainer | Evolves reusable LO package contracts under `packages-lo/`. |
 | Security reviewer | Reviews policy, secret handling, reports and package boundaries. |
 | AI coding assistant | Uses `AGENTS.md` and `build/graph` to navigate the project safely. |
 | Future app user | End user of the bespoke app once a product domain is defined. |
@@ -71,15 +71,15 @@ must not be treated as implemented app functionality.
 
 The app package must remain deliberately small until a product domain is chosen.
 
-- Bespoke app source must live in `packages/app/`.
-- App routes, modules, tests and app configuration must stay in `packages/app/`
+- Bespoke app source must live in `packages-lo/lo-example-app/`.
+- App routes, modules, tests and app configuration must stay in `packages-lo/lo-example-app/`
   or app-specific docs.
 - App-specific requirements must be added to this document before implementing
   product features.
 - App source must use explicit validation, explicit error handling and safe
   configuration references.
-- App features must not be implemented inside `packages/lo-core/`.
-- App features must not turn `packages/lo-app-kernel/` into a full framework,
+- App features must not be implemented inside `packages-lo/lo-core/`.
+- App features must not turn `packages-lo/lo-app-kernel/` into a full framework,
   CMS, admin dashboard, ORM or frontend framework.
 
 ## Non-Functional Requirements
@@ -97,56 +97,56 @@ The app package must remain deliberately small until a product domain is chosen.
 
 ## Workspace Package Requirements
 
-- The LO language core must live in `packages/lo-core/`.
-- Compiler pipeline contracts must live in `packages/lo-compiler/`.
-- Runtime execution contracts must live in `packages/lo-runtime/`.
-- Shared security primitives must live in `packages/lo-security/`.
-- Project configuration contracts must live in `packages/lo-config/`.
-- Shared report contracts must live in `packages/lo-reports/`.
+- The LO language core must live in `packages-lo/lo-core/`.
+- Compiler pipeline contracts must live in `packages-lo/lo-compiler/`.
+- Runtime execution contracts must live in `packages-lo/lo-runtime/`.
+- Shared security primitives must live in `packages-lo/lo-security/`.
+- Project configuration contracts must live in `packages-lo/lo-config/`.
+- Shared report contracts must live in `packages-lo/lo-reports/`.
 - LO multi-state logic concepts such as `Tri`, `Logic<N>` and future Omni logic
-  must live in `packages/lo-logic/`.
+  must live in `packages-lo/lo-logic/`.
 - LO vector value, lane and operation concepts must live in
-  `packages/lo-vector/`.
+  `packages-lo/lo-vector/`.
 - LO compute planning, capability, budget and target selection concepts must
-  live in `packages/lo-compute/`.
+  live in `packages-lo/lo-compute/`.
 - Generic AI inference contracts, model metadata, safety policy and AI reports
-  must live in `packages/lo-ai/`.
+  must live in `packages-lo/lo-ai/`.
 - Low-bit and ternary AI inference contracts must live in
-  `packages/lo-lowbit-ai/`, with BitNet represented only as a backend.
+  `packages-lo/lo-lowbit-ai/`, with BitNet represented only as a backend.
 - Supervised AI agent definitions, tool permissions, task groups, merge
-  policies and reports must live in `packages/lo-agent/`.
+  policies and reports must live in `packages-lo/lo-agent/`.
 - Neural-network model, layer, inference and training boundary contracts must
-  live in `packages/lo-neural/`.
+  live in `packages-lo/lo-neural/`.
 - Neuromorphic spike, event-signal and spiking model contracts must live in
-  `packages/lo-neuromorphic/`.
+  `packages-lo/lo-neuromorphic/`.
 - Photonic and wavelength hardware concepts must live in
-  `packages/lo-photonic/`.
+  `packages-lo/lo-photonic/`.
 - CPU target planning, feature detection and fallback reports must live in
-  `packages/lo-target-cpu/`.
-- Optimized CPU kernel contracts must live in `packages/lo-cpu-kernels/`.
-- Binary/native target planning must live in `packages/lo-target-binary/`.
-- WebAssembly target planning must live in `packages/lo-target-wasm/`.
-- GPU target planning must live in `packages/lo-target-gpu/`.
+  `packages-lo/lo-target-cpu/`.
+- Optimized CPU kernel contracts must live in `packages-lo/lo-cpu-kernels/`.
+- Binary/native target planning must live in `packages-lo/lo-target-binary/`.
+- WebAssembly target planning must live in `packages-lo/lo-target-wasm/`.
+- GPU target planning must live in `packages-lo/lo-target-gpu/`.
 - AI accelerator target planning for NPU, TPU and AI-chip backends must live in
-  `packages/lo-target-ai-accelerator/`.
+  `packages-lo/lo-target-ai-accelerator/`.
 - Photonic backend target planning must live in
-  `packages/lo-target-photonic/`.
-- The optional LO Secure App Kernel must live in `packages/lo-app-kernel/`.
-- The built-in LO HTTP API server must live in `packages/lo-api-server/`.
-- The LO developer CLI must live in `packages/lo-cli/`.
-- Safe LO project automation must live in `packages/lo-tasks/`.
-- LO benchmark and diagnostics tooling must live in `packages/lo-benchmark/`.
-- LO project knowledge graph tooling must live in `packages/lo-project-graph/`.
-- Bespoke app source must live in `packages/app/`.
+  `packages-lo/lo-target-photonic/`.
+- The optional LO Secure App Kernel must live in `packages-lo/lo-app-kernel/`.
+- The built-in LO HTTP API server must live in `packages-lo/lo-api-server/`.
+- The LO developer CLI must live in `packages-lo/lo-cli/`.
+- Safe LO project automation must live in `packages-lo/lo-tasks/`.
+- LO benchmark and diagnostics tooling must live in `packages-lo/lo-benchmark/`.
+- LO project knowledge graph tooling must live in `packages-lo/lo-project-graph/`.
+- Bespoke app source must live in `packages-lo/lo-example-app/`.
 - App documentation must live in `docs/`.
-- Language documentation must stay within `packages/lo-core/`.
-- Full framework features must stay outside `packages/lo-core/` and
-  `packages/lo-app-kernel/`.
+- Language documentation must stay within `packages-lo/lo-core/`.
+- Full framework features must stay outside `packages-lo/lo-core/` and
+  `packages-lo/lo-app-kernel/`.
 - Current development may use one root Git repository while package boundaries
   are still being shaped.
-- Later, `packages/` may become its own Git repository so the LO packages can be
+- Later, `packages-lo/` may become its own Git repository so the LO packages can be
   imported into different frameworks.
-- If `packages/` has its own `.git`, it must be added intentionally as a
+- If `packages-lo/` has its own `.git`, it must be added intentionally as a
   submodule or standalone nested repository, and the framework root must treat
   it as an external dependency.
 - A future `packages-lo/lo-developer/` tree may be used for development-only
@@ -158,8 +158,15 @@ The app package must remain deliberately small until a product domain is chosen.
   must stay separate from production runtime package manifests.
 - `packages-lo/lo-finance/` may be used as a grouped beta finance package area
   before finance contracts split into smaller packages.
-- Finance package work must stay outside `packages/lo-core/` unless it is a
+- Finance package work must stay outside `packages-lo/lo-core/` unless it is a
   general language rule needed by all domains.
+- Package naming must follow `docs/PACKAGE_NAMING.md`: `lo-target-*` for where
+  code runs or compiles to, `lo-io-*` for how data moves, `lo-ai-*` for
+  AI-specific workloads, `lo-kernel-*` for low-level execution kernels and
+  `lo-app-*` for runtime/application framework layers.
+- `lo-target-binary` and `lo-target-photonic` must not be renamed to I/O
+  package names; binary and photonic I/O should be added later as separate
+  `lo-io-*` packages.
 
 ## Finance Package Requirements
 

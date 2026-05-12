@@ -2,7 +2,7 @@
 
 ## Phase 1: Planning
 
-- [x] Update workspace documentation for the `packages/lo-core/` language package move
+- [x] Update workspace documentation for the `packages-lo/lo-core/` language package move
 - [x] Mark the current workspace version as beta rather than a stable release
 - [x] Document that maintained repo structure takes precedence over generated
   document suggestions
@@ -10,9 +10,9 @@
   `packages-lo/` package split
 - [x] Add grouped `packages-lo/lo-finance` beta package scaffold
 - [x] Add F# comparison and LO positioning guidance
-- [x] Split partial framework guidance into `packages/lo-app-kernel/`
+- [x] Split partial framework guidance into `packages-lo/lo-app-kernel/`
 - [x] Add LO logic, compute type and secure runtime future-support proposal
-- [x] Add `packages/lo-api-server/` HTTP API serving package documentation
+- [x] Add `packages-lo/lo-api-server/` HTTP API serving package documentation
 - [x] Add Rust financial markets design note
 - [x] Add optical I/O and Intel Silicon Photonics design note
 - [x] Add passive AI accelerator and Intel Gaudi profile design note
@@ -23,7 +23,7 @@
 
 ## Phase 2: App Setup
 
-- [ ] Create app entry files in `packages/app/`
+- [ ] Create app entry files in `packages-lo/lo-example-app/`
 - [ ] Add app config
 - [ ] Add environment schema
 - [ ] Add basic route/module structure
@@ -52,7 +52,7 @@
 - [x] Add package scaffold for `lo-project-graph`
 - [x] Add package scaffold for `lo-benchmark`
 - [x] Add TODO documents for `lo-api-server` and `lo-app-kernel`
-- [x] Add README and TODO documents for `packages/app`
+- [x] Add README and TODO documents for `packages-lo/lo-example-app`
 - [ ] Add unit tests
 - [ ] Add integration tests
 - [ ] Add manual test checklist
@@ -121,9 +121,12 @@
 - [x] Define `lo-config` project config and environment mode contracts
 - [x] Define `lo-reports` shared report schemas
 
-## Phase 9: Repository Split
+## Phase 9: Package Collection Split
 
-- [ ] Decide when `packages/` is stable enough to become a reusable package
+- [x] Move LO packages from `packages/` into `packages-lo/`
+- [x] Rename ambiguous app package folder to `packages-lo/lo-example-app`
+- [x] Document package naming rules and staged rename candidates
+- [ ] Decide when `packages-lo/` is stable enough to become a reusable package
   repository
 - [ ] Define `package-lo.json` schema for LO package dependencies and profiles
 - [ ] Define `lo.lock.json` schema for locked LO package refs, checksums and
@@ -132,11 +135,17 @@
   `packages-lo/lo-developer/` or another explicit dev package mount
 - [ ] Define production versus development package resolution rules so
   production apps do not download staging packages by default
-- [ ] Split `packages/` into its own Git repository
-- [ ] Mount `packages/` in framework repositories as a submodule or explicit
+- [ ] Split `packages-lo/` into its own Git repository
+- [ ] Mount `packages-lo/` in framework repositories as a submodule or explicit
   nested repository
 - [ ] Document package import workflow for different frameworks
 - [ ] Add release/versioning rules for reusable LO packages
+- [ ] Decide whether to rename `lo-target-ai-accelerator` to `lo-target-ai`
+- [ ] Decide whether to rename `lo-cpu-kernels` to `lo-kernel-cpu`
+- [ ] Decide whether to rename `lo-lowbit-ai`, `lo-neural` and
+  `lo-neuromorphic` under the `lo-ai-*` naming family
+- [ ] Define first `lo-io-*` package contracts without replacing target
+  packages
 
 ## Phase 10: Finance Packages
 

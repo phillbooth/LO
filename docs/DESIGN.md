@@ -35,8 +35,8 @@ change and friendly to both humans and AI coding tools.
 4. Query the graph if needed:
 
 ```powershell
-node packages\lo-cli\dist\index.js graph query lo-security --out build\graph
-node packages\lo-cli\dist\index.js graph explain package:lo-security --out build\graph
+node packages-lo\lo-cli\dist\index.js graph query lo-security --out build\graph
+node packages-lo\lo-cli\dist\index.js graph explain package:lo-security --out build\graph
 ```
 
 ### Refresh Project Context
@@ -45,7 +45,7 @@ node packages\lo-cli\dist\index.js graph explain package:lo-security --out build
 2. Regenerate the project graph:
 
 ```powershell
-node packages\lo-cli\dist\index.js graph --out build\graph
+node packages-lo\lo-cli\dist\index.js graph --out build\graph
 ```
 
 3. Review generated graph output when the change affects package ownership,
@@ -56,13 +56,13 @@ node packages\lo-cli\dist\index.js graph --out build\graph
 1. Inspect task definitions.
 
 ```powershell
-node packages\lo-cli\dist\index.js task --file packages\lo-tasks\examples\tasks.lo
+node packages-lo\lo-cli\dist\index.js task --file packages-lo\lo-tasks\examples\tasks.lo
 ```
 
 2. Dry-run a task before execution.
 
 ```powershell
-node packages\lo-cli\dist\index.js task buildApi --file packages\lo-tasks\examples\tasks.lo --dry-run
+node packages-lo\lo-cli\dist\index.js task buildApi --file packages-lo\lo-tasks\examples\tasks.lo --dry-run
 ```
 
 3. Review the task report at `build/reports/task-report.json` unless a custom
@@ -72,7 +72,7 @@ node packages\lo-cli\dist\index.js task buildApi --file packages\lo-tasks\exampl
 
 1. Add product requirements to `docs/REQUIREMENTS.md`.
 2. Add product UX rules and screens to this document.
-3. Add app source under `packages/app/`.
+3. Add app source under `packages-lo/lo-example-app/`.
 4. Keep reusable language, runtime, security and tooling contracts in their
    owning packages.
 
@@ -84,9 +84,9 @@ node packages\lo-cli\dist\index.js task buildApi --file packages\lo-tasks\exampl
 | `AGENTS.md` | AI coding tool instructions and package boundary rules. |
 | `lo.workspace.json` | Machine-readable workspace package and docs index. |
 | `docs/` | App/workspace requirements, design, architecture, security and operations. |
-| `packages/lo-core/` | LO language introduction and language documentation. |
-| `packages/*/README.md` | Package-specific purpose, boundaries and contracts. |
-| `packages/*/TODO.md` | Package-specific remaining work. |
+| `packages-lo/lo-core/` | LO language introduction and language documentation. |
+| `packages-lo/*/README.md` | LO package-specific purpose, boundaries and contracts. |
+| `packages-lo/*/TODO.md` | LO package-specific remaining work. |
 | `build/graph/` | Generated graph, report, AI map and HTML overview. |
 | `build/reports/` | Generated task and future CLI/runtime reports. |
 
@@ -101,7 +101,7 @@ Docs should be scannable and role-oriented.
 - Record completed work in `docs/CHANGELOG.md`.
 - Mark planning tasks in `docs/TASKS.md` when a document becomes usable.
 - Do not duplicate large language specifications in `docs/`; link to
-  `packages/lo-core/` instead.
+  `packages-lo/lo-core/` instead.
 
 ## CLI Output Design
 
@@ -126,7 +126,7 @@ Graph report: build\graph\LO_GRAPH_REPORT.md
 
 ```text
 Task buildApi dry-run planned.
-Task file: packages\lo-tasks\examples\tasks.lo
+Task file: packages-lo\lo-tasks\examples\tasks.lo
 Dependency order: generateReports -> buildApi
 Task report: build\reports\task-report.json
 ```
