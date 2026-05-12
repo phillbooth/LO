@@ -30,6 +30,7 @@ safe-pattern-matching-and-regex.md
 tri-logic
 type-system.md
 lessons-from-rust.md
+lo-vs-fsharp.md
 modules-and-visibility.md
 standard-library.md
 package-use-registry.md

@@ -9,6 +9,7 @@
 - [x] Document the proposed `package-lo.json`, `lo.lock.json` and
   `packages-lo/` package split
 - [x] Add grouped `packages-lo/lo-finance` beta package scaffold
+- [x] Add F# comparison and LO positioning guidance
 - [x] Split partial framework guidance into `packages/lo-app-kernel/`
 - [x] Add LO logic, compute type and secure runtime future-support proposal
 - [x] Add `packages/lo-api-server/` HTTP API serving package documentation
@@ -110,6 +111,11 @@
 
 - [ ] Define `lo-compiler` compiler pipeline contracts
 - [ ] Define `lo-runtime` execution contracts
+- [ ] Define standard library baseline for JSON, HTTP, files, streams, crypto
+  policy, dates, money and safe strings
+- [ ] Define IDE/LSP, debugger, source-map and test-framework roadmap
+- [ ] Define exhaustive match, sealed variant, generic constraint and protocol
+  requirements for production-readiness
 - [x] Define resilient flow controlled recovery and processing report direction
 - [x] Define `lo-security` primitives, redaction and permission models
 - [x] Define `lo-config` project config and environment mode contracts

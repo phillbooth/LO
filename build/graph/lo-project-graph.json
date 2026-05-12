@@ -1,6 +1,6 @@
 {
   "version": "0.1.0",
-  "generatedAt": "2026-05-12T15:23:04.380Z",
+  "generatedAt": "2026-05-12T16:14:43.864Z",
   "nodes": [
     {
       "id": "package:lo-core",
@@ -1808,6 +1808,16 @@
       "kind": "Document",
       "label": "lessons-from-rust.md",
       "sourcePath": "packages/lo-core/docs/lessons-from-rust.md",
+      "tags": [
+        "document",
+        "lo-core"
+      ]
+    },
+    {
+      "id": "doc:packages/lo-core/docs/lo-vs-fsharp.md",
+      "kind": "Document",
+      "label": "lo-vs-fsharp.md",
+      "sourcePath": "packages/lo-core/docs/lo-vs-fsharp.md",
       "tags": [
         "document",
         "lo-core"
@@ -12196,6 +12206,20 @@
       "kind": "documents",
       "confidence": "INFERRED",
       "evidencePath": "packages/lo-core/docs/lessons-from-rust.md"
+    },
+    {
+      "from": "package:lo-core",
+      "to": "doc:packages/lo-core/docs/lo-vs-fsharp.md",
+      "kind": "owns",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages/lo-core/docs/lo-vs-fsharp.md"
+    },
+    {
+      "from": "doc:packages/lo-core/docs/lo-vs-fsharp.md",
+      "to": "package:app",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages/lo-core/docs/lo-vs-fsharp.md"
     },
     {
       "from": "package:lo-core",

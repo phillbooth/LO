@@ -9,7 +9,7 @@ schemas and detailed language documentation.
 
 ## Status
 
-LO is currently a language-design and v0.1 prototype project.
+LO is currently a language-design and v0.1 beta prototype project.
 
 The prototype CLI lives in `compiler/lo.js`. It can parse and check the
 documented LO subset, run simple `.lo` files, generate reports, emit placeholder
@@ -223,6 +223,11 @@ LO core:
 | 10 | Stable diagnostics and AI report schemas |
 
 Detailed analysis lives in `docs/backend-language-gap-analysis.md`.
+
+Comparative positioning against mature languages such as F# lives in
+`docs/lo-vs-fsharp.md`. The short version is that LO should not claim to be
+better than F# today; it should compete from a different angle: security-first
+defaults, explicit effects, AI-readable reports and target-aware planning.
 
 ## File Extension
 

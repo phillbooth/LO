@@ -674,6 +674,12 @@ NIST-style standards where useful. `v21` should keep mobile graphics basic:
 canvas-style primitives, charting and adapter planning such as Flutter or Skia,
 without making frontend frameworks part of `lo-core`.
 
+The F# comparison in `docs/lo-vs-fsharp.md` should guide positioning. LO should
+not compete by claiming maturity, speed or ecosystem depth before those exist.
+It should compete through explicit security contracts, effect/permission
+reports, AI-readable project context, target-aware planning and source-mapped
+diagnostics.
+
 ---
 
 ## Future Hardware Roadmap

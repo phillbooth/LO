@@ -18,6 +18,9 @@ All notable changes to this app should be documented here.
 - Added `docs/FINANCE_PACKAGES.md` and `packages-lo/lo-finance/` as a grouped
   beta finance package area covering finance maths, market data, FIX, audit,
   risk, pricing and desktop interoperability boundaries.
+- Added `packages/lo-core/docs/lo-vs-fsharp.md` to position LO honestly against
+  F# as a beta, security-first, AI-readable and target-aware backend language
+  concept rather than a production .NET competitor.
 - Initial documentation structure.
 - Added `packages/lo-app-kernel/` as the optional partial framework
   layer for secure runtime boundaries.

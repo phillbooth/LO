@@ -72,6 +72,10 @@ Example:
 
 ### Added
 
+- Added `docs/lo-vs-fsharp.md` to document honest positioning against F#,
+  including F# maturity, LO differentiators and missing production-readiness
+  work.
+
 ```text
 - Added explicit backend language suggestion adoption guidance to docs/backend-language-gap-analysis.md.
 - Added backend evolution requirements for editions, compatibility, variants, constraints, concurrency, cleanup, metadata, FFI, shape types and diagnostics.
