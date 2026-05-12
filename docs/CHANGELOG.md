@@ -6,6 +6,18 @@ All notable changes to this app should be documented here.
 
 ### Added
 
+- Documented the current workspace as a beta prototype rather than a stable
+  release.
+- Documented repository-maintained structure as authoritative over generated
+  document suggestions, while allowing roadmap version labels to move.
+- Added a proposed `packages-lo/lo-developer/` boundary for development-only,
+  staging, diagnostic and experimental packages that production applications
+  should not download by default.
+- Added `docs/PACKAGE_LAYOUT.md` for the proposed `package-lo.json`,
+  `lo.lock.json`, `packages/` and `packages-lo/` split.
+- Added `docs/FINANCE_PACKAGES.md` and `packages-lo/lo-finance/` as a grouped
+  beta finance package area covering finance maths, market data, FIX, audit,
+  risk, pricing and desktop interoperability boundaries.
 - Initial documentation structure.
 - Added `packages/lo-app-kernel/` as the optional partial framework
   layer for secure runtime boundaries.

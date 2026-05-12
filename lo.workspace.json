@@ -1,6 +1,6 @@
 {
     "name": "LO-app",
-    "version": "0.1.0",
+    "version": "0.1.0-beta.0",
     "description": "A clean LO app workspace template.",
     "packages": [
         "packages/lo-core",
@@ -31,6 +31,7 @@
         "packages/lo-tasks",
         "packages/lo-benchmark",
         "packages/lo-project-graph",
+        "packages-lo/lo-finance",
         "packages/app"
     ],
     "defaultPackage": "packages/app",
@@ -62,6 +63,7 @@
     "tasksPackage": "packages/lo-tasks",
     "benchmarkPackage": "packages/lo-benchmark",
     "projectGraphPackage": "packages/lo-project-graph",
+    "financePackage": "packages-lo/lo-finance",
     "strict": true,
     "targets": [
         "cpu",
@@ -104,7 +106,8 @@
         "runtimeKernel": "packages/lo-app-kernel",
         "cliAndTasks": "packages/lo-cli-and-lo-tasks-requirements.md",
         "benchmark": "packages/lo-benchmark",
-        "projectGraph": "packages/lo-project-graph"
+        "projectGraph": "packages/lo-project-graph",
+        "finance": "packages-lo/lo-finance"
     },
     "tools": {
         "root": "tools"

@@ -1,6 +1,6 @@
 {
   "name": "@lo/logic",
-  "version": "0.1.0",
+  "version": "0.1.0-beta.0",
   "description": "LO multi-state logic concepts including Tri, Logic<N> and future Omni logic.",
   "license": "Apache-2.0",
   "private": true,

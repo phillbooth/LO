@@ -23,7 +23,9 @@ package boundaries while the project is still being shaped.
 
 ## Status
 
-LO is currently a language-design and v0.1 prototype project.
+LO is currently a language-design and v0.1 beta prototype project. It is not a
+stable release, and package versions use beta prerelease identifiers until the
+toolchain, package boundaries and documentation contracts are release-ready.
 
 The mature language introduction lives in:
 
@@ -39,6 +41,12 @@ The practical baseline is CPU-compatible checked execution and deterministic
 developer tooling. GPU, generic AI accelerator, low-bit AI, optical I/O,
 photonic compute, ternary and Omni-logic support are package contracts, planning
 layers or simulation/report artefacts until real backends exist.
+
+Generated notes, planning documents and AI-suggested structures are advisory.
+When they conflict, the repository structure, `AGENTS.md`, `lo.workspace.json`,
+package READMEs/TODOs and docs in this workspace take precedence. Roadmap
+version labels may move when that improves staging, but package ownership rules
+should not be overridden by generated documents.
 
 ## Core Ideas
 
@@ -121,6 +129,8 @@ package README for the supported commands.
 ```text
 LO-app/
 |-- AGENTS.md
+|-- package-lo.json          # proposed future LO package manifest
+|-- lo.lock.json             # proposed future LO package lockfile
 |-- docs/
 |-- build/
 |   `-- graph/
@@ -154,6 +164,9 @@ LO-app/
 |   |-- lo-benchmark/
 |   |-- lo-project-graph/
 |   `-- app/
+|-- packages-lo/
+|   |-- lo-developer/        # proposed future dev-only package collection
+|   `-- lo-finance/          # grouped beta finance package contracts
 `-- tools/
 ```
 
@@ -214,6 +227,11 @@ LO-app/
   document, policy and report relationships.
 - `packages/app/` - bespoke application source, routes, modules, tests and app
   configuration.
+- `packages-lo/lo-developer/` - proposed future location for staging,
+  diagnostics, experiments and development-only packages that should not be
+  fetched by production applications by default.
+- `packages-lo/lo-finance/` - grouped beta package area for finance maths,
+  market data, FIX, audit, risk, pricing and desktop interoperability contracts.
 - `docs/` - app/workspace requirements, architecture, security, deployment,
   decisions, changelog and operational documentation.
 
@@ -237,6 +255,10 @@ LO API Server
 
 LO CLI / Tasks / Project Graph
   developer tooling, safe automation, benchmarks and AI-readable project maps
+
+LO Finance
+  optional domain package contracts for finance maths, market data, FIX, audit,
+  risk, pricing and financial desktop interoperability
 
 Full Frameworks
   CMS, admin UI, page builders, ORMs, template engines and frontend adapters
@@ -263,6 +285,29 @@ Important boundary rules:
   or project data.
 - `lo-project-graph` explains the repository. It does not enforce compiler,
   runtime or security rules.
+- Development-only packages should remain outside production package
+  resolution. The proposed `packages-lo/lo-developer/` collection may later
+  hold staging packages, experiments, benchmarks, generators and diagnostics so
+  production applications do not download them on every install.
+- Finance packages are domain packages. They must not become LO core syntax or
+  imply that LO beta is ready to run live exchange, HFT, broker-dealer,
+  clearing, settlement or custody systems.
+
+## Package Layout Direction
+
+The proposed long-term split is documented in `docs/PACKAGE_LAYOUT.md`:
+
+```text
+package.json       normal app/runtime ecosystem dependencies
+package-lo.json    LO package manifest
+lo.lock.json       deterministic LO package lockfile
+packages/          normal app/vendor packages
+packages-lo/       LO packages, optionally a nested repository
+```
+
+The current beta still keeps most LO packages under `packages/`. Do not move
+the existing packages into `packages-lo/` until the manifest, lockfile, graph
+scanner and package resolver understand the split.
 
 ## Current Tooling
 

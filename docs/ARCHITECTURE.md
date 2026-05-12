@@ -33,7 +33,12 @@ tooling lives in `packages/lo-cli/`, and safe project automation lives in
 `packages/lo-tasks/`. Development benchmark diagnostics live in
 `packages/lo-benchmark/`. Project knowledge graph tooling lives in
 `packages/lo-project-graph/`. App source and build configuration live in
-`packages/app/`. App planning and operational documentation live in `docs/`.
+`packages/app/`. Beta finance package planning lives in
+`packages-lo/lo-finance/`. App planning and operational documentation live in `docs/`. A
+future development-only package collection may live outside the production
+package tree as `packages-lo/lo-developer/`; it should be used for staging,
+experiments, diagnostics and generators that production applications should not
+download by default.
 
 ## Main Structure
 
@@ -72,6 +77,9 @@ LO-app/
 |   |-- lo-benchmark/
 |   |-- lo-project-graph/
 |   `-- app/
+|-- packages-lo/
+|   |-- lo-developer/
+|   `-- lo-finance/
 `-- tools/
 ```
 
@@ -111,6 +119,9 @@ light-framework/
 |   |-- lo-benchmark/
 |   `-- lo-project-graph/
 |-- app/
+|-- packages-lo/
+|   |-- lo-developer/
+|   `-- lo-finance/
 `-- framework files
 ```
 
@@ -118,6 +129,28 @@ In the future structure, `packages/` is a reusable LO package repository that
 can be imported by multiple frameworks. It should be mounted intentionally, for
 example as a Git submodule or standalone nested repository. The framework root
 remains its own repository.
+
+`packages-lo/lo-developer/` is a proposed separate developer-package repository
+or optional mount. It must not be required by production runtime installs. It
+may contain staging packages, experiments, development diagnostics, benchmark
+helpers, generators and migration tools after the package registry supports
+production and development package classes.
+
+The proposed long-term application layout separates host ecosystem dependencies
+from LO dependencies:
+
+```text
+package.json
+package-lo.json
+lo.lock.json
+packages/
+packages-lo/
+```
+
+`package-lo.json` should describe selected LO packages and profiles.
+`lo.lock.json` should lock versions, source refs, checksums and profile
+selection. This is a planned package-management boundary; current beta tooling
+does not yet resolve LO packages from those files.
 
 ## Package Layers
 
@@ -206,6 +239,14 @@ LO Benchmark
 LO Project Graph
   project graph maps for packages, docs, policies, reports and AI assistance
 
+LO Developer Packages
+  optional staging, diagnostics, generators and experiments outside production
+  install paths
+
+LO Finance
+  finance maths, market data, FIX, audit, compliance, risk, pricing and FDC3
+  package contracts
+
 LO Standard Packages
   HTTP adapters, SQL adapters, Redis queue, OpenAPI generator, JS/WASM generators
 
@@ -239,6 +280,17 @@ safe for ordinary development machines.
 assistant context. It may generate graph JSON, an HTML view, a graph report and
 an AI map, but it must not become a source of truth for compiler validation,
 runtime enforcement or security decisions.
+
+Developer-only packages should be resolved through an explicit development
+profile. Production lockfiles, runtime package manifests and application
+deployments should not pull `packages-lo/lo-developer/` unless a maintainer
+opts into a development or staging mode.
+
+`lo-finance` is a domain package group. Early work should define deterministic
+finance maths, market-data types, FIX integration contracts, audit evidence,
+calendar/session rules and risk/pricing boundaries. It must not make LO a live
+exchange engine, HFT engine, broker-dealer platform, settlement system,
+clearing system or custody platform.
 
 `lo-logic` owns logic semantics such as `Tri`, `Logic<N>` and Omni. `lo-photonic`
 owns photonic representation and target planning. Photonic mappings may consume

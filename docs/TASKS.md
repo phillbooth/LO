@@ -3,6 +3,12 @@
 ## Phase 1: Planning
 
 - [x] Update workspace documentation for the `packages/lo-core/` language package move
+- [x] Mark the current workspace version as beta rather than a stable release
+- [x] Document that maintained repo structure takes precedence over generated
+  document suggestions
+- [x] Document the proposed `package-lo.json`, `lo.lock.json` and
+  `packages-lo/` package split
+- [x] Add grouped `packages-lo/lo-finance` beta package scaffold
 - [x] Split partial framework guidance into `packages/lo-app-kernel/`
 - [x] Add LO logic, compute type and secure runtime future-support proposal
 - [x] Add `packages/lo-api-server/` HTTP API serving package documentation
@@ -113,8 +119,28 @@
 
 - [ ] Decide when `packages/` is stable enough to become a reusable package
   repository
+- [ ] Define `package-lo.json` schema for LO package dependencies and profiles
+- [ ] Define `lo.lock.json` schema for locked LO package refs, checksums and
+  selected profiles
+- [ ] Decide whether development-only packages should live under
+  `packages-lo/lo-developer/` or another explicit dev package mount
+- [ ] Define production versus development package resolution rules so
+  production apps do not download staging packages by default
 - [ ] Split `packages/` into its own Git repository
 - [ ] Mount `packages/` in framework repositories as a submodule or explicit
   nested repository
 - [ ] Document package import workflow for different frameworks
 - [ ] Add release/versioning rules for reusable LO packages
+
+## Phase 10: Finance Packages
+
+- [x] Add grouped `lo-finance` package planning area
+- [ ] Define `lo-finance-math` deterministic decimal and money contracts
+- [ ] Define `lo-finance-calendar` exchange calendar and trading session
+  contracts
+- [ ] Define `lo-finance-market-data` quote, trade, order book, candle and
+  replay contracts
+- [ ] Define `lo-finance-fix` FIX dictionary, validation and session contracts
+- [ ] Define `lo-finance-audit` evidence, hash-chain, reconstruction and
+  redacted bundle contracts
+- [ ] Decide when finance contracts should split into standalone packages

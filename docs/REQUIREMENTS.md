@@ -56,6 +56,16 @@ must not be treated as implemented app functionality.
 - The workspace must keep secrets out of source control.
 - Package READMEs and TODOs must describe package responsibility and remaining
   implementation work.
+- This workspace is a beta prototype, not a stable release. Version metadata
+  must use beta prerelease identifiers until release criteria are explicitly
+  met.
+- The future LO package split should be documented before implementation:
+  `package.json` for normal app/vendor packages, `package-lo.json` for LO
+  package dependencies, `lo.lock.json` for locked LO package graphs,
+  `packages/` for normal vendor packages and `packages-lo/` for LO packages.
+- Generated documents and AI-suggested structures are advisory. Repository
+  package boundaries, `AGENTS.md`, `lo.workspace.json`, package READMEs/TODOs
+  and maintained docs take precedence when suggestions conflict.
 
 ## App Requirements
 
@@ -139,6 +149,44 @@ The app package must remain deliberately small until a product domain is chosen.
 - If `packages/` has its own `.git`, it must be added intentionally as a
   submodule or standalone nested repository, and the framework root must treat
   it as an external dependency.
+- A future `packages-lo/lo-developer/` tree may be used for development-only
+  packages, staging packages, diagnostics, generators and experiments.
+- Development-only packages must be excluded from production package resolution
+  and production downloads unless a maintainer explicitly opts into a
+  development or staging profile.
+- The exact developer package folder name remains provisional, but its boundary
+  must stay separate from production runtime package manifests.
+- `packages-lo/lo-finance/` may be used as a grouped beta finance package area
+  before finance contracts split into smaller packages.
+- Finance package work must stay outside `packages/lo-core/` unless it is a
+  general language rule needed by all domains.
+
+## Finance Package Requirements
+
+- `lo-finance` must be a domain package group, not core LO syntax.
+- Finance support must start with typed data, deterministic maths, validation,
+  audit, replay and integration contracts rather than live trading systems.
+- Finance maths must disallow float money by default, require explicit rounding
+  mode and make rounding decisions reportable.
+- Market-data contracts must model instruments, exchanges, sessions, quotes,
+  trades, order book levels, candles, snapshots, source metadata and replayable
+  event streams.
+- FIX support must be defined as an integration package boundary for message
+  dictionaries, validation, session state, sequence numbers, heartbeats, resend
+  requests, rejects, execution reports, order cancel/replace and persistence
+  policy.
+- Finance audit must support immutable event references, message hashes, order
+  lifecycle reconstruction, risk decision reports, permission decision reports
+  and redacted evidence bundles.
+- Risk and pricing package work must wait until finance maths, market data and
+  audit contracts are stable enough to support them.
+- LO finance packages may wrap mature C++, Java, Python or TypeScript finance
+  ecosystems through controlled interop, but wrappers must declare memory
+  isolation, credential policy, network permissions, audit requirements and
+  fallback behaviour.
+- Early LO finance work must not claim to implement a full stock exchange,
+  HFT engine, broker-dealer platform, settlement system, clearing system,
+  custody platform or regulated trading-advice engine.
 
 ## Secure App Kernel Requirements
 

@@ -11,6 +11,7 @@ This is a LO application template.
 The repository contains:
 
 - LO language/package files in `packages/lo-core/`
+- Proposed reusable LO package collection files in `packages-lo/`
 - LO secure runtime kernel design files in `packages/lo-app-kernel/`
 - Bespoke app files in `packages/app/`
 - App documentation in `docs/`
@@ -21,6 +22,8 @@ The repository contains:
 - Do not place app-specific documentation inside `packages/lo-core/`.
 - Do not place full-framework, CMS, admin UI, ORM or frontend framework design inside `packages/lo-core/`.
 - Do not place LO language documentation inside `docs/`.
+- Do not treat `packages-lo/` as production-installed by default; use it for
+  explicit LO package collection planning or selected LO domain packages.
 - Keep the repository root clean.
 - Do not commit secrets.
 - Do not invent LO syntax without documenting it.
@@ -130,6 +133,22 @@ Use for:
 - app tests
 - app build output
 - app config
+
+### `packages-lo/`
+
+Use for:
+
+- proposed reusable LO package collection layout
+- beta LO domain packages that should not live in app/vendor package space
+- grouped package planning such as `lo-finance/`
+- future nested repository or submodule planning
+
+Do not use for:
+
+- normal npm/vendor app packages
+- app-specific source
+- secrets
+- production-only packages that have not been selected by a LO package profile
 
 ### `docs/`
 

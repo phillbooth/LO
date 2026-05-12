@@ -7,7 +7,7 @@
 </head>
 <body>
 <h1>LO Project Graph</h1>
-<p>861 nodes, 1583 relationships.</p>
+<p>868 nodes, 1606 relationships.</p>
 <h2>Nodes</h2>
 <ul><li><strong>lo-core</strong> <span>Package</span></li>
 <li><strong>lo-compiler</strong> <span>Package</span></li>
@@ -37,6 +37,7 @@
 <li><strong>lo-tasks</strong> <span>Package</span></li>
 <li><strong>lo-benchmark</strong> <span>Package</span></li>
 <li><strong>lo-project-graph</strong> <span>Package</span></li>
+<li><strong>lo-finance</strong> <span>Package</span></li>
 <li><strong>app</strong> <span>Package</span></li>
 <li><strong>AGENTS.md</strong> <span>Document</span></li>
 <li><strong>README.md</strong> <span>Document</span></li>
@@ -51,11 +52,13 @@
 <li><strong>DEPLOYMENT.md</strong> <span>Document</span></li>
 <li><strong>DESIGN.md</strong> <span>Document</span></li>
 <li><strong>ERROR_HANDLING.md</strong> <span>Document</span></li>
+<li><strong>FINANCE_PACKAGES.md</strong> <span>Document</span></li>
 <li><strong>lo-logic-compute-runtime-proposal.md</strong> <span>Document</span></li>
 <li><strong>LOWBIT_AI_BACKENDS.md</strong> <span>Document</span></li>
 <li><strong>NEURAL_ACCELERATOR_PACKAGES.md</strong> <span>Document</span></li>
 <li><strong>OBSERVABILITY.md</strong> <span>Document</span></li>
 <li><strong>OPTICAL_IO.md</strong> <span>Document</span></li>
+<li><strong>PACKAGE_LAYOUT.md</strong> <span>Document</span></li>
 <li><strong>PROJECT_GRAPH.md</strong> <span>Document</span></li>
 <li><strong>README.md</strong> <span>Document</span></li>
 <li><strong>REQUIREMENTS.md</strong> <span>Document</span></li>
@@ -840,6 +843,9 @@
 <li><strong>createProjectGraphEdge</strong> <span>Flow</span></li>
 <li><strong>TODO.md</strong> <span>Document</span></li>
 <li><strong>tsconfig.json</strong> <span>Document</span></li>
+<li><strong>package.json</strong> <span>Document</span></li>
+<li><strong>README.md</strong> <span>Document</span></li>
+<li><strong>TODO.md</strong> <span>Document</span></li>
 <li><strong>README.md</strong> <span>Document</span></li>
 <li><strong>TODO.md</strong> <span>Document</span></li>
 <li><strong>app</strong> <span>Document</span></li>
@@ -869,6 +875,7 @@
 <li><strong>cliAndTasks</strong> <span>Document</span></li>
 <li><strong>benchmark</strong> <span>Document</span></li>
 <li><strong>projectGraph</strong> <span>Document</span></li>
+<li><strong>finance</strong> <span>Document</span></li>
 <li><strong>LO Project Graph Report</strong> <span>Report</span></li></ul>
 <h2>Relationships</h2>
 <ul><li>doc:AGENTS.md <code>documents</code> package:lo-core</li>
@@ -877,6 +884,7 @@
 <li>doc:AGENTS.md <code>documents</code> package:lo-app-kernel</li>
 <li>doc:AGENTS.md <code>documents</code> package:lo-cli</li>
 <li>doc:AGENTS.md <code>documents</code> package:lo-project-graph</li>
+<li>doc:AGENTS.md <code>documents</code> package:lo-finance</li>
 <li>doc:AGENTS.md <code>documents</code> package:app</li>
 <li>doc:README.md <code>documents</code> package:lo-core</li>
 <li>doc:README.md <code>documents</code> package:lo-compiler</li>
@@ -906,6 +914,7 @@
 <li>doc:README.md <code>documents</code> package:lo-tasks</li>
 <li>doc:README.md <code>documents</code> package:lo-benchmark</li>
 <li>doc:README.md <code>documents</code> package:lo-project-graph</li>
+<li>doc:README.md <code>documents</code> package:lo-finance</li>
 <li>doc:README.md <code>documents</code> package:app</li>
 <li>doc:docs/AI_ACCELERATOR_TARGETS.md <code>documents</code> package:lo-vector</li>
 <li>doc:docs/AI_ACCELERATOR_TARGETS.md <code>documents</code> package:lo-compute</li>
@@ -945,6 +954,7 @@
 <li>doc:docs/ARCHITECTURE.md <code>documents</code> package:lo-tasks</li>
 <li>doc:docs/ARCHITECTURE.md <code>documents</code> package:lo-benchmark</li>
 <li>doc:docs/ARCHITECTURE.md <code>documents</code> package:lo-project-graph</li>
+<li>doc:docs/ARCHITECTURE.md <code>documents</code> package:lo-finance</li>
 <li>doc:docs/ARCHITECTURE.md <code>documents</code> package:app</li>
 <li>doc:docs/CHANGELOG.md <code>documents</code> package:lo-core</li>
 <li>doc:docs/CHANGELOG.md <code>documents</code> package:lo-compiler</li>
@@ -974,6 +984,7 @@
 <li>doc:docs/CHANGELOG.md <code>documents</code> package:lo-tasks</li>
 <li>doc:docs/CHANGELOG.md <code>documents</code> package:lo-benchmark</li>
 <li>doc:docs/CHANGELOG.md <code>documents</code> package:lo-project-graph</li>
+<li>doc:docs/CHANGELOG.md <code>documents</code> package:lo-finance</li>
 <li>doc:docs/CHANGELOG.md <code>documents</code> package:app</li>
 <li>doc:docs/COMPILED_APP_GIT.md <code>documents</code> package:app</li>
 <li>doc:docs/DATABASE.md <code>documents</code> package:app</li>
@@ -994,6 +1005,9 @@
 <li>doc:docs/DESIGN.md <code>documents</code> package:lo-project-graph</li>
 <li>doc:docs/DESIGN.md <code>documents</code> package:app</li>
 <li>doc:docs/ERROR_HANDLING.md <code>documents</code> package:app</li>
+<li>doc:docs/FINANCE_PACKAGES.md <code>documents</code> package:lo-runtime</li>
+<li>doc:docs/FINANCE_PACKAGES.md <code>documents</code> package:lo-finance</li>
+<li>doc:docs/FINANCE_PACKAGES.md <code>documents</code> package:app</li>
 <li>doc:docs/lo-logic-compute-runtime-proposal.md <code>documents</code> package:app</li>
 <li>doc:docs/LOWBIT_AI_BACKENDS.md <code>documents</code> package:lo-core</li>
 <li>doc:docs/LOWBIT_AI_BACKENDS.md <code>documents</code> package:lo-logic</li>
@@ -1022,6 +1036,12 @@
 <li>doc:docs/OPTICAL_IO.md <code>documents</code> package:lo-target-photonic</li>
 <li>doc:docs/OPTICAL_IO.md <code>documents</code> package:lo-benchmark</li>
 <li>doc:docs/OPTICAL_IO.md <code>documents</code> package:app</li>
+<li>doc:docs/PACKAGE_LAYOUT.md <code>documents</code> package:lo-core</li>
+<li>doc:docs/PACKAGE_LAYOUT.md <code>documents</code> package:lo-compiler</li>
+<li>doc:docs/PACKAGE_LAYOUT.md <code>documents</code> package:lo-runtime</li>
+<li>doc:docs/PACKAGE_LAYOUT.md <code>documents</code> package:lo-security</li>
+<li>doc:docs/PACKAGE_LAYOUT.md <code>documents</code> package:lo-finance</li>
+<li>doc:docs/PACKAGE_LAYOUT.md <code>documents</code> package:app</li>
 <li>doc:docs/PROJECT_GRAPH.md <code>documents</code> package:lo-security</li>
 <li>doc:docs/PROJECT_GRAPH.md <code>documents</code> package:lo-ai</li>
 <li>doc:docs/PROJECT_GRAPH.md <code>documents</code> package:lo-api-server</li>
@@ -1060,6 +1080,7 @@
 <li>doc:docs/REQUIREMENTS.md <code>documents</code> package:lo-tasks</li>
 <li>doc:docs/REQUIREMENTS.md <code>documents</code> package:lo-benchmark</li>
 <li>doc:docs/REQUIREMENTS.md <code>documents</code> package:lo-project-graph</li>
+<li>doc:docs/REQUIREMENTS.md <code>documents</code> package:lo-finance</li>
 <li>doc:docs/REQUIREMENTS.md <code>documents</code> package:app</li>
 <li>doc:docs/RESILIENT_FLOWS.md <code>documents</code> package:lo-core</li>
 <li>doc:docs/RESILIENT_FLOWS.md <code>documents</code> package:lo-runtime</li>
@@ -1106,6 +1127,7 @@
 <li>doc:docs/TASKS.md <code>documents</code> package:lo-tasks</li>
 <li>doc:docs/TASKS.md <code>documents</code> package:lo-benchmark</li>
 <li>doc:docs/TASKS.md <code>documents</code> package:lo-project-graph</li>
+<li>doc:docs/TASKS.md <code>documents</code> package:lo-finance</li>
 <li>doc:docs/TASKS.md <code>documents</code> package:app</li>
 <li>doc:docs/testing.md <code>documents</code> package:lo-app-kernel</li>
 <li>doc:docs/testing.md <code>documents</code> package:app</li>
@@ -1355,21 +1377,6 @@
 <li>package:lo-core <code>owns</code> doc:packages/lo-core/docs/language-rules.md</li>
 <li>doc:packages/lo-core/docs/language-rules.md <code>documents</code> package:app</li>
 <li>package:lo-core <code>owns</code> doc:packages/lo-core/docs/language-supported-primitives.md</li>
-<li>doc:packages/lo-core/docs/language-supported-primitives.md <code>documents</code> package:app</li>
-<li>package:lo-core <code>owns</code> doc:packages/lo-core/docs/lazy-compact-json.md</li>
-<li>doc:packages/lo-core/docs/lazy-compact-json.md <code>documents</code> package:app</li>
-<li>package:lo-core <code>owns</code> doc:packages/lo-core/docs/legacy-and-compatibility-boundaries.md</li>
-<li>doc:packages/lo-core/docs/legacy-and-compatibility-boundaries.md <code>documents</code> package:app</li>
-<li>package:lo-core <code>owns</code> doc:packages/lo-core/docs/lessons-from-rust.md</li>
-<li>doc:packages/lo-core/docs/lessons-from-rust.md <code>documents</code> package:app</li>
-<li>package:lo-core <code>owns</code> doc:packages/lo-core/docs/lo-vs-python-and-generated-outputs.md</li>
-<li>doc:packages/lo-core/docs/lo-vs-python-and-generated-outputs.md <code>documents</code> package:app</li>
-<li>package:lo-core <code>owns</code> doc:packages/lo-core/docs/logic-targets.md</li>
-<li>doc:packages/lo-core/docs/logic-targets.md <code>documents</code> package:lo-logic</li>
-<li>doc:packages/lo-core/docs/logic-targets.md <code>documents</code> package:lo-photonic</li>
-<li>doc:packages/lo-core/docs/logic-targets.md <code>documents</code> package:lo-target-photonic</li>
-<li>doc:packages/lo-core/docs/logic-targets.md <code>documents</code> package:app</li>
-<li>package:lo-core <code>owns</code> doc:packages/lo-core/docs/logic-widths.md</li>
-<li>package:lo-core <code>owns</code> doc:packages/lo-core/docs/memory-and-variable-use.md</li></ul>
+<li>doc:packages/lo-core/docs/language-supported-primitives.md <code>documents</code> package:app</li></ul>
 </body>
 </html>

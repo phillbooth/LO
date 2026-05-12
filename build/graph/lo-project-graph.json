@@ -1,6 +1,6 @@
 {
   "version": "0.1.0",
-  "generatedAt": "2026-05-09T19:08:35.941Z",
+  "generatedAt": "2026-05-12T15:23:04.380Z",
   "nodes": [
     {
       "id": "package:lo-core",
@@ -283,6 +283,16 @@
       ]
     },
     {
+      "id": "package:lo-finance",
+      "kind": "Package",
+      "label": "lo-finance",
+      "sourcePath": "packages-lo/lo-finance/README.md",
+      "summary": "Grouped LO finance package contracts for financial maths, market data, FIX, audit, risk and pricing planning.",
+      "tags": [
+        "package"
+      ]
+    },
+    {
       "id": "package:app",
       "kind": "Package",
       "label": "app",
@@ -410,6 +420,15 @@
       ]
     },
     {
+      "id": "doc:docs/FINANCE_PACKAGES.md",
+      "kind": "Document",
+      "label": "FINANCE_PACKAGES.md",
+      "sourcePath": "docs/FINANCE_PACKAGES.md",
+      "tags": [
+        "document"
+      ]
+    },
+    {
       "id": "doc:docs/lo-logic-compute-runtime-proposal.md",
       "kind": "Document",
       "label": "lo-logic-compute-runtime-proposal.md",
@@ -450,6 +469,15 @@
       "kind": "Document",
       "label": "OPTICAL_IO.md",
       "sourcePath": "docs/OPTICAL_IO.md",
+      "tags": [
+        "document"
+      ]
+    },
+    {
+      "id": "doc:docs/PACKAGE_LAYOUT.md",
+      "kind": "Document",
+      "label": "PACKAGE_LAYOUT.md",
+      "sourcePath": "docs/PACKAGE_LAYOUT.md",
       "tags": [
         "document"
       ]
@@ -8286,6 +8314,36 @@
       ]
     },
     {
+      "id": "doc:packages-lo/lo-finance/package.json",
+      "kind": "Document",
+      "label": "package.json",
+      "sourcePath": "packages-lo/lo-finance/package.json",
+      "tags": [
+        "report",
+        "lo-finance"
+      ]
+    },
+    {
+      "id": "doc:packages-lo/lo-finance/README.md",
+      "kind": "Document",
+      "label": "README.md",
+      "sourcePath": "packages-lo/lo-finance/README.md",
+      "tags": [
+        "document",
+        "lo-finance"
+      ]
+    },
+    {
+      "id": "doc:packages-lo/lo-finance/TODO.md",
+      "kind": "Document",
+      "label": "TODO.md",
+      "sourcePath": "packages-lo/lo-finance/TODO.md",
+      "tags": [
+        "document",
+        "lo-finance"
+      ]
+    },
+    {
       "id": "doc:packages/app/README.md",
       "kind": "Document",
       "label": "README.md",
@@ -8576,6 +8634,16 @@
       ]
     },
     {
+      "id": "doc:packages-lo/lo-finance",
+      "kind": "Document",
+      "label": "finance",
+      "sourcePath": "packages-lo/lo-finance",
+      "tags": [
+        "document",
+        "workspace-doc"
+      ]
+    },
+    {
       "id": "report:project-graph",
       "kind": "Report",
       "label": "LO Project Graph Report",
@@ -8631,6 +8699,13 @@
     },
     {
       "from": "doc:AGENTS.md",
+      "to": "package:lo-finance",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "AGENTS.md"
+    },
+    {
+      "from": "doc:AGENTS.md",
       "to": "package:app",
       "kind": "documents",
       "confidence": "INFERRED",
@@ -8834,6 +8909,13 @@
     },
     {
       "from": "doc:README.md",
+      "to": "package:lo-finance",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "README.md"
+    },
+    {
+      "from": "doc:README.md",
       "to": "package:app",
       "kind": "documents",
       "confidence": "INFERRED",
@@ -9107,6 +9189,13 @@
     },
     {
       "from": "doc:docs/ARCHITECTURE.md",
+      "to": "package:lo-finance",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/ARCHITECTURE.md"
+    },
+    {
+      "from": "doc:docs/ARCHITECTURE.md",
       "to": "package:app",
       "kind": "documents",
       "confidence": "INFERRED",
@@ -9304,6 +9393,13 @@
     {
       "from": "doc:docs/CHANGELOG.md",
       "to": "package:lo-project-graph",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/CHANGELOG.md"
+    },
+    {
+      "from": "doc:docs/CHANGELOG.md",
+      "to": "package:lo-finance",
       "kind": "documents",
       "confidence": "INFERRED",
       "evidencePath": "docs/CHANGELOG.md"
@@ -9447,6 +9543,27 @@
       "kind": "documents",
       "confidence": "INFERRED",
       "evidencePath": "docs/ERROR_HANDLING.md"
+    },
+    {
+      "from": "doc:docs/FINANCE_PACKAGES.md",
+      "to": "package:lo-runtime",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/FINANCE_PACKAGES.md"
+    },
+    {
+      "from": "doc:docs/FINANCE_PACKAGES.md",
+      "to": "package:lo-finance",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/FINANCE_PACKAGES.md"
+    },
+    {
+      "from": "doc:docs/FINANCE_PACKAGES.md",
+      "to": "package:app",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/FINANCE_PACKAGES.md"
     },
     {
       "from": "doc:docs/lo-logic-compute-runtime-proposal.md",
@@ -9645,6 +9762,48 @@
       "evidencePath": "docs/OPTICAL_IO.md"
     },
     {
+      "from": "doc:docs/PACKAGE_LAYOUT.md",
+      "to": "package:lo-core",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/PACKAGE_LAYOUT.md"
+    },
+    {
+      "from": "doc:docs/PACKAGE_LAYOUT.md",
+      "to": "package:lo-compiler",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/PACKAGE_LAYOUT.md"
+    },
+    {
+      "from": "doc:docs/PACKAGE_LAYOUT.md",
+      "to": "package:lo-runtime",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/PACKAGE_LAYOUT.md"
+    },
+    {
+      "from": "doc:docs/PACKAGE_LAYOUT.md",
+      "to": "package:lo-security",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/PACKAGE_LAYOUT.md"
+    },
+    {
+      "from": "doc:docs/PACKAGE_LAYOUT.md",
+      "to": "package:lo-finance",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/PACKAGE_LAYOUT.md"
+    },
+    {
+      "from": "doc:docs/PACKAGE_LAYOUT.md",
+      "to": "package:app",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/PACKAGE_LAYOUT.md"
+    },
+    {
       "from": "doc:docs/PROJECT_GRAPH.md",
       "to": "package:lo-security",
       "kind": "documents",
@@ -9906,6 +10065,13 @@
     {
       "from": "doc:docs/REQUIREMENTS.md",
       "to": "package:lo-project-graph",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/REQUIREMENTS.md"
+    },
+    {
+      "from": "doc:docs/REQUIREMENTS.md",
+      "to": "package:lo-finance",
       "kind": "documents",
       "confidence": "INFERRED",
       "evidencePath": "docs/REQUIREMENTS.md"
@@ -10228,6 +10394,13 @@
     {
       "from": "doc:docs/TASKS.md",
       "to": "package:lo-project-graph",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/TASKS.md"
+    },
+    {
+      "from": "doc:docs/TASKS.md",
+      "to": "package:lo-finance",
       "kind": "documents",
       "confidence": "INFERRED",
       "evidencePath": "docs/TASKS.md"
@@ -14003,6 +14176,20 @@
       "to": "doc:packages/lo-core/ROADMAP.md",
       "kind": "owns",
       "confidence": "EXTRACTED",
+      "evidencePath": "packages/lo-core/ROADMAP.md"
+    },
+    {
+      "from": "doc:packages/lo-core/ROADMAP.md",
+      "to": "package:lo-core",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages/lo-core/ROADMAP.md"
+    },
+    {
+      "from": "doc:packages/lo-core/ROADMAP.md",
+      "to": "package:lo-finance",
+      "kind": "documents",
+      "confidence": "INFERRED",
       "evidencePath": "packages/lo-core/ROADMAP.md"
     },
     {
@@ -19632,6 +19819,48 @@
       "kind": "owns",
       "confidence": "EXTRACTED",
       "evidencePath": "packages/lo-project-graph/tsconfig.json"
+    },
+    {
+      "from": "package:lo-finance",
+      "to": "doc:packages-lo/lo-finance/package.json",
+      "kind": "owns",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-lo/lo-finance/package.json"
+    },
+    {
+      "from": "package:lo-finance",
+      "to": "doc:packages-lo/lo-finance/README.md",
+      "kind": "owns",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-lo/lo-finance/README.md"
+    },
+    {
+      "from": "doc:packages-lo/lo-finance/README.md",
+      "to": "package:lo-runtime",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-lo/lo-finance/README.md"
+    },
+    {
+      "from": "doc:packages-lo/lo-finance/README.md",
+      "to": "package:lo-finance",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-lo/lo-finance/README.md"
+    },
+    {
+      "from": "package:lo-finance",
+      "to": "doc:packages-lo/lo-finance/TODO.md",
+      "kind": "owns",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-lo/lo-finance/TODO.md"
+    },
+    {
+      "from": "doc:packages-lo/lo-finance/TODO.md",
+      "to": "package:lo-finance",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-lo/lo-finance/TODO.md"
     },
     {
       "from": "package:app",

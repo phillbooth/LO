@@ -10,7 +10,7 @@ The roadmap is designed to move LO from concept documentation into a working pro
 
 ## Roadmap Summary
 
-LO should be developed in stages:
+LO should be developed in beta stages before any stable release:
 
 ```text
 0.1.x  Documentation and concept
@@ -22,12 +22,17 @@ LO should be developed in stages:
 0.7.x  Developer tooling
 0.8.x  Runtime prototype
 0.9.x  Larger application structure and package conventions
-1.0.0  First stable language specification
+1.0.0-beta.x  Beta language specification candidate
+1.0.0         First stable language specification, only after release criteria are met
 ```
 
 The first goal is not real photonic hardware support.
 
 The first goal is to make LO useful and understandable on normal systems.
+
+The current repository version is beta. It should not be described as a stable
+release while compiler, runtime, package and documentation contracts are still
+being shaped.
 
 ---
 
@@ -46,6 +51,11 @@ make LO easier to deploy
 make LO ready for multi-target compilation
 make LO useful without future hardware
 ```
+
+Generated roadmap documents are advisory. If a generated document conflicts
+with this repository's package structure, `AGENTS.md`, workspace map or
+maintained docs, the repository structure takes precedence. Version labels may
+move when that produces a clearer beta, staging or release path.
 
 ---
 
@@ -555,24 +565,25 @@ source maps work across app files
 
 ---
 
-## Version 1.0.0 — First Stable Specification
+## Version 1.0.0-beta.x - Beta Specification Candidate
 
 ### Goal
 
-Publish the first stable LO language specification and basic toolchain.
+Publish a beta LO language specification candidate and basic toolchain for
+review before any stable release.
 
-### Required for 1.0.0
+### Required for 1.0.0-beta.x
 
 ```text
-stable .lo syntax
-stable boot.lo structure
-stable strict type rules
-stable Option and Result model
-stable Decision model
-stable JSON model
-stable API/webhook model
-stable source-map format
-stable compiler report formats
+beta .lo syntax
+beta boot.lo structure
+beta strict type rules
+beta Option and Result model
+beta Decision model
+beta JSON model
+beta API/webhook model
+beta source-map format
+beta compiler report formats
 working parser
 working checker
 working formatter
@@ -582,7 +593,7 @@ clear documentation
 Apache-2.0 licence
 ```
 
-### Not Required for 1.0.0
+### Not Required for 1.0.0-beta.x
 
 ```text
 real photonic hardware backend
@@ -593,7 +604,9 @@ built-in full MVC framework
 large standard library
 ```
 
-The first stable version should focus on correctness, clarity and developer experience.
+The beta candidate should focus on correctness, clarity and developer
+experience. A later stable `1.0.0` release should happen only after beta review,
+compatibility checks, security review and documentation sign-off.
 
 ---
 
@@ -622,6 +635,44 @@ standard library
 web framework packages
 cloud deployment adapters
 ```
+
+## Post-Beta Major Roadmap
+
+The following major-version direction is advisory and may move as the beta
+stabilises:
+
+```text
+v10  Advanced Hardware
+v11  Financial Industry and Stock Market Support
+v13  OSWARP - Operating System Wrapper and Runtime Portability
+v18  Syntax and Security Review
+v19  Framework Review
+v20  Standards and ISO Review
+v21  Basic Mobile Graphics
+```
+
+`v10` should cover advanced hardware planning before mobile and finance
+expansion. GPU, AI accelerator, low-bit AI, optical I/O, photonic, ternary and
+Omni-logic work remain planning, simulation and report layers unless concrete
+backend support exists.
+
+`v11` may cover financial-market data, money and currency types, risk, audit,
+trading safety boundaries and stock-market support. These should be package or
+standard-library candidates, not unreviewed core syntax.
+
+The first `v11` planning surface should be the grouped `lo-finance` package
+area. Start with deterministic finance maths, calendars, market data, FIX
+contracts and audit/replay evidence before risk, pricing, desktop interop or
+low-latency runtime profiles.
+
+`v13` may use OSWARP as a working name for Operating System Wrapper and Runtime
+Portability. It should wrap runtime portability and platform policy rather than
+turning LO into an operating system.
+
+`v20` should align relevant LO contracts with ISO, IEC, IEEE, W3C, OWASP and
+NIST-style standards where useful. `v21` should keep mobile graphics basic:
+canvas-style primitives, charting and adapter planning such as Flutter or Skia,
+without making frontend frameworks part of `lo-core`.
 
 ---
 

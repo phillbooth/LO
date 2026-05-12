@@ -162,6 +162,11 @@ package mentions in documentation
 This is intentionally lightweight and deterministic. Richer external tools can
 be added later as backend adapters without changing `lo graph`.
 
+When `packages-lo/` package paths are listed in `lo.workspace.json`, the native
+mapper should treat them as LO package collection paths. They may be beta
+domain packages or future package-repository mounts, but the graph remains
+advisory and must not decide production package resolution.
+
 The native helper also supports graph query, node explanation and path finding
 over generated graph JSON.
 

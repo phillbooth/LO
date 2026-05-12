@@ -1,6 +1,6 @@
 {
   "name": "@lo/compiler",
-  "version": "0.1.0",
+  "version": "0.1.0-beta.0",
   "description": "LO compiler pipeline contracts for parsing, checking, IR, diagnostics and reports.",
   "license": "Apache-2.0",
   "private": true,

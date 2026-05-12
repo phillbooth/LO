@@ -1,6 +1,6 @@
 {
   "name": "@lo/language",
-  "version": "0.1.0",
+  "version": "0.1.0-beta.0",
   "description": "LO / Logic Omni language package, examples, schemas and prototype CLI.",
   "license": "Apache-2.0",
   "type": "commonjs",

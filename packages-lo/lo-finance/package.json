@@ -1,0 +1,8 @@
+{
+  "name": "@lo/finance",
+  "version": "0.1.0-beta.0",
+  "description": "Grouped LO finance package contracts for financial maths, market data, FIX, audit, risk and pricing planning.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "private": true
+}
