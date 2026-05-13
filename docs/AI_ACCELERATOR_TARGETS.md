@@ -176,9 +176,9 @@ AudioBatch
 VideoFrameBatch
 ```
 
-`lo-vector` should own tensor shape and numeric element contracts.
-`lo-neural` should own neural workload contracts.
-`lo-compute` should own target selection.
+`lo-core-vector` should own tensor shape and numeric element contracts.
+`lo-ai-neural` should own neural workload contracts.
+`lo-core-compute` should own target selection.
 `lo-target-ai-accelerator` should own accelerator capability profiles and
 reports.
 
@@ -341,7 +341,7 @@ Example:
 
 ## Benchmarks
 
-`lo-benchmark` should benchmark accelerator behavior generically:
+`lo-tools-benchmark` should benchmark accelerator behavior generically:
 
 ```bash
 lo benchmark --target ai_accelerator --light
@@ -411,7 +411,7 @@ Always report selected backend, precision, memory tier, topology and fallback.
 ## Package Ownership
 
 ```text
-lo-compute
+lo-core-compute
   generic ai_accelerator selection and fallback planning
 
 lo-target-ai-accelerator
@@ -420,13 +420,13 @@ lo-target-ai-accelerator
 lo-ai
   model metadata, inference safety and AI output policy
 
-lo-neural
+lo-ai-neural
   neural workload contracts
 
-lo-vector
+lo-core-vector
   tensor and shape contracts
 
-lo-benchmark
+lo-tools-benchmark
   generic ai_accelerator benchmark target and backend-specific report fields
 ```
 

@@ -6,7 +6,7 @@
 [x] Add TODO.md
 [x] Add package metadata
 [x] Add initial typed exports
-[ ] Define input contract from lo-compute
+[ ] Define input contract from lo-core-compute
 [ ] Define GPU target capability model
 [ ] Define GPU plan output format
 [ ] Define kernel mapping plan format

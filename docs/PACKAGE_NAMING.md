@@ -2,80 +2,120 @@
 
 ## Purpose
 
-This document records package naming rules after moving LO packages from
-`packages/` into `packages-lo/`.
-
-## Current Rule
+This document defines the package naming scheme for `packages-lo/`.
 
 ```text
 packages/       normal app/vendor package space
 packages-lo/    LO language, runtime, tooling, target and domain packages
 ```
 
-The generic `app/` folder was renamed to `lo-example-app/` because a plain
-`app` name is ambiguous inside the LO package collection.
+Use grouped names so package purpose is visible from the directory alone.
 
-## Naming Prefixes
+## Naming Rule
 
-Use these prefixes consistently:
+Use:
 
 ```text
-lo-target-*   where code runs or compiles to
-lo-io-*       how data moves
-lo-ai-*       AI-specific models, tasks or AI workload abstractions
-lo-kernel-*   low-level execution kernels
-lo-app-*      runtime/application framework layer
+lo-[family]-[purpose]
 ```
 
-## Names To Keep
-
-Keep these names because their responsibilities are clear:
+Ungrouped names are allowed only for stable root packages whose responsibility is
+already clear:
 
 ```text
 lo-core
-lo-cli
-lo-compiler
-lo-runtime
-lo-compute
-lo-logic
-lo-vector
-lo-security
-lo-reports
-lo-project-graph
+lo-ai
+lo-photonic
+```
+
+`lo-core` is the language root. `lo-ai` is the generic AI contract root.
+`lo-photonic` is the photonic concept/model root, not a compiler target.
+
+## Package Families
+
+| Family | Meaning | Examples |
+|---|---|---|
+| `lo-core-*` | Core language, toolchain, runtime and safe developer automation | `lo-core-compiler`, `lo-core-runtime`, `lo-core-security`, `lo-core-cli`, `lo-core-tasks` |
+| `lo-ai-*` | AI workload, model, agent and AI compute-model packages | `lo-ai-agent`, `lo-ai-neural`, `lo-ai-neuromorphic`, `lo-ai-lowbit` |
+| `lo-target-*` | Compiler/output targets and backend planning | `lo-target-cpu`, `lo-target-gpu`, `lo-target-wasm`, `lo-target-photonic` |
+| `lo-cpu-*` | CPU implementation and optimized kernel packages | `lo-cpu-kernels` |
+| `lo-gpu-*` | GPU implementation and optimized kernel packages | future `lo-gpu-kernels` |
+| `lo-framework-*` | Optional framework, server and app boundary packages | `lo-framework-app-kernel`, `lo-framework-api-server`, `lo-framework-example-app` |
+| `lo-devtools-*` | Development-only tools not needed by production installs | `lo-devtools-project-graph` |
+| `lo-tools-*` | Tools that may run in development or staging but are not core runtime packages | `lo-tools-benchmark` |
+| `lo-finance-*` | Finance domain package family | `lo-finance-core` |
+| `lo-database-*` | Database domain package family | future package family |
+| `lo-industrial-*` | Industrial domain package family | future package family |
+| `lo-science-*` | Science domain package family | future package family |
+| `lo-manufacturing-*` | Manufacturing domain package family | future package family |
+
+## Current Package Names
+
+```text
+lo-core
+lo-core-cli
+lo-core-compiler
+lo-core-compute
+lo-core-config
+lo-core-logic
+lo-core-reports
+lo-core-runtime
+lo-core-security
+lo-core-tasks
+lo-core-vector
+lo-ai
+lo-ai-agent
+lo-ai-lowbit
+lo-ai-neural
+lo-ai-neuromorphic
+lo-photonic
+lo-target-ai-accelerator
 lo-target-binary
 lo-target-cpu
 lo-target-gpu
 lo-target-photonic
 lo-target-wasm
-lo-photonic
-lo-app-kernel
-lo-api-server
-lo-tasks
-lo-benchmark
-lo-finance
+lo-cpu-kernels
+lo-framework-app-kernel
+lo-framework-api-server
+lo-framework-example-app
+lo-devtools-project-graph
+lo-tools-benchmark
+lo-finance-core
 ```
 
-`lo-target-binary` means native/binary target planning. It should not be
-renamed to `lo-io-binary`, because binary target output and binary data I/O are
-different concerns.
+## Devtools Rule
 
-`lo-target-photonic` means photonic backend target planning. It should not be
-renamed to `lo-io-photonic`, because photonic target planning and photonic I/O
-are different concerns.
+Packages needed only by developers should use `lo-devtools-*` when they inspect,
+map, scaffold or explain the project. They should not be production runtime
+dependencies.
 
-## Candidate Renames
+Use `lo-tools-*` for broader utilities such as benchmark runners, diagnostics or
+release tooling that may run in development or staging.
 
-These names are candidates for a later staged migration:
+## Target Rule
 
-| Current | Candidate | Reason |
-|---|---|---|
-| `lo-target-ai-accelerator` | `lo-target-ai` | Shorter target name for NPU, TPU, Gaudi and related AI targets. |
-| `lo-cpu-kernels` | `lo-kernel-cpu` | Better if the package owns low-level CPU execution kernels. |
-| `lo-lowbit-ai` | `lo-ai-lowbit` | Groups AI packages by prefix. |
-| `lo-neural` | `lo-ai-neural` | Makes neural workload ownership visibly AI-related. |
-| `lo-neuromorphic` | `lo-ai-neuromorphic` | Groups future AI compute models by prefix. |
+`lo-target-*` packages describe where compiled LO code is going.
 
-Do not apply these renames casually. A rename must update:
+Do not rename target packages to I/O packages. For example, `lo-target-binary`
+means native or binary output planning. `lo-target-photonic` means compiler
+mapping to photonic hardware, simulators or plans.
+
+I/O packages can be added later for data movement:
+
+```text
+lo-io-network
+lo-io-storage
+lo-io-binary
+lo-io-optical
+lo-io-photonic
+```
+
+These should not replace compiler target packages.
+
+## Rename Checklist
+
+When renaming a package, update:
 
 ```text
 directory paths
@@ -87,28 +127,3 @@ imports and relative paths
 generated project graph outputs
 changelog and migration notes
 ```
-
-## I/O Packages To Add Later
-
-Add these as new packages when their contracts are needed:
-
-```text
-lo-io
-lo-io-binary
-lo-io-network
-lo-io-storage
-lo-io-optical
-lo-io-photonic
-```
-
-Suggested meanings:
-
-```text
-lo-io-network    TCP, UDP, HTTP, TLS, QUIC and WebSocket data movement
-lo-io-storage    files, SSD, NVMe, object storage and stream storage
-lo-io-binary     binary data formats, binary parsing and binary streams
-lo-io-optical    fibre and optical network I/O
-lo-io-photonic   photonic interconnect, silicon photonics and optical compute I/O
-```
-
-These should not replace target packages.

@@ -5,7 +5,7 @@ and reports.
 
 Status: draft language and compiler contract. GPU target planning and output
 contracts belong in `packages-lo/lo-target-gpu/`. Compute target selection belongs
-in `packages-lo/lo-compute/`.
+in `packages-lo/lo-core-compute/`.
 
 ## Purpose
 
@@ -63,7 +63,7 @@ compute target best {
 
 ## Compiler Checks
 
-`lo-core` and `lo-compiler` should check:
+`lo-core` and `lo-core-compiler` should check:
 
 ```text
 compute block is pure
@@ -146,10 +146,10 @@ do not claim vendor execution unless a backend exists
 lo-core
   target syntax, compiler-facing checks and report contracts
 
-lo-compute
+lo-core-compute
   target selection, capability model, budgets and fallback planning
 
-lo-vector
+lo-core-vector
   vector, matrix and tensor operation semantics
 
 lo-target-gpu
@@ -160,6 +160,6 @@ Final rule:
 
 ```text
 lo-core defines GPU target syntax.
-lo-compute decides whether GPU is suitable.
+lo-core-compute decides whether GPU is suitable.
 lo-target-gpu produces GPU plans and reports.
 ```

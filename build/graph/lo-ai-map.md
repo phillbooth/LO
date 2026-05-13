@@ -4,7 +4,7 @@
 
 LO / Logic Omni language package, examples, schemas and prototype CLI.
 
-## lo-compiler
+## lo-core-compiler
 
 LO compiler pipeline contracts for parsing, checking, IR, diagnostics and reports.
 
@@ -14,7 +14,7 @@ Provides:
 - CompilerDiagnostic
 - CompilerResult
 
-## lo-runtime
+## lo-core-runtime
 
 LO execution engine contracts for checked and compiled runtime execution.
 
@@ -25,7 +25,7 @@ Provides:
 - RuntimeResult
 - RuntimeReport
 
-## lo-security
+## lo-core-security
 
 Reusable LO security primitives, redaction helpers, permission models and security report contracts.
 
@@ -43,7 +43,7 @@ Provides:
 - RedactionResult
 - PermissionGrant
 
-## lo-config
+## lo-core-config
 
 LO project configuration, environment mode and policy loading contracts.
 
@@ -61,7 +61,7 @@ Provides:
 - ProductionStrictnessPolicy
 - RuntimeConfigHandoff
 
-## lo-reports
+## lo-core-reports
 
 Shared LO report schemas and report-writing contracts.
 
@@ -79,7 +79,7 @@ Provides:
 - SecurityReport
 - TargetReport
 
-## lo-logic
+## lo-core-logic
 
 LO multi-state logic concepts including Tri, Logic<N> and future Omni logic.
 
@@ -90,7 +90,7 @@ Provides:
 - TruthTableRow
 - LogicReport
 
-## lo-vector
+## lo-core-vector
 
 LO vector value, lane, operation and report concepts.
 
@@ -107,7 +107,7 @@ Provides:
 - TensorOperation
 - VectorReport
 
-## lo-compute
+## lo-core-compute
 
 LO compute planning, capability and target selection concepts.
 
@@ -143,7 +143,7 @@ Provides:
 - AiModelRegistry
 - AiTargetSelection
 
-## lo-lowbit-ai
+## lo-ai-lowbit
 
 LO low-bit AI inference contracts with BitNet as an optional backend.
 
@@ -161,7 +161,7 @@ Provides:
 - LowBitAiBackendAdapter
 - LowBitAiModelReference
 
-## lo-agent
+## lo-ai-agent
 
 LO supervised AI agent, tool permission, task group and report contracts.
 
@@ -177,7 +177,7 @@ Provides:
 - AgentMergePolicy
 - AgentReport
 
-## lo-neural
+## lo-ai-neural
 
 LO neural network model, layer, inference and training boundary contracts.
 
@@ -194,7 +194,7 @@ Provides:
 - NeuralTrainingPlan
 - NeuralReport
 
-## lo-neuromorphic
+## lo-ai-neuromorphic
 
 LO neuromorphic and spiking event model contracts.
 
@@ -316,15 +316,15 @@ Provides:
 - UnsupportedPhotonicOperation
 - PhotonicSimulationTarget
 
-## lo-app-kernel
+## lo-framework-app-kernel
 
 Optional LO secure runtime kernel design for typed APIs, validation, auth, workload controls, jobs and reports.
 
-## lo-api-server
+## lo-framework-api-server
 
-`lo-api-server` is the first concrete HTTP API-serving package for LO.
+`lo-framework-api-server` is the first concrete HTTP API-serving package for LO.
 
-## lo-cli
+## lo-core-cli
 
 LO developer command-line interface for checking, building, serving, reporting and running safe tasks.
 
@@ -342,7 +342,7 @@ Provides:
 - dirname
 - join
 
-## lo-tasks
+## lo-core-tasks
 
 Safe typed task runner for LO project automation.
 
@@ -360,7 +360,7 @@ Provides:
 - TaskReport
 - TaskRunReport
 
-## lo-benchmark
+## lo-tools-benchmark
 
 LO benchmark and diagnostics contracts for logic, compute targets, fallback behaviour and safe reporting.
 
@@ -378,7 +378,7 @@ Provides:
 - BenchmarkSubmitPayload
 - DEFAULT_BENCHMARK_CONFIG
 
-## lo-project-graph
+## lo-devtools-project-graph
 
 LO project knowledge graph contracts for package, document, policy and report relationships.
 
@@ -396,10 +396,10 @@ Provides:
 - ProjectGraph
 - ProjectGraphWorkspacePackage
 
-## lo-finance
+## lo-finance-core
 
 Grouped LO finance package contracts for financial maths, market data, FIX, audit, risk and pricing planning.
 
-## lo-example-app
+## lo-framework-example-app
 
-`packages-lo/lo-example-app` is the bespoke application package for this workspace.
+`packages-lo/lo-framework-example-app` is the bespoke application package for this workspace.

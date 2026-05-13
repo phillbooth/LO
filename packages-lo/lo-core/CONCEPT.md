@@ -172,7 +172,7 @@ source-mapped API reports
 
 The Secure App Kernel can enforce those contracts at runtime.
 
-The `lo-api-server` package can serve compiled API route manifests over HTTP by
+The `lo-framework-api-server` package can serve compiled API route manifests over HTTP by
 normalising requests and passing them into the Secure App Kernel. This keeps the
 HTTP server separate from LO core and keeps auth, validation and typed handler
 execution in the kernel.

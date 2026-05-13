@@ -32,12 +32,12 @@ These files describe the app being built, not the LO language itself.
 
 ## Package-Level Architecture Notes
 
-- `../packages-lo/lo-agent-parallel-compute.md` - parallel AI agents, CPU/GPU
+- `../packages-lo/lo-ai-agent-parallel-compute.md` - parallel AI agents, CPU/GPU
   compute and supervised orchestration
-- `../packages-lo/lo-benchmark/README.md` - benchmark diagnostics, fallback
+- `../packages-lo/lo-tools-benchmark/README.md` - benchmark diagnostics, fallback
   checks, privacy-safe reports and future sharing payloads
 
 ## Language and Runtime Proposals
 
-- `lo-logic-compute-runtime-proposal.md` - future LO logic, compute type and
+- `lo-core-logic-compute-runtime-proposal.md` - future LO logic, compute type and
   secure runtime support proposal.

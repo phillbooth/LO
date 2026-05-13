@@ -35,8 +35,8 @@ change and friendly to both humans and AI coding tools.
 4. Query the graph if needed:
 
 ```powershell
-node packages-lo\lo-cli\dist\index.js graph query lo-security --out build\graph
-node packages-lo\lo-cli\dist\index.js graph explain package:lo-security --out build\graph
+node packages-lo\lo-core-cli\dist\index.js graph query lo-core-security --out build\graph
+node packages-lo\lo-core-cli\dist\index.js graph explain package:lo-core-security --out build\graph
 ```
 
 ### Refresh Project Context
@@ -45,7 +45,7 @@ node packages-lo\lo-cli\dist\index.js graph explain package:lo-security --out bu
 2. Regenerate the project graph:
 
 ```powershell
-node packages-lo\lo-cli\dist\index.js graph --out build\graph
+node packages-lo\lo-core-cli\dist\index.js graph --out build\graph
 ```
 
 3. Review generated graph output when the change affects package ownership,
@@ -56,13 +56,13 @@ node packages-lo\lo-cli\dist\index.js graph --out build\graph
 1. Inspect task definitions.
 
 ```powershell
-node packages-lo\lo-cli\dist\index.js task --file packages-lo\lo-tasks\examples\tasks.lo
+node packages-lo\lo-core-cli\dist\index.js task --file packages-lo\lo-core-tasks\examples\tasks.lo
 ```
 
 2. Dry-run a task before execution.
 
 ```powershell
-node packages-lo\lo-cli\dist\index.js task buildApi --file packages-lo\lo-tasks\examples\tasks.lo --dry-run
+node packages-lo\lo-core-cli\dist\index.js task buildApi --file packages-lo\lo-core-tasks\examples\tasks.lo --dry-run
 ```
 
 3. Review the task report at `build/reports/task-report.json` unless a custom
@@ -72,7 +72,7 @@ node packages-lo\lo-cli\dist\index.js task buildApi --file packages-lo\lo-tasks\
 
 1. Add product requirements to `docs/REQUIREMENTS.md`.
 2. Add product UX rules and screens to this document.
-3. Add app source under `packages-lo/lo-example-app/`.
+3. Add app source under `packages-lo/lo-framework-example-app/`.
 4. Keep reusable language, runtime, security and tooling contracts in their
    owning packages.
 
@@ -120,13 +120,13 @@ Current examples:
 
 ```text
 LO project graph generated.
-Graph JSON: build\graph\lo-project-graph.json
+Graph JSON: build\graph\lo-devtools-project-graph.json
 Graph report: build\graph\LO_GRAPH_REPORT.md
 ```
 
 ```text
 Task buildApi dry-run planned.
-Task file: packages-lo\lo-tasks\examples\tasks.lo
+Task file: packages-lo\lo-core-tasks\examples\tasks.lo
 Dependency order: generateReports -> buildApi
 Task report: build\reports\task-report.json
 ```
@@ -189,7 +189,7 @@ Use components that match actual user work:
 - report links for generated artefacts
 
 Avoid adding a CMS, admin framework, ORM UI or frontend framework design to
-`lo-core` or `lo-app-kernel`.
+`lo-core` or `lo-framework-app-kernel`.
 
 ## Accessibility Baseline
 

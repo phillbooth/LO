@@ -22,11 +22,11 @@ my-lo-app/
 `-- packages-lo/
     |-- .git
     |-- lo-core/
-    |-- lo-compiler/
-    |-- lo-runtime/
-    |-- lo-security/
-    |-- lo-finance/
-    `-- lo-example-app/
+    |-- lo-core-compiler/
+    |-- lo-core-runtime/
+    |-- lo-core-security/
+    |-- lo-finance-core/
+    `-- lo-framework-example-app/
 ```
 
 ## Package Responsibilities
@@ -56,7 +56,7 @@ ecosystem.
 
 `packages-lo/` is for LO packages. It may later be a Git submodule or
 standalone nested repository, but that must be intentional. In this beta repo it
-also contains `lo-example-app/`, a clearly named example/template app package.
+also contains `lo-framework-example-app/`, a clearly named example/template app package.
 
 ## Production Resolution Rule
 

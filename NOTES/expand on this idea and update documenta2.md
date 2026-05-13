@@ -1,4 +1,6 @@
-expand on this idea and update documentation
+expand on this idea and update documentation and update project files
+there sould be a lo-core-* package for network and or security with related content in that may need changing
+for each file you update etc confirm it is saved
 
 Yes — LO could help improve **network / Ethernet I/O speed and security**, but not by “making Ethernet faster” directly.
 
@@ -26,6 +28,7 @@ Ethernet itself is still evolving quickly. IEEE 802.3 has active work around **2
 
 LO should have a dedicated network layer:
 
+consider naming the below lo-core-* or lo-networking-* etc
 ```text
 lo-net
 lo-http

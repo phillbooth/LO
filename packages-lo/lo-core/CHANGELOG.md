@@ -104,12 +104,12 @@ Example:
 - Added docs/dart-flutter-target.md plus matching docs/sytax/ and docs/sytax-examples/ entries for layered Dart/Flutter target support, explicit async flows and Bytes/Uint8List interop boundaries.
 - Expanded Dart/Flutter target planning with support levels for Dart logic packages, Flutter package/plugin output, platform-channel contracts, Pigeon-style typed APIs, Flutter FFI/native libraries, permission reports, source maps and deferred widget syntax.
 - Added docs/react-native-target.md and updated framework target planning so React Native is supported as generated mobile adapter/package interop, not LO Core UI syntax.
-- Added `packages-lo/lo-api-server/` positioning across LO core docs as the built-in HTTP API server that delegates to the Secure App Kernel.
+- Added `packages-lo/lo-framework-api-server/` positioning across LO core docs as the built-in HTTP API server that delegates to the Secure App Kernel.
 - Added `docs/package-boundaries.md` and cross-references from LO core docs to
-  sibling packages: `lo-logic`, `lo-vector`, `lo-compute`, `lo-photonic`,
-  `lo-target-binary`, `lo-target-photonic`, `lo-app-kernel`, `lo-api-server`,
-  `lo-cli` and `lo-tasks`.
-- Added LO core package-boundary references for `lo-ai`, `lo-lowbit-ai`,
+  sibling packages: `lo-core-logic`, `lo-core-vector`, `lo-core-compute`, `lo-photonic`,
+  `lo-target-binary`, `lo-target-photonic`, `lo-framework-app-kernel`, `lo-framework-api-server`,
+  `lo-core-cli` and `lo-core-tasks`.
+- Added LO core package-boundary references for `lo-ai`, `lo-ai-lowbit`,
   `lo-target-cpu` and `lo-cpu-kernels` so AI inference and CPU fallback stay
   outside `lo-core`.
 - Clarified `TASKS.md` and `TODO.md` so `lo-core` tracks syntax, compiler

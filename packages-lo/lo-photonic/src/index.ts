@@ -22,7 +22,7 @@ export interface OpticalChannel {
 }
 
 export interface PhotonicMapping {
-  readonly logicPackage: "@lo/logic";
+  readonly logicPackage: "@lo/core-logic";
   readonly logicName: string;
   readonly states: readonly {
     readonly state: string;

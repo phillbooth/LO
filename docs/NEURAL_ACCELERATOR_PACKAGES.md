@@ -9,32 +9,32 @@ Best rule:
 
 ```text
 LO core defines the language.
-lo-vector defines vector, matrix and tensor shapes.
-lo-neural defines neural network workloads.
-lo-neuromorphic defines spike/event workloads.
-lo-compute selects targets and fallback plans.
+lo-core-vector defines vector, matrix and tensor shapes.
+lo-ai-neural defines neural network workloads.
+lo-ai-neuromorphic defines spike/event workloads.
+lo-core-compute selects targets and fallback plans.
 target packages map planned work to CPU, GPU, AI accelerator or photonic plans.
 ```
 
 ## Package Split
 
 ```text
-packages-lo/lo-vector
+packages-lo/lo-core-vector
   Vector<T, N>, Matrix<T, R, C>, Tensor<T, Shape>, numeric element contracts
 
-packages-lo/lo-neural
+packages-lo/lo-ai-neural
   neural models, layers, activations, inference, training boundaries
 
-packages-lo/lo-neuromorphic
+packages-lo/lo-ai-neuromorphic
   Spike, SpikeTrain, EventSignal<T>, spiking models
 
 packages-lo/lo-ai
   generic AI model metadata, safety policy and AI inference reports
 
-packages-lo/lo-lowbit-ai
+packages-lo/lo-ai-lowbit
   low-bit, quantized and ternary AI backend contracts
 
-packages-lo/lo-compute
+packages-lo/lo-core-compute
   compute auto, target selection and fallback reports
 
 packages-lo/lo-target-ai-accelerator
@@ -50,10 +50,10 @@ packages-lo/lo-target-photonic
 the same thing everywhere.
 
 ```text
-lo-logic
+lo-core-logic
   Tri truth/logical state semantics
 
-lo-lowbit-ai
+lo-ai-lowbit
   ternary or low-bit model weights
 
 lo-photonic
@@ -63,7 +63,7 @@ lo-target-photonic
   backend plans for photonic hardware or simulators
 ```
 
-Photonic support should not own `Tri`. `Tri` belongs to `lo-logic`. Photonic
+Photonic support should not own `Tri`. `Tri` belongs to `lo-core-logic`. Photonic
 packages can map logic states to optical properties such as phase, amplitude or
 wavelength.
 
@@ -151,7 +151,7 @@ warnings
   LO syntax.
 - Do not require photonic, GPU or AI accelerator hardware for baseline LO.
 - Do not let model output directly make high-impact decisions.
-- Do not put neural layers or training policy into `lo-vector`.
+- Do not put neural layers or training policy into `lo-core-vector`.
 
 ## Final Rule
 

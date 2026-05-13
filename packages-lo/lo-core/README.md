@@ -43,43 +43,43 @@ Package ownership:
 packages-lo/lo-core/
   Bool, Option, Result, basic flow syntax, basic type rules, compiler contracts
 
-packages-lo/lo-compiler/
+packages-lo/lo-core-compiler/
   lexer, parser, AST, checker pipeline, IR, diagnostics, source maps, compiler reports
 
-packages-lo/lo-runtime/
+packages-lo/lo-core-runtime/
   checked execution, compiled execution, effect dispatch, runtime errors, runtime reports
 
-packages-lo/lo-security/
+packages-lo/lo-core-security/
   SecureString helpers, redaction primitives, permission models, security reports
 
-packages-lo/lo-config/
+packages-lo/lo-core-config/
   project config, environment modes, config validation, production policy loading
 
-packages-lo/lo-reports/
+packages-lo/lo-core-reports/
   shared report metadata, diagnostics, processing reports, schemas and writer contracts
 
-packages-lo/lo-logic/
+packages-lo/lo-core-logic/
   Tri, Logic<N>, Decision, RiskLevel, Omni logic, truth tables, logic reports
 
-packages-lo/lo-vector/
+packages-lo/lo-core-vector/
   Vector<T, N>, Matrix<T>, Tensor<T>, Shape, lanes, dimensions, vector operations and vector reports
 
-packages-lo/lo-compute/
+packages-lo/lo-core-compute/
   compute planning, capabilities, budgets, offload and target selection
 
 packages-lo/lo-ai/
   generic AI inference contracts, model metadata, safety policy, AI reports
 
-packages-lo/lo-lowbit-ai/
+packages-lo/lo-ai-lowbit/
   low-bit / ternary AI model references, backend selection and CPU inference plans
 
-packages-lo/lo-agent/
+packages-lo/lo-ai-agent/
   supervised AI agent, tool permission, task group and report contracts
 
-packages-lo/lo-neural/
+packages-lo/lo-ai-neural/
   neural models, layers, inference and training boundary contracts
 
-packages-lo/lo-neuromorphic/
+packages-lo/lo-ai-neuromorphic/
   Spike, SpikeTrain, EventSignal and spiking model contracts
 
 packages-lo/lo-photonic/
@@ -106,10 +106,10 @@ packages-lo/lo-target-ai-accelerator/
 packages-lo/lo-target-photonic/
   photonic backend target plans using lo-photonic concepts
 
-packages-lo/lo-benchmark/
+packages-lo/lo-tools-benchmark/
   development diagnostics, benchmark configs, fallback checks and privacy-safe reports
 
-packages-lo/lo-project-graph/
+packages-lo/lo-devtools-project-graph/
   project knowledge graph contracts for packages, docs, policies and reports
 ```
 
@@ -120,13 +120,13 @@ Runtime enforcement for application request handling belongs in the optional LO
 Secure App Kernel package in the surrounding workspace:
 
 ```text
-packages-lo/lo-app-kernel/
+packages-lo/lo-framework-app-kernel/
 ```
 
 HTTP API serving belongs in the built-in API server package:
 
 ```text
-packages-lo/lo-api-server/
+packages-lo/lo-framework-api-server/
 ```
 
 The intended layering is:
@@ -159,7 +159,7 @@ Full Frameworks
 
 LO core may define syntax, checks and reports for safe API, webhook, job and
 security contracts. The Secure App Kernel enforces those contracts at runtime
-when an application opts into it. `lo-api-server` provides the default HTTP
+when an application opts into it. `lo-framework-api-server` provides the default HTTP
 transport for API services by loading route manifests, normalising requests and
 passing them to the kernel. Full frameworks provide opinionated application
 structure above or beside the kernel.
@@ -296,7 +296,7 @@ effects [database.write] {
 LO core checks the contract. A kernel-backed runtime can enforce request
 validation, auth, limits, idempotency and typed handler dispatch.
 
-The built-in `lo-api-server` package can serve the compiled API route manifest
+The built-in `lo-framework-api-server` package can serve the compiled API route manifest
 over HTTP, but it should not own auth policy, business logic, persistence,
 frontend rendering or framework conventions.
 

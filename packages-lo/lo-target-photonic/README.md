@@ -63,9 +63,9 @@ What fallback path is available if optical I/O is not present?
 ```text
 .lo source
   ->
-lo-core / lo-compiler
+lo-core / lo-core-compiler
   ->
-lo-compute
+lo-core-compute
   ->
 lo-target-photonic
   ->
@@ -120,7 +120,7 @@ The package can report both families, but it must keep them distinct.
 phase, amplitude, optical signal and optical channel. It should not own the
 general photonic vocabulary itself.
 
-`lo-target-photonic` should consume plans from `lo-compute` and concepts from
+`lo-target-photonic` should consume plans from `lo-core-compute` and concepts from
 `lo-photonic`, then produce target-specific outputs.
 
 It should not own:
@@ -134,17 +134,17 @@ runtime API/auth policy
 general compiler parsing/checking
 ```
 
-Those belong in `lo-logic`, `lo-vector`, `lo-compute`, `lo-photonic`,
-`lo-app-kernel` and `lo-compiler`.
+Those belong in `lo-core-logic`, `lo-core-vector`, `lo-core-compute`, `lo-photonic`,
+`lo-framework-app-kernel` and `lo-core-compiler`.
 
 ## Inputs
 
 Expected inputs:
 
 ```text
-checked flow or IR summary from lo-compiler
-compute plan from lo-compute
-vector/matrix operation summary from lo-vector
+checked flow or IR summary from lo-core-compiler
+compute plan from lo-core-compute
+vector/matrix operation summary from lo-core-vector
 photonic concepts from lo-photonic
 target preferences from project config
 available target capability map
@@ -279,12 +279,12 @@ lo-target-photonic
 | --- | --- |
 | `lo-photonic` | Photonic types, models, APIs and simulations |
 | `lo-target-photonic` | Compiler backend, output target and hardware or simulator mapping |
-| `lo-vector` | Vector, matrix, tensor types and operations |
-| `lo-compute` | `compute auto`, target selection and fallback planning |
+| `lo-core-vector` | Vector, matrix, tensor types and operations |
+| `lo-core-compute` | `compute auto`, target selection and fallback planning |
 | `lo-target-binary` | Normal CPU/native binary output |
 | `lo-target-gpu` | GPU target planning and output contracts |
-| `lo-benchmark` | Benchmark diagnostics for optical I/O and fallback paths |
-| `lo-reports` | Shared report schemas and report-writing contracts |
+| `lo-tools-benchmark` | Benchmark diagnostics for optical I/O and fallback paths |
+| `lo-core-reports` | Shared report schemas and report-writing contracts |
 
 ## First Version Scope
 
@@ -292,7 +292,7 @@ The first version should support:
 
 ```text
 define photonic target capability model
-define input contract from lo-compute
+define input contract from lo-core-compute
 define photonic plan output format
 define simulation target report format
 define unsupported-operation diagnostics

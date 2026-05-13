@@ -1,4 +1,4 @@
-expand on this idea and update documentation
+expand on this idea update project and update documentation
 
 LO could be **more secure than Rust/C++/Python in application security**, not necessarily in every low-level memory-safety case.
 

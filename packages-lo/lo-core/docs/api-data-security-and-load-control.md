@@ -47,7 +47,7 @@ simultaneous requests.
 The Secure App Kernel is the runtime enforcement layer for these contracts when
 an application opts into a LO-managed request lifecycle.
 
-`lo-api-server` is the built-in HTTP API server package for that lifecycle. It
+`lo-framework-api-server` is the built-in HTTP API server package for that lifecycle. It
 should own HTTP listening, request normalisation, route manifest loading,
 server-level body/timeout limits, safe response writing and server reports. It
 should delegate typed decoding, auth, idempotency, rate-limit policy and handler
@@ -152,7 +152,7 @@ request analytics UI
 ```
 
 The default built-in HTTP server implementation is expected to live in
-`packages-lo/lo-api-server/`. External framework integrations should live in
+`packages-lo/lo-framework-api-server/`. External framework integrations should live in
 adapter packages rather than LO core.
 
 LO should provide the rules, metadata and safety checks. Frameworks/packages

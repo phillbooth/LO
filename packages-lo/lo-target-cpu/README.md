@@ -24,7 +24,7 @@ CPU AI inference target planning
 
 `lo-target-cpu` should not implement kernels directly. Optimized CPU kernel
 descriptions belong in `lo-cpu-kernels`; AI model adapters belong in `lo-ai`
-and `lo-lowbit-ai`.
+and `lo-ai-lowbit`.
 
 ## Contracts
 
@@ -37,5 +37,5 @@ Final rule:
 ```text
 lo-target-cpu decides whether the CPU can run the work.
 lo-cpu-kernels describes optimized CPU kernels.
-lo-lowbit-ai describes low-bit AI backend inference plans.
+lo-ai-lowbit describes low-bit AI backend inference plans.
 ```

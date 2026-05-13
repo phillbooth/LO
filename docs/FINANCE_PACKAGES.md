@@ -48,24 +48,24 @@ References:
 Start grouped:
 
 ```text
-packages-lo/lo-finance/
+packages-lo/lo-finance-core/
 ```
 
 Split later only after contracts are stable:
 
 ```text
-packages-lo/lo-finance-math/
-packages-lo/lo-finance-calendar/
-packages-lo/lo-finance-market-data/
-packages-lo/lo-finance-order/
-packages-lo/lo-finance-fix/
-packages-lo/lo-finance-audit/
-packages-lo/lo-finance-compliance/
-packages-lo/lo-finance-risk/
-packages-lo/lo-finance-pricing/
-packages-lo/lo-finance-products/
-packages-lo/lo-finance-scenarios/
-packages-lo/lo-finance-fdc3/
+packages-lo/lo-finance-core-math/
+packages-lo/lo-finance-core-calendar/
+packages-lo/lo-finance-core-market-data/
+packages-lo/lo-finance-core-order/
+packages-lo/lo-finance-core-fix/
+packages-lo/lo-finance-core-audit/
+packages-lo/lo-finance-core-compliance/
+packages-lo/lo-finance-core-risk/
+packages-lo/lo-finance-core-pricing/
+packages-lo/lo-finance-core-products/
+packages-lo/lo-finance-core-scenarios/
+packages-lo/lo-finance-core-fdc3/
 ```
 
 Keep general infrastructure outside finance:
@@ -79,7 +79,7 @@ packages-lo/lo-ffi-cpp/
 packages-lo/lo-ffi-java/
 packages-lo/lo-ffi-python/
 packages-lo/lo-replay/
-packages-lo/lo-runtime-low-latency/
+packages-lo/lo-core-runtime-low-latency/
 ```
 
 ## First Phase
@@ -87,11 +87,11 @@ packages-lo/lo-runtime-low-latency/
 Build contracts in this order:
 
 ```text
-lo-finance-math
-lo-finance-calendar
-lo-finance-market-data
-lo-finance-audit
-lo-finance-fix
+lo-finance-core-math
+lo-finance-core-calendar
+lo-finance-core-market-data
+lo-finance-core-audit
+lo-finance-core-fix
 ```
 
 This keeps the beta realistic. LO should first prove it can model financial
@@ -108,10 +108,10 @@ lo-schema-registry
 lo-ffi-cpp
 lo-ffi-java
 lo-ffi-python
-lo-finance-risk
-lo-finance-pricing
-lo-finance-fdc3
-lo-runtime-low-latency
+lo-finance-core-risk
+lo-finance-core-pricing
+lo-finance-core-fdc3
+lo-core-runtime-low-latency
 lo-replay
 ```
 

@@ -2,7 +2,7 @@
 
 Ownership note: `lo-core` may document vector syntax and compiler checks, but
 vector values, lanes, dimensions, operations and vector reports belong in
-`packages-lo/lo-vector/`.
+`packages-lo/lo-core-vector/`.
 
 This document defines a security-first design for adding vector-aware execution to **LO / Logic Omni**.
 

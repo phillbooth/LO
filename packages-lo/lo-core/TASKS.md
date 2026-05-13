@@ -87,8 +87,8 @@ package boundaries
 [x] First practical implementation target: Node.js-hosted checked interpreter/prototype
 [x] Separate LO core language concerns from the optional Secure App Kernel layer
 [x] Support simple `console.log("...")` output in checked Run Mode
-[x] Document package boundaries from `lo-core` to `lo-logic`, `lo-vector`,
-    `lo-compute`, `lo-photonic`, target packages, CLI and task packages
+[x] Document package boundaries from `lo-core` to `lo-core-logic`, `lo-core-vector`,
+    `lo-core-compute`, `lo-photonic`, target packages, CLI and task packages
 [x] Split compiler, runtime, security, config, reports, WASM target and GPU
     target responsibilities into dedicated package TODOs
 [x] Split AI inference, low-bit AI backend, CPU target and CPU kernel
@@ -136,21 +136,21 @@ package boundaries
 Package-boundary note:
 
 ```text
-Tri / Logic<N> / Omni work should update packages-lo/lo-logic first.
-Vector work should update packages-lo/lo-vector first.
-Compute planning work should update packages-lo/lo-compute first.
+Tri / Logic<N> / Omni work should update packages-lo/lo-core-logic first.
+Vector work should update packages-lo/lo-core-vector first.
+Compute planning work should update packages-lo/lo-core-compute first.
 AI inference work should update packages-lo/lo-ai first.
-Low-bit AI backend work should update packages-lo/lo-lowbit-ai first.
+Low-bit AI backend work should update packages-lo/lo-ai-lowbit first.
 Photonic vocabulary should update packages-lo/lo-photonic first.
 Target backend work should update packages-lo/lo-target-binary or
 packages-lo/lo-target-cpu, packages-lo/lo-target-wasm, packages-lo/lo-target-gpu or
 packages-lo/lo-target-photonic first.
 CPU kernel work should update packages-lo/lo-cpu-kernels first.
-Compiler pipeline work should update packages-lo/lo-compiler first.
-Runtime execution work should update packages-lo/lo-runtime first.
-Security primitive work should update packages-lo/lo-security first.
-Config and report shape work should update packages-lo/lo-config or
-packages-lo/lo-reports first.
+Compiler pipeline work should update packages-lo/lo-core-compiler first.
+Runtime execution work should update packages-lo/lo-core-runtime first.
+Security primitive work should update packages-lo/lo-core-security first.
+Config and report shape work should update packages-lo/lo-core-config or
+packages-lo/lo-core-reports first.
 lo-core should be updated when syntax, compiler validation or report contracts
 change.
 ```
@@ -160,11 +160,11 @@ change.
 These areas are intentionally tracked outside `lo-core` first:
 
 ```text
-Tri, Logic<N>, Decision and Omni semantics -> packages-lo/lo-logic/TODO.md
-Vector values, lanes and operation semantics -> packages-lo/lo-vector/TODO.md
-Compute planning and target selection -> packages-lo/lo-compute/TODO.md
+Tri, Logic<N>, Decision and Omni semantics -> packages-lo/lo-core-logic/TODO.md
+Vector values, lanes and operation semantics -> packages-lo/lo-core-vector/TODO.md
+Compute planning and target selection -> packages-lo/lo-core-compute/TODO.md
 AI inference contracts -> packages-lo/lo-ai/TODO.md
-Low-bit AI backend -> packages-lo/lo-lowbit-ai/TODO.md
+Low-bit AI backend -> packages-lo/lo-ai-lowbit/TODO.md
 Photonic concepts and simulation helpers -> packages-lo/lo-photonic/TODO.md
 CPU target planning -> packages-lo/lo-target-cpu/TODO.md
 CPU kernel planning -> packages-lo/lo-cpu-kernels/TODO.md
@@ -172,15 +172,15 @@ Binary/native target output -> packages-lo/lo-target-binary/TODO.md
 WASM target output -> packages-lo/lo-target-wasm/TODO.md
 GPU target output -> packages-lo/lo-target-gpu/TODO.md
 Photonic target output -> packages-lo/lo-target-photonic/TODO.md
-Compiler pipeline implementation -> packages-lo/lo-compiler/TODO.md
-Runtime execution contracts -> packages-lo/lo-runtime/TODO.md
-Security primitives and report contracts -> packages-lo/lo-security/TODO.md
-Config loading contracts -> packages-lo/lo-config/TODO.md
-Shared report schemas -> packages-lo/lo-reports/TODO.md
-CLI command UX and dispatch -> packages-lo/lo-cli/TODO.md
-Safe task automation -> packages-lo/lo-tasks/TODO.md
-API transport -> packages-lo/lo-api-server/TODO.md
-Application boundary enforcement -> packages-lo/lo-app-kernel/TODO.md
+Compiler pipeline implementation -> packages-lo/lo-core-compiler/TODO.md
+Runtime execution contracts -> packages-lo/lo-core-runtime/TODO.md
+Security primitives and report contracts -> packages-lo/lo-core-security/TODO.md
+Config loading contracts -> packages-lo/lo-core-config/TODO.md
+Shared report schemas -> packages-lo/lo-core-reports/TODO.md
+CLI command UX and dispatch -> packages-lo/lo-core-cli/TODO.md
+Safe task automation -> packages-lo/lo-core-tasks/TODO.md
+API transport -> packages-lo/lo-framework-api-server/TODO.md
+Application boundary enforcement -> packages-lo/lo-framework-app-kernel/TODO.md
 ```
 
 ---
@@ -231,7 +231,7 @@ Application boundary enforcement -> packages-lo/lo-app-kernel/TODO.md
 [x] Create docs/compute-blocks.md as language syntax and compiler contract reference
 [x] Create docs/gpu-target.md as target declaration/report contract reference
 [ ] Create docs/photonic-target.md as target declaration/report contract reference
-[ ] Create docs/ternary-logic.md as syntax/report reference to lo-logic
+[ ] Create docs/ternary-logic.md as syntax/report reference to lo-core-logic
 [ ] Create docs/source-maps.md
 [ ] Create docs/compiler-reports.md
 [ ] Create docs/ai-context.md

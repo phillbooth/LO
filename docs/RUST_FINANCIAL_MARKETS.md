@@ -461,22 +461,22 @@ Useful LO package connections:
 lo-core
   syntax, Result, Option, match, effects and typed records
 
-lo-security
+lo-core-security
   redaction, secrets, permission checks and security reports
 
-lo-reports
+lo-core-reports
   audit reports, processing reports and benchmark reports
 
-lo-runtime
+lo-core-runtime
   supervision, cancellation, memory policy and controlled execution
 
-lo-compute
+lo-core-compute
   target planning for fast simulation, vector ranking and AI workloads
 
-lo-vector
+lo-core-vector
   matrix, tensor and numeric workloads for modelling and backtesting
 
-lo-benchmark
+lo-tools-benchmark
   compare behavior across CPU, GPU, low-bit and fallback targets
 ```
 

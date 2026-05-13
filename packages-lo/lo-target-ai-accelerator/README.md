@@ -67,15 +67,15 @@ Related packages:
 
 | Package | Responsibility |
 |---|---|
-| `lo-neural` | Neural model, layer, inference and training contracts |
-| `lo-vector` | Vector, matrix and tensor shape contracts |
+| `lo-ai-neural` | Neural model, layer, inference and training contracts |
+| `lo-core-vector` | Vector, matrix and tensor shape contracts |
 | `lo-ai` | Generic AI inference safety and report contracts |
-| `lo-compute` | Target selection and fallback planning |
+| `lo-core-compute` | Target selection and fallback planning |
 | `lo-target-cpu` | CPU fallback target planning |
 | `lo-target-gpu` | GPU target planning |
-| `lo-lowbit-ai` | Low-bit AI backend selection |
+| `lo-ai-lowbit` | Low-bit AI backend selection |
 | `lo-target-photonic` | Future photonic target planning |
-| `lo-benchmark` | Generic AI accelerator benchmark diagnostics |
+| `lo-tools-benchmark` | Generic AI accelerator benchmark diagnostics |
 
 Final rule:
 

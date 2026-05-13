@@ -1,8 +1,8 @@
 # LO Simple Vector Syntax and Compute Auto
 
 Ownership note: `lo-core` may document language syntax for vector flows and
-`compute auto`, but vector semantics belong in `packages-lo/lo-vector/` and compute
-planning semantics belong in `packages-lo/lo-compute/`.
+`compute auto`, but vector semantics belong in `packages-lo/lo-core-vector/` and compute
+planning semantics belong in `packages-lo/lo-core-compute/`.
 
 This document describes the proposed **Simple Vector Syntax** and **Compute Auto** model for **LO / Logic Omni**.
 

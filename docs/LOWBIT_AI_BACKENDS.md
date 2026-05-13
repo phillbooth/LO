@@ -20,7 +20,7 @@ Primary references:
 lo-ai
   generic AI inference contracts, model metadata, safety policy and reports
 
-lo-lowbit-ai
+lo-ai-lowbit
   low-bit model references, backend selection and inference reports
 
 lo-target-cpu
@@ -29,11 +29,11 @@ lo-target-cpu
 lo-cpu-kernels
   optimized CPU kernel contracts for GEMM, GEMV, matrix and low-bit work
 
-lo-compute
+lo-core-compute
   target preference, fallback and target selection reports
 ```
 
-BitNet remains useful, but it is a backend inside `lo-lowbit-ai`, not a target
+BitNet remains useful, but it is a backend inside `lo-ai-lowbit`, not a target
 name in LO syntax and not part of `lo-core`.
 
 ## Compute Policy
@@ -110,14 +110,14 @@ BitNet b1.58 uses ternary model weights. LO `Tri` also uses a three-state value
 shape, but the meaning is different:
 
 ```text
-lo-logic
+lo-core-logic
   language-level Tri, Logic<N>, Decision and Omni semantics
 
-lo-lowbit-ai
+lo-ai-lowbit
   model-level low-bit and ternary weights for AI inference
 ```
 
-Do not make `lo-logic` depend on BitNet or any AI backend.
+Do not make `lo-core-logic` depend on BitNet or any AI backend.
 
 ## Report Shape
 

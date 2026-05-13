@@ -8,7 +8,7 @@ the template, package boundaries and developer tooling must provide so a
 bespoke application can be built on top of LO safely.
 
 Product-specific requirements belong in this file once an app domain is chosen.
-Until then, `packages-lo/lo-example-app/` remains a minimal app area and feature placeholders
+Until then, `packages-lo/lo-framework-example-app/` remains a minimal app area and feature placeholders
 must not be treated as implemented app functionality.
 
 ## Template Goals
@@ -35,7 +35,7 @@ must not be treated as implemented app functionality.
 
 | User Type | Description |
 |---|---|
-| App developer | Builds bespoke application source in `packages-lo/lo-example-app/` using LO packages. |
+| App developer | Builds bespoke application source in `packages-lo/lo-framework-example-app/` using LO packages. |
 | Package maintainer | Evolves reusable LO package contracts under `packages-lo/`. |
 | Security reviewer | Reviews policy, secret handling, reports and package boundaries. |
 | AI coding assistant | Uses `AGENTS.md` and `build/graph` to navigate the project safely. |
@@ -71,15 +71,15 @@ must not be treated as implemented app functionality.
 
 The app package must remain deliberately small until a product domain is chosen.
 
-- Bespoke app source must live in `packages-lo/lo-example-app/`.
-- App routes, modules, tests and app configuration must stay in `packages-lo/lo-example-app/`
+- Bespoke app source must live in `packages-lo/lo-framework-example-app/`.
+- App routes, modules, tests and app configuration must stay in `packages-lo/lo-framework-example-app/`
   or app-specific docs.
 - App-specific requirements must be added to this document before implementing
   product features.
 - App source must use explicit validation, explicit error handling and safe
   configuration references.
 - App features must not be implemented inside `packages-lo/lo-core/`.
-- App features must not turn `packages-lo/lo-app-kernel/` into a full framework,
+- App features must not turn `packages-lo/lo-framework-app-kernel/` into a full framework,
   CMS, admin dashboard, ORM or frontend framework.
 
 ## Non-Functional Requirements
@@ -98,27 +98,27 @@ The app package must remain deliberately small until a product domain is chosen.
 ## Workspace Package Requirements
 
 - The LO language core must live in `packages-lo/lo-core/`.
-- Compiler pipeline contracts must live in `packages-lo/lo-compiler/`.
-- Runtime execution contracts must live in `packages-lo/lo-runtime/`.
-- Shared security primitives must live in `packages-lo/lo-security/`.
-- Project configuration contracts must live in `packages-lo/lo-config/`.
-- Shared report contracts must live in `packages-lo/lo-reports/`.
+- Compiler pipeline contracts must live in `packages-lo/lo-core-compiler/`.
+- Runtime execution contracts must live in `packages-lo/lo-core-runtime/`.
+- Shared security primitives must live in `packages-lo/lo-core-security/`.
+- Project configuration contracts must live in `packages-lo/lo-core-config/`.
+- Shared report contracts must live in `packages-lo/lo-core-reports/`.
 - LO multi-state logic concepts such as `Tri`, `Logic<N>` and future Omni logic
-  must live in `packages-lo/lo-logic/`.
+  must live in `packages-lo/lo-core-logic/`.
 - LO vector value, lane and operation concepts must live in
-  `packages-lo/lo-vector/`.
+  `packages-lo/lo-core-vector/`.
 - LO compute planning, capability, budget and target selection concepts must
-  live in `packages-lo/lo-compute/`.
+  live in `packages-lo/lo-core-compute/`.
 - Generic AI inference contracts, model metadata, safety policy and AI reports
   must live in `packages-lo/lo-ai/`.
 - Low-bit and ternary AI inference contracts must live in
-  `packages-lo/lo-lowbit-ai/`, with BitNet represented only as a backend.
+  `packages-lo/lo-ai-lowbit/`, with BitNet represented only as a backend.
 - Supervised AI agent definitions, tool permissions, task groups, merge
-  policies and reports must live in `packages-lo/lo-agent/`.
+  policies and reports must live in `packages-lo/lo-ai-agent/`.
 - Neural-network model, layer, inference and training boundary contracts must
-  live in `packages-lo/lo-neural/`.
+  live in `packages-lo/lo-ai-neural/`.
 - Neuromorphic spike, event-signal and spiking model contracts must live in
-  `packages-lo/lo-neuromorphic/`.
+  `packages-lo/lo-ai-neuromorphic/`.
 - Photonic and wavelength hardware concepts must live in
   `packages-lo/lo-photonic/`.
 - CPU target planning, feature detection and fallback reports must live in
@@ -131,17 +131,17 @@ The app package must remain deliberately small until a product domain is chosen.
   `packages-lo/lo-target-ai-accelerator/`.
 - Photonic backend target planning must live in
   `packages-lo/lo-target-photonic/`.
-- The optional LO Secure App Kernel must live in `packages-lo/lo-app-kernel/`.
-- The built-in LO HTTP API server must live in `packages-lo/lo-api-server/`.
-- The LO developer CLI must live in `packages-lo/lo-cli/`.
-- Safe LO project automation must live in `packages-lo/lo-tasks/`.
-- LO benchmark and diagnostics tooling must live in `packages-lo/lo-benchmark/`.
-- LO project knowledge graph tooling must live in `packages-lo/lo-project-graph/`.
-- Bespoke app source must live in `packages-lo/lo-example-app/`.
+- The optional LO Secure App Kernel must live in `packages-lo/lo-framework-app-kernel/`.
+- The built-in LO HTTP API server must live in `packages-lo/lo-framework-api-server/`.
+- The LO developer CLI must live in `packages-lo/lo-core-cli/`.
+- Safe LO project automation must live in `packages-lo/lo-core-tasks/`.
+- LO benchmark and diagnostics tooling must live in `packages-lo/lo-tools-benchmark/`.
+- LO project knowledge graph tooling must live in `packages-lo/lo-devtools-project-graph/`.
+- Bespoke app source must live in `packages-lo/lo-framework-example-app/`.
 - App documentation must live in `docs/`.
 - Language documentation must stay within `packages-lo/lo-core/`.
 - Full framework features must stay outside `packages-lo/lo-core/` and
-  `packages-lo/lo-app-kernel/`.
+  `packages-lo/lo-framework-app-kernel/`.
 - Current development may use one root Git repository while package boundaries
   are still being shaped.
 - Later, `packages-lo/` may become its own Git repository so the LO packages can be
@@ -149,14 +149,14 @@ The app package must remain deliberately small until a product domain is chosen.
 - If `packages-lo/` has its own `.git`, it must be added intentionally as a
   submodule or standalone nested repository, and the framework root must treat
   it as an external dependency.
-- A future `packages-lo/lo-developer/` tree may be used for development-only
-  packages, staging packages, diagnostics, generators and experiments.
+- Development-only packages must use `lo-devtools-*` or `lo-tools-*` names for
+  staging packages, diagnostics, generators and experiments.
 - Development-only packages must be excluded from production package resolution
   and production downloads unless a maintainer explicitly opts into a
   development or staging profile.
 - The exact developer package folder name remains provisional, but its boundary
   must stay separate from production runtime package manifests.
-- `packages-lo/lo-finance/` may be used as a grouped beta finance package area
+- `packages-lo/lo-finance-core/` may be used as a grouped beta finance package area
   before finance contracts split into smaller packages.
 - Finance package work must stay outside `packages-lo/lo-core/` unless it is a
   general language rule needed by all domains.
@@ -170,7 +170,7 @@ The app package must remain deliberately small until a product domain is chosen.
 
 ## Finance Package Requirements
 
-- `lo-finance` must be a domain package group, not core LO syntax.
+- `lo-finance-core` must be a domain package group, not core LO syntax.
 - Finance support must start with typed data, deterministic maths, validation,
   audit, replay and integration contracts rather than live trading systems.
 - Finance maths must disallow float money by default, require explicit rounding
@@ -212,35 +212,35 @@ The app package must remain deliberately small until a product domain is chosen.
 
 ## API Server Requirements
 
-- `lo-api-server` must be an HTTP serving package, not a full web framework.
-- `lo-api-server` must load route manifests generated from LO API contracts.
-- `lo-api-server` must normalise HTTP requests before passing them to
-  `lo-app-kernel`.
-- `lo-api-server` must enforce server-level limits such as body size, timeout,
+- `lo-framework-api-server` must be an HTTP serving package, not a full web framework.
+- `lo-framework-api-server` must load route manifests generated from LO API contracts.
+- `lo-framework-api-server` must normalise HTTP requests before passing them to
+  `lo-framework-app-kernel`.
+- `lo-framework-api-server` must enforce server-level limits such as body size, timeout,
   connection shutdown and safe response writing.
-- `lo-api-server` must ask `lo-app-kernel` for auth, validation, idempotency and
+- `lo-framework-api-server` must ask `lo-framework-app-kernel` for auth, validation, idempotency and
   typed route execution decisions.
-- `lo-api-server` must redact secrets, bearer tokens, cookies and SecureString
+- `lo-framework-api-server` must redact secrets, bearer tokens, cookies and SecureString
   values from logs and reports.
-- Bespoke frameworks may either use `lo-api-server` or call `lo-app-kernel`
+- Bespoke frameworks may either use `lo-framework-api-server` or call `lo-framework-app-kernel`
   directly from their own HTTP layer.
 
 ## CLI and Task Requirements
 
-- `lo-cli` must provide developer commands for checking, building, running,
+- `lo-core-cli` must provide developer commands for checking, building, running,
   serving, reporting, route inspection, security checks and task execution.
-- `lo-cli` may coordinate `lo-core`, future compiler/runtime packages,
-  `lo-api-server` and `lo-tasks`, but must not contain application behaviour.
+- `lo-core-cli` may coordinate `lo-core`, future compiler/runtime packages,
+  `lo-framework-api-server` and `lo-core-tasks`, but must not contain application behaviour.
 - `lo graph` must generate project graph JSON, Markdown report, AI map and HTML
   outputs.
 - `lo task` must load task files, list tasks, resolve dependencies, detect
   cycles, support dry-run planning and write task reports.
-- `lo-tasks` must provide safe, typed project automation with declared effects
+- `lo-core-tasks` must provide safe, typed project automation with declared effects
   and permissions.
-- `lo-tasks` must validate filesystem permissions as safe repository-relative
+- `lo-core-tasks` must validate filesystem permissions as safe repository-relative
   paths.
-- `lo-tasks` must validate environment permissions as explicit variable names.
-- `lo-tasks` must deny raw shell execution by default.
+- `lo-core-tasks` must validate environment permissions as explicit variable names.
+- `lo-core-tasks` must deny raw shell execution by default.
 - Unsafe shell support, if added later, must be explicit, permissioned,
   timeout-limited, reported and redacted.
 - Both packages must redact secrets, bearer tokens, cookies, `SecureString`
@@ -248,7 +248,7 @@ The app package must remain deliberately small until a product domain is chosen.
 
 ## Benchmark Requirements
 
-- `lo-benchmark` must own benchmark configuration, task definitions, result
+- `lo-tools-benchmark` must own benchmark configuration, task definitions, result
   types, score categories, privacy policy and report payload contracts.
 - Benchmarking must prioritize correctness, fallback behavior and safe
   execution before raw speed.
@@ -275,7 +275,7 @@ The app package must remain deliberately small until a product domain is chosen.
 
 ## Project Graph Requirements
 
-- `lo-project-graph` must own project knowledge graph contracts for packages,
+- `lo-devtools-project-graph` must own project knowledge graph contracts for packages,
   documents, flows, types, effects, policies, reports, targets and decisions.
 - Project graph tooling must be optional developer tooling and must not be
   required to compile or run LO applications.
@@ -300,27 +300,27 @@ The app package must remain deliberately small until a product domain is chosen.
 
 ## Logic and Photonic Package Requirements
 
-- `lo-logic` must own `Tri`, `Logic<N>`, future Omni logic, multi-state truth
+- `lo-core-logic` must own `Tri`, `Logic<N>`, future Omni logic, multi-state truth
   tables, conversion rules and logic reports.
 - `lo-photonic` must own wavelength, phase, amplitude, optical signal, optical
   channel, photonic simulation and photonic target planning concepts.
-- `lo-photonic` may map logic states from `lo-logic` to photonic
+- `lo-photonic` may map logic states from `lo-core-logic` to photonic
   representations, but it must not own the logic semantics.
-- `lo-vector` must own vector values, dimensions, lanes, vector operation rules
+- `lo-core-vector` must own vector values, dimensions, lanes, vector operation rules
   and vector reports.
-- `lo-vector` must also own matrix, tensor, shape and numeric element contracts
+- `lo-core-vector` must also own matrix, tensor, shape and numeric element contracts
   used by neural and compute workloads.
-- `lo-compute` must own compute planning, capability, budget, offload and target
+- `lo-core-compute` must own compute planning, capability, budget, offload and target
   selection concepts.
 - `lo-ai` must own generic AI inference contracts, prompt/response shapes, model
   capability metadata, memory estimates, safety policy and AI reports.
-- `lo-agent` must own typed agent definitions, tool permissions, agent limits,
+- `lo-ai-agent` must own typed agent definitions, tool permissions, agent limits,
   supervised task group plans, merge policies and agent reports.
-- `lo-neural` must own neural-network model definitions, layers, activations,
+- `lo-ai-neural` must own neural-network model definitions, layers, activations,
   inference boundaries, training boundaries and neural reports.
-- `lo-neuromorphic` must own spikes, spike trains, event signals, spiking model
+- `lo-ai-neuromorphic` must own spikes, spike trains, event signals, spiking model
   contracts and neuromorphic reports.
-- `lo-lowbit-ai` must own low-bit and ternary model references, GGUF metadata,
+- `lo-ai-lowbit` must own low-bit and ternary model references, GGUF metadata,
   quantization declarations, backend selection, CPU inference limits and low-bit
   AI inference reports.
 - `lo-target-binary` must own binary/native target planning and artefact
@@ -357,7 +357,7 @@ The app package must remain deliberately small until a product domain is chosen.
 - Intel Silicon Photonics and OCI-style devices must be documented as optical
   connectivity for distributed compute, AI infrastructure, accelerator
   communication, GPU disaggregation and memory pooling.
-- `lo-compute` must model data movement as a first-class cost for optical I/O
+- `lo-core-compute` must model data movement as a first-class cost for optical I/O
   planning, including transfer size, data locality, target placement, fallback
   path and serialization format.
 - Optical I/O reports must include detected interconnect, provider, bandwidth
@@ -366,29 +366,29 @@ The app package must remain deliberately small until a product domain is chosen.
 - Remote memory or memory-pool access over optical I/O must require typed access
   policy, bounds checks, timeout handling, fallback rules, audit logging and
   redacted reports.
-- `lo-benchmark` should support a future `optical_io` benchmark target for
+- `lo-tools-benchmark` should support a future `optical_io` benchmark target for
   latency, throughput, tensor transfer, schema-compressed transfer, remote
   memory read and fallback diagnostics.
 
 ## Compiler, Runtime, Security, Config and Report Requirements
 
-- `lo-compiler` must own compiler pipeline contracts for lexing, parsing, AST,
+- `lo-core-compiler` must own compiler pipeline contracts for lexing, parsing, AST,
   checkers, IR, diagnostics, source maps and compiler reports.
-- `lo-runtime` must own execution contracts for checked and compiled LO code.
-- `lo-security` must own reusable security primitives, redaction rules,
+- `lo-core-runtime` must own execution contracts for checked and compiled LO code.
+- `lo-core-security` must own reusable security primitives, redaction rules,
   permission models, security diagnostics and security report contracts.
 - Security primitives must represent sensitive values as redacted references in
   reports and diagnostics, not as raw secret values.
 - Security helpers must provide reusable redaction, safe token/cookie/header
   references, permission decisions and cryptographic policy validation.
-- `lo-config` must own project config, environment mode and policy loading
+- `lo-core-config` must own project config, environment mode and policy loading
   contracts.
-- `lo-config` must represent environment variables as safe references by name
+- `lo-core-config` must represent environment variables as safe references by name
   and metadata; it must not expose secret values in diagnostics or runtime
   handoff objects.
-- `lo-config` must provide production strictness checks for strict project mode,
+- `lo-core-config` must provide production strictness checks for strict project mode,
   required environment variables and unsafe secret defaults.
-- `lo-reports` must own shared report schemas and report-writing contracts.
+- `lo-core-reports` must own shared report schemas and report-writing contracts.
 - Shared report contracts must include common metadata, generator metadata,
   diagnostic summaries and typed build, security, target, runtime, task and AI
   guide report shapes.
@@ -421,12 +421,12 @@ The app package must remain deliberately small until a product domain is chosen.
   or equivalent runtime supervision.
 - Agent outputs may inform decisions but must not directly authorize security,
   payment, access-control or deployment decisions.
-- Neural-network support must live in `lo-neural`, not `lo-core`.
-- Neural workloads must use tensor shapes from `lo-vector`, compute planning
-  from `lo-compute` and safety/report contracts from `lo-ai`.
+- Neural-network support must live in `lo-ai-neural`, not `lo-core`.
+- Neural workloads must use tensor shapes from `lo-core-vector`, compute planning
+  from `lo-core-compute` and safety/report contracts from `lo-ai`.
 - Training flows must declare dataset reference, data policy, loss function,
   optimizer, epochs, batch size, memory limit and timeout.
-- Neuromorphic support must live in `lo-neuromorphic`, separate from normal
+- Neuromorphic support must live in `lo-ai-neuromorphic`, separate from normal
   tensor neural networks.
 - Low-bit AI support must be optional and must not be required by `lo-core`.
 - LO source syntax must use generic targets such as `low_bit_ai` and
@@ -448,16 +448,16 @@ The app package must remain deliberately small until a product domain is chosen.
 
 ## Runtime Naming Requirement
 
-- `lo-app-kernel` must remain the secure application boundary package.
-- A future `lo-runtime` package, if added, should be the LO execution engine for
+- `lo-framework-app-kernel` must remain the secure application boundary package.
+- A future `lo-core-runtime` package, if added, should be the LO execution engine for
   compiled or checked LO code.
-- `lo-app-kernel` must not be renamed to `lo-runtime`, because API policy and
+- `lo-framework-app-kernel` must not be renamed to `lo-core-runtime`, because API policy and
   code execution are separate responsibilities.
 
 ## Out of Scope
 
 - Product-specific app features before a product domain is selected.
-- Full-framework behavior inside `lo-core` or `lo-app-kernel`.
+- Full-framework behavior inside `lo-core` or `lo-framework-app-kernel`.
 - Mandatory ORM, CMS, admin UI, template engine or frontend framework design.
 - Treating project graph output as a security or compiler authority.
 - Treating BitNet, Graphify or any named backend as LO language syntax.

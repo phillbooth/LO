@@ -6,7 +6,7 @@
 [x] Add TODO.md
 [x] Add package metadata
 [x] Add initial typed exports
-[ ] Define input contract from lo-compiler and lo-compute
+[ ] Define input contract from lo-core-compiler and lo-core-compute
 [ ] Define WASM target metadata
 [ ] Define WASM module output contract
 [ ] Define WASM import/export contract

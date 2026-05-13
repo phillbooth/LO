@@ -39,6 +39,6 @@ Final rule:
 
 ```text
 lo-ai describes AI inference.
-lo-lowbit-ai adapts low-bit model backends.
-lo-compute and target packages choose where work runs.
+lo-ai-lowbit adapts low-bit model backends.
+lo-core-compute and target packages choose where work runs.
 ```

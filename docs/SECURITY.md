@@ -55,7 +55,7 @@ AI output must not directly approve security, payment, access-control or other
 high-impact decisions. Route AI output through deterministic application policy
 before taking action.
 
-Local AI inference packages such as `lo-lowbit-ai` must use declared model paths,
+Local AI inference packages such as `lo-ai-lowbit` must use declared model paths,
 memory limits, context limits, output token limits, thread limits and timeouts.
 Prompts and reports must be redacted before logging when they may contain
 secrets or user-sensitive data.

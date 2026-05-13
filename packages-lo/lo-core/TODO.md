@@ -51,7 +51,7 @@ Use this file as a practical checklist while the project moves from concept to d
 [x] Create docs/legacy-and-compatibility-boundaries.md
 [x] Create docs/package-boundaries.md
 [x] Create docs/security-risk-feature-ranking.md
-[x] Create packages-lo/lo-api-server README and positioning docs
+[x] Create packages-lo/lo-framework-api-server README and positioning docs
 [x] Create .env.example
 [x] Create .gitignore
 ```

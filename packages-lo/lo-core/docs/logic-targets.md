@@ -1,7 +1,7 @@
 # Logic Targets
 
 Ownership note: logic widths, truth tables and logic reports belong in
-`packages-lo/lo-logic/`. Photonic representation belongs in
+`packages-lo/lo-core-logic/`. Photonic representation belongs in
 `packages-lo/lo-photonic/`, and photonic backend target planning belongs in
 `packages-lo/lo-target-photonic/`.
 

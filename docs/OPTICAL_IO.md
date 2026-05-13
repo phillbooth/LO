@@ -367,7 +367,7 @@ remote memory EmbeddingPool {
 
 ## Benchmarks
 
-`lo-benchmark` should eventually include:
+`lo-tools-benchmark` should eventually include:
 
 ```bash
 lo benchmark --target optical_io
@@ -422,22 +422,22 @@ interconnect topology must not expose private hostnames in shareable reports
 Recommended ownership:
 
 ```text
-lo-compute
+lo-core-compute
   optical_io target selection and data-movement cost planning
 
 lo-target-photonic
   photonic compute target planning plus optical I/O/interconnect planning reports
 
-lo-vector
+lo-core-vector
   tensor, matrix and batch shape information used for transfer estimates
 
-lo-security
+lo-core-security
   remote memory, encryption and redaction policy
 
-lo-reports
+lo-core-reports
   shared report metadata and report-writing contracts
 
-lo-benchmark
+lo-tools-benchmark
   optical_io benchmark target and fallback diagnostics
 ```
 

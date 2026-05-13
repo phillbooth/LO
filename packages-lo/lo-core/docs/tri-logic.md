@@ -2,7 +2,7 @@
 
 Ownership note: `lo-core` may document syntax and compiler checking for `Tri`
 and `Logic<N>`, but detailed logic semantics, conversion rules, truth tables and
-logic reports belong in `packages-lo/lo-logic/`.
+logic reports belong in `packages-lo/lo-core-logic/`.
 
 ## Summary
 

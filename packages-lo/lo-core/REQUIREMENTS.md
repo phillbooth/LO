@@ -53,7 +53,7 @@ The build folder should also include `app.memory-report.json` and
 LO core defines language safety. Runtime enforcement for request handling,
 auth, rate limits, idempotency, jobs and workload control belongs in the
 optional LO Secure App Kernel. Built-in HTTP API serving belongs in
-`packages-lo/lo-api-server/`, which should load route manifests and delegate to the
+`packages-lo/lo-framework-api-server/`, which should load route manifests and delegate to the
 kernel. Full frameworks should build above or beside that kernel.
 
 Specialised LO concepts belong in sibling packages. `lo-core` may define syntax,
@@ -61,20 +61,20 @@ compiler checks and report contracts for them, but detailed package semantics
 must be updated in the owning package first:
 
 ```text
-packages-lo/lo-logic
-packages-lo/lo-vector
-packages-lo/lo-compute
+packages-lo/lo-core-logic
+packages-lo/lo-core-vector
+packages-lo/lo-core-compute
 packages-lo/lo-ai
-packages-lo/lo-lowbit-ai
+packages-lo/lo-ai-lowbit
 packages-lo/lo-photonic
 packages-lo/lo-target-cpu
 packages-lo/lo-cpu-kernels
 packages-lo/lo-target-binary
 packages-lo/lo-target-photonic
-packages-lo/lo-app-kernel
-packages-lo/lo-api-server
-packages-lo/lo-cli
-packages-lo/lo-tasks
+packages-lo/lo-framework-app-kernel
+packages-lo/lo-framework-api-server
+packages-lo/lo-core-cli
+packages-lo/lo-core-tasks
 ```
 
 ---
@@ -1905,20 +1905,20 @@ Ownership:
 
 ```text
 lo-core              = language syntax, compiler contracts and core safety rules
-lo-logic             = Tri, Logic<N>, Decision, RiskLevel and Omni logic
-lo-vector            = vector values, dimensions, lanes and vector operations
-lo-compute           = compute planning, capabilities, budgets and target selection
+lo-core-logic             = Tri, Logic<N>, Decision, RiskLevel and Omni logic
+lo-core-vector            = vector values, dimensions, lanes and vector operations
+lo-core-compute           = compute planning, capabilities, budgets and target selection
 lo-ai                = generic AI inference contracts and safety policy
-lo-lowbit-ai            = low-bit and ternary AI inference contracts
+lo-ai-lowbit            = low-bit and ternary AI inference contracts
 lo-photonic          = wavelength, phase, amplitude and optical signal concepts
 lo-target-cpu        = CPU target capability and fallback planning
 lo-cpu-kernels       = optimized CPU kernel contracts
 lo-target-binary     = binary/native target planning and artefact metadata
 lo-target-photonic   = photonic backend target planning
-lo-app-kernel        = secure application/API runtime boundary
-lo-api-server        = built-in HTTP transport package
-lo-cli               = developer command-line tooling
-lo-tasks             = safe project automation
+lo-framework-app-kernel        = secure application/API runtime boundary
+lo-framework-api-server        = built-in HTTP transport package
+lo-core-cli               = developer command-line tooling
+lo-core-tasks             = safe project automation
 ```
 
 If a change affects only package semantics, update that package documentation.

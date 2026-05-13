@@ -9,7 +9,7 @@ JSON
 REST APIs
 webhooks
 OpenAPI
-lo-api-server
+lo-framework-api-server
 XML
 GraphQL
 environment variables
@@ -44,9 +44,9 @@ Python NLP package interop
 
 Interop boundaries should be explicit, typed, permission-checked and reported.
 
-`lo-api-server` is the built-in HTTP serving boundary for LO APIs. It should
+`lo-framework-api-server` is the built-in HTTP serving boundary for LO APIs. It should
 load route manifests, normalise HTTP requests, apply server-level limits and
-delegate application security decisions to `lo-app-kernel`.
+delegate application security decisions to `lo-framework-app-kernel`.
 
 Dart and Flutter interop should use normal LO types in portable code and expose
 target-specific types only at explicit boundaries.

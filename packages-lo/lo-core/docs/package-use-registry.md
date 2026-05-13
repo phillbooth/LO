@@ -63,19 +63,19 @@ package name and updated in their owning docs:
 
 ```text
 lo-core              = language syntax, compiler contracts and core safety rules
-lo-compiler          = compiler pipeline contracts
-lo-runtime           = checked and compiled LO execution contracts
-lo-security          = reusable security primitives and security report contracts
-lo-config            = project config and environment mode contracts
-lo-reports           = shared report schemas, processing reports and writer contracts
-lo-logic             = Tri, Logic<N>, Decision, RiskLevel and Omni logic
-lo-vector            = vector, matrix, tensor, lanes, dimensions and numeric operations
-lo-compute           = compute planning, capabilities, budgets and target selection
+lo-core-compiler          = compiler pipeline contracts
+lo-core-runtime           = checked and compiled LO execution contracts
+lo-core-security          = reusable security primitives and security report contracts
+lo-core-config            = project config and environment mode contracts
+lo-core-reports           = shared report schemas, processing reports and writer contracts
+lo-core-logic             = Tri, Logic<N>, Decision, RiskLevel and Omni logic
+lo-core-vector            = vector, matrix, tensor, lanes, dimensions and numeric operations
+lo-core-compute           = compute planning, capabilities, budgets and target selection
 lo-ai                = generic AI inference contracts and safety policy
-lo-lowbit-ai         = low-bit and ternary AI inference contracts
-lo-agent             = supervised AI agent, tool permission and task group contracts
-lo-neural            = neural model, layer, inference and training contracts
-lo-neuromorphic      = spike, event-signal and spiking model contracts
+lo-ai-lowbit         = low-bit and ternary AI inference contracts
+lo-ai-agent             = supervised AI agent, tool permission and task group contracts
+lo-ai-neural            = neural model, layer, inference and training contracts
+lo-ai-neuromorphic      = spike, event-signal and spiking model contracts
 lo-photonic          = wavelength, phase, amplitude and optical signal concepts
 lo-target-cpu        = CPU target capability and fallback planning
 lo-cpu-kernels       = optimized CPU kernel contracts
@@ -84,12 +84,12 @@ lo-target-wasm       = WebAssembly target planning and output contracts
 lo-target-gpu        = GPU target planning and output contracts
 lo-target-ai-accelerator = NPU, TPU, AI-chip and passive backend profile planning
 lo-target-photonic   = photonic backend and optical I/O target planning
-lo-app-kernel        = secure application/API runtime boundary
-lo-api-server        = built-in HTTP transport package
-lo-cli               = developer command-line tooling
-lo-tasks             = safe project automation
-lo-benchmark         = benchmark diagnostics and privacy-safe reports
-lo-project-graph     = project knowledge graph and AI assistant map contracts
+lo-framework-app-kernel        = secure application/API runtime boundary
+lo-framework-api-server        = built-in HTTP transport package
+lo-core-cli               = developer command-line tooling
+lo-core-tasks             = safe project automation
+lo-tools-benchmark         = benchmark diagnostics and privacy-safe reports
+lo-devtools-project-graph     = project knowledge graph and AI assistant map contracts
 ```
 
 `lo-core` owns the package registry syntax and compiler/report contract.

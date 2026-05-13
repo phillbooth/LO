@@ -37,5 +37,5 @@ Final rule:
 ```text
 lo-cpu-kernels describes optimized CPU kernels.
 lo-target-cpu describes CPU capability and fallback selection.
-lo-lowbit-ai chooses low-bit backend kernel requirements.
+lo-ai-lowbit chooses low-bit backend kernel requirements.
 ```

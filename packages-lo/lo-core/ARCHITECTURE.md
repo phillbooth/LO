@@ -104,7 +104,7 @@ checks auth, controls workload, queues heavy work and routes to typed flows.
 
 The kernel is a partial framework layer, not a full application framework.
 
-The built-in `lo-api-server` package is the HTTP transport layer for LO API
+The built-in `lo-framework-api-server` package is the HTTP transport layer for LO API
 services. It should load compiler-generated API route manifests, enforce
 server-level request limits, pass requests into the Secure App Kernel and write
 safe HTTP responses. It is not part of LO core and must not become a full web
@@ -115,18 +115,18 @@ language syntax, compiler checks and report contracts, while package-specific
 semantics belong in the owning package:
 
 ```text
-Tri / Logic<N> / Omni      -> packages-lo/lo-logic
-vector values and lanes    -> packages-lo/lo-vector
-compute target selection   -> packages-lo/lo-compute
+Tri / Logic<N> / Omni      -> packages-lo/lo-core-logic
+vector values and lanes    -> packages-lo/lo-core-vector
+compute target selection   -> packages-lo/lo-core-compute
 AI inference contracts     -> packages-lo/lo-ai
-Low-bit AI backend         -> packages-lo/lo-lowbit-ai
+Low-bit AI backend         -> packages-lo/lo-ai-lowbit
 photonic concepts          -> packages-lo/lo-photonic
 CPU target planning        -> packages-lo/lo-target-cpu
 CPU kernel contracts       -> packages-lo/lo-cpu-kernels
 binary target backend      -> packages-lo/lo-target-binary
 photonic target backend    -> packages-lo/lo-target-photonic
-developer commands         -> packages-lo/lo-cli
-safe automation tasks      -> packages-lo/lo-tasks
+developer commands         -> packages-lo/lo-core-cli
+safe automation tasks      -> packages-lo/lo-core-tasks
 ```
 
 ---
@@ -1537,16 +1537,16 @@ Current LO workspace package boundaries:
 
 ```text
 packages-lo/lo-core
-packages-lo/lo-logic
-packages-lo/lo-vector
-packages-lo/lo-compute
+packages-lo/lo-core-logic
+packages-lo/lo-core-vector
+packages-lo/lo-core-compute
 packages-lo/lo-photonic
 packages-lo/lo-target-binary
 packages-lo/lo-target-photonic
-packages-lo/lo-app-kernel
-packages-lo/lo-api-server
-packages-lo/lo-cli
-packages-lo/lo-tasks
+packages-lo/lo-framework-app-kernel
+packages-lo/lo-framework-api-server
+packages-lo/lo-core-cli
+packages-lo/lo-core-tasks
 ```
 
 When these packages are edited, update the owning package documentation first.

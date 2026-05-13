@@ -52,11 +52,11 @@ Runtime positioning:
 
 ```text
 LO Core checks service/api/webhook contracts.
-lo-api-server serves HTTP and loads generated route manifests.
-lo-app-kernel enforces validation, auth, idempotency and typed execution.
+lo-framework-api-server serves HTTP and loads generated route manifests.
+lo-framework-app-kernel enforces validation, auth, idempotency and typed execution.
 ```
 
-`lo-api-server` may be the default implementation for `lo serve`, but it remains
+`lo-framework-api-server` may be the default implementation for `lo serve`, but it remains
 an HTTP server package, not a full web framework.
 
 Example relationship:

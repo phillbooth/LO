@@ -47,7 +47,7 @@ How do we simulate photonic behaviour?
 ## Boundary
 
 `lo-photonic` must not own `Tri`, `Logic<N>` or Omni logic semantics. Those
-belong in `lo-logic`.
+belong in `lo-core-logic`.
 
 `lo-photonic` must not own compiler backend output, hardware mapping files,
 target reports or fallback decisions. Those belong in `lo-target-photonic`.
@@ -65,7 +65,7 @@ Decision.Allow  -> phase 0deg
 ```
 
 This is a representation mapping, not ownership of `Tri`. The truth semantics
-for `-1`, `0` and `+1` stay in `lo-logic`.
+for `-1`, `0` and `+1` stay in `lo-core-logic`.
 
 Example signal:
 
@@ -114,16 +114,16 @@ execution and generates the target plan/report.
 | --- | --- |
 | `lo-photonic` | Photonic types, models, APIs and simulations |
 | `lo-target-photonic` | Compiler backend, output target and hardware or simulator mapping |
-| `lo-vector` | Vector, matrix, tensor types and operations |
-| `lo-compute` | `compute auto`, target selection and fallback planning |
+| `lo-core-vector` | Vector, matrix, tensor types and operations |
+| `lo-core-compute` | `compute auto`, target selection and fallback planning |
 | `lo-target-binary` | Normal CPU/native binary output |
-| `lo-neural` | Neural model, layer, inference and training boundaries |
+| `lo-ai-neural` | Neural model, layer, inference and training boundaries |
 | `lo-target-ai-accelerator` | NPU, TPU and AI-chip target planning |
 
 Final rule:
 
 ```text
-lo-logic handles the logic model.
+lo-core-logic handles the logic model.
 lo-photonic handles what photonic means.
 lo-target-photonic handles how LO outputs to photonic systems.
 ```

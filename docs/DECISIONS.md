@@ -46,8 +46,8 @@ but does not have the same language-level meaning.
 **Decision:**
 
 LO will model low-bit AI as a generic compute target through `low_bit_ai` and
-`ternary_ai`. BitNet is an optional backend inside `lo-lowbit-ai`, not a source
-syntax target and not part of `lo-core` or `lo-logic`. Generic AI inference
+`ternary_ai`. BitNet is an optional backend inside `lo-ai-lowbit`, not a source
+syntax target and not part of `lo-core` or `lo-core-logic`. Generic AI inference
 contracts belong in `lo-ai`. CPU fallback planning belongs in `lo-target-cpu`,
 and optimized CPU kernel contracts belong in `lo-cpu-kernels`.
 
@@ -56,7 +56,7 @@ and optimized CPU kernel contracts belong in `lo-cpu-kernels`.
 This keeps LO CPU/binary compatible by default while allowing a faster local AI
 path for compatible low-bit models. It also avoids locking LO source syntax to
 one named backend that could later be replaced. Language semantics stay in
-`lo-core` and `lo-logic`, while AI inference and CPU kernel concerns live in
+`lo-core` and `lo-core-logic`, while AI inference and CPU kernel concerns live in
 dedicated packages.
 
 **Consequences:**

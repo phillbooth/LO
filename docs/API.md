@@ -11,12 +11,12 @@ LO Core
 LO App Kernel
   enforces validation, auth, rate limits, idempotency and typed handler dispatch
 
-lo-api-server
+lo-framework-api-server
   serves HTTP, loads route manifests and passes normalised requests to the kernel
 ```
 
-`lo-api-server` is the default built-in HTTP API server package for simple LO API
-services. Bespoke frameworks can use it directly, use `lo-app-kernel` directly,
+`lo-framework-api-server` is the default built-in HTTP API server package for simple LO API
+services. Bespoke frameworks can use it directly, use `lo-framework-app-kernel` directly,
 or later use adapter packages such as Express, Fastify, Lambda or Cloudflare
 Workers.
 
@@ -24,17 +24,17 @@ Workers.
 
 ```text
 HTTP request
-  -> lo-api-server
-  -> lo-app-kernel
+  -> lo-framework-api-server
+  -> lo-framework-app-kernel
   -> LO runtime / typed LO flow
-  -> lo-app-kernel
-  -> lo-api-server
+  -> lo-framework-app-kernel
+  -> lo-framework-api-server
   -> HTTP response
 ```
 
 ## Boundaries
 
-`lo-api-server` owns:
+`lo-framework-api-server` owns:
 
 ```text
 HTTP listener
@@ -49,7 +49,7 @@ runtime report files
 graceful shutdown
 ```
 
-`lo-app-kernel` owns:
+`lo-framework-app-kernel` owns:
 
 ```text
 route matching policy
@@ -78,7 +78,7 @@ security report contracts
 
 ## Non-Goals
 
-`lo-api-server` must not become:
+`lo-framework-api-server` must not become:
 
 ```text
 a full web framework

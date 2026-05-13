@@ -46,16 +46,16 @@ contracts for package-owned concepts, but the package-specific docs should be
 updated first:
 
 ```text
-../../lo-logic/README.md
-../../lo-compiler/README.md
-../../lo-runtime/README.md
-../../lo-security/README.md
-../../lo-config/README.md
-../../lo-reports/README.md
-../../lo-vector/README.md
-../../lo-compute/README.md
+../../lo-core-logic/README.md
+../../lo-core-compiler/README.md
+../../lo-core-runtime/README.md
+../../lo-core-security/README.md
+../../lo-core-config/README.md
+../../lo-core-reports/README.md
+../../lo-core-vector/README.md
+../../lo-core-compute/README.md
 ../../lo-ai/README.md
-../../lo-lowbit-ai/README.md
+../../lo-ai-lowbit/README.md
 ../../lo-photonic/README.md
 ../../lo-target-cpu/README.md
 ../../lo-cpu-kernels/README.md
@@ -65,12 +65,12 @@ updated first:
 ../../../docs/AI_ACCELERATOR_TARGETS.md
 ../../../docs/OPTICAL_IO.md
 ../../lo-target-photonic/README.md
-../../lo-app-kernel/README.md
-../../lo-api-server/README.md
-../../lo-cli/README.md
-../../lo-tasks/README.md
-../../lo-benchmark/README.md
-../../lo-project-graph/README.md
+../../lo-framework-app-kernel/README.md
+../../lo-framework-api-server/README.md
+../../lo-core-cli/README.md
+../../lo-core-tasks/README.md
+../../lo-tools-benchmark/README.md
+../../lo-devtools-project-graph/README.md
 ```
 
 Use `package-boundaries.md` to decide whether a change belongs in `lo-core` or
@@ -116,7 +116,7 @@ dependencies.md
 ## API and Interop
 
 ```text
-../../lo-api-server/README.md
+../../lo-framework-api-server/README.md
 json-native-design.md
 lazy-compact-json.md
 api-native-design.md

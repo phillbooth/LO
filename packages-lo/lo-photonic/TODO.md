@@ -14,7 +14,7 @@
 [ ] Define wavelength-division multiplexing model helpers
 [ ] Define optical matrix multiplication model helpers
 [ ] Define optical signal reports
-[ ] Define mappings from lo-logic states
+[ ] Define mappings from lo-core-logic states
 [ ] Define photonic simulation helper APIs
 [ ] Add examples
 [ ] Add tests

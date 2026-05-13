@@ -306,19 +306,19 @@ memory_policy {
 lo-core
   resilient flow syntax direction, Result/Option, recover/retry/checkpoint syntax notes
 
-lo-runtime
+lo-core-runtime
   execution supervision, cancellation, retry scheduling, checkpoint/resume hooks
 
-lo-reports
+lo-core-reports
   processing report, batch result report and failure summaries
 
-lo-security
+lo-core-security
   policy checks for whether recovery is allowed
 
-lo-app-kernel
+lo-framework-app-kernel
   API/job idempotency, transactions, replay protection and safe runtime boundaries
 
-lo-tasks
+lo-core-tasks
   safe automation reports for task-level partial failures
 ```
 

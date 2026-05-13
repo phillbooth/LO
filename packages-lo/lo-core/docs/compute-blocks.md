@@ -3,7 +3,7 @@
 This document defines the LO core language contract for `compute` blocks.
 
 Status: draft language and compiler contract. Detailed compute planning belongs
-in `packages-lo/lo-compute/`. Target-specific output belongs in target packages
+in `packages-lo/lo-core-compute/`. Target-specific output belongs in target packages
 such as `packages-lo/lo-target-binary/`, `packages-lo/lo-target-wasm/`,
 `packages-lo/lo-target-gpu/` and `packages-lo/lo-target-photonic/`.
 
@@ -137,7 +137,7 @@ Move file reading outside the compute block and pass parsed data into the model.
 
 ## Compiler Checks
 
-`lo-core` and `lo-compiler` should define checks for:
+`lo-core` and `lo-core-compiler` should define checks for:
 
 ```text
 valid compute target policy
@@ -187,13 +187,13 @@ target package reports
 lo-core
   compute block syntax, compiler-facing contract and report fields
 
-lo-compiler
+lo-core-compiler
   parser, checker pipeline, diagnostics and IR handoff
 
-lo-compute
+lo-core-compute
   compute capability model, budgets, target selection and fallback planning
 
-lo-vector
+lo-core-vector
   vector, matrix and tensor operation semantics
 
 lo-target-binary
@@ -238,6 +238,6 @@ Final rule:
 
 ```text
 lo-core defines what a compute block means in source.
-lo-compute decides how work should be planned.
+lo-core-compute decides how work should be planned.
 target packages decide how planned work is emitted.
 ```

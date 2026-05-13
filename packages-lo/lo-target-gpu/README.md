@@ -22,14 +22,14 @@ future CUDA/ROCm/WebGPU/Vulkan planning
 
 ## Boundary
 
-`lo-target-gpu` should consume compute plans from `lo-compute` and produce
+`lo-target-gpu` should consume compute plans from `lo-core-compute` and produce
 GPU-specific target plans or reports. It should not own vector semantics,
 compute target selection or application runtime policy.
 
 Final rule:
 
 ```text
-lo-vector defines vector operations.
-lo-compute chooses and plans compute targets.
+lo-core-vector defines vector operations.
+lo-core-compute chooses and plans compute targets.
 lo-target-gpu maps suitable work to GPU plans or outputs.
 ```

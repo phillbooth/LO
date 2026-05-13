@@ -15,7 +15,7 @@ Primary references:
 ## Package
 
 ```text
-packages-lo/lo-project-graph
+packages-lo/lo-devtools-project-graph
 ```
 
 The package owns graph contracts for:
@@ -75,8 +75,8 @@ commit, tag or versioned ref. Model-assisted extraction remains opt-in.
 Recommended generated output paths:
 
 ```text
-build/graph/lo-project-graph.json
-build/graph/lo-project-graph.html
+build/graph/lo-devtools-project-graph.json
+build/graph/lo-devtools-project-graph.html
 build/graph/LO_GRAPH_REPORT.md
 build/graph/lo-ai-map.md
 ```
@@ -87,10 +87,10 @@ Run from the repository root:
 
 ```powershell
 cd C:\laragon\www\LO
-node packages-lo\lo-cli\dist\index.js graph --out build\graph
+node packages-lo\lo-core-cli\dist\index.js graph --out build\graph
 ```
 
-This writes the graph outputs under `build\graph`. Once `lo-cli` is linked or
+This writes the graph outputs under `build\graph`. Once `lo-core-cli` is linked or
 published, use the stable installed CLI form:
 
 ```powershell
@@ -99,7 +99,7 @@ lo graph --out build\graph
 
 AI coding tools should consult `build\graph\lo-ai-map.md` or
 `build\graph\LO_GRAPH_REPORT.md` when package ownership is unclear. If
-`build\graph\lo-project-graph.json` is missing, or if changes were made to
+`build\graph\lo-devtools-project-graph.json` is missing, or if changes were made to
 `AGENTS.md`, `lo.workspace.json`, `docs/`, package README/TODO files, package
 manifests or package source contracts, regenerate the graph before relying on
 it.
@@ -110,16 +110,16 @@ Current commands:
 lo graph
 lo graph --out build/graph
 lo graph query "Which package owns SecureString?"
-lo graph explain lo-security
-lo graph path lo-api-server lo-security
+lo graph explain lo-core-security
+lo graph path lo-framework-api-server lo-core-security
 ```
 
 Current local Node equivalents:
 
 ```powershell
-node packages-lo\lo-cli\dist\index.js graph query lo-security --out build\graph
-node packages-lo\lo-cli\dist\index.js graph explain package:lo-security --out build\graph
-node packages-lo\lo-cli\dist\index.js graph path package:lo-project-graph report:project-graph --out build\graph
+node packages-lo\lo-core-cli\dist\index.js graph query lo-core-security --out build\graph
+node packages-lo\lo-core-cli\dist\index.js graph explain package:lo-core-security --out build\graph
+node packages-lo\lo-core-cli\dist\index.js graph path package:lo-devtools-project-graph report:project-graph --out build\graph
 ```
 
 ## Safety Rules
@@ -147,7 +147,7 @@ distinguish source facts from inferred relationships
 
 ## Native Mapper
 
-The first implementation is the LO-native mapper in `packages-lo/lo-project-graph`.
+The first implementation is the LO-native mapper in `packages-lo/lo-devtools-project-graph`.
 It can scan workspace package paths and project docs, then map:
 
 ```text

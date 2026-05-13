@@ -23,7 +23,7 @@ packages-lo/lo-core
   report contracts
   language examples
 
-packages-lo/lo-compiler
+packages-lo/lo-core-compiler
   lexer
   parser
   AST
@@ -33,7 +33,7 @@ packages-lo/lo-compiler
   source maps
   compiler reports
 
-packages-lo/lo-runtime
+packages-lo/lo-core-runtime
   checked execution
   compiled execution
   effect dispatch
@@ -41,27 +41,27 @@ packages-lo/lo-runtime
   runtime error handling
   runtime reports
 
-packages-lo/lo-security
+packages-lo/lo-core-security
   SecureString helper model
   redaction primitives
   permission model types
   security diagnostics
   security report contracts
 
-packages-lo/lo-config
+packages-lo/lo-core-config
   project config shape
   environment modes
   config validation diagnostics
   production policy loading
 
-packages-lo/lo-reports
+packages-lo/lo-core-reports
   shared report metadata
   shared diagnostics
   report schema contracts
   processing report contracts
   report writer contracts
 
-packages-lo/lo-logic
+packages-lo/lo-core-logic
   Tri
   Logic<N>
   Decision
@@ -72,7 +72,7 @@ packages-lo/lo-logic
   truth tables
   logic reports
 
-packages-lo/lo-vector
+packages-lo/lo-core-vector
   Vector<T, N>
   Matrix<T, R, C>
   Tensor<T, Shape>
@@ -85,7 +85,7 @@ packages-lo/lo-vector
   vector safety rules
   vector reports
 
-packages-lo/lo-compute
+packages-lo/lo-core-compute
   compute planning
   compute capabilities
   compute budgets
@@ -101,7 +101,7 @@ packages-lo/lo-ai
   AI safety policy
   AI inference reports
 
-packages-lo/lo-lowbit-ai
+packages-lo/lo-ai-lowbit
   low-bit model references
   GGUF model metadata
   low-bit and ternary quantization declarations
@@ -109,7 +109,7 @@ packages-lo/lo-lowbit-ai
   CPU low-bit inference plans
   low-bit inference reports
 
-packages-lo/lo-agent
+packages-lo/lo-ai-agent
   agent definitions
   agent tool permissions
   agent limits
@@ -117,7 +117,7 @@ packages-lo/lo-agent
   merge policies
   agent reports
 
-packages-lo/lo-neural
+packages-lo/lo-ai-neural
   neural model definitions
   neural layers
   activation functions
@@ -125,7 +125,7 @@ packages-lo/lo-neural
   training boundaries
   neural reports
 
-packages-lo/lo-neuromorphic
+packages-lo/lo-ai-neuromorphic
   Spike
   SpikeTrain
   EventSignal<T>
@@ -192,7 +192,7 @@ packages-lo/lo-target-photonic
   data movement reports
   photonic target reports
 
-packages-lo/lo-app-kernel
+packages-lo/lo-framework-app-kernel
   typed API boundary enforcement
   validation policy
   auth policy
@@ -201,27 +201,27 @@ packages-lo/lo-app-kernel
   queue/job contracts
   runtime and audit reports
 
-packages-lo/lo-api-server
+packages-lo/lo-framework-api-server
   HTTP listening
   request normalisation
   route manifest loading
   server-level limits
   safe HTTP responses
 
-packages-lo/lo-cli
+packages-lo/lo-core-cli
   developer commands
   check/build/run/serve/report commands
   safe output formatting
   task command dispatch
 
-packages-lo/lo-tasks
+packages-lo/lo-core-tasks
   safe project automation
   task effects and permissions
   dry run mode
   task reports
   unsafe shell gates
 
-packages-lo/lo-benchmark
+packages-lo/lo-tools-benchmark
   benchmark configuration
   benchmark task definitions
   light/full/stress benchmark modes
@@ -229,7 +229,7 @@ packages-lo/lo-benchmark
   privacy-safe benchmark reports
   shareable benchmark payload contracts
 
-packages-lo/lo-project-graph
+packages-lo/lo-devtools-project-graph
   project graph nodes and relationships
   package ownership maps
   documentation and decision links
@@ -245,15 +245,15 @@ Examples:
 
 ```text
 Tri conversion rule changes
-  update packages-lo/lo-logic first
+  update packages-lo/lo-core-logic first
   update lo-core docs only if syntax or compiler checking changes
 
 Vector lane rules
-  update packages-lo/lo-vector first
+  update packages-lo/lo-core-vector first
   update lo-core docs only if language syntax changes
 
 Compute target selection
-  update packages-lo/lo-compute first
+  update packages-lo/lo-core-compute first
   update lo-core docs only if compute block syntax changes
 
 AI inference contracts
@@ -261,31 +261,31 @@ AI inference contracts
   update lo-core docs only if package registry or effect syntax changes
 
 Low-bit AI backend
-  update packages-lo/lo-lowbit-ai, packages-lo/lo-target-cpu or packages-lo/lo-cpu-kernels first
+  update packages-lo/lo-ai-lowbit, packages-lo/lo-target-cpu or packages-lo/lo-cpu-kernels first
   update lo-core docs only if compute target syntax or report contracts change
 
 Parallel AI agent orchestration
-  update packages-lo/lo-agent first
-  update packages-lo/lo-runtime only if structured concurrency contracts change
-  update packages-lo/lo-security only if permission or tool safety contracts change
+  update packages-lo/lo-ai-agent first
+  update packages-lo/lo-core-runtime only if structured concurrency contracts change
+  update packages-lo/lo-core-security only if permission or tool safety contracts change
   update lo-core docs only if async/task_group/spawn syntax changes
 
 Neural model or training boundary changes
-  update packages-lo/lo-neural first
-  update packages-lo/lo-vector only if tensor shape contracts change
+  update packages-lo/lo-ai-neural first
+  update packages-lo/lo-core-vector only if tensor shape contracts change
   update lo-core docs only if language-level compute syntax changes
 
 Neuromorphic event or spiking model changes
-  update packages-lo/lo-neuromorphic first
+  update packages-lo/lo-ai-neuromorphic first
   update target packages only if hardware planning changes
 
 AI accelerator target changes
   update packages-lo/lo-target-ai-accelerator first
-  update packages-lo/lo-compute only if target selection contracts change
+  update packages-lo/lo-core-compute only if target selection contracts change
 
 AI accelerator vendor profile changes
   update docs/AI_ACCELERATOR_TARGETS.md and packages-lo/lo-target-ai-accelerator first
-  update packages-lo/lo-benchmark only if benchmark target contracts change
+  update packages-lo/lo-tools-benchmark only if benchmark target contracts change
   update lo-core docs only if target syntax or package registry contracts change
 
 Photonic wavelength model
@@ -298,8 +298,8 @@ Photonic backend lowering
 
 Optical I/O or interconnect planning
   update docs/OPTICAL_IO.md and packages-lo/lo-target-photonic first
-  update packages-lo/lo-compute only if target selection or data movement contracts change
-  update packages-lo/lo-benchmark only if benchmark target contracts change
+  update packages-lo/lo-core-compute only if target selection or data movement contracts change
+  update packages-lo/lo-tools-benchmark only if benchmark target contracts change
   update lo-core docs only if target syntax or package registry contracts change
 
 WASM or GPU target backend changes
@@ -307,43 +307,43 @@ WASM or GPU target backend changes
   update lo-core docs only if target syntax or report contracts change
 
 Security primitive changes
-  update packages-lo/lo-security first
+  update packages-lo/lo-core-security first
   update lo-core docs only if language security syntax or compiler checks change
 
 Runtime execution changes
-  update packages-lo/lo-runtime first
+  update packages-lo/lo-core-runtime first
   update lo-core docs only if language runtime contracts change
 
 Resilient flow or controlled recovery changes
   update docs/RESILIENT_FLOWS.md first for workspace-level policy
-  update packages-lo/lo-runtime first for supervision, retry and checkpoint behavior
-  update packages-lo/lo-reports first for processing report shape changes
+  update packages-lo/lo-core-runtime first for supervision, retry and checkpoint behavior
+  update packages-lo/lo-core-reports first for processing report shape changes
   update lo-core docs only if resilient/recover syntax changes
 
 Compiler pipeline changes
-  update packages-lo/lo-compiler first
+  update packages-lo/lo-core-compiler first
   update lo-core docs only if language contracts or schemas change
 
 Config or report shape changes
-  update packages-lo/lo-config or packages-lo/lo-reports first
+  update packages-lo/lo-core-config or packages-lo/lo-core-reports first
   update lo-core docs only if compiler output contracts change
 
 CLI command behaviour
-  update packages-lo/lo-cli first
+  update packages-lo/lo-core-cli first
   update lo-core docs only if compiler command contracts change
 
 Safe task automation
-  update packages-lo/lo-tasks first
+  update packages-lo/lo-core-tasks first
   update lo-core docs only if package registry or task syntax changes
 
 Benchmark diagnostics
-  update packages-lo/lo-benchmark first
+  update packages-lo/lo-tools-benchmark first
   update target packages only if capability detection contracts change
-  update packages-lo/lo-reports only if shared report schemas change
+  update packages-lo/lo-core-reports only if shared report schemas change
   update lo-core docs only if benchmark syntax or package registry contracts change
 
 Project knowledge graph tooling
-  update packages-lo/lo-project-graph first
+  update packages-lo/lo-devtools-project-graph first
   update lo-core docs only if compiler reports or package registry contracts change
 ```
 

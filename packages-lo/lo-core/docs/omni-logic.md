@@ -2,7 +2,7 @@
 
 Ownership note: `lo-core` may document syntax and compatibility constraints for
 Omni logic, but detailed Omni logic semantics, widths, truth tables and reports
-belong in `packages-lo/lo-logic/`.
+belong in `packages-lo/lo-core-logic/`.
 
 LO should be Omni-logic compatible from the start.
 

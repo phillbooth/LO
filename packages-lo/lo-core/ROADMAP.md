@@ -660,7 +660,7 @@ backend support exists.
 trading safety boundaries and stock-market support. These should be package or
 standard-library candidates, not unreviewed core syntax.
 
-The first `v11` planning surface should be the grouped `lo-finance` package
+The first `v11` planning surface should be the grouped `lo-finance-core` package
 area. Start with deterministic finance maths, calendars, market data, FIX
 contracts and audit/replay evidence before risk, pricing, desktop interop or
 low-latency runtime profiles.

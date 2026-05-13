@@ -1,0 +1,52 @@
+{
+  "version": "0.1.0",
+  "generatedAt": "2026-05-08T00:00:00.000Z",
+  "nodes": [
+    {
+      "id": "package:lo-core",
+      "kind": "Package",
+      "label": "lo-core",
+      "sourcePath": "packages-lo/lo-core/README.md",
+      "summary": "LO language syntax, compiler-facing rules and core safety model.",
+      "tags": ["package", "language"]
+    },
+    {
+      "id": "package:lo-devtools-project-graph",
+      "kind": "Package",
+      "label": "lo-devtools-project-graph",
+      "sourcePath": "packages-lo/lo-devtools-project-graph/README.md",
+      "summary": "Project knowledge graph contracts for packages, docs, policies and reports.",
+      "tags": ["package", "tooling", "ai"]
+    },
+    {
+      "id": "doc:architecture",
+      "kind": "Document",
+      "label": "Architecture",
+      "sourcePath": "docs/ARCHITECTURE.md",
+      "tags": ["document", "architecture"]
+    },
+    {
+      "id": "report:graph",
+      "kind": "Report",
+      "label": "LO Graph Report",
+      "sourcePath": "build/graph/LO_GRAPH_REPORT.md",
+      "tags": ["report", "ai-map"]
+    }
+  ],
+  "edges": [
+    {
+      "from": "doc:architecture",
+      "to": "package:lo-devtools-project-graph",
+      "kind": "documents",
+      "confidence": "EXTRACTED",
+      "evidencePath": "docs/ARCHITECTURE.md"
+    },
+    {
+      "from": "package:lo-devtools-project-graph",
+      "to": "report:graph",
+      "kind": "generates",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-lo/lo-devtools-project-graph/README.md"
+    }
+  ]
+}

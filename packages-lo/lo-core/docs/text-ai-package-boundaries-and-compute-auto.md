@@ -157,7 +157,7 @@ External services:
   search providers
 ```
 
-Low-bit AI support belongs in `packages-lo/lo-lowbit-ai/`, with generic AI
+Low-bit AI support belongs in `packages-lo/lo-ai-lowbit/`, with generic AI
 contracts in `packages-lo/lo-ai/`. BitNet can be selected as a backend there, but
 source code should use generic compute target planning such as `low_bit_ai` or
 `ternary_ai`, rather than adding a backend name to LO core.

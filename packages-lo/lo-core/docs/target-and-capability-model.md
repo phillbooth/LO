@@ -4,7 +4,7 @@ Ownership note: `lo-core` may document target declaration syntax and compiler
 report contracts. Binary/native target planning belongs in
 `packages-lo/lo-target-binary/`; photonic backend target planning belongs in
 `packages-lo/lo-target-photonic/`; compute target selection belongs in
-`packages-lo/lo-compute/`.
+`packages-lo/lo-core-compute/`.
 
 This document defines the proposed **Target and Capability Model** for **LO / Logic Omni**.
 

@@ -3,8 +3,8 @@
 This document defines the LO core language contract for structured concurrency.
 
 Status: draft language and compiler contract. Runtime scheduling and execution
-details belong in `packages-lo/lo-runtime/`. API workload controls, queue handoff,
-rate limits and request cancellation policy belong in `packages-lo/lo-app-kernel/`.
+details belong in `packages-lo/lo-core-runtime/`. API workload controls, queue handoff,
+rate limits and request cancellation policy belong in `packages-lo/lo-framework-app-kernel/`.
 
 ## Purpose
 
@@ -206,13 +206,13 @@ source locations
 lo-core
   syntax, compiler checks and report contracts
 
-lo-runtime
+lo-core-runtime
   execution, scheduling, cancellation propagation and runtime errors
 
-lo-app-kernel
+lo-framework-app-kernel
   API workload controls, queue handoff, request cancellation and rate limits
 
-lo-tasks
+lo-core-tasks
   safe project automation tasks, not application async runtime
 ```
 
@@ -220,6 +220,6 @@ Final rule:
 
 ```text
 lo-core defines structured concurrency contracts.
-lo-runtime executes them.
-lo-app-kernel applies API/runtime policy around them.
+lo-core-runtime executes them.
+lo-framework-app-kernel applies API/runtime policy around them.
 ```
