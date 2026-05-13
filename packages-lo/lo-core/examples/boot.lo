@@ -80,6 +80,15 @@ runtime {
   cache_ir true
   hot_reload true
 
+  production {
+    disabled_packages [
+      "packages-lo/lo-tools-benchmark",
+      "packages-lo/lo-devtools-*"
+    ]
+
+    package_overrides []
+  }
+
   memory {
     soft_limit 512mb
     hard_limit 768mb

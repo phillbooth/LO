@@ -1,0 +1,8 @@
+{
+  "name": "@lo/electrical-core",
+  "version": "0.1.0-beta.0",
+  "description": "Grouped LO electrical infrastructure contracts for assets, monitoring, capacity, energy, maintenance, protection records and audit planning.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "private": true
+}

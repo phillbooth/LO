@@ -106,6 +106,7 @@ package permissions are valid
 JSON body limits are set
 memory/cache policies are valid
 vector policies are valid
+production-disabled packages are absent or explicitly overridden
 ```
 
 ---
@@ -216,6 +217,7 @@ global registry status
 security policy status
 route and webhook status
 package registry status
+production package override status
 memory/vector/json policy status
 startup diagnostics
 ```
@@ -233,6 +235,8 @@ Do not run a project with invalid config.
 Do not run a project with missing required secrets.
 Do not run routes that violate the security policy.
 Do not load unapproved packages.
+Do not load production-disabled benchmark or devtool packages without an
+explicit, reported production override.
 Do not allow memory, JSON or vector policy errors to become runtime surprises.
 ```
 

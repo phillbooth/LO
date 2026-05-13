@@ -9,6 +9,9 @@
       "packages-lo/lo-core-config",
       "packages-lo/lo-framework-example-app"
     ],
+    "production": {
+      "packageOverrides": []
+    },
     "strict": true,
     "targets": ["cpu", "wasm"],
     "defaultPackage": "packages-lo/lo-framework-example-app",

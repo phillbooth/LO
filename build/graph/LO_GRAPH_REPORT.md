@@ -1,15 +1,15 @@
 # LO Graph Report
 
 Workspace: LO-app
-Generated: 2026-05-13T16:53:05.909Z
+Generated: 2026-05-13T17:05:14.890Z
 
 ## Summary
 
-- Packages: 30
-- Documents: 346
-- Types/interfaces: 313
+- Packages: 32
+- Documents: 355
+- Types/interfaces: 314
 - Functions: 97
-- Relationships: 1455
+- Relationships: 1480
 
 ## Package Nodes
 
@@ -42,6 +42,8 @@ Generated: 2026-05-13T16:53:05.909Z
 - lo-tools-benchmark (packages-lo/lo-tools-benchmark/README.md)
 - lo-devtools-project-graph (packages-lo/lo-devtools-project-graph/README.md)
 - lo-finance-core (packages-lo/lo-finance-core/README.md)
+- lo-electrical-core (packages-lo/lo-electrical-core/README.md)
+- lo-ot-core (packages-lo/lo-ot-core/README.md)
 - lo-framework-example-app (packages-lo/lo-framework-example-app/README.md)
 
 ## High-Signal Questions

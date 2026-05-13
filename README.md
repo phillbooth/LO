@@ -165,6 +165,8 @@ LO-app/
 |   |-- lo-tools-benchmark/
 |   |-- lo-devtools-project-graph/
 |   |-- lo-finance-core/
+|   |-- lo-electrical-core/
+|   |-- lo-ot-core/
 |   |-- lo-framework-example-app/
 `-- tools/
 ```
@@ -232,6 +234,12 @@ LO-app/
   configuration.
 - `packages-lo/lo-finance-core/` - grouped beta package area for finance maths,
   market data, FIX, audit, risk, pricing and desktop interoperability contracts.
+- `packages-lo/lo-electrical-core/` - grouped beta package area for electrical
+  assets, monitoring, capacity, energy, maintenance, protection records and
+  audit contracts.
+- `packages-lo/lo-ot-core/` - grouped beta package area for operational
+  technology telemetry, protocol adapter boundaries, OT network policy, signed
+  command envelopes and audit contracts.
 - `docs/` - app/workspace requirements, architecture, security, deployment,
   decisions, changelog and operational documentation.
 
@@ -261,6 +269,11 @@ LO Finance
   optional domain package contracts for finance maths, market data, FIX, audit,
   risk, pricing and financial desktop interoperability
 
+LO Electrical / OT
+  optional domain package contracts for electrical infrastructure modelling,
+  monitoring, capacity, energy, maintenance, protection records, OT protocol
+  boundaries and audit evidence
+
 Full Frameworks
   CMS, admin UI, page builders, ORMs, template engines and frontend adapters
 ```
@@ -281,18 +294,25 @@ Important boundary rules:
   hardware are backend profiles selected by policy and reported after planning.
 - `optical_io` means high-speed interconnect/data movement planning. It is not a
   claim that Intel Silicon Photonics or OCI devices are general-purpose CPUs.
-- `lo-tools-benchmark` is development diagnostics. It must not auto-run in production
-  and must report skipped targets and fallbacks without exposing private machine
-  or project data.
+- `lo-tools-benchmark` is development diagnostics. It must not auto-run in
+  production and is disabled by default in production boot/package profiles.
+  Enabling it in production requires an explicit reported override with a
+  reason. Benchmark reports must not expose private machine or project data.
 - `lo-devtools-project-graph` explains the repository. It does not enforce compiler,
   runtime or security rules.
 - Development-only packages should remain outside production package
   resolution. Use `lo-devtools-*` for development-only inspection, graph,
   scaffold and assistant-context packages, and `lo-tools-*` for broader
   diagnostics or benchmark utilities that may run in development or staging.
+  Production defaults must disable these packages unless a maintainer declares
+  an explicit production package override.
 - Finance packages are domain packages. They must not become LO core syntax or
   imply that LO beta is ready to run live exchange, HFT, broker-dealer,
   clearing, settlement or custody systems.
+- Electrical and OT packages are modelling, monitoring, validation, workflow and
+  audit packages. They must not replace certified electrical protection,
+  circuit breakers, relays, PLC safety systems, SCADA products, grid protection
+  or qualified electrical engineering judgement.
 
 ## Package Layout Direction
 

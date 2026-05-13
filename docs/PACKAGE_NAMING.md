@@ -43,6 +43,8 @@ lo-ai
 | `lo-devtools-*` | Development-only tools not needed by production installs | `lo-devtools-project-graph` |
 | `lo-tools-*` | Tools that may run in development or staging but are not core runtime packages | `lo-tools-benchmark` |
 | `lo-finance-*` | Finance domain package family | `lo-finance-core` |
+| `lo-electrical-*` | Electrical infrastructure domain package family | `lo-electrical-core` |
+| `lo-ot-*` | Operational-technology integration package family | `lo-ot-core`, future `lo-ot-opcua` |
 | `lo-database-*` | Database domain package family | future package family |
 | `lo-industrial-*` | Industrial domain package family | future package family |
 | `lo-science-*` | Science domain package family | future package family |
@@ -81,6 +83,8 @@ lo-framework-example-app
 lo-devtools-project-graph
 lo-tools-benchmark
 lo-finance-core
+lo-electrical-core
+lo-ot-core
 ```
 
 ## Devtools Rule
@@ -91,6 +95,10 @@ dependencies.
 
 Use `lo-tools-*` for broader utilities such as benchmark runners, diagnostics or
 release tooling that may run in development or staging.
+
+Production profiles must not enable `lo-devtools-*` or `lo-tools-benchmark` by
+default. A production build that includes one of these packages requires an
+explicit production package override with a reason and report output.
 
 ## Target Rule
 

@@ -16,6 +16,7 @@
 - [x] Add Rust financial markets design note
 - [x] Add optical I/O and Intel Silicon Photonics design note
 - [x] Add passive AI accelerator and Intel Gaudi profile design note
+- [x] Add electrical infrastructure and OT package planning note
 - [x] Complete `docs/REQUIREMENTS.md`
 - [x] Complete `docs/DESIGN.md`
 - [ ] Complete `docs/ARCHITECTURE.md`
@@ -137,6 +138,8 @@
   families instead of a generic developer bucket
 - [ ] Define production versus development package resolution rules so
   production apps do not download staging packages by default
+- [x] Define production boot/profile defaults that disable benchmark and
+  development-only packages unless explicitly overridden and reported
 - [ ] Split `packages-lo/` into its own Git repository
 - [ ] Mount `packages-lo/` in framework repositories as a submodule or explicit
   nested repository
@@ -161,3 +164,23 @@
 - [ ] Define `lo-finance-core-audit` evidence, hash-chain, reconstruction and
   redacted bundle contracts
 - [ ] Decide when finance contracts should split into standalone packages
+
+## Phase 11: Electrical and OT Packages
+
+- [x] Add grouped `lo-electrical-core` package planning area
+- [x] Add grouped `lo-ot-core` package planning area
+- [ ] Define `lo-electrical-assets` contracts for panels, circuits, breakers,
+  cables, loads, meters, transformers, inverters, batteries, EV chargers, UPS,
+  generators, relays and sensors
+- [ ] Define `lo-electrical-monitoring` telemetry contracts
+- [ ] Define `lo-electrical-capacity` load and phase-balancing checks
+- [ ] Define `lo-electrical-energy` demand, cost, carbon and optimisation reports
+- [ ] Define `lo-electrical-maintenance` inspection and test evidence contracts
+- [ ] Define `lo-electrical-protection-records` approval, test and rollback
+  evidence contracts
+- [ ] Define `lo-ot-core` read-only telemetry gateway and OT network policy
+  contracts
+- [ ] Define future `lo-ot-opcua`, `lo-ot-iec61850`, `lo-ot-modbus`,
+  `lo-ot-mqtt` and `lo-ot-scada` package boundaries
+- [ ] Keep certified protection replacement, PLC safety replacement,
+  unsupervised switching and real-time grid control out of beta scope

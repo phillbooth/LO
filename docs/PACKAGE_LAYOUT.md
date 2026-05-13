@@ -43,6 +43,8 @@ runtime
 development
 staging
 finance
+electrical
+ot
 low_latency
 benchmark
 ```
@@ -68,10 +70,43 @@ The resolver should install only packages required by the selected profile:
 runtime       minimal runtime/compiler/app-kernel requirements
 development   graph, diagnostics, generators and test helpers
 finance       finance package contracts selected by the app
+electrical    electrical infrastructure contracts selected by the app
+ot            operational-technology integration contracts selected by the app
 benchmark     benchmark packages, never implicit in production
 ```
 
 Development and staging packages should be excluded unless explicitly selected.
+
+Production boot/profile defaults must disable development-only and benchmark
+packages. This is a rule, not only a resolver optimisation.
+
+Default-disabled production package families include:
+
+```text
+lo-tools-benchmark
+lo-devtools-*
+```
+
+If a production build includes a default-disabled package, `boot.lo` or
+`package-lo.json` must declare an explicit production package override with a
+reason, and preferably an expiry. The override must be reported. Without the
+override, startup/build validation must fail.
+
+Example object-shaped policy:
+
+```json
+{
+  "production": {
+    "packageOverrides": [
+      {
+        "path": "packages-lo/lo-tools-benchmark",
+        "reason": "One-off production hardware validation before launch.",
+        "expires": "2026-06-01"
+      }
+    ]
+  }
+}
+```
 
 ## Migration Rule
 

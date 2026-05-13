@@ -32,6 +32,8 @@
         "packages-lo/lo-tools-benchmark",
         "packages-lo/lo-devtools-project-graph",
         "packages-lo/lo-finance-core",
+        "packages-lo/lo-electrical-core",
+        "packages-lo/lo-ot-core",
         "packages-lo/lo-framework-example-app"
     ],
     "defaultPackage": "packages-lo/lo-framework-example-app",
@@ -66,6 +68,8 @@
     "benchmarkPackage": "packages-lo/lo-tools-benchmark",
     "projectGraphPackage": "packages-lo/lo-devtools-project-graph",
     "financePackage": "packages-lo/lo-finance-core",
+    "electricalPackage": "packages-lo/lo-electrical-core",
+    "otPackage": "packages-lo/lo-ot-core",
     "strict": true,
     "targets": [
         "cpu",
@@ -111,7 +115,10 @@
         "cliAndTasks": "packages-lo/lo-core-cli-and-lo-core-tasks-requirements.md",
         "benchmark": "packages-lo/lo-tools-benchmark",
         "projectGraph": "packages-lo/lo-devtools-project-graph",
-        "finance": "packages-lo/lo-finance-core"
+        "finance": "packages-lo/lo-finance-core",
+        "electrical": "packages-lo/lo-electrical-core",
+        "ot": "packages-lo/lo-ot-core",
+        "electricalInfrastructure": "docs/ELECTRICAL_INFRASTRUCTURE.md"
     },
     "tools": {
         "root": "tools"

@@ -74,3 +74,7 @@ not mistaken for production runtime dependencies.
 - `lo-devtools-project-graph/` - development-only project graph tooling.
 - `lo-tools-benchmark/` - benchmark and diagnostic tooling.
 - `lo-finance-core/` - grouped beta planning package for finance contracts.
+- `lo-electrical-core/` - grouped beta planning package for electrical
+  infrastructure contracts.
+- `lo-ot-core/` - grouped beta planning package for operational-technology
+  integration contracts.

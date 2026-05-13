@@ -34,8 +34,10 @@ tooling lives in `packages-lo/lo-core-cli/`, and safe project automation lives i
 `packages-lo/lo-tools-benchmark/`. Project knowledge graph tooling lives in
 `packages-lo/lo-devtools-project-graph/`. App source and build configuration live in
 `packages-lo/lo-framework-example-app/`. Beta finance package planning lives in
-`packages-lo/lo-finance-core/`. App planning and operational documentation live
-in `docs/`. Development-only packages should use `lo-devtools-*` or
+`packages-lo/lo-finance-core/`. Electrical infrastructure package planning lives
+in `packages-lo/lo-electrical-core/`, and operational-technology integration
+planning lives in `packages-lo/lo-ot-core/`. App planning and operational
+documentation live in `docs/`. Development-only packages should use `lo-devtools-*` or
 `lo-tools-*` names and must not be resolved by production applications by
 default.
 
@@ -77,6 +79,8 @@ LO-app/
 |   |-- lo-tools-benchmark/
 |   |-- lo-devtools-project-graph/
 |   |-- lo-finance-core/
+|   |-- lo-electrical-core/
+|   |-- lo-ot-core/
 |   |-- lo-framework-example-app/
 `-- tools/
 ```
@@ -119,6 +123,8 @@ light-framework/
 |   |-- lo-tools-benchmark/
 |   |-- lo-devtools-project-graph/
 |   |-- lo-finance-core/
+|   |-- lo-electrical-core/
+|   |-- lo-ot-core/
 |   `-- lo-framework-example-app/
 |-- app/
 `-- framework files
@@ -246,6 +252,14 @@ LO Finance
   finance maths, market data, FIX, audit, compliance, risk, pricing and FDC3
   package contracts
 
+LO Electrical
+  electrical assets, telemetry, capacity, energy, maintenance, protection
+  setting records, event audit and reports
+
+LO OT
+  operational-technology telemetry gateways, protocol adapter boundaries,
+  network policy, signed command envelopes and audit reports
+
 LO Standard Packages
   HTTP adapters, SQL adapters, Redis queue, OpenAPI generator, JS/WASM generators
 
@@ -284,12 +298,30 @@ Developer-only packages should be resolved through an explicit development
 profile. Production lockfiles, runtime package manifests and application
 deployments should not pull `lo-devtools-*` or development-only `lo-tools-*`
 packages unless a maintainer opts into a development or staging mode.
+Production boot/profile policy must additionally default-disable
+`lo-tools-benchmark` and `lo-devtools-*`. If one is included in a production
+build, `lo-core-config` should require an explicit production package override
+with a reason and expose that override in the runtime handoff and reports.
 
 `lo-finance-core` is a domain package group. Early work should define deterministic
 finance maths, market-data types, FIX integration contracts, audit evidence,
 calendar/session rules and risk/pricing boundaries. It must not make LO a live
 exchange engine, HFT engine, broker-dealer platform, settlement system,
 clearing system or custody platform.
+
+`lo-electrical-core` is a domain package group for electrical infrastructure
+modelling, validation, monitoring, capacity, energy, maintenance, protection
+setting records and audit evidence. It must not replace certified electrical
+protection equipment, circuit breakers, protection relays, PLC safety systems,
+grid protection, SCADA products, certified controllers or qualified electrical
+engineering judgement. First work should be read-only and report-heavy.
+
+`lo-ot-core` is an operational-technology integration package group for
+telemetry gateways, protocol adapter boundaries, network segmentation policy,
+signed command envelopes, operator approvals and control-attempt audit records.
+It may guide future `lo-ot-opcua`, `lo-ot-iec61850`, `lo-ot-modbus`,
+`lo-ot-mqtt` and `lo-ot-scada` packages. OT writes and equipment control must
+be deny-by-default and require explicit policy, approval and audit.
 
 `lo-core-logic` owns logic semantics such as `Tri`, `Logic<N>` and Omni.
 `lo-core-photonic` owns photonic concepts, representation models and simulation
@@ -353,8 +385,8 @@ configuration loading contracts, and `lo-core-reports` owns shared report shapes
 produces runtime handoff objects with structured diagnostics. It represents
 environment variables by safe references only: names, required flags, secret
 flags, scopes and optional non-secret defaults. Production strictness policy
-checks belong here, while secret protection and redaction remain in
-`lo-core-security`.
+checks and default-disabled production package checks belong here, while secret
+protection and redaction remain in `lo-core-security`.
 
 Controlled recovery belongs across language, runtime and report layers.
 `lo-core` may describe resilient flow syntax direction, but `lo-core-runtime` owns

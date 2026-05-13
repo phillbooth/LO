@@ -140,6 +140,15 @@ All notable changes to this app should be documented here.
   wording, unknown-storage fallback, incremental build/IDE index planning,
   streaming large files, read-only mapping, cache bypass and cache safety rules.
 - Added typed storage and build-cache report contracts to `lo-core-reports`.
+- Added production boot/profile rules that default-disable benchmark and
+  development-only packages such as `lo-tools-benchmark` and `lo-devtools-*`,
+  with explicit reported production package overrides required when policy
+  allows them.
+- Added `docs/ELECTRICAL_INFRASTRUCTURE.md`, `packages-lo/lo-electrical-core/`
+  and `packages-lo/lo-ot-core/` for electrical infrastructure and
+  operational-technology package planning, with explicit safety boundaries
+  against replacing certified protection equipment, PLC safety systems, SCADA
+  products or qualified electrical engineering judgement.
 
 ### Changed
 

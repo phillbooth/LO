@@ -72,6 +72,17 @@ the developer runs it manually from the command line
 
 It should not run automatically in production.
 
+Production package rule:
+
+```text
+lo-tools-benchmark is disabled by default in production boot/package profiles.
+```
+
+If a maintainer needs benchmark support in production, for example for a
+one-off hardware validation window, it must be enabled with an explicit
+production package override that includes a reason and should include an expiry.
+The override must appear in config, build, security or deployment reports.
+
 Example major version trigger:
 
 ```text
@@ -972,7 +983,7 @@ development mode:
   prompt or auto-run depending on config
 
 production mode:
-  do not auto-run
+  package disabled by default; do not auto-run even when explicitly enabled
 
 CI mode:
   run only if explicitly configured

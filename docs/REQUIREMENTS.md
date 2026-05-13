@@ -160,12 +160,26 @@ The app package must remain deliberately small until a product domain is chosen.
 - Development-only packages must be excluded from production package resolution
   and production downloads unless a maintainer explicitly opts into a
   development or staging profile.
+- Production boot/profile defaults must disable development-only and benchmark
+  packages such as `lo-devtools-*` and `lo-tools-benchmark`.
+- A production build that includes a default-disabled package must declare an
+  explicit production package override with a reason, and the override must be
+  visible in config/build/security/deployment reports. Without that override,
+  startup or build validation must fail.
 - The exact developer package folder name remains provisional, but its boundary
   must stay separate from production runtime package manifests.
 - `packages-lo/lo-finance-core/` may be used as a grouped beta finance package area
   before finance contracts split into smaller packages.
 - Finance package work must stay outside `packages-lo/lo-core/` unless it is a
   general language rule needed by all domains.
+- `packages-lo/lo-electrical-core/` may be used as a grouped beta electrical
+  infrastructure package area before electrical contracts split into smaller
+  packages.
+- `packages-lo/lo-ot-core/` may be used as a grouped beta operational-technology
+  integration package area before OT protocol contracts split into smaller
+  packages.
+- Electrical and OT package work must stay outside `packages-lo/lo-core/` unless
+  it is a general language rule needed by all domains.
 - Package naming must follow `docs/PACKAGE_NAMING.md`: `lo-target-*` for where
   code runs or compiles to, `lo-io-*` for how data moves, `lo-ai-*` for
   AI-specific workloads, `lo-kernel-*` for low-level execution kernels and
@@ -173,6 +187,46 @@ The app package must remain deliberately small until a product domain is chosen.
 - `lo-target-binary` and `lo-target-photonic` must not be renamed to I/O
   package names; binary and photonic I/O should be added later as separate
   `lo-io-*` packages.
+
+## Electrical and OT Package Requirements
+
+- `lo-electrical-core` must be a domain package group, not core LO syntax.
+- `lo-ot-core` must be an operational-technology integration package group, not
+  core LO syntax and not a SCADA, PLC or safety controller product.
+- LO electrical support must be positioned as modelling, validation,
+  monitoring, workflow and audit support. It must not replace circuit breakers,
+  relays, protective devices, PLC safety systems, grid protection, certified
+  controllers or qualified electrical design.
+- Early electrical contracts must start with asset models, telemetry ingestion,
+  alerts, reports, capacity checks, maintenance schedules, energy reports, OT
+  network policy and protection setting record/audit evidence.
+- Early electrical contracts must avoid direct breaker control, relay protection
+  replacement, PLC replacement, safety interlock control, unsupervised
+  switching and real-time grid control.
+- Electrical asset models may cover panels, circuits, breakers, cables, loads,
+  meters, transformers, inverters, batteries, EV chargers, UPS, generators,
+  relays and sensors.
+- Electrical telemetry may cover voltage, current, power, power factor,
+  frequency, phase imbalance, harmonics, temperature, breaker state, relay
+  state, battery state of charge, solar generation, EV charger demand and UPS
+  load.
+- Electrical control policy must be deny-by-default. Reading telemetry,
+  creating alerts and opening maintenance work orders are lower risk. Changing
+  setpoints, switching load and breaker operations are high risk and must
+  require explicit policy, approval, signed jobs, audit and suitable local
+  safety interlocks.
+- Protection setting support must manage records, versions, approvals, test
+  evidence, rollback plans and compatibility reports. It must not replace
+  protection relay behaviour.
+- OT packages may define adapter boundaries for OPC UA, IEC 61850, Modbus, MQTT
+  and SCADA connectors, but concrete protocol stacks and vendor integrations
+  should remain package-specific and permissioned.
+- OT security must require read-only defaults, network segmentation, host
+  allowlists, signed commands, operator approval, mTLS where appropriate, no
+  arbitrary scripts, no undeclared package network access and audit of all
+  control attempts.
+- Electrical and OT reports must avoid raw secrets, unnecessary personal data
+  and unsafe control payloads.
 
 ## Finance Package Requirements
 
@@ -264,6 +318,9 @@ The app package must remain deliberately small until a product domain is chosen.
   automatically.
 - Benchmark runs must be manual, CI-explicit or development-only major-version
   checks. They must never auto-run in production.
+- `lo-tools-benchmark` must be disabled by default in production boot/package
+  profiles. Even if explicitly overridden for a production validation window,
+  it must not auto-run.
 - GPU, low-bit AI and future accelerator tests must be optional and must report
   skipped or fallback status when unsupported.
 - Public benchmark names and LO syntax must stay backend-neutral. BitNet may be
@@ -394,6 +451,9 @@ The app package must remain deliberately small until a product domain is chosen.
   handoff objects.
 - `lo-core-config` must provide production strictness checks for strict project mode,
   required environment variables and unsafe secret defaults.
+- `lo-core-config` must enforce production-disabled package defaults for
+  development-only and benchmark packages, while supporting explicit reported
+  production package overrides when policy allows them.
 - `lo-core-reports` must own shared report schemas and report-writing contracts.
 - Shared report contracts must include common metadata, generator metadata,
   diagnostic summaries and typed build, security, target, runtime, task and AI
