@@ -481,6 +481,7 @@ Reason for additions:
 [x] Define runtime memory pressure block
 [x] Define runtime spill aLOw/deny policy
 [x] Define memory pressure ladder and cache bypass behaviour
+[x] Define conservative storage-aware performance and cache rules
 [x] Define Strict Global Registry
 [x] Define data race prevention
 [x] Define thread/task sharing rules

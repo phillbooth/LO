@@ -5,10 +5,12 @@ import {
   createAiGuideReport,
   createAsyncReport,
   createBuildReport,
+  createBuildCacheReport,
   createProcessingReport,
   createReportDiagnostic,
   createReportMetadata,
   createSecurityReport,
+  createStorageReport,
   createTargetReport,
   serializeReportJson,
   summarizeDiagnostics,
@@ -195,6 +197,41 @@ describe("lo-core-reports contracts", () => {
     assert.equal(report.groups[0]?.cancellationPolicy, "cancelOnError");
     assert.deepEqual(validateLoReport(report), []);
     assert.match(serializeReportJson(report), /structuredConcurrency/);
+  });
+
+  it("creates conservative storage and build-cache reports", () => {
+    const storageReport = createStorageReport({
+      metadata: createReportMetadata({
+        ...metadata,
+        kind: "storage",
+        name: "LO storage report",
+      }),
+      storage: {
+        detected: false,
+        kind: "unknown",
+        detailsReliable: false,
+        detectionNotes: ["Storage details unavailable in container."],
+      },
+    });
+    const cacheReport = createBuildCacheReport({
+      metadata: createReportMetadata({
+        ...metadata,
+        kind: "build-cache",
+        name: "LO build cache report",
+      }),
+      hits: 12,
+      misses: 3,
+      bypasses: 1,
+      invalidations: 2,
+      cachedDataClasses: ["parsed_ast", "type_check_cache"],
+    });
+
+    assert.equal(storageReport.recommendedCacheMode, "minimal-bounded");
+    assert.equal(storageReport.unknownFallbackUsed, true);
+    assert.equal(cacheReport.correctnessRequiredCache, false);
+    assert.equal(cacheReport.deniedDataClasses.includes("SecureString"), true);
+    assert.deepEqual(validateLoReport(storageReport), []);
+    assert.deepEqual(validateLoReport(cacheReport), []);
   });
 
   it("validates report metadata and diagnostic shape", () => {

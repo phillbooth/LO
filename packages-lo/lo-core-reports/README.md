@@ -20,6 +20,7 @@ security report contracts
 target report contracts
 runtime report contracts
 async/concurrency report contracts
+storage and build-cache report contracts
 task report contracts
 processing report contracts
 AI guide report contracts
@@ -59,6 +60,8 @@ BatchResultReport
 AsyncReport
 AwaitSiteReport
 AwaitGroupReport
+StorageReport
+BuildCacheReport
 AiGuideReport
 CustomReport
 ReportWriter
@@ -77,6 +80,12 @@ await groups, race blocks, stream blocks, queue awaits, missing timeout counts,
 unscoped task counts, background task counts, structured-concurrency status and
 source locations. Compiler, runtime and kernel packages produce the facts;
 `lo-core-reports` only owns the shared shape.
+
+Storage and build-cache reports are for conservative performance planning. They
+record optional storage facts, unknown-storage fallback, recommended bounded
+cache mode, cache hits, misses, bypasses, evictions and invalidations. Cache
+reports must make clear that cached data is not required for correctness and
+that secrets or sensitive payloads are denied by default.
 
 Final rule:
 

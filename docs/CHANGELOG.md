@@ -136,6 +136,10 @@ All notable changes to this app should be documented here.
   cancellation, mandatory timeout policy, stream backpressure, queue handoff and
   async/concurrency reports.
 - Added typed async/concurrency report contracts to `lo-core-reports`.
+- Added conservative storage-aware performance documentation covering SSD/NVMe/M.2
+  wording, unknown-storage fallback, incremental build/IDE index planning,
+  streaming large files, read-only mapping, cache bypass and cache safety rules.
+- Added typed storage and build-cache report contracts to `lo-core-reports`.
 
 ### Changed
 

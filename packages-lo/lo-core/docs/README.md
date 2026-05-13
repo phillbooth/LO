@@ -102,6 +102,7 @@ memory-safety.md
 memory-and-variable-use.md
 memory-error-correction.md
 memory-pressure-and-disk-spill.md
+storage-aware-performance.md
 security-risk-feature-ranking.md
 warnings-and-diagnostics.md
 system-health-warnings.md

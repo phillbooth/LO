@@ -184,7 +184,7 @@ LO-app/
 - `packages-lo/lo-core-config/` - project configuration, environment mode and production
   strictness contracts.
 - `packages-lo/lo-core-reports/` - shared report schemas and report-writing
-  contracts, including async/concurrency report shapes.
+  contracts, including async/concurrency, storage and build-cache report shapes.
 - `packages-lo/lo-core-logic/` - `Tri`, `Logic<N>`, Decision, RiskLevel and future Omni
   logic concepts.
 - `packages-lo/lo-core-vector/` - vector, matrix, tensor, lane, dimension and numeric
@@ -239,7 +239,8 @@ LO-app/
 
 ```text
 LO Core
-  language, type system, effects, memory safety, Structured Await syntax and core reports
+  language, type system, effects, memory safety, Structured Await,
+  storage-aware performance rules and core reports
 
 LO Compiler / Runtime / Security / Config / Reports
   compiler pipeline, execution, shared security, configuration and report contracts

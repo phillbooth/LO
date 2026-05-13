@@ -30,6 +30,9 @@ must not be treated as implemented app functionality.
   instead of exposed future/promise plumbing.
 - Support controlled recovery for batch/data flows while stopping safely on
   unsafe system or runtime integrity failures.
+- Support storage-aware performance planning without claiming direct support for
+  SSD, NVMe, M.2 or other hardware. Storage detection must be optional,
+  reportable and safe when unknown.
 - Give AI coding tools enough generated context to understand package ownership
   without replacing compiler, runtime, security or test checks.
 - Provide safe task automation with explicit effects, permissions and reports.
@@ -398,8 +401,37 @@ The app package must remain deliberately small until a product domain is chosen.
 - Shared report contracts must include async/concurrency report shapes for
   Structured Await, including await sites, groups, missing timeout counts,
   unscoped task counts and structured-concurrency status.
+- Shared report contracts should include storage and build-cache planning shapes
+  for detected storage facts, unknown-storage fallback, conservative cache mode,
+  cache hits, misses, bypasses, evictions and invalidations.
 - Shared report contracts must include processing report shapes for resilient
   flows, partial success, retries, quarantined items and failure summaries.
+
+## Storage-Aware Performance Requirements
+
+- LO must not claim to support M.2, NVMe, SSDs or storage controllers directly.
+  Operating systems, drivers, firmware and hardware controllers own physical
+  storage access.
+- LO may detect storage capability where available and use it to guide
+  incremental compilation, IDE indexing, project graph scanning, large-file
+  processing, JSON streaming, asset pipelines and diagnostics.
+- Storage detection must degrade to `unknown` in containers, virtual machines,
+  cloud volumes, network storage or restricted environments.
+- Cache behavior must be conservative by default: bounded, rebuildable,
+  content-addressed where practical, safe to bypass and safe to delete.
+- Only deterministic, non-secret, rebuildable data may be cached automatically.
+- LO must not automatically cache secrets, raw sensitive payloads, authorization
+  decisions, non-deterministic results, database query results or external API
+  responses.
+- Application-level caching of database/API data must require explicit
+  app/framework policy.
+- Build and IDE caches must be invalidated by relevant source, config, package
+  lock, tool version and policy changes.
+- Large file and large JSON workflows should prefer streaming, bounded batches,
+  read-only views and explicit clone/copy-on-write rules.
+- Reports should show storage kind when known, unknown-storage fallback,
+  recommended conservative cache mode, cache use, cache bypass and invalidation
+  reasons.
 
 ## Structured Await Requirements
 

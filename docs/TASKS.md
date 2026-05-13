@@ -118,6 +118,7 @@
   requirements for production-readiness
 - [x] Define resilient flow controlled recovery and processing report direction
 - [x] Define LO Structured Await language, runtime, kernel and report direction
+- [x] Define conservative storage-aware performance and cache planning direction
 - [x] Define `lo-core-security` primitives, redaction and permission models
 - [x] Define `lo-core-config` project config and environment mode contracts
 - [x] Define `lo-core-reports` shared report schemas

@@ -1,6 +1,6 @@
 {
   "version": "0.1.0",
-  "generatedAt": "2026-05-13T16:48:35.749Z",
+  "generatedAt": "2026-05-13T16:53:05.909Z",
   "nodes": [
     {
       "id": "package:lo-core",
@@ -1636,6 +1636,16 @@
       "kind": "Document",
       "label": "startup-validation.md",
       "sourcePath": "packages-lo/lo-core/docs/startup-validation.md",
+      "tags": [
+        "document",
+        "lo-core"
+      ]
+    },
+    {
+      "id": "doc:packages-lo/lo-core/docs/storage-aware-performance.md",
+      "kind": "Document",
+      "label": "storage-aware-performance.md",
+      "sourcePath": "packages-lo/lo-core/docs/storage-aware-performance.md",
       "tags": [
         "document",
         "lo-core"
@@ -3492,6 +3502,56 @@
       ]
     },
     {
+      "id": "type:lo-core-reports:StorageKind",
+      "kind": "Type",
+      "label": "StorageKind",
+      "sourcePath": "packages-lo/lo-core-reports/src/index.ts",
+      "tags": [
+        "type",
+        "lo-core-reports"
+      ]
+    },
+    {
+      "id": "type:lo-core-reports:CacheMode",
+      "kind": "Type",
+      "label": "CacheMode",
+      "sourcePath": "packages-lo/lo-core-reports/src/index.ts",
+      "tags": [
+        "type",
+        "lo-core-reports"
+      ]
+    },
+    {
+      "id": "type:lo-core-reports:StorageCapability",
+      "kind": "Type",
+      "label": "StorageCapability",
+      "sourcePath": "packages-lo/lo-core-reports/src/index.ts",
+      "tags": [
+        "type",
+        "lo-core-reports"
+      ]
+    },
+    {
+      "id": "type:lo-core-reports:StorageReport",
+      "kind": "Type",
+      "label": "StorageReport",
+      "sourcePath": "packages-lo/lo-core-reports/src/index.ts",
+      "tags": [
+        "type",
+        "lo-core-reports"
+      ]
+    },
+    {
+      "id": "type:lo-core-reports:BuildCacheReport",
+      "kind": "Type",
+      "label": "BuildCacheReport",
+      "sourcePath": "packages-lo/lo-core-reports/src/index.ts",
+      "tags": [
+        "type",
+        "lo-core-reports"
+      ]
+    },
+    {
       "id": "type:lo-core-reports:TaskReport",
       "kind": "Type",
       "label": "TaskReport",
@@ -3715,6 +3775,26 @@
       "id": "flow:lo-core-reports:createAsyncReport",
       "kind": "Flow",
       "label": "createAsyncReport",
+      "sourcePath": "packages-lo/lo-core-reports/src/index.ts",
+      "tags": [
+        "function",
+        "lo-core-reports"
+      ]
+    },
+    {
+      "id": "flow:lo-core-reports:createStorageReport",
+      "kind": "Flow",
+      "label": "createStorageReport",
+      "sourcePath": "packages-lo/lo-core-reports/src/index.ts",
+      "tags": [
+        "function",
+        "lo-core-reports"
+      ]
+    },
+    {
+      "id": "flow:lo-core-reports:createBuildCacheReport",
+      "kind": "Flow",
+      "label": "createBuildCacheReport",
       "sourcePath": "packages-lo/lo-core-reports/src/index.ts",
       "tags": [
         "function",
@@ -11785,6 +11865,13 @@
     },
     {
       "from": "package:lo-core",
+      "to": "doc:packages-lo/lo-core/docs/storage-aware-performance.md",
+      "kind": "owns",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-lo/lo-core/docs/storage-aware-performance.md"
+    },
+    {
+      "from": "package:lo-core",
       "to": "doc:packages-lo/lo-core/docs/strict-comments.md",
       "kind": "owns",
       "confidence": "EXTRACTED",
@@ -13871,6 +13958,41 @@
     },
     {
       "from": "package:lo-core-reports",
+      "to": "type:lo-core-reports:StorageKind",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-lo/lo-core-reports/src/index.ts"
+    },
+    {
+      "from": "package:lo-core-reports",
+      "to": "type:lo-core-reports:CacheMode",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-lo/lo-core-reports/src/index.ts"
+    },
+    {
+      "from": "package:lo-core-reports",
+      "to": "type:lo-core-reports:StorageCapability",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-lo/lo-core-reports/src/index.ts"
+    },
+    {
+      "from": "package:lo-core-reports",
+      "to": "type:lo-core-reports:StorageReport",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-lo/lo-core-reports/src/index.ts"
+    },
+    {
+      "from": "package:lo-core-reports",
+      "to": "type:lo-core-reports:BuildCacheReport",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-lo/lo-core-reports/src/index.ts"
+    },
+    {
+      "from": "package:lo-core-reports",
       "to": "type:lo-core-reports:TaskReport",
       "kind": "provides",
       "confidence": "EXTRACTED",
@@ -14026,6 +14148,20 @@
     {
       "from": "package:lo-core-reports",
       "to": "flow:lo-core-reports:createAsyncReport",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-lo/lo-core-reports/src/index.ts"
+    },
+    {
+      "from": "package:lo-core-reports",
+      "to": "flow:lo-core-reports:createStorageReport",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-lo/lo-core-reports/src/index.ts"
+    },
+    {
+      "from": "package:lo-core-reports",
+      "to": "flow:lo-core-reports:createBuildCacheReport",
       "kind": "provides",
       "confidence": "EXTRACTED",
       "evidencePath": "packages-lo/lo-core-reports/src/index.ts"

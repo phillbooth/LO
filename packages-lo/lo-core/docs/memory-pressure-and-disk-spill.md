@@ -63,6 +63,22 @@ flow.
 
 This is called `cache_bypass`.
 
+Cache support must remain conservative:
+
+```text
+cache only deterministic, non-secret, rebuildable data automatically
+never require cache for correctness
+validate cache entries by source/config/package/tool hashes where relevant
+prefer bounded content-addressed caches
+bypass cache rather than use uncertain or stale entries
+report cache use, bypass, eviction and invalidation
+```
+
+LO should not automatically cache secrets, raw sensitive payloads,
+authorization decisions, non-deterministic flow results, database query results
+or external API responses. Application-level caching for database or API data
+must be explicit policy owned by the app/framework layer.
+
 ## Memory Pressure Ladder
 
 When total memory pressure rises, LO should respond in this order:
@@ -194,6 +210,10 @@ cache, type-check cache, API report cache, AI guide generation cache and target
 planning cache.
 
 Build spill must not include secrets.
+
+Build cache entries should be safe to delete, safe to rebuild and safe to
+bypass. If storage is unknown, slow, remote or under pressure, LO should prefer
+smaller caches and fewer random reads rather than aggressive cache expansion.
 
 ## Reports and Generated Documentation
 

@@ -374,6 +374,16 @@ report shapes so compiler, runtime and kernel facts can be emitted consistently.
 Normal LO developers should use Structured Await forms rather than direct
 future/promise management.
 
+Storage-aware performance is a tooling/runtime concern, not direct hardware
+support. `lo-core` owns language rules for streaming large data, read-only
+views, explicit clone/copy-on-write and conservative cache semantics.
+`lo-core-compiler`, `lo-core-cli` and `lo-devtools-project-graph` may use
+storage facts for incremental compilation, IDE indexes and project graph scans.
+`lo-core-runtime` may use storage facts for bounded file I/O and safe temporary
+storage. `lo-core-reports` owns storage and build-cache report shapes. Hardware
+details may be unavailable, so every storage-aware optimization must have an
+unknown-storage fallback and must not depend on cache correctness.
+
 `lo-framework-app-kernel` should not be renamed to `lo-core-runtime`. A future `lo-core-runtime`
 package should execute compiled or checked LO code. The app kernel should
 remain the secure application/API boundary that controls validation, auth,

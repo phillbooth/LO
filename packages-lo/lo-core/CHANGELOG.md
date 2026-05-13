@@ -79,6 +79,10 @@ Example:
   `docs/sytax-examples/` entries for LO Structured Await: `await`, `await all`,
   `await race`, `await stream`, queue handoff, mandatory timeout policy,
   cancellation modes, scoped tasks and async reports.
+- Added `docs/storage-aware-performance.md` for conservative storage-aware
+  performance planning, including careful SSD/NVMe/M.2 wording, unknown-storage
+  fallback, bounded cache rules, streaming large files and build/IDE index
+  report direction.
 
 ```text
 - Added explicit backend language suggestion adoption guidance to docs/backend-language-gap-analysis.md.

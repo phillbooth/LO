@@ -8,6 +8,8 @@ export type ReportKind =
   | "target"
   | "runtime"
   | "async"
+  | "storage"
+  | "build-cache"
   | "task"
   | "processing"
   | "ai-guide"
@@ -147,6 +149,57 @@ export interface AsyncReport extends LoReportBase {
   readonly groups: readonly AwaitGroupReport[];
 }
 
+export type StorageKind =
+  | "unknown"
+  | "hdd"
+  | "sata-ssd"
+  | "nvme"
+  | "ram-disk"
+  | "network"
+  | "cloud"
+  | "container";
+
+export type CacheMode =
+  | "disabled"
+  | "minimal-bounded"
+  | "bounded"
+  | "bounded-parallel-indexed"
+  | "temporary-only";
+
+export interface StorageCapability {
+  readonly detected: boolean;
+  readonly kind: StorageKind;
+  readonly formFactor?: string;
+  readonly sequentialReadMbPerSecond?: number;
+  readonly sequentialWriteMbPerSecond?: number;
+  readonly randomReadIops?: number;
+  readonly randomWriteIops?: number;
+  readonly detailsReliable: boolean;
+  readonly detectionNotes: readonly string[];
+}
+
+export interface StorageReport extends LoReportBase {
+  readonly kind: "storage";
+  readonly storage: StorageCapability;
+  readonly recommendedCacheMode: CacheMode;
+  readonly unknownFallbackUsed: boolean;
+  readonly conservativeCache: boolean;
+}
+
+export interface BuildCacheReport extends LoReportBase {
+  readonly kind: "build-cache";
+  readonly cacheMode: CacheMode;
+  readonly maxSizeBytes?: number;
+  readonly hits: number;
+  readonly misses: number;
+  readonly bypasses: number;
+  readonly evictions: number;
+  readonly invalidations: number;
+  readonly correctnessRequiredCache: false;
+  readonly cachedDataClasses: readonly string[];
+  readonly deniedDataClasses: readonly string[];
+}
+
 export interface TaskReport extends LoReportBase {
   readonly kind: "task";
   readonly taskName: string;
@@ -213,6 +266,8 @@ export type LoReport =
   | TargetReport
   | RuntimeReport
   | AsyncReport
+  | StorageReport
+  | BuildCacheReport
   | TaskReport
   | ProcessingReport
   | AiGuideReport
@@ -443,6 +498,72 @@ export function createAsyncReport(input: {
     structuredConcurrency: input.structuredConcurrency ?? true,
     awaitSites: input.awaitSites ?? [],
     groups: input.groups ?? [],
+  };
+}
+
+export function createStorageReport(input: {
+  readonly metadata: ReportMetadata;
+  readonly diagnostics?: readonly ReportDiagnostic[];
+  readonly storage: StorageCapability;
+  readonly recommendedCacheMode?: CacheMode;
+  readonly unknownFallbackUsed?: boolean;
+  readonly conservativeCache?: boolean;
+}): StorageReport {
+  return {
+    kind: "storage",
+    metadata: normalizeMetadataKind(input.metadata, "storage"),
+    ...baseReportFields(input.diagnostics ?? []),
+    storage: input.storage,
+    recommendedCacheMode:
+      input.recommendedCacheMode ??
+      (input.storage.kind === "unknown"
+        ? "minimal-bounded"
+        : "bounded"),
+    unknownFallbackUsed:
+      input.unknownFallbackUsed ?? (input.storage.kind === "unknown"),
+    conservativeCache: input.conservativeCache ?? true,
+  };
+}
+
+export function createBuildCacheReport(input: {
+  readonly metadata: ReportMetadata;
+  readonly diagnostics?: readonly ReportDiagnostic[];
+  readonly cacheMode?: CacheMode;
+  readonly maxSizeBytes?: number;
+  readonly hits?: number;
+  readonly misses?: number;
+  readonly bypasses?: number;
+  readonly evictions?: number;
+  readonly invalidations?: number;
+  readonly cachedDataClasses?: readonly string[];
+  readonly deniedDataClasses?: readonly string[];
+}): BuildCacheReport {
+  return {
+    kind: "build-cache",
+    metadata: normalizeMetadataKind(input.metadata, "build-cache"),
+    ...baseReportFields(input.diagnostics ?? []),
+    cacheMode: input.cacheMode ?? "minimal-bounded",
+    ...(input.maxSizeBytes === undefined
+      ? {}
+      : { maxSizeBytes: input.maxSizeBytes }),
+    hits: input.hits ?? 0,
+    misses: input.misses ?? 0,
+    bypasses: input.bypasses ?? 0,
+    evictions: input.evictions ?? 0,
+    invalidations: input.invalidations ?? 0,
+    correctnessRequiredCache: false,
+    cachedDataClasses: input.cachedDataClasses ?? [],
+    deniedDataClasses:
+      input.deniedDataClasses ?? [
+        "SecureString",
+        "api_keys",
+        "session_tokens",
+        "payment_tokens",
+        "private_keys",
+        "raw_sensitive_payloads",
+        "authorization_decisions",
+        "non_deterministic_results",
+      ],
   };
 }
 
