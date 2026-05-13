@@ -22,6 +22,12 @@ export interface ProjectPackageReference {
   readonly role?: string;
 }
 
+export interface ProductionPackageOverride {
+  readonly path: string;
+  readonly reason: string;
+  readonly expires?: string;
+}
+
 export interface ConfigPathMap {
   readonly [name: string]: string;
 }
@@ -35,6 +41,7 @@ export interface ProjectConfig {
   readonly strict: boolean;
   readonly targets: readonly string[];
   readonly defaultPackage?: string;
+  readonly productionPackageOverrides: readonly ProductionPackageOverride[];
   readonly docs?: ConfigPathMap;
   readonly tools?: ConfigPathMap;
 }
@@ -66,6 +73,8 @@ export interface ProductionStrictnessPolicy {
   readonly allowDefaultedSecrets: boolean;
   readonly allowMissingRequiredVariables: boolean;
   readonly requireRuntimeHandoffValidation: boolean;
+  readonly disabledPackagePatterns: readonly string[];
+  readonly allowProductionPackageOverrides: boolean;
   readonly maxWarnings: number;
 }
 
@@ -73,6 +82,7 @@ export interface RuntimeConfigHandoff {
   readonly project: ProjectConfig;
   readonly environment: EnvironmentConfig;
   readonly productionPolicy: ProductionStrictnessPolicy;
+  readonly activeProductionPackageOverrides: readonly ProductionPackageOverride[];
   readonly diagnostics: readonly ConfigDiagnostic[];
   readonly canRun: boolean;
   readonly generatedAt: string;
@@ -113,6 +123,11 @@ export const DEFAULT_PRODUCTION_STRICTNESS_POLICY: ProductionStrictnessPolicy = 
   allowDefaultedSecrets: false,
   allowMissingRequiredVariables: false,
   requireRuntimeHandoffValidation: true,
+  disabledPackagePatterns: [
+    "packages-lo/lo-tools-benchmark",
+    "packages-lo/lo-devtools-",
+  ],
+  allowProductionPackageOverrides: true,
   maxWarnings: 0,
 };
 
@@ -190,6 +205,12 @@ export function defineProductionStrictnessPolicy(
     requireRuntimeHandoffValidation:
       policy.requireRuntimeHandoffValidation ??
       DEFAULT_PRODUCTION_STRICTNESS_POLICY.requireRuntimeHandoffValidation,
+    disabledPackagePatterns:
+      policy.disabledPackagePatterns ??
+      DEFAULT_PRODUCTION_STRICTNESS_POLICY.disabledPackagePatterns,
+    allowProductionPackageOverrides:
+      policy.allowProductionPackageOverrides ??
+      DEFAULT_PRODUCTION_STRICTNESS_POLICY.allowProductionPackageOverrides,
     maxWarnings:
       policy.maxWarnings ?? DEFAULT_PRODUCTION_STRICTNESS_POLICY.maxWarnings,
   };
@@ -221,6 +242,11 @@ export function parseProjectConfig(
   const strict = readOptionalBoolean(input, "strict") ?? true;
   const targets = readStringArray(input, "targets", diagnostics);
   const defaultPackage = readOptionalString(input, "defaultPackage");
+  const productionPackageOverrides = readProductionPackageOverrides(
+    input["production"],
+    "production.packageOverrides",
+    diagnostics,
+  );
   const docs = readStringMap(input, "docs", diagnostics);
   const tools = readStringMap(input, "tools", diagnostics);
 
@@ -236,6 +262,7 @@ export function parseProjectConfig(
     packages,
     strict,
     targets,
+    productionPackageOverrides,
     ...(defaultPackage === undefined ? {} : { defaultPackage }),
     ...(docs === undefined ? {} : { docs }),
     ...(tools === undefined ? {} : { tools }),
@@ -351,6 +378,8 @@ export function createRuntimeConfigHandoff(
   diagnostics.push(
     ...validateProductionStrictness(project, environment, productionPolicy),
   );
+  const activeProductionPackageOverrides =
+    environment.mode === "production" ? project.productionPackageOverrides : [];
 
   if (
     environment.mode === "production" &&
@@ -391,6 +420,7 @@ export function createRuntimeConfigHandoff(
     project,
     environment,
     productionPolicy,
+    activeProductionPackageOverrides,
     diagnostics,
     canRun: !hasError && warningsAllowed,
     generatedAt: options.generatedAt ?? new Date().toISOString(),
@@ -483,7 +513,125 @@ function validateProductionStrictness(
     }
   }
 
+  const overridePaths = new Set(
+    project.productionPackageOverrides.map((override) => override.path),
+  );
+
+  for (const packageRef of project.packages) {
+    const matchedPattern = policy.disabledPackagePatterns.find((pattern) =>
+      packageRef.path.includes(pattern),
+    );
+
+    if (matchedPattern === undefined) {
+      continue;
+    }
+
+    if (!overridePaths.has(packageRef.path)) {
+      diagnostics.push(
+        createConfigDiagnostic(
+          "LO_CONFIG_PRODUCTION_PACKAGE_DISABLED",
+          "error",
+          `Production mode disables package "${packageRef.path}" by default.`,
+          "project.packages",
+          "Remove this package from the production profile or add an explicit production.packageOverrides entry with a reason.",
+        ),
+      );
+      continue;
+    }
+
+    if (!policy.allowProductionPackageOverrides) {
+      diagnostics.push(
+        createConfigDiagnostic(
+          "LO_CONFIG_PRODUCTION_PACKAGE_OVERRIDE_NOT_ALLOWED",
+          "error",
+          `Production package override is not allowed for "${packageRef.path}".`,
+          "project.production.packageOverrides",
+        ),
+      );
+    }
+  }
+
   return diagnostics;
+}
+
+function readProductionPackageOverrides(
+  input: unknown,
+  path: string,
+  diagnostics: ConfigDiagnostic[],
+): readonly ProductionPackageOverride[] {
+  if (input === undefined) {
+    return [];
+  }
+
+  if (!isRecord(input)) {
+    diagnostics.push(
+      createConfigDiagnostic(
+        "LO_CONFIG_PRODUCTION_POLICY_INVALID",
+        "error",
+        "Production package policy must be an object.",
+        "production",
+      ),
+    );
+    return [];
+  }
+
+  const overrides = input["packageOverrides"];
+  if (overrides === undefined) {
+    return [];
+  }
+
+  if (!Array.isArray(overrides)) {
+    diagnostics.push(
+      createConfigDiagnostic(
+        "LO_CONFIG_PRODUCTION_PACKAGE_OVERRIDES_INVALID",
+        "error",
+        "Production package overrides must be an array.",
+        path,
+      ),
+    );
+    return [];
+  }
+
+  const parsedOverrides: ProductionPackageOverride[] = [];
+
+  overrides.forEach((override, index) => {
+    const overridePath = `${path}.${index}`;
+    if (!isRecord(override)) {
+      diagnostics.push(
+        createConfigDiagnostic(
+          "LO_CONFIG_PRODUCTION_PACKAGE_OVERRIDE_INVALID",
+          "error",
+          "Production package override must be an object.",
+          overridePath,
+        ),
+      );
+      return;
+    }
+
+    const packagePath = readRequiredString(
+      override,
+      "path",
+      diagnostics,
+      overridePath,
+    );
+    const reason = readRequiredString(
+      override,
+      "reason",
+      diagnostics,
+      overridePath,
+    );
+    const expires = readOptionalString(override, "expires");
+
+    if (packagePath !== undefined && reason !== undefined) {
+      parsedOverrides.push({
+        path: packagePath,
+        reason,
+        ...(expires === undefined ? {} : { expires }),
+      });
+    }
+  });
+
+  return parsedOverrides;
 }
 
 function readEnvironmentVariableReferences(

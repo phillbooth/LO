@@ -29,7 +29,8 @@ safe environment variable references
 - `EnvironmentConfig` - the active mode plus public and secret environment
   variable references.
 - `ProductionStrictnessPolicy` - production checks for strict project mode,
-  missing required variables and unsafe secret defaults.
+  missing required variables, unsafe secret defaults and production-disabled
+  packages.
 - `RuntimeConfigHandoff` - the safe object passed to runtime consumers after
   config validation.
 - `ConfigDiagnostic` - structured warnings and errors with stable codes,
@@ -66,6 +67,39 @@ const result = loadConfigFromObjects({
 ```
 
 See `examples/project-config.json` for a fuller object-shaped example.
+
+## Production Package Overrides
+
+Production mode must be conservative about optional tooling packages. Packages
+such as `lo-tools-benchmark` and `lo-devtools-*` are disabled by default in
+production profiles.
+
+Default production rule:
+
+```text
+production disables development-only and benchmark packages unless explicitly
+overridden with a reason.
+```
+
+Example explicit override:
+
+```json
+{
+  "production": {
+    "packageOverrides": [
+      {
+        "path": "packages-lo/lo-tools-benchmark",
+        "reason": "One-off production hardware validation before launch.",
+        "expires": "2026-06-01"
+      }
+    ]
+  }
+}
+```
+
+Overrides are included in the runtime config handoff as
+`activeProductionPackageOverrides` so build, security and deployment reports can
+show that production defaults were intentionally changed.
 
 ## Boundary
 

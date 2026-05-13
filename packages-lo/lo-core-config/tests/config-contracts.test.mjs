@@ -86,6 +86,105 @@ describe("lo-core-config contracts", () => {
     );
   });
 
+  it("disables benchmark packages by default in production", () => {
+    const result = loadConfigFromObjects({
+      project: {
+        name: "LO-app",
+        version: "0.1.0",
+        root: ".",
+        entryFiles: [],
+        packages: [
+          "packages-lo/lo-core",
+          "packages-lo/lo-tools-benchmark",
+        ],
+        strict: true,
+        targets: [],
+      },
+      environment: {
+        mode: "production",
+      },
+      availableEnvironment: {},
+    });
+
+    assert.equal(result.runtime?.canRun, false);
+    assert.equal(
+      result.diagnostics.at(-1)?.code,
+      "LO_CONFIG_PRODUCTION_PACKAGE_DISABLED",
+    );
+  });
+
+  it("allows explicit reported production package overrides", () => {
+    const result = loadConfigFromObjects({
+      project: {
+        name: "LO-app",
+        version: "0.1.0",
+        root: ".",
+        entryFiles: [],
+        packages: [
+          "packages-lo/lo-core",
+          "packages-lo/lo-tools-benchmark",
+        ],
+        production: {
+          packageOverrides: [
+            {
+              path: "packages-lo/lo-tools-benchmark",
+              reason: "One-off production hardware validation before launch.",
+              expires: "2026-06-01",
+            },
+          ],
+        },
+        strict: true,
+        targets: [],
+      },
+      environment: {
+        mode: "production",
+      },
+      availableEnvironment: {},
+    });
+
+    assert.equal(result.runtime?.canRun, true);
+    assert.equal(
+      result.runtime?.activeProductionPackageOverrides[0]?.path,
+      "packages-lo/lo-tools-benchmark",
+    );
+    assert.deepEqual(result.diagnostics, []);
+  });
+
+  it("can forbid production package overrides by policy", () => {
+    const result = loadConfigFromObjects({
+      project: {
+        name: "LO-app",
+        version: "0.1.0",
+        root: ".",
+        entryFiles: [],
+        packages: ["packages-lo/lo-tools-benchmark"],
+        production: {
+          packageOverrides: [
+            {
+              path: "packages-lo/lo-tools-benchmark",
+              reason: "Temporary validation.",
+            },
+          ],
+        },
+        strict: true,
+        targets: [],
+      },
+      environment: {
+        mode: "production",
+      },
+      availableEnvironment: {},
+      productionPolicy: {
+        allowProductionPackageOverrides: false,
+      },
+    });
+
+    assert.equal(result.runtime?.canRun, false);
+    assert.equal(
+      result.diagnostics.at(-1)?.code,
+      "LO_CONFIG_PRODUCTION_PACKAGE_OVERRIDE_NOT_ALLOWED",
+    );
+  });
+
   it("normalises safe environment variable references", () => {
     const reference = defineEnvironmentVariableReference("LO_CACHE_TTL", {
       required: false,
