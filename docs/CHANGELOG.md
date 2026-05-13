@@ -196,7 +196,10 @@ All notable changes to this app should be documented here.
 
 ### Removed
 
-- Nothing yet.
+- Removed stale generated-output-only duplicate package folders
+  `packages-lo/lo-cli/`, `packages-lo/lo-compute/` and
+  `packages-lo/lo-config/` after confirming the canonical `lo-core-*` packages
+  contain the current source, tests, manifests and newer contracts.
 
 ### Fixed
 

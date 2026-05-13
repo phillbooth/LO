@@ -30,6 +30,11 @@ lo-ai
 `lo-core` is the language root. `lo-ai` is the generic AI contract root.
 `lo-core-photonic` is the photonic concept/model root, not a compiler target.
 
+When a core package has both a grouped `lo-core-*` name and an older ungrouped
+name, keep the grouped `lo-core-*` package as canonical. Merge any unique source,
+tests, manifests or current generated artifacts into the grouped package, then
+remove the stale ungrouped package folder.
+
 ## Package Families
 
 | Family | Meaning | Examples |

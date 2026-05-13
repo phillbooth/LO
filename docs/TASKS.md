@@ -136,6 +136,8 @@
   selected profiles
 - [x] Use `lo-devtools-*` and `lo-tools-*` naming for development-only package
   families instead of a generic developer bucket
+- [x] Remove stale duplicate `lo-cli`, `lo-compute` and `lo-config` package
+  folders after preserving the canonical `lo-core-*` package data
 - [ ] Define production versus development package resolution rules so
   production apps do not download staging packages by default
 - [x] Define production boot/profile defaults that disable benchmark and
