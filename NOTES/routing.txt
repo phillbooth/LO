@@ -1,0 +1,603 @@
+LO could offer strong routing security **and** fast multi-request handling by making routes **compiled, typed and policy-checked before the app runs**.
+
+The idea:
+
+```text id="ul1g8h"
+Routes should not be loose strings handled by middleware at runtime.
+
+Routes should become a compiled security graph.
+```
+
+That means LO would know, before deployment:
+
+```text id="ucife2"
+which route exists
+which method it accepts
+what request body is allowed
+what auth is required
+what roles/scopes are allowed
+whether CSRF is required
+what rate limit applies
+what database effects are allowed
+what response fields are safe to return
+how many concurrent requests are allowed
+```
+
+OWASP’s API Top 10 highlights risks such as broken object-level authorization, broken object-property authorization, broken function-level authorization and unrestricted resource consumption, so LO routing should treat **authorization and resource limits as route requirements**, not optional middleware. ([OWASP][1])
+
+---
+
+# LO Routing Principle
+
+```text id="n4xpmb"
+No route should be callable unless its security, input, output and resource rules are known.
+```
+
+So instead of this style:
+
+```js id="dci0xx"
+app.post("/orders/:id", handler)
+```
+
+LO should prefer this style:
+
+```lo id="o7vkta"
+route POST "/orders/{orderId: UUID}" {
+  auth required
+  csrf required
+  rate_limit "user:60/min"
+  body CreateOrderRequest
+  response OrderResponse
+
+  allow_roles ["customer", "admin"]
+
+  object_access {
+    resource: Order
+    id: orderId
+    rule: "user owns order OR user is admin"
+  }
+
+  effects {
+    database: ["orders.read", "orders.write"]
+    network: []
+    files: []
+  }
+
+  limits {
+    timeout: 2s
+    max_body_size: 64kb
+    max_concurrency_per_user: 5
+  }
+
+  handler createOrder
+}
+```
+
+This gives LO two advantages:
+
+```text id="esijex"
+1. Security can be checked at compile time.
+2. Runtime routing can be fast because route matching is precompiled.
+```
+
+---
+
+# Fast Routing Design
+
+LO should compile all routes into a **method-indexed radix tree / trie**.
+
+Example:
+
+```text id="45bgtw"
+GET
+  /users
+  /users/{userId}
+  /orders/{orderId}
+
+POST
+  /orders
+  /payments
+  /account/email
+
+DELETE
+  /orders/{orderId}
+```
+
+At runtime, LO should not scan a long list of routes.
+
+It should do:
+
+```text id="9g7rim"
+1. Read HTTP method
+2. Jump to method-specific route tree
+3. Match static path segments first
+4. Match typed parameters second
+5. Reject unknown routes early
+6. Run precompiled route policy
+7. Run handler
+```
+
+This is faster than checking many route patterns one by one.
+
+## Fast path
+
+```text id="18r3cp"
+method lookup
+path lookup
+typed parameter extraction
+security policy check
+body parser selection
+schema validation
+handler call
+```
+
+## Avoid on hot path
+
+```text id="pdm7m2"
+runtime regex building
+dynamic middleware discovery
+rechecking route definitions
+untyped body parsing
+late permission lookup
+large global middleware chains
+```
+
+---
+
+# Secure Routing Layers
+
+LO routing should use several layers.
+
+```text id="bmjnh0"
+Layer 1: Method and path match
+Layer 2: Transport/security headers
+Layer 3: CORS/Origin/CSRF checks
+Layer 4: Authentication
+Layer 5: Function-level authorization
+Layer 6: Object-level authorization
+Layer 7: Property-level authorization
+Layer 8: Input validation
+Layer 9: Resource limits
+Layer 10: Handler effects
+Layer 11: Response filtering
+Layer 12: Audit/reporting
+```
+
+OWASP recommends being specific with CORS origins and disabling CORS headers when cross-domain calls are not expected; LO should therefore make CORS explicit per app or route group. ([OWASP Cheat Sheet Series][2])
+
+---
+
+# Example: Route Group Security
+
+```lo id="knkhqx"
+route_group "/admin" {
+  auth required
+  roles ["admin"]
+  csrf required
+  rate_limit "user:30/min"
+
+  cors {
+    enabled: false
+  }
+
+  headers {
+    frame_options: "DENY"
+    content_type_options: "nosniff"
+    referrer_policy: "strict-origin-when-cross-origin"
+  }
+
+  routes {
+    GET "/users" {
+      response AdminUserList
+      handler listUsers
+    }
+
+    POST "/users/{userId: UUID}/suspend" {
+      body SuspendUserRequest
+      response SuspendUserResponse
+
+      object_access {
+        resource: User
+        id: userId
+        rule: "admin can suspend user"
+      }
+
+      audit required
+
+      handler suspendUser
+    }
+  }
+}
+```
+
+OWASP’s HTTP security header guidance notes that security-related response headers can help protect against issues such as XSS, clickjacking and information disclosure, so LO should allow secure headers at app, group and route level. ([OWASP Cheat Sheet Series][3])
+
+---
+
+# Compile-Time Security Checks
+
+LO should fail compilation for dangerous routes.
+
+## Example 1: State-changing GET
+
+```lo id="90cj19"
+GET "/delete-account" {
+  handler deleteAccount
+}
+```
+
+Compiler result:
+
+```text id="icvzku"
+LO_ROUTE_SECURITY_ERROR
+
+GET route cannot perform a state-changing action.
+
+Route:
+GET /delete-account
+
+Handler:
+deleteAccount
+
+Fix:
+Use POST or DELETE with csrf required.
+```
+
+## Example 2: Missing auth
+
+```lo id="jhdgm4"
+POST "/payments" {
+  body PaymentRequest
+  handler createPayment
+}
+```
+
+Compiler result:
+
+```text id="f1uh4q"
+LO_ROUTE_SECURITY_ERROR
+
+POST /payments changes financial state but has no auth rule.
+
+Required:
+auth required
+csrf required
+idempotency_key required
+audit required
+```
+
+## Example 3: Missing object-level authorization
+
+```lo id="gr4vwn"
+GET "/orders/{orderId: UUID}" {
+  auth required
+  response OrderResponse
+  handler getOrder
+}
+```
+
+Compiler result:
+
+```text id="xfozo8"
+LO_AUTHZ_ERROR
+
+Route uses user-supplied object ID but has no object_access rule.
+
+Route:
+GET /orders/{orderId}
+
+Fix:
+Add object_access rule proving the user can access this order.
+```
+
+This directly targets broken object-level authorization, one of the main API risks in OWASP API Security Top 10. ([OWASP][1])
+
+---
+
+# Property-Level Response Security
+
+LO should not only check whether a user can access an object.
+
+It should also check which fields they can see.
+
+Example:
+
+```lo id="6ijzft"
+response UserProfile {
+  public id: UUID
+  public displayName: String
+
+  private email: Email
+  private mobile: Phone
+  admin_only accountStatus: AccountStatus
+}
+```
+
+Route:
+
+```lo id="oxsl8c"
+GET "/users/{userId: UUID}" {
+  auth required
+
+  object_access {
+    resource: User
+    id: userId
+    rule: "user owns profile OR user is admin"
+  }
+
+  response UserProfile filtered_by current_user
+
+  handler getUserProfile
+}
+```
+
+This helps prevent accidentally returning sensitive properties. OWASP identifies broken object property-level authorization as a major API risk where users can access properties they should not be able to read or modify. ([OWASP][4])
+
+---
+
+# Multiple Requests and Performance
+
+LO should handle multiple requests using a runtime scheduler, not by making developers manually manage asynchronous complexity.
+
+A route should declare its limits:
+
+```lo id="bebts9"
+limits {
+  timeout: 2s
+  max_body_size: 128kb
+  max_concurrency_global: 1000
+  max_concurrency_per_ip: 20
+  max_concurrency_per_user: 10
+  queue: "short"
+  backpressure: "reject_with_429"
+}
+```
+
+Runtime behaviour:
+
+```text id="jv4h1x"
+1. Accept request
+2. Apply cheap checks first
+3. Reject oversized bodies before parsing
+4. Reject blocked methods before auth
+5. Reject rate-limited requests before handler work
+6. Parse only the expected body type
+7. Run handler inside declared resource budget
+8. Apply backpressure if overloaded
+9. Return 429/503 safely rather than crash
+```
+
+This helps address unrestricted resource consumption, which OWASP lists as an API security risk involving CPU, memory, storage, network bandwidth or paid provider resources being consumed without suitable limits. ([OWASP][5])
+
+---
+
+# Fast + Secure Request Pipeline
+
+LO should order the request pipeline so cheap checks happen first.
+
+```text id="m7ulq4"
+1. Method allowed?
+2. Path exists?
+3. Host allowed?
+4. TLS/security headers policy valid?
+5. Request body size allowed?
+6. Rate limit allowed?
+7. CORS/Origin/Fetch Metadata valid?
+8. CSRF token valid if required?
+9. Auth token/session valid?
+10. Role/scope allowed?
+11. Object-level access allowed?
+12. Input schema valid?
+13. Handler effects allowed?
+14. Handler runs
+15. Response filtered
+16. Audit/report written
+```
+
+This is both safer and faster because bad requests are rejected before expensive work.
+
+---
+
+# Route Effects Model
+
+LO should know what every route is allowed to do.
+
+Example:
+
+```lo id="ox01a0"
+effects {
+  database: ["orders.read", "orders.write"]
+  network: ["payments.stripe"]
+  files: []
+  ai: []
+}
+```
+
+Then the compiler/runtime can block this:
+
+```text id="xkou1e"
+A route that only declares database read cannot perform database write.
+
+A route that does not declare network access cannot call an external API.
+
+A route that does not declare file access cannot read or write files.
+```
+
+This protects against route handlers becoming hidden backdoors.
+
+---
+
+# Route Security Profiles
+
+LO could provide default security profiles.
+
+```lo id="jzr9is"
+security_profile public_read {
+  auth optional
+  csrf not_required
+  methods ["GET"]
+  cache allowed
+  rate_limit "ip:300/min"
+}
+
+security_profile user_write {
+  auth required
+  csrf required
+  methods ["POST", "PUT", "PATCH", "DELETE"]
+  rate_limit "user:60/min"
+  audit required
+}
+
+security_profile finance_action {
+  auth required
+  csrf required
+  mfa required
+  idempotency_key required
+  audit required
+  user_interaction required
+  rate_limit "user:10/min"
+}
+```
+
+Usage:
+
+```lo id="3bg6ur"
+POST "/trade/buy" uses finance_action {
+  body BuyStockRequest
+  response TradeResponse
+  handler buyStock
+}
+```
+
+---
+
+# Suggested LO Route Manifest
+
+When LO builds the app, it should generate a route manifest:
+
+```json id="vet7gw"
+{
+  "routes": [
+    {
+      "method": "POST",
+      "path": "/orders/{orderId}",
+      "handler": "createOrder",
+      "auth": "required",
+      "csrf": "required",
+      "rateLimit": "user:60/min",
+      "body": "CreateOrderRequest",
+      "response": "OrderResponse",
+      "objectAccess": true,
+      "effects": {
+        "database": ["orders.read", "orders.write"],
+        "network": [],
+        "files": []
+      },
+      "limits": {
+        "timeout": "2s",
+        "maxBodySize": "64kb",
+        "maxConcurrencyPerUser": 5
+      }
+    }
+  ]
+}
+```
+
+This would help:
+
+```text id="eznwqb"
+developers
+security reviewers
+AI coding assistants
+CI/CD pipelines
+auditors
+framework tooling
+```
+
+OWASP ASVS is intended as a basis for testing web application technical security controls and as requirements for secure development, so LO’s route manifest could map each route to ASVS/OWASP-style checks. ([OWASP][6])
+
+---
+
+# Best Architecture for LO Routing
+
+```text id="bi6w6m"
+Compile time:
+- parse routes
+- type-check path parameters
+- validate auth policy
+- validate CSRF policy
+- validate CORS policy
+- validate request/response schemas
+- validate effects
+- generate route trie
+- generate route manifest
+- generate security report
+
+Runtime:
+- method lookup
+- path trie lookup
+- cheap rejection first
+- rate limit
+- auth/session/token check
+- authorization check
+- schema validation
+- handler execution
+- response filtering
+- audit logging
+```
+
+---
+
+# Add This to the Roadmap
+
+This belongs mainly in:
+
+```text id="8ei2lq"
+v3 - LO Secure Network
+v5 - LO App Kernel
+v11 - LO Finance
+v20 - LO Standards and ISO Review
+```
+
+Recommended roadmap section:
+
+```markdown id="j2jz97"
+## Secure Fast Routing
+
+LO should compile routes into a typed route graph.
+
+Routes must declare:
+
+- HTTP method
+- path parameters
+- request body type
+- response type
+- authentication policy
+- authorization policy
+- CSRF policy
+- CORS policy
+- rate limit
+- timeout
+- maximum body size
+- allowed effects
+- audit rules
+
+State-changing routes must not compile without explicit security rules.
+
+The runtime should use a method-indexed radix tree/trie for fast route matching and should reject unsafe or invalid requests before doing expensive work.
+```
+
+In short:
+
+```text id="io2dia"
+LO should make secure routing the default,
+make unsafe routing difficult,
+and make fast routing a compiler/runtime feature rather than a developer burden.
+```
+
+[1]: https://owasp.org/API-Security/editions/2023/en/0x11-t10/?utm_source=chatgpt.com "OWASP Top 10 API Security Risks – 2023"
+[2]: https://cheatsheetseries.owasp.org/cheatsheets/REST_Security_Cheat_Sheet.html?utm_source=chatgpt.com "REST Security Cheat Sheet"
+[3]: https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html?utm_source=chatgpt.com "HTTP Security Response Headers Cheat Sheet"
+[4]: https://owasp.org/API-Security/editions/2023/en/0xa3-broken-object-property-level-authorization/?utm_source=chatgpt.com "API3:2023 Broken Object Property Level Authorization"
+[5]: https://owasp.org/API-Security/editions/2023/en/0xa4-unrestricted-resource-consumption/?utm_source=chatgpt.com "API4:2023 Unrestricted Resource Consumption"
+[6]: https://owasp.org/www-project-application-security-verification-standard/?utm_source=chatgpt.com "OWASP Application Security Verification Standard (ASVS)"

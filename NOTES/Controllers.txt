@@ -1,0 +1,401 @@
+make a new document noteing the below
+
+I would **not make Controllers a core LO concept**.
+
+For LO, a better approach is:
+
+```text id="5jh6kd"
+Routes define the contract.
+Handlers/actions do the work.
+Policies define security.
+Effects define what the route is allowed to touch.
+Reports explain everything.
+```
+
+So instead of traditional MVC controllers, LO should use **typed route actions** or **route handlers**.
+
+---
+
+# Recommendation
+
+```text id="eskssb"
+LO should not require Controllers.
+
+LO can support controller-style grouping later as a framework convenience, but the secure core should be route-first and contract-first.
+```
+
+Traditional controllers are useful in Laravel, Symfony, Rails, ASP.NET MVC, etc., but LO is trying to be:
+
+```text id="1iq0e0"
+security-first
+AI-readable
+compiler-checked
+route-contract based
+effect-aware
+fast at runtime
+```
+
+Controllers can hide too much.
+
+---
+
+# Why Controllers may not be ideal for LO
+
+## 1. Security can become hidden
+
+A traditional controller might look clean:
+
+```php id="rb6f8h"
+class OrderController {
+  public function delete($id) {
+    // delete order
+  }
+}
+```
+
+But the security rules may be somewhere else:
+
+```text id="8v082a"
+middleware
+route file
+annotations
+base controller
+service provider
+framework config
+```
+
+That makes it harder for LO to prove:
+
+```text id="r0egyu"
+Does this route require auth?
+Does it require CSRF?
+Can this user access this order?
+Is DELETE allowed?
+Is this audited?
+Can this handler write to the database?
+```
+
+LO should avoid that.
+
+---
+
+## 2. Controllers encourage large files
+
+Controllers often grow into this:
+
+```text id="qquv21"
+OrderController
+  index()
+  show()
+  create()
+  store()
+  edit()
+  update()
+  delete()
+  refund()
+  export()
+  email()
+  adminApprove()
+```
+
+That becomes harder for:
+
+```text id="g28wci"
+developers
+security reviewers
+AI assistants
+test tools
+route reports
+```
+
+LO should prefer smaller, clearer units.
+
+---
+
+## 3. Controllers are not automatically faster
+
+The word “Controller” does not make routing faster or slower.
+
+Speed depends on:
+
+```text id="jlo6da"
+route matching
+runtime reflection
+middleware chains
+dynamic dispatch
+dependency loading
+request parsing
+database calls
+handler execution
+```
+
+LO can be faster if it compiles routes into a static route graph/trie and knows exactly which handler to call.
+
+---
+
+# Better LO structure
+
+I would use this model:
+
+```text id="l13t5v"
+Route Contract
+  ↓
+Security Policy
+  ↓
+Request Type
+  ↓
+Handler / Action
+  ↓
+Allowed Effects
+  ↓
+Response Type
+  ↓
+Generated Report
+```
+
+Example:
+
+```lo id="gz0sby"
+route POST "/orders/{orderId: UUID}/cancel" {
+  auth required
+  csrf required
+  audit required
+
+  body CancelOrderRequest
+  response CancelOrderResponse
+
+  object_access {
+    resource: Order
+    id: orderId
+    rule: "user owns order OR user is admin"
+  }
+
+  effects {
+    database: ["orders.read", "orders.write"]
+    network: []
+    files: []
+  }
+
+  limits {
+    timeout: 2s
+    max_body_size: 32kb
+  }
+
+  handler cancelOrder
+}
+```
+
+Handler:
+
+```lo id="ww2qtl"
+action cancelOrder(request: CancelOrderRequest, ctx: RequestContext)
+  -> Result<CancelOrderResponse, OrderError>
+{
+  let order = Orders.find(request.orderId)
+
+  match order {
+    None => return Err(OrderNotFound)
+    Some(value) => {
+      value.cancel()
+      Orders.save(value)
+
+      return Ok(CancelOrderResponse {
+        status: "cancelled"
+      })
+    }
+  }
+}
+```
+
+This is clearer than a controller because the route declares everything important.
+
+---
+
+# Suggested naming
+
+Instead of `Controller`, LO could use:
+
+```text id="6eg3p8"
+Action
+Handler
+RouteAction
+Command
+Query
+Resource
+Endpoint
+```
+
+My preferred naming for LO:
+
+```text id="26hplv"
+route = public HTTP/API contract
+action = function that performs the route work
+policy = security and permission rules
+effect = what the route is allowed to access
+resource = domain object, such as Order, User, Payment
+```
+
+---
+
+# Example folder structure
+
+```text id="bmpg91"
+src/
+  boot.lo
+  main.lo
+
+  routes/
+    orders.routes.lo
+    users.routes.lo
+    payments.routes.lo
+
+  actions/
+    orders/
+      createOrder.lo
+      cancelOrder.lo
+      refundOrder.lo
+
+    users/
+      getUserProfile.lo
+      updateUserEmail.lo
+
+  models/
+    Order.lo
+    User.lo
+    Payment.lo
+
+  policies/
+    orderAccess.policy.lo
+    userAccess.policy.lo
+
+  schemas/
+    requests/
+      CreateOrderRequest.lo
+      CancelOrderRequest.lo
+
+    responses/
+      OrderResponse.lo
+      CancelOrderResponse.lo
+```
+
+This is easier for AI to understand than one large controller file.
+
+---
+
+# Could LO still support Controllers?
+
+Yes, but only as a **framework adapter**, not as the core design.
+
+For example:
+
+```lo id="g453vx"
+controller OrdersController {
+  uses routes from "./routes/orders.routes.lo"
+  actions from "./actions/orders"
+}
+```
+
+But this should compile down to the same route graph.
+
+So Controllers would be optional organisation, not runtime magic.
+
+---
+
+# Best rule for LO
+
+```text id="ssmxqu"
+Do not make Controllers required.
+
+Make routes, actions, policies and effects required.
+
+Allow controller-style grouping only as optional framework sugar.
+```
+
+---
+
+# Why this is better for security
+
+A route-first LO app can fail compilation if something is missing:
+
+```text id="gw7pu1"
+POST route without CSRF = compile error
+Route with user ID but no object_access rule = compile error
+Route writes to database but does not declare database.write = compile error
+Financial route without audit/idempotency = compile error
+Admin route without role policy = compile error
+Handler returns private fields without response filter = compile error
+```
+
+Controllers usually depend on the framework doing those checks at runtime.
+
+LO should move those checks earlier.
+
+---
+
+# Why this is better for AI understanding
+
+AI assistants can understand this more easily:
+
+```text id="p4tprq"
+Route: POST /orders/{orderId}/cancel
+Request: CancelOrderRequest
+Response: CancelOrderResponse
+Security: auth + csrf + object access
+Effects: orders read/write only
+Handler: cancelOrder
+```
+
+Compared with:
+
+```text id="bmo95n"
+Find the controller.
+Find the method.
+Find middleware.
+Find inherited middleware.
+Find route file.
+Find service provider.
+Find validation class.
+Find policy class.
+Find response transformer.
+```
+
+LO should make the contract obvious in one place.
+
+---
+
+# Add this to the roadmap
+
+This belongs in:
+
+```text id="8ebz3b"
+v5 - LO App Kernel
+v19 - LO Framework Review
+```
+
+Suggested roadmap note:
+
+```markdown id="ki7j9u"
+## Controller Policy
+
+LO should not require traditional MVC Controllers.
+
+The preferred structure is:
+
+- route contracts
+- route actions / handlers
+- typed request objects
+- typed response objects
+- policies
+- effects
+- generated route reports
+
+Controller-style grouping may be supported later as optional framework sugar, but it should compile into the same secure route graph and should not hide auth, CSRF, permissions, validation or effects.
+```
+
+In short:
+
+```text id="t9jryl"
+For LO, Controllers are optional organisation.
+
+Secure typed routes are essential.
+```

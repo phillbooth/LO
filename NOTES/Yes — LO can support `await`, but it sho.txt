@@ -1,0 +1,529 @@
+Yes — LO can support `await`, but it should **not expose async complexity as the normal programming model**.
+
+Rust is powerful because it has `async`, `await`, futures and no garbage collector, but async Rust also has complexity around runtimes, futures, lifetimes, pinning and traits. Rust’s own book describes async as code that can pause and resume at `await` points, and the Async Rust book describes pinning as a difficult low-level concept that most users should ideally avoid unless implementing lower-level futures/runtime code. ([doc.rust-lang.org][1])
+
+LO could be competitive by doing this:
+
+```text
+Keep the code simple like synchronous code.
+Make concurrency structured and safe.
+Hide runtime plumbing.
+Expose reports, limits and cancellation.
+Avoid callback chains, promise chains and manual future management.
+```
+
+---
+
+# 1. Use `await`, but only as structured waiting
+
+LO should support `await`, but avoid JavaScript-style async sprawl.
+
+Instead of developers writing lots of nested async functions, LO could have **await blocks**:
+
+```text
+task FetchCustomerOrder(orderId: OrderId) -> Result<OrderView, AppError> {
+    let customer = await CustomerApi.get(orderId)
+    let order = await OrderDb.find(orderId)
+
+    return OrderView.from(customer, order)
+}
+```
+
+This is simple.
+
+But LO should also support grouped waiting:
+
+```text
+task LoadDashboard(userId: UserId) -> Result<Dashboard, AppError> {
+    await all {
+        user = UserDb.find(userId)
+        orders = OrderDb.recentFor(userId)
+        alerts = AlertService.forUser(userId)
+    }
+
+    return Dashboard.from(user, orders, alerts)
+}
+```
+
+The developer does not need to manually manage futures.
+
+---
+
+# 2. Add structured concurrency
+
+This is probably the most important part.
+
+LO should not allow random background tasks that are forgotten.
+
+Bad pattern:
+
+```text
+start task somewhere
+forget to cancel it
+request ends
+task keeps running
+memory/network leak happens
+```
+
+Better LO pattern:
+
+```text
+scope RequestWork {
+    await all {
+        customer = CustomerApi.get(id)
+        orders = OrderDb.list(id)
+        payment = PaymentApi.status(id)
+    }
+}
+```
+
+When the request ends, everything inside the scope ends too.
+
+Rule:
+
+```text
+A task must belong to a scope.
+When the scope ends, unfinished child tasks are cancelled or completed according to policy.
+```
+
+This avoids async hell and resource leaks.
+
+---
+
+# 3. Make timeouts mandatory for network/database waits
+
+LO should not allow indefinite waits by default.
+
+Example:
+
+```text
+await PaymentApi.charge(request) timeout 5s
+```
+
+or:
+
+```text
+await all timeout 3s {
+    stock = StockApi.check(items)
+    delivery = DeliveryApi.quote(address)
+}
+```
+
+If timeout is missing on production network calls, LO can warn or fail:
+
+```text
+Build failed:
+External network await has no timeout.
+```
+
+This is stronger than many languages because the compiler can help enforce operational safety.
+
+---
+
+# 4. Built-in cancellation
+
+LO should treat cancellation as normal, not exceptional.
+
+Example:
+
+```text
+await all cancelOnError {
+    customer = CustomerApi.get(id)
+    orders = OrderDb.list(id)
+    risk = RiskService.check(id)
+}
+```
+
+If `risk` fails, the others can be cancelled.
+
+Useful modes:
+
+```text
+cancelOnError
+waitForAll
+firstSuccess
+firstResult
+timeoutCancel
+manualCancel
+```
+
+Example:
+
+```text
+await race {
+    cache = Cache.get(key)
+    database = Database.get(key)
+} firstSuccess
+```
+
+This is useful for performance without giving developers raw async machinery.
+
+---
+
+# 5. Clear concurrency keywords
+
+LO could support a small set of simple concurrency forms:
+
+```text
+await one
+await all
+await race
+await stream
+await queue
+await retry
+```
+
+Examples:
+
+```text
+await one {
+    user = UserDb.find(id)
+}
+```
+
+```text
+await all {
+    a = ServiceA.get()
+    b = ServiceB.get()
+}
+```
+
+```text
+await race {
+    primary = MainApi.get()
+    backup = BackupApi.get()
+}
+```
+
+```text
+await stream Events from EventSource {
+    for each event {
+        process(event)
+    }
+}
+```
+
+This avoids exposing futures, promises, pins, executors and manual polling to normal developers.
+
+---
+
+# 6. Async effects instead of async everywhere
+
+LO could use an **effect system**.
+
+A function that waits on the network/database declares it:
+
+```text
+function loadUser(id: UserId) -> User
+    effects [db.read, await]
+{
+    return await UserDb.find(id)
+}
+```
+
+A pure function cannot await:
+
+```text
+pure function calculateVat(price: Money) -> Money {
+    // await is not allowed here
+}
+```
+
+This gives LO a clean model:
+
+```text
+pure function      = no await, no I/O
+effect function    = may await declared effects
+task               = structured async unit
+route handler      = may await under request policy
+```
+
+This is excellent for security and reporting.
+
+---
+
+# 7. No hidden background tasks by default
+
+LO should deny this by default:
+
+```text
+background sendEmailLater()
+```
+
+Instead:
+
+```text
+queue EmailJob {
+    payload: EmailRequest
+    retry: 3
+    timeout: 10s
+    audit: true
+}
+```
+
+Then:
+
+```text
+await queue EmailJob.add(request)
+```
+
+This means background work is visible, typed and reportable.
+
+---
+
+# 8. Async reports
+
+Every build/run could report async behaviour.
+
+Generated files:
+
+```text
+app.async-report.json
+app.await-report.json
+app.concurrency-report.json
+app.timeout-report.json
+app.queue-report.json
+```
+
+Example:
+
+```json
+{
+  "async": {
+    "awaitPoints": 18,
+    "networkAwaitWithoutTimeout": 0,
+    "databaseAwaitWithoutTimeout": 0,
+    "backgroundTasks": 0,
+    "structuredConcurrency": true,
+    "warnings": [
+      {
+        "file": "orders.lo",
+        "line": 44,
+        "message": "Three external services awaited sequentially. Consider await all."
+      }
+    ]
+  }
+}
+```
+
+That is a real advantage over many ecosystems.
+
+---
+
+# 9. Automatic async optimisation
+
+LO could detect:
+
+```text
+let a = await ApiA.get()
+let b = await ApiB.get()
+let c = await ApiC.get()
+```
+
+and warn:
+
+```text
+These awaits do not depend on each other.
+Use await all to run them concurrently.
+```
+
+Suggested fix:
+
+```text
+await all {
+    a = ApiA.get()
+    b = ApiB.get()
+    c = ApiC.get()
+}
+```
+
+This makes LO competitive with Rust while staying easier for normal backend developers.
+
+---
+
+# 10. Backpressure for streams
+
+For streams, LO should avoid unbounded async processing.
+
+Bad:
+
+```text
+for every event, spawn unlimited work
+```
+
+Better:
+
+```text
+await stream Orders from OrderQueue {
+    concurrency: 8
+    backpressure: required
+    maxInFlight: 100
+
+    process order {
+        await ProcessOrder(order) timeout 10s
+    }
+}
+```
+
+This prevents memory overload and queue explosions.
+
+---
+
+# 11. Suggested LO syntax
+
+I would standardise on this spelling:
+
+```text
+await
+```
+
+Not:
+
+```text
+awaite
+```
+
+Unless `awaite` is intentional as a unique LO keyword. I would avoid it because most developers already understand `await`.
+
+Possible LO keywords:
+
+```text
+await
+await all
+await race
+await stream
+task
+scope
+timeout
+cancel
+retry
+queue
+```
+
+---
+
+# 12. Backend route example
+
+```text
+route GET "/dashboard/{userId}" {
+    input: DashboardRequest
+    output: DashboardResponse
+
+    limits {
+        timeoutMs: 3000
+        maxConcurrency: 6
+    }
+
+    handler {
+        await all timeout 2500ms cancelOnError {
+            user = UserDb.find(input.userId)
+            orders = OrderDb.recent(input.userId)
+            alerts = AlertService.get(input.userId)
+            permissions = AuthService.permissions(input.userId)
+        }
+
+        return DashboardResponse.from(user, orders, alerts, permissions)
+    }
+}
+```
+
+This is easy to read, but still powerful.
+
+---
+
+# 13. How LO can be competitive with Rust
+
+Rust is very strong for low-level async performance, but LO can compete by being **higher-level, safer by default and easier to audit**.
+
+| Area              | Rust                                     | LO opportunity                                 |
+| ----------------- | ---------------------------------------- | ---------------------------------------------- |
+| Async performance | Very strong                              | Use compiled runtime and structured scheduling |
+| Complexity        | Futures, lifetimes, pinning can get hard | Hide futures/pinning/runtime details           |
+| Syntax            | `async` / `await`                        | `await all`, `await race`, scoped tasks        |
+| Runtime           | Often selected via ecosystem             | Declared runtime profile                       |
+| Cancellation      | Library/runtime dependent                | Built into language policy                     |
+| Timeouts          | Developer responsibility                 | Required by policy                             |
+| Reports           | Not standard                             | Standard async/concurrency reports             |
+| Backend APIs      | Excellent but library-based              | Route-level async limits and policies          |
+
+Best positioning:
+
+```text
+Rust gives developers powerful async tools.
+LO should give developers safe async workflows.
+```
+
+---
+
+# 14. Recommended LO design rule
+
+Use this rule:
+
+```text
+LO supports waiting and concurrency, but not unstructured async programming.
+```
+
+More formally:
+
+```text
+All async work in LO must be:
+- scoped
+- typed
+- cancellable
+- timeout-aware
+- effect-declared
+- reportable
+- memory-bounded where relevant
+```
+
+---
+
+# 15. Good feature name
+
+I would call this:
+
+```text
+LO Structured Await
+```
+
+or:
+
+```text
+LO Await Flow
+```
+
+Feature summary:
+
+```text
+LO Await Flow provides simple synchronous-looking code with safe structured concurrency, grouped awaits, timeouts, cancellation, retry, streams, queues and reports.
+```
+
+---
+
+# My recommendation
+
+Add `await`, but do **not** expose futures/promises as the normal developer model.
+
+Best LO approach:
+
+```text
+Normal developers use:
+await
+await all
+await race
+await stream
+queue
+timeout
+retry
+
+Advanced runtime/package authors may use:
+Future
+Task
+Scheduler
+Poll
+Pin-like internals if ever needed
+```
+
+So LO stays simple for backend developers but can still be competitive with Rust where it matters: performance, safety, concurrency and reliability.
+
+[1]: https://doc.rust-lang.org/book/ch17-01-futures-and-syntax.html?utm_source=chatgpt.com "Futures and the Async Syntax - The Rust Programming Language"

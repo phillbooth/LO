@@ -1,0 +1,642 @@
+LO could make **HTTP responses secure by design** by treating every response as a **typed contract**, not as a loose string, object or raw header map.
+
+The core idea:
+
+```text id="cppzfv"
+A route should not be allowed to return data unless LO knows:
+- the response type
+- the content type
+- the status code
+- the cache policy
+- the security headers
+- whether private fields are filtered
+- whether cookies are safe
+- whether the response can be embedded, cached, indexed or downloaded
+```
+
+OWASP recommends security-related HTTP response headers because they help reduce risks such as XSS, clickjacking and information disclosure. OWASP also recommends setting `Content-Type` correctly, using `X-Content-Type-Options: nosniff`, using CSP where possible, controlling referrer leakage, setting secure cache behaviour, and removing technology-leaking headers such as `X-Powered-By`. ([OWASP Cheat Sheet Series][1])
+
+---
+
+# Recommended LO Response Model
+
+Instead of allowing this:
+
+```lo id="w5v9vd"
+return {
+  user: user
+}
+```
+
+LO should require this:
+
+```lo id="6dtcb5"
+return Response<UserProfileResponse> {
+  status: 200
+  content_type: "application/json"
+  body: safeUserProfile
+  cache: "private-no-store"
+  security_profile: "authenticated_json"
+}
+```
+
+That lets the compiler check the response before the app runs.
+
+---
+
+# LO Response Principle
+
+```text id="m7wrxl"
+No raw response leaves the app without a declared type, content type, cache rule and security profile.
+```
+
+This gives LO stronger protection against:
+
+```text id="quskqu"
+accidental private data leaks
+wrong MIME types
+browser MIME sniffing
+unsafe HTML output
+bad cache headers
+missing security headers
+unsafe cookies
+JSON accidentally rendered as HTML
+open redirects
+file download abuse
+over-sharing error details
+```
+
+---
+
+# Response Security Profiles
+
+LO should provide built-in response profiles.
+
+```lo id="bkx0sb"
+response_profile public_json {
+  content_type: "application/json; charset=utf-8"
+  headers {
+    "X-Content-Type-Options": "nosniff"
+    "Referrer-Policy": "strict-origin-when-cross-origin"
+    "Cross-Origin-Resource-Policy": "same-origin"
+  }
+  cache: "public-short"
+}
+
+response_profile authenticated_json {
+  content_type: "application/json; charset=utf-8"
+  headers {
+    "X-Content-Type-Options": "nosniff"
+    "Referrer-Policy": "strict-origin-when-cross-origin"
+    "Cross-Origin-Resource-Policy": "same-origin"
+  }
+  cache: "private-no-store"
+}
+
+response_profile html_page {
+  content_type: "text/html; charset=utf-8"
+  headers {
+    "Content-Security-Policy": "default-src 'self'; frame-ancestors 'none'; object-src 'none'; base-uri 'self'"
+    "X-Content-Type-Options": "nosniff"
+    "Referrer-Policy": "strict-origin-when-cross-origin"
+  }
+  cache: "private-no-store"
+}
+```
+
+OWASP notes that `Content-Type` should be specified for the actual content returned by an API response, and that incorrect or missing content type can lead browsers to guess the type, creating MIME-sniffing risks. MDN describes `X-Content-Type-Options` as telling browsers to respect declared MIME types rather than changing them. ([OWASP Cheat Sheet Series][2])
+
+---
+
+# Secure Headers LO Should Understand
+
+LO should not ask every developer to remember every header manually. It should offer secure defaults and route-specific overrides.
+
+## For JSON APIs
+
+```text id="y77k6y"
+Content-Type: application/json; charset=utf-8
+X-Content-Type-Options: nosniff
+Cache-Control: no-store for private/authenticated data
+Referrer-Policy: strict-origin-when-cross-origin
+Cross-Origin-Resource-Policy: same-origin
+```
+
+## For HTML pages
+
+```text id="i5pdy4"
+Content-Type: text/html; charset=utf-8
+Content-Security-Policy: strict default
+X-Content-Type-Options: nosniff
+Referrer-Policy: strict-origin-when-cross-origin
+X-Frame-Options: DENY or CSP frame-ancestors
+Cache-Control: no-store for private pages
+```
+
+OWASP recommends using CSP `frame-ancestors` where possible and not allowing pages to be displayed in a frame; it also recommends `X-Frame-Options: DENY` for older/supporting cases. ([OWASP Cheat Sheet Series][3])
+
+## For downloads
+
+```text id="lls8uo"
+Content-Type: correct file MIME type
+Content-Disposition: attachment; filename=\"safe-name.pdf\"
+X-Content-Type-Options: nosniff
+Cache-Control: private/no-store depending on sensitivity
+X-Robots-Tag: noindex, nofollow for private files
+```
+
+## Headers LO should avoid or remove
+
+```text id="y0ujjj"
+X-Powered-By
+verbose Server values
+Public-Key-Pins
+Expect-CT
+X-XSS-Protection except possibly X-XSS-Protection: 0
+```
+
+OWASP recommends removing `X-Powered-By`, making the `Server` header non-informative, avoiding deprecated HPKP, avoiding `Expect-CT`, and using CSP rather than relying on `X-XSS-Protection`. ([OWASP Cheat Sheet Series][3])
+
+---
+
+# Typed Status Codes
+
+LO should make status codes meaningful.
+
+Example:
+
+```lo id="kpdwh8"
+route GET "/orders/{orderId: UUID}" {
+  response {
+    200: OrderResponse
+    401: AuthErrorResponse
+    403: ForbiddenResponse
+    404: NotFoundResponse
+    429: RateLimitResponse
+    500: SafeServerErrorResponse
+  }
+
+  handler getOrder
+}
+```
+
+Then this should fail:
+
+```lo id="zgp9ie"
+return Response<OrderResponse> {
+  status: 500
+  body: order
+}
+```
+
+Because `500` should not return a successful business object.
+
+---
+
+# Private Field Filtering
+
+LO should make response data filtering automatic and compile-time checked.
+
+```lo id="6khfjk"
+response UserProfileResponse {
+  public id: UUID
+  public displayName: String
+
+  private email: Email
+  private mobile: Phone
+  admin_only accountStatus: AccountStatus
+}
+```
+
+Route:
+
+```lo id="uixf6a"
+GET "/users/{userId: UUID}" {
+  auth required
+
+  object_access {
+    resource: User
+    id: userId
+    rule: "user owns profile OR user is admin"
+  }
+
+  response UserProfileResponse filtered_by current_user
+
+  handler getUserProfile
+}
+```
+
+LO should fail compilation if a handler returns a raw database model directly:
+
+```text id="u1cmwl"
+LO_RESPONSE_SECURITY_ERROR
+
+Route returns database model User directly.
+
+Problem:
+Database model may contain private fields.
+
+Fix:
+Return UserProfileResponse or define an explicit response filter.
+```
+
+---
+
+# Safe Error Responses
+
+LO should separate internal errors from public errors.
+
+Bad:
+
+```json id="o2eu3t"
+{
+  "error": "SQL error in /var/www/app/db/orders.js line 52"
+}
+```
+
+Good:
+
+```json id="y96su3"
+{
+  "error": {
+    "code": "ORDER_LOOKUP_FAILED",
+    "message": "The order could not be found or accessed.",
+    "requestId": "req_123"
+  }
+}
+```
+
+LO route:
+
+```lo id="mvblpi"
+error_response SafeError {
+  expose: ["code", "message", "requestId"]
+  hide: ["stack", "sql", "filePath", "secret", "internalMessage"]
+}
+```
+
+Compiler rule:
+
+```text id="oeg9zm"
+Production routes cannot expose stack traces, SQL strings, file paths, secrets or internal exception messages.
+```
+
+---
+
+# Cache Safety
+
+LO should require cache rules for every response.
+
+```lo id="8szu2k"
+cache_policy public_short {
+  header: "public, max-age=60"
+}
+
+cache_policy private_no_store {
+  header: "no-store"
+}
+
+cache_policy static_asset {
+  header: "public, max-age=31536000, immutable"
+}
+```
+
+Usage:
+
+```lo id="1jf14s"
+GET "/account" {
+  auth required
+  response AccountPage
+  cache private_no_store
+  handler accountPage
+}
+```
+
+LO should block this:
+
+```text id="kyo3cv"
+Authenticated user page using public cache.
+```
+
+OWASP notes that `Cache-Control` defines how browsers and intermediate caches store responses, which is especially important when responses contain private or sensitive content. ([OWASP Cheat Sheet Series][3])
+
+---
+
+# Safe Cookies in Responses
+
+LO should make cookie security explicit.
+
+```lo id="2l9n1r"
+set_cookie session {
+  value: sessionToken
+  http_only: true
+  secure: true
+  same_site: "Lax"
+  path: "/"
+  max_age: 2h
+}
+```
+
+LO should reject:
+
+```lo id="0h0lel"
+set_cookie session {
+  value: sessionToken
+  http_only: false
+}
+```
+
+For sensitive apps, LO should default to:
+
+```text id="y8c5q4"
+HttpOnly
+Secure
+SameSite=Lax or Strict
+short session lifetime
+no session token in URL
+```
+
+OWASP notes that `Set-Cookie` itself is not a security header, but its security attributes are crucial. ([OWASP Cheat Sheet Series][3])
+
+---
+
+# Content Security Policy Built In
+
+For HTML responses, LO should generate CSP by default.
+
+Example:
+
+```lo id="p6d4qs"
+html_response DashboardPage {
+  csp {
+    default_src ["self"]
+    script_src ["self"]
+    style_src ["self"]
+    img_src ["self", "data:"]
+    object_src []
+    frame_ancestors []
+    base_uri ["self"]
+  }
+}
+```
+
+Generated header:
+
+```text id="gt1saw"
+Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; object-src 'none'; frame-ancestors 'none'; base-uri 'self'
+```
+
+MDN describes CSP as a browser feature that reduces risks from threats such as XSS by restricting what page code is allowed to do. OWASP similarly describes CSP as an added security layer for mitigating XSS and data injection attacks. ([MDN Web Docs][4])
+
+---
+
+# Content Negotiation
+
+LO should prevent accidental wrong-format output.
+
+```lo id="j65q6y"
+route GET "/reports/{id: UUID}" {
+  accepts ["application/json"]
+  produces ["application/json"]
+
+  response ReportResponse
+
+  handler getReport
+}
+```
+
+If the client asks for HTML:
+
+```text id="fa9whr"
+Accept: text/html
+```
+
+LO should return:
+
+```text id="mhyvvp"
+406 Not Acceptable
+```
+
+This prevents APIs unexpectedly returning browser-renderable content.
+
+---
+
+# Safe Redirects
+
+HTTP responses also include redirects, so LO should treat redirects as a separate safe type.
+
+```lo id="rstbnc"
+return Redirect {
+  status: 303
+  to: trustedRoute("account.dashboard")
+}
+```
+
+LO should reject:
+
+```lo id="xfi20n"
+return Redirect {
+  to: request.query.next
+}
+```
+
+Unless the target is validated:
+
+```lo id="r4w6k3"
+return Redirect {
+  to: safeRedirect(request.query.next, allow_hosts: ["example.com"])
+}
+```
+
+This helps prevent open redirect problems.
+
+---
+
+# Response Size and Streaming
+
+LO should protect against oversized responses.
+
+```lo id="053br4"
+response_limits {
+  max_json_size: 512kb
+  max_html_size: 1mb
+  stream_large_files: true
+  compress_min_size: 2kb
+}
+```
+
+For large files:
+
+```lo id="oj0zvq"
+return FileResponse {
+  file: safeFile
+  content_type: "application/pdf"
+  disposition: "attachment"
+  filename: safeFilename
+  cache: private_no_store
+}
+```
+
+LO should require streaming for large downloads instead of loading whole files into memory.
+
+---
+
+# Fast Response Handling
+
+Security should not make responses slow.
+
+LO can stay fast by compiling response policies.
+
+At build time:
+
+```text id="txt2ld"
+compile response schemas
+compile header profiles
+compile cache policies
+compile CSP templates
+compile field filters
+compile error mappers
+compile content serializers
+```
+
+At runtime:
+
+```text id="kckmou"
+select response profile
+serialize typed body
+apply precompiled headers
+apply field filter
+apply cache rule
+return response
+```
+
+Avoid:
+
+```text id="x3l990"
+runtime header guessing
+dynamic response shape scanning
+string-based JSON building
+manual HTML escaping
+late security middleware chains
+raw response mutation
+```
+
+---
+
+# Example Secure Response Contract
+
+```lo id="vgkh4l"
+route GET "/account/profile" {
+  auth required
+
+  response {
+    200: UserProfileResponse using authenticated_json
+    401: AuthErrorResponse using error_json
+    403: ForbiddenResponse using error_json
+  }
+
+  cache private_no_store
+
+  headers {
+    referrer_policy: "strict-origin-when-cross-origin"
+    content_type_options: "nosniff"
+    resource_policy: "same-origin"
+  }
+
+  handler getProfile
+}
+```
+
+Handler:
+
+```lo id="j2mxft"
+action getProfile(ctx: RequestContext)
+  -> Result<UserProfileResponse, RouteError>
+{
+  let user = Users.find(ctx.user.id)
+
+  return Ok(UserProfileResponse.from(user))
+}
+```
+
+The handler returns a typed response object, not a raw HTTP response.
+
+---
+
+# Generated Response Security Report
+
+LO should generate this during build:
+
+```json id="el84l6"
+{
+  "httpResponses": {
+    "totalRoutes": 42,
+    "rawResponses": 0,
+    "missingContentType": 0,
+    "missingNosniff": 0,
+    "publicCacheOnPrivateRoutes": 0,
+    "unsafeRedirects": 0,
+    "stackTraceExposure": 0,
+    "xPoweredByRemoved": true,
+    "serverHeader": "non_informative",
+    "cspEnabledForHtml": true,
+    "deprecatedHeaders": {
+      "Public-Key-Pins": 0,
+      "Expect-CT": 0,
+      "X-XSS-Protection": "disabled_or_not_set"
+    }
+  }
+}
+```
+
+---
+
+# Roadmap Placement
+
+This belongs mainly in:
+
+```text id="xdlyee"
+v3  - LO Secure Network
+v5  - LO App Kernel
+v7  - LO Data / Rendering
+v11 - LO Finance
+v19 - LO Framework Review
+v20 - LO Standards and ISO Review
+```
+
+Recommended roadmap note:
+
+```markdown id="nb2am5"
+## Secure HTTP Responses
+
+LO should treat HTTP responses as typed, policy-checked contracts.
+
+Every response should declare:
+
+- status code
+- response body type
+- content type
+- cache policy
+- security header profile
+- cookie policy
+- redirect policy if applicable
+- field filtering policy
+- error exposure policy
+
+Raw responses should be denied by default except inside trusted low-level packages.
+
+The compiler should generate a response security report and fail builds when private routes use public caching, unsafe redirects, missing content types, missing nosniff protection, unsafe cookies, stack-trace exposure or deprecated security headers.
+```
+
+In short:
+
+```text id="ycb7it"
+LO should make the secure response the default response.
+
+Unsafe or unclear HTTP responses should not compile.
+```
+
+[1]: https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html?utm_source=chatgpt.com "HTTP Security Response Headers Cheat Sheet"
+[2]: https://cheatsheetseries.owasp.org/cheatsheets/REST_Security_Cheat_Sheet.html?utm_source=chatgpt.com "REST Security Cheat Sheet"
+[3]: https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html "HTTP Headers - OWASP Cheat Sheet Series"
+[4]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP?utm_source=chatgpt.com "Content Security Policy (CSP) - HTTP - MDN Web Docs"

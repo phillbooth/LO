@@ -1,0 +1,459 @@
+Yes — LO should support databases as a **typed model and response layer**, not just raw SQL strings.
+
+The main idea:
+
+```text
+Database
+  -> typed model
+  -> validation
+  -> service logic
+  -> typed response
+  -> API / archive / report
+```
+
+LO should make it hard to accidentally return unsafe, missing, overexposed or wrongly typed data.
+
+---
+
+## Best package names
+
+I would use:
+
+```text
+lo-data-db
+lo-data-model
+lo-data-query
+lo-data-response
+lo-db-postgres
+lo-db-mysql
+lo-db-sqlite
+lo-db-opensearch
+lo-db-firestore
+```
+
+Or, if you want a simpler first version:
+
+```text
+lo-db
+lo-db-model
+lo-db-query
+lo-db-response
+```
+
+My preference:
+
+```text
+lo-data-db
+lo-data-model
+lo-data-response
+```
+
+because it keeps database work inside the wider `lo-data-*` family.
+
+---
+
+## 1. Database model support
+
+LO should allow database models like:
+
+```text
+model User {
+    table: "users"
+
+    id: UUID primary
+    email: Email unique
+    name: Text
+    role: UserRole
+    createdAt: DateTime
+    updatedAt: DateTime
+}
+```
+
+Then LO knows:
+
+```text
+what table it maps to
+what fields exist
+what types they are
+which fields are private
+which fields can be returned to APIs
+which fields need privacy/security handling
+```
+
+---
+
+## 2. Separate database model from response model
+
+This is very important.
+
+The database may contain fields that should **not** be returned to the browser/API.
+
+Example:
+
+```text
+model User {
+    id: UUID primary
+    email: PersonalData<Text>
+    passwordHash: SecretData<Text>
+    resetToken: SecretData<Text> optional
+    name: Text
+    role: UserRole
+    createdAt: DateTime
+}
+```
+
+API response:
+
+```text
+response UserResponse {
+    id: UUID
+    name: Text
+    role: UserRole
+}
+```
+
+LO should block this:
+
+```text
+return User
+```
+
+if `User` contains private fields.
+
+Compiler warning/error:
+
+```text
+Security error:
+User model contains SecretData fields.
+Return a safe response model such as UserResponse.
+```
+
+This is a strong LO feature.
+
+---
+
+## 3. Typed query results
+
+Instead of loose SQL:
+
+```text
+SELECT * FROM users
+```
+
+LO should prefer typed queries:
+
+```text
+query GetUserById(id: UUID) -> Option<User> {
+    from User
+    where User.id == id
+}
+```
+
+Or:
+
+```text
+let user = db.users.findOne({
+    id: userId
+})
+```
+
+The result type is known:
+
+```text
+Option<User>
+```
+
+So the developer must handle the missing case:
+
+```text
+match user {
+    Some(found) => return UserResponse.from(found)
+    None => return NotFound("User not found")
+}
+```
+
+---
+
+## 4. Safe API response mapping
+
+LO should support explicit mapping:
+
+```text
+response UserResponse from User {
+    id
+    name
+    role
+}
+```
+
+Then:
+
+```text
+route GET "/users/{id}" {
+    output: UserResponse
+
+    handler {
+        let user = User.findById(params.id)
+        return UserResponse.from(user)
+    }
+}
+```
+
+This prevents accidental leaks like:
+
+```text
+passwordHash
+resetToken
+adminNotes
+internalFlags
+paymentReference
+```
+
+---
+
+## 5. Model permissions
+
+LO models could declare what operations are allowed:
+
+```text
+model User {
+    allow read by ["admin", "self"]
+    allow create by ["public"]
+    allow update by ["admin", "self"]
+    deny delete unless role == "admin"
+
+    fields {
+        email: PersonalData<Text>
+        passwordHash: SecretData<Text> hidden
+    }
+}
+```
+
+This connects database access to LO’s security and compliance system.
+
+---
+
+## 6. Validation before insert/update
+
+LO should validate data before it reaches the database.
+
+```text
+schema CreateUserInput {
+    email: Email
+    name: Text min 2 max 100
+    password: SecretData<Text> min 12
+}
+```
+
+Then:
+
+```text
+command CreateUser(input: CreateUserInput) -> UserResponse {
+    let user = User.create({
+        email: input.email
+        name: input.name
+        passwordHash: hashPassword(input.password)
+    })
+
+    return UserResponse.from(user)
+}
+```
+
+LO should block direct unsafe inserts:
+
+```text
+User.create(request.body)
+```
+
+unless the request body has been validated.
+
+---
+
+## 7. Database response reports
+
+LO could generate:
+
+```text
+app.database-report.json
+app.model-report.json
+app.query-report.json
+app.response-report.json
+app.privacy-report.json
+app.security-report.json
+```
+
+Example:
+
+```json
+{
+  "models": {
+    "User": {
+      "table": "users",
+      "personalDataFields": ["email"],
+      "secretFields": ["passwordHash", "resetToken"],
+      "safeResponses": ["UserResponse", "UserListResponse"],
+      "rawModelReturnedByApi": false
+    }
+  },
+  "queries": {
+    "rawSql": "denied",
+    "parameterised": true,
+    "typedResults": true
+  }
+}
+```
+
+---
+
+## 8. Support different database styles
+
+LO should not only support SQL.
+
+It could support:
+
+```text
+SQL databases
+document databases
+search indexes
+key-value stores
+graph databases
+time-series databases
+object storage metadata
+```
+
+Examples:
+
+```text
+lo-db-postgres
+lo-db-mysql
+lo-db-sqlite
+lo-db-firestore
+lo-db-opensearch
+lo-db-redis
+lo-db-neo4j
+```
+
+But the model layer should stay consistent:
+
+```text
+model
+query
+command
+response
+archive
+report
+```
+
+---
+
+## 9. Database archive support
+
+For archiving:
+
+```text
+archive UserAuditArchive {
+    source: UserEvent
+
+    store {
+        database: "audit.user_events"
+        jsonl: "./archive/user-events.jsonl"
+    }
+
+    retention {
+        keepForYears: 6
+    }
+
+    integrity {
+        hash: sha256
+        appendOnly: true
+    }
+}
+```
+
+This fits the earlier `lo-data-archive` concept.
+
+---
+
+## 10. Best LO database rule
+
+The strongest rule:
+
+```text
+Database data should not be returned directly.
+
+Database data should pass through a typed response model.
+```
+
+So LO has:
+
+```text
+Model       = how data is stored
+Input       = what the user/API may send
+Query       = how data is read
+Command     = how data is changed
+Response    = what leaves the server
+Archive     = what is retained
+Report      = what proves the behaviour
+```
+
+---
+
+## Suggested document section
+
+```markdown
+## Database Models and Responses
+
+LO should support database models as typed records connected to storage.
+
+LO should separate database models from API response models.
+
+A database model may contain private, personal, secret or internal fields.
+
+A response model defines what may safely leave the server.
+
+LO should block raw database models from being returned by public routes when they contain sensitive fields.
+
+LO should support:
+
+- typed models
+- typed queries
+- typed commands
+- safe response mapping
+- parameterised database access
+- denied raw SQL by default
+- model-level permissions
+- validation before insert/update
+- privacy-aware fields
+- archive policies
+- query reports
+- response reports
+```
+
+## Simple package recommendation
+
+Start with:
+
+```text
+lo-data-model
+lo-data-db
+lo-data-query
+lo-data-response
+```
+
+Then add database-specific packages later:
+
+```text
+lo-db-postgres
+lo-db-mysql
+lo-db-sqlite
+lo-db-firestore
+lo-db-opensearch
+```
+
+Best summary:
+
+```text
+LO should treat the database as a typed, validated, permissioned and reportable data boundary.
+
+It should make a clear distinction between what is stored and what is allowed to be returned.
+```
