@@ -75,6 +75,10 @@ Example:
 - Added `docs/lo-vs-fsharp.md` to document honest positioning against F#,
   including F# maturity, LO differentiators and missing production-readiness
   work.
+- Added `docs/structured-await.md` plus matching `docs/sytax/` and
+  `docs/sytax-examples/` entries for LO Structured Await: `await`, `await all`,
+  `await race`, `await stream`, queue handoff, mandatory timeout policy,
+  cancellation modes, scoped tasks and async reports.
 
 ```text
 - Added explicit backend language suggestion adoption guidance to docs/backend-language-gap-analysis.md.

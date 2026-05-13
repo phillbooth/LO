@@ -40,6 +40,7 @@ Matching examples should live in `docs/sytax-examples/` and show both good and b
 
 ```text
 async-dart-flutter.md
+structured-await.md
 api-data-security-and-load-control.md
 api-duplicate-detection-and-idempotency.md
 auth-token-verification.md

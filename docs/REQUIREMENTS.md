@@ -25,6 +25,9 @@ must not be treated as implemented app functionality.
   not by making neural networks part of normal app syntax.
 - Support parallel AI agents only as supervised, bounded, permissioned,
   cancelable and reportable workloads.
+- Support LO Structured Await as the normal concurrency model: synchronous-looking
+  waits with scoped child work, typed effects, timeouts, cancellation and reports
+  instead of exposed future/promise plumbing.
 - Support controlled recovery for batch/data flows while stopping safely on
   unsafe system or runtime integrity failures.
 - Give AI coding tools enough generated context to understand package ownership
@@ -392,8 +395,36 @@ The app package must remain deliberately small until a product domain is chosen.
 - Shared report contracts must include common metadata, generator metadata,
   diagnostic summaries and typed build, security, target, runtime, task and AI
   guide report shapes.
+- Shared report contracts must include async/concurrency report shapes for
+  Structured Await, including await sites, groups, missing timeout counts,
+  unscoped task counts and structured-concurrency status.
 - Shared report contracts must include processing report shapes for resilient
   flows, partial success, retries, quarantined items and failure summaries.
+
+## Structured Await Requirements
+
+- LO must support `await` for effect-declared waits, but must not expose
+  futures, promises, pinning, executors or manual polling as the normal
+  application model.
+- LO must support grouped waits through `await all`, race waits through
+  `await race`, bounded stream processing through `await stream`, queue handoff
+  through declared queue/job contracts and retry through explicit retry policy.
+- Every task must belong to a scope. When a scope ends, unfinished child work
+  must be cancelled, completed or handed off according to explicit policy.
+- Pure functions must not use `await`.
+- Awaiting external network or database work must require timeout policy in
+  production profiles.
+- Cancellation must be a normal declared policy, with modes such as
+  `cancelOnError`, `waitForAll`, `firstSuccess`, `firstResult`,
+  `timeoutCancel` and `manualCancel`.
+- Hidden background work must be denied by default. Work that outlives a
+  request must use a typed, reportable queue/job contract.
+- Streams must declare bounded concurrency, backpressure policy and maximum
+  in-flight work.
+- Compiler diagnostics should warn when independent sequential awaits could use
+  `await all`.
+- Build and runtime reports should expose async behavior through deterministic
+  async, await, concurrency, timeout and queue report entries.
 
 ## Resilient Flow Requirements
 

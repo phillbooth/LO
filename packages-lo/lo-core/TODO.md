@@ -655,6 +655,11 @@ Reason for additions:
 ```text
 [x] Define async task syntax
 [x] Define await behaviour
+[x] Define Structured Await syntax and policy direction
+[x] Define await all behaviour
+[x] Define await race behaviour
+[x] Define await stream behaviour
+[x] Define await queue handoff direction
 [x] Define structured concurrency rules
 [x] Define cancellation behaviour
 [x] Define timeout behaviour

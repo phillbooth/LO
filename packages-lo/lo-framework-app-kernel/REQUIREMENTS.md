@@ -8,6 +8,10 @@
 - Support auth provider declarations without hard-coding one identity system.
 - Support idempotency and replay protection for risky side effects.
 - Support memory, timeout, concurrency and rate-limit policies.
+- Support request-scoped Structured Await policy so child work is cancelled,
+  completed or queued according to explicit route/job policy.
+- Deny hidden background work by default; require typed queue/job handoff for
+  work that outlives a request.
 - Support queue and job contracts without becoming a queue product.
 - Generate machine-readable runtime and audit reports.
 - Provide a non-compiled checked Run Mode smoke test for basic framework

@@ -19,6 +19,7 @@ language-non-supported-primitives.md
 legacy-and-compatibility-boundaries.md
 backend-language-gap-analysis.md
 concurrency.md
+structured-await.md
 compute-blocks.md
 syntax.md
 sytax/

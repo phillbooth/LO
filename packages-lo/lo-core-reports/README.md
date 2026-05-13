@@ -19,6 +19,7 @@ build report contracts
 security report contracts
 target report contracts
 runtime report contracts
+async/concurrency report contracts
 task report contracts
 processing report contracts
 AI guide report contracts
@@ -55,6 +56,9 @@ RuntimeReport
 TaskReport
 ProcessingReport
 BatchResultReport
+AsyncReport
+AwaitSiteReport
+AwaitGroupReport
 AiGuideReport
 CustomReport
 ReportWriter
@@ -67,6 +71,12 @@ Processing reports are for resilient/batch flows that can continue after
 item-level failures. They record totals, successes, failures, retries,
 quarantined items, checkpoints and failure-type summaries. They must not be used
 to hide system/runtime integrity failures.
+
+Async reports are for Structured Await analysis. They record await points,
+await groups, race blocks, stream blocks, queue awaits, missing timeout counts,
+unscoped task counts, background task counts, structured-concurrency status and
+source locations. Compiler, runtime and kernel packages produce the facts;
+`lo-core-reports` only owns the shared shape.
 
 Final rule:
 

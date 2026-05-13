@@ -172,15 +172,19 @@ LO-app/
 ## Package Map
 
 - `packages-lo/lo-core/` - LO language rules, syntax, type system, prototype
-  compiler notes, memory safety model, examples and core documentation.
+  compiler notes, memory safety model, Structured Await, examples and core
+  documentation.
 - `packages-lo/lo-core-compiler/` - compiler pipeline contracts for lexer, parser, AST,
   checkers, IR, diagnostics, source maps and compiler reports.
-- `packages-lo/lo-core-runtime/` - execution contracts for checked or compiled LO code.
+- `packages-lo/lo-core-runtime/` - execution contracts for checked or compiled
+  LO code, including Structured Await scopes, cancellation and timeout
+  enforcement.
 - `packages-lo/lo-core-security/` - reusable security primitives, redaction,
   permissions, crypto policy and security reports.
 - `packages-lo/lo-core-config/` - project configuration, environment mode and production
   strictness contracts.
-- `packages-lo/lo-core-reports/` - shared report schemas and report-writing contracts.
+- `packages-lo/lo-core-reports/` - shared report schemas and report-writing
+  contracts, including async/concurrency report shapes.
 - `packages-lo/lo-core-logic/` - `Tri`, `Logic<N>`, Decision, RiskLevel and future Omni
   logic concepts.
 - `packages-lo/lo-core-vector/` - vector, matrix, tensor, lane, dimension and numeric
@@ -235,7 +239,7 @@ LO-app/
 
 ```text
 LO Core
-  language, type system, effects, memory safety, syntax and core reports
+  language, type system, effects, memory safety, Structured Await syntax and core reports
 
 LO Compiler / Runtime / Security / Config / Reports
   compiler pipeline, execution, shared security, configuration and report contracts

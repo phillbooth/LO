@@ -364,6 +364,16 @@ quarantine and failure summaries. `lo-framework-app-kernel` should still prefer
 transactions, rollback, idempotency and hold-for-review for security-sensitive
 API workflows.
 
+Structured Await belongs across the same boundaries. `lo-core` owns `await`,
+`await all`, `await race`, `await stream`, queue-await syntax, effect checks and
+compiler diagnostics. `lo-core-runtime` owns scheduling, scoped child tasks,
+timeout enforcement, cancellation propagation, race policy and stream
+backpressure. `lo-framework-app-kernel` owns request scopes, route limits,
+queue/job handoff policy and audit events. `lo-core-reports` owns shared async
+report shapes so compiler, runtime and kernel facts can be emitted consistently.
+Normal LO developers should use Structured Await forms rather than direct
+future/promise management.
+
 `lo-framework-app-kernel` should not be renamed to `lo-core-runtime`. A future `lo-core-runtime`
 package should execute compiled or checked LO code. The app kernel should
 remain the secure application/API boundary that controls validation, auth,

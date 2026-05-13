@@ -17,7 +17,9 @@ adapter request
   -> typed decode and validation
   -> idempotency and replay check
   -> workload limits
+  -> request Structured Await scope
   -> typed flow handler
+  -> child cancellation and queue handoff policy
   -> typed response encode
   -> reports and audit events
 ```
@@ -37,9 +39,54 @@ replay protection
 load control
 jobs
 queues
+request await scopes
 error handling
 reports
 adapter contracts
+```
+
+## Structured Await Policy
+
+The Secure App Kernel owns application/request policy around LO Structured
+Await. LO core defines `await`, `await all`, `await race`, `await stream` and
+effect checks. `lo-core-runtime` executes scoped work. The kernel decides how
+those scopes are bounded for API requests, jobs and queue handoff.
+
+Kernel policy should enforce:
+
+```text
+every route handler runs inside a request scope
+request cancellation cancels unfinished child work unless a queue handoff was declared
+route limits define maximum request timeout and maximum concurrency
+external network/database awaits must have timeout policy in production
+background work is denied unless represented as a typed queue/job
+queue jobs declare payload, retry, timeout, idempotency/audit policy where relevant
+async, timeout, queue and audit facts are reportable
+```
+
+Example route policy:
+
+```lo
+route GET "/dashboard/{userId}" {
+  input DashboardRequest
+  output DashboardResponse
+
+  limits {
+    timeoutMs 3000
+    maxConcurrency 6
+  }
+
+  handler {
+    await all timeout 2500ms cancelOnError {
+      user = UserDb.find(input.userId)
+      orders = OrderDb.recent(input.userId)
+      alerts = AlertService.get(input.userId)
+      permissions = AuthService.permissions(input.userId)
+    }
+
+    return DashboardResponse.from(user, orders, alerts, permissions)
+  }
+}
 ```
 
 ## Adapter Boundary

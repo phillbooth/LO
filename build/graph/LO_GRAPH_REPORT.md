@@ -1,15 +1,15 @@
 # LO Graph Report
 
 Workspace: LO-app
-Generated: 2026-05-13T13:24:08.133Z
+Generated: 2026-05-13T16:48:35.749Z
 
 ## Summary
 
 - Packages: 30
-- Documents: 322
-- Types/interfaces: 303
-- Functions: 94
-- Relationships: 1403
+- Documents: 345
+- Types/interfaces: 308
+- Functions: 95
+- Relationships: 1447
 
 ## Package Nodes
 

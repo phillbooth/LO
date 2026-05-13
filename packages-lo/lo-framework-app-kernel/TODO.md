@@ -11,6 +11,7 @@
 [ ] Define scope and role policy model
 [ ] Define idempotency and replay protection contract
 [ ] Define rate-limit and workload control policy
+[ ] Define request Structured Await scope and cancellation policy
 [ ] Define queue/job contract
 [ ] Define runtime audit report format
 [ ] Define app-kernel to lo-core-runtime handoff contract

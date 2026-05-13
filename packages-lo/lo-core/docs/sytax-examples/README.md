@@ -35,6 +35,7 @@ expected diagnostics or reports
 
 ```text
 async-dart-flutter.md
+structured-await.md
 api-data-security-and-load-control.md
 api-duplicate-detection-and-idempotency.md
 auth-token-verification.md

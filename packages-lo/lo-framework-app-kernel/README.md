@@ -53,6 +53,8 @@ Frameworks provide opinions and user-facing structure.
 - Idempotency and replay protection policy.
 - Workload control for rate limits, concurrency limits, memory budgets,
   timeouts, queue handoff and backpressure.
+- Request-scoped Structured Await policy for `await all`, `await race`,
+  cancellation, external wait timeouts and bounded stream processing.
 - Standard job contracts and queue-driver boundaries.
 - Runtime reports for APIs, auth, idempotency, memory, load control, data and
   target behaviour.

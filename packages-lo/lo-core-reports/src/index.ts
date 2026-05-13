@@ -7,6 +7,7 @@ export type ReportKind =
   | "security"
   | "target"
   | "runtime"
+  | "async"
   | "task"
   | "processing"
   | "ai-guide"
@@ -94,6 +95,58 @@ export interface RuntimeReport extends LoReportBase {
   readonly effects: readonly string[];
 }
 
+export type AwaitKind =
+  | "one"
+  | "all"
+  | "race"
+  | "stream"
+  | "queue"
+  | "retry";
+
+export type AwaitCancellationPolicy =
+  | "cancelOnError"
+  | "waitForAll"
+  | "firstSuccess"
+  | "firstResult"
+  | "timeoutCancel"
+  | "manualCancel";
+
+export interface AwaitSiteReport {
+  readonly name?: string;
+  readonly kind: AwaitKind;
+  readonly effects: readonly string[];
+  readonly timeoutMs?: number;
+  readonly source?: ReportSourceLocation;
+}
+
+export interface AwaitGroupReport {
+  readonly name?: string;
+  readonly kind: Extract<AwaitKind, "all" | "race" | "stream" | "queue" | "retry">;
+  readonly awaitCount: number;
+  readonly timeoutMs?: number;
+  readonly cancellationPolicy?: AwaitCancellationPolicy;
+  readonly maxConcurrency?: number;
+  readonly maxInFlight?: number;
+  readonly backpressureRequired?: boolean;
+  readonly source?: ReportSourceLocation;
+}
+
+export interface AsyncReport extends LoReportBase {
+  readonly kind: "async";
+  readonly awaitPoints: number;
+  readonly awaitGroups: number;
+  readonly raceBlocks: number;
+  readonly streamBlocks: number;
+  readonly queueAwaits: number;
+  readonly networkAwaitWithoutTimeout: number;
+  readonly databaseAwaitWithoutTimeout: number;
+  readonly unscopedTasks: number;
+  readonly backgroundTasks: number;
+  readonly structuredConcurrency: boolean;
+  readonly awaitSites: readonly AwaitSiteReport[];
+  readonly groups: readonly AwaitGroupReport[];
+}
+
 export interface TaskReport extends LoReportBase {
   readonly kind: "task";
   readonly taskName: string;
@@ -159,6 +212,7 @@ export type LoReport =
   | SecurityReport
   | TargetReport
   | RuntimeReport
+  | AsyncReport
   | TaskReport
   | ProcessingReport
   | AiGuideReport
@@ -354,6 +408,41 @@ export function createRuntimeReport(input: {
       ? {}
       : { completedAt: input.completedAt }),
     effects: input.effects ?? [],
+  };
+}
+
+export function createAsyncReport(input: {
+  readonly metadata: ReportMetadata;
+  readonly diagnostics?: readonly ReportDiagnostic[];
+  readonly awaitPoints?: number;
+  readonly awaitGroups?: number;
+  readonly raceBlocks?: number;
+  readonly streamBlocks?: number;
+  readonly queueAwaits?: number;
+  readonly networkAwaitWithoutTimeout?: number;
+  readonly databaseAwaitWithoutTimeout?: number;
+  readonly unscopedTasks?: number;
+  readonly backgroundTasks?: number;
+  readonly structuredConcurrency?: boolean;
+  readonly awaitSites?: readonly AwaitSiteReport[];
+  readonly groups?: readonly AwaitGroupReport[];
+}): AsyncReport {
+  return {
+    kind: "async",
+    metadata: normalizeMetadataKind(input.metadata, "async"),
+    ...baseReportFields(input.diagnostics ?? []),
+    awaitPoints: input.awaitPoints ?? 0,
+    awaitGroups: input.awaitGroups ?? 0,
+    raceBlocks: input.raceBlocks ?? 0,
+    streamBlocks: input.streamBlocks ?? 0,
+    queueAwaits: input.queueAwaits ?? 0,
+    networkAwaitWithoutTimeout: input.networkAwaitWithoutTimeout ?? 0,
+    databaseAwaitWithoutTimeout: input.databaseAwaitWithoutTimeout ?? 0,
+    unscopedTasks: input.unscopedTasks ?? 0,
+    backgroundTasks: input.backgroundTasks ?? 0,
+    structuredConcurrency: input.structuredConcurrency ?? true,
+    awaitSites: input.awaitSites ?? [],
+    groups: input.groups ?? [],
   };
 }
 

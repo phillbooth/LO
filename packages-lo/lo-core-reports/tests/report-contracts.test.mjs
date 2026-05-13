@@ -3,6 +3,7 @@ import { describe, it } from "node:test";
 
 import {
   createAiGuideReport,
+  createAsyncReport,
   createBuildReport,
   createProcessingReport,
   createReportDiagnostic,
@@ -143,6 +144,57 @@ describe("lo-core-reports contracts", () => {
     assert.equal(report.failedItems, 28);
     assert.equal(report.failureTypes[0]?.action, "quarantine");
     assert.deepEqual(validateLoReport(report), []);
+  });
+
+  it("creates async reports for Structured Await analysis", () => {
+    const report = createAsyncReport({
+      metadata: createReportMetadata({
+        ...metadata,
+        kind: "async",
+        name: "LO async report",
+      }),
+      awaitPoints: 18,
+      awaitGroups: 4,
+      raceBlocks: 1,
+      streamBlocks: 2,
+      queueAwaits: 3,
+      networkAwaitWithoutTimeout: 0,
+      databaseAwaitWithoutTimeout: 0,
+      unscopedTasks: 0,
+      backgroundTasks: 0,
+      structuredConcurrency: true,
+      awaitSites: [
+        {
+          name: "CustomerApi.get",
+          kind: "one",
+          effects: ["network.outbound", "await"],
+          timeoutMs: 2000,
+          source: {
+            path: "orders.lo",
+            line: 12,
+          },
+        },
+      ],
+      groups: [
+        {
+          name: "LoadDashboard",
+          kind: "all",
+          awaitCount: 4,
+          timeoutMs: 2500,
+          cancellationPolicy: "cancelOnError",
+          source: {
+            path: "dashboard.lo",
+            line: 20,
+          },
+        },
+      ],
+    });
+
+    assert.equal(report.kind, "async");
+    assert.equal(report.awaitPoints, 18);
+    assert.equal(report.groups[0]?.cancellationPolicy, "cancelOnError");
+    assert.deepEqual(validateLoReport(report), []);
+    assert.match(serializeReportJson(report), /structuredConcurrency/);
   });
 
   it("validates report metadata and diagnostic shape", () => {

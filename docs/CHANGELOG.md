@@ -131,6 +131,11 @@ All notable changes to this app should be documented here.
 - Added `docs/AI_ACCELERATOR_TARGETS.md` documenting passive AI accelerator
   target profiles, with Intel Gaudi 3 represented as a backend profile rather
   than LO syntax.
+- Added LO Structured Await documentation across core language, runtime,
+  app-kernel and workspace docs, covering `await all`, `await race`, scoped
+  cancellation, mandatory timeout policy, stream backpressure, queue handoff and
+  async/concurrency reports.
+- Added typed async/concurrency report contracts to `lo-core-reports`.
 
 ### Changed
 

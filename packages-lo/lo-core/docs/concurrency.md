@@ -9,13 +9,19 @@ rate limits and request cancellation policy belong in `packages-lo/lo-framework-
 ## Purpose
 
 LO concurrency should make asynchronous work explicit, bounded and reportable.
+The normal developer model is **Structured Await**: code may wait with
+`await`, but async work must stay scoped, typed, cancellable, timeout-aware and
+visible in reports. LO should not expose futures, promises, executor plumbing,
+pinning or manual polling as the ordinary application programming model.
 
 It should support:
 
 ```text
-async tasks
 await
-parallel blocks
+await all
+await race
+await stream
+scoped tasks
 timeouts
 cancellation
 channels
@@ -32,6 +38,7 @@ safe shared state
 Concurrency must be structured.
 Effects must be declared.
 Cancellation must be visible.
+External waits must have timeouts.
 Shared mutable state must be controlled.
 Failures must be typed and source-mapped.
 ```
@@ -48,29 +55,117 @@ data races
 secret leakage in concurrent logs
 ```
 
-## Async Tasks
+## Structured Await
 
-Example:
+Simple waits should read like synchronous code:
 
 ```lo
-task fetchCustomer = async getCustomer(order.customerId)
-task fetchStock = async getStock(order.items)
+task FetchCustomerOrder(orderId: OrderId) -> Result<OrderView, AppError>
+effects [network.outbound, database.read, await] {
+  let customer = await CustomerApi.get(orderId) timeout 2s
+  let order = await OrderDb.find(orderId) timeout 500ms
 
-let customer = await fetchCustomer
-let stock = await fetchStock
+  return Ok(OrderView.from(customer, order))
+}
+```
+
+Independent waits should be grouped so the compiler and runtime can schedule
+them safely:
+
+```lo
+task LoadDashboard(userId: UserId) -> Result<Dashboard, AppError>
+effects [database.read, network.outbound, await] {
+  await all timeout 2500ms cancelOnError {
+    user = UserDb.find(userId)
+    orders = OrderDb.recentFor(userId)
+    alerts = AlertService.forUser(userId)
+  }
+
+  return Ok(Dashboard.from(user, orders, alerts))
+}
 ```
 
 Compiler checks should include:
 
 ```text
-await target exists
-await is used only where async work is allowed
-task result type is handled
-task failure type is handled
-effects are allowed in the current flow
+await is valid only in task, async flow or an effect-declared handler
+await requires the current declaration to include the await effect
+pure functions cannot await
+network/database awaits require timeout policy in production profiles
+independent sequential external awaits produce an optimisation warning
+raw futures/promises cannot escape normal application code
 ```
 
-## Parallel Blocks
+## Await Forms
+
+The core language should standardise on a small set of waiting forms:
+
+```text
+await one
+await all
+await race
+await stream
+await queue
+await retry
+```
+
+`await one` waits for one operation and is equivalent to ordinary `await` with
+explicit policy. `await all` starts child operations inside one scope and binds
+all declared results. `await race` waits according to a race policy such as
+`firstSuccess` or `firstResult`. `await stream` consumes a bounded stream with
+backpressure. `await queue` hands work to a declared queue/job contract. `await
+retry` retries only errors marked retryable by policy.
+
+Cancellation modes should include:
+
+```text
+cancelOnError
+waitForAll
+firstSuccess
+firstResult
+timeoutCancel
+manualCancel
+```
+
+Example race:
+
+```lo
+await race timeout 200ms firstSuccess {
+  cache = Cache.get(key)
+  database = Database.get(key)
+}
+```
+
+## Scopes and Tasks
+
+Example:
+
+```lo
+scope RequestWork {
+  await all timeout 2s cancelOnError {
+    customer = CustomerApi.get(id)
+    orders = OrderDb.list(id)
+    payment = PaymentApi.status(id)
+  }
+}
+```
+
+Compiler checks should include:
+
+```text
+every task belongs to a scope
+request-scoped children cannot outlive the request unless queued explicitly
+unfinished children are cancelled or completed according to declared policy
+task result and failure types are handled
+task effects are allowed in the current scope
+```
+
+## Parallel Blocks Compatibility
+
+Older planning docs used `parallel { ... }`. New LO source should prefer
+`await all { ... }` because it makes waiting, scope and result binding explicit.
+The compiler may keep `parallel` as a compatibility spelling during the draft
+period, but diagnostics should suggest `await all`.
 
 Example:
 
@@ -92,6 +187,32 @@ effects are declared
 shared writes are rejected unless explicitly controlled
 all branch errors are handled
 cancellation path is source-mapped
+```
+
+## Streams and Backpressure
+
+Streams must be memory-bounded. Unbounded per-event spawning is not allowed.
+
+```lo
+await stream Orders from OrderQueue {
+  concurrency 8
+  backpressure required
+  maxInFlight 100
+
+  process order {
+    await ProcessOrder(order) timeout 10s
+  }
+}
+```
+
+Compiler and runtime checks should include:
+
+```text
+stream concurrency is bounded
+max in-flight work is bounded
+backpressure policy exists
+per-item timeout exists for external work
+child cancellation is propagated on shutdown
 ```
 
 ## Channels
@@ -178,6 +299,11 @@ printing SecureString values from concurrent workers
 LO should generate concurrency-related report entries in:
 
 ```text
+app.async-report.json
+app.await-report.json
+app.concurrency-report.json
+app.timeout-report.json
+app.queue-report.json
 app.security-report.json
 app.runtime-report.json
 app.memory-report.json
@@ -189,11 +315,14 @@ Report entries should include:
 
 ```text
 async tasks
+await points
+await all/race/stream blocks
 parallel blocks
 channels
 workers
 timeouts
 cancellation paths
+sequential await optimisation suggestions
 backpressure policy
 dead-letter policy
 shared state warnings
@@ -219,7 +348,7 @@ lo-core-tasks
 Final rule:
 
 ```text
-lo-core defines structured concurrency contracts.
+lo-core defines Structured Await and structured concurrency contracts.
 lo-core-runtime executes them.
 lo-framework-app-kernel applies API/runtime policy around them.
 ```

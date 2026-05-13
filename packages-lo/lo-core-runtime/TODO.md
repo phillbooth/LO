@@ -10,6 +10,10 @@
 [ ] Define checked execution contract
 [ ] Define compiled execution contract
 [ ] Define runtime effect dispatch contract
+[ ] Define Structured Await scope and scheduler contract
+[ ] Define cancellation propagation contract
+[ ] Define timeout enforcement contract
+[ ] Define stream backpressure runtime contract
 [ ] Define runtime memory policy contract
 [ ] Define runtime error format
 [ ] Define target fallback runtime contract

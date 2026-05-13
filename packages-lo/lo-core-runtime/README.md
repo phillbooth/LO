@@ -17,11 +17,36 @@ runtime memory policy
 effect dispatch
 runtime error handling
 resilient flow supervision
+structured await scheduling
+cancellation propagation
+timeout enforcement
 retry scheduling
 checkpoint and resume hooks
 target fallback execution
 runtime reports
 ```
+
+## Structured Await Runtime
+
+`lo-core-runtime` should execute the lower-level mechanics behind LO Structured
+Await while keeping those mechanics out of normal application code.
+
+Runtime responsibilities include:
+
+```text
+create request/job/task scopes
+schedule await all child work inside the parent scope
+enforce await and await-group timeouts
+propagate cancellation to unfinished children
+apply race policies such as firstSuccess and firstResult
+apply stream backpressure and max in-flight limits
+emit runtime facts for async/concurrency reports
+release resources when scopes end
+```
+
+The runtime may use futures, tasks, schedulers or polling internally, but those
+types should remain package/runtime author APIs rather than the default LO
+developer model.
 
 ## Controlled Recovery
 
@@ -46,7 +71,7 @@ fallback.
 
 ```text
 lo-core-runtime
-  executes checked or compiled LO code
+  executes checked or compiled LO code and Structured Await scopes
 
 lo-framework-app-kernel
   validates requests, checks auth, controls idempotency, rate limits, jobs and API policy
