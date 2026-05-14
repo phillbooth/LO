@@ -6,6 +6,19 @@ LO is a strict, memory-safe, security-first, JSON-native, API-native and acceler
 
 The syntax is currently a design proposal and may change as the language develops.
 
+V1 syntax must be frozen before more active package surfaces are added. The
+minimum acceptance bar is:
+
+```text
+20 real .lo example programs
+a grammar that can parse those examples
+documented function, type, match, Result, Option, effect and import syntax
+diagnostics for unsupported or post-v1 syntax
+```
+
+Draft examples may mention post-v1 concepts, but active v1 syntax should focus
+on core language, type-system, CPU-compatible execution and WASM target needs.
+
 ---
 
 ## Syntax Goals

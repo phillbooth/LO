@@ -25,7 +25,6 @@ my-lo-app/
     |-- lo-core-compiler/
     |-- lo-core-runtime/
     |-- lo-core-security/
-    |-- lo-finance-core/
     `-- lo-framework-example-app/
 ```
 
@@ -35,19 +34,19 @@ my-lo-app/
 should describe normal npm dependencies, scripts and app tooling.
 
 `package-lo.json` should become the LO package manifest. It should describe LO
-language, runtime, compiler, security, app-kernel and domain package
-dependencies. It should support explicit profiles such as:
+language, runtime, compiler, security and app-kernel dependencies. It should
+support explicit profiles such as:
 
 ```text
 runtime
 development
 staging
-finance
-electrical
-ot
 low_latency
 benchmark
 ```
+
+Finance, electrical and OT profiles are archived post-v2 planning and must not
+be active v1 package profiles.
 
 `lo.lock.json` should lock LO package versions, source refs, checksums, selected
 profiles and dependency graph metadata. It should be deterministic and safe to
@@ -69,9 +68,6 @@ The resolver should install only packages required by the selected profile:
 ```text
 runtime       minimal runtime/compiler/app-kernel requirements
 development   graph, diagnostics, generators and test helpers
-finance       finance package contracts selected by the app
-electrical    electrical infrastructure contracts selected by the app
-ot            operational-technology integration contracts selected by the app
 benchmark     benchmark packages, never implicit in production
 ```
 

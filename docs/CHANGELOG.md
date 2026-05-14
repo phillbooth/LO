@@ -149,6 +149,8 @@ All notable changes to this app should be documented here.
   operational-technology package planning, with explicit safety boundaries
   against replacing certified protection equipment, PLC safety systems, SCADA
   products or qualified electrical engineering judgement.
+- Added an explicit v1 surface freeze around core syntax, core type-system
+  semantics, the memory-safety model, CPU target support and WASM target support.
 
 ### Changed
 
@@ -193,6 +195,14 @@ All notable changes to this app should be documented here.
   contracts as an interconnect-aware data movement target.
 - Added generic `ai_accelerator` planning support and an Intel Gaudi 3 backend
   profile to AI accelerator, compute and benchmark contracts.
+- Narrowed the active workspace target list to `cpu` and `wasm`, with GPU, AI
+  accelerator, photonic, optical I/O, low-bit AI and other advanced target work
+  labelled post-v1 unless needed by core type-system semantics.
+- Clarified that LO must not make measured speed claims over C#, Python, C or
+  C++ until the compiler, memory model and benchmark methodology exist.
+- Defined AI-readable as concrete syntax/tooling properties: regular grammar,
+  explicit effects/imports, typed errors, source maps, stable diagnostics and
+  machine-readable reports.
 
 ### Removed
 
@@ -200,6 +210,9 @@ All notable changes to this app should be documented here.
   `packages-lo/lo-cli/`, `packages-lo/lo-compute/` and
   `packages-lo/lo-config/` after confirming the canonical `lo-core-*` packages
   contain the current source, tests, manifests and newer contracts.
+- Moved `packages-lo/lo-finance-core/`, `packages-lo/lo-electrical-core/` and
+  `packages-lo/lo-ot-core/` to `C:\laragon\www\LO_Archive\packages-lo\` and
+  removed them from active workspace package resolution.
 
 ### Fixed
 

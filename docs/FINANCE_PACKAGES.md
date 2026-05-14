@@ -1,5 +1,16 @@
 # Finance Packages
 
+Status: archived post-v2 planning.
+
+Finance package folders have been moved out of the active workspace to:
+
+```text
+C:\laragon\www\LO_Archive\packages-lo\lo-finance-core
+```
+
+This document is retained as planning context only. Finance packages must not
+be part of the active v1 build graph.
+
 ## Purpose
 
 LO should treat finance as a serious domain package layer, not as core language

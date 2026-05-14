@@ -1,7 +1,7 @@
 # LO Package Collection
 
-`packages-lo/` is the home for reusable LO packages in this beta workspace.
-It is split from ordinary app/vendor packages.
+`packages-lo/` is the home for active reusable LO packages in this beta
+workspace. It is split from ordinary app/vendor packages.
 
 Current beta rule:
 
@@ -33,6 +33,25 @@ runtime profile. Development-only packages, staging packages, diagnostics,
 generators and experimental packages should require an explicit development or
 staging profile.
 
+## V1 Surface Freeze
+
+The active v1 surface is intentionally narrow:
+
+```text
+core language syntax
+core type system
+explicit Result / Option error and missing-value handling
+memory-safety model
+CPU target
+WASM target
+core reports, config, security, runtime, compiler and CLI tooling
+```
+
+Everything beyond CPU and WASM target support is post-v1 unless it is required
+to specify the core type system. Domain packages and regulated/safety-heavy
+packages should stay outside the active workspace until the parser, memory
+model and v1 examples are stable.
+
 ## Naming
 
 Package names follow the family-prefix rule documented in
@@ -60,21 +79,25 @@ not mistaken for production runtime dependencies.
 - `lo-core-compute/` - compute planning, capabilities, effects and target selection.
 - `lo-core-cli/` - developer command tooling.
 - `lo-core-tasks/` - safe typed project automation.
-- `lo-ai/` - generic AI inference contracts and AI safety policy.
-- `lo-ai-agent/` - supervised AI agent and tool-permission contracts.
-- `lo-ai-lowbit/` - low-bit and ternary AI backend contracts.
-- `lo-ai-neural/` - neural workload contracts.
-- `lo-ai-neuromorphic/` - spike and event-signal workload contracts.
-- `lo-core-photonic/` - photonic concepts, models, APIs and simulations.
-- `lo-target-*` - compiler/output target packages.
+- `lo-ai/` - post-v1 generic AI inference contracts and AI safety policy.
+- `lo-ai-agent/` - post-v1 supervised AI agent and tool-permission contracts.
+- `lo-ai-lowbit/` - post-v1 low-bit and ternary AI backend contracts.
+- `lo-ai-neural/` - post-v1 neural workload contracts.
+- `lo-ai-neuromorphic/` - post-v1 spike and event-signal workload contracts.
+- `lo-core-photonic/` - post-v1 photonic concepts, models, APIs and simulations.
+- `lo-target-cpu/` and `lo-target-wasm/` - v1 compiler/output target packages.
+- Other `lo-target-*` packages - post-v1 target planning.
 - `lo-cpu-kernels/` - optimized CPU kernel contracts.
 - `lo-framework-app-kernel/` - optional secure application kernel.
 - `lo-framework-api-server/` - built-in HTTP API transport package.
 - `lo-framework-example-app/` - minimal example/template app package.
 - `lo-devtools-project-graph/` - development-only project graph tooling.
 - `lo-tools-benchmark/` - benchmark and diagnostic tooling.
-- `lo-finance-core/` - grouped beta planning package for finance contracts.
-- `lo-electrical-core/` - grouped beta planning package for electrical
-  infrastructure contracts.
-- `lo-ot-core/` - grouped beta planning package for operational-technology
-  integration contracts.
+
+Archived package planning lives outside this active workspace:
+
+```text
+C:\laragon\www\LO_Archive\packages-lo\lo-finance-core
+C:\laragon\www\LO_Archive\packages-lo\lo-electrical-core
+C:\laragon\www\LO_Archive\packages-lo\lo-ot-core
+```

@@ -33,13 +33,44 @@ tooling lives in `packages-lo/lo-core-cli/`, and safe project automation lives i
 `packages-lo/lo-core-tasks/`. Development benchmark diagnostics live in
 `packages-lo/lo-tools-benchmark/`. Project knowledge graph tooling lives in
 `packages-lo/lo-devtools-project-graph/`. App source and build configuration live in
-`packages-lo/lo-framework-example-app/`. Beta finance package planning lives in
-`packages-lo/lo-finance-core/`. Electrical infrastructure package planning lives
-in `packages-lo/lo-electrical-core/`, and operational-technology integration
-planning lives in `packages-lo/lo-ot-core/`. App planning and operational
-documentation live in `docs/`. Development-only packages should use `lo-devtools-*` or
+`packages-lo/lo-framework-example-app/`. Finance, electrical and
+operational-technology package planning is archived outside the active
+workspace under `C:\laragon\www\LO_Archive\packages-lo\` and is not part of the
+v1 build graph. App planning and operational documentation live in `docs/`.
+Development-only packages should use `lo-devtools-*` or
 `lo-tools-*` names and must not be resolved by production applications by
 default.
+
+## V1 Surface Freeze
+
+The v1 architecture is frozen around a small language surface:
+
+```text
+core syntax
+core type system
+Result / Option error and missing-value handling
+the memory-safety model
+CPU target support
+WASM target support
+compiler, runtime, security, config, reports, CLI and task tooling
+```
+
+Everything beyond CPU and WASM targets is post-v1 unless it directly specifies
+core type-system semantics. AI, GPU, AI accelerator, photonic, optical I/O,
+finance, electrical, OT and other domain-specific packages must not define the
+v1 language surface. They may remain as archived or clearly labelled post-v1
+planning only.
+
+The v1 priority order is:
+
+```text
+1. Finalise syntax and grammar.
+2. Commit to the memory model.
+3. Define Bool, Tri, Decision, Option and Result semantics.
+4. Write at least 20 real LO example programs.
+5. Build a working parser for that subset.
+6. Only then expand package targets or domain packages.
+```
 
 ## Main Structure
 
@@ -78,9 +109,6 @@ LO-app/
 |   |-- lo-core-tasks/
 |   |-- lo-tools-benchmark/
 |   |-- lo-devtools-project-graph/
-|   |-- lo-finance-core/
-|   |-- lo-electrical-core/
-|   |-- lo-ot-core/
 |   |-- lo-framework-example-app/
 `-- tools/
 ```
@@ -122,9 +150,6 @@ light-framework/
 |   |-- lo-core-tasks/
 |   |-- lo-tools-benchmark/
 |   |-- lo-devtools-project-graph/
-|   |-- lo-finance-core/
-|   |-- lo-electrical-core/
-|   |-- lo-ot-core/
 |   `-- lo-framework-example-app/
 |-- app/
 `-- framework files
@@ -248,18 +273,6 @@ LO Developer Packages
   optional staging, diagnostics, generators and experiments outside production
   install paths
 
-LO Finance
-  finance maths, market data, FIX, audit, compliance, risk, pricing and FDC3
-  package contracts
-
-LO Electrical
-  electrical assets, telemetry, capacity, energy, maintenance, protection
-  setting records, event audit and reports
-
-LO OT
-  operational-technology telemetry gateways, protocol adapter boundaries,
-  network policy, signed command envelopes and audit reports
-
 LO Standard Packages
   HTTP adapters, SQL adapters, Redis queue, OpenAPI generator, JS/WASM generators
 
@@ -303,25 +316,11 @@ Production boot/profile policy must additionally default-disable
 build, `lo-core-config` should require an explicit production package override
 with a reason and expose that override in the runtime handoff and reports.
 
-`lo-finance-core` is a domain package group. Early work should define deterministic
-finance maths, market-data types, FIX integration contracts, audit evidence,
-calendar/session rules and risk/pricing boundaries. It must not make LO a live
-exchange engine, HFT engine, broker-dealer platform, settlement system,
-clearing system or custody platform.
-
-`lo-electrical-core` is a domain package group for electrical infrastructure
-modelling, validation, monitoring, capacity, energy, maintenance, protection
-setting records and audit evidence. It must not replace certified electrical
-protection equipment, circuit breakers, protection relays, PLC safety systems,
-grid protection, SCADA products, certified controllers or qualified electrical
-engineering judgement. First work should be read-only and report-heavy.
-
-`lo-ot-core` is an operational-technology integration package group for
-telemetry gateways, protocol adapter boundaries, network segmentation policy,
-signed command envelopes, operator approvals and control-attempt audit records.
-It may guide future `lo-ot-opcua`, `lo-ot-iec61850`, `lo-ot-modbus`,
-`lo-ot-mqtt` and `lo-ot-scada` packages. OT writes and equipment control must
-be deny-by-default and require explicit policy, approval and audit.
+Finance, electrical and OT packages are archived post-v2 domain planning. They
+must not be part of active v1 package resolution, compiler targets or build
+reports. Any future restoration must start with a new design review because
+finance and OT/electrical domains carry regulatory, protocol correctness,
+safety and cybersecurity requirements beyond the v1 language scope.
 
 `lo-core-logic` owns logic semantics such as `Tri`, `Logic<N>` and Omni.
 `lo-core-photonic` owns photonic concepts, representation models and simulation

@@ -17,6 +17,8 @@
 - [x] Add optical I/O and Intel Silicon Photonics design note
 - [x] Add passive AI accelerator and Intel Gaudi profile design note
 - [x] Add electrical infrastructure and OT package planning note
+- [x] Archive finance, electrical and OT package scaffolds outside the active
+  workspace until post-v2 package planning resumes
 - [x] Complete `docs/REQUIREMENTS.md`
 - [x] Complete `docs/DESIGN.md`
 - [ ] Complete `docs/ARCHITECTURE.md`
@@ -110,8 +112,17 @@
 
 ## Phase 8: Core Infrastructure Packages
 
+- [ ] Freeze v1 syntax and grammar around the supported examples
+- [ ] Write at least 20 real `.lo` examples covering basic, intermediate and
+  advanced v1 syntax
+- [ ] Build a parser that accepts the v1 examples and rejects post-v1 syntax
+  with clear diagnostics
 - [ ] Define `lo-core-compiler` compiler pipeline contracts
 - [ ] Define `lo-core-runtime` execution contracts
+- [ ] Commit the v1 memory model as hybrid ownership, borrowing, moves,
+  bounds-checking and explicit unsafe boundaries
+- [ ] Finalise `Bool`, `Tri`, `Decision`, `Option` and `Result` conversion and
+  branch semantics
 - [ ] Define standard library baseline for JSON, HTTP, files, streams, crypto
   policy, dates, money and safe strings
 - [ ] Define IDE/LSP, debugger, source-map and test-framework roadmap

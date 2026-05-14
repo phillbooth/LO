@@ -1,8 +1,0 @@
-{
-  "name": "@lo/ot-core",
-  "version": "0.1.0-beta.0",
-  "description": "Grouped LO operational-technology contracts for telemetry gateways, OT network policy, protocol adapter boundaries, signed commands and audit planning.",
-  "license": "Apache-2.0",
-  "type": "module",
-  "private": true
-}

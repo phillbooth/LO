@@ -1,5 +1,18 @@
 # Electrical Infrastructure Packages
 
+Status: archived post-v2 planning.
+
+Electrical and OT package folders have been moved out of the active workspace
+to:
+
+```text
+C:\laragon\www\LO_Archive\packages-lo\lo-electrical-core
+C:\laragon\www\LO_Archive\packages-lo\lo-ot-core
+```
+
+This document is retained as planning context only. Electrical and OT packages
+must not be part of the active v1 build graph.
+
 ## Positioning
 
 LO can support electrical systems and infrastructure as a typed, secure and

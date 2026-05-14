@@ -1,5 +1,8 @@
 # LO Photonic TODO
 
+Post-v1 status: photonic concept work is preserved as planning only unless a
+piece is required to clarify core `Tri` or `Logic<N>` semantics.
+
 ```text
 [x] Create /packages-lo/lo-core-photonic
 [x] Document package boundary

@@ -127,7 +127,9 @@ count = count + 1
 
 ## Ownership Model
 
-LO uses a hybrid ownership model.
+LO uses a hybrid ownership model. This is the current v1 candidate memory
+model, not marketing language: memory safety depends on compiler-enforced
+ownership, borrow, move, bounds and unsafe-boundary checks.
 
 Normal values use safe automatic memory management. Resources, concurrent messages, accelerator buffers and secrets use stricter ownership rules.
 
@@ -160,6 +162,13 @@ resources have explicit owners and cleanup points
 channel sends move ownership unless the value is immutable/share-safe
 SecureString has special ownership and redaction rules
 raw pointer ownership is not exposed to application code
+```
+
+V1 commitment:
+
+```text
+LO will not describe itself as memory safe unless the checked/compiler path can
+enforce these rules for the supported v1 syntax subset.
 ```
 
 ---

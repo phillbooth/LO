@@ -1,5 +1,8 @@
 # LO AI TODO
 
+Post-v1 status: AI package work is preserved as planning only and must not be
+part of the active v1 language surface.
+
 ```text
 [x] Create /packages-lo/lo-ai
 [x] Document package boundary

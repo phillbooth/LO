@@ -1,5 +1,8 @@
 # LO Target CPU TODO
 
+V1 freeze rule: CPU is an active v1 target and must remain the baseline for
+checked execution, fallback behaviour and reportable capability detection.
+
 ```text
 [x] Create /packages-lo/lo-target-cpu
 [x] Document package boundary

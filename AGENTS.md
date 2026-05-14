@@ -11,7 +11,7 @@ This is a LO application template.
 The repository contains:
 
 - LO language/package files in `packages-lo/lo-core/`
-- Proposed reusable LO package collection files in `packages-lo/`
+- Active reusable LO package collection files in `packages-lo/`
 - LO secure runtime kernel design files in `packages-lo/lo-framework-app-kernel/`
 - Bespoke app files in `packages-lo/lo-framework-example-app/`
 - App documentation in `docs/`
@@ -23,7 +23,10 @@ The repository contains:
 - Do not place full-framework, CMS, admin UI, ORM or frontend framework design inside `packages-lo/lo-core/`.
 - Do not place LO language documentation inside `docs/`.
 - Do not treat `packages-lo/` as production-installed by default; use it for
-  explicit LO package collection planning or selected LO domain packages.
+  explicit LO package collection planning only.
+- Finance, electrical and OT package planning is archived under
+  `C:\laragon\www\LO_Archive\packages-lo\` and must not be treated as part of
+  the active v1 build graph.
 - Keep the repository root clean.
 - Do not commit secrets.
 - Do not invent LO syntax without documenting it.
@@ -139,8 +142,8 @@ Use for:
 Use for:
 
 - proposed reusable LO package collection layout
-- beta LO domain packages that should not live in app/vendor package space
-- grouped package planning such as `lo-finance-core/`
+- active core package and tooling package planning
+- archived package references that point outside this workspace
 - future nested repository or submodule planning
 
 Do not use for:

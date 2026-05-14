@@ -19,8 +19,9 @@ must not be treated as implemented app functionality.
   documentation in `docs/`.
 - Support CPU-compatible checked execution and deterministic reports as the
   practical baseline.
-- Keep GPU, photonic, low-bit AI and other accelerator support optional and
-  backend-neutral.
+- Keep v1 target support limited to CPU and WASM. GPU, photonic, low-bit AI,
+  AI accelerator, optical I/O and other accelerator support are post-v1 planning
+  unless needed to explain core type-system semantics.
 - Support neural-network workloads through typed packages and target planning,
   not by making neural networks part of normal app syntax.
 - Support parallel AI agents only as supervised, bounded, permissioned,
@@ -36,6 +37,35 @@ must not be treated as implemented app functionality.
 - Give AI coding tools enough generated context to understand package ownership
   without replacing compiler, runtime, security or test checks.
 - Provide safe task automation with explicit effects, permissions and reports.
+
+## V1 Language Requirements
+
+- The v1 surface must freeze around core syntax, the core type system,
+  `Result<T, E>`, `Option<T>`, the memory-safety model, CPU target support and
+  WASM target support.
+- Everything beyond CPU and WASM targets must be labelled post-v1 unless it is
+  necessary to define the core type system.
+- LO must not claim to be faster than C#, Python, C or C++ until the compiler,
+  memory model and benchmark methodology exist. Current performance wording
+  must be framed as a goal or opportunity, not a measured fact.
+- Memory safety must be tied to an explicit mechanism. The current candidate is
+  hybrid ownership: immutable sharing by default, one active mutable owner,
+  read-only and mutable borrows, explicit moves for resources, bounds-checked
+  collections and no raw pointers in normal application code.
+- Recoverable errors must be explicit in syntax and types through
+  `Result<T, E>` or an equivalent typed result form. Hidden exceptions must not
+  be the default application error model.
+- Missing values must use `Option<T>` or another explicit typed missing-value
+  form, not unchecked null.
+- `Tri` must not silently convert to `Bool`. Branch conditions must require
+  `Bool`; `Tri` values must use exhaustive `match` or an explicit conversion
+  policy such as `unknown_as: false`, `unknown_as: error` or equivalent.
+- AI-readable must mean concrete compiler/tooling properties: regular grammar,
+  explicit effects, explicit imports, typed errors, source maps, stable
+  diagnostics and machine-readable reports. It must not be a vague marketing
+  label.
+- Before adding more active packages, the project must include at least 20 real
+  `.lo` example programs covering basic, intermediate and advanced syntax.
 
 ## Users
 
@@ -168,18 +198,14 @@ The app package must remain deliberately small until a product domain is chosen.
   startup or build validation must fail.
 - The exact developer package folder name remains provisional, but its boundary
   must stay separate from production runtime package manifests.
-- `packages-lo/lo-finance-core/` may be used as a grouped beta finance package area
-  before finance contracts split into smaller packages.
-- Finance package work must stay outside `packages-lo/lo-core/` unless it is a
-  general language rule needed by all domains.
-- `packages-lo/lo-electrical-core/` may be used as a grouped beta electrical
-  infrastructure package area before electrical contracts split into smaller
-  packages.
-- `packages-lo/lo-ot-core/` may be used as a grouped beta operational-technology
-  integration package area before OT protocol contracts split into smaller
-  packages.
-- Electrical and OT package work must stay outside `packages-lo/lo-core/` unless
-  it is a general language rule needed by all domains.
+- Finance, electrical and OT package planning must stay archived outside the
+  active workspace under `C:\laragon\www\LO_Archive\packages-lo\` until post-v2
+  package planning resumes.
+- Finance, electrical and OT packages must not be part of active v1 package
+  resolution, build graph generation, compiler targets or runtime profiles.
+- Any future restoration of finance, electrical or OT packages must require a
+  design review because these domains carry regulatory, protocol correctness,
+  safety and cybersecurity requirements beyond the v1 language scope.
 - Package naming must follow `docs/PACKAGE_NAMING.md`: `lo-target-*` for where
   code runs or compiles to, `lo-io-*` for how data moves, `lo-ai-*` for
   AI-specific workloads, `lo-kernel-*` for low-level execution kernels and
@@ -188,7 +214,10 @@ The app package must remain deliberately small until a product domain is chosen.
   package names; binary and photonic I/O should be added later as separate
   `lo-io-*` packages.
 
-## Electrical and OT Package Requirements
+## Archived Electrical and OT Package Requirements
+
+These requirements are preserved as post-v2 archive notes. They do not apply to
+the active v1 build graph.
 
 - `lo-electrical-core` must be a domain package group, not core LO syntax.
 - `lo-ot-core` must be an operational-technology integration package group, not
@@ -228,7 +257,10 @@ The app package must remain deliberately small until a product domain is chosen.
 - Electrical and OT reports must avoid raw secrets, unnecessary personal data
   and unsafe control payloads.
 
-## Finance Package Requirements
+## Archived Finance Package Requirements
+
+These requirements are preserved as post-v2 archive notes. They do not apply to
+the active v1 build graph.
 
 - `lo-finance-core` must be a domain package group, not core LO syntax.
 - Finance support must start with typed data, deterministic maths, validation,

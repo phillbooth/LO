@@ -1,5 +1,10 @@
 # LO Compute TODO
 
+V1 freeze rule: compute planning must keep active target selection to CPU and
+WASM. GPU, AI accelerator, optical I/O, photonic, low-bit AI and other advanced
+targets are post-v1 planning unless needed to describe core type-system
+semantics.
+
 ```text
 [x] Create /packages-lo/lo-core-compute
 [x] Document package boundary

@@ -396,18 +396,6 @@ Provides:
 - ProjectGraph
 - ProjectGraphWorkspacePackage
 
-## lo-finance-core
-
-Grouped LO finance package contracts for financial maths, market data, FIX, audit, risk and pricing planning.
-
-## lo-electrical-core
-
-Grouped LO electrical infrastructure contracts for assets, monitoring, capacity, energy, maintenance, protection records and audit planning.
-
-## lo-ot-core
-
-Grouped LO operational-technology contracts for telemetry gateways, OT network policy, protocol adapter boundaries, signed commands and audit planning.
-
 ## lo-framework-example-app
 
 `packages-lo/lo-framework-example-app` is the bespoke application package for this workspace.

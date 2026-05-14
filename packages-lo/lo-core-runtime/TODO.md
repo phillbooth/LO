@@ -1,5 +1,10 @@
 # LO Runtime TODO
 
+V1 freeze rule: the runtime package should support CPU-compatible checked
+execution, WASM handoff planning, explicit `Result`/`Option` handling,
+Structured Await policy hooks and the memory-safety model before post-v1 target
+runtime work.
+
 ```text
 [x] Create /packages-lo/lo-core-runtime
 [x] Add README.md

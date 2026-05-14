@@ -87,10 +87,18 @@ lo-framework-api-server
 lo-framework-example-app
 lo-devtools-project-graph
 lo-tools-benchmark
+```
+
+Archived post-v2 domain package names:
+
+```text
 lo-finance-core
 lo-electrical-core
 lo-ot-core
 ```
+
+These packages are preserved under `C:\laragon\www\LO_Archive\packages-lo\`
+and must not be part of the active v1 build graph.
 
 ## Devtools Rule
 

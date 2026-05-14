@@ -1,5 +1,8 @@
 # LO Target AI Accelerator TODO
 
+Post-v1 status: AI accelerator target work is preserved as planning only and
+must not be part of the active v1 build surface.
+
 ```text
 [x] Create /packages-lo/lo-target-ai-accelerator
 [x] Add README.md

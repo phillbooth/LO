@@ -1,5 +1,8 @@
 # LO Target GPU TODO
 
+Post-v1 status: GPU target work is preserved as planning only and must not be
+part of the active v1 build surface.
+
 ```text
 [x] Create /packages-lo/lo-target-gpu
 [x] Add README.md

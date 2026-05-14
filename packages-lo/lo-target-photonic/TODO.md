@@ -1,5 +1,8 @@
 # LO Target Photonic TODO
 
+Post-v1 status: photonic target work is preserved as planning only and must not
+be part of the active v1 build surface.
+
 ```text
 [x] Create /packages-lo/lo-target-photonic
 [x] Document package boundary

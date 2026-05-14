@@ -8,6 +8,21 @@ Use this file as a practical checklist while the project moves from concept to d
 
 ---
 
+## V1 Surface Freeze
+
+```text
+[ ] Freeze core syntax and grammar before adding more active package surfaces
+[ ] Keep v1 target scope to CPU and WASM
+[ ] Treat GPU, AI accelerator, photonic, optical I/O and domain packages as post-v1
+[ ] Commit the hybrid ownership memory-safety model
+[ ] Finalise Bool, Tri, Decision, Option and Result semantics
+[ ] Add at least 20 real .lo examples for the v1 syntax subset
+[ ] Build parser coverage for those examples
+[ ] Reject post-v1 syntax with clear diagnostics
+```
+
+---
+
 ## Status Key
 
 ```text

@@ -1,6 +1,6 @@
 {
   "version": "0.1.0",
-  "generatedAt": "2026-05-13T17:16:32.647Z",
+  "generatedAt": "2026-05-14T06:16:18.629Z",
   "nodes": [
     {
       "id": "package:lo-core",
@@ -278,36 +278,6 @@
       "label": "lo-devtools-project-graph",
       "sourcePath": "packages-lo/lo-devtools-project-graph/README.md",
       "summary": "LO project knowledge graph contracts for package, document, policy and report relationships.",
-      "tags": [
-        "package"
-      ]
-    },
-    {
-      "id": "package:lo-finance-core",
-      "kind": "Package",
-      "label": "lo-finance-core",
-      "sourcePath": "packages-lo/lo-finance-core/README.md",
-      "summary": "Grouped LO finance package contracts for financial maths, market data, FIX, audit, risk and pricing planning.",
-      "tags": [
-        "package"
-      ]
-    },
-    {
-      "id": "package:lo-electrical-core",
-      "kind": "Package",
-      "label": "lo-electrical-core",
-      "sourcePath": "packages-lo/lo-electrical-core/README.md",
-      "summary": "Grouped LO electrical infrastructure contracts for assets, monitoring, capacity, energy, maintenance, protection records and audit planning.",
-      "tags": [
-        "package"
-      ]
-    },
-    {
-      "id": "package:lo-ot-core",
-      "kind": "Package",
-      "label": "lo-ot-core",
-      "sourcePath": "packages-lo/lo-ot-core/README.md",
-      "summary": "Grouped LO operational-technology contracts for telemetry gateways, OT network policy, protocol adapter boundaries, signed commands and audit planning.",
       "tags": [
         "package"
       ]
@@ -7781,96 +7751,6 @@
       ]
     },
     {
-      "id": "doc:packages-lo/lo-finance-core/package.json",
-      "kind": "Document",
-      "label": "package.json",
-      "sourcePath": "packages-lo/lo-finance-core/package.json",
-      "tags": [
-        "report",
-        "lo-finance-core"
-      ]
-    },
-    {
-      "id": "doc:packages-lo/lo-finance-core/README.md",
-      "kind": "Document",
-      "label": "README.md",
-      "sourcePath": "packages-lo/lo-finance-core/README.md",
-      "tags": [
-        "document",
-        "lo-finance-core"
-      ]
-    },
-    {
-      "id": "doc:packages-lo/lo-finance-core/TODO.md",
-      "kind": "Document",
-      "label": "TODO.md",
-      "sourcePath": "packages-lo/lo-finance-core/TODO.md",
-      "tags": [
-        "document",
-        "lo-finance-core"
-      ]
-    },
-    {
-      "id": "doc:packages-lo/lo-electrical-core/package.json",
-      "kind": "Document",
-      "label": "package.json",
-      "sourcePath": "packages-lo/lo-electrical-core/package.json",
-      "tags": [
-        "report",
-        "lo-electrical-core"
-      ]
-    },
-    {
-      "id": "doc:packages-lo/lo-electrical-core/README.md",
-      "kind": "Document",
-      "label": "README.md",
-      "sourcePath": "packages-lo/lo-electrical-core/README.md",
-      "tags": [
-        "document",
-        "lo-electrical-core"
-      ]
-    },
-    {
-      "id": "doc:packages-lo/lo-electrical-core/TODO.md",
-      "kind": "Document",
-      "label": "TODO.md",
-      "sourcePath": "packages-lo/lo-electrical-core/TODO.md",
-      "tags": [
-        "document",
-        "lo-electrical-core"
-      ]
-    },
-    {
-      "id": "doc:packages-lo/lo-ot-core/package.json",
-      "kind": "Document",
-      "label": "package.json",
-      "sourcePath": "packages-lo/lo-ot-core/package.json",
-      "tags": [
-        "report",
-        "lo-ot-core"
-      ]
-    },
-    {
-      "id": "doc:packages-lo/lo-ot-core/README.md",
-      "kind": "Document",
-      "label": "README.md",
-      "sourcePath": "packages-lo/lo-ot-core/README.md",
-      "tags": [
-        "document",
-        "lo-ot-core"
-      ]
-    },
-    {
-      "id": "doc:packages-lo/lo-ot-core/TODO.md",
-      "kind": "Document",
-      "label": "TODO.md",
-      "sourcePath": "packages-lo/lo-ot-core/TODO.md",
-      "tags": [
-        "document",
-        "lo-ot-core"
-      ]
-    },
-    {
       "id": "doc:packages-lo/lo-framework-example-app/README.md",
       "kind": "Document",
       "label": "README.md",
@@ -8161,36 +8041,6 @@
       ]
     },
     {
-      "id": "doc:packages-lo/lo-finance-core",
-      "kind": "Document",
-      "label": "finance",
-      "sourcePath": "packages-lo/lo-finance-core",
-      "tags": [
-        "document",
-        "workspace-doc"
-      ]
-    },
-    {
-      "id": "doc:packages-lo/lo-electrical-core",
-      "kind": "Document",
-      "label": "electrical",
-      "sourcePath": "packages-lo/lo-electrical-core",
-      "tags": [
-        "document",
-        "workspace-doc"
-      ]
-    },
-    {
-      "id": "doc:packages-lo/lo-ot-core",
-      "kind": "Document",
-      "label": "ot",
-      "sourcePath": "packages-lo/lo-ot-core",
-      "tags": [
-        "document",
-        "workspace-doc"
-      ]
-    },
-    {
       "id": "report:project-graph",
       "kind": "Report",
       "label": "LO Project Graph Report",
@@ -8246,13 +8096,6 @@
     },
     {
       "from": "doc:AGENTS.md",
-      "to": "package:lo-finance-core",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "AGENTS.md"
-    },
-    {
-      "from": "doc:AGENTS.md",
       "to": "package:lo-framework-example-app",
       "kind": "documents",
       "confidence": "INFERRED",
@@ -8450,27 +8293,6 @@
     {
       "from": "doc:README.md",
       "to": "package:lo-devtools-project-graph",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "README.md"
-    },
-    {
-      "from": "doc:README.md",
-      "to": "package:lo-finance-core",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "README.md"
-    },
-    {
-      "from": "doc:README.md",
-      "to": "package:lo-electrical-core",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "README.md"
-    },
-    {
-      "from": "doc:README.md",
-      "to": "package:lo-ot-core",
       "kind": "documents",
       "confidence": "INFERRED",
       "evidencePath": "README.md"
@@ -8743,27 +8565,6 @@
     },
     {
       "from": "doc:docs/ARCHITECTURE.md",
-      "to": "package:lo-finance-core",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "docs/ARCHITECTURE.md"
-    },
-    {
-      "from": "doc:docs/ARCHITECTURE.md",
-      "to": "package:lo-electrical-core",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "docs/ARCHITECTURE.md"
-    },
-    {
-      "from": "doc:docs/ARCHITECTURE.md",
-      "to": "package:lo-ot-core",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "docs/ARCHITECTURE.md"
-    },
-    {
-      "from": "doc:docs/ARCHITECTURE.md",
       "to": "package:lo-framework-example-app",
       "kind": "documents",
       "confidence": "INFERRED",
@@ -8967,27 +8768,6 @@
     },
     {
       "from": "doc:docs/CHANGELOG.md",
-      "to": "package:lo-finance-core",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "docs/CHANGELOG.md"
-    },
-    {
-      "from": "doc:docs/CHANGELOG.md",
-      "to": "package:lo-electrical-core",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "docs/CHANGELOG.md"
-    },
-    {
-      "from": "doc:docs/CHANGELOG.md",
-      "to": "package:lo-ot-core",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "docs/CHANGELOG.md"
-    },
-    {
-      "from": "doc:docs/CHANGELOG.md",
       "to": "package:lo-framework-example-app",
       "kind": "documents",
       "confidence": "INFERRED",
@@ -9092,20 +8872,6 @@
       "evidencePath": "docs/DESIGN.md"
     },
     {
-      "from": "doc:docs/ELECTRICAL_INFRASTRUCTURE.md",
-      "to": "package:lo-electrical-core",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "docs/ELECTRICAL_INFRASTRUCTURE.md"
-    },
-    {
-      "from": "doc:docs/ELECTRICAL_INFRASTRUCTURE.md",
-      "to": "package:lo-ot-core",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "docs/ELECTRICAL_INFRASTRUCTURE.md"
-    },
-    {
       "from": "doc:docs/FINANCE_PACKAGES.md",
       "to": "package:lo-core",
       "kind": "documents",
@@ -9115,13 +8881,6 @@
     {
       "from": "doc:docs/FINANCE_PACKAGES.md",
       "to": "package:lo-core-runtime",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "docs/FINANCE_PACKAGES.md"
-    },
-    {
-      "from": "doc:docs/FINANCE_PACKAGES.md",
-      "to": "package:lo-finance-core",
       "kind": "documents",
       "confidence": "INFERRED",
       "evidencePath": "docs/FINANCE_PACKAGES.md"
@@ -9332,13 +9091,6 @@
     {
       "from": "doc:docs/PACKAGE_LAYOUT.md",
       "to": "package:lo-tools-benchmark",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "docs/PACKAGE_LAYOUT.md"
-    },
-    {
-      "from": "doc:docs/PACKAGE_LAYOUT.md",
-      "to": "package:lo-finance-core",
       "kind": "documents",
       "confidence": "INFERRED",
       "evidencePath": "docs/PACKAGE_LAYOUT.md"
@@ -9542,27 +9294,6 @@
     {
       "from": "doc:docs/PACKAGE_NAMING.md",
       "to": "package:lo-devtools-project-graph",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "docs/PACKAGE_NAMING.md"
-    },
-    {
-      "from": "doc:docs/PACKAGE_NAMING.md",
-      "to": "package:lo-finance-core",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "docs/PACKAGE_NAMING.md"
-    },
-    {
-      "from": "doc:docs/PACKAGE_NAMING.md",
-      "to": "package:lo-electrical-core",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "docs/PACKAGE_NAMING.md"
-    },
-    {
-      "from": "doc:docs/PACKAGE_NAMING.md",
-      "to": "package:lo-ot-core",
       "kind": "documents",
       "confidence": "INFERRED",
       "evidencePath": "docs/PACKAGE_NAMING.md"
@@ -9843,27 +9574,6 @@
     {
       "from": "doc:docs/REQUIREMENTS.md",
       "to": "package:lo-devtools-project-graph",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "docs/REQUIREMENTS.md"
-    },
-    {
-      "from": "doc:docs/REQUIREMENTS.md",
-      "to": "package:lo-finance-core",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "docs/REQUIREMENTS.md"
-    },
-    {
-      "from": "doc:docs/REQUIREMENTS.md",
-      "to": "package:lo-electrical-core",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "docs/REQUIREMENTS.md"
-    },
-    {
-      "from": "doc:docs/REQUIREMENTS.md",
-      "to": "package:lo-ot-core",
       "kind": "documents",
       "confidence": "INFERRED",
       "evidencePath": "docs/REQUIREMENTS.md"
@@ -10172,27 +9882,6 @@
     {
       "from": "doc:docs/TASKS.md",
       "to": "package:lo-devtools-project-graph",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "docs/TASKS.md"
-    },
-    {
-      "from": "doc:docs/TASKS.md",
-      "to": "package:lo-finance-core",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "docs/TASKS.md"
-    },
-    {
-      "from": "doc:docs/TASKS.md",
-      "to": "package:lo-electrical-core",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "docs/TASKS.md"
-    },
-    {
-      "from": "doc:docs/TASKS.md",
-      "to": "package:lo-ot-core",
       "kind": "documents",
       "confidence": "INFERRED",
       "evidencePath": "docs/TASKS.md"
@@ -12867,13 +12556,6 @@
     {
       "from": "doc:packages-lo/lo-core/ROADMAP.md",
       "to": "package:lo-core",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "packages-lo/lo-core/ROADMAP.md"
-    },
-    {
-      "from": "doc:packages-lo/lo-core/ROADMAP.md",
-      "to": "package:lo-finance-core",
       "kind": "documents",
       "confidence": "INFERRED",
       "evidencePath": "packages-lo/lo-core/ROADMAP.md"
@@ -18421,111 +18103,6 @@
       "kind": "owns",
       "confidence": "EXTRACTED",
       "evidencePath": "packages-lo/lo-devtools-project-graph/tsconfig.json"
-    },
-    {
-      "from": "package:lo-finance-core",
-      "to": "doc:packages-lo/lo-finance-core/package.json",
-      "kind": "owns",
-      "confidence": "EXTRACTED",
-      "evidencePath": "packages-lo/lo-finance-core/package.json"
-    },
-    {
-      "from": "package:lo-finance-core",
-      "to": "doc:packages-lo/lo-finance-core/README.md",
-      "kind": "owns",
-      "confidence": "EXTRACTED",
-      "evidencePath": "packages-lo/lo-finance-core/README.md"
-    },
-    {
-      "from": "doc:packages-lo/lo-finance-core/README.md",
-      "to": "package:lo-core",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "packages-lo/lo-finance-core/README.md"
-    },
-    {
-      "from": "doc:packages-lo/lo-finance-core/README.md",
-      "to": "package:lo-core-runtime",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "packages-lo/lo-finance-core/README.md"
-    },
-    {
-      "from": "doc:packages-lo/lo-finance-core/README.md",
-      "to": "package:lo-finance-core",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "packages-lo/lo-finance-core/README.md"
-    },
-    {
-      "from": "package:lo-finance-core",
-      "to": "doc:packages-lo/lo-finance-core/TODO.md",
-      "kind": "owns",
-      "confidence": "EXTRACTED",
-      "evidencePath": "packages-lo/lo-finance-core/TODO.md"
-    },
-    {
-      "from": "doc:packages-lo/lo-finance-core/TODO.md",
-      "to": "package:lo-finance-core",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "packages-lo/lo-finance-core/TODO.md"
-    },
-    {
-      "from": "package:lo-electrical-core",
-      "to": "doc:packages-lo/lo-electrical-core/package.json",
-      "kind": "owns",
-      "confidence": "EXTRACTED",
-      "evidencePath": "packages-lo/lo-electrical-core/package.json"
-    },
-    {
-      "from": "package:lo-electrical-core",
-      "to": "doc:packages-lo/lo-electrical-core/README.md",
-      "kind": "owns",
-      "confidence": "EXTRACTED",
-      "evidencePath": "packages-lo/lo-electrical-core/README.md"
-    },
-    {
-      "from": "doc:packages-lo/lo-electrical-core/README.md",
-      "to": "package:lo-electrical-core",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "packages-lo/lo-electrical-core/README.md"
-    },
-    {
-      "from": "package:lo-electrical-core",
-      "to": "doc:packages-lo/lo-electrical-core/TODO.md",
-      "kind": "owns",
-      "confidence": "EXTRACTED",
-      "evidencePath": "packages-lo/lo-electrical-core/TODO.md"
-    },
-    {
-      "from": "package:lo-ot-core",
-      "to": "doc:packages-lo/lo-ot-core/package.json",
-      "kind": "owns",
-      "confidence": "EXTRACTED",
-      "evidencePath": "packages-lo/lo-ot-core/package.json"
-    },
-    {
-      "from": "package:lo-ot-core",
-      "to": "doc:packages-lo/lo-ot-core/README.md",
-      "kind": "owns",
-      "confidence": "EXTRACTED",
-      "evidencePath": "packages-lo/lo-ot-core/README.md"
-    },
-    {
-      "from": "doc:packages-lo/lo-ot-core/README.md",
-      "to": "package:lo-ot-core",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "packages-lo/lo-ot-core/README.md"
-    },
-    {
-      "from": "package:lo-ot-core",
-      "to": "doc:packages-lo/lo-ot-core/TODO.md",
-      "kind": "owns",
-      "confidence": "EXTRACTED",
-      "evidencePath": "packages-lo/lo-ot-core/TODO.md"
     },
     {
       "from": "package:lo-framework-example-app",

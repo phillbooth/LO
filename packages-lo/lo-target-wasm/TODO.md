@@ -1,5 +1,8 @@
 # LO Target WASM TODO
 
+V1 freeze rule: WASM is an active v1 target. Keep the scope to target metadata,
+module boundaries, imports/exports, browser/edge constraints and reports.
+
 ```text
 [x] Create /packages-lo/lo-target-wasm
 [x] Add README.md

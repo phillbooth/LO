@@ -37,10 +37,11 @@ The root of this repository is the workspace entry point. Use it to understand
 how LO packages, app files, tooling, reports and generated project graph outputs
 fit together.
 
-The practical baseline is CPU-compatible checked execution and deterministic
-developer tooling. GPU, generic AI accelerator, low-bit AI, optical I/O,
-photonic compute, ternary and Omni-logic support are package contracts, planning
-layers or simulation/report artefacts until real backends exist.
+The practical v1 baseline is CPU-compatible checked execution, WASM target
+planning and deterministic developer tooling. GPU, generic AI accelerator,
+low-bit AI, optical I/O, photonic compute, ternary and Omni-logic support are
+post-v1 package contracts, planning layers or simulation/report artefacts until
+real backends exist.
 
 Generated notes, planning documents and AI-suggested structures are advisory.
 When they conflict, the repository structure, `AGENTS.md`, `lo.workspace.json`,
@@ -66,6 +67,14 @@ optical I/O and data-movement awareness
 optional accelerator planning
 optional AI inference packages
 ```
+
+In this repository, AI-readable means regular syntax, explicit effects,
+explicit imports, typed errors, source maps, stable diagnostics and
+machine-readable reports. It does not mean vague natural-language friendliness.
+
+For v1, these are goals unless backed by implemented compiler checks and tests.
+LO should not claim measured speed over C#, Python, C or C++ until the compiler,
+memory model and benchmark methodology exist.
 
 LO avoids:
 
@@ -164,9 +173,6 @@ LO-app/
 |   |-- lo-core-tasks/
 |   |-- lo-tools-benchmark/
 |   |-- lo-devtools-project-graph/
-|   |-- lo-finance-core/
-|   |-- lo-electrical-core/
-|   |-- lo-ot-core/
 |   |-- lo-framework-example-app/
 `-- tools/
 ```
@@ -232,16 +238,16 @@ LO-app/
   document, policy and report relationships.
 - `packages-lo/lo-framework-example-app/` - bespoke application source, routes, modules, tests and app
   configuration.
-- `packages-lo/lo-finance-core/` - grouped beta package area for finance maths,
-  market data, FIX, audit, risk, pricing and desktop interoperability contracts.
-- `packages-lo/lo-electrical-core/` - grouped beta package area for electrical
-  assets, monitoring, capacity, energy, maintenance, protection records and
-  audit contracts.
-- `packages-lo/lo-ot-core/` - grouped beta package area for operational
-  technology telemetry, protocol adapter boundaries, OT network policy, signed
-  command envelopes and audit contracts.
 - `docs/` - app/workspace requirements, architecture, security, deployment,
   decisions, changelog and operational documentation.
+
+Archived post-v2 package planning is preserved outside the active workspace:
+
+```text
+C:\laragon\www\LO_Archive\packages-lo\lo-finance-core
+C:\laragon\www\LO_Archive\packages-lo\lo-electrical-core
+C:\laragon\www\LO_Archive\packages-lo\lo-ot-core
+```
 
 ## Layering
 
@@ -254,7 +260,8 @@ LO Compiler / Runtime / Security / Config / Reports
   compiler pipeline, execution, shared security, configuration and report contracts
 
 LO Logic / Vector / Compute / AI / Neural / Photonic / Target Packages
-  specialised concepts and target planning outside the core language package
+  specialised concepts and target planning outside the core language package;
+  only CPU and WASM are active v1 targets
 
 LO Secure App Kernel
   optional runtime layer for API validation, auth, rate limits, jobs and reports
@@ -264,15 +271,6 @@ LO API Server
 
 LO CLI / Tasks / Project Graph
   developer tooling, safe automation, benchmarks and AI-readable project maps
-
-LO Finance
-  optional domain package contracts for finance maths, market data, FIX, audit,
-  risk, pricing and financial desktop interoperability
-
-LO Electrical / OT
-  optional domain package contracts for electrical infrastructure modelling,
-  monitoring, capacity, energy, maintenance, protection records, OT protocol
-  boundaries and audit evidence
 
 Full Frameworks
   CMS, admin UI, page builders, ORMs, template engines and frontend adapters
@@ -306,13 +304,10 @@ Important boundary rules:
   diagnostics or benchmark utilities that may run in development or staging.
   Production defaults must disable these packages unless a maintainer declares
   an explicit production package override.
-- Finance packages are domain packages. They must not become LO core syntax or
-  imply that LO beta is ready to run live exchange, HFT, broker-dealer,
-  clearing, settlement or custody systems.
-- Electrical and OT packages are modelling, monitoring, validation, workflow and
-  audit packages. They must not replace certified electrical protection,
-  circuit breakers, relays, PLC safety systems, SCADA products, grid protection
-  or qualified electrical engineering judgement.
+- Finance, electrical and OT packages are archived post-v2 domain planning and
+  are not part of the active build graph. They must not become LO core syntax or
+  imply that LO beta is ready for regulated finance, certified electrical
+  protection, PLC safety systems, SCADA products or OT control.
 
 ## Package Layout Direction
 
@@ -333,7 +328,7 @@ lockfile and package resolver are implemented.
 
 Package naming guidance lives in `docs/PACKAGE_NAMING.md`. Current packages use
 family prefixes such as `lo-core-*`, `lo-ai-*`, `lo-target-*`,
-`lo-framework-*`, `lo-devtools-*`, `lo-tools-*` and `lo-finance-*` so their
+`lo-framework-*`, `lo-devtools-*` and `lo-tools-*` so their
 runtime, developer-tooling or domain role is visible from the directory name.
 
 ## Current Tooling

@@ -27,9 +27,35 @@ npm run dev
 node compiler/lo.js run examples/hello.lo --generate
 ```
 
-The prototype is not a production compiler. CPU-compatible checked execution is
-the practical baseline. GPU, photonic, ternary and Omni-logic outputs are
-planning, simulation or compatibility-report artefacts until real backends exist.
+The prototype is not a production compiler. CPU-compatible checked execution and
+WASM target planning are the practical v1 baseline. GPU, photonic, AI
+accelerator, low-bit AI, optical I/O, ternary and Omni-logic outputs are
+post-v1 planning, simulation or compatibility-report artefacts until real
+backends exist.
+
+## V1 Surface Freeze
+
+The v1 language surface is intentionally small:
+
+```text
+core syntax and grammar
+core type system
+Bool, Option, Result and explicit errors
+Tri semantics only where they affect the core type system
+hybrid ownership memory-safety model
+CPU-compatible checked execution
+WASM target planning
+source maps, diagnostics and machine-readable reports
+```
+
+The project should not add more active package surfaces until the syntax,
+memory model, Tri/Bool boundary and parser are concrete enough to test against
+real `.lo` programs.
+
+LO should not claim measured speed over C#, Python, C or C++ in v0.1. It can
+state performance goals and design opportunities, but measured performance
+claims require an implemented compiler, a settled memory model and reproducible
+benchmarks.
 
 ## Layer Boundary
 
@@ -183,10 +209,10 @@ machine-readable reports
 AI-readable project context
 multi-target planning
 CPU compatibility by default
-AI inference as an optional package layer
-GPU planning
-photonic planning
-ternary and Omni-logic simulation
+post-v1 AI inference as an optional package layer
+post-v1 GPU planning
+post-v1 photonic planning
+post-v1 ternary and Omni-logic simulation
 ```
 
 LO should avoid:
