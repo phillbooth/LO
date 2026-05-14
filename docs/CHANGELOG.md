@@ -151,6 +151,8 @@ All notable changes to this app should be documented here.
   products or qualified electrical engineering judgement.
 - Added an explicit v1 surface freeze around core syntax, core type-system
   semantics, the memory-safety model, CPU target support and WASM target support.
+- Added `docs/CORE_FOUNDATION_ROADMAP.md` to sequence foundation work before
+  package, domain or advanced-target expansion.
 
 ### Changed
 

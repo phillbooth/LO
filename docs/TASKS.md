@@ -19,6 +19,8 @@
 - [x] Add electrical infrastructure and OT package planning note
 - [x] Archive finance, electrical and OT package scaffolds outside the active
   workspace until post-v2 package planning resumes
+- [x] Add a core foundation roadmap that gates future work on syntax, memory,
+  examples, parser, checker, CPU execution, WASM planning and reports
 - [x] Complete `docs/REQUIREMENTS.md`
 - [x] Complete `docs/DESIGN.md`
 - [ ] Complete `docs/ARCHITECTURE.md`
@@ -112,6 +114,8 @@
 
 ## Phase 8: Core Infrastructure Packages
 
+- [ ] Follow `docs/CORE_FOUNDATION_ROADMAP.md` before adding new active package
+  surfaces
 - [ ] Freeze v1 syntax and grammar around the supported examples
 - [ ] Write at least 20 real `.lo` examples covering basic, intermediate and
   advanced v1 syntax

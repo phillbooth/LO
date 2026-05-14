@@ -1,6 +1,6 @@
 {
   "version": "0.1.0",
-  "generatedAt": "2026-05-14T06:16:18.629Z",
+  "generatedAt": "2026-05-14T06:22:28.426Z",
   "nodes": [
     {
       "id": "package:lo-core",
@@ -360,6 +360,15 @@
       "kind": "Document",
       "label": "COMPILED_APP_GIT.md",
       "sourcePath": "docs/COMPILED_APP_GIT.md",
+      "tags": [
+        "document"
+      ]
+    },
+    {
+      "id": "doc:docs/CORE_FOUNDATION_ROADMAP.md",
+      "kind": "Document",
+      "label": "CORE_FOUNDATION_ROADMAP.md",
+      "sourcePath": "docs/CORE_FOUNDATION_ROADMAP.md",
       "tags": [
         "document"
       ]
@@ -8772,6 +8781,13 @@
       "kind": "documents",
       "confidence": "INFERRED",
       "evidencePath": "docs/CHANGELOG.md"
+    },
+    {
+      "from": "doc:docs/CORE_FOUNDATION_ROADMAP.md",
+      "to": "package:lo-core",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/CORE_FOUNDATION_ROADMAP.md"
     },
     {
       "from": "doc:docs/DECISIONS.md",

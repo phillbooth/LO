@@ -72,6 +72,9 @@ The v1 priority order is:
 6. Only then expand package targets or domain packages.
 ```
 
+The working execution plan for these gates lives in
+`docs/CORE_FOUNDATION_ROADMAP.md`.
+
 ## Main Structure
 
 Current single-repository structure:
