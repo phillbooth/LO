@@ -1,11 +1,11 @@
 update documentation / add packages
 
-Created the document **“LO Compliance and Privacy Framework”**.
+Created the document **“LogicN Compliance and Privacy Framework”**.
 
 It combines:
 
 ```text
-LO Compliance
+LogicN Compliance
   -> privacy
   -> security
   -> data governance
@@ -19,27 +19,27 @@ LO Compliance
 Suggested repo filename:
 
 ```text
-packages/lo-core/docs/compliance-and-privacy.md
+packages/logicn-core/docs/compliance-and-privacy.md
 ```
 
 or later, when split into packages:
 
 ```text
-packages/lo-compliance/README.md
-packages/lo-compliance-privacy/README.md
+packages/LogicN-compliance/README.md
+packages/LogicN-compliance-privacy/README.md
 ```
 
 Best package names from the document:
 
 ```text
-lo-compliance
-lo-compliance-privacy
-lo-compliance-security
-lo-compliance-data
-lo-compliance-audit
-lo-compliance-retention
-lo-compliance-ai
-lo-compliance-accessibility
-lo-compliance-deployment
-lo-compliance-reports
+LogicN-compliance
+LogicN-compliance-privacy
+LogicN-compliance-security
+LogicN-compliance-data
+LogicN-compliance-audit
+LogicN-compliance-retention
+LogicN-compliance-ai
+LogicN-compliance-accessibility
+LogicN-compliance-deployment
+LogicN-compliance-reports
 ```

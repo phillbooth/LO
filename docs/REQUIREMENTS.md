@@ -2,20 +2,20 @@
 
 ## Scope
 
-This repository is a LO application template and package workspace. It does not
+This repository is a LogicN application template and package workspace. It does not
 yet define one specific product domain. Requirements in this file describe what
 the template, package boundaries and developer tooling must provide so a
-bespoke application can be built on top of LO safely.
+bespoke application can be built on top of LogicN safely.
 
 Product-specific requirements belong in this file once an app domain is chosen.
-Until then, `packages-lo/lo-framework-example-app/` remains a minimal app area and feature placeholders
+Until then, `packages-logicn/logicn-framework-example-app/` remains a minimal app area and feature placeholders
 must not be treated as implemented app functionality.
 
 ## Template Goals
 
-- Provide a clear workspace for LO language, compiler/runtime contracts,
+- Provide a clear workspace for LogicN language, compiler/runtime contracts,
   security primitives, tooling packages and bespoke app code.
-- Keep language documentation in `packages-lo/lo-core/` and app/workspace
+- Keep language documentation in `packages-logicn/logicn-core/` and app/workspace
   documentation in `docs/`.
 - Support CPU-compatible checked execution and deterministic reports as the
   practical baseline.
@@ -26,7 +26,7 @@ must not be treated as implemented app functionality.
   not by making neural networks part of normal app syntax.
 - Support parallel AI agents only as supervised, bounded, permissioned,
   cancelable and reportable workloads.
-- Support LO Structured Await as the normal concurrency model: synchronous-looking
+- Support LogicN Structured Await as the normal concurrency model: synchronous-looking
   waits with scoped child work, typed effects, timeouts, cancellation and reports
   instead of exposed future/promise plumbing.
 - Support controlled recovery for batch/data flows while stopping safely on
@@ -45,7 +45,7 @@ must not be treated as implemented app functionality.
   WASM target support.
 - Everything beyond CPU and WASM targets must be labelled post-v1 unless it is
   necessary to define the core type system.
-- LO must not claim to be faster than C#, Python, C or C++ until the compiler,
+- LogicN must not claim to be faster than C#, Python, C or C++ until the compiler,
   memory model and benchmark methodology exist. Current performance wording
   must be framed as a goal or opportunity, not a measured fact.
 - Memory safety must be tied to an explicit mechanism. The current candidate is
@@ -65,14 +65,14 @@ must not be treated as implemented app functionality.
   diagnostics and machine-readable reports. It must not be a vague marketing
   label.
 - Before adding more active packages, the project must include at least 20 real
-  `.lo` example programs covering basic, intermediate and advanced syntax.
+  `.lln` example programs covering basic, intermediate and advanced syntax.
 
 ## Users
 
 | User Type | Description |
 |---|---|
-| App developer | Builds bespoke application source in `packages-lo/lo-framework-example-app/` using LO packages. |
-| Package maintainer | Evolves reusable LO package contracts under `packages-lo/`. |
+| App developer | Builds bespoke application source in `packages-logicn/logicn-framework-example-app/` using LogicN packages. |
+| Package maintainer | Evolves reusable LogicN package contracts under `packages-logicn/`. |
 | Security reviewer | Reviews policy, secret handling, reports and package boundaries. |
 | AI coding assistant | Uses `AGENTS.md` and `build/graph` to navigate the project safely. |
 | Future app user | End user of the bespoke app once a product domain is defined. |
@@ -80,11 +80,11 @@ must not be treated as implemented app functionality.
 
 ## Core Workspace Requirements
 
-- The root README must introduce LO, the workspace layout, current tooling and
+- The root README must introduce LogicN, the workspace layout, current tooling and
   package boundaries.
 - `AGENTS.md` must tell AI tools how to use the project graph and where package
   responsibilities live.
-- `lo.workspace.json` must identify the package paths and documentation roots
+- `logicn.workspace.json` must identify the package paths and documentation roots
   used by tooling.
 - Generated project graph outputs must be refreshable from the repository root.
 - The workspace must keep generated compiler output out of Git unless a file is
@@ -95,31 +95,31 @@ must not be treated as implemented app functionality.
 - This workspace is a beta prototype, not a stable release. Version metadata
   must use beta prerelease identifiers until release criteria are explicitly
   met.
-- The future LO package split should be documented before implementation:
-  `package.json` for normal app/vendor packages, `package-lo.json` for LO
-  package dependencies, `lo.lock.json` for locked LO package graphs,
-  `packages/` for normal vendor packages and `packages-lo/` for LO packages.
+- The future LogicN package split should be documented before implementation:
+  `package.json` for normal app/vendor packages, `package-logicn.json` for LogicN
+  package dependencies, `logicn.lock.json` for locked LogicN package graphs,
+  `packages/` for normal vendor packages and `packages-logicn/` for LogicN packages.
 - NPM and `package.json` must remain host ecosystem tooling only. They may run
   current JavaScript/TypeScript prototype checks and package generated JS/TS
-  interop, but they must not define LO package graph resolution, LO runtime
-  profiles, LO compiler target policy or LO production package overrides.
+  interop, but they must not define LogicN package graph resolution, LogicN runtime
+  profiles, LogicN compiler target policy or LogicN production package overrides.
 - Generated documents and AI-suggested structures are advisory. Repository
-  package boundaries, `AGENTS.md`, `lo.workspace.json`, package READMEs/TODOs
+  package boundaries, `AGENTS.md`, `logicn.workspace.json`, package READMEs/TODOs
   and maintained docs take precedence when suggestions conflict.
 
 ## App Requirements
 
 The app package must remain deliberately small until a product domain is chosen.
 
-- Bespoke app source must live in `packages-lo/lo-framework-example-app/`.
-- App routes, modules, tests and app configuration must stay in `packages-lo/lo-framework-example-app/`
+- Bespoke app source must live in `packages-logicn/logicn-framework-example-app/`.
+- App routes, modules, tests and app configuration must stay in `packages-logicn/logicn-framework-example-app/`
   or app-specific docs.
 - App-specific requirements must be added to this document before implementing
   product features.
 - App source must use explicit validation, explicit error handling and safe
   configuration references.
-- App features must not be implemented inside `packages-lo/lo-core/`.
-- App features must not turn `packages-lo/lo-framework-app-kernel/` into a full framework,
+- App features must not be implemented inside `packages-logicn/logicn-core/`.
+- App features must not turn `packages-logicn/logicn-framework-app-kernel/` into a full framework,
   CMS, admin dashboard, ORM or frontend framework.
 
 ## Non-Functional Requirements
@@ -137,65 +137,65 @@ The app package must remain deliberately small until a product domain is chosen.
 
 ## Workspace Package Requirements
 
-- The LO language core must live in `packages-lo/lo-core/`.
-- Compiler pipeline contracts must live in `packages-lo/lo-core-compiler/`.
-- Runtime execution contracts must live in `packages-lo/lo-core-runtime/`.
-- Shared security primitives must live in `packages-lo/lo-core-security/`.
-- Project configuration contracts must live in `packages-lo/lo-core-config/`.
-- Shared report contracts must live in `packages-lo/lo-core-reports/`.
-- LO multi-state logic concepts such as `Tri`, `Logic<N>` and future Omni logic
-  must live in `packages-lo/lo-core-logic/`.
-- LO vector value, lane and operation concepts must live in
-  `packages-lo/lo-core-vector/`.
-- LO compute planning, capability, budget and target selection concepts must
-  live in `packages-lo/lo-core-compute/`.
+- The LogicN language core must live in `packages-logicn/logicn-core/`.
+- Compiler pipeline contracts must live in `packages-logicn/logicn-core-compiler/`.
+- Runtime execution contracts must live in `packages-logicn/logicn-core-runtime/`.
+- Shared security primitives must live in `packages-logicn/logicn-core-security/`.
+- Project configuration contracts must live in `packages-logicn/logicn-core-config/`.
+- Shared report contracts must live in `packages-logicn/logicn-core-reports/`.
+- LogicN multi-state logic concepts such as `Tri`, `LogicN` and future Omni logic
+  must live in `packages-logicn/logicn-core-logic/`.
+- LogicN vector value, lane and operation concepts must live in
+  `packages-logicn/logicn-core-vector/`.
+- LogicN compute planning, capability, budget and target selection concepts must
+  live in `packages-logicn/logicn-core-compute/`.
 - Generic AI inference contracts, model metadata, safety policy and AI reports
-  must live in `packages-lo/lo-ai/`.
+  must live in `packages-logicn/logicn-ai/`.
 - Low-bit and ternary AI inference contracts must live in
-  `packages-lo/lo-ai-lowbit/`, with BitNet represented only as a backend.
+  `packages-logicn/logicn-ai-lowbit/`, with BitNet represented only as a backend.
 - Supervised AI agent definitions, tool permissions, task groups, merge
-  policies and reports must live in `packages-lo/lo-ai-agent/`.
+  policies and reports must live in `packages-logicn/logicn-ai-agent/`.
 - Neural-network model, layer, inference and training boundary contracts must
-  live in `packages-lo/lo-ai-neural/`.
+  live in `packages-logicn/logicn-ai-neural/`.
 - Neuromorphic spike, event-signal and spiking model contracts must live in
-  `packages-lo/lo-ai-neuromorphic/`.
+  `packages-logicn/logicn-ai-neuromorphic/`.
 - Photonic and wavelength hardware concepts must live in
-  `packages-lo/lo-core-photonic/`.
+  `packages-logicn/logicn-core-photonic/`.
 - CPU target planning, feature detection and fallback reports must live in
-  `packages-lo/lo-target-cpu/`.
-- Optimized CPU kernel contracts must live in `packages-lo/lo-cpu-kernels/`.
-- Binary/native target planning must live in `packages-lo/lo-target-binary/`.
-- WebAssembly target planning must live in `packages-lo/lo-target-wasm/`.
-- GPU target planning must live in `packages-lo/lo-target-gpu/`.
+  `packages-logicn/logicn-target-cpu/`.
+- Optimized CPU kernel contracts must live in `packages-logicn/logicn-cpu-kernels/`.
+- Binary/native target planning must live in `packages-logicn/logicn-target-binary/`.
+- WebAssembly target planning must live in `packages-logicn/logicn-target-wasm/`.
+- GPU target planning must live in `packages-logicn/logicn-target-gpu/`.
 - AI accelerator target planning for NPU, TPU and AI-chip backends must live in
-  `packages-lo/lo-target-ai-accelerator/`.
+  `packages-logicn/logicn-target-ai-accelerator/`.
 - Photonic backend target planning must live in
-  `packages-lo/lo-target-photonic/`.
-- The optional LO Secure App Kernel must live in `packages-lo/lo-framework-app-kernel/`.
-- The built-in LO HTTP API server must live in `packages-lo/lo-framework-api-server/`.
-- The LO developer CLI must live in `packages-lo/lo-core-cli/`.
-- Safe LO project automation must live in `packages-lo/lo-core-tasks/`.
-- LO benchmark and diagnostics tooling must live in `packages-lo/lo-tools-benchmark/`.
-- LO project knowledge graph tooling must live in `packages-lo/lo-devtools-project-graph/`.
-- Bespoke app source must live in `packages-lo/lo-framework-example-app/`.
+  `packages-logicn/logicn-target-photonic/`.
+- The optional LogicN Secure App Kernel must live in `packages-logicn/logicn-framework-app-kernel/`.
+- The built-in LogicN HTTP API server must live in `packages-logicn/logicn-framework-api-server/`.
+- The LogicN developer CLI must live in `packages-logicn/logicn-core-cli/`.
+- Safe LogicN project automation must live in `packages-logicn/logicn-core-tasks/`.
+- LogicN benchmark and diagnostics tooling must live in `packages-logicn/logicn-tools-benchmark/`.
+- LogicN project knowledge graph tooling must live in `packages-logicn/logicn-devtools-project-graph/`.
+- Bespoke app source must live in `packages-logicn/logicn-framework-example-app/`.
 - App documentation must live in `docs/`.
-- Language documentation must stay within `packages-lo/lo-core/`.
-- Full framework features must stay outside `packages-lo/lo-core/` and
-  `packages-lo/lo-framework-app-kernel/`.
+- Language documentation must stay within `packages-logicn/logicn-core/`.
+- Full framework features must stay outside `packages-logicn/logicn-core/` and
+  `packages-logicn/logicn-framework-app-kernel/`.
 - Current development may use one root Git repository while package boundaries
   are still being shaped.
-- Later, `packages-lo/` may become its own Git repository so the LO packages can be
+- Later, `packages-logicn/` may become its own Git repository so the LogicN packages can be
   imported into different frameworks.
-- If `packages-lo/` has its own `.git`, it must be added intentionally as a
+- If `packages-logicn/` has its own `.git`, it must be added intentionally as a
   submodule or standalone nested repository, and the framework root must treat
   it as an external dependency.
-- Development-only packages must use `lo-devtools-*` or `lo-tools-*` names for
+- Development-only packages must use `logicn-devtools-*` or `logicn-tools-*` names for
   staging packages, diagnostics, generators and experiments.
 - Development-only packages must be excluded from production package resolution
   and production downloads unless a maintainer explicitly opts into a
   development or staging profile.
 - Production boot/profile defaults must disable development-only and benchmark
-  packages such as `lo-devtools-*` and `lo-tools-benchmark`.
+  packages such as `logicn-devtools-*` and `logicn-tools-benchmark`.
 - A production build that includes a default-disabled package must declare an
   explicit production package override with a reason, and the override must be
   visible in config/build/security/deployment reports. Without that override,
@@ -203,30 +203,30 @@ The app package must remain deliberately small until a product domain is chosen.
 - The exact developer package folder name remains provisional, but its boundary
   must stay separate from production runtime package manifests.
 - Finance, electrical and OT package planning must stay archived outside the
-  active workspace under `C:\laragon\www\LO_Archive\packages-lo\` until post-v2
+  active workspace under `C:\laragon\www\LogicN_Archive\packages-logicn\` until post-v2
   package planning resumes.
 - Finance, electrical and OT packages must not be part of active v1 package
   resolution, build graph generation, compiler targets or runtime profiles.
 - Any future restoration of finance, electrical or OT packages must require a
   design review because these domains carry regulatory, protocol correctness,
   safety and cybersecurity requirements beyond the v1 language scope.
-- Package naming must follow `docs/PACKAGE_NAMING.md`: `lo-target-*` for where
-  code runs or compiles to, `lo-io-*` for how data moves, `lo-ai-*` for
-  AI-specific workloads, `lo-kernel-*` for low-level execution kernels and
-  `lo-app-*` for runtime/application framework layers.
-- `lo-target-binary` and `lo-target-photonic` must not be renamed to I/O
+- Package naming must follow `docs/PACKAGE_NAMING.md`: `logicn-target-*` for where
+  code runs or compiles to, `logicn-io-*` for how data moves, `logicn-ai-*` for
+  AI-specific workloads, `logicn-kernel-*` for low-level execution kernels and
+  `logicn-app-*` for runtime/application framework layers.
+- `logicn-target-binary` and `logicn-target-photonic` must not be renamed to I/O
   package names; binary and photonic I/O should be added later as separate
-  `lo-io-*` packages.
+  `logicn-io-*` packages.
 
 ## Archived Electrical and OT Package Requirements
 
 These requirements are preserved as post-v2 archive notes. They do not apply to
 the active v1 build graph.
 
-- `lo-electrical-core` must be a domain package group, not core LO syntax.
-- `lo-ot-core` must be an operational-technology integration package group, not
-  core LO syntax and not a SCADA, PLC or safety controller product.
-- LO electrical support must be positioned as modelling, validation,
+- `logicn-electrical-core` must be a domain package group, not core LogicN syntax.
+- `logicn-ot-core` must be an operational-technology integration package group, not
+  core LogicN syntax and not a SCADA, PLC or safety controller product.
+- LogicN electrical support must be positioned as modelling, validation,
   monitoring, workflow and audit support. It must not replace circuit breakers,
   relays, protective devices, PLC safety systems, grid protection, certified
   controllers or qualified electrical design.
@@ -266,7 +266,7 @@ the active v1 build graph.
 These requirements are preserved as post-v2 archive notes. They do not apply to
 the active v1 build graph.
 
-- `lo-finance-core` must be a domain package group, not core LO syntax.
+- `logicn-finance-core` must be a domain package group, not core LogicN syntax.
 - Finance support must start with typed data, deterministic maths, validation,
   audit, replay and integration contracts rather than live trading systems.
 - Finance maths must disallow float money by default, require explicit rounding
@@ -283,11 +283,11 @@ the active v1 build graph.
   and redacted evidence bundles.
 - Risk and pricing package work must wait until finance maths, market data and
   audit contracts are stable enough to support them.
-- LO finance packages may wrap mature C++, Java, Python or TypeScript finance
+- LogicN finance packages may wrap mature C++, Java, Python or TypeScript finance
   ecosystems through controlled interop, but wrappers must declare memory
   isolation, credential policy, network permissions, audit requirements and
   fallback behaviour.
-- Early LO finance work must not claim to implement a full stock exchange,
+- Early LogicN finance work must not claim to implement a full stock exchange,
   HFT engine, broker-dealer platform, settlement system, clearing system,
   custody platform or regulated trading-advice engine.
 
@@ -296,47 +296,47 @@ the active v1 build graph.
 - The kernel may define typed API boundaries, validation, auth policy,
   rate-limit policy, idempotency, replay protection, jobs and runtime reports.
 - The kernel must receive raw requests and pass only typed, validated values to
-  LO handlers unless unsafe raw access is explicitly declared.
-- The kernel must enforce `boot.lo` security policy at runtime where a runtime
+  LogicN handlers unless unsafe raw access is explicitly declared.
+- The kernel must enforce `boot.lln` security policy at runtime where a runtime
   adapter is present.
 - The kernel must support adapter boundaries for HTTP servers, queue backends,
   storage backends and identity providers.
 - The kernel must not include CMS features, admin dashboards, page builders,
   mandatory ORM design, mandatory template engines or frontend framework syntax.
 - The kernel package must support a non-compiled checked Run Mode smoke test for
-  validating simple `.lo` execution during framework development.
+  validating simple `.lln` execution during framework development.
 
 ## API Server Requirements
 
-- `lo-framework-api-server` must be an HTTP serving package, not a full web framework.
-- `lo-framework-api-server` must load route manifests generated from LO API contracts.
-- `lo-framework-api-server` must normalise HTTP requests before passing them to
-  `lo-framework-app-kernel`.
-- `lo-framework-api-server` must enforce server-level limits such as body size, timeout,
+- `logicn-framework-api-server` must be an HTTP serving package, not a full web framework.
+- `logicn-framework-api-server` must load route manifests generated from LogicN API contracts.
+- `logicn-framework-api-server` must normalise HTTP requests before passing them to
+  `logicn-framework-app-kernel`.
+- `logicn-framework-api-server` must enforce server-level limits such as body size, timeout,
   connection shutdown and safe response writing.
-- `lo-framework-api-server` must ask `lo-framework-app-kernel` for auth, validation, idempotency and
+- `logicn-framework-api-server` must ask `logicn-framework-app-kernel` for auth, validation, idempotency and
   typed route execution decisions.
-- `lo-framework-api-server` must redact secrets, bearer tokens, cookies and SecureString
+- `logicn-framework-api-server` must redact secrets, bearer tokens, cookies and SecureString
   values from logs and reports.
-- Bespoke frameworks may either use `lo-framework-api-server` or call `lo-framework-app-kernel`
+- Bespoke frameworks may either use `logicn-framework-api-server` or call `logicn-framework-app-kernel`
   directly from their own HTTP layer.
 
 ## CLI and Task Requirements
 
-- `lo-core-cli` must provide developer commands for checking, building, running,
+- `logicn-core-cli` must provide developer commands for checking, building, running,
   serving, reporting, route inspection, security checks and task execution.
-- `lo-core-cli` may coordinate `lo-core`, future compiler/runtime packages,
-  `lo-framework-api-server` and `lo-core-tasks`, but must not contain application behaviour.
-- `lo graph` must generate project graph JSON, Markdown report, AI map and HTML
+- `logicn-core-cli` may coordinate `logicn-core`, future compiler/runtime packages,
+  `logicn-framework-api-server` and `logicn-core-tasks`, but must not contain application behaviour.
+- `LogicN graph` must generate project graph JSON, Markdown report, AI map and HTML
   outputs.
-- `lo task` must load task files, list tasks, resolve dependencies, detect
+- `LogicN task` must load task files, list tasks, resolve dependencies, detect
   cycles, support dry-run planning and write task reports.
-- `lo-core-tasks` must provide safe, typed project automation with declared effects
+- `logicn-core-tasks` must provide safe, typed project automation with declared effects
   and permissions.
-- `lo-core-tasks` must validate filesystem permissions as safe repository-relative
+- `logicn-core-tasks` must validate filesystem permissions as safe repository-relative
   paths.
-- `lo-core-tasks` must validate environment permissions as explicit variable names.
-- `lo-core-tasks` must deny raw shell execution by default.
+- `logicn-core-tasks` must validate environment permissions as explicit variable names.
+- `logicn-core-tasks` must deny raw shell execution by default.
 - Unsafe shell support, if added later, must be explicit, permissioned,
   timeout-limited, reported and redacted.
 - Both packages must redact secrets, bearer tokens, cookies, `SecureString`
@@ -344,7 +344,7 @@ the active v1 build graph.
 
 ## Benchmark Requirements
 
-- `lo-tools-benchmark` must own benchmark configuration, task definitions, result
+- `logicn-tools-benchmark` must own benchmark configuration, task definitions, result
   types, score categories, privacy policy and report payload contracts.
 - Benchmarking must prioritize correctness, fallback behavior and safe
   execution before raw speed.
@@ -354,12 +354,12 @@ the active v1 build graph.
   automatically.
 - Benchmark runs must be manual, CI-explicit or development-only major-version
   checks. They must never auto-run in production.
-- `lo-tools-benchmark` must be disabled by default in production boot/package
+- `logicn-tools-benchmark` must be disabled by default in production boot/package
   profiles. Even if explicitly overridden for a production validation window,
   it must not auto-run.
 - GPU, low-bit AI and future accelerator tests must be optional and must report
   skipped or fallback status when unsupported.
-- Public benchmark names and LO syntax must stay backend-neutral. BitNet may be
+- Public benchmark names and LogicN syntax must stay backend-neutral. BitNet may be
   selected as a low-bit backend, but benchmark categories should use
   `low_bit_ai`, `ternary_ai` or `quantized_ai`.
 - Benchmark reports must omit hostname, username, project path, environment
@@ -374,18 +374,18 @@ the active v1 build graph.
 
 ## Project Graph Requirements
 
-- `lo-devtools-project-graph` must own project knowledge graph contracts for packages,
+- `logicn-devtools-project-graph` must own project knowledge graph contracts for packages,
   documents, flows, types, effects, policies, reports, targets and decisions.
 - Project graph tooling must be optional developer tooling and must not be
-  required to compile or run LO applications.
+  required to compile or run LogicN applications.
 - Project graph output may explain security and architecture relationships, but
   it must not replace compiler checks, runtime policy enforcement or security
   reports.
 - Project graph scans must redact secrets by default.
-- Project graph syntax and CLI commands must stay backend-neutral; `lo graph`
-  must not become `lo graphify`.
+- Project graph syntax and CLI commands must stay backend-neutral; `LogicN graph`
+  must not become `LogicN graphify`.
 - Graphify or any future graph tool must be represented as a swappable backend
-  selected by policy, not as LO language syntax.
+  selected by policy, not as LogicN language syntax.
 - Git-sourced project graph backends must be explicitly allowed and pinned to a
   commit, tag or versioned ref.
 - Model-assisted extraction for documents, PDFs, images, audio or video must be
@@ -399,50 +399,50 @@ the active v1 build graph.
 
 ## Logic and Photonic Package Requirements
 
-- `lo-core-logic` must own `Tri`, `Logic<N>`, future Omni logic, multi-state truth
+- `logicn-core-logic` must own `Tri`, `LogicN`, future Omni logic, multi-state truth
   tables, conversion rules and logic reports.
-- `lo-core-logic` must validate declared logic widths, state names, state
+- `logicn-core-logic` must validate declared logic widths, state names, state
   indexes and truth-table coverage so malformed or incomplete logic definitions
   cannot silently become accepted semantics.
 - `Tri` conversion helpers must require an explicit unknown policy. Unknown
   values must never become `true`, `Allow` or other grant states through an
   implicit conversion.
-- `lo-core-photonic` must own wavelength, phase, amplitude, optical signal,
+- `logicn-core-photonic` must own wavelength, phase, amplitude, optical signal,
   optical channel, photonic modelling and photonic simulation concepts.
-- `lo-core-photonic` may map logic states from `lo-core-logic` to photonic
+- `logicn-core-photonic` may map logic states from `logicn-core-logic` to photonic
   representations, but it must not own the logic semantics.
-- `lo-core-vector` must own vector values, dimensions, lanes, vector operation rules
+- `logicn-core-vector` must own vector values, dimensions, lanes, vector operation rules
   and vector reports.
-- `lo-core-vector` must also own matrix, tensor, shape and numeric element contracts
+- `logicn-core-vector` must also own matrix, tensor, shape and numeric element contracts
   used by neural and compute workloads.
-- `lo-core-compute` must own compute planning, capability, budget, offload and target
+- `logicn-core-compute` must own compute planning, capability, budget, offload and target
   selection concepts.
-- `lo-ai` must own generic AI inference contracts, prompt/response shapes, model
+- `logicn-ai` must own generic AI inference contracts, prompt/response shapes, model
   capability metadata, memory estimates, safety policy and AI reports.
-- `lo-ai-agent` must own typed agent definitions, tool permissions, agent limits,
+- `logicn-ai-agent` must own typed agent definitions, tool permissions, agent limits,
   supervised task group plans, merge policies and agent reports.
-- `lo-ai-neural` must own neural-network model definitions, layers, activations,
+- `logicn-ai-neural` must own neural-network model definitions, layers, activations,
   inference boundaries, training boundaries and neural reports.
-- `lo-ai-neuromorphic` must own spikes, spike trains, event signals, spiking model
+- `logicn-ai-neuromorphic` must own spikes, spike trains, event signals, spiking model
   contracts and neuromorphic reports.
-- `lo-ai-lowbit` must own low-bit and ternary model references, GGUF metadata,
+- `logicn-ai-lowbit` must own low-bit and ternary model references, GGUF metadata,
   quantization declarations, backend selection, CPU inference limits and low-bit
   AI inference reports.
-- `lo-target-binary` must own binary/native target planning and artefact
+- `logicn-target-binary` must own binary/native target planning and artefact
   metadata.
-- `lo-target-cpu` must own CPU capability, feature, thread, memory and fallback
+- `logicn-target-cpu` must own CPU capability, feature, thread, memory and fallback
   planning contracts.
-- `lo-cpu-kernels` must own CPU kernel contracts for GEMM, GEMV, vector dot
+- `logicn-cpu-kernels` must own CPU kernel contracts for GEMM, GEMV, vector dot
   products, matrix multiplication, low-bit operations, ternary operations,
   tiling and threading plans.
-- `lo-target-wasm` must own WebAssembly target planning, module metadata and
+- `logicn-target-wasm` must own WebAssembly target planning, module metadata and
   import/export contracts.
-- `lo-target-gpu` must own GPU target planning, kernel mapping, precision and
+- `logicn-target-gpu` must own GPU target planning, kernel mapping, precision and
   data movement reports.
-- `lo-target-ai-accelerator` must own NPU, TPU, AI-chip capability reports,
+- `logicn-target-ai-accelerator` must own NPU, TPU, AI-chip capability reports,
   precision support, model operation mapping plans and accelerator fallback
   reports.
-- AI accelerator support must be passive and vendor-neutral. LO source syntax
+- AI accelerator support must be passive and vendor-neutral. LogicN source syntax
   should use `ai_accelerator`, not vendor-specific targets such as `gaudi`.
 - Vendor devices such as Intel Gaudi 3 must be represented as backend profiles
   selected by config, adapter policy or capability detection.
@@ -455,14 +455,14 @@ the active v1 build graph.
 - First AI accelerator implementations should prefer controlled adapters over
   existing ecosystems such as PyTorch, vLLM, Hugging Face, DeepSpeed,
   TensorFlow or PyTorch Lightning before native backend work.
-- `lo-target-photonic` must own photonic backend target planning and may use
-  `lo-core-photonic` concepts.
+- `logicn-target-photonic` must own photonic backend target planning and may use
+  `logicn-core-photonic` concepts.
 - `optical_io` must be treated as a high-speed data-movement and interconnect
   target, not as a normal CPU, GPU or photonic compute target.
 - Intel Silicon Photonics and OCI-style devices must be documented as optical
   connectivity for distributed compute, AI infrastructure, accelerator
   communication, GPU disaggregation and memory pooling.
-- `lo-core-compute` must model data movement as a first-class cost for optical I/O
+- `logicn-core-compute` must model data movement as a first-class cost for optical I/O
   planning, including transfer size, data locality, target placement, fallback
   path and serialization format.
 - Optical I/O reports must include detected interconnect, provider, bandwidth
@@ -471,21 +471,21 @@ the active v1 build graph.
 - Remote memory or memory-pool access over optical I/O must require typed access
   policy, bounds checks, timeout handling, fallback rules, audit logging and
   redacted reports.
-- `lo-tools-benchmark` should support a future `optical_io` benchmark target for
+- `logicn-tools-benchmark` should support a future `optical_io` benchmark target for
   latency, throughput, tensor transfer, schema-compressed transfer, remote
   memory read and fallback diagnostics.
 
 ## Compiler, Runtime, Security, Config and Report Requirements
 
-- `lo-core-compiler` must own compiler pipeline contracts for lexing, parsing, AST,
+- `logicn-core-compiler` must own compiler pipeline contracts for lexing, parsing, AST,
   checkers, IR, diagnostics, source maps and compiler reports.
-- Until the full parser/checker exists, `lo-core-compiler` must provide a
+- Until the full parser/checker exists, `logicn-core-compiler` must provide a
   conservative syntax safety scan for the frozen v1 core risks: direct Tri
   branch conditions, implicit Tri/Decision/Bool boundary assignments,
   non-exhaustive Tri matches, risky secure-flow unknown conversion, raw
   secret-like literals and unsafe dynamic execution forms.
-- `lo-core-runtime` must own execution contracts for checked and compiled LO code.
-- `lo-core-security` must own reusable security primitives, redaction rules,
+- `logicn-core-runtime` must own execution contracts for checked and compiled LogicN code.
+- `logicn-core-security` must own reusable security primitives, redaction rules,
   permission models, security diagnostics and security report contracts.
 - Security primitives must represent sensitive values as redacted references in
   reports and diagnostics, not as raw secret values.
@@ -497,21 +497,21 @@ the active v1 build graph.
 - Permission decisions must deny by default and must give matching deny grants
   precedence over matching allow grants. Default-allow and wildcard-allow
   models must be reportable diagnostics.
-- `lo-core-config` must own project config, environment mode and policy loading
+- `logicn-core-config` must own project config, environment mode and policy loading
   contracts.
-- `lo-core-config` must represent environment variables as safe references by name
+- `logicn-core-config` must represent environment variables as safe references by name
   and metadata; it must not expose secret values in diagnostics or runtime
   handoff objects.
-- `lo-core-config` must provide production strictness checks for strict project mode,
+- `logicn-core-config` must provide production strictness checks for strict project mode,
   required environment variables and unsafe secret defaults.
-- `lo-core-config` must enforce production-disabled package defaults for
+- `logicn-core-config` must enforce production-disabled package defaults for
   development-only and benchmark packages, while supporting explicit reported
   production package overrides when policy allows them.
-- `lo-core-config` must validate the boundary between host package manifests
-  and LO package manifests. LO package graph keys must not be accepted from
-  `package.json`; they belong in `package-lo.json`, `lo.lock.json` or explicit
-  LO config once those schemas exist.
-- `lo-core-reports` must own shared report schemas and report-writing contracts.
+- `logicn-core-config` must validate the boundary between host package manifests
+  and LogicN package manifests. LogicN package graph keys must not be accepted from
+  `package.json`; they belong in `package-logicn.json`, `logicn.lock.json` or explicit
+  LogicN config once those schemas exist.
+- `logicn-core-reports` must own shared report schemas and report-writing contracts.
 - Shared report contracts must include common metadata, generator metadata,
   diagnostic summaries and typed build, security, target, runtime, task and AI
   guide report shapes.
@@ -526,10 +526,10 @@ the active v1 build graph.
 
 ## Storage-Aware Performance Requirements
 
-- LO must not claim to support M.2, NVMe, SSDs or storage controllers directly.
+- LogicN must not claim to support M.2, NVMe, SSDs or storage controllers directly.
   Operating systems, drivers, firmware and hardware controllers own physical
   storage access.
-- LO may detect storage capability where available and use it to guide
+- LogicN may detect storage capability where available and use it to guide
   incremental compilation, IDE indexing, project graph scanning, large-file
   processing, JSON streaming, asset pipelines and diagnostics.
 - Storage detection must degrade to `unknown` in containers, virtual machines,
@@ -537,7 +537,7 @@ the active v1 build graph.
 - Cache behavior must be conservative by default: bounded, rebuildable,
   content-addressed where practical, safe to bypass and safe to delete.
 - Only deterministic, non-secret, rebuildable data may be cached automatically.
-- LO must not automatically cache secrets, raw sensitive payloads, authorization
+- LogicN must not automatically cache secrets, raw sensitive payloads, authorization
   decisions, non-deterministic results, database query results or external API
   responses.
 - Application-level caching of database/API data must require explicit
@@ -552,10 +552,10 @@ the active v1 build graph.
 
 ## Structured Await Requirements
 
-- LO must support `await` for effect-declared waits, but must not expose
+- LogicN must support `await` for effect-declared waits, but must not expose
   futures, promises, pinning, executors or manual polling as the normal
   application model.
-- LO must support grouped waits through `await all`, race waits through
+- LogicN must support grouped waits through `await all`, race waits through
   `await race`, bounded stream processing through `await stream`, queue handoff
   through declared queue/job contracts and retry through explicit retry policy.
 - Every task must belong to a scope. When a scope ends, unfinished child work
@@ -594,28 +594,28 @@ the active v1 build graph.
 
 ## AI and Low-Bit Backend Requirements
 
-- AI inference must be target-neutral at the `lo-ai` layer.
+- AI inference must be target-neutral at the `logicn-ai` layer.
 - AI agents must declare input type, output type, tools, effects, permissions,
   memory budget, timeout, rate limits and failure behaviour.
 - Parallel agents must run inside supervised task groups, queues, worker pools
   or equivalent runtime supervision.
 - Agent outputs may inform decisions but must not directly authorize security,
   payment, access-control or deployment decisions.
-- Neural-network support must live in `lo-ai-neural`, not `lo-core`.
-- Neural workloads must use tensor shapes from `lo-core-vector`, compute planning
-  from `lo-core-compute` and safety/report contracts from `lo-ai`.
+- Neural-network support must live in `logicn-ai-neural`, not `logicn-core`.
+- Neural workloads must use tensor shapes from `logicn-core-vector`, compute planning
+  from `logicn-core-compute` and safety/report contracts from `logicn-ai`.
 - Training flows must declare dataset reference, data policy, loss function,
   optimizer, epochs, batch size, memory limit and timeout.
-- Neuromorphic support must live in `lo-ai-neuromorphic`, separate from normal
+- Neuromorphic support must live in `logicn-ai-neuromorphic`, separate from normal
   tensor neural networks.
-- Low-bit AI support must be optional and must not be required by `lo-core`.
-- LO source syntax must use generic targets such as `low_bit_ai` and
+- Low-bit AI support must be optional and must not be required by `logicn-core`.
+- LogicN source syntax must use generic targets such as `low_bit_ai` and
   `ternary_ai`, not a backend name such as BitNet.
 - BitNet should be treated as one optional backend for compatible low-bit AI
   inference when GPU, NPU or other accelerator targets are unavailable or not
   permitted.
 - BitNet ternary weights and other model weight formats must not be treated as
-  LO `Tri` truth semantics.
+  LogicN `Tri` truth semantics.
 - AI inference declarations must include explicit model reference, context
   limit, output token limit, timeout, thread limit and memory estimate.
 - AI output must be untrusted by default and must not directly authorize
@@ -624,26 +624,26 @@ the active v1 build graph.
   `ternary_ai` was selected, which backend was used and why higher-preference
   targets were not selected.
 - AI accelerator and photonic targets must be optional. CPU-compatible fallback
-  must remain the baseline for LO developer workflows.
+  must remain the baseline for LogicN developer workflows.
 
 ## Runtime Naming Requirement
 
-- `lo-framework-app-kernel` must remain the secure application boundary package.
-- A future `lo-core-runtime` package, if added, should be the LO execution engine for
-  compiled or checked LO code.
-- `lo-framework-app-kernel` must not be renamed to `lo-core-runtime`, because API policy and
+- `logicn-framework-app-kernel` must remain the secure application boundary package.
+- A future `logicn-core-runtime` package, if added, should be the LogicN execution engine for
+  compiled or checked LogicN code.
+- `logicn-framework-app-kernel` must not be renamed to `logicn-core-runtime`, because API policy and
   code execution are separate responsibilities.
 
 ## Out of Scope
 
 - Product-specific app features before a product domain is selected.
-- Full-framework behavior inside `lo-core` or `lo-framework-app-kernel`.
+- Full-framework behavior inside `logicn-core` or `logicn-framework-app-kernel`.
 - Mandatory ORM, CMS, admin UI, template engine or frontend framework design.
 - Treating project graph output as a security or compiler authority.
-- Treating BitNet, Graphify or any named backend as LO language syntax.
+- Treating BitNet, Graphify or any named backend as LogicN language syntax.
 - Treating neural networks, neuromorphic models or AI accelerators as mandatory
   core language features.
-- Requiring future hardware for the baseline LO developer workflow.
+- Requiring future hardware for the baseline LogicN developer workflow.
 
 ## Success Criteria
 
@@ -651,7 +651,7 @@ the active v1 build graph.
 - Package boundaries are explicit and enforced through documentation and tests
   where code exists.
 - Project graph outputs can be regenerated and used by AI tools.
-- `lo task` can load, validate, dry-run and report safe task plans.
+- `LogicN task` can load, validate, dry-run and report safe task plans.
 - Secrets are never committed or emitted in reports.
 - A future app can add domain requirements without moving language or framework
   responsibilities into the wrong package.

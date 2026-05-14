@@ -1,6 +1,6 @@
 # AI Accelerator Targets
 
-LO should support AI accelerators passively through generic target planning,
+LogicN should support AI accelerators passively through generic target planning,
 capability profiles, adapters and reports.
 
 It should not create permanent language syntax for every hardware vendor or
@@ -9,7 +9,7 @@ chipset.
 The right model is:
 
 ```text
-LO source syntax:
+LogicN source syntax:
   prefer ai_accelerator
 
 Runtime or config profile:
@@ -19,13 +19,13 @@ Reports:
   selected_backend: intel.gaudi3.hl338
 ```
 
-This keeps LO vendor-neutral while still allowing the project to understand
+This keeps LogicN vendor-neutral while still allowing the project to understand
 important accelerator concepts such as tensor workloads, precision, HBM memory,
 framework interop, topology and fallback behaviour.
 
 ## Intel Gaudi As A Profile
 
-LO should treat Intel Gaudi 3 as an AI accelerator profile, not as a normal CPU
+LogicN should treat Intel Gaudi 3 as an AI accelerator profile, not as a normal CPU
 or GPU target.
 
 Intel describes the Intel Gaudi 3 PCIe HL-338 card as an AI accelerator for
@@ -34,7 +34,7 @@ lists features including 128GB HBM2e, 96MB on-die SRAM, 600W TDP, 8 MME
 engines, 64 Tensor Processor Cores, AI data types including FP8, BF16, FP16,
 TF32 and FP32, and HBM bandwidth of 3.7 TB/s.
 
-So LO should not ask:
+So LogicN should not ask:
 
 ```text
 Should this run on CPU, GPU or Gaudi?
@@ -56,7 +56,7 @@ What report should be generated?
 
 Prefer this:
 
-```lo
+```LogicN
 compute auto {
   prefer ai_accelerator
   prefer gpu
@@ -66,7 +66,7 @@ compute auto {
 
 Avoid this as public language syntax:
 
-```lo
+```LogicN
 compute target gaudi {
   ...
 }
@@ -74,7 +74,7 @@ compute target gaudi {
 
 Vendor-specific names should be selected by backend policy:
 
-```lo
+```LogicN
 compute_backend {
   ai_accelerator {
     backend auto
@@ -83,7 +83,7 @@ compute_backend {
 }
 ```
 
-This avoids locking LO source code to one chipset. Gaudi support can evolve,
+This avoids locking LogicN source code to one chipset. Gaudi support can evolve,
 and another accelerator can replace it later without requiring application code
 to be rewritten.
 
@@ -127,17 +127,17 @@ Lightning and Hugging Face-related workflows.
 Practical first path:
 
 ```text
-LO typed AI task
+LogicN typed AI task
   -> generated adapter config
   -> PyTorch / vLLM / Hugging Face / DeepSpeed workflow
   -> Intel Gaudi software stack when selected
-  -> typed LO result
-  -> LO accelerator report
+  -> typed LogicN result
+  -> LogicN accelerator report
 ```
 
 Example direction:
 
-```lo
+```LogicN
 secure compute flow answerQuestion(input: RagRequest)
   -> Result<RagAnswer, AiError>
 {
@@ -162,7 +162,7 @@ secure compute flow answerQuestion(input: RagRequest)
 
 AI accelerator planning depends on first-class tensor and batch types.
 
-Useful LO concepts:
+Useful LogicN concepts:
 
 ```text
 Tensor<Float32>
@@ -176,10 +176,10 @@ AudioBatch
 VideoFrameBatch
 ```
 
-`lo-core-vector` should own tensor shape and numeric element contracts.
-`lo-ai-neural` should own neural workload contracts.
-`lo-core-compute` should own target selection.
-`lo-target-ai-accelerator` should own accelerator capability profiles and
+`logicn-core-vector` should own tensor shape and numeric element contracts.
+`logicn-ai-neural` should own neural workload contracts.
+`logicn-core-compute` should own target selection.
+`logicn-target-ai-accelerator` should own accelerator capability profiles and
 reports.
 
 ## Precision Policy
@@ -189,7 +189,7 @@ AI accelerator planning must be precision-aware.
 For Gaudi 3, Intel lists AI data types including FP8, BF16, FP16, TF32 and FP32,
 and highlights FP8 quantization for large language and multimodal models.
 
-LO should support policy such as:
+LogicN should support policy such as:
 
 ```text
 precision auto
@@ -200,7 +200,7 @@ precision deny FP8 for financial/security-critical output
 
 Example:
 
-```lo
+```LogicN
 ai model CustomerSupportLlm {
   precision {
     prefer FP8
@@ -221,7 +221,7 @@ FP8 may improve throughput, but high-impact outputs need verification policy.
 
 Accelerator memory is not normal CPU memory.
 
-LO should model accelerator memory tiers:
+LogicN should model accelerator memory tiers:
 
 ```text
 CPU RAM
@@ -232,7 +232,7 @@ pooled HBM across cards
 ```
 
 For Gaudi 3 HL-338, Intel lists 128GB HBM2e, 96MB on-die SRAM and 3.7 TB/s HBM
-bandwidth. LO should therefore optimise for:
+bandwidth. LogicN should therefore optimise for:
 
 ```text
 keep tensors on accelerator
@@ -246,7 +246,7 @@ reduce batch size on out-of-memory
 
 Example direction:
 
-```lo
+```LogicN
 memory ai_accelerator {
   keep_model_weights_on_device true
   batch_inputs auto
@@ -266,7 +266,7 @@ describes 1x4 as four cards with 512GB pooled HBM2e, 2x4 as two groups of four
 cards with 2 x 512GB pooled HBM2e, and 4x1 as four independent cards without a
 top bridge.
 
-LO should therefore ask:
+LogicN should therefore ask:
 
 ```text
 How many accelerator cards?
@@ -280,7 +280,7 @@ Should separate models run independently?
 
 Example policy direction:
 
-```lo
+```LogicN
 ai_accelerator topology auto {
   if layout == "pooled_1x4" {
     prefer model_sharding
@@ -313,7 +313,7 @@ app.compute-placement-report.json
 ```
 
 Vendor-specific details can appear in the report, but should not become public
-LO syntax.
+LogicN syntax.
 
 Example:
 
@@ -341,13 +341,13 @@ Example:
 
 ## Benchmarks
 
-`lo-tools-benchmark` should benchmark accelerator behavior generically:
+`logicn-tools-benchmark` should benchmark accelerator behavior generically:
 
 ```bash
-lo benchmark --target ai_accelerator --light
-lo benchmark --target ai_accelerator --llm
-lo benchmark --target ai_accelerator --rag
-lo benchmark --target ai_accelerator --multimodal
+LogicN benchmark --target ai_accelerator --light
+LogicN benchmark --target ai_accelerator --llm
+LogicN benchmark --target ai_accelerator --rag
+LogicN benchmark --target ai_accelerator --multimodal
 ```
 
 The report can identify the selected backend:
@@ -400,7 +400,7 @@ Phase 6
 
 ```text
 Do not make vendor names part of normal source syntax.
-Do not require AI accelerator hardware for baseline LO.
+Do not require AI accelerator hardware for baseline LogicN.
 Do not claim native accelerator execution unless an adapter/backend actually ran.
 Do not silently downgrade precision.
 Do not use FP8 for high-impact decisions without verification policy.
@@ -411,22 +411,22 @@ Always report selected backend, precision, memory tier, topology and fallback.
 ## Package Ownership
 
 ```text
-lo-core-compute
+logicn-core-compute
   generic ai_accelerator selection and fallback planning
 
-lo-target-ai-accelerator
+logicn-target-ai-accelerator
   capability profiles, framework adapters, precision and memory reports
 
-lo-ai
+logicn-ai
   model metadata, inference safety and AI output policy
 
-lo-ai-neural
+logicn-ai-neural
   neural workload contracts
 
-lo-core-vector
+logicn-core-vector
   tensor and shape contracts
 
-lo-tools-benchmark
+logicn-tools-benchmark
   generic ai_accelerator benchmark target and backend-specific report fields
 ```
 

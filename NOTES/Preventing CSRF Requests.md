@@ -1,30 +1,30 @@
-LO could prevent CSRF by making it a **default security rule in the language/app-kernel**, not something every developer has to remember manually.
+LogicN could prevent CSRF by making it a **default security rule in the language/app-kernel**, not something every developer has to remember manually.
 
 CSRF happens because browsers automatically send cookies, including session cookies, with requests; a malicious site can trick an authenticated browser into sending a state-changing request to a trusted site. OWASP recommends CSRF tokens for state-changing requests, synchronizer tokens for stateful apps, signed double-submit cookies for stateless apps, custom headers for API-driven sites, Fetch Metadata checks, SameSite cookies, Origin/Referer checks, and avoiding state-changing `GET` requests. OWASP also warns that XSS can bypass CSRF protections, so CSRF must be paired with XSS prevention. ([OWASP Cheat Sheet Series][1])
 
-## Where this fits in the LO roadmap
+## Where this fits in the LogicN roadmap
 
 ```text
-v3  - LO Secure Network
+v3  - LogicN Secure Network
       CSRF policy, secure cookies, Fetch Metadata, Origin checks
 
-v5  - LO App Kernel
+v5  - LogicN App Kernel
       Route-level CSRF enforcement for APIs and forms
 
-v11 - LO Finance
+v11 - LogicN Finance
       Stronger CSRF rules for payments, trades, account changes
 
-v20 - LO Standards and ISO Review
-      Map LO protections to OWASP, NIST, ISO/IEC and secure coding guidance
+v20 - LogicN Standards and ISO Review
+      Map LogicN protections to OWASP, NIST, ISO/IEC and secure coding guidance
 ```
 
-## Core LO principle
+## Core LogicN principle
 
 ```text
 Any route that changes state must prove user intent.
 ```
 
-So LO should treat these as **unsafe by default**:
+So LogicN should treat these as **unsafe by default**:
 
 ```text
 POST
@@ -52,9 +52,9 @@ route-level security report
 
 ---
 
-# Suggested LO CSRF Policy
+# Suggested LogicN CSRF Policy
 
-```lo
+```LogicN
 security csrf {
   enabled: true
 
@@ -93,7 +93,7 @@ security csrf {
 
 ## Route example
 
-```lo
+```LogicN
 api AccountApi {
   POST "/account/email" {
     request ChangeEmailRequest
@@ -109,10 +109,10 @@ api AccountApi {
 
 ## Compiler check
 
-LO should fail the build if a state-changing route has no CSRF policy:
+LogicN should fail the build if a state-changing route has no CSRF policy:
 
 ```text
-LO_SECURITY_ERROR: Route POST /account/email changes user state but has no CSRF protection.
+LogicN_SECURITY_ERROR: Route POST /account/email changes user state but has no CSRF protection.
 
 Fix:
 - add `csrf required`
@@ -123,9 +123,9 @@ Fix:
 
 # GET must not change state
 
-LO should block this:
+LogicN should block this:
 
-```lo
+```LogicN
 GET "/delete-account" {
   handler deleteAccount
 }
@@ -133,10 +133,10 @@ GET "/delete-account" {
 
 Because OWASP explicitly says not to use `GET` for state-changing operations. ([OWASP Cheat Sheet Series][1])
 
-LO should report:
+LogicN should report:
 
 ```text
-LO_ROUTE_ERROR: GET route cannot call a state-changing handler.
+LogicN_ROUTE_ERROR: GET route cannot call a state-changing handler.
 
 Route:
 GET /delete-account
@@ -154,9 +154,9 @@ Use POST or DELETE with csrf required.
 
 CSRF mainly matters when the browser automatically sends authentication, especially cookies.
 
-So LO should understand the difference:
+So LogicN should understand the difference:
 
-```lo
+```LogicN
 auth session_cookie {
   csrf required
 }
@@ -164,7 +164,7 @@ auth session_cookie {
 
 But for a pure API using explicit headers:
 
-```lo
+```LogicN
 auth bearer_token {
   csrf not_required
   require_header: "Authorization"
@@ -178,7 +178,7 @@ If authentication is automatic through cookies, CSRF is required.
 If authentication is manually attached through Authorization headers, CSRF may not be required.
 ```
 
-But LO should still enforce:
+But LogicN should still enforce:
 
 ```text
 CORS policy
@@ -194,7 +194,7 @@ audit logging
 
 ```text
 1. Request arrives
-2. LO checks HTTP method
+2. LogicN checks HTTP method
 3. If method is GET/HEAD/OPTIONS, allow only read-safe behaviour
 4. If method is POST/PUT/PATCH/DELETE, mark as state-changing
 5. Check Fetch Metadata headers
@@ -211,7 +211,7 @@ audit logging
 
 # Generated CSRF report
 
-LO should generate a security report like this:
+LogicN should generate a security report like this:
 
 ```json
 {
@@ -230,7 +230,7 @@ LO should generate a security report like this:
 }
 ```
 
-This fits LO’s idea of:
+This fits LogicN’s idea of:
 
 ```text
 deny by default
@@ -242,9 +242,9 @@ report everything
 
 # Strong finance/admin rule
 
-For financial routes, LO should go further:
+For financial routes, LogicN should go further:
 
-```lo
+```LogicN
 api TradingApi {
   POST "/trade/buy" {
     auth required
@@ -264,16 +264,16 @@ For example, a stock trade, payment, withdrawal, password change, or account del
 
 # Recommended roadmap addition
 
-Add this under **v3 - LO Secure Network**:
+Add this under **v3 - LogicN Secure Network**:
 
 ```markdown
 ## CSRF Protection
 
-LO should include built-in CSRF protection for cookie-authenticated web applications.
+LogicN should include built-in CSRF protection for cookie-authenticated web applications.
 
 State-changing routes must require CSRF protection by default.
 
-LO should support:
+LogicN should support:
 
 - synchronizer tokens for stateful applications
 - signed double-submit cookies for stateless applications
@@ -286,6 +286,6 @@ LO should support:
 - route-level compiler warnings and errors
 ```
 
-In short: **LO can prevent CSRF by making unsafe routes impossible to compile unless the route has an explicit protection model.**
+In short: **LogicN can prevent CSRF by making unsafe routes impossible to compile unless the route has an explicit protection model.**
 
 [1]: https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html "Cross-Site Request Forgery Prevention - OWASP Cheat Sheet Series"

@@ -49,27 +49,27 @@ The foLOwing must never be committed:
 
 ## Core Security Primitives
 
-`packages-lo/lo-core-security/` owns reusable security primitives. Redaction
+`packages-logicn/logicn-core-security/` owns reusable security primitives. Redaction
 must fail closed by default: malformed rules, oversized inputs or replacements
 that can re-emit matched secrets must produce redacted output instead of leaking
 raw text. Permission models must deny by default, and matching deny grants must
 win over matching allow grants.
 
-`packages-lo/lo-core-logic/` owns `Tri` and `Logic<N>` semantics used by core
+`packages-logicn/logicn-core-logic/` owns `Tri` and `LogicN` semantics used by core
 policy checks. `Tri` unknown states must not implicitly convert to `Bool` or
 security decisions; callers must choose an explicit conversion policy and should
 use `unknown_as_error` or `unknown_as_false` for security-sensitive decisions.
 
-`packages-lo/lo-core-compiler/` must catch the same risks before execution when
+`packages-logicn/logicn-core-compiler/` must catch the same risks before execution when
 source text is available. The interim syntax safety scan reports direct Tri
 branch conditions, implicit Tri/Decision/Bool conversions, non-exhaustive Tri
 matches, risky `unknown_as: true` use in secure flows, raw secret-like literals
 and unsafe dynamic execution patterns.
 
-NPM and `package.json` are host tooling only in this beta. LO package graph
+NPM and `package.json` are host tooling only in this beta. LogicN package graph
 selection, runtime profiles, compiler target policy and production package
 overrides must not be hidden inside host manifests. Use the future
-`package-lo.json`/`lo.lock.json` boundary for LO packages once those schemas are
+`package-logicn.json`/`LogicN.lock.json` boundary for LogicN packages once those schemas are
 implemented.
 
 ## AI Inference
@@ -80,7 +80,7 @@ AI output must not directly approve security, payment, access-control or other
 high-impact decisions. Route AI output through deterministic application policy
 before taking action.
 
-Local AI inference packages such as `lo-ai-lowbit` must use declared model paths,
+Local AI inference packages such as `logicn-ai-lowbit` must use declared model paths,
 memory limits, context limits, output token limits, thread limits and timeouts.
 Prompts and reports must be redacted before logging when they may contain
 secrets or user-sensitive data.

@@ -1,11 +1,11 @@
 update documentation / add packages
 
-Yes — that is exactly the kind of feature that would make LO feel more “enterprise runtime aware” rather than just a normal language.
+Yes — that is exactly the kind of feature that would make LogicN feel more “enterprise runtime aware” rather than just a normal language.
 
 Instead of requiring this everywhere:
 
-```lo
-use lo-target-coreml with {
+```LogicN
+use logicn-target-coreml with {
   compute: "all"
   prefer: "neural_engine"
   fallback: ["gpu", "cpu"]
@@ -14,11 +14,11 @@ use lo-target-coreml with {
 }
 ```
 
-LO could allow the developer to write a **default auto policy** once in `boot.lo`.
+LogicN could allow the developer to write a **default auto policy** once in `boot.lln`.
 
 ## Better concept: auto compute discovery
 
-```lo
+```LogicN
 boot compute {
   mode: auto
 
@@ -37,13 +37,13 @@ boot compute {
   cache {
     enabled: true
     saveToGit: false
-    location: ".lo/cache/compute-profile.json"
+    location: ".lln/cache/compute-profile.json"
     recheck: "periodic"
     recheckEvery: "7 days"
     recheckOn: [
       "hardware_changed",
       "os_updated",
-      "lo_version_changed",
+      "LogicN_version_changed",
       "driver_changed",
       "model_changed",
       "manual_command"
@@ -52,17 +52,17 @@ boot compute {
 }
 ```
 
-Then normal LO code could stay clean:
+Then normal LogicN code could stay clean:
 
-```lo
+```LogicN
 task classifyImage(image: Image) -> ImageClass
   compute auto
 {
-  return model "./models/classifier.lo-model"(image)
+  return model "./models/classifier.logicn-model"(image)
 }
 ```
 
-LO would work out the best available target.
+LogicN would work out the best available target.
 
 ---
 
@@ -70,7 +70,7 @@ LO would work out the best available target.
 
 ## First run
 
-On the first run, LO performs a hardware/runtime pass:
+On the first run, LogicN performs a hardware/runtime pass:
 
 ```text
 1. Detect OS
@@ -91,14 +91,14 @@ The first run may be slower, but that is fine.
 Output:
 
 ```text
-LO compute discovery started...
+LogicN compute discovery started...
 Apple Core ML: available
 Apple Neural Engine: preferred through Core ML
 GPU Metal: available
 CPU: available
 BitNet runtime: not available
 Selected default AI target: apple.coreml.all
-Saved local profile: .lo/cache/compute-profile.json
+Saved local profile: .lln/cache/compute-profile.json
 ```
 
 Apple’s Core ML route fits this idea because Core ML can use CPU, GPU and Neural Engine, and Apple exposes compute-unit choices such as using all available compute units. ([Apple Developer][1])
@@ -122,22 +122,22 @@ Apple Silicon build machine
 on-prem server
 ```
 
-So LO should generate local machine files like:
+So LogicN should generate local machine files like:
 
 ```text
-.lo/cache/compute-profile.json
-.lo/cache/hardware-profile.json
-.lo/cache/model-plan.json
-.lo/cache/benchmark-lite.json
+.lln/cache/compute-profile.json
+.lln/cache/hardware-profile.json
+.lln/cache/model-plan.json
+.lln/cache/benchmark-lite.json
 ```
 
 And `.gitignore` should include:
 
 ```gitignore
-.lo/cache/
-.lo/local/
-.lo/runtime/
-*.lo-profile.json
+.lln/cache/
+.lln/local/
+.lln/runtime/
+*.logicn-profile.json
 ```
 
 The repo should only save the **policy**, not the discovered machine result.
@@ -149,8 +149,8 @@ The repo should only save the **policy**, not the discovered machine result.
 This belongs in Git:
 
 ```text
-boot.lo
-lo.config
+boot.lln
+LogicN.config
 package policies
 model requirements
 security policy
@@ -160,7 +160,7 @@ fallback policy
 
 Example:
 
-```lo
+```LogicN
 boot compute {
   mode: auto
   allowTargets: [
@@ -181,7 +181,7 @@ This means:
 ```text
 The project says what is allowed.
 The machine decides what is available.
-LO chooses the best safe option.
+LogicN chooses the best safe option.
 ```
 
 That is the right separation.
@@ -224,15 +224,15 @@ security-sensitive environment details
 
 This is where the idea becomes powerful.
 
-When LO is deployed to production, it should not assume the development computer profile.
+When LogicN is deployed to production, it should not assume the development computer profile.
 
 Production run:
 
 ```bash
-lo run --env production
+LogicN run --env production
 ```
 
-LO detects the server:
+LogicN detects the server:
 
 ```text
 DigitalOcean App Platform
@@ -245,16 +245,16 @@ Memory limit: 1GB
 Selected target: cpu.safe
 ```
 
-Then LO creates a production-local profile:
+Then LogicN creates a production-local profile:
 
 ```text
-.lo/cache/compute-profile.production.json
+.lln/cache/compute-profile.production.json
 ```
 
 Or, in a container/serverless environment, it could use:
 
 ```text
-/tmp/lo/compute-profile.json
+/tmp/LogicN/compute-profile.json
 ```
 
 because some cloud filesystems are ephemeral.
@@ -263,7 +263,7 @@ because some cloud filesystems are ephemeral.
 
 # Periodic recheck
 
-Yes, LO should periodically recheck.
+Yes, LogicN should periodically recheck.
 
 Reasons:
 
@@ -276,20 +276,20 @@ container moved
 Apple Core ML version changed
 BitNet runtime updated
 model changed
-LO compiler updated
+LogicN compiler updated
 memory limit changed
 production scaling changed
 ```
 
 Example:
 
-```lo
+```LogicN
 cache {
   enabled: true
   recheckEvery: "7 days"
 
   forceRecheckOn: [
-    "lo_version_changed",
+    "LogicN_version_changed",
     "package_version_changed",
     "model_hash_changed",
     "os_version_changed",
@@ -302,17 +302,17 @@ cache {
 Manual command:
 
 ```bash
-lo compute detect
-lo compute detect --force
-lo compute report
-lo compute clean
+LogicN compute detect
+LogicN compute detect --force
+LogicN compute report
+LogicN compute clean
 ```
 
 ---
 
 # Add a light benchmark pass
 
-LO should not just detect hardware. It should run a **small safe benchmark**.
+LogicN should not just detect hardware. It should run a **small safe benchmark**.
 
 Example:
 
@@ -328,7 +328,7 @@ memory copy test
 
 The benchmark should be quick, maybe under 10–30 seconds by default.
 
-```lo
+```LogicN
 boot benchmark {
   mode: light
   maxDuration: "30 seconds"
@@ -337,7 +337,7 @@ boot benchmark {
 }
 ```
 
-This avoids LO choosing a bad target just because it exists.
+This avoids LogicN choosing a bad target just because it exists.
 
 For example:
 
@@ -350,7 +350,7 @@ CPU has AVX512 and beats fallback GPU path.
 
 Microsoft’s `bitnet.cpp` is a good example of why this matters: it is aimed at 1-bit / 1.58-bit LLM inference and currently focuses on optimized CPU/GPU kernels, with NPU support described as coming next. ([GitHub][2])
 
-So LO should treat BitNet as:
+So LogicN should treat BitNet as:
 
 ```text
 available only when the model/runtime actually matches
@@ -360,35 +360,35 @@ not as a general AI accelerator.
 
 ---
 
-# Suggested LO package structure
+# Suggested LogicN package structure
 
 ```text
-packages/lo-compute-auto/
-packages/lo-compute-detect/
-packages/lo-compute-cache/
-packages/lo-compute-benchmark/
-packages/lo-target-apple/
-packages/lo-target-coreml/
-packages/lo-target-metal/
-packages/lo-target-bitnet/
-packages/lo-target-directml/
-packages/lo-target-cuda/
-packages/lo-target-rocm/
-packages/lo-target-cpu/
-packages/lo-runtime-profile/
+packages/logicn-compute-auto/
+packages/logicn-compute-detect/
+packages/logicn-compute-cache/
+packages/logicn-compute-benchmark/
+packages/logicn-target-apple/
+packages/logicn-target-coreml/
+packages/logicn-target-metal/
+packages/logicn-target-bitnet/
+packages/logicn-target-directml/
+packages/logicn-target-cuda/
+packages/logicn-target-rocm/
+packages/logicn-target-cpu/
+packages/logicn-runtime-profile/
 ```
 
 For your naming style, I would use:
 
 ```text
-lo-compute-auto
-lo-compute-detect
-lo-compute-cache
-lo-target-coreml
-lo-target-bitnet
+logicn-compute-auto
+logicn-compute-detect
+logicn-compute-cache
+logicn-target-coreml
+logicn-target-bitnet
 ```
 
-Rather than putting everything directly into `boot.lo`.
+Rather than putting everything directly into `boot.lln`.
 
 ---
 
@@ -396,10 +396,10 @@ Rather than putting everything directly into `boot.lo`.
 
 A clean default could be:
 
-```lo
+```LogicN
 boot app {
-  name: "my-lo-app"
-  mode: Env("LO_ENV", default: "development")
+  name: "my-logicn-app"
+  mode: Env("LOGICN_ENV", default: "development")
 }
 
 boot security {
@@ -451,13 +451,13 @@ boot compute {
   cache {
     enabled: true
     git: false
-    path: ".lo/cache/compute-profile.json"
+    path: ".lln/cache/compute-profile.json"
     recheckEvery: "7 days"
   }
 
   report {
     enabled: true
-    write: ".lo/reports/compute-report.json"
+    write: ".lln/reports/compute-report.json"
   }
 }
 ```
@@ -469,17 +469,17 @@ AI/tensor tasks can auto-select accelerator.
 JSON/security/network/crypto stay CPU by default.
 ```
 
-That prevents LO from doing unsafe or pointless acceleration.
+That prevents LogicN from doing unsafe or pointless acceleration.
 
 ---
 
 # Task-level override still needed
 
-Even with auto boot settings, LO should still allow a task to override the default.
+Even with auto boot settings, LogicN should still allow a task to override the default.
 
 Example:
 
-```lo
+```LogicN
 task verifyPayment(input: PaymentRequest) -> Result<PaymentApproved, PaymentError>
   compute cpu.required
 {
@@ -505,11 +505,11 @@ financial order validation
 
 For AI/image tasks:
 
-```lo
+```LogicN
 task classifyDocument(image: Image) -> DocumentClass
   compute auto.ai
 {
-  return model "./models/document-classifier.lo-model"(image)
+  return model "./models/document-classifier.logicn-model"(image)
 }
 ```
 
@@ -594,7 +594,7 @@ future-proof
 better for enterprise deployment
 ```
 
-This is especially useful if LO wants to support:
+This is especially useful if LogicN wants to support:
 
 ```text
 Apple Neural Engine
@@ -611,11 +611,11 @@ future AI accelerators
 
 # Add strict modes for enterprise
 
-LO should support different behaviour by environment.
+LogicN should support different behaviour by environment.
 
 ## Development
 
-```lo
+```LogicN
 compute {
   mode: auto
   missingAccelerator: warn
@@ -625,7 +625,7 @@ compute {
 
 ## Production
 
-```lo
+```LogicN
 compute {
   mode: auto
   missingAccelerator: warn
@@ -636,7 +636,7 @@ compute {
 
 ## Regulated finance / healthcare
 
-```lo
+```LogicN
 compute {
   mode: locked
   requireApprovedProfile: true
@@ -658,7 +658,7 @@ lock profile
 deploy only approved profile
 ```
 
-So LO should support both:
+So LogicN should support both:
 
 ```text
 auto mode
@@ -672,19 +672,19 @@ locked approved mode
 You could call this feature:
 
 ```text
-LO Compute Auto Profile
+LogicN Compute Auto Profile
 ```
 
 Or:
 
 ```text
-LO Runtime Capability Profile
+LogicN Runtime Capability Profile
 ```
 
 Files:
 
 ```text
-compute-policy.lo        saved in Git
+compute-policy.lln        saved in Git
 compute-profile.json     local only
 compute-report.json      local/report artifact
 ```
@@ -692,22 +692,22 @@ compute-report.json      local/report artifact
 Commands:
 
 ```bash
-lo compute detect
-lo compute profile
-lo compute benchmark --light
-lo compute report
-lo compute clean
-lo compute lock --production
+LogicN compute detect
+LogicN compute profile
+LogicN compute benchmark --light
+LogicN compute report
+LogicN compute clean
+LogicN compute lock --production
 ```
 
 ---
 
 # Best concept summary
 
-Your idea should become a formal LO feature:
+Your idea should become a formal LogicN feature:
 
 ```text
-LO should separate compute policy from compute discovery.
+LogicN should separate compute policy from compute discovery.
 ```
 
 ## Policy is saved in Git
@@ -724,7 +724,7 @@ What fallback is acceptable.
 ```text
 What this machine actually has.
 What passed benchmark checks.
-What target LO selected.
+What target LogicN selected.
 When it was last checked.
 ```
 
@@ -734,7 +734,7 @@ When it was last checked.
 boot policy + local profile = safe automatic target selection
 ```
 
-That gives LO a serious advantage:
+That gives LogicN a serious advantage:
 
 ```text
 write once
@@ -745,17 +745,17 @@ without hardcoding the developer machine
 The core feature should be added as:
 
 ```text
-packages/lo-compute-auto
-packages/lo-compute-detect
-packages/lo-compute-cache
-packages/lo-runtime-profile
+packages/logicn-compute-auto
+packages/logicn-compute-detect
+packages/logicn-compute-cache
+packages/logicn-runtime-profile
 ```
 
 Then Apple Neural Engine and BitNet become target plugins:
 
 ```text
-packages/lo-target-coreml
-packages/lo-target-bitnet
+packages/logicn-target-coreml
+packages/logicn-target-bitnet
 ```
 
 [1]: https://developer.apple.com/documentation/coreml?utm_source=chatgpt.com "Core ML | Apple Developer Documentation"

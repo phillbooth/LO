@@ -435,11 +435,11 @@ redacted diagnostics
 These ideas are not Rust-only, but Rust supports them well because it rewards
 explicit state, explicit ownership and explicit failure paths.
 
-## What This Suggests For LO
+## What This Suggests For LogicN
 
-LO can learn from the same strengths without becoming Rust.
+LogicN can learn from the same strengths without becoming Rust.
 
-For LO, finance-facing design should emphasize:
+For LogicN, finance-facing design should emphasize:
 
 ```text
 strict money and instrument types
@@ -455,32 +455,32 @@ CPU/binary compatibility as a baseline
 benchmarking for latency, fallback and correctness
 ```
 
-Useful LO package connections:
+Useful LogicN package connections:
 
 ```text
-lo-core
+logicn-core
   syntax, Result, Option, match, effects and typed records
 
-lo-core-security
+logicn-core-security
   redaction, secrets, permission checks and security reports
 
-lo-core-reports
+logicn-core-reports
   audit reports, processing reports and benchmark reports
 
-lo-core-runtime
+logicn-core-runtime
   supervision, cancellation, memory policy and controlled execution
 
-lo-core-compute
+logicn-core-compute
   target planning for fast simulation, vector ranking and AI workloads
 
-lo-core-vector
+logicn-core-vector
   matrix, tensor and numeric workloads for modelling and backtesting
 
-lo-tools-benchmark
+logicn-tools-benchmark
   compare behavior across CPU, GPU, low-bit and fallback targets
 ```
 
-Finance is a good test domain for LO because it exposes whether the language can
+Finance is a good test domain for LogicN because it exposes whether the language can
 handle correctness, performance, reporting and safety together.
 
 ## Where Rust Is Not Automatically Better

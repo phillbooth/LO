@@ -1,4 +1,4 @@
-LO could offer strong routing security **and** fast multi-request handling by making routes **compiled, typed and policy-checked before the app runs**.
+LogicN could offer strong routing security **and** fast multi-request handling by making routes **compiled, typed and policy-checked before the app runs**.
 
 The idea:
 
@@ -8,7 +8,7 @@ Routes should not be loose strings handled by middleware at runtime.
 Routes should become a compiled security graph.
 ```
 
-That means LO would know, before deployment:
+That means LogicN would know, before deployment:
 
 ```text id="ucife2"
 which route exists
@@ -23,11 +23,11 @@ what response fields are safe to return
 how many concurrent requests are allowed
 ```
 
-OWASP’s API Top 10 highlights risks such as broken object-level authorization, broken object-property authorization, broken function-level authorization and unrestricted resource consumption, so LO routing should treat **authorization and resource limits as route requirements**, not optional middleware. ([OWASP][1])
+OWASP’s API Top 10 highlights risks such as broken object-level authorization, broken object-property authorization, broken function-level authorization and unrestricted resource consumption, so LogicN routing should treat **authorization and resource limits as route requirements**, not optional middleware. ([OWASP][1])
 
 ---
 
-# LO Routing Principle
+# LogicN Routing Principle
 
 ```text id="n4xpmb"
 No route should be callable unless its security, input, output and resource rules are known.
@@ -39,9 +39,9 @@ So instead of this style:
 app.post("/orders/:id", handler)
 ```
 
-LO should prefer this style:
+LogicN should prefer this style:
 
-```lo id="o7vkta"
+```LogicN id="o7vkta"
 route POST "/orders/{orderId: UUID}" {
   auth required
   csrf required
@@ -73,7 +73,7 @@ route POST "/orders/{orderId: UUID}" {
 }
 ```
 
-This gives LO two advantages:
+This gives LogicN two advantages:
 
 ```text id="esijex"
 1. Security can be checked at compile time.
@@ -84,7 +84,7 @@ This gives LO two advantages:
 
 # Fast Routing Design
 
-LO should compile all routes into a **method-indexed radix tree / trie**.
+LogicN should compile all routes into a **method-indexed radix tree / trie**.
 
 Example:
 
@@ -103,7 +103,7 @@ DELETE
   /orders/{orderId}
 ```
 
-At runtime, LO should not scan a long list of routes.
+At runtime, LogicN should not scan a long list of routes.
 
 It should do:
 
@@ -146,7 +146,7 @@ large global middleware chains
 
 # Secure Routing Layers
 
-LO routing should use several layers.
+LogicN routing should use several layers.
 
 ```text id="bmjnh0"
 Layer 1: Method and path match
@@ -163,13 +163,13 @@ Layer 11: Response filtering
 Layer 12: Audit/reporting
 ```
 
-OWASP recommends being specific with CORS origins and disabling CORS headers when cross-domain calls are not expected; LO should therefore make CORS explicit per app or route group. ([OWASP Cheat Sheet Series][2])
+OWASP recommends being specific with CORS origins and disabling CORS headers when cross-domain calls are not expected; LogicN should therefore make CORS explicit per app or route group. ([OWASP Cheat Sheet Series][2])
 
 ---
 
 # Example: Route Group Security
 
-```lo id="knkhqx"
+```LogicN id="knkhqx"
 route_group "/admin" {
   auth required
   roles ["admin"]
@@ -210,17 +210,17 @@ route_group "/admin" {
 }
 ```
 
-OWASP’s HTTP security header guidance notes that security-related response headers can help protect against issues such as XSS, clickjacking and information disclosure, so LO should allow secure headers at app, group and route level. ([OWASP Cheat Sheet Series][3])
+OWASP’s HTTP security header guidance notes that security-related response headers can help protect against issues such as XSS, clickjacking and information disclosure, so LogicN should allow secure headers at app, group and route level. ([OWASP Cheat Sheet Series][3])
 
 ---
 
 # Compile-Time Security Checks
 
-LO should fail compilation for dangerous routes.
+LogicN should fail compilation for dangerous routes.
 
 ## Example 1: State-changing GET
 
-```lo id="90cj19"
+```LogicN id="90cj19"
 GET "/delete-account" {
   handler deleteAccount
 }
@@ -229,7 +229,7 @@ GET "/delete-account" {
 Compiler result:
 
 ```text id="icvzku"
-LO_ROUTE_SECURITY_ERROR
+LogicN_ROUTE_SECURITY_ERROR
 
 GET route cannot perform a state-changing action.
 
@@ -245,7 +245,7 @@ Use POST or DELETE with csrf required.
 
 ## Example 2: Missing auth
 
-```lo id="jhdgm4"
+```LogicN id="jhdgm4"
 POST "/payments" {
   body PaymentRequest
   handler createPayment
@@ -255,7 +255,7 @@ POST "/payments" {
 Compiler result:
 
 ```text id="f1uh4q"
-LO_ROUTE_SECURITY_ERROR
+LogicN_ROUTE_SECURITY_ERROR
 
 POST /payments changes financial state but has no auth rule.
 
@@ -268,7 +268,7 @@ audit required
 
 ## Example 3: Missing object-level authorization
 
-```lo id="gr4vwn"
+```LogicN id="gr4vwn"
 GET "/orders/{orderId: UUID}" {
   auth required
   response OrderResponse
@@ -279,7 +279,7 @@ GET "/orders/{orderId: UUID}" {
 Compiler result:
 
 ```text id="xfozo8"
-LO_AUTHZ_ERROR
+LogicN_AUTHZ_ERROR
 
 Route uses user-supplied object ID but has no object_access rule.
 
@@ -296,13 +296,13 @@ This directly targets broken object-level authorization, one of the main API ris
 
 # Property-Level Response Security
 
-LO should not only check whether a user can access an object.
+LogicN should not only check whether a user can access an object.
 
 It should also check which fields they can see.
 
 Example:
 
-```lo id="6ijzft"
+```LogicN id="6ijzft"
 response UserProfile {
   public id: UUID
   public displayName: String
@@ -315,7 +315,7 @@ response UserProfile {
 
 Route:
 
-```lo id="oxsl8c"
+```LogicN id="oxsl8c"
 GET "/users/{userId: UUID}" {
   auth required
 
@@ -337,11 +337,11 @@ This helps prevent accidentally returning sensitive properties. OWASP identifies
 
 # Multiple Requests and Performance
 
-LO should handle multiple requests using a runtime scheduler, not by making developers manually manage asynchronous complexity.
+LogicN should handle multiple requests using a runtime scheduler, not by making developers manually manage asynchronous complexity.
 
 A route should declare its limits:
 
-```lo id="bebts9"
+```LogicN id="bebts9"
 limits {
   timeout: 2s
   max_body_size: 128kb
@@ -373,7 +373,7 @@ This helps address unrestricted resource consumption, which OWASP lists as an AP
 
 # Fast + Secure Request Pipeline
 
-LO should order the request pipeline so cheap checks happen first.
+LogicN should order the request pipeline so cheap checks happen first.
 
 ```text id="m7ulq4"
 1. Method allowed?
@@ -400,11 +400,11 @@ This is both safer and faster because bad requests are rejected before expensive
 
 # Route Effects Model
 
-LO should know what every route is allowed to do.
+LogicN should know what every route is allowed to do.
 
 Example:
 
-```lo id="ox01a0"
+```LogicN id="ox01a0"
 effects {
   database: ["orders.read", "orders.write"]
   network: ["payments.stripe"]
@@ -429,9 +429,9 @@ This protects against route handlers becoming hidden backdoors.
 
 # Route Security Profiles
 
-LO could provide default security profiles.
+LogicN could provide default security profiles.
 
-```lo id="jzr9is"
+```LogicN id="jzr9is"
 security_profile public_read {
   auth optional
   csrf not_required
@@ -461,7 +461,7 @@ security_profile finance_action {
 
 Usage:
 
-```lo id="3bg6ur"
+```LogicN id="3bg6ur"
 POST "/trade/buy" uses finance_action {
   body BuyStockRequest
   response TradeResponse
@@ -471,9 +471,9 @@ POST "/trade/buy" uses finance_action {
 
 ---
 
-# Suggested LO Route Manifest
+# Suggested LogicN Route Manifest
 
-When LO builds the app, it should generate a route manifest:
+When LogicN builds the app, it should generate a route manifest:
 
 ```json id="vet7gw"
 {
@@ -514,11 +514,11 @@ auditors
 framework tooling
 ```
 
-OWASP ASVS is intended as a basis for testing web application technical security controls and as requirements for secure development, so LO’s route manifest could map each route to ASVS/OWASP-style checks. ([OWASP][6])
+OWASP ASVS is intended as a basis for testing web application technical security controls and as requirements for secure development, so LogicN’s route manifest could map each route to ASVS/OWASP-style checks. ([OWASP][6])
 
 ---
 
-# Best Architecture for LO Routing
+# Best Architecture for LogicN Routing
 
 ```text id="bi6w6m"
 Compile time:
@@ -553,10 +553,10 @@ Runtime:
 This belongs mainly in:
 
 ```text id="8ei2lq"
-v3 - LO Secure Network
-v5 - LO App Kernel
-v11 - LO Finance
-v20 - LO Standards and ISO Review
+v3 - LogicN Secure Network
+v5 - LogicN App Kernel
+v11 - LogicN Finance
+v20 - LogicN Standards and ISO Review
 ```
 
 Recommended roadmap section:
@@ -564,7 +564,7 @@ Recommended roadmap section:
 ```markdown id="j2jz97"
 ## Secure Fast Routing
 
-LO should compile routes into a typed route graph.
+LogicN should compile routes into a typed route graph.
 
 Routes must declare:
 
@@ -590,7 +590,7 @@ The runtime should use a method-indexed radix tree/trie for fast route matching 
 In short:
 
 ```text id="io2dia"
-LO should make secure routing the default,
+LogicN should make secure routing the default,
 make unsafe routing difficult,
 and make fast routing a compiler/runtime feature rather than a developer burden.
 ```

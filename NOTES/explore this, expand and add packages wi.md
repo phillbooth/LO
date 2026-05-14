@@ -1,8 +1,8 @@
 explore this, expand and add packages with correct naming and add/update documents
 
-Reading that as **rendering in the browser when data is received** — yes, LO could help a lot here.
+Reading that as **rendering in the browser when data is received** — yes, LogicN could help a lot here.
 
-The idea is that LO should not just receive JSON and let JavaScript manually update HTML. LO could define a **typed browser rendering pipeline**.
+The idea is that LogicN should not just receive JSON and let JavaScript manually update HTML. LogicN could define a **typed browser rendering pipeline**.
 
 ```text id="5ee5oh"
 API response
@@ -19,38 +19,38 @@ API response
 I would group this under:
 
 ```text id="2guw3b"
-lo-web
-lo-web-render
-lo-web-state
-lo-web-components
-lo-web-router
-lo-web-events
-lo-data-json
-lo-security-html
-lo-target-wasm
-lo-target-js
+LogicN-web
+LogicN-web-render
+LogicN-web-state
+LogicN-web-components
+LogicN-web-router
+LogicN-web-events
+LogicN-data-json
+logicn-security-html
+logicn-target-wasm
+logicn-target-js
 ```
 
 Or shorter:
 
 ```text id="rjvy35"
-lo-ui
-lo-ui-web
-lo-ui-render
-lo-ui-state
+LogicN-ui
+LogicN-ui-web
+LogicN-ui-render
+LogicN-ui-state
 ```
 
 My preference:
 
 ```text id="7dqu7j"
-lo-web-render
+LogicN-web-render
 ```
 
 because it clearly means browser rendering.
 
 ---
 
-## How LO could help browser rendering
+## How LogicN could help browser rendering
 
 ### 1. Typed API responses
 
@@ -60,7 +60,7 @@ Instead of receiving loose JSON:
 const data = await response.json();
 ```
 
-LO could require a schema:
+LogicN could require a schema:
 
 ```text id="wmmnsn"
 schema Product {
@@ -78,13 +78,13 @@ Then:
 let products = fetch "/api/products" as Product[]
 ```
 
-If the API returns bad data, LO blocks rendering and returns a typed error.
+If the API returns bad data, LogicN blocks rendering and returns a typed error.
 
 ---
 
 ### 2. Safe rendering by default
 
-LO should prevent unsafe HTML injection.
+LogicN should prevent unsafe HTML injection.
 
 Bad pattern:
 
@@ -92,7 +92,7 @@ Bad pattern:
 element.innerHTML = apiData.description
 ```
 
-LO should require:
+LogicN should require:
 
 ```text id="va0v2w"
 render Text(apiData.description)
@@ -118,7 +118,7 @@ This would help prevent XSS-style issues.
 
 ### 3. State-driven rendering
 
-LO could use a state model:
+LogicN could use a state model:
 
 ```text id="t7pgn4"
 state ProductPage {
@@ -146,13 +146,13 @@ view ProductGrid(state: ProductPage) {
 }
 ```
 
-When data changes, LO updates the UI.
+When data changes, LogicN updates the UI.
 
 ---
 
 ### 4. Only update changed parts
 
-LO could compile browser rendering to:
+LogicN could compile browser rendering to:
 
 ```text id="vgxr9t"
 JavaScript
@@ -164,7 +164,7 @@ fine-grained reactive updates
 
 The developer should not manually decide which DOM node to update.
 
-LO could do:
+LogicN could do:
 
 ```text id="gu8ddx"
 old state -> new state -> update changed UI only
@@ -176,7 +176,7 @@ This would make rendering faster and safer.
 
 ### 5. Streaming rendering
 
-For large data, LO should not wait for everything.
+For large data, LogicN should not wait for everything.
 
 Example:
 
@@ -208,7 +208,7 @@ render all data
 freeze browser
 ```
 
-LO should support:
+LogicN should support:
 
 ```text id="8nzvbi"
 receive chunk
@@ -219,7 +219,7 @@ continue
 
 ---
 
-## Example LO-style browser page
+## Example LogicN-style browser page
 
 ```text id="43lc3g"
 use web.render
@@ -288,7 +288,7 @@ page Products {
 
 ## Browser rendering reports
 
-LO could generate:
+LogicN could generate:
 
 ```text id="ekaidr"
 app.web-render-report.json
@@ -316,7 +316,7 @@ Example:
 
 ---
 
-## Good LO rule for browser rendering
+## Good LogicN rule for browser rendering
 
 ```text id="i52whm"
 Data received by the browser must be validated before it becomes UI.
@@ -335,7 +335,7 @@ Large data can stream in batches.
 
 ## Best positioning
 
-LO could make browser rendering stronger by combining:
+LogicN could make browser rendering stronger by combining:
 
 ```text id="owj3xa"
 typed API data
@@ -347,4 +347,4 @@ security reports
 performance reports
 ```
 
-So LO would not replace the browser. It would compile safe, typed LO UI code into browser-compatible JavaScript/WASM and make sure received data is validated before rendering.
+So LogicN would not replace the browser. It would compile safe, typed LogicN UI code into browser-compatible JavaScript/WASM and make sure received data is validated before rendering.

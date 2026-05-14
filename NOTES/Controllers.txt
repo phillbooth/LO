@@ -1,7 +1,7 @@
 
-I would **not make Controllers a core LO concept**.
+I would **not make Controllers a core LogicN concept**.
 
-For LO, a better approach is:
+For LogicN, a better approach is:
 
 ```text id="5jh6kd"
 Routes define the contract.
@@ -11,19 +11,19 @@ Effects define what the route is allowed to touch.
 Reports explain everything.
 ```
 
-So instead of traditional MVC controllers, LO should use **typed route actions** or **route handlers**.
+So instead of traditional MVC controllers, LogicN should use **typed route actions** or **route handlers**.
 
 ---
 
 # Recommendation
 
 ```text id="eskssb"
-LO should not require Controllers.
+LogicN should not require Controllers.
 
-LO can support controller-style grouping later as a framework convenience, but the secure core should be route-first and contract-first.
+LogicN can support controller-style grouping later as a framework convenience, but the secure core should be route-first and contract-first.
 ```
 
-Traditional controllers are useful in Laravel, Symfony, Rails, ASP.NET MVC, etc., but LO is trying to be:
+Traditional controllers are useful in Laravel, Symfony, Rails, ASP.NET MVC, etc., but LogicN is trying to be:
 
 ```text id="1iq0e0"
 security-first
@@ -38,7 +38,7 @@ Controllers can hide too much.
 
 ---
 
-# Why Controllers may not be ideal for LO
+# Why Controllers may not be ideal for LogicN
 
 ## 1. Security can become hidden
 
@@ -63,7 +63,7 @@ service provider
 framework config
 ```
 
-That makes it harder for LO to prove:
+That makes it harder for LogicN to prove:
 
 ```text id="r0egyu"
 Does this route require auth?
@@ -74,7 +74,7 @@ Is this audited?
 Can this handler write to the database?
 ```
 
-LO should avoid that.
+LogicN should avoid that.
 
 ---
 
@@ -107,7 +107,7 @@ test tools
 route reports
 ```
 
-LO should prefer smaller, clearer units.
+LogicN should prefer smaller, clearer units.
 
 ---
 
@@ -128,11 +128,11 @@ database calls
 handler execution
 ```
 
-LO can be faster if it compiles routes into a static route graph/trie and knows exactly which handler to call.
+LogicN can be faster if it compiles routes into a static route graph/trie and knows exactly which handler to call.
 
 ---
 
-# Better LO structure
+# Better LogicN structure
 
 I would use this model:
 
@@ -154,7 +154,7 @@ Generated Report
 
 Example:
 
-```lo id="gz0sby"
+```LogicN id="gz0sby"
 route POST "/orders/{orderId: UUID}/cancel" {
   auth required
   csrf required
@@ -186,7 +186,7 @@ route POST "/orders/{orderId: UUID}/cancel" {
 
 Handler:
 
-```lo id="ww2qtl"
+```LogicN id="ww2qtl"
 action cancelOrder(request: CancelOrderRequest, ctx: RequestContext)
   -> Result<CancelOrderResponse, OrderError>
 {
@@ -212,7 +212,7 @@ This is clearer than a controller because the route declares everything importan
 
 # Suggested naming
 
-Instead of `Controller`, LO could use:
+Instead of `Controller`, LogicN could use:
 
 ```text id="6eg3p8"
 Action
@@ -224,7 +224,7 @@ Resource
 Endpoint
 ```
 
-My preferred naming for LO:
+My preferred naming for LogicN:
 
 ```text id="26hplv"
 route = public HTTP/API contract
@@ -240,56 +240,56 @@ resource = domain object, such as Order, User, Payment
 
 ```text id="bmpg91"
 src/
-  boot.lo
-  main.lo
+  boot.lln
+  main.lln
 
   routes/
-    orders.routes.lo
-    users.routes.lo
-    payments.routes.lo
+    orders.routes.lln
+    users.routes.lln
+    payments.routes.lln
 
   actions/
     orders/
-      createOrder.lo
-      cancelOrder.lo
-      refundOrder.lo
+      createOrder.lln
+      cancelOrder.lln
+      refundOrder.lln
 
     users/
-      getUserProfile.lo
-      updateUserEmail.lo
+      getUserProfile.lln
+      updateUserEmail.lln
 
   models/
-    Order.lo
-    User.lo
-    Payment.lo
+    Order.lln
+    User.lln
+    Payment.lln
 
   policies/
-    orderAccess.policy.lo
-    userAccess.policy.lo
+    orderAccess.policy.lln
+    userAccess.policy.lln
 
   schemas/
     requests/
-      CreateOrderRequest.lo
-      CancelOrderRequest.lo
+      CreateOrderRequest.lln
+      CancelOrderRequest.lln
 
     responses/
-      OrderResponse.lo
-      CancelOrderResponse.lo
+      OrderResponse.lln
+      CancelOrderResponse.lln
 ```
 
 This is easier for AI to understand than one large controller file.
 
 ---
 
-# Could LO still support Controllers?
+# Could LogicN still support Controllers?
 
 Yes, but only as a **framework adapter**, not as the core design.
 
 For example:
 
-```lo id="g453vx"
+```LogicN id="g453vx"
 controller OrdersController {
-  uses routes from "./routes/orders.routes.lo"
+  uses routes from "./routes/orders.routes.lln"
   actions from "./actions/orders"
 }
 ```
@@ -300,7 +300,7 @@ So Controllers would be optional organisation, not runtime magic.
 
 ---
 
-# Best rule for LO
+# Best rule for LogicN
 
 ```text id="ssmxqu"
 Do not make Controllers required.
@@ -314,7 +314,7 @@ Allow controller-style grouping only as optional framework sugar.
 
 # Why this is better for security
 
-A route-first LO app can fail compilation if something is missing:
+A route-first LogicN app can fail compilation if something is missing:
 
 ```text id="gw7pu1"
 POST route without CSRF = compile error
@@ -327,7 +327,7 @@ Handler returns private fields without response filter = compile error
 
 Controllers usually depend on the framework doing those checks at runtime.
 
-LO should move those checks earlier.
+LogicN should move those checks earlier.
 
 ---
 
@@ -358,7 +358,7 @@ Find policy class.
 Find response transformer.
 ```
 
-LO should make the contract obvious in one place.
+LogicN should make the contract obvious in one place.
 
 ---
 
@@ -367,8 +367,8 @@ LO should make the contract obvious in one place.
 This belongs in:
 
 ```text id="8ebz3b"
-v5 - LO App Kernel
-v19 - LO Framework Review
+v5 - LogicN App Kernel
+v19 - LogicN Framework Review
 ```
 
 Suggested roadmap note:
@@ -376,7 +376,7 @@ Suggested roadmap note:
 ```markdown id="ki7j9u"
 ## Controller Policy
 
-LO should not require traditional MVC Controllers.
+LogicN should not require traditional MVC Controllers.
 
 The preferred structure is:
 
@@ -394,7 +394,7 @@ Controller-style grouping may be supported later as optional framework sugar, bu
 In short:
 
 ```text id="t9jryl"
-For LO, Controllers are optional organisation.
+For LogicN, Controllers are optional organisation.
 
 Secure typed routes are essential.
 ```

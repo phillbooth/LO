@@ -1,4 +1,4 @@
-Yes — LO should support databases as a **typed model and response layer**, not just raw SQL strings.
+Yes — LogicN should support databases as a **typed model and response layer**, not just raw SQL strings.
 
 The main idea:
 
@@ -11,7 +11,7 @@ Database
   -> API / archive / report
 ```
 
-LO should make it hard to accidentally return unsafe, missing, overexposed or wrongly typed data.
+LogicN should make it hard to accidentally return unsafe, missing, overexposed or wrongly typed data.
 
 ---
 
@@ -20,41 +20,41 @@ LO should make it hard to accidentally return unsafe, missing, overexposed or wr
 I would use:
 
 ```text
-lo-data-db
-lo-data-model
-lo-data-query
-lo-data-response
-lo-db-postgres
-lo-db-mysql
-lo-db-sqlite
-lo-db-opensearch
-lo-db-firestore
+LogicN-data-db
+LogicN-data-model
+LogicN-data-query
+LogicN-data-response
+LogicN-db-postgres
+LogicN-db-mysql
+LogicN-db-sqlite
+LogicN-db-opensearch
+LogicN-db-firestore
 ```
 
 Or, if you want a simpler first version:
 
 ```text
-lo-db
-lo-db-model
-lo-db-query
-lo-db-response
+LogicN-db
+LogicN-db-model
+LogicN-db-query
+LogicN-db-response
 ```
 
 My preference:
 
 ```text
-lo-data-db
-lo-data-model
-lo-data-response
+LogicN-data-db
+LogicN-data-model
+LogicN-data-response
 ```
 
-because it keeps database work inside the wider `lo-data-*` family.
+because it keeps database work inside the wider `LogicN-data-*` family.
 
 ---
 
 ## 1. Database model support
 
-LO should allow database models like:
+LogicN should allow database models like:
 
 ```text
 model User {
@@ -69,7 +69,7 @@ model User {
 }
 ```
 
-Then LO knows:
+Then LogicN knows:
 
 ```text
 what table it maps to
@@ -112,7 +112,7 @@ response UserResponse {
 }
 ```
 
-LO should block this:
+LogicN should block this:
 
 ```text
 return User
@@ -128,7 +128,7 @@ User model contains SecretData fields.
 Return a safe response model such as UserResponse.
 ```
 
-This is a strong LO feature.
+This is a strong LogicN feature.
 
 ---
 
@@ -140,7 +140,7 @@ Instead of loose SQL:
 SELECT * FROM users
 ```
 
-LO should prefer typed queries:
+LogicN should prefer typed queries:
 
 ```text
 query GetUserById(id: UUID) -> Option<User> {
@@ -176,7 +176,7 @@ match user {
 
 ## 4. Safe API response mapping
 
-LO should support explicit mapping:
+LogicN should support explicit mapping:
 
 ```text
 response UserResponse from User {
@@ -213,7 +213,7 @@ paymentReference
 
 ## 5. Model permissions
 
-LO models could declare what operations are allowed:
+LogicN models could declare what operations are allowed:
 
 ```text
 model User {
@@ -229,13 +229,13 @@ model User {
 }
 ```
 
-This connects database access to LO’s security and compliance system.
+This connects database access to LogicN’s security and compliance system.
 
 ---
 
 ## 6. Validation before insert/update
 
-LO should validate data before it reaches the database.
+LogicN should validate data before it reaches the database.
 
 ```text
 schema CreateUserInput {
@@ -259,7 +259,7 @@ command CreateUser(input: CreateUserInput) -> UserResponse {
 }
 ```
 
-LO should block direct unsafe inserts:
+LogicN should block direct unsafe inserts:
 
 ```text
 User.create(request.body)
@@ -271,7 +271,7 @@ unless the request body has been validated.
 
 ## 7. Database response reports
 
-LO could generate:
+LogicN could generate:
 
 ```text
 app.database-report.json
@@ -307,7 +307,7 @@ Example:
 
 ## 8. Support different database styles
 
-LO should not only support SQL.
+LogicN should not only support SQL.
 
 It could support:
 
@@ -324,13 +324,13 @@ object storage metadata
 Examples:
 
 ```text
-lo-db-postgres
-lo-db-mysql
-lo-db-sqlite
-lo-db-firestore
-lo-db-opensearch
-lo-db-redis
-lo-db-neo4j
+LogicN-db-postgres
+LogicN-db-mysql
+LogicN-db-sqlite
+LogicN-db-firestore
+LogicN-db-opensearch
+LogicN-db-redis
+LogicN-db-neo4j
 ```
 
 But the model layer should stay consistent:
@@ -370,11 +370,11 @@ archive UserAuditArchive {
 }
 ```
 
-This fits the earlier `lo-data-archive` concept.
+This fits the earlier `LogicN-data-archive` concept.
 
 ---
 
-## 10. Best LO database rule
+## 10. Best LogicN database rule
 
 The strongest rule:
 
@@ -384,7 +384,7 @@ Database data should not be returned directly.
 Database data should pass through a typed response model.
 ```
 
-So LO has:
+So LogicN has:
 
 ```text
 Model       = how data is stored
@@ -403,17 +403,17 @@ Report      = what proves the behaviour
 ```markdown
 ## Database Models and Responses
 
-LO should support database models as typed records connected to storage.
+LogicN should support database models as typed records connected to storage.
 
-LO should separate database models from API response models.
+LogicN should separate database models from API response models.
 
 A database model may contain private, personal, secret or internal fields.
 
 A response model defines what may safely leave the server.
 
-LO should block raw database models from being returned by public routes when they contain sensitive fields.
+LogicN should block raw database models from being returned by public routes when they contain sensitive fields.
 
-LO should support:
+LogicN should support:
 
 - typed models
 - typed queries
@@ -434,26 +434,26 @@ LO should support:
 Start with:
 
 ```text
-lo-data-model
-lo-data-db
-lo-data-query
-lo-data-response
+LogicN-data-model
+LogicN-data-db
+LogicN-data-query
+LogicN-data-response
 ```
 
 Then add database-specific packages later:
 
 ```text
-lo-db-postgres
-lo-db-mysql
-lo-db-sqlite
-lo-db-firestore
-lo-db-opensearch
+LogicN-db-postgres
+LogicN-db-mysql
+LogicN-db-sqlite
+LogicN-db-firestore
+LogicN-db-opensearch
 ```
 
 Best summary:
 
 ```text
-LO should treat the database as a typed, validated, permissioned and reportable data boundary.
+LogicN should treat the database as a typed, validated, permissioned and reportable data boundary.
 
 It should make a clear distinction between what is stored and what is allowed to be returned.
 ```

@@ -1,6 +1,6 @@
 # Optical I/O Optimisation
 
-LO should support optical I/O as a data-movement and interconnect optimisation
+LogicN should support optical I/O as a data-movement and interconnect optimisation
 target.
 
 Intel Silicon Photonics and Optical Compute Interconnect technologies should
@@ -18,7 +18,7 @@ infrastructure. Intel states that its first-generation OCI chiplet supports
 second per device, and is designed to be co-packaged with future CPUs, GPUs,
 IPUs and other SoCs.
 
-For LO, the optimisation area is:
+For LogicN, the optimisation area is:
 
 ```text
 move less data
@@ -30,7 +30,7 @@ report bandwidth, latency and fallback behaviour
 
 ## Target Model
 
-LO should separate these concepts:
+LogicN should separate these concepts:
 
 ```text
 photonic_compute
@@ -48,7 +48,7 @@ general-purpose compute target by itself.
 
 Example target concept:
 
-```lo
+```LogicN
 target optical_io {
   provider "intel.silicon_photonics"
   mode "interconnect"
@@ -96,7 +96,7 @@ Example report:
 
 ## AI And Tensor Workloads
 
-Optical I/O is most relevant to LO when workloads involve large data movement:
+Optical I/O is most relevant to LogicN when workloads involve large data movement:
 
 ```text
 matrix workloads
@@ -116,7 +116,7 @@ Instead of asking only:
 Should this run on CPU or GPU?
 ```
 
-LO should also ask:
+LogicN should also ask:
 
 ```text
 Where is the data?
@@ -129,7 +129,7 @@ Can the result be reduced before transfer?
 
 Example direction:
 
-```lo
+```LogicN
 compute auto classifyImages(batch: ImageBatch) {
   prefer accelerator.ai
   prefer optical_io if data_size > 1gb
@@ -140,7 +140,7 @@ compute auto classifyImages(batch: ImageBatch) {
 
 ## Topology-Aware Scheduling
 
-LO should be able to generate and use a topology map:
+LogicN should be able to generate and use a topology map:
 
 ```text
 CPU node 1
@@ -156,7 +156,7 @@ practical.
 
 Example config direction:
 
-```lo
+```LogicN
 topology auto {
   detect cpu
   detect gpu
@@ -167,7 +167,7 @@ topology auto {
 }
 ```
 
-Then LO can decide:
+Then LogicN can decide:
 
 ```text
 run part A near GPU 1
@@ -197,7 +197,7 @@ use columnar batches where useful
 use zero-copy read-only views where safe
 ```
 
-LO should support transfer planning for:
+LogicN should support transfer planning for:
 
 ```text
 schema-compressed JSON
@@ -210,7 +210,7 @@ streaming pipelines
 
 Example direction:
 
-```lo
+```LogicN
 transfer UserEvents over optical_io {
   format schema_compressed
   batch_size auto
@@ -221,12 +221,12 @@ transfer UserEvents over optical_io {
 
 ## Data Locality Rules
 
-LO should be able to express that certain data should stay close to certain
+LogicN should be able to express that certain data should stay close to certain
 compute.
 
 Example:
 
-```lo
+```LogicN
 data ModelWeights {
   size large
   locality accelerator
@@ -236,7 +236,7 @@ data ModelWeights {
 
 Or:
 
-```lo
+```LogicN
 task runInference(input: TensorBatch) {
   prefer data_locality
   avoid moving ModelWeights
@@ -250,7 +250,7 @@ time and shared interconnect capacity.
 
 ## Reports
 
-LO should produce optical I/O reports when a workload or deployment profile uses
+LogicN should produce optical I/O reports when a workload or deployment profile uses
 high-speed interconnect planning.
 
 Possible reports:
@@ -301,7 +301,7 @@ Example:
 
 ## Deployment Profiles
 
-Optical I/O is mainly a cloud and data-centre scale feature. LO should support
+Optical I/O is mainly a cloud and data-centre scale feature. LogicN should support
 deployment profiles that understand this.
 
 Example profiles:
@@ -317,7 +317,7 @@ edge
 
 Example direction:
 
-```lo
+```LogicN
 deployment ai_cluster {
   require high_bandwidth_interconnect
   prefer optical_io
@@ -338,9 +338,9 @@ Expected data movement cost increased.
 
 ## Remote Memory Safety
 
-If LO supports memory pooling or remote accelerator memory, it must be secure.
+If LogicN supports memory pooling or remote accelerator memory, it must be secure.
 
-Remote memory should not be treated like normal local RAM. LO should require:
+Remote memory should not be treated like normal local RAM. LogicN should require:
 
 ```text
 typed remote memory
@@ -355,7 +355,7 @@ audit logging
 
 Example direction:
 
-```lo
+```LogicN
 remote memory EmbeddingPool {
   access read_only
   encryption required
@@ -367,10 +367,10 @@ remote memory EmbeddingPool {
 
 ## Benchmarks
 
-`lo-tools-benchmark` should eventually include:
+`logicn-tools-benchmark` should eventually include:
 
 ```bash
-lo benchmark --target optical_io
+LogicN benchmark --target optical_io
 ```
 
 It should test:
@@ -403,7 +403,7 @@ Example output:
 
 ## Security Rules
 
-Optical I/O should not bypass LO security policy.
+Optical I/O should not bypass LogicN security policy.
 
 Rules:
 
@@ -422,28 +422,28 @@ interconnect topology must not expose private hostnames in shareable reports
 Recommended ownership:
 
 ```text
-lo-core-compute
+logicn-core-compute
   optical_io target selection and data-movement cost planning
 
-lo-target-photonic
+logicn-target-photonic
   photonic compute target planning plus optical I/O/interconnect planning reports
 
-lo-core-vector
+logicn-core-vector
   tensor, matrix and batch shape information used for transfer estimates
 
-lo-core-security
+logicn-core-security
   remote memory, encryption and redaction policy
 
-lo-core-reports
+logicn-core-reports
   shared report metadata and report-writing contracts
 
-lo-tools-benchmark
+logicn-tools-benchmark
   optical_io benchmark target and fallback diagnostics
 ```
 
 ## Conclusion
 
-LO can make the best of Intel Silicon Photonics by becoming interconnect-aware.
+LogicN can make the best of Intel Silicon Photonics by becoming interconnect-aware.
 
 Not just:
 
@@ -458,10 +458,10 @@ Where is the data?
 Where is the compute?
 How expensive is movement?
 Can optical I/O reduce the bottleneck?
-Can LO report and optimise that automatically?
+Can LogicN report and optimise that automatically?
 ```
 
-That would make LO more forward-looking than a normal language because most
+That would make LogicN more forward-looking than a normal language because most
 languages do not understand the cost of moving data across CPUs, GPUs,
 accelerators, memory pools and data-centre fabrics.
 

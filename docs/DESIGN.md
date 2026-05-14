@@ -2,7 +2,7 @@
 
 ## Scope
 
-This document describes the design of the LO application template and developer
+This document describes the design of the LogicN application template and developer
 experience. It does not define the final product UI for a bespoke app. Product
 screens, branding, visual language and user flows should be added after a
 specific app domain is selected.
@@ -30,13 +30,13 @@ change and friendly to both humans and AI coding tools.
 
 1. Open `README.md`.
 2. Read the status, quick start and package map.
-3. If package ownership is unclear, open `build/graph/lo-ai-map.md` or
-   `build/graph/LO_GRAPH_REPORT.md`.
+3. If package ownership is unclear, open `build/graph/logicn-ai-map.md` or
+   `build/graph/LogicN_GRAPH_REPORT.md`.
 4. Query the graph if needed:
 
 ```powershell
-node packages-lo\lo-core-cli\dist\index.js graph query lo-core-security --out build\graph
-node packages-lo\lo-core-cli\dist\index.js graph explain package:lo-core-security --out build\graph
+node packages-logicn\logicn-core-cli\dist\index.js graph query logicn-core-security --out build\graph
+node packages-logicn\logicn-core-cli\dist\index.js graph explain package:logicn-core-security --out build\graph
 ```
 
 ### Refresh Project Context
@@ -45,7 +45,7 @@ node packages-lo\lo-core-cli\dist\index.js graph explain package:lo-core-securit
 2. Regenerate the project graph:
 
 ```powershell
-node packages-lo\lo-core-cli\dist\index.js graph --out build\graph
+node packages-logicn\logicn-core-cli\dist\index.js graph --out build\graph
 ```
 
 3. Review generated graph output when the change affects package ownership,
@@ -56,13 +56,13 @@ node packages-lo\lo-core-cli\dist\index.js graph --out build\graph
 1. Inspect task definitions.
 
 ```powershell
-node packages-lo\lo-core-cli\dist\index.js task --file packages-lo\lo-core-tasks\examples\tasks.lo
+node packages-logicn\logicn-core-cli\dist\index.js task --file packages-logicn\logicn-core-tasks\examples\tasks.lln
 ```
 
 2. Dry-run a task before execution.
 
 ```powershell
-node packages-lo\lo-core-cli\dist\index.js task buildApi --file packages-lo\lo-core-tasks\examples\tasks.lo --dry-run
+node packages-logicn\logicn-core-cli\dist\index.js task buildApi --file packages-logicn\logicn-core-tasks\examples\tasks.lln --dry-run
 ```
 
 3. Review the task report at `build/reports/task-report.json` unless a custom
@@ -72,7 +72,7 @@ node packages-lo\lo-core-cli\dist\index.js task buildApi --file packages-lo\lo-c
 
 1. Add product requirements to `docs/REQUIREMENTS.md`.
 2. Add product UX rules and screens to this document.
-3. Add app source under `packages-lo/lo-framework-example-app/`.
+3. Add app source under `packages-logicn/logicn-framework-example-app/`.
 4. Keep reusable language, runtime, security and tooling contracts in their
    owning packages.
 
@@ -80,13 +80,13 @@ node packages-lo\lo-core-cli\dist\index.js task buildApi --file packages-lo\lo-c
 
 | Area | Purpose |
 |---|---|
-| `README.md` | Human entry point for LO status, package map and commands. |
+| `README.md` | Human entry point for LogicN status, package map and commands. |
 | `AGENTS.md` | AI coding tool instructions and package boundary rules. |
-| `lo.workspace.json` | Machine-readable workspace package and docs index. |
+| `logicn.workspace.json` | Machine-readable workspace package and docs index. |
 | `docs/` | App/workspace requirements, design, architecture, security and operations. |
-| `packages-lo/lo-core/` | LO language introduction and language documentation. |
-| `packages-lo/*/README.md` | LO package-specific purpose, boundaries and contracts. |
-| `packages-lo/*/TODO.md` | LO package-specific remaining work. |
+| `packages-logicn/logicn-core/` | LogicN language introduction and language documentation. |
+| `packages-logicn/*/README.md` | LogicN package-specific purpose, boundaries and contracts. |
+| `packages-logicn/*/TODO.md` | LogicN package-specific remaining work. |
 | `build/graph/` | Generated graph, report, AI map and HTML overview. |
 | `build/reports/` | Generated task and future CLI/runtime reports. |
 
@@ -101,7 +101,7 @@ Docs should be scannable and role-oriented.
 - Record completed work in `docs/CHANGELOG.md`.
 - Mark planning tasks in `docs/TASKS.md` when a document becomes usable.
 - Do not duplicate large language specifications in `docs/`; link to
-  `packages-lo/lo-core/` instead.
+  `packages-logicn/logicn-core/` instead.
 
 ## CLI Output Design
 
@@ -119,14 +119,14 @@ Required output qualities:
 Current examples:
 
 ```text
-LO project graph generated.
-Graph JSON: build\graph\lo-devtools-project-graph.json
-Graph report: build\graph\LO_GRAPH_REPORT.md
+LogicN project graph generated.
+Graph JSON: build\graph\logicn-devtools-project-graph.json
+Graph report: build\graph\LogicN_GRAPH_REPORT.md
 ```
 
 ```text
 Task buildApi dry-run planned.
-Task file: packages-lo\lo-core-tasks\examples\tasks.lo
+Task file: packages-logicn\logicn-core-tasks\examples\tasks.lln
 Dependency order: generateReports -> buildApi
 Task report: build\reports\task-report.json
 ```
@@ -189,7 +189,7 @@ Use components that match actual user work:
 - report links for generated artefacts
 
 Avoid adding a CMS, admin framework, ORM UI or frontend framework design to
-`lo-core` or `lo-framework-app-kernel`.
+`logicn-core` or `logicn-framework-app-kernel`.
 
 ## Accessibility Baseline
 
@@ -207,7 +207,7 @@ Future app UI must:
 
 - Defining a product-specific homepage before a product domain exists.
 - Defining brand, copy, illustrations or marketing pages for the template.
-- Putting frontend framework syntax into `lo-core`.
+- Putting frontend framework syntax into `logicn-core`.
 - Treating generated graph HTML as the production app UI.
 - Treating task or graph reports as a substitute for tests.
 
@@ -219,4 +219,4 @@ Future app UI must:
 - CLI output is concise and safe.
 - Reports provide enough structured context for review.
 - Future product UI work has a clear place to add screens and UX rules without
-  polluting LO language packages.
+  polluting LogicN language packages.

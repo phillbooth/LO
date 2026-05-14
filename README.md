@@ -1,6 +1,6 @@
-# LO App Template
+# LogicN App Template
 
-### LO, short for Logic Omni
+### LogicN, short for LogicN
 
 ```text
 Designed to be backwards compatible with binary while supporting photonic Tri logic.
@@ -11,30 +11,30 @@ AI friendly syntax and mapping
 ```
 
 This repository is a starter workspace for building a bespoke application with
-LO.
+LogicN.
 
 A strict, memory-safe, 
 security-first programming
 language concept for API-heavy, JSON-native, 
 AI-readable and accelerator-aware
-software. This workspace keeps the LO language package, compiler/runtime
+software. This workspace keeps the LogicN language package, compiler/runtime
 contracts, secure application kernel, developer tooling and app source in clear
 package boundaries while the project is still being shaped.
 
 ## Status
 
-LO is currently a language-design and v0.1 beta prototype project. It is not a
+LogicN is currently a language-design and v0.1 beta prototype project. It is not a
 stable release, and package versions use beta prerelease identifiers until the
 toolchain, package boundaries and documentation contracts are release-ready.
 
 The mature language introduction lives in:
 
 ```text
-packages-lo/lo-core/README.md
+packages-logicn/logicn-core/README.md
 ```
 
 The root of this repository is the workspace entry point. Use it to understand
-how LO packages, app files, tooling, reports and generated project graph outputs
+how LogicN packages, app files, tooling, reports and generated project graph outputs
 fit together.
 
 The practical v1 baseline is CPU-compatible checked execution, WASM target
@@ -44,14 +44,14 @@ post-v1 package contracts, planning layers or simulation/report artefacts until
 real backends exist.
 
 Generated notes, planning documents and AI-suggested structures are advisory.
-When they conflict, the repository structure, `AGENTS.md`, `lo.workspace.json`,
+When they conflict, the repository structure, `AGENTS.md`, `logicn.workspace.json`,
 package READMEs/TODOs and docs in this workspace take precedence. Roadmap
 version labels may move when that improves staging, but package ownership rules
 should not be overridden by generated documents.
 
 ## Core Ideas
 
-LO is designed around:
+LogicN is designed around:
 
 ```text
 strict typing
@@ -73,10 +73,10 @@ explicit imports, typed errors, source maps, stable diagnostics and
 machine-readable reports. It does not mean vague natural-language friendliness.
 
 For v1, these are goals unless backed by implemented compiler checks and tests.
-LO should not claim measured speed over C#, Python, C or C++ until the compiler,
+LogicN should not claim measured speed over C#, Python, C or C++ until the compiler,
 memory model and benchmark methodology exist.
 
-LO avoids:
+LogicN avoids:
 
 ```text
 undefined
@@ -91,152 +91,152 @@ framework-specific language syntax
 mandatory future hardware
 ```
 
-LO explicitly supports `optical_io` as a future data-movement and interconnect
+LogicN explicitly supports `optical_io` as a future data-movement and interconnect
 planning target. Intel Silicon Photonics and OCI-style devices should be treated
 as high-speed optical I/O for distributed compute, AI clusters, accelerator
 communication and memory pooling, not as normal CPUs or a direct replacement for
 photonic compute targets.
 
-LO also supports `ai_accelerator` as a generic accelerator planning target.
+LogicN also supports `ai_accelerator` as a generic accelerator planning target.
 Vendor devices such as Intel Gaudi 3 should be passive backend profiles selected
 by config, adapter policy or capability detection. They should not become
-permanent LO syntax such as `target gaudi`.
+permanent LogicN syntax such as `target gaudi`.
 
 ## Quick Start
 
 From the repository root:
 
 ```powershell
-cd C:\laragon\www\LO
+cd C:\laragon\www\LogicN
 ```
 
 Generate or refresh the project graph:
 
 ```powershell
-node packages-lo\lo-core-cli\dist\index.js graph --out build\graph
+node packages-logicn\logicn-core-cli\dist\index.js graph --out build\graph
 ```
 
 Inspect task automation with a dry run:
 
 ```powershell
-node packages-lo\lo-core-cli\dist\index.js task buildApi --file packages-lo\lo-core-tasks\examples\tasks.lo --dry-run
+node packages-logicn\logicn-core-cli\dist\index.js task buildApi --file packages-logicn\logicn-core-tasks\examples\tasks.lln --dry-run
 ```
 
 Run the package tests that currently have executable coverage:
 
 ```powershell
-npm.cmd --prefix packages-lo\lo-devtools-project-graph test
-npm.cmd --prefix packages-lo\lo-core-tasks test
-npm.cmd --prefix packages-lo\lo-core-cli test
+npm.cmd --prefix packages-logicn\logicn-devtools-project-graph test
+npm.cmd --prefix packages-logicn\logicn-core-tasks test
+npm.cmd --prefix packages-logicn\logicn-core-cli test
 ```
 
-For the prototype LO core compiler, work from `packages-lo/lo-core/` and see that
+For the prototype LogicN core compiler, work from `packages-logicn/logicn-core/` and see that
 package README for the supported commands.
 
 ## Project Structure
 
 ```text
-LO-app/
+logicn-app/
 |-- AGENTS.md
-|-- package-lo.json          # proposed future LO package manifest
-|-- lo.lock.json             # proposed future LO package lockfile
+|-- package-logicn.json          # proposed future LogicN package manifest
+|-- logicn.lock.json             # proposed future LogicN package lockfile
 |-- docs/
 |-- build/
 |   `-- graph/
 |-- packages/               # normal app/vendor package space
-|-- packages-lo/
-|   |-- lo-core/
-|   |-- lo-core-compiler/
-|   |-- lo-core-runtime/
-|   |-- lo-core-security/
-|   |-- lo-core-config/
-|   |-- lo-core-reports/
-|   |-- lo-core-logic/
-|   |-- lo-core-vector/
-|   |-- lo-core-compute/
-|   |-- lo-ai/
-|   |-- lo-ai-lowbit/
-|   |-- lo-ai-agent/
-|   |-- lo-ai-neural/
-|   |-- lo-ai-neuromorphic/
-|   |-- lo-core-photonic/
-|   |-- lo-target-cpu/
-|   |-- lo-cpu-kernels/
-|   |-- lo-target-binary/
-|   |-- lo-target-wasm/
-|   |-- lo-target-gpu/
-|   |-- lo-target-ai-accelerator/
-|   |-- lo-target-photonic/
-|   |-- lo-framework-app-kernel/
-|   |-- lo-framework-api-server/
-|   |-- lo-core-cli/
-|   |-- lo-core-tasks/
-|   |-- lo-tools-benchmark/
-|   |-- lo-devtools-project-graph/
-|   |-- lo-framework-example-app/
+|-- packages-logicn/
+|   |-- logicn-core/
+|   |-- logicn-core-compiler/
+|   |-- logicn-core-runtime/
+|   |-- logicn-core-security/
+|   |-- logicn-core-config/
+|   |-- logicn-core-reports/
+|   |-- logicn-core-logic/
+|   |-- logicn-core-vector/
+|   |-- logicn-core-compute/
+|   |-- logicn-ai/
+|   |-- logicn-ai-lowbit/
+|   |-- logicn-ai-agent/
+|   |-- logicn-ai-neural/
+|   |-- logicn-ai-neuromorphic/
+|   |-- logicn-core-photonic/
+|   |-- logicn-target-cpu/
+|   |-- logicn-cpu-kernels/
+|   |-- logicn-target-binary/
+|   |-- logicn-target-wasm/
+|   |-- logicn-target-gpu/
+|   |-- logicn-target-ai-accelerator/
+|   |-- logicn-target-photonic/
+|   |-- logicn-framework-app-kernel/
+|   |-- logicn-framework-api-server/
+|   |-- logicn-core-cli/
+|   |-- logicn-core-tasks/
+|   |-- logicn-tools-benchmark/
+|   |-- logicn-devtools-project-graph/
+|   |-- logicn-framework-example-app/
 `-- tools/
 ```
 
 ## Package Map
 
-- `packages-lo/lo-core/` - LO language rules, syntax, type system, prototype
+- `packages-logicn/logicn-core/` - LogicN language rules, syntax, type system, prototype
   compiler notes, memory safety model, Structured Await, examples and core
   documentation.
-- `packages-lo/lo-core-compiler/` - compiler pipeline contracts for lexer, parser, AST,
+- `packages-logicn/logicn-core-compiler/` - compiler pipeline contracts for lexer, parser, AST,
   checkers, IR, diagnostics, source maps and compiler reports.
-- `packages-lo/lo-core-runtime/` - execution contracts for checked or compiled
-  LO code, including Structured Await scopes, cancellation and timeout
+- `packages-logicn/logicn-core-runtime/` - execution contracts for checked or compiled
+  LogicN code, including Structured Await scopes, cancellation and timeout
   enforcement.
-- `packages-lo/lo-core-security/` - reusable security primitives, redaction,
+- `packages-logicn/logicn-core-security/` - reusable security primitives, redaction,
   permissions, crypto policy and security reports.
-- `packages-lo/lo-core-config/` - project configuration, environment mode and production
+- `packages-logicn/logicn-core-config/` - project configuration, environment mode and production
   strictness contracts.
-- `packages-lo/lo-core-reports/` - shared report schemas and report-writing
+- `packages-logicn/logicn-core-reports/` - shared report schemas and report-writing
   contracts, including async/concurrency, storage and build-cache report shapes.
-- `packages-lo/lo-core-logic/` - `Tri`, `Logic<N>`, Decision, RiskLevel and future Omni
+- `packages-logicn/logicn-core-logic/` - `Tri`, `LogicN`, Decision, RiskLevel and future Omni
   logic concepts.
-- `packages-lo/lo-core-vector/` - vector, matrix, tensor, lane, dimension and numeric
+- `packages-logicn/logicn-core-vector/` - vector, matrix, tensor, lane, dimension and numeric
   operation concepts.
-- `packages-lo/lo-core-compute/` - compute planning, capabilities, effects, budgets and
+- `packages-logicn/logicn-core-compute/` - compute planning, capabilities, effects, budgets and
   target selection.
-- `packages-lo/lo-ai/` - generic AI inference contracts, model metadata, safety
+- `packages-logicn/logicn-ai/` - generic AI inference contracts, model metadata, safety
   policy and AI reports.
-- `packages-lo/lo-ai-lowbit/` - low-bit and ternary AI inference contracts, with
-  BitNet represented as one optional backend rather than LO syntax.
-- `packages-lo/lo-ai-agent/` - supervised AI agent, tool permission, task group,
+- `packages-logicn/logicn-ai-lowbit/` - low-bit and ternary AI inference contracts, with
+  BitNet represented as one optional backend rather than LogicN syntax.
+- `packages-logicn/logicn-ai-agent/` - supervised AI agent, tool permission, task group,
   merge policy and agent report contracts.
-- `packages-lo/lo-ai-neural/` - neural model, layer, inference and training boundary
+- `packages-logicn/logicn-ai-neural/` - neural model, layer, inference and training boundary
   contracts.
-- `packages-lo/lo-ai-neuromorphic/` - spike, event-signal and spiking model
+- `packages-logicn/logicn-ai-neuromorphic/` - spike, event-signal and spiking model
   contracts.
-- `packages-lo/lo-core-photonic/` - photonic and wavelength concepts, simulation and
+- `packages-logicn/logicn-core-photonic/` - photonic and wavelength concepts, simulation and
   logic-to-light mapping contracts.
-- `packages-lo/lo-target-cpu/` - CPU capability detection, threading, memory limits
+- `packages-logicn/logicn-target-cpu/` - CPU capability detection, threading, memory limits
   and fallback planning.
-- `packages-lo/lo-cpu-kernels/` - optimized CPU kernel contracts for vector,
+- `packages-logicn/logicn-cpu-kernels/` - optimized CPU kernel contracts for vector,
   matrix, low-bit and ternary workloads.
-- `packages-lo/lo-target-binary/` - binary/native target planning and artefact
+- `packages-logicn/logicn-target-binary/` - binary/native target planning and artefact
   metadata.
-- `packages-lo/lo-target-wasm/` - WebAssembly target planning and module metadata.
-- `packages-lo/lo-target-gpu/` - GPU target planning, kernel mapping and data
+- `packages-logicn/logicn-target-wasm/` - WebAssembly target planning and module metadata.
+- `packages-logicn/logicn-target-gpu/` - GPU target planning, kernel mapping and data
   movement reports.
-- `packages-lo/lo-target-ai-accelerator/` - NPU, TPU, AI-chip and passive
+- `packages-logicn/logicn-target-ai-accelerator/` - NPU, TPU, AI-chip and passive
   accelerator backend profile planning contracts.
-- `packages-lo/lo-target-photonic/` - photonic backend target planning and
-  optical I/O interconnect planning that uses `lo-core-photonic`.
-- `packages-lo/lo-framework-app-kernel/` - optional secure application kernel for typed API
+- `packages-logicn/logicn-target-photonic/` - photonic backend target planning and
+  optical I/O interconnect planning that uses `logicn-core-photonic`.
+- `packages-logicn/logicn-framework-app-kernel/` - optional secure application kernel for typed API
   boundaries, validation, auth, rate limits, jobs and runtime reports.
-- `packages-lo/lo-framework-api-server/` - built-in HTTP API transport that delegates typed
-  execution and policy decisions to `lo-framework-app-kernel`.
-- `packages-lo/lo-core-cli/` - developer command tooling for graph, tasks, future check,
+- `packages-logicn/logicn-framework-api-server/` - built-in HTTP API transport that delegates typed
+  execution and policy decisions to `logicn-framework-app-kernel`.
+- `packages-logicn/logicn-core-cli/` - developer command tooling for graph, tasks, future check,
   build, run, serve, reports, routes and security commands.
-- `packages-lo/lo-core-tasks/` - safe typed project automation with declared effects,
+- `packages-logicn/logicn-core-tasks/` - safe typed project automation with declared effects,
   permissions, dependency planning and reports.
-- `packages-lo/lo-tools-benchmark/` - development diagnostics and benchmark contracts
+- `packages-logicn/logicn-tools-benchmark/` - development diagnostics and benchmark contracts
   for logic, CPU/GPU/low-bit fallback, privacy-safe reports and comparisons.
-- `packages-lo/lo-devtools-project-graph/` - project graph contracts and mapper for package,
+- `packages-logicn/logicn-devtools-project-graph/` - project graph contracts and mapper for package,
   document, policy and report relationships.
-- `packages-lo/lo-framework-example-app/` - bespoke application source, routes, modules, tests and app
+- `packages-logicn/logicn-framework-example-app/` - bespoke application source, routes, modules, tests and app
   configuration.
 - `docs/` - app/workspace requirements, architecture, security, deployment,
   decisions, changelog and operational documentation.
@@ -244,32 +244,32 @@ LO-app/
 Archived post-v2 package planning is preserved outside the active workspace:
 
 ```text
-C:\laragon\www\LO_Archive\packages-lo\lo-finance-core
-C:\laragon\www\LO_Archive\packages-lo\lo-electrical-core
-C:\laragon\www\LO_Archive\packages-lo\lo-ot-core
+C:\laragon\www\LogicN_Archive\packages-logicn\logicn-finance-core
+C:\laragon\www\LogicN_Archive\packages-logicn\logicn-electrical-core
+C:\laragon\www\LogicN_Archive\packages-logicn\logicn-ot-core
 ```
 
 ## Layering
 
 ```text
-LO Core
+LogicN Core
   language, type system, effects, memory safety, Structured Await,
   storage-aware performance rules and core reports
 
-LO Compiler / Runtime / Security / Config / Reports
+LogicN Compiler / Runtime / Security / Config / Reports
   compiler pipeline, execution, shared security, configuration and report contracts
 
-LO Logic / Vector / Compute / AI / Neural / Photonic / Target Packages
+LogicN Logic / Vector / Compute / AI / Neural / Photonic / Target Packages
   specialised concepts and target planning outside the core language package;
   only CPU and WASM are active v1 targets
 
-LO Secure App Kernel
+LogicN Secure App Kernel
   optional runtime layer for API validation, auth, rate limits, jobs and reports
 
-LO API Server
+LogicN API Server
   HTTP transport that normalises requests and calls the app kernel
 
-LO CLI / Tasks / Project Graph
+LogicN CLI / Tasks / Project Graph
   developer tooling, safe automation, benchmarks and AI-readable project maps
 
 Full Frameworks
@@ -278,35 +278,35 @@ Full Frameworks
 
 Important boundary rules:
 
-- `lo-core` defines the language. It must not become a web framework.
-- `lo-framework-app-kernel` is an optional secure application boundary. It must not become
+- `logicn-core` defines the language. It must not become a web framework.
+- `logicn-framework-app-kernel` is an optional secure application boundary. It must not become
   a CMS, admin dashboard, ORM or frontend framework.
-- `lo-framework-api-server` serves HTTP and delegates typed policy decisions.
-- `lo-ai`, `lo-ai-agent`, `lo-ai-neural`, `lo-ai-neuromorphic` and `lo-ai-lowbit` are
+- `logicn-framework-api-server` serves HTTP and delegates typed policy decisions.
+- `logicn-ai`, `logicn-ai-agent`, `logicn-ai-neural`, `logicn-ai-neuromorphic` and `logicn-ai-lowbit` are
   optional AI package layers, not core syntax.
 - Parallel agents must be supervised, bounded, permissioned and reportable.
 - BitNet is a backend option inside low-bit AI, not a language feature.
 - AI accelerators, GPUs, optical I/O and photonic chipsets are optional targets.
   CPU and binary-compatible fallback remain the baseline.
-- `ai_accelerator` is the public LO target category. Intel Gaudi and similar
+- `ai_accelerator` is the public LogicN target category. Intel Gaudi and similar
   hardware are backend profiles selected by policy and reported after planning.
 - `optical_io` means high-speed interconnect/data movement planning. It is not a
   claim that Intel Silicon Photonics or OCI devices are general-purpose CPUs.
-- `lo-tools-benchmark` is development diagnostics. It must not auto-run in
+- `logicn-tools-benchmark` is development diagnostics. It must not auto-run in
   production and is disabled by default in production boot/package profiles.
   Enabling it in production requires an explicit reported override with a
   reason. Benchmark reports must not expose private machine or project data.
-- `lo-devtools-project-graph` explains the repository. It does not enforce compiler,
+- `logicn-devtools-project-graph` explains the repository. It does not enforce compiler,
   runtime or security rules.
 - Development-only packages should remain outside production package
-  resolution. Use `lo-devtools-*` for development-only inspection, graph,
-  scaffold and assistant-context packages, and `lo-tools-*` for broader
+  resolution. Use `logicn-devtools-*` for development-only inspection, graph,
+  scaffold and assistant-context packages, and `logicn-tools-*` for broader
   diagnostics or benchmark utilities that may run in development or staging.
   Production defaults must disable these packages unless a maintainer declares
   an explicit production package override.
 - Finance, electrical and OT packages are archived post-v2 domain planning and
-  are not part of the active build graph. They must not become LO core syntax or
-  imply that LO beta is ready for regulated finance, certified electrical
+  are not part of the active build graph. They must not become LogicN core syntax or
+  imply that LogicN beta is ready for regulated finance, certified electrical
   protection, PLC safety systems, SCADA products or OT control.
 
 ## Package Layout Direction
@@ -315,20 +315,20 @@ The proposed long-term split is documented in `docs/PACKAGE_LAYOUT.md`:
 
 ```text
 package.json       normal app/runtime ecosystem dependencies
-package-lo.json    LO package manifest
-lo.lock.json       deterministic LO package lockfile
+package-logicn.json    LogicN package manifest
+logicn.lock.json       deterministic LogicN package lockfile
 packages/          normal app/vendor packages
-packages-lo/       LO packages, optionally a nested repository
+packages-logicn/       LogicN packages, optionally a nested repository
 ```
 
-The current beta has moved LO packages under `packages-lo/`. `packages/` is now
-reserved for normal app/vendor package space. `package-lo.json` and
-`lo.lock.json` remain planned files; do not rely on them until the manifest,
+The current beta has moved LogicN packages under `packages-logicn/`. `packages/` is now
+reserved for normal app/vendor package space. `package-logicn.json` and
+`logicn.lock.json` remain planned files; do not rely on them until the manifest,
 lockfile and package resolver are implemented.
 
 Package naming guidance lives in `docs/PACKAGE_NAMING.md`. Current packages use
-family prefixes such as `lo-core-*`, `lo-ai-*`, `lo-target-*`,
-`lo-framework-*`, `lo-devtools-*` and `lo-tools-*` so their
+family prefixes such as `logicn-core-*`, `logicn-ai-*`, `logicn-target-*`,
+`logicn-framework-*`, `logicn-devtools-*` and `logicn-tools-*` so their
 runtime, developer-tooling or domain role is visible from the directory name.
 
 ## Current Tooling
@@ -336,25 +336,25 @@ runtime, developer-tooling or domain role is visible from the directory name.
 The currently implemented root-level CLI paths are:
 
 ```powershell
-node packages-lo\lo-core-cli\dist\index.js graph --out build\graph
-node packages-lo\lo-core-cli\dist\index.js graph query lo-core-security --out build\graph
-node packages-lo\lo-core-cli\dist\index.js graph explain package:lo-core-security --out build\graph
-node packages-lo\lo-core-cli\dist\index.js graph path package:lo-devtools-project-graph report:project-graph --out build\graph
+node packages-logicn\logicn-core-cli\dist\index.js graph --out build\graph
+node packages-logicn\logicn-core-cli\dist\index.js graph query logicn-core-security --out build\graph
+node packages-logicn\logicn-core-cli\dist\index.js graph explain package:logicn-core-security --out build\graph
+node packages-logicn\logicn-core-cli\dist\index.js graph path package:logicn-devtools-project-graph report:project-graph --out build\graph
 
-node packages-lo\lo-core-cli\dist\index.js task --file packages-lo\lo-core-tasks\examples\tasks.lo
-node packages-lo\lo-core-cli\dist\index.js task buildApi --file packages-lo\lo-core-tasks\examples\tasks.lo --dry-run
+node packages-logicn\logicn-core-cli\dist\index.js task --file packages-logicn\logicn-core-tasks\examples\tasks.lln
+node packages-logicn\logicn-core-cli\dist\index.js task buildApi --file packages-logicn\logicn-core-tasks\examples\tasks.lln --dry-run
 ```
 
-`lo benchmark` is registered as a future command placeholder. Benchmark modes,
+`LogicN benchmark` is registered as a future command placeholder. Benchmark modes,
 report shapes and safety rules are documented in
-`packages-lo/lo-tools-benchmark/README.md`; the runnable benchmark runner is still on
+`packages-logicn/logicn-tools-benchmark/README.md`; the runnable benchmark runner is still on
 the package TODO list.
 
-Once `lo-core-cli` is installed or linked, the intended shorthand is:
+Once `logicn-core-cli` is installed or linked, the intended shorthand is:
 
 ```powershell
-lo graph --out build\graph
-lo task buildApi --dry-run
+LogicN graph --out build\graph
+LogicN task buildApi --dry-run
 ```
 
 ## Project Graph
@@ -363,16 +363,16 @@ AI assistants and developers should use the generated project graph to inspect
 package ownership and repository relationships:
 
 ```text
-build/graph/lo-devtools-project-graph.json
-build/graph/LO_GRAPH_REPORT.md
-build/graph/lo-ai-map.md
-build/graph/lo-devtools-project-graph.html
+build/graph/logicn-devtools-project-graph.json
+build/graph/LogicN_GRAPH_REPORT.md
+build/graph/logicn-ai-map.md
+build/graph/logicn-devtools-project-graph.html
 ```
 
 If the graph is missing or out of date, regenerate it from the repository root:
 
 ```powershell
-node packages-lo\lo-core-cli\dist\index.js graph --out build\graph
+node packages-logicn\logicn-core-cli\dist\index.js graph --out build\graph
 ```
 
 The graph is navigation tooling only. It does not replace the compiler, tests,
@@ -380,12 +380,12 @@ security checks or package boundary rules.
 
 ## Task Automation
 
-`lo-core-tasks` loads safe task definitions from `tasks.lo` files. Tasks declare
+`logicn-core-tasks` loads safe task definitions from `tasks.lln` files. Tasks declare
 their dependencies, effects and permissions before anything runs.
 
 Example:
 
-```lo
+```LogicN
 task buildApi {
   depends [generateReports]
   effects [filesystem, compiler, reports]
@@ -409,7 +409,7 @@ build/reports/task-report.json
 
 ## Documentation Guide
 
-- Use `packages-lo/lo-core/` for language documentation.
+- Use `packages-logicn/logicn-core/` for language documentation.
 - Use package READMEs and TODOs for package-specific contracts and work.
 - Use `docs/` for app/workspace requirements, architecture, security,
   deployment, decisions and changelog.
@@ -429,22 +429,22 @@ light-framework/
 |-- .git
 |-- packages/
 |   `-- normal app/vendor packages
-|-- packages-lo/
+|-- packages-logicn/
 |   `-- .git
 `-- app/framework files
 ```
 
-Use that layout only when `packages-lo/` becomes a reusable LO package collection that
+Use that layout only when `packages-logicn/` becomes a reusable LogicN package collection that
 is imported by different frameworks.
 
 Recommended implementation:
 
 ```text
 light-framework/.git
-packages-lo/.git
+packages-logicn/.git
 ```
 
-with `packages-lo/` added to the framework as an intentional Git submodule or
-standalone nested repository. Do not create `packages-lo/.git` accidentally
+with `packages-logicn/` added to the framework as an intentional Git submodule or
+standalone nested repository. Do not create `packages-logicn/.git` accidentally
 inside the current app template, because the parent repository will not track
-package contents in the normal way once `packages-lo/` is its own repository.
+package contents in the normal way once `packages-logicn/` is its own repository.

@@ -1,15 +1,15 @@
 expand on this idea and update documentation and update project files
-there sould be a lo-core-* package for network and or security with related content in that may need changing
+there sould be a logicn-core-* package for network and or security with related content in that may need changing
 for each file you update etc confirm it is saved
 
-Yes — LO could help improve **network / Ethernet I/O speed and security**, but not by “making Ethernet faster” directly.
+Yes — LogicN could help improve **network / Ethernet I/O speed and security**, but not by “making Ethernet faster” directly.
 
 The honest design is:
 
 ```text
-LO cannot change the physical Ethernet speed.
+LogicN cannot change the physical Ethernet speed.
 
-LO can improve how applications use the network:
+LogicN can improve how applications use the network:
 - fewer copies
 - better buffering
 - safer protocols
@@ -20,28 +20,28 @@ LO can improve how applications use the network:
 - security rules before deployment
 ```
 
-Ethernet itself is still evolving quickly. IEEE 802.3 has active work around **200 Gb/s, 400 Gb/s, 800 Gb/s and 1.6 Tb/s Ethernet**, so LO should be designed for future high-speed networks rather than assuming normal 1 Gb/s or 10 Gb/s servers. ([ieee802.org][1])
+Ethernet itself is still evolving quickly. IEEE 802.3 has active work around **200 Gb/s, 400 Gb/s, 800 Gb/s and 1.6 Tb/s Ethernet**, so LogicN should be designed for future high-speed networks rather than assuming normal 1 Gb/s or 10 Gb/s servers. ([ieee802.org][1])
 
 ---
 
 # 1. Add a network-aware runtime
 
-LO should have a dedicated network layer:
+LogicN should have a dedicated network layer:
 
-consider naming the below lo-core-* or lo-networking-* etc
+consider naming the below logicn-core-* or LogicN-networking-* etc
 ```text
-lo-net
-lo-http
-lo-tls
-lo-dns
-lo-quic
-lo-tcp
-lo-udp
-lo-websocket
-lo-network-policy
+LogicN-net
+LogicN-http
+LogicN-tls
+LogicN-dns
+LogicN-quic
+LogicN-tcp
+LogicN-udp
+LogicN-websocket
+LogicN-network-policy
 ```
 
-LO Core should not contain every network protocol, but LO should make networking **typed, permissioned and reportable**.
+LogicN Core should not contain every network protocol, but LogicN should make networking **typed, permissioned and reportable**.
 
 Example:
 
@@ -58,7 +58,7 @@ network {
 }
 ```
 
-This would already make LO safer than many normal scripting apps.
+This would already make LogicN safer than many normal scripting apps.
 
 ---
 
@@ -68,7 +68,7 @@ A major speed problem in networking is unnecessary copying between kernel memory
 
 Linux has modern zero-copy options. For example, `MSG_ZEROCOPY` enables copy avoidance for socket send calls, and the Linux kernel docs say it is implemented for TCP, UDP and VSOCK. ([Kernel Documentation][2]) Linux `io_uring` also supports high-performance shared-ring I/O patterns, and the kernel docs describe zero-copy receive as removing kernel-to-user copying on the network receive path. ([Kernel Documentation][3])
 
-LO could expose this safely:
+LogicN could expose this safely:
 
 ```text
 network io {
@@ -79,7 +79,7 @@ network io {
 }
 ```
 
-The developer writes normal LO code, but LO decides:
+The developer writes normal LogicN code, but LogicN decides:
 
 ```text
 small request       -> normal buffered I/O
@@ -92,7 +92,7 @@ unsupported system  -> safe buffered fallback
 
 # 3. Add `network auto`
 
-Similar to `compute auto`, LO could have:
+Similar to `compute auto`, LogicN could have:
 
 ```text
 network auto
@@ -127,17 +127,17 @@ macOS                            -> use kqueue-style backend
 basic platform                   -> use safe async sockets
 ```
 
-So LO does not hard-code one network model.
+So LogicN does not hard-code one network model.
 
 ---
 
 # 4. Support eBPF / XDP for high-speed filtering
 
-For very high-speed servers, LO could optionally support eBPF/XDP adapters.
+For very high-speed servers, LogicN could optionally support eBPF/XDP adapters.
 
 XDP programs can attach to network devices and run on incoming packets before much of the normal kernel networking overhead occurs; they can drop, redirect, manipulate or pass packets to the network stack. ([docs.ebpf.io][4]) Red Hat describes XDP and eBPF as a high-performance combination for early packet processing, filtering, tracing and monitoring. ([Red Hat Documentation][5])
 
-LO could use this for:
+LogicN could use this for:
 
 ```text
 DDoS filtering
@@ -163,17 +163,17 @@ network edgeFilter {
 }
 ```
 
-Important: this should be optional and advanced, not required for normal LO apps.
+Important: this should be optional and advanced, not required for normal LogicN apps.
 
 ---
 
 # 5. Support DPDK for specialist packet processing
 
-For extreme networking workloads, LO could support DPDK through an adapter.
+For extreme networking workloads, LogicN could support DPDK through an adapter.
 
 DPDK is a Linux Foundation project providing libraries to accelerate packet-processing workloads across CPU architectures. ([dpdk.org][6]) Its own documentation says its main goal is to provide a framework for fast packet processing in data-plane applications. ([doc.dpdk.org][7])
 
-LO could use DPDK for:
+LogicN could use DPDK for:
 
 ```text
 packet routers
@@ -188,7 +188,7 @@ custom protocol gateways
 
 But DPDK is not ideal for every normal web app. It is a specialist high-performance networking path.
 
-LO should model it like:
+LogicN should model it like:
 
 ```text
 network target dpdk {
@@ -203,7 +203,7 @@ network target dpdk {
 
 # 6. Add protocol-safe APIs
 
-LO could improve security by making protocol handling typed.
+LogicN could improve security by making protocol handling typed.
 
 Instead of raw strings everywhere:
 
@@ -212,7 +212,7 @@ request.headers["Authorization"]
 request.body.anything
 ```
 
-LO could enforce:
+LogicN could enforce:
 
 ```text
 Header<Authorization>
@@ -244,7 +244,7 @@ route Login {
 }
 ```
 
-LO could fail the build if public routes are unsafe:
+LogicN could fail the build if public routes are unsafe:
 
 ```text
 Build failed:
@@ -289,7 +289,7 @@ supply-chain attacks
 debug ports left open
 ```
 
-LO package permissions could be:
+LogicN package permissions could be:
 
 ```text
 package imageProcessor {
@@ -309,7 +309,7 @@ Package imageProcessor attempted network.open to unknown host.
 
 # 8. Add TLS and certificate policy
 
-LO could require secure transport by default.
+LogicN could require secure transport by default.
 
 ```text
 tls {
@@ -337,7 +337,7 @@ This would help avoid common mistakes.
 
 # 9. Add network observability reports
 
-LO should generate reports such as:
+LogicN should generate reports such as:
 
 ```text
 app.network-report.json
@@ -376,7 +376,7 @@ This would be very useful for enterprise deployments.
 
 # 10. Add high-speed network profiles
 
-LO could support deployment profiles:
+LogicN could support deployment profiles:
 
 ```text
 networkProfile default
@@ -421,7 +421,7 @@ This ties into the earlier Intel Silicon Photonics and Gaudi discussions.
 
 A common network problem is accepting more data than the app can process.
 
-LO should make backpressure a first-class concept:
+LogicN should make backpressure a first-class concept:
 
 ```text
 stream HttpRequestBody {
@@ -447,7 +447,7 @@ server crashes under load
 
 Raw sockets are powerful but dangerous.
 
-LO should deny them by default:
+LogicN should deny them by default:
 
 ```text
 deny rawSocket
@@ -466,17 +466,17 @@ networkTool PacketMonitor {
 }
 ```
 
-This would keep normal apps safe while still allowing cybersecurity tools to be written in LO.
+This would keep normal apps safe while still allowing cybersecurity tools to be written in LogicN.
 
 ---
 
 # 13. Add network-aware benchmarking
 
-LO could include:
+LogicN could include:
 
 ```bash
-lo benchmark --network --light
-lo benchmark --network --full
+LogicN benchmark --network --light
+LogicN benchmark --network --full
 ```
 
 Test areas:
@@ -514,12 +514,12 @@ This would help developers understand whether the network, CPU, validation, JSON
 
 ---
 
-# Best LO feature set for network I/O
+# Best LogicN feature set for network I/O
 
 I would define this as:
 
 ```text
-LO Network Runtime
+LogicN Network Runtime
 ```
 
 With these parts:
@@ -546,13 +546,13 @@ network benchmarks
 ```markdown
 ## Network and Ethernet I/O Optimisation
 
-LO should not claim to make Ethernet hardware faster.
+LogicN should not claim to make Ethernet hardware faster.
 
 Ethernet speed is determined by hardware, drivers, cables, switches, network cards and standards.
 
-LO should instead optimise how applications use network I/O.
+LogicN should instead optimise how applications use network I/O.
 
-LO should support:
+LogicN should support:
 
 - typed network APIs
 - deny-by-default network permissions
@@ -567,7 +567,7 @@ LO should support:
 - network security reports
 - deployment-aware network profiles
 
-LO should treat networking as a security-sensitive capability.
+LogicN should treat networking as a security-sensitive capability.
 
 Network access should be explicit, permissioned, logged and reportable.
 ```
@@ -576,7 +576,7 @@ Network access should be explicit, permissioned, logged and reportable.
 
 # Best short positioning
 
-LO could be stronger for network/Ethernet I/O by making the network layer:
+LogicN could be stronger for network/Ethernet I/O by making the network layer:
 
 ```text
 faster through zero-copy, batching and async I/O
@@ -586,7 +586,7 @@ more enterprise-ready through reports and deployment profiles
 more future-ready through XDP, DPDK, optical I/O and AI-cluster networking support
 ```
 
-That gives LO a strong identity: not just “send a request”, but **understand and govern network movement before the app runs**.
+That gives LogicN a strong identity: not just “send a request”, but **understand and govern network movement before the app runs**.
 
 [1]: https://www.ieee802.org/3/?utm_source=chatgpt.com "IEEE 802.3 Ethernet Working Group"
 [2]: https://docs.kernel.org/networking/msg_zerocopy.html?utm_source=chatgpt.com "MSG_ZEROCOPY"

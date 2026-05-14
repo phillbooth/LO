@@ -2,21 +2,21 @@
 
 ## API Serving Model
 
-LO API serving is split across three layers:
+LogicN API serving is split across three layers:
 
 ```text
-LO Core
+LogicN Core
   defines API contracts, types, diagnostics and generated reports
 
-LO App Kernel
+LogicN App Kernel
   enforces validation, auth, rate limits, idempotency and typed handler dispatch
 
-lo-framework-api-server
+logicn-framework-api-server
   serves HTTP, loads route manifests and passes normalised requests to the kernel
 ```
 
-`lo-framework-api-server` is the default built-in HTTP API server package for simple LO API
-services. Bespoke frameworks can use it directly, use `lo-framework-app-kernel` directly,
+`logicn-framework-api-server` is the default built-in HTTP API server package for simple LogicN API
+services. Bespoke frameworks can use it directly, use `logicn-framework-app-kernel` directly,
 or later use adapter packages such as Express, Fastify, Lambda or Cloudflare
 Workers.
 
@@ -24,17 +24,17 @@ Workers.
 
 ```text
 HTTP request
-  -> lo-framework-api-server
-  -> lo-framework-app-kernel
-  -> LO runtime / typed LO flow
-  -> lo-framework-app-kernel
-  -> lo-framework-api-server
+  -> logicn-framework-api-server
+  -> logicn-framework-app-kernel
+  -> LogicN runtime / typed LogicN flow
+  -> logicn-framework-app-kernel
+  -> logicn-framework-api-server
   -> HTTP response
 ```
 
 ## Boundaries
 
-`lo-framework-api-server` owns:
+`logicn-framework-api-server` owns:
 
 ```text
 HTTP listener
@@ -49,7 +49,7 @@ runtime report files
 graceful shutdown
 ```
 
-`lo-framework-app-kernel` owns:
+`logicn-framework-app-kernel` owns:
 
 ```text
 route matching policy
@@ -64,7 +64,7 @@ typed handler execution
 audit reports
 ```
 
-LO Core owns:
+LogicN Core owns:
 
 ```text
 language syntax
@@ -78,7 +78,7 @@ security report contracts
 
 ## Non-Goals
 
-`lo-framework-api-server` must not become:
+`logicn-framework-api-server` must not become:
 
 ```text
 a full web framework

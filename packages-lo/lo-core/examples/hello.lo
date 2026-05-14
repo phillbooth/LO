@@ -1,4 +1,0 @@
-secure flow main() -> Result<Void, Error> {
-  print("hello from LO")
-  return Ok()
-}

@@ -6,8 +6,8 @@ Electrical and OT package folders have been moved out of the active workspace
 to:
 
 ```text
-C:\laragon\www\LO_Archive\packages-lo\lo-electrical-core
-C:\laragon\www\LO_Archive\packages-lo\lo-ot-core
+C:\laragon\www\LogicN_Archive\packages-logicn\LogicN-electrical-core
+C:\laragon\www\LogicN_Archive\packages-logicn\LogicN-ot-core
 ```
 
 This document is retained as planning context only. Electrical and OT packages
@@ -15,16 +15,16 @@ must not be part of the active v1 build graph.
 
 ## Positioning
 
-LO can support electrical systems and infrastructure as a typed, secure and
+LogicN can support electrical systems and infrastructure as a typed, secure and
 auditable modelling, monitoring and workflow layer.
 
 Core rule:
 
 ```text
-LO should not replace circuit breakers, relays, protective devices, PLC safety
+LogicN should not replace circuit breakers, relays, protective devices, PLC safety
 systems, grid protection, certified controllers or qualified electrical design.
 
-LO can help model, validate, monitor, document, automate and audit electrical
+LogicN can help model, validate, monitor, document, automate and audit electrical
 infrastructure safely.
 ```
 
@@ -32,7 +32,7 @@ Electrical support must start above the physical equipment:
 
 ```text
 sensors / meters / relays / PLCs / BMS / SCADA
-  -> LO typed integration layer
+  -> LogicN typed integration layer
   -> validation, monitoring, alerts, reports
   -> archive, dashboards, compliance evidence
 ```
@@ -57,7 +57,7 @@ energy metering
 SCADA and OT integrations
 ```
 
-LO package work may model these systems, but it must not claim to certify
+LogicN package work may model these systems, but it must not claim to certify
 designs, replace protection settings studies, perform unsupervised switching or
 act as a safety system.
 
@@ -66,31 +66,31 @@ act as a safety system.
 Use grouped beta package areas first:
 
 ```text
-lo-electrical-core
-lo-ot-core
+LogicN-electrical-core
+LogicN-ot-core
 ```
 
 Future electrical subpackages may include:
 
 ```text
-lo-electrical-assets
-lo-electrical-monitoring
-lo-electrical-energy
-lo-electrical-capacity
-lo-electrical-maintenance
-lo-electrical-protection-records
-lo-electrical-reports
+LogicN-electrical-assets
+LogicN-electrical-monitoring
+LogicN-electrical-energy
+LogicN-electrical-capacity
+LogicN-electrical-maintenance
+LogicN-electrical-protection-records
+LogicN-electrical-reports
 ```
 
-Future OT protocol packages should use `lo-ot-*`, because protocols such as
+Future OT protocol packages should use `LogicN-ot-*`, because protocols such as
 OPC UA, Modbus, MQTT, SCADA connectors and IEC 61850 are not only electrical:
 
 ```text
-lo-ot-opcua
-lo-ot-iec61850
-lo-ot-modbus
-lo-ot-mqtt
-lo-ot-scada
+LogicN-ot-opcua
+LogicN-ot-iec61850
+LogicN-ot-modbus
+LogicN-ot-mqtt
+LogicN-ot-scada
 ```
 
 ## Standards Context
@@ -107,7 +107,7 @@ control systems.
 NIST NCCoE guidance notes that connecting OT systems to IT systems can improve
 operations but also increases exposure to cyber threats.
 
-LO documentation should reference these standards as integration and security
+LogicN documentation should reference these standards as integration and security
 context, not as claims of compliance.
 
 References:
@@ -121,7 +121,7 @@ References:
 
 ## Asset Modelling
 
-`lo-electrical-core` should define typed asset contracts:
+`LogicN-electrical-core` should define typed asset contracts:
 
 ```text
 Panel
@@ -142,7 +142,7 @@ Sensor
 
 Example direction:
 
-```lo
+```LogicN
 electrical panel MainPanel {
   voltage 400V
   phases 3
@@ -170,7 +170,7 @@ The first output should be an electrical asset report, not runtime control.
 
 ## Telemetry and Monitoring
 
-LO may process live or periodic telemetry:
+LogicN may process live or periodic telemetry:
 
 ```text
 voltage
@@ -191,7 +191,7 @@ UPS load
 
 Example direction:
 
-```lo
+```LogicN
 electrical monitor FactoryPower {
   source Meter("main-incomer")
 
@@ -214,7 +214,7 @@ electrical monitor FactoryPower {
 
 ## Safe Command Boundaries
 
-LO must distinguish monitoring from control:
+LogicN must distinguish monitoring from control:
 
 ```text
 read telemetry        = lower risk
@@ -228,7 +228,7 @@ override protection   = deny
 
 Default policy:
 
-```lo
+```LogicN
 electrical control {
   default deny
 
@@ -246,13 +246,13 @@ electrical control {
 }
 ```
 
-Normal LO scripts must not casually operate electrical equipment. High-risk
+Normal LogicN scripts must not casually operate electrical equipment. High-risk
 control must require explicit policy, signed jobs, operator approval, local
 interlocks and package/runtime support designed for that environment.
 
 ## Capacity and Energy
 
-LO may model:
+LogicN may model:
 
 ```text
 total connected load
@@ -275,7 +275,7 @@ behind safe command boundaries.
 
 ## Protection Settings Records
 
-LO can help manage protection setting records, but not replace relays or
+LogicN can help manage protection setting records, but not replace relays or
 protection devices.
 
 Allowed package responsibilities:
@@ -293,7 +293,7 @@ device compatibility reports
 
 Example direction:
 
-```lo
+```LogicN
 protection settings MainIncomerRelay {
   source "./relay-settings/main-incomer.json"
 
@@ -325,7 +325,7 @@ audit all control attempts
 
 Example direction:
 
-```lo
+```LogicN
 ot network ElectricalOT {
   default deny
 
@@ -386,7 +386,7 @@ real-time grid control
 
 ## Non-Goals
 
-LO electrical package work must not:
+LogicN electrical package work must not:
 
 ```text
 replace certified electrical protection equipment

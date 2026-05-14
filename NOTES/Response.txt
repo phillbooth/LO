@@ -1,9 +1,9 @@
-LO could make **HTTP responses secure by design** by treating every response as a **typed contract**, not as a loose string, object or raw header map.
+LogicN could make **HTTP responses secure by design** by treating every response as a **typed contract**, not as a loose string, object or raw header map.
 
 The core idea:
 
 ```text id="cppzfv"
-A route should not be allowed to return data unless LO knows:
+A route should not be allowed to return data unless LogicN knows:
 - the response type
 - the content type
 - the status code
@@ -18,19 +18,19 @@ OWASP recommends security-related HTTP response headers because they help reduce
 
 ---
 
-# Recommended LO Response Model
+# Recommended LogicN Response Model
 
 Instead of allowing this:
 
-```lo id="w5v9vd"
+```LogicN id="w5v9vd"
 return {
   user: user
 }
 ```
 
-LO should require this:
+LogicN should require this:
 
-```lo id="6dtcb5"
+```LogicN id="6dtcb5"
 return Response<UserProfileResponse> {
   status: 200
   content_type: "application/json"
@@ -44,13 +44,13 @@ That lets the compiler check the response before the app runs.
 
 ---
 
-# LO Response Principle
+# LogicN Response Principle
 
 ```text id="m7wrxl"
 No raw response leaves the app without a declared type, content type, cache rule and security profile.
 ```
 
-This gives LO stronger protection against:
+This gives LogicN stronger protection against:
 
 ```text id="quskqu"
 accidental private data leaks
@@ -70,9 +70,9 @@ over-sharing error details
 
 # Response Security Profiles
 
-LO should provide built-in response profiles.
+LogicN should provide built-in response profiles.
 
-```lo id="bkx0sb"
+```LogicN id="bkx0sb"
 response_profile public_json {
   content_type: "application/json; charset=utf-8"
   headers {
@@ -108,9 +108,9 @@ OWASP notes that `Content-Type` should be specified for the actual content retur
 
 ---
 
-# Secure Headers LO Should Understand
+# Secure Headers LogicN Should Understand
 
-LO should not ask every developer to remember every header manually. It should offer secure defaults and route-specific overrides.
+LogicN should not ask every developer to remember every header manually. It should offer secure defaults and route-specific overrides.
 
 ## For JSON APIs
 
@@ -145,7 +145,7 @@ Cache-Control: private/no-store depending on sensitivity
 X-Robots-Tag: noindex, nofollow for private files
 ```
 
-## Headers LO should avoid or remove
+## Headers LogicN should avoid or remove
 
 ```text id="y0ujjj"
 X-Powered-By
@@ -161,11 +161,11 @@ OWASP recommends removing `X-Powered-By`, making the `Server` header non-informa
 
 # Typed Status Codes
 
-LO should make status codes meaningful.
+LogicN should make status codes meaningful.
 
 Example:
 
-```lo id="kpdwh8"
+```LogicN id="kpdwh8"
 route GET "/orders/{orderId: UUID}" {
   response {
     200: OrderResponse
@@ -182,7 +182,7 @@ route GET "/orders/{orderId: UUID}" {
 
 Then this should fail:
 
-```lo id="zgp9ie"
+```LogicN id="zgp9ie"
 return Response<OrderResponse> {
   status: 500
   body: order
@@ -195,9 +195,9 @@ Because `500` should not return a successful business object.
 
 # Private Field Filtering
 
-LO should make response data filtering automatic and compile-time checked.
+LogicN should make response data filtering automatic and compile-time checked.
 
-```lo id="6khfjk"
+```LogicN id="6khfjk"
 response UserProfileResponse {
   public id: UUID
   public displayName: String
@@ -210,7 +210,7 @@ response UserProfileResponse {
 
 Route:
 
-```lo id="uixf6a"
+```LogicN id="uixf6a"
 GET "/users/{userId: UUID}" {
   auth required
 
@@ -226,10 +226,10 @@ GET "/users/{userId: UUID}" {
 }
 ```
 
-LO should fail compilation if a handler returns a raw database model directly:
+LogicN should fail compilation if a handler returns a raw database model directly:
 
 ```text id="u1cmwl"
-LO_RESPONSE_SECURITY_ERROR
+LogicN_RESPONSE_SECURITY_ERROR
 
 Route returns database model User directly.
 
@@ -244,7 +244,7 @@ Return UserProfileResponse or define an explicit response filter.
 
 # Safe Error Responses
 
-LO should separate internal errors from public errors.
+LogicN should separate internal errors from public errors.
 
 Bad:
 
@@ -266,9 +266,9 @@ Good:
 }
 ```
 
-LO route:
+LogicN route:
 
-```lo id="mvblpi"
+```LogicN id="mvblpi"
 error_response SafeError {
   expose: ["code", "message", "requestId"]
   hide: ["stack", "sql", "filePath", "secret", "internalMessage"]
@@ -285,9 +285,9 @@ Production routes cannot expose stack traces, SQL strings, file paths, secrets o
 
 # Cache Safety
 
-LO should require cache rules for every response.
+LogicN should require cache rules for every response.
 
-```lo id="8szu2k"
+```LogicN id="8szu2k"
 cache_policy public_short {
   header: "public, max-age=60"
 }
@@ -303,7 +303,7 @@ cache_policy static_asset {
 
 Usage:
 
-```lo id="1jf14s"
+```LogicN id="1jf14s"
 GET "/account" {
   auth required
   response AccountPage
@@ -312,7 +312,7 @@ GET "/account" {
 }
 ```
 
-LO should block this:
+LogicN should block this:
 
 ```text id="kyo3cv"
 Authenticated user page using public cache.
@@ -324,9 +324,9 @@ OWASP notes that `Cache-Control` defines how browsers and intermediate caches st
 
 # Safe Cookies in Responses
 
-LO should make cookie security explicit.
+LogicN should make cookie security explicit.
 
-```lo id="2l9n1r"
+```LogicN id="2l9n1r"
 set_cookie session {
   value: sessionToken
   http_only: true
@@ -337,16 +337,16 @@ set_cookie session {
 }
 ```
 
-LO should reject:
+LogicN should reject:
 
-```lo id="0h0lel"
+```LogicN id="0h0lel"
 set_cookie session {
   value: sessionToken
   http_only: false
 }
 ```
 
-For sensitive apps, LO should default to:
+For sensitive apps, LogicN should default to:
 
 ```text id="y8c5q4"
 HttpOnly
@@ -362,11 +362,11 @@ OWASP notes that `Set-Cookie` itself is not a security header, but its security 
 
 # Content Security Policy Built In
 
-For HTML responses, LO should generate CSP by default.
+For HTML responses, LogicN should generate CSP by default.
 
 Example:
 
-```lo id="p6d4qs"
+```LogicN id="p6d4qs"
 html_response DashboardPage {
   csp {
     default_src ["self"]
@@ -392,9 +392,9 @@ MDN describes CSP as a browser feature that reduces risks from threats such as X
 
 # Content Negotiation
 
-LO should prevent accidental wrong-format output.
+LogicN should prevent accidental wrong-format output.
 
-```lo id="j65q6y"
+```LogicN id="j65q6y"
 route GET "/reports/{id: UUID}" {
   accepts ["application/json"]
   produces ["application/json"]
@@ -411,7 +411,7 @@ If the client asks for HTML:
 Accept: text/html
 ```
 
-LO should return:
+LogicN should return:
 
 ```text id="mhyvvp"
 406 Not Acceptable
@@ -423,18 +423,18 @@ This prevents APIs unexpectedly returning browser-renderable content.
 
 # Safe Redirects
 
-HTTP responses also include redirects, so LO should treat redirects as a separate safe type.
+HTTP responses also include redirects, so LogicN should treat redirects as a separate safe type.
 
-```lo id="rstbnc"
+```LogicN id="rstbnc"
 return Redirect {
   status: 303
   to: trustedRoute("account.dashboard")
 }
 ```
 
-LO should reject:
+LogicN should reject:
 
-```lo id="xfi20n"
+```LogicN id="xfi20n"
 return Redirect {
   to: request.query.next
 }
@@ -442,7 +442,7 @@ return Redirect {
 
 Unless the target is validated:
 
-```lo id="r4w6k3"
+```LogicN id="r4w6k3"
 return Redirect {
   to: safeRedirect(request.query.next, allow_hosts: ["example.com"])
 }
@@ -454,9 +454,9 @@ This helps prevent open redirect problems.
 
 # Response Size and Streaming
 
-LO should protect against oversized responses.
+LogicN should protect against oversized responses.
 
-```lo id="053br4"
+```LogicN id="053br4"
 response_limits {
   max_json_size: 512kb
   max_html_size: 1mb
@@ -467,7 +467,7 @@ response_limits {
 
 For large files:
 
-```lo id="oj0zvq"
+```LogicN id="oj0zvq"
 return FileResponse {
   file: safeFile
   content_type: "application/pdf"
@@ -477,7 +477,7 @@ return FileResponse {
 }
 ```
 
-LO should require streaming for large downloads instead of loading whole files into memory.
+LogicN should require streaming for large downloads instead of loading whole files into memory.
 
 ---
 
@@ -485,7 +485,7 @@ LO should require streaming for large downloads instead of loading whole files i
 
 Security should not make responses slow.
 
-LO can stay fast by compiling response policies.
+LogicN can stay fast by compiling response policies.
 
 At build time:
 
@@ -525,7 +525,7 @@ raw response mutation
 
 # Example Secure Response Contract
 
-```lo id="vgkh4l"
+```LogicN id="vgkh4l"
 route GET "/account/profile" {
   auth required
 
@@ -549,7 +549,7 @@ route GET "/account/profile" {
 
 Handler:
 
-```lo id="j2mxft"
+```LogicN id="j2mxft"
 action getProfile(ctx: RequestContext)
   -> Result<UserProfileResponse, RouteError>
 {
@@ -565,7 +565,7 @@ The handler returns a typed response object, not a raw HTTP response.
 
 # Generated Response Security Report
 
-LO should generate this during build:
+LogicN should generate this during build:
 
 ```json id="el84l6"
 {
@@ -596,12 +596,12 @@ LO should generate this during build:
 This belongs mainly in:
 
 ```text id="xdlyee"
-v3  - LO Secure Network
-v5  - LO App Kernel
-v7  - LO Data / Rendering
-v11 - LO Finance
-v19 - LO Framework Review
-v20 - LO Standards and ISO Review
+v3  - LogicN Secure Network
+v5  - LogicN App Kernel
+v7  - LogicN Data / Rendering
+v11 - LogicN Finance
+v19 - LogicN Framework Review
+v20 - LogicN Standards and ISO Review
 ```
 
 Recommended roadmap note:
@@ -609,7 +609,7 @@ Recommended roadmap note:
 ```markdown id="nb2am5"
 ## Secure HTTP Responses
 
-LO should treat HTTP responses as typed, policy-checked contracts.
+LogicN should treat HTTP responses as typed, policy-checked contracts.
 
 Every response should declare:
 
@@ -631,7 +631,7 @@ The compiler should generate a response security report and fail builds when pri
 In short:
 
 ```text id="ycb7it"
-LO should make the secure response the default response.
+LogicN should make the secure response the default response.
 
 Unsafe or unclear HTTP responses should not compile.
 ```

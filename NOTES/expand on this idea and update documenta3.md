@@ -1,14 +1,14 @@
 expand on this idea and update documentation
 
-At **code-language level**, LO cannot stop someone physically observing packets on a network. Routers, switches, ISPs, Wi-Fi access points, cloud providers or attackers on the path may still see that packets exist.
+At **code-language level**, LogicN cannot stop someone physically observing packets on a network. Routers, switches, ISPs, Wi-Fi access points, cloud providers or attackers on the path may still see that packets exist.
 
-What LO *can* do is make sure they cannot read or tamper with the useful content.
+What LogicN *can* do is make sure they cannot read or tamper with the useful content.
 
 The rule should be:
 
 ```text
-LO cannot make packets invisible.
-LO can make packet contents encrypted, authenticated, permissioned, minimised and auditable.
+LogicN cannot make packets invisible.
+LogicN can make packet contents encrypted, authenticated, permissioned, minimised and auditable.
 ```
 
 TLS 1.3 is designed to prevent eavesdropping, tampering and message forgery between client/server applications, and QUIC uses TLS 1.3 for its security model. ([IETF Datatracker][1])
@@ -17,7 +17,7 @@ TLS 1.3 is designed to prevent eavesdropping, tampering and message forgery betw
 
 ## 1. TLS by default
 
-LO should never allow normal network traffic to be plaintext by default.
+LogicN should never allow normal network traffic to be plaintext by default.
 
 Bad default:
 
@@ -25,13 +25,13 @@ Bad default:
 http://api.example.com
 ```
 
-Better LO default:
+Better LogicN default:
 
 ```text
 https://api.example.com
 ```
 
-LO policy:
+LogicN policy:
 
 ```text
 network {
@@ -61,7 +61,7 @@ OWASP’s TLS guidance focuses on using TLS correctly for application transport 
 
 ## 2. Strong production profile
 
-LO should have a strict production networking mode:
+LogicN should have a strict production networking mode:
 
 ```text
 production network {
@@ -90,7 +90,7 @@ leaking secrets into logs
 
 ## 3. Mutual TLS for enterprise systems
 
-For internal enterprise systems, LO could support **mTLS**.
+For internal enterprise systems, LogicN could support **mTLS**.
 
 Normal TLS proves the server identity to the client.
 mTLS proves both sides:
@@ -100,7 +100,7 @@ client proves identity to server
 server proves identity to client
 ```
 
-LO example:
+LogicN example:
 
 ```text
 service PaymentsApi {
@@ -122,7 +122,7 @@ This helps prevent fake internal services or unauthorised clients talking to sen
 
 ## 4. No silent downgrade
 
-LO should block protocol downgrade.
+LogicN should block protocol downgrade.
 
 Bad:
 
@@ -131,7 +131,7 @@ try HTTPS
 if failed, use HTTP
 ```
 
-LO should deny this unless explicitly allowed in development:
+LogicN should deny this unless explicitly allowed in development:
 
 ```text
 tls {
@@ -167,7 +167,7 @@ logging systems
 internal services
 ```
 
-So for highly sensitive data, LO could support **application-layer encryption** as well.
+So for highly sensitive data, LogicN could support **application-layer encryption** as well.
 
 Example:
 
@@ -196,7 +196,7 @@ domain name in some cases
 traffic volume
 ```
 
-So LO should help reduce what can be inferred.
+So LogicN should help reduce what can be inferred.
 
 Example:
 
@@ -209,7 +209,7 @@ network privacy {
 }
 ```
 
-LO should block things like:
+LogicN should block things like:
 
 ```text
 GET /reset-password?token=secret-token
@@ -226,7 +226,7 @@ body: encrypted/validated payload
 
 ## 7. No secrets in URLs, headers or logs unless approved
 
-LO should have secret-aware networking.
+LogicN should have secret-aware networking.
 
 ```text
 secret API_KEY from env
@@ -246,7 +246,7 @@ request ExternalApi {
 }
 ```
 
-LO should block:
+LogicN should block:
 
 ```text
 log(API_KEY)
@@ -266,7 +266,7 @@ Secrets must not be transmitted in URLs.
 
 ## 8. Typed allowlist networking
 
-LO should deny unknown outbound traffic.
+LogicN should deny unknown outbound traffic.
 
 ```text
 network {
@@ -324,7 +324,7 @@ package paymentProvider {
 }
 ```
 
-This would be a major LO security feature.
+This would be a major LogicN security feature.
 
 ---
 
@@ -366,7 +366,7 @@ This gives developers, auditors and DevOps teams proof of what the app is allowe
 
 ## 11. Packet capture blocked by default
 
-At code level, LO should deny packet inspection unless the app is explicitly a security/network tool.
+At code level, LogicN should deny packet inspection unless the app is explicitly a security/network tool.
 
 Default:
 
@@ -395,7 +395,7 @@ This prevents normal apps or dependencies from silently observing traffic.
 
 ## 12. Safer internal service calls
 
-For enterprise microservices, LO should support service identity.
+For enterprise microservices, LogicN should support service identity.
 
 ```text
 service OrdersApi {
@@ -419,12 +419,12 @@ This means services cannot randomly call anything on the internal network.
 
 ---
 
-## Best LO rule
+## Best LogicN rule
 
 I would define it like this:
 
 ```text
-Network access in LO is denied by default.
+Network access in LogicN is denied by default.
 
 All network communication must be:
 - encrypted where appropriate
@@ -437,18 +437,18 @@ All network communication must be:
 - blocked from plaintext fallback in production
 ```
 
-## Suggested LO docs section
+## Suggested LogicN docs section
 
 ```markdown
 ## Safe Networking
 
-LO cannot prevent packets from being physically observed on a network.
+LogicN cannot prevent packets from being physically observed on a network.
 
-LO can prevent useful data inside those packets from being readable or tampered with by requiring secure transport, typed network policies and secret-safe data handling.
+LogicN can prevent useful data inside those packets from being readable or tampered with by requiring secure transport, typed network policies and secret-safe data handling.
 
-LO should deny plaintext networking by default.
+LogicN should deny plaintext networking by default.
 
-Production LO applications should require:
+Production LogicN applications should require:
 
 - TLS
 - certificate validation
@@ -461,7 +461,7 @@ Production LO applications should require:
 - safe logging and redaction
 - generated network security reports
 
-For enterprise systems, LO should also support:
+For enterprise systems, LogicN should also support:
 
 - mutual TLS
 - service identity
@@ -474,11 +474,11 @@ For enterprise systems, LO should also support:
 The strongest security position is:
 
 ```text
-LO should not trust the network.
+LogicN should not trust the network.
 
-LO should assume packets can be observed, copied, delayed, blocked or modified.
+LogicN should assume packets can be observed, copied, delayed, blocked or modified.
 
-Therefore LO must encrypt, authenticate, validate, minimise and report all network communication.
+Therefore LogicN must encrypt, authenticate, validate, minimise and report all network communication.
 ```
 
 [1]: https://datatracker.ietf.org/doc/html/rfc8446?utm_source=chatgpt.com "RFC 8446 - The Transport Layer Security (TLS) Protocol ..."

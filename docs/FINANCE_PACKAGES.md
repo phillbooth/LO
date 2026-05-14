@@ -5,7 +5,7 @@ Status: archived post-v2 planning.
 Finance package folders have been moved out of the active workspace to:
 
 ```text
-C:\laragon\www\LO_Archive\packages-lo\lo-finance-core
+C:\laragon\www\LogicN_Archive\packages-logicn\LogicN-finance-core
 ```
 
 This document is retained as planning context only. Finance packages must not
@@ -13,8 +13,8 @@ be part of the active v1 build graph.
 
 ## Purpose
 
-LO should treat finance as a serious domain package layer, not as core language
-syntax and not as a claim that LO is ready to run live trading infrastructure.
+LogicN should treat finance as a serious domain package layer, not as core language
+syntax and not as a claim that LogicN is ready to run live trading infrastructure.
 
 The finance opportunity is strongest around safe data handling, typed
 messaging, auditability, deterministic maths, market data, event streams,
@@ -59,38 +59,38 @@ References:
 Start grouped:
 
 ```text
-packages-lo/lo-finance-core/
+packages-logicn/LogicN-finance-core/
 ```
 
 Split later only after contracts are stable:
 
 ```text
-packages-lo/lo-finance-core-math/
-packages-lo/lo-finance-core-calendar/
-packages-lo/lo-finance-core-market-data/
-packages-lo/lo-finance-core-order/
-packages-lo/lo-finance-core-fix/
-packages-lo/lo-finance-core-audit/
-packages-lo/lo-finance-core-compliance/
-packages-lo/lo-finance-core-risk/
-packages-lo/lo-finance-core-pricing/
-packages-lo/lo-finance-core-products/
-packages-lo/lo-finance-core-scenarios/
-packages-lo/lo-finance-core-fdc3/
+packages-logicn/LogicN-finance-core-math/
+packages-logicn/LogicN-finance-core-calendar/
+packages-logicn/LogicN-finance-core-market-data/
+packages-logicn/LogicN-finance-core-order/
+packages-logicn/LogicN-finance-core-fix/
+packages-logicn/LogicN-finance-core-audit/
+packages-logicn/LogicN-finance-core-compliance/
+packages-logicn/LogicN-finance-core-risk/
+packages-logicn/LogicN-finance-core-pricing/
+packages-logicn/LogicN-finance-core-products/
+packages-logicn/LogicN-finance-core-scenarios/
+packages-logicn/LogicN-finance-core-fdc3/
 ```
 
 Keep general infrastructure outside finance:
 
 ```text
-packages-lo/lo-stream/
-packages-lo/lo-stream-kafka/
-packages-lo/lo-schema-registry/
-packages-lo/lo-ffi/
-packages-lo/lo-ffi-cpp/
-packages-lo/lo-ffi-java/
-packages-lo/lo-ffi-python/
-packages-lo/lo-replay/
-packages-lo/lo-core-runtime-low-latency/
+packages-logicn/LogicN-stream/
+packages-logicn/LogicN-stream-kafka/
+packages-logicn/LogicN-schema-registry/
+packages-logicn/LogicN-ffi/
+packages-logicn/LogicN-ffi-cpp/
+packages-logicn/LogicN-ffi-java/
+packages-logicn/LogicN-ffi-python/
+packages-logicn/LogicN-replay/
+packages-logicn/logicn-core-runtime-low-latency/
 ```
 
 ## First Phase
@@ -98,14 +98,14 @@ packages-lo/lo-core-runtime-low-latency/
 Build contracts in this order:
 
 ```text
-lo-finance-core-math
-lo-finance-core-calendar
-lo-finance-core-market-data
-lo-finance-core-audit
-lo-finance-core-fix
+LogicN-finance-core-math
+LogicN-finance-core-calendar
+LogicN-finance-core-market-data
+LogicN-finance-core-audit
+LogicN-finance-core-fix
 ```
 
-This keeps the beta realistic. LO should first prove it can model financial
+This keeps the beta realistic. LogicN should first prove it can model financial
 data, rounding, identifiers, timestamps, market events, validation and audit
 evidence safely.
 
@@ -114,19 +114,19 @@ evidence safely.
 After the base contracts are stable:
 
 ```text
-lo-stream-kafka
-lo-schema-registry
-lo-ffi-cpp
-lo-ffi-java
-lo-ffi-python
-lo-finance-core-risk
-lo-finance-core-pricing
-lo-finance-core-fdc3
-lo-core-runtime-low-latency
-lo-replay
+LogicN-stream-kafka
+LogicN-schema-registry
+LogicN-ffi-cpp
+LogicN-ffi-java
+LogicN-ffi-python
+LogicN-finance-core-risk
+LogicN-finance-core-pricing
+LogicN-finance-core-fdc3
+logicn-core-runtime-low-latency
+LogicN-replay
 ```
 
-Interop should be controlled by policy. A LO app may wrap mature C++, Java,
+Interop should be controlled by policy. A LogicN app may wrap mature C++, Java,
 Python or TypeScript systems, but the wrapper must declare memory isolation,
 network permissions, credentials policy, audit requirements and fallback
 behaviour.
@@ -145,5 +145,5 @@ custody platform
 trading advice engine
 ```
 
-These are regulated and high-risk systems. LO beta work should focus on typed
+These are regulated and high-risk systems. LogicN beta work should focus on typed
 contracts, validation, replay, audit and safe integration first.

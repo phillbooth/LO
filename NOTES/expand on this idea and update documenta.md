@@ -1,33 +1,33 @@
 expand on this idea update project and update documentation
 
-LO could be **more secure than Rust/C++/Python in application security**, not necessarily in every low-level memory-safety case.
+LogicN could be **more secure than Rust/C++/Python in application security**, not necessarily in every low-level memory-safety case.
 
 Rust is already very strong for memory safety, although Rust still has `unsafe` for cases the compiler cannot fully verify, such as raw pointers and unsafe functions. ([Rust Documentation][1]) C++ can be very fast and powerful, but its safety often depends on discipline, tools and guideline enforcement; the C++ Core Guidelines describe profiles for type, bounds and lifetime safety. ([ISO C++][2]) Python is productive, but its standard library has several documented security considerations, especially around execution environment, networking, serialization and unsafe modules. ([Python documentation][3])
 
-## 10 ways LO could be more secure
+## 10 ways LogicN could be more secure
 
-|  # | LO security idea                  | Why it could be stronger                                                                                                          |
+|  # | LogicN security idea                  | Why it could be stronger                                                                                                          |
 | -: | --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-|  1 | **Deny-by-default permissions**   | LO packages and apps could have no file, network, database, shell, AI or GPU access unless declared.                              |
+|  1 | **Deny-by-default permissions**   | LogicN packages and apps could have no file, network, database, shell, AI or GPU access unless declared.                              |
 |  2 | **Build-time security reports**   | Every build could generate `app.security-report.json`, showing risky permissions, secrets, routes, packages and unsafe behaviour. |
 |  3 | **Typed API input by default**    | APIs could reject unknown fields, oversized JSON, invalid types and unsafe payloads before handler logic runs.                    |
-|  4 | **No raw SQL by default**         | LO could require typed queries or parameterised queries unless raw SQL is explicitly approved.                                    |
+|  4 | **No raw SQL by default**         | LogicN could require typed queries or parameterised queries unless raw SQL is explicitly approved.                                    |
 |  5 | **Secret-safe language rules**    | Secrets could be blocked from logs, AI prompts, external APIs and error output unless explicitly allowed.                         |
 |  6 | **Package effect system**         | A package would have to declare effects like `network.read`, `file.write`, `python.run`, `shell.run`, or `database.query`.        |
 |  7 | **Production policy enforcement** | A production build could fail if auth, rate limits, HTTPS, validation, or secret rules are missing.                               |
 |  8 | **Controlled interop**            | Python, C, C++, Rust or JavaScript interop could only happen through typed, audited, permissioned adapters.                       |
 |  9 | **Security-aware IDE warnings**   | The IDE could warn when user input reaches a database, shell command, file path, log, or external API unsafely.                   |
-| 10 | **AI-safe project context**       | LO could generate safe AI-readable docs without leaking secrets, private data or unsafe runtime controls.                         |
+| 10 | **AI-safe project context**       | LogicN could generate safe AI-readable docs without leaking secrets, private data or unsafe runtime controls.                         |
 
-## Where LO could beat each language
+## Where LogicN could beat each language
 
 ### Compared with Python
 
-LO could be more secure by avoiding dynamic/untyped runtime behaviour in core application logic.
+LogicN could be more secure by avoiding dynamic/untyped runtime behaviour in core application logic.
 
 Python allows very flexible code, but that flexibility can create security risks if unsafe modules, untrusted inputs, subprocesses, imports, deserialization or path handling are misused. Python’s own documentation lists security considerations across standard-library modules and interpreter options. ([Python documentation][3])
 
-LO could improve this with:
+LogicN could improve this with:
 
 ```text
 strict types
@@ -41,11 +41,11 @@ secret-safe logging
 
 ### Compared with C++
 
-LO could be more secure by making memory safety and unsafe behaviour part of the language rules rather than relying heavily on developer discipline.
+LogicN could be more secure by making memory safety and unsafe behaviour part of the language rules rather than relying heavily on developer discipline.
 
 C++ can be made safer with modern practices and guideline checkers, but it still gives developers low-level power that can cause memory, bounds and lifetime problems if misused. The C++ Core Guidelines specifically discuss type, bounds and lifetime safety profiles. ([ISO C++][2])
 
-LO could improve this with:
+LogicN could improve this with:
 
 ```text
 no raw pointers by default
@@ -62,19 +62,19 @@ safe FFI boundary reports
 
 This is harder, because Rust is already one of the strongest mainstream languages for memory safety.
 
-LO should not claim:
+LogicN should not claim:
 
 ```text
-LO is more memory-safe than Rust
+LogicN is more memory-safe than Rust
 ```
 
 A better claim is:
 
 ```text
-LO could be more secure than Rust for full application policy, deployment safety, package permissions, API validation and security reporting.
+LogicN could be more secure than Rust for full application policy, deployment safety, package permissions, API validation and security reporting.
 ```
 
-Rust focuses strongly on memory safety and safe systems programming. LO could focus on a wider security model:
+Rust focuses strongly on memory safety and safe systems programming. LogicN could focus on a wider security model:
 
 ```text
 memory safety
@@ -88,7 +88,7 @@ interop safety
 cloud policy safety
 ```
 
-## Example LO security policy
+## Example LogicN security policy
 
 ```text
 security {
@@ -141,7 +141,7 @@ Build failed:
 Package image-tools requested network.open but policy denies it.
 ```
 
-## Best LO security position
+## Best LogicN security position
 
 The strongest honest position is:
 
@@ -150,10 +150,10 @@ Rust is excellent for memory safety.
 C++ is excellent for performance but needs careful safety discipline.
 Python is excellent for productivity but relies heavily on runtime checks and safe usage.
 
-LO could be more secure at the application level by making permissions, APIs, secrets, packages, interop, deployment and AI-readable reports part of the language itself.
+LogicN could be more secure at the application level by making permissions, APIs, secrets, packages, interop, deployment and AI-readable reports part of the language itself.
 ```
 
-So LO’s security advantage would be:
+So LogicN’s security advantage would be:
 
 ```text
 secure by default

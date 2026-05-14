@@ -852,16 +852,16 @@ room-render-3d
 room-export
 ```
 
-For an LO-style package naming approach:
+For an LogicN-style package naming approach:
 
 ```text
-lo-vision-room
-lo-vision-depth
-lo-vision-fixtures
-lo-spatial-measure
-lo-spatial-render
-lo-building-ifc
-lo-video-reconstruct
+LogicN-vision-room
+LogicN-vision-depth
+LogicN-vision-fixtures
+LogicN-spatial-measure
+LogicN-spatial-render
+LogicN-building-ifc
+LogicN-video-reconstruct
 ```
 
 ---

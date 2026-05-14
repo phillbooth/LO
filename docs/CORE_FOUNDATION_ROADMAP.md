@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This roadmap keeps LO focused on the language foundation before expanding
+This roadmap keeps LogicN focused on the language foundation before expanding
 packages, domains or advanced targets.
 
 V1 must prove the core language first:
@@ -40,7 +40,7 @@ Goal: keep the repo from drifting while the core is being specified.
 
 Deliverables:
 
-- Active `lo.workspace.json` packages limited to core, tooling, framework
+- Active `logicn.workspace.json` packages limited to core, tooling, framework
   boundary packages and CPU/WASM target planning.
 - Finance, electrical and OT packages archived outside the active workspace.
 - GPU, AI accelerator, photonic, optical I/O and domain work labelled post-v1.
@@ -48,7 +48,7 @@ Deliverables:
 
 Exit criteria:
 
-- `lo.workspace.json` active targets are `cpu` and `wasm`.
+- `logicn.workspace.json` active targets are `cpu` and `wasm`.
 - Generated graph reflects the active workspace only.
 - Docs agree that v1 is foundation-first.
 
@@ -78,7 +78,7 @@ Goal: make the language concrete before adding more design documents.
 
 Deliverables:
 
-- At least 20 real `.lo` examples:
+- At least 20 real `.lln` examples:
   - 5 basic examples: variables, functions, records, simple `Result`, simple
     `Option`.
   - 5 type-system examples: variants/enums, exhaustive `match`, `Tri`, explicit
@@ -136,7 +136,7 @@ Deliverables:
 
 Exit criteria:
 
-- `lo-core` test suite parses the v1 example corpus.
+- `logicn-core` test suite parses the v1 example corpus.
 - Parser output is deterministic.
 - Error messages include file, line, column and suggested fixes where practical.
 
@@ -199,7 +199,7 @@ production package registry
 ## Near-Term Work Order
 
 1. Create the v1 grammar draft.
-2. Audit existing `.lo` examples and classify them as v1 or post-v1.
+2. Audit existing `.lln` examples and classify them as v1 or post-v1.
 3. Add enough examples to reach the 20-example corpus.
 4. Implement parser tests around that corpus.
 5. Finalise the memory model document.

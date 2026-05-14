@@ -2,68 +2,68 @@
 
 ## Summary
 
-LO should support neural-network workloads through typed packages and target
+LogicN should support neural-network workloads through typed packages and target
 planning, not by making neural networks part of normal app syntax.
 
 Best rule:
 
 ```text
-LO core defines the language.
-lo-core-vector defines vector, matrix and tensor shapes.
-lo-ai-neural defines neural network workloads.
-lo-ai-neuromorphic defines spike/event workloads.
-lo-core-compute selects targets and fallback plans.
+LogicN core defines the language.
+logicn-core-vector defines vector, matrix and tensor shapes.
+logicn-ai-neural defines neural network workloads.
+logicn-ai-neuromorphic defines spike/event workloads.
+logicn-core-compute selects targets and fallback plans.
 target packages map planned work to CPU, GPU, AI accelerator or photonic plans.
 ```
 
 ## Package Split
 
 ```text
-packages-lo/lo-core-vector
+packages-logicn/logicn-core-vector
   Vector<T, N>, Matrix<T, R, C>, Tensor<T, Shape>, numeric element contracts
 
-packages-lo/lo-ai-neural
+packages-logicn/logicn-ai-neural
   neural models, layers, activations, inference, training boundaries
 
-packages-lo/lo-ai-neuromorphic
+packages-logicn/logicn-ai-neuromorphic
   Spike, SpikeTrain, EventSignal<T>, spiking models
 
-packages-lo/lo-ai
+packages-logicn/logicn-ai
   generic AI model metadata, safety policy and AI inference reports
 
-packages-lo/lo-ai-lowbit
+packages-logicn/logicn-ai-lowbit
   low-bit, quantized and ternary AI backend contracts
 
-packages-lo/lo-core-compute
+packages-logicn/logicn-core-compute
   compute auto, target selection and fallback reports
 
-packages-lo/lo-target-ai-accelerator
+packages-logicn/logicn-target-ai-accelerator
   NPU, TPU, AI-chip and passive accelerator backend profile planning
 
-packages-lo/lo-target-photonic
+packages-logicn/logicn-target-photonic
   future photonic target planning
 ```
 
 ## Photonic And `-1`
 
-`-1`, `0` and `+1` can appear in more than one LO package, but they do not mean
+`-1`, `0` and `+1` can appear in more than one LogicN package, but they do not mean
 the same thing everywhere.
 
 ```text
-lo-core-logic
+logicn-core-logic
   Tri truth/logical state semantics
 
-lo-ai-lowbit
+logicn-ai-lowbit
   ternary or low-bit model weights
 
-lo-core-photonic
+logicn-core-photonic
   possible optical signal mappings for logic or compute states
 
-lo-target-photonic
+logicn-target-photonic
   backend plans for photonic hardware or simulators
 ```
 
-Photonic support should not own `Tri`. `Tri` belongs to `lo-core-logic`. Photonic
+Photonic support should not own `Tri`. `Tri` belongs to `logicn-core-logic`. Photonic
 packages can map logic states to optical properties such as phase, amplitude or
 wavelength.
 
@@ -71,7 +71,7 @@ wavelength.
 
 Neural inference should be a typed compute workload:
 
-```lo
+```LogicN
 secure compute flow moderateText(input: Text) -> Result<ModerationDecision, AiError> {
   compute auto {
     prefer ai_accelerator
@@ -124,7 +124,7 @@ Do not make source syntax depend on one backend, chipset or vendor.
 
 Vendor-specific AI accelerators should be backend profiles. For example, Intel
 Gaudi 3 can be selected as `intel.gaudi3.hl338` under the generic
-`ai_accelerator` target, but LO source should not need `target gaudi`.
+`ai_accelerator` target, but LogicN source should not need `target gaudi`.
 
 The practical first implementation should generate controlled adapter plans for
 existing AI ecosystems such as PyTorch, vLLM, Hugging Face, DeepSpeed,
@@ -146,17 +146,17 @@ warnings
 
 ## Non-Goals
 
-- Do not make LO core a neural-network framework.
+- Do not make LogicN core a neural-network framework.
 - Do not make BitNet, Graphify, a GPU vendor or an AI accelerator vendor part of
-  LO syntax.
-- Do not require photonic, GPU or AI accelerator hardware for baseline LO.
+  LogicN syntax.
+- Do not require photonic, GPU or AI accelerator hardware for baseline LogicN.
 - Do not let model output directly make high-impact decisions.
-- Do not put neural layers or training policy into `lo-core-vector`.
+- Do not put neural layers or training policy into `logicn-core-vector`.
 
 ## Final Rule
 
 ```text
-LO should be able to define, check, run, accelerate and report neural workloads.
+LogicN should be able to define, check, run, accelerate and report neural workloads.
 It should do that through typed packages and target plans, not by turning the
 core language into a neural-network framework.
 ```

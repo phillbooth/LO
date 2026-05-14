@@ -2,11 +2,11 @@
 
 ## Purpose
 
-This document defines the package naming scheme for `packages-lo/`.
+This document defines the package naming scheme for `packages-logicn/`.
 
 ```text
 packages/       normal app/vendor package space
-packages-lo/    LO language, runtime, tooling, target and domain packages
+packages-logicn/    LogicN language, runtime, tooling, target and domain packages
 ```
 
 Use grouped names so package purpose is visible from the directory alone.
@@ -16,22 +16,22 @@ Use grouped names so package purpose is visible from the directory alone.
 Use:
 
 ```text
-lo-[family]-[purpose]
+LogicN-[family]-[purpose]
 ```
 
 Ungrouped names are allowed only for stable root packages whose responsibility is
 already clear:
 
 ```text
-lo-core
-lo-ai
+logicn-core
+logicn-ai
 ```
 
-`lo-core` is the language root. `lo-ai` is the generic AI contract root.
-`lo-core-photonic` is the photonic concept/model root, not a compiler target.
+`logicn-core` is the language root. `logicn-ai` is the generic AI contract root.
+`logicn-core-photonic` is the photonic concept/model root, not a compiler target.
 
-When a core package has both a grouped `lo-core-*` name and an older ungrouped
-name, keep the grouped `lo-core-*` package as canonical. Merge any unique source,
+When a core package has both a grouped `logicn-core-*` name and an older ungrouped
+name, keep the grouped `logicn-core-*` package as canonical. Merge any unique source,
 tests, manifests or current generated artifacts into the grouped package, then
 remove the stale ungrouped package folder.
 
@@ -39,96 +39,96 @@ remove the stale ungrouped package folder.
 
 | Family | Meaning | Examples |
 |---|---|---|
-| `lo-core-*` | Core language, toolchain, runtime and safe developer automation | `lo-core-compiler`, `lo-core-runtime`, `lo-core-security`, `lo-core-cli`, `lo-core-tasks` |
-| `lo-ai-*` | AI workload, model, agent and AI compute-model packages | `lo-ai-agent`, `lo-ai-neural`, `lo-ai-neuromorphic`, `lo-ai-lowbit` |
-| `lo-target-*` | Compiler/output targets and backend planning | `lo-target-cpu`, `lo-target-gpu`, `lo-target-wasm`, `lo-target-photonic` |
-| `lo-cpu-*` | CPU implementation and optimized kernel packages | `lo-cpu-kernels`, future `lo-cpu-photonic-sim` |
-| `lo-gpu-*` | GPU implementation and optimized kernel packages | future `lo-gpu-kernels` |
-| `lo-framework-*` | Optional framework, server and app boundary packages | `lo-framework-app-kernel`, `lo-framework-api-server`, `lo-framework-example-app` |
-| `lo-devtools-*` | Development-only tools not needed by production installs | `lo-devtools-project-graph` |
-| `lo-tools-*` | Tools that may run in development or staging but are not core runtime packages | `lo-tools-benchmark` |
-| `lo-finance-*` | Finance domain package family | `lo-finance-core` |
-| `lo-electrical-*` | Electrical infrastructure domain package family | `lo-electrical-core` |
-| `lo-ot-*` | Operational-technology integration package family | `lo-ot-core`, future `lo-ot-opcua` |
-| `lo-database-*` | Database domain package family | future package family |
-| `lo-industrial-*` | Industrial domain package family | future package family |
-| `lo-science-*` | Science domain package family | future package family |
-| `lo-manufacturing-*` | Manufacturing domain package family | future package family |
+| `logicn-core-*` | Core language, toolchain, runtime and safe developer automation | `logicn-core-compiler`, `logicn-core-runtime`, `logicn-core-security`, `logicn-core-cli`, `logicn-core-tasks` |
+| `logicn-ai-*` | AI workload, model, agent and AI compute-model packages | `logicn-ai-agent`, `logicn-ai-neural`, `logicn-ai-neuromorphic`, `logicn-ai-lowbit` |
+| `logicn-target-*` | Compiler/output targets and backend planning | `logicn-target-cpu`, `logicn-target-gpu`, `logicn-target-wasm`, `logicn-target-photonic` |
+| `logicn-cpu-*` | CPU implementation and optimized kernel packages | `logicn-cpu-kernels`, future `logicn-cpu-photonic-sim` |
+| `LogicN-gpu-*` | GPU implementation and optimized kernel packages | future `LogicN-gpu-kernels` |
+| `logicn-framework-*` | Optional framework, server and app boundary packages | `logicn-framework-app-kernel`, `logicn-framework-api-server`, `logicn-framework-example-app` |
+| `logicn-devtools-*` | Development-only tools not needed by production installs | `logicn-devtools-project-graph` |
+| `logicn-tools-*` | Tools that may run in development or staging but are not core runtime packages | `logicn-tools-benchmark` |
+| `LogicN-finance-*` | Finance domain package family | `LogicN-finance-core` |
+| `LogicN-electrical-*` | Electrical infrastructure domain package family | `LogicN-electrical-core` |
+| `LogicN-ot-*` | Operational-technology integration package family | `LogicN-ot-core`, future `LogicN-ot-opcua` |
+| `LogicN-database-*` | Database domain package family | future package family |
+| `LogicN-industrial-*` | Industrial domain package family | future package family |
+| `LogicN-science-*` | Science domain package family | future package family |
+| `LogicN-manufacturing-*` | Manufacturing domain package family | future package family |
 
 ## Current Package Names
 
 ```text
-lo-core
-lo-core-cli
-lo-core-compiler
-lo-core-compute
-lo-core-config
-lo-core-logic
-lo-core-photonic
-lo-core-reports
-lo-core-runtime
-lo-core-security
-lo-core-tasks
-lo-core-vector
-lo-ai
-lo-ai-agent
-lo-ai-lowbit
-lo-ai-neural
-lo-ai-neuromorphic
-lo-target-ai-accelerator
-lo-target-binary
-lo-target-cpu
-lo-target-gpu
-lo-target-photonic
-lo-target-wasm
-lo-cpu-kernels
-lo-framework-app-kernel
-lo-framework-api-server
-lo-framework-example-app
-lo-devtools-project-graph
-lo-tools-benchmark
+logicn-core
+logicn-core-cli
+logicn-core-compiler
+logicn-core-compute
+logicn-core-config
+logicn-core-logic
+logicn-core-photonic
+logicn-core-reports
+logicn-core-runtime
+logicn-core-security
+logicn-core-tasks
+logicn-core-vector
+logicn-ai
+logicn-ai-agent
+logicn-ai-lowbit
+logicn-ai-neural
+logicn-ai-neuromorphic
+logicn-target-ai-accelerator
+logicn-target-binary
+logicn-target-cpu
+logicn-target-gpu
+logicn-target-photonic
+logicn-target-wasm
+logicn-cpu-kernels
+logicn-framework-app-kernel
+logicn-framework-api-server
+logicn-framework-example-app
+logicn-devtools-project-graph
+logicn-tools-benchmark
 ```
 
 Archived post-v2 domain package names:
 
 ```text
-lo-finance-core
-lo-electrical-core
-lo-ot-core
+LogicN-finance-core
+LogicN-electrical-core
+LogicN-ot-core
 ```
 
-These packages are preserved under `C:\laragon\www\LO_Archive\packages-lo\`
+These packages are preserved under `C:\laragon\www\LogicN_Archive\packages-logicn\`
 and must not be part of the active v1 build graph.
 
 ## Devtools Rule
 
-Packages needed only by developers should use `lo-devtools-*` when they inspect,
+Packages needed only by developers should use `logicn-devtools-*` when they inspect,
 map, scaffold or explain the project. They should not be production runtime
 dependencies.
 
-Use `lo-tools-*` for broader utilities such as benchmark runners, diagnostics or
+Use `logicn-tools-*` for broader utilities such as benchmark runners, diagnostics or
 release tooling that may run in development or staging.
 
-Production profiles must not enable `lo-devtools-*` or `lo-tools-benchmark` by
+Production profiles must not enable `logicn-devtools-*` or `logicn-tools-benchmark` by
 default. A production build that includes one of these packages requires an
 explicit production package override with a reason and report output.
 
 ## Target Rule
 
-`lo-target-*` packages describe where compiled LO code is going.
+`logicn-target-*` packages describe where compiled LogicN code is going.
 
-Do not rename target packages to I/O packages. For example, `lo-target-binary`
-means native or binary output planning. `lo-target-photonic` means compiler
+Do not rename target packages to I/O packages. For example, `logicn-target-binary`
+means native or binary output planning. `logicn-target-photonic` means compiler
 mapping to photonic hardware, simulators or plans.
 
 I/O packages can be added later for data movement:
 
 ```text
-lo-io-network
-lo-io-storage
-lo-io-binary
-lo-io-optical
-lo-io-photonic
+LogicN-io-network
+LogicN-io-storage
+LogicN-io-binary
+LogicN-io-optical
+LogicN-io-photonic
 ```
 
 These should not replace compiler target packages.
@@ -138,15 +138,15 @@ These should not replace compiler target packages.
 Use these names for photonic work:
 
 ```text
-lo-core-photonic      photonic concepts, types, models, APIs and simulations
-lo-target-photonic    compiler target planning for photonic hardware, simulators or plans
-lo-cpu-photonic-sim   future CPU implementation package for photonic simulation
-lo-cpu-photonic-kernels future CPU kernels for photonic-style numerical simulation
+logicn-core-photonic      photonic concepts, types, models, APIs and simulations
+logicn-target-photonic    compiler target planning for photonic hardware, simulators or plans
+logicn-cpu-photonic-sim   future CPU implementation package for photonic simulation
+logicn-cpu-photonic-kernels future CPU kernels for photonic-style numerical simulation
 ```
 
-Do not use `lo-core-potonic`; that is a typo. Do not use a bare
-`lo-photonic` package name under the grouped naming scheme. Do not use
-`lo-cpu-photonic` for the general concept package, because CPU packages should
+Do not use `logicn-core-potonic`; that is a typo. Do not use a bare
+`LogicN-photonic` package name under the grouped naming scheme. Do not use
+`logicn-cpu-photonic` for the general concept package, because CPU packages should
 own CPU implementations or kernels, not photonic vocabulary.
 
 ## Rename Checklist
@@ -156,7 +156,7 @@ When renaming a package, update:
 ```text
 directory paths
 package.json names
-lo.workspace.json
+logicn.workspace.json
 docs and examples
 tests
 imports and relative paths

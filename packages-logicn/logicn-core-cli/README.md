@@ -1,0 +1,120 @@
+# LogicN CLI
+
+`logicn-core-cli` is the command-line interface for LogicN developers.
+
+It belongs in:
+
+```text
+/packages-logicn/logicn-core-cli
+```
+
+It coordinates other LogicN packages instead of owning language, runtime, server or
+application behaviour.
+
+## Responsibilities
+
+```text
+read project configuration
+load environment mode
+call the compiler
+call the runtime
+start server tools
+run task tools
+print safe output
+generate reports
+show diagnostics
+generate project graphs
+```
+
+## Early Commands
+
+```text
+LogicN check
+LogicN build
+LogicN run
+LogicN serve
+LogicN reports
+LogicN security:check
+LogicN routes
+LogicN benchmark
+LogicN task
+LogicN graph
+LogicN graph query
+LogicN graph explain
+LogicN graph path
+```
+
+`LogicN benchmark` is currently a placeholder command. The benchmark contracts,
+recommended modes and report shape live in `packages-logicn/logicn-tools-benchmark/README.md`.
+
+## Graph Command
+
+`LogicN graph` reads `logicn.workspace.json` and writes a local project graph summary.
+The query commands read generated graph JSON.
+
+From the repository root, run the current local CLI build with:
+
+```text
+node packages-logicn\logicn-core-cli\dist\index.js graph --out build\graph
+```
+
+The shorter `LogicN graph --out build\graph` form is the intended command once the
+CLI is installed or linked.
+
+Default outputs:
+
+```text
+build/graph/logicn-devtools-project-graph.json
+build/graph/LogicN_GRAPH_REPORT.md
+build/graph/logicn-ai-map.md
+build/graph/logicn-devtools-project-graph.html
+```
+
+Use `--out <dir>` to choose a different output directory.
+
+Examples:
+
+```text
+node packages-logicn\logicn-core-cli\dist\index.js graph query logicn-core-security --out build\graph
+node packages-logicn\logicn-core-cli\dist\index.js graph explain package:logicn-core-security --out build\graph
+node packages-logicn\logicn-core-cli\dist\index.js graph path package:logicn-devtools-project-graph report:project-graph --out build\graph
+
+LogicN graph query logicn-core-security
+LogicN graph explain package:logicn-core-security
+LogicN graph path package:logicn-devtools-project-graph report:project-graph
+```
+
+## Task Command
+
+`LogicN task` loads safe project automation from `tasks.lln` in the repository root,
+or from a file passed with `--file`.
+
+Examples:
+
+```text
+LogicN task
+LogicN task buildApi --dry-run
+LogicN task generateReports --file packages-logicn/logicn-core-tasks/examples/tasks.lln --dry-run
+LogicN task buildApi --report-out build/reports/task-report.json
+```
+
+Current task execution supports loading task definitions, listing tasks,
+resolving dependency order, rejecting missing or circular dependencies and
+running dry-run plans. Task runs write a structured report to
+`build/reports/task-report.json` by default. Use `--report-out <path>` to choose
+a different path, or `--no-report` to skip writing the report. Built-in
+operation execution remains in `logicn-core-tasks`.
+
+## Security Rules
+
+CLI output is safe by default. It must redact `SecureString` values, bearer
+tokens, API keys, cookies, database passwords and private key material.
+
+Production mode is strict and should fail when critical unsafe features are
+enabled without explicit reason.
+
+## Non-Goals
+
+`logicn-core-cli` must not contain business logic, routing logic, authentication logic,
+ORM logic, template rendering, CMS features, admin UI or frontend framework
+behaviour.

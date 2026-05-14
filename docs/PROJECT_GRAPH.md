@@ -2,7 +2,7 @@
 
 ## Summary
 
-LO should support project maps as optional developer tooling. The goal is to
+LogicN should support project maps as optional developer tooling. The goal is to
 help humans and AI assistants understand package ownership, documentation
 links, policies, reports and design decisions without treating the graph as a
 compiler or runtime authority.
@@ -15,7 +15,7 @@ Primary references:
 ## Package
 
 ```text
-packages-lo/lo-devtools-project-graph
+packages-logicn/logicn-devtools-project-graph
 ```
 
 The package owns graph contracts for:
@@ -39,13 +39,13 @@ Decision
 
 ## Backend-Neutral Rule
 
-Do not make developers write Graphify-specific LO syntax or commands. Keep the
+Do not make developers write Graphify-specific LogicN syntax or commands. Keep the
 stable surface generic:
 
 ```bash
-lo graph
-lo graph --out build/graph
-lo graph query "Which package owns SecureString?"
+LogicN graph
+LogicN graph --out build/graph
+LogicN graph query "Which package owns SecureString?"
 ```
 
 Backend selection belongs in policy/configuration:
@@ -53,19 +53,19 @@ Backend selection belongs in policy/configuration:
 ```text
 project_graph {
   backend auto
-  allow ["lo_native", "graphify", "future_standard"]
+  allow ["LogicN_native", "graphify", "future_standard"]
 }
 ```
 
-This lets LO use:
+This lets LogicN use:
 
 ```text
-lo_native today
+LogicN_native today
 graphify as an optional pinned Git backend
 another graph backend later
 ```
 
-without changing LO source, CLI commands or generated graph file names.
+without changing LogicN source, CLI commands or generated graph file names.
 
 If a backend is loaded from Git, it must be explicitly allowed and pinned to a
 commit, tag or versioned ref. Model-assisted extraction remains opt-in.
@@ -75,10 +75,10 @@ commit, tag or versioned ref. Model-assisted extraction remains opt-in.
 Recommended generated output paths:
 
 ```text
-build/graph/lo-devtools-project-graph.json
-build/graph/lo-devtools-project-graph.html
-build/graph/LO_GRAPH_REPORT.md
-build/graph/lo-ai-map.md
+build/graph/logicn-devtools-project-graph.json
+build/graph/logicn-devtools-project-graph.html
+build/graph/LogicN_GRAPH_REPORT.md
+build/graph/logicn-ai-map.md
 ```
 
 ## CLI Direction
@@ -86,40 +86,40 @@ build/graph/lo-ai-map.md
 Run from the repository root:
 
 ```powershell
-cd C:\laragon\www\LO
-node packages-lo\lo-core-cli\dist\index.js graph --out build\graph
+cd C:\laragon\www\LogicN
+node packages-logicn\logicn-core-cli\dist\index.js graph --out build\graph
 ```
 
-This writes the graph outputs under `build\graph`. Once `lo-core-cli` is linked or
+This writes the graph outputs under `build\graph`. Once `logicn-core-cli` is linked or
 published, use the stable installed CLI form:
 
 ```powershell
-lo graph --out build\graph
+LogicN graph --out build\graph
 ```
 
-AI coding tools should consult `build\graph\lo-ai-map.md` or
-`build\graph\LO_GRAPH_REPORT.md` when package ownership is unclear. If
-`build\graph\lo-devtools-project-graph.json` is missing, or if changes were made to
-`AGENTS.md`, `lo.workspace.json`, `docs/`, package README/TODO files, package
+AI coding tools should consult `build\graph\logicn-ai-map.md` or
+`build\graph\LogicN_GRAPH_REPORT.md` when package ownership is unclear. If
+`build\graph\logicn-devtools-project-graph.json` is missing, or if changes were made to
+`AGENTS.md`, `logicn.workspace.json`, `docs/`, package README/TODO files, package
 manifests or package source contracts, regenerate the graph before relying on
 it.
 
 Current commands:
 
 ```bash
-lo graph
-lo graph --out build/graph
-lo graph query "Which package owns SecureString?"
-lo graph explain lo-core-security
-lo graph path lo-framework-api-server lo-core-security
+LogicN graph
+LogicN graph --out build/graph
+LogicN graph query "Which package owns SecureString?"
+LogicN graph explain logicn-core-security
+LogicN graph path logicn-framework-api-server logicn-core-security
 ```
 
 Current local Node equivalents:
 
 ```powershell
-node packages-lo\lo-core-cli\dist\index.js graph query lo-core-security --out build\graph
-node packages-lo\lo-core-cli\dist\index.js graph explain package:lo-core-security --out build\graph
-node packages-lo\lo-core-cli\dist\index.js graph path package:lo-devtools-project-graph report:project-graph --out build\graph
+node packages-logicn\logicn-core-cli\dist\index.js graph query logicn-core-security --out build\graph
+node packages-logicn\logicn-core-cli\dist\index.js graph explain package:logicn-core-security --out build\graph
+node packages-logicn\logicn-core-cli\dist\index.js graph path package:logicn-devtools-project-graph report:project-graph --out build\graph
 ```
 
 ## Safety Rules
@@ -147,11 +147,11 @@ distinguish source facts from inferred relationships
 
 ## Native Mapper
 
-The first implementation is the LO-native mapper in `packages-lo/lo-devtools-project-graph`.
+The first implementation is the LogicN-native mapper in `packages-logicn/logicn-devtools-project-graph`.
 It can scan workspace package paths and project docs, then map:
 
 ```text
-workspace package paths from `lo.workspace.json`, including `packages-lo/`
+workspace package paths from `logicn.workspace.json`, including `packages-logicn/`
 README/TODO/docs files
 package.json descriptions and dependencies
 TypeScript exported types, interfaces and functions
@@ -160,10 +160,10 @@ package mentions in documentation
 ```
 
 This is intentionally lightweight and deterministic. Richer external tools can
-be added later as backend adapters without changing `lo graph`.
+be added later as backend adapters without changing `LogicN graph`.
 
-When `packages-lo/` package paths are listed in `lo.workspace.json`, the native
-mapper should treat them as LO package collection paths. They may be beta
+When `packages-logicn/` package paths are listed in `logicn.workspace.json`, the native
+mapper should treat them as LogicN package collection paths. They may be beta
 domain packages or future package-repository mounts, but the graph remains
 advisory and must not decide production package resolution.
 
@@ -172,4 +172,4 @@ over generated graph JSON.
 
 ## Boundary
 
-The graph explains LO. It does not enforce LO.
+The graph explains LogicN. It does not enforce LogicN.

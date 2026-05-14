@@ -1,4 +1,4 @@
-Done — I created the document explaining why LO should support both:
+Done — I created the document explaining why LogicN should support both:
 
 ```text
 try/catch = simple readable application flow
@@ -10,12 +10,12 @@ The main conclusion is:
 ```text
 Neither should become legacy because of photonic, GPU, AI accelerator or future hardware support.
 
-Future targets should affect how LO compiles internally, not force developers to rewrite clear source code.
+Future targets should affect how LogicN compiles internally, not force developers to rewrite clear source code.
 ```
 
 I also corrected the suggested shape to:
 
-```lo
+```LogicN
 try {
   return Response.created(
     Responses.OrderResponse.from(order)
@@ -37,7 +37,7 @@ E = the error type
 
 So:
 
-```lo
+```LogicN
 Result<Order, OrderError>
 ```
 
@@ -64,7 +64,7 @@ No.
 
 This:
 
-```lo
+```LogicN
 return Response.created(
   Responses.OrderResponse.from(order)
 )
@@ -86,9 +86,9 @@ new uploaded file
 new database item
 ```
 
-But LO could support other response helpers:
+But LogicN could support other response helpers:
 
-```lo
+```LogicN
 Response.ok(...)          // 200
 Response.created(...)     // 201
 Response.accepted(...)    // 202
@@ -100,7 +100,7 @@ Response.error(...)       // safe mapped error
 
 Or a more explicit version:
 
-```lo
+```LogicN
 return Response.status(201).body(
   Responses.OrderResponse.from(order)
 )
@@ -108,7 +108,7 @@ return Response.status(201).body(
 
 For developer simplicity, I would keep helpers like:
 
-```lo
+```LogicN
 Response.ok(...)
 Response.created(...)
 Response.noContent()
@@ -124,7 +124,7 @@ The `s` comes from using `Responses` as a **namespace**.
 
 This:
 
-```lo
+```LogicN
 Responses.OrderResponse
 ```
 
@@ -137,7 +137,7 @@ Use the OrderResponse schema.
 
 It is different from:
 
-```lo
+```LogicN
 Response.created(...)
 ```
 
@@ -150,7 +150,7 @@ Responses = app response schemas namespace
 
 So:
 
-```lo
+```LogicN
 Response.created(
   Responses.OrderResponse.from(order)
 )
@@ -167,7 +167,7 @@ However, I agree this could be confusing.
 
 A clearer naming option might be:
 
-```lo
+```LogicN
 return HttpResponse.created(
   ResponseBodies.Order.from(order)
 )
@@ -175,7 +175,7 @@ return HttpResponse.created(
 
 or:
 
-```lo
+```LogicN
 return Http.created(
   AppResponses.Order.from(order)
 )
@@ -183,7 +183,7 @@ return Http.created(
 
 My preferred cleaner version would be:
 
-```lo
+```LogicN
 return Http.created(
   AppResponses.Order.from(order)
 )
@@ -196,7 +196,7 @@ Http = framework HTTP response builder
 AppResponses = your app's response body schemas
 ```
 
-So LO could avoid this confusing pair:
+So LogicN could avoid this confusing pair:
 
 ```text
 Response
@@ -213,7 +213,7 @@ Security does not come from `match` alone. Security comes from the compiler forc
 
 This is very secure:
 
-```lo
+```LogicN
 match result {
   Ok(order) => {
     return Http.created(
@@ -249,7 +249,7 @@ fallback error path
 
 But the **best security** is when the route contract also lists all allowed responses:
 
-```lo
+```LogicN
 POST "/orders" {
   response {
     201: AppResponses.Order
@@ -262,7 +262,7 @@ POST "/orders" {
 }
 ```
 
-Then LO can check:
+Then LogicN can check:
 
 ```text
 The action cannot return a response that the route did not declare.
@@ -278,11 +278,11 @@ Compiler checks they agree.
 
 ---
 
-## Best LO style
+## Best LogicN style
 
 For simple actions:
 
-```lo
+```LogicN
 let order = try Services.OrderService.createOrder(...)
 
 return Http.created(
@@ -292,7 +292,7 @@ return Http.created(
 
 For security-sensitive or complex actions:
 
-```lo
+```LogicN
 match result {
   Ok(order) => return Http.created(AppResponses.Order.from(order))
   Err(Errors.OrderError.InvalidItems) => return Http.badRequest(...)

@@ -1,25 +1,25 @@
-Yes — this would be a **very strong direction for LO**, but it needs to be described correctly.
+Yes — this would be a **very strong direction for LogicN**, but it needs to be described correctly.
 
-LO should not claim:
+LogicN should not claim:
 
 ```text
-LO directly controls L2 cache, L3 cache or ECC memory.
+LogicN directly controls L2 cache, L3 cache or ECC memory.
 ```
 
 Better:
 
 ```text
-LO is memory-hierarchy aware.
-LO can optimise for CPU cache behaviour.
-LO can detect/report ECC-capable environments where the OS/hardware exposes it.
-LO can warn developers when code is likely to cause poor cache use or unsafe memory reliability assumptions.
+LogicN is memory-hierarchy aware.
+LogicN can optimise for CPU cache behaviour.
+LogicN can detect/report ECC-capable environments where the OS/hardware exposes it.
+LogicN can warn developers when code is likely to cause poor cache use or unsafe memory reliability assumptions.
 ```
 
 L1/L2/L3 CPU cache is managed by the CPU hardware, not normal application code. Intel describes L1 as the smallest and fastest cache closest to the core, L2 as larger but slower, and L3/LLC as the largest and slowest CPU cache level. ([Intel][1]) ECC is also hardware/platform dependent; ECC memory detects and corrects memory data errors caused by physical defects or environmental interference, but the language cannot simply “turn ECC on” if the CPU, motherboard and RAM do not support it. ([memtest86.com][2])
 
-## How LO could support L2/L3 cache better
+## How LogicN could support L2/L3 cache better
 
-LO could introduce a **cache-aware memory model**.
+LogicN could introduce a **cache-aware memory model**.
 
 The goal would be:
 
@@ -33,7 +33,7 @@ fewer cache misses
 fewer memory stalls
 ```
 
-For example, LO could prefer contiguous memory layouts for performance-critical data:
+For example, LogicN could prefer contiguous memory layouts for performance-critical data:
 
 ```text
 array<UserScore>
@@ -47,9 +47,9 @@ UserScore object -> pointer -> nested object -> pointer -> value
 
 This matters because CPUs are much faster when data arrives in predictable blocks.
 
-## LO features for CPU cache awareness
+## LogicN features for CPU cache awareness
 
-LO could support:
+LogicN could support:
 
 ```text
 contiguous arrays
@@ -69,11 +69,11 @@ large-object copy warnings
 memory-layout reports
 ```
 
-This would not make LO magically faster than C++ in every case, but it could make good performance easier and safer.
+This would not make LogicN magically faster than C++ in every case, but it could make good performance easier and safer.
 
 ## Example: cache-aware data layout
 
-For gaming, AI, simulation or large JSON processing, LO could allow layout choices:
+For gaming, AI, simulation or large JSON processing, LogicN could allow layout choices:
 
 ```text
 type Position {
@@ -116,7 +116,7 @@ structureOfArrays or contiguous array.
 
 ## L2/L3 cache support as reports
 
-LO could generate:
+LogicN could generate:
 
 ```text
 app.memory-report.json
@@ -136,12 +136,12 @@ Example:
     "detected": true,
     "warnings": [
       {
-        "file": "physics.lo",
+        "file": "physics.lln",
         "line": 42,
         "message": "Large object copied inside hot loop."
       },
       {
-        "file": "entities.lo",
+        "file": "entities.lln",
         "line": 88,
         "message": "Pointer-heavy entity layout may reduce cache locality."
       }
@@ -150,7 +150,7 @@ Example:
 }
 ```
 
-LO should be honest when it cannot detect hardware:
+LogicN should be honest when it cannot detect hardware:
 
 ```json
 {
@@ -165,7 +165,7 @@ That is important for cloud platforms, containers and managed hosting.
 
 ## IDE warnings
 
-This could be a very strong LO IDE feature.
+This could be a very strong LogicN IDE feature.
 
 The IDE could show warnings like:
 
@@ -182,15 +182,15 @@ This function copies a 250MB JSON object.
 Use read-only view, stream, or explicit clone().
 ```
 
-That would make LO feel smarter than C++ for many developers, because C++ allows high performance but usually expects the developer to know and manually inspect these problems.
+That would make LogicN feel smarter than C++ for many developers, because C++ allows high performance but usually expects the developer to know and manually inspect these problems.
 
 ## ECC support
 
 ECC should be treated differently.
 
-LO cannot provide ECC memory in software as a normal guarantee. ECC depends on hardware, firmware, memory modules, CPU and motherboard/server support.
+LogicN cannot provide ECC memory in software as a normal guarantee. ECC depends on hardware, firmware, memory modules, CPU and motherboard/server support.
 
-But LO could support **ECC-aware reliability modes**.
+But LogicN could support **ECC-aware reliability modes**.
 
 Example:
 
@@ -202,7 +202,7 @@ reliability {
 }
 ```
 
-If the app is running on a server with ECC information available, LO could include it in:
+If the app is running on a server with ECC information available, LogicN could include it in:
 
 ```text
 app.hardware-report.json
@@ -224,7 +224,7 @@ Example:
 }
 ```
 
-If LO cannot confirm ECC:
+If LogicN cannot confirm ECC:
 
 ```json
 {
@@ -237,7 +237,7 @@ If LO cannot confirm ECC:
 }
 ```
 
-## Where ECC would matter for LO
+## Where ECC would matter for LogicN
 
 ECC support would be useful for:
 
@@ -255,9 +255,9 @@ high-reliability cloud deployments
 
 For normal desktop apps or simple scripts, ECC should be optional.
 
-For high-integrity LO apps, it could be required by policy.
+For high-integrity LogicN apps, it could be required by policy.
 
-## Good LO design
+## Good LogicN design
 
 I would add this as two separate concepts:
 
@@ -273,13 +273,13 @@ Suggested docs section:
 ```markdown
 ## Memory Hierarchy and Reliability
 
-LO should be aware that memory is not only RAM.
+LogicN should be aware that memory is not only RAM.
 
 Modern systems include several layers of memory and cache, including CPU cache, main memory, storage-backed memory and accelerator memory.
 
-LO should not claim direct control over CPU caches or ECC hardware.
+LogicN should not claim direct control over CPU caches or ECC hardware.
 
-Instead, LO should provide:
+Instead, LogicN should provide:
 
 - cache-aware data layout guidance
 - contiguous memory options
@@ -291,17 +291,17 @@ Instead, LO should provide:
 - ECC detection where available
 - reliability policies for high-integrity workloads
 
-LO should treat L2/L3 cache as an optimisation target.
+LogicN should treat L2/L3 cache as an optimisation target.
 
-LO should treat ECC as a reliability property of the deployment environment.
+LogicN should treat ECC as a reliability property of the deployment environment.
 ```
 
 ## Best final direction
 
-For LO, I would define this as:
+For LogicN, I would define this as:
 
 ```text
-LO Memory Model v2
+LogicN Memory Model v2
 ```
 
 with these parts:
@@ -319,7 +319,7 @@ IDE warnings
 
 The best claim would be:
 
-> LO does not control CPU cache or ECC hardware directly. LO can make memory behaviour visible, typed, reportable and optimisable, helping developers write code that works better with L2/L3 cache and can require ECC-capable environments for high-reliability workloads.
+> LogicN does not control CPU cache or ECC hardware directly. LogicN can make memory behaviour visible, typed, reportable and optimisable, helping developers write code that works better with L2/L3 cache and can require ECC-capable environments for high-reliability workloads.
 
 [1]: https://www.intel.com/content/dam/www/public/us/en/documents/white-papers/cache-allocation-technology-white-paper.pdf?utm_source=chatgpt.com "Improving Real-Time Performance by Utilizing Cache ..."
 [2]: https://www.memtest86.com/ecc.htm?utm_source=chatgpt.com "MemTest86 - ECC Technical Details"

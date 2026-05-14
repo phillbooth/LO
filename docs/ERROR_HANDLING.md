@@ -18,9 +18,9 @@ This document explains how the app should handle errors.
 - Sensitive data must not be logged.
 - Failed operations should not leave the app in an unsafe state.
 
-## LO Error Handling Expectations
+## LogicN Error Handling Expectations
 
-Where useful, LO code should handle:
+Where useful, LogicN code should handle:
 
 - undefined values
 - expected errors

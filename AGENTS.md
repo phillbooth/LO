@@ -6,30 +6,30 @@ This file gives guidance to AI coding tools working on this repository.
 
 ## Project Type
 
-This is a LO application template.
+This is a LogicN application template.
 
 The repository contains:
 
-- LO language/package files in `packages-lo/lo-core/`
-- Active reusable LO package collection files in `packages-lo/`
-- LO secure runtime kernel design files in `packages-lo/lo-framework-app-kernel/`
-- Bespoke app files in `packages-lo/lo-framework-example-app/`
+- LogicN language/package files in `packages-logicn/logicn-core/`
+- Active reusable LogicN package collection files in `packages-logicn/`
+- LogicN secure runtime kernel design files in `packages-logicn/logicn-framework-app-kernel/`
+- Bespoke app files in `packages-logicn/logicn-framework-example-app/`
 - App documentation in `docs/`
 - Helper scripts and generators in `tools/`
 
 ## Important Rules
 
-- Do not place app-specific documentation inside `packages-lo/lo-core/`.
-- Do not place full-framework, CMS, admin UI, ORM or frontend framework design inside `packages-lo/lo-core/`.
-- Do not place LO language documentation inside `docs/`.
-- Do not treat `packages-lo/` as production-installed by default; use it for
-  explicit LO package collection planning only.
+- Do not place app-specific documentation inside `packages-logicn/logicn-core/`.
+- Do not place full-framework, CMS, admin UI, ORM or frontend framework design inside `packages-logicn/logicn-core/`.
+- Do not place LogicN language documentation inside `docs/`.
+- Do not treat `packages-logicn/` as production-installed by default; use it for
+  explicit LogicN package collection planning only.
 - Finance, electrical and OT package planning is archived under
-  `C:\laragon\www\LO_Archive\packages-lo\` and must not be treated as part of
+  `C:\laragon\www\LogicN_Archive\packages-logicn\` and must not be treated as part of
   the active v1 build graph.
 - Keep the repository root clean.
 - Do not commit secrets.
-- Do not invent LO syntax without documenting it.
+- Do not invent LogicN syntax without documenting it.
 - Update relevant docs when changing architecture, requirements, security, API or deployment behaviour.
 
 ## Project Graph for AI Tools
@@ -39,26 +39,26 @@ and relationships before making broad architecture or package changes.
 
 Primary graph outputs:
 
-- `build/graph/lo-devtools-project-graph.json`
-- `build/graph/LO_GRAPH_REPORT.md`
-- `build/graph/lo-ai-map.md`
-- `build/graph/lo-devtools-project-graph.html`
+- `build/graph/logicn-devtools-project-graph.json`
+- `build/graph/LogicN_GRAPH_REPORT.md`
+- `build/graph/logicn-ai-map.md`
+- `build/graph/logicn-devtools-project-graph.html`
 
-If `build/graph/lo-devtools-project-graph.json` is missing, or if the graph appears out
-of date after changes to `AGENTS.md`, `lo.workspace.json`, `docs/`, package
+If `build/graph/logicn-devtools-project-graph.json` is missing, or if the graph appears out
+of date after changes to `AGENTS.md`, `logicn.workspace.json`, `docs/`, package
 READMEs, package TODOs, package manifests or package source contracts, run from
 the repository root:
 
 ```powershell
-node packages-lo\lo-core-cli\dist\index.js graph --out build\graph
+node packages-logicn\logicn-core-cli\dist\index.js graph --out build\graph
 ```
 
 Use graph query commands when package ownership or relationships are unclear:
 
 ```powershell
-node packages-lo\lo-core-cli\dist\index.js graph query lo-core-security --out build\graph
-node packages-lo\lo-core-cli\dist\index.js graph explain package:lo-core-security --out build\graph
-node packages-lo\lo-core-cli\dist\index.js graph path package:lo-devtools-project-graph report:project-graph --out build\graph
+node packages-logicn\logicn-core-cli\dist\index.js graph query logicn-core-security --out build\graph
+node packages-logicn\logicn-core-cli\dist\index.js graph explain package:logicn-core-security --out build\graph
+node packages-logicn\logicn-core-cli\dist\index.js graph path package:logicn-devtools-project-graph report:project-graph --out build\graph
 ```
 
 The project graph is advisory. It helps AI and humans navigate the repository,
@@ -93,11 +93,11 @@ When adding or changing features, update:
 
 ## Package Boundaries
 
-### `packages-lo/lo-core/`
+### `packages-logicn/logicn-core/`
 
 Use for:
 
-- LO language rules
+- LogicN language rules
 - syntax
 - type system
 - compiler notes
@@ -105,11 +105,11 @@ Use for:
 - examples
 - standard library notes
 
-### `packages-lo/lo-framework-app-kernel/`
+### `packages-logicn/logicn-framework-app-kernel/`
 
 Use for:
 
-- optional LO Secure App Kernel design
+- optional LogicN Secure App Kernel design
 - request lifecycle policy
 - typed API boundary enforcement
 - validation, auth and rate-limit policy
@@ -126,7 +126,7 @@ Do not use for:
 - mandatory template engines
 - React, Angular or other frontend framework syntax
 
-### `packages-lo/lo-framework-example-app/`
+### `packages-logicn/logicn-framework-example-app/`
 
 Use for:
 
@@ -137,11 +137,11 @@ Use for:
 - app build output
 - app config
 
-### `packages-lo/`
+### `packages-logicn/`
 
 Use for:
 
-- proposed reusable LO package collection layout
+- proposed reusable LogicN package collection layout
 - active core package and tooling package planning
 - archived package references that point outside this workspace
 - future nested repository or submodule planning
@@ -149,9 +149,9 @@ Use for:
 Do not use for:
 
 - normal npm/vendor app packages
-- app-specific source, except the current template `lo-framework-example-app/`
+- app-specific source, except the current template `logicn-framework-example-app/`
 - secrets
-- production-only packages that have not been selected by a LO package profile
+- production-only packages that have not been selected by a LogicN package profile
 
 ### `docs/`
 
