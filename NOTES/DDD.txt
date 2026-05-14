@@ -1,0 +1,1559 @@
+Take the below concept with a pinch of salt use reaoning to impliment if it will not harm security
+
+````markdown
+# LogicN and Domain-Driven Design  
+## A Practical Architecture Note
+
+LogicN is a security-first, typed, AI-readable backend language concept. It can support Domain-Driven Design, but it should not blindly copy heavyweight enterprise DDD patterns.
+
+The recommended direction is:
+
+> LogicN should support domain-driven structure where it improves meaning, safety, testing and AI readability, but security, memory management, crash handling and compute performance should be enforced by LogicN’s own language, compiler and runtime policies.
+
+---
+
+# 1. Is LogicN Domain-Driven Design?
+
+LogicN is not automatically DDD.
+
+LogicN is a programming language concept. DDD is an application design approach.
+
+A better description is:
+
+> LogicN is a security-first, typed, AI-readable backend language that can support DDD-style architecture for business applications.
+
+DDD should be optional, not forced.
+
+For small scripts, DDD would be too much.
+
+For serious backend systems, especially in finance, legal, healthcare, manufacturing, payments, APIs and webhooks, a domain-driven structure can help make the code easier to understand and safer to maintain.
+
+---
+
+# 2. What DDD Means Simply
+
+Domain-Driven Design means organising code around the real business domain.
+
+For an order system, the important concepts are:
+
+```text
+Order
+Customer
+Payment
+Invoice
+Refund
+Delivery
+````
+
+Not just:
+
+```text
+orders_table
+payments_table
+controller.php
+utils.js
+```
+
+DDD tries to make the code read like the business process.
+
+Example:
+
+```logicn
+Orders.createDraft(input)
+Payments.authorise(order.total)
+Orders.markPaid(order, payment.id)
+OrderStore.save(order)
+```
+
+This is easier to understand than:
+
+```logicn
+processData(input)
+handler2()
+saveModel()
+```
+
+---
+
+# 3. How LogicN Could Support DDD
+
+A practical LogicN app could use a structure like this:
+
+```text
+my-logicn-app/
+├── boot.logicn
+├── main.logicn
+├── api/
+│   ├── orders-api.logicn
+│   └── payment-webhook.logicn
+├── flows/
+│   ├── create-order.logicn
+│   └── refund-order.logicn
+├── domain/
+│   ├── orders.logicn
+│   ├── payments.logicn
+│   └── customers.logicn
+├── infrastructure/
+│   ├── order-store.logicn
+│   ├── payment-provider.logicn
+│   └── email-provider.logicn
+├── compute/
+│   └── fraud-score.logicn
+├── policies/
+│   ├── security-policy.logicn
+│   ├── memory-policy.logicn
+│   ├── crash-policy.logicn
+│   └── ai-cache-policy.logicn
+└── reports/
+    ├── security-report.json
+    ├── memory-report.json
+    ├── compute-report.json
+    └── ai-context-report.json
+```
+
+The key separation is:
+
+| Area              | Purpose                                             |
+| ----------------- | --------------------------------------------------- |
+| `api/`            | HTTP routes, webhooks, request/response translation |
+| `flows/`          | Application use-cases and workflows                 |
+| `domain/`         | Business rules and business language                |
+| `infrastructure/` | Database, files, external APIs, providers           |
+| `compute/`        | Performance-heavy CPU/GPU/vector/AI/photonic work   |
+| `policies/`       | Security, memory, crash, cache and runtime rules    |
+| `reports/`        | Compiler/runtime reports for humans and AI          |
+
+---
+
+# 4. Example Domain Code
+
+```logicn
+type OrderId = String
+type CustomerId = String
+
+enum OrderStatus {
+  Draft
+  PendingPayment
+  Paid
+  Cancelled
+  Refunded
+}
+
+type Order = {
+  id: OrderId
+  customerId: CustomerId
+  status: OrderStatus
+  total: Money
+}
+```
+
+A domain rule:
+
+```logicn
+domain Orders {
+  rule canRefund(order: Order, amount: Money) -> Decision {
+    match order.status {
+      case Paid {
+        return Decision.Allow
+      }
+
+      case Cancelled {
+        return Decision.Deny
+      }
+
+      case Refunded {
+        return Decision.Deny
+      }
+
+      otherwise {
+        return Decision.Review
+      }
+    }
+  }
+}
+```
+
+This is useful because the business rule is clear.
+
+The code says:
+
+```text
+Can this order be refunded?
+```
+
+Not:
+
+```text
+Run processor service number 4.
+```
+
+---
+
+# 5. Example Application Flow
+
+```logicn
+secure flow CreateOrder.handle(input: CreateOrderRequest) -> Result<OrderResponse, OrderError>
+  effects [
+    database.read,
+    database.write,
+    payment.authorise,
+    log.safe
+  ]
+{
+  let order = Orders.createDraft(input)
+    Err(error) => return Err(InvalidOrder)
+
+  match Orders.canBePaid(order) {
+    case true {
+      continue
+    }
+
+    case false {
+      return Err(OrderCannotBePaid)
+    }
+  }
+
+  let payment = Payments.authorise(order.total)
+    Err(error) => return Err(PaymentFailed)
+
+  let saved = OrderStore.save(order.markPaid(payment.id))
+    Err(error) => return Err(DatabaseUnavailable)
+
+  return Ok(OrderResponse.from(saved))
+}
+```
+
+This is DDD-like because the code follows the business process:
+
+```text
+Create draft order
+Check if it can be paid
+Authorise payment
+Mark order as paid
+Save order
+Return response
+```
+
+---
+
+# 6. Should LogicN Use DDD for Security?
+
+## Direct answer
+
+No. DDD is not the best design for security by itself.
+
+DDD helps organise security boundaries, but it does not automatically secure an app.
+
+DDD can help by separating:
+
+```text
+domain          = business rules
+flows           = use cases
+infrastructure  = database, APIs, files
+api             = requests and responses
+```
+
+That lets LogicN enforce rules such as:
+
+```logicn
+domain Orders {
+  pure only
+
+  deny effects [
+    database.write,
+    network.outbound,
+    secret.read,
+    file.write,
+    llm.call
+  ]
+}
+```
+
+This is valuable because business rules should not secretly:
+
+```text
+read secrets
+call external APIs
+write files
+write to the database
+send data to an LLM
+```
+
+However, security still needs LogicN-specific features:
+
+```text
+explicit effects
+permissions
+secret tracking
+safe logging
+typed inputs
+typed errors
+crash boundaries
+source maps
+security reports
+```
+
+So the best answer is:
+
+> DDD can help organise security, but LogicN security must come from compiler-enforced policies.
+
+---
+
+# 7. Should LogicN Use DDD for Memory Management?
+
+## Direct answer
+
+No. DDD is not the best design for memory management.
+
+DDD is about business modelling. It does not decide:
+
+```text
+when memory is allocated
+when memory is freed
+when data is copied
+when large values are referenced
+when data should be streamed
+whether a buffer can be reused
+whether a value is owned, borrowed or cloned
+```
+
+LogicN needs its own memory model.
+
+Example:
+
+```logicn
+let orderData = read_only largeJson
+let editableOrderData = clone(orderData)
+```
+
+This makes the memory behaviour visible.
+
+LogicN should support:
+
+```text
+read-only references
+explicit clone()
+copy-on-write
+streaming large data
+no silent large copies
+memory-pressure reports
+safe lifetimes
+owned values
+borrowed values
+```
+
+Example:
+
+```logicn
+flow processLargeImport(data: ReadOnly<JsonDocument>) -> Result<ImportResult, ImportError> {
+  // Can read the data.
+  // Cannot silently copy or mutate the full document.
+}
+```
+
+Best rule:
+
+> DDD can organise the code, but memory safety should be a LogicN language/runtime feature.
+
+---
+
+# 8. Should LogicN Use DDD for Compute and Speed?
+
+## Direct answer
+
+No. DDD is not the best design for compute or speed.
+
+DDD can sometimes make performance easier to reason about because the system is organised clearly.
+
+But heavy DDD can also make performance worse by creating:
+
+```text
+too many small objects
+too many layers
+too many conversions
+too many repository calls
+too much abstraction
+too much indirection
+```
+
+For compute-heavy work, LogicN should use compute blocks, not heavy domain abstractions.
+
+Example:
+
+```logicn
+compute target best verify cpu_reference {
+  prefer gpu
+  fallback cpu_vector
+  fallback cpu
+
+  result = FraudModel.score(batch)
+}
+```
+
+This should not be hidden behind:
+
+```logicn
+FraudScoringDomainServiceFactory
+  .createService()
+  .getScoringProcessor()
+  .processFraudScoreBatch(batch)
+```
+
+LogicN needs separate performance tools:
+
+```text
+CPU scalar
+CPU vector
+GPU
+AI accelerator
+photonic plan
+WASM
+binary
+batch execution
+streaming
+profiling
+benchmarking
+target reports
+fallback reports
+```
+
+Best rule:
+
+> Use DDD for business meaning. Use compute policies, target-aware compilation, profiling and caching for speed.
+
+---
+
+# 9. Will DDD Make Code Easier for Humans and AI?
+
+## Direct answer
+
+Yes, often.
+
+This is where DDD helps LogicN the most.
+
+AI and junior developers can understand this:
+
+```logicn
+domain Orders
+rule canCancelOrder
+rule canRefundOrder
+flow CreateOrder
+flow RefundPayment
+```
+
+more easily than:
+
+```logicn
+utils1
+handler2
+dataProcessor
+mainService
+doThing
+```
+
+DDD gives context.
+
+It tells humans and AI:
+
+```text
+This file is about orders.
+This rule controls refunds.
+This flow creates an order.
+This repository saves orders.
+This error belongs to payments.
+```
+
+That makes AI-generated code safer and less random.
+
+Best rule:
+
+> DDD is most useful for meaning, naming, structure and AI readability.
+
+---
+
+# 10. Are DDD Abstractions a Waste of Code?
+
+## Direct answer
+
+No, not automatically.
+
+DDD abstractions are useful when they protect business rules, security boundaries or long-term clarity.
+
+They become wasteful when they only add layers.
+
+Bad abstraction:
+
+```logicn
+OrderService.callOrderRepositoryToSaveOrder(order)
+```
+
+This does not add meaning. It just wraps another call.
+
+Better abstraction:
+
+```logicn
+Orders.canRefund(order, amount)
+```
+
+This is useful because it describes a real business decision.
+
+Good abstractions should answer at least one of these:
+
+```text
+What business decision is being made?
+What security boundary is being protected?
+What unsafe behaviour is being blocked?
+What future change is likely?
+```
+
+If the abstraction does none of those, it may be waste.
+
+---
+
+# 11. Example of Wasteful DDD
+
+This is too much for many LogicN apps:
+
+```text
+orders/
+├── OrderEntity.logicn
+├── OrderDto.logicn
+├── OrderModel.logicn
+├── OrderMapper.logicn
+├── OrderRepository.logicn
+├── OrderRepositoryInterface.logicn
+├── OrderService.logicn
+├── OrderFactory.logicn
+├── OrderValidator.logicn
+├── OrderUseCase.logicn
+├── OrderController.logicn
+└── OrderPresenter.logicn
+```
+
+This can become:
+
+```text
+too many layers
+too many names
+too many files
+too much boilerplate
+harder for juniors
+harder for AI
+slower to change
+```
+
+For LogicN, this should be avoided unless the business complexity genuinely requires it.
+
+---
+
+# 12. Example of Useful Thin DDD
+
+A cleaner LogicN structure:
+
+```text
+my-logicn-app/
+├── api/
+│   └── orders-api.logicn
+├── domain/
+│   └── orders.logicn
+├── flows/
+│   └── create-order.logicn
+├── infrastructure/
+│   └── order-store.logicn
+└── policies/
+    └── security-policy.logicn
+```
+
+This gives useful separation without too much ceremony.
+
+Simple API:
+
+```logicn
+api OrdersApi {
+  POST "/orders" {
+    request CreateOrderRequest
+    response OrderResponse
+    handler CreateOrder.handle
+  }
+}
+```
+
+Application flow:
+
+```logicn
+flow CreateOrder.handle(input: CreateOrderRequest) -> Result<OrderResponse, OrderError> {
+  let order = Orders.create(input)
+    Err(error) => return Err(InvalidOrder)
+
+  let saved = OrderStore.save(order)
+    Err(error) => return Err(DatabaseUnavailable)
+
+  return Ok(OrderResponse.from(saved))
+}
+```
+
+Domain rule added only when needed:
+
+```logicn
+domain Orders {
+  rule canRefund(order: Order, amount: Money) -> Decision {
+    ...
+  }
+}
+```
+
+This is a better approach for LogicN.
+
+---
+
+# 13. Would DDD Cause Legacy Concepts or Structure?
+
+## Direct answer
+
+DDD can accidentally create legacy-style structure if copied too rigidly.
+
+But DDD itself is not legacy.
+
+The risk is heavyweight enterprise DDD, where every feature gets:
+
+```text
+Service
+Manager
+Handler
+Processor
+RepositoryInterface
+RepositoryImplementation
+Mapper
+Factory
+DTO
+Presenter
+Adapter
+Port
+```
+
+Some of these are useful in large systems, but they should not be mandatory.
+
+LogicN should avoid this style:
+
+```logicn
+OrderRefundEligibilityDomainService
+  .getRefundEligibilityDecisionForOrderRefundRequest(...)
+```
+
+Prefer:
+
+```logicn
+Orders.canRefund(order, amount)
+```
+
+The second version is easier for humans and AI.
+
+---
+
+# 14. Legacy Risk: Database-Shaped Domain
+
+Bad structure:
+
+```text
+domain/
+├── tbl_orders.logicn
+├── tbl_order_items.logicn
+├── tbl_customers.logicn
+└── tbl_payments.logicn
+```
+
+This is not really DDD. It is just database-first design.
+
+Better:
+
+```text
+domain/
+├── orders.logicn
+├── payments.logicn
+├── customers.logicn
+└── refunds.logicn
+```
+
+The domain should follow the business, not the database.
+
+---
+
+# 15. Legacy Risk: Too Many Object Wrappers
+
+Bad:
+
+```logicn
+let orderDto = OrderMapper.entityToDto(
+  OrderFactory.createOrderEntity(
+    OrderService.prepareOrder(input)
+  )
+)
+```
+
+Better:
+
+```logicn
+let order = Orders.create(input)
+let response = OrderResponse.from(order)
+```
+
+LogicN should prefer direct, typed, readable flows.
+
+---
+
+# 16. Legacy Risk: Forcing Repositories Everywhere
+
+Repositories can be useful when hiding database details.
+
+But this may be wasteful:
+
+```logicn
+OrderRepository.save(order)
+```
+
+when the app could simply use:
+
+```logicn
+OrderStore.save(order)
+```
+
+or:
+
+```logicn
+Database.orders.save(order)
+```
+
+LogicN should not force repository patterns unless there is a real benefit.
+
+---
+
+# 17. Legacy Risk: DDD Hiding Performance Problems
+
+Heavy DDD can cause:
+
+```text
+too many allocations
+too many conversions
+too many layers
+too many small files
+too much indirection
+```
+
+For LogicN, compute-heavy code should not be forced through domain layers.
+
+Better:
+
+```logicn
+compute target best {
+  result = FraudModel.score(batch)
+}
+```
+
+Not:
+
+```logicn
+FraudScoringDomainServiceFactory
+  .createService()
+  .getScoringProcessor()
+  .processFraudScoreBatch(batch)
+```
+
+---
+
+# 18. Recommended LogicN Architecture Rule
+
+LogicN should not say:
+
+```text
+Everything must be DDD.
+```
+
+LogicN should say:
+
+```text
+Use domain structure where it adds meaning.
+Avoid architecture that only adds layers.
+```
+
+A useful architecture policy could be:
+
+```logicn
+architecture_policy {
+  domain pure by_default
+  allow thin_domain
+
+  warn excessive_layers
+  warn empty_wrappers
+  warn database_shaped_domain
+  warn unused_abstractions
+}
+```
+
+LogicN could then generate an architecture report:
+
+```json
+{
+  "architecture": {
+    "domainStyle": "thin-domain",
+    "warnings": [
+      {
+        "code": "LOGICN-ARCH-002",
+        "message": "OrderService only forwards calls to Orders.create. Consider removing this wrapper."
+      },
+      {
+        "code": "LOGICN-ARCH-006",
+        "message": "Domain folder appears to mirror database table names. Consider business-domain names instead."
+      }
+    ]
+  }
+}
+```
+
+---
+
+# 19. Progressive Structure
+
+LogicN should support progressive architecture.
+
+| App size              | Recommended structure                                         |
+| --------------------- | ------------------------------------------------------------- |
+| Small script          | One or two `.logicn` files                                    |
+| Small API             | `api/`, `flows/`, `infrastructure/`                           |
+| Business app          | Add `domain/`                                                 |
+| Complex regulated app | Add stronger boundaries and policies                          |
+| High-security app     | Add enforced security, memory, crash and architecture reports |
+| Compute-heavy app     | Add `compute/` and target reports                             |
+
+This avoids forcing enterprise structure onto small projects.
+
+---
+
+# 20. Best LogicN Position
+
+LogicN should support what could be called:
+
+```text
+Thin DDD
+Domain-first structure
+Policy-enforced architecture
+```
+
+Not:
+
+```text
+Heavy enterprise DDD
+Layer-first architecture
+Boilerplate-driven design
+```
+
+The best design principle is:
+
+> Business meaning belongs in the domain.
+> Application steps belong in flows.
+> External systems belong in infrastructure.
+> Security, memory, crash handling and compute belong in LogicN policies.
+
+---
+
+# 21. Final Summary
+
+DDD is useful for LogicN, but only in the right places.
+
+## Security
+
+DDD helps organise security boundaries, but LogicN needs compiler-enforced security policies.
+
+## Memory
+
+DDD does not solve memory management. LogicN needs explicit memory rules such as read-only references, `clone()`, copy-on-write and memory reports.
+
+## Speed
+
+DDD does not solve compute performance. LogicN needs compute blocks, profiling, target-aware compilation, caching and fallback reports.
+
+## Human and AI readability
+
+DDD can help a lot because business names and clear structure make the code easier to understand.
+
+## Abstraction
+
+DDD abstractions are not waste when they protect business rules or boundaries. They are waste when they only wrap other code.
+
+## Legacy risk
+
+DDD is not legacy, but heavyweight DDD can create legacy-style structure. LogicN should prefer thin, clear, modern domain structure.
+
+---
+
+# Recommended LogicN Rule
+
+```text
+Use DDD for business meaning.
+Use LogicN policies for security.
+Use LogicN memory rules for safe data handling.
+Use LogicN compute rules for speed.
+Use LogicN reports so humans and AI can understand the system.
+Avoid abstractions that do not add meaning, safety or future value.
+```
+
+```
+```
+## First: “DDD compliant” is not a formal compiler standard
+
+There is no official universal “DDD compliant” test like HTML validation. For LogicN, I would define it as:
+
+> Business rules live in `domain/`, workflows live in `flows/`, external systems live in `infrastructure/`, routes live in `api/`, and LogicN can enforce those boundaries with policies.
+
+I’ll use `.ln` files for LogicN.
+
+---
+
+# 1. LogicN now: simple route-centred style
+
+This is easier for a small app, but business logic, payment logic and database logic are close together.
+
+```text
+my-app/
+├── boot.ln
+├── main.ln
+└── api/
+    └── orders-api.ln
+```
+
+## `api/orders-api.ln`
+
+```logicn
+api OrdersApi {
+  POST "/orders" {
+    request CreateOrderRequest
+    response OrderResponse
+    handler createOrder
+  }
+}
+
+secure flow createOrder(input: CreateOrderRequest) -> Result<OrderResponse, OrderError>
+  effects [
+    database.write,
+    payment.authorise,
+    log.safe
+  ]
+{
+  if input.items.length == 0 {
+    return Err(InvalidOrder)
+  }
+
+  if input.total <= 0 {
+    return Err(InvalidOrder)
+  }
+
+  let payment = PaymentProvider.authorise({
+    customerId: input.customerId,
+    amount: input.total
+  })
+    Err(error) => return Err(PaymentFailed)
+
+  let order = {
+    id: Id.new(),
+    customerId: input.customerId,
+    items: input.items,
+    total: input.total,
+    status: "Paid",
+    paymentId: payment.id
+  }
+
+  let saved = Database.orders.save(order)
+    Err(error) => return Err(DatabaseUnavailable)
+
+  Log.safe("Order created", {
+    orderId: saved.id
+  })
+
+  return Ok(OrderResponse.from(saved))
+}
+```
+
+## What is wrong with this for larger apps?
+
+It works, but the route/flow knows too much:
+
+```text
+It validates business rules.
+It knows payment details.
+It builds the order object directly.
+It chooses order status directly.
+It writes to the database directly.
+```
+
+For a small project, that may be fine.
+
+For a larger secure system, it becomes harder to know:
+
+```text
+Where are the order rules?
+Who is allowed to change order status?
+Can domain code call the database?
+Can payment logic be reused?
+Can AI safely edit this file?
+```
+
+---
+
+# 2. LogicN with DDD-ready structure
+
+Now the same feature is split by responsibility.
+
+```text
+my-app/
+├── boot.ln
+├── main.ln
+├── api/
+│   └── orders-api.ln
+├── flows/
+│   └── create-order.ln
+├── domain/
+│   └── orders.ln
+├── infrastructure/
+│   ├── order-store.ln
+│   └── payment-provider.ln
+└── policies/
+    └── architecture-policy.ln
+```
+
+---
+
+# 3. DDD version: domain model
+
+## `domain/orders.ln`
+
+```logicn
+type OrderId = String
+type CustomerId = String
+
+enum OrderStatus {
+  Draft
+  PendingPayment
+  Paid
+  Cancelled
+  Refunded
+}
+
+type OrderItem = {
+  productId: String
+  quantity: Int
+  price: Money
+}
+
+type Order = {
+  id: OrderId
+  customerId: CustomerId
+  items: List<OrderItem>
+  total: Money
+  status: OrderStatus
+  paymentId: String?
+}
+
+enum OrderError {
+  InvalidOrder
+  OrderCannotBePaid
+  PaymentFailed
+  DatabaseUnavailable
+}
+```
+
+The domain now owns order status and order rules.
+
+```logicn
+domain Orders {
+  rule createDraft(input: CreateOrderRequest) -> Result<Order, OrderError> {
+    if input.items.length == 0 {
+      return Err(InvalidOrder)
+    }
+
+    if input.total <= 0 {
+      return Err(InvalidOrder)
+    }
+
+    return Ok({
+      id: Id.new(),
+      customerId: input.customerId,
+      items: input.items,
+      total: input.total,
+      status: OrderStatus.Draft,
+      paymentId: null
+    })
+  }
+
+  rule canBePaid(order: Order) -> Bool {
+    match order.status {
+      case Draft {
+        return true
+      }
+
+      case PendingPayment {
+        return true
+      }
+
+      otherwise {
+        return false
+      }
+    }
+  }
+
+  rule markPaid(order: Order, paymentId: String) -> Order {
+    return {
+      ...order,
+      status: OrderStatus.Paid,
+      paymentId: paymentId
+    }
+  }
+}
+```
+
+Important difference:
+
+```text
+The domain says what an order is.
+The domain says when an order can be paid.
+The domain says how an order becomes paid.
+```
+
+The API no longer decides those rules.
+
+---
+
+# 4. DDD version: API route
+
+## `api/orders-api.ln`
+
+```logicn
+api OrdersApi {
+  POST "/orders" {
+    request CreateOrderRequest
+    response OrderResponse
+
+    errors [
+      InvalidOrder,
+      OrderCannotBePaid,
+      PaymentFailed,
+      DatabaseUnavailable
+    ]
+
+    timeout 5s
+    max_body_size 128kb
+
+    handler CreateOrder.handle
+  }
+}
+```
+
+The API route now only describes:
+
+```text
+HTTP method
+URL
+request type
+response type
+possible errors
+handler
+```
+
+It does not contain business rules.
+
+---
+
+# 5. DDD version: application flow
+
+## `flows/create-order.ln`
+
+```logicn
+secure flow CreateOrder.handle(input: CreateOrderRequest) -> Result<OrderResponse, OrderError>
+  effects [
+    payment.authorise,
+    database.write,
+    log.safe
+  ]
+{
+  let draftOrder = Orders.createDraft(input)
+    Err(error) => return Err(error)
+
+  match Orders.canBePaid(draftOrder) {
+    case true {
+      continue
+    }
+
+    case false {
+      return Err(OrderCannotBePaid)
+    }
+  }
+
+  let payment = PaymentProvider.authorise({
+    customerId: draftOrder.customerId,
+    amount: draftOrder.total
+  })
+    Err(error) => return Err(PaymentFailed)
+
+  let paidOrder = Orders.markPaid(draftOrder, payment.id)
+
+  let savedOrder = OrderStore.save(paidOrder)
+    Err(error) => return Err(DatabaseUnavailable)
+
+  Log.safe("Order created", {
+    orderId: savedOrder.id
+  })
+
+  return Ok(OrderResponse.from(savedOrder))
+}
+```
+
+This is the main DDD improvement.
+
+The flow reads like a use case:
+
+```text
+Create draft order.
+Check if it can be paid.
+Authorise payment.
+Mark order as paid.
+Save order.
+Return response.
+```
+
+---
+
+# 6. DDD version: infrastructure
+
+## `infrastructure/payment-provider.ln`
+
+```logicn
+provider PaymentProvider {
+  allow outbound "https://payments.example.com"
+
+  secret PAYMENT_API_KEY {
+    source env "PAYMENT_API_KEY"
+  }
+
+  function authorise(request: PaymentAuthoriseRequest) -> Result<PaymentResult, PaymentError>
+    effects [
+      network.outbound,
+      secret.read
+    ]
+  {
+    with secret PAYMENT_API_KEY as key {
+      let response = Http.post("https://payments.example.com/authorise", {
+        headers: {
+          Authorization: Secret.bearer(key)
+        },
+        body: request
+      })
+        Err(error) => return Err(PaymentUnavailable)
+
+      return Ok(PaymentResult.from(response))
+    }
+  }
+}
+```
+
+## `infrastructure/order-store.ln`
+
+```logicn
+store OrderStore {
+  function save(order: Order) -> Result<Order, DatabaseError>
+    effects [
+      database.write
+    ]
+  {
+    let saved = Database.orders.save(order)
+      Err(error) => return Err(DatabaseUnavailable)
+
+    return Ok(saved)
+  }
+}
+```
+
+Infrastructure is where external systems live:
+
+```text
+database
+HTTP APIs
+files
+queues
+secrets
+storage
+email providers
+payment providers
+```
+
+---
+
+# 7. DDD version: architecture policy
+
+## `policies/architecture-policy.ln`
+
+```logicn
+architecture_policy DddThinDomain {
+  domain {
+    pure by_default
+
+    deny effects [
+      database.read,
+      database.write,
+      network.outbound,
+      secret.read,
+      file.write,
+      llm.call,
+      cache.write
+    ]
+  }
+
+  api {
+    allow request_decode
+    allow response_encode
+    deny business_rules
+  }
+
+  flows {
+    allow domain
+    allow infrastructure
+    require explicit_effects true
+  }
+
+  infrastructure {
+    allow database
+    allow network
+    allow secrets
+    require safe_logging true
+  }
+
+  reports {
+    write_architecture_report true
+    warn empty_wrappers true
+    warn database_shaped_domain true
+    warn excessive_layers true
+  }
+}
+```
+
+This is where LogicN becomes stronger than ordinary DDD.
+
+It does not just organise files. It can enforce boundaries.
+
+---
+
+# 8. Side-by-side difference
+
+## LogicN now
+
+```logicn
+secure flow createOrder(input: CreateOrderRequest) -> Result<OrderResponse, OrderError>
+  effects [
+    database.write,
+    payment.authorise,
+    log.safe
+  ]
+{
+  if input.items.length == 0 {
+    return Err(InvalidOrder)
+  }
+
+  if input.total <= 0 {
+    return Err(InvalidOrder)
+  }
+
+  let payment = PaymentProvider.authorise({
+    customerId: input.customerId,
+    amount: input.total
+  })
+    Err(error) => return Err(PaymentFailed)
+
+  let order = {
+    id: Id.new(),
+    customerId: input.customerId,
+    items: input.items,
+    total: input.total,
+    status: "Paid",
+    paymentId: payment.id
+  }
+
+  let saved = Database.orders.save(order)
+    Err(error) => return Err(DatabaseUnavailable)
+
+  return Ok(OrderResponse.from(saved))
+}
+```
+
+## DDD-ready LogicN
+
+```logicn
+secure flow CreateOrder.handle(input: CreateOrderRequest) -> Result<OrderResponse, OrderError>
+  effects [
+    payment.authorise,
+    database.write,
+    log.safe
+  ]
+{
+  let draftOrder = Orders.createDraft(input)
+    Err(error) => return Err(error)
+
+  match Orders.canBePaid(draftOrder) {
+    case true {
+      continue
+    }
+
+    case false {
+      return Err(OrderCannotBePaid)
+    }
+  }
+
+  let payment = PaymentProvider.authorise({
+    customerId: draftOrder.customerId,
+    amount: draftOrder.total
+  })
+    Err(error) => return Err(PaymentFailed)
+
+  let paidOrder = Orders.markPaid(draftOrder, payment.id)
+
+  let savedOrder = OrderStore.save(paidOrder)
+    Err(error) => return Err(DatabaseUnavailable)
+
+  return Ok(OrderResponse.from(savedOrder))
+}
+```
+
+---
+
+# 9. The real code difference
+
+| Area             | LogicN now                                 | DDD-ready LogicN                                     |
+| ---------------- | ------------------------------------------ | ---------------------------------------------------- |
+| Route file       | Contains route and possibly business logic | Only defines HTTP contract                           |
+| Business rules   | Can be inside flow/handler                 | Moved into `domain/`                                 |
+| Database access  | Can be called directly                     | Goes through `infrastructure/`                       |
+| Payment provider | Can be called directly                     | Goes through provider boundary                       |
+| Status changes   | Can be set manually                        | Controlled by domain rules                           |
+| Security effects | Declared per flow                          | Declared per flow and checked by architecture policy |
+| AI readability   | Good                                       | Better, because file purpose is clearer              |
+| Boilerplate      | Lower                                      | Slightly higher                                      |
+| Safety           | Good if coded carefully                    | Better if policies enforce boundaries                |
+
+---
+
+# 10. Example of what DDD prevents
+
+In non-DDD style, a developer might accidentally do this inside an API file:
+
+```logicn
+let order = {
+  ...order,
+  status: "Refunded"
+}
+
+Database.orders.save(order)
+```
+
+That bypasses refund rules.
+
+In DDD-ready LogicN, the correct version is:
+
+```logicn
+let decision = Orders.canRefund(order, refundAmount)
+
+match decision {
+  case Decision.Allow {
+    let refundedOrder = Orders.markRefunded(order, refundAmount)
+    OrderStore.save(refundedOrder)
+  }
+
+  case Decision.Deny {
+    return Err(RefundNotAllowed)
+  }
+
+  case Decision.Review {
+    return Err(RefundRequiresReview)
+  }
+}
+```
+
+The refund rule is now protected.
+
+---
+
+# 11. What LogicN should avoid
+
+DDD-ready LogicN should **not** become this:
+
+```logicn
+OrderRefundEligibilityDomainServiceFactory
+  .create()
+  .getService()
+  .calculateRefundEligibilityDecisionForOrderRefundRequest(...)
+```
+
+That is too heavy.
+
+LogicN should prefer:
+
+```logicn
+Orders.canRefund(order, amount)
+```
+
+Clear, short, business-readable.
+
+---
+
+# 12. Final summary
+
+## LogicN now
+
+Best for:
+
+```text
+small apps
+prototypes
+simple APIs
+scripts
+early compiler examples
+```
+
+Style:
+
+```text
+route -> secure flow -> database/provider
+```
+
+## LogicN DDD-ready
+
+Best for:
+
+```text
+larger apps
+payments
+finance
+legal systems
+healthcare
+webhooks
+regulated systems
+AI-assisted development
+```
+
+Style:
+
+```text
+api -> flow -> domain -> infrastructure
+```
+
+With policies:
+
+```text
+domain is pure
+flows declare effects
+infrastructure handles external systems
+API does not contain business rules
+compiler reports architecture problems
+```
+
+The best LogicN direction is not “heavy DDD”.
+
+It is:
+
+> Thin DDD + compiler-enforced boundaries + security/memory/compute policies.
+

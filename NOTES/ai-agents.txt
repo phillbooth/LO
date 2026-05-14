@@ -1,0 +1,1599 @@
+Yes. LogicN could be designed to run **multiple AI agents**, but it should not copy the usual “agent chaos” model where agents freely call tools, pass text around, and loop forever.
+
+The best LogicN version would be:
+
+> Multi-agent AI, but typed, permissioned, audited, bounded, cache-aware and safe by default.
+
+---
+
+# 1. What “multiple AI agents” means
+
+Instead of one AI doing everything, you split work into specialised agents:
+
+```text
+PlannerAgent       = decides steps
+CodeAgent          = writes code
+SecurityAgent      = checks safety
+TestAgent          = creates tests
+DocsAgent          = writes documentation
+ReviewAgent        = checks final output
+SupervisorAgent    = controls the workflow
+```
+
+This is useful for LogicN because the language already aims to be:
+
+```text
+strict
+typed
+security-first
+AI-readable
+report-driven
+source-mapped
+safe with secrets
+safe with cache
+```
+
+That fits multi-agent systems very well.
+
+---
+
+# 2. Basic LogicN agent structure
+
+Example:
+
+```logicn
+agent CodeAgent {
+  model "best:code"
+
+  input CodeTask
+  output CodePatch
+
+  permissions [
+    project.read,
+    file.propose_change
+  ]
+
+  deny [
+    file.write_direct,
+    secret.read,
+    network.outbound
+  ]
+
+  memory readonly ProjectContext
+  cache passive
+
+  handler writeCodePatch
+}
+```
+
+This means:
+
+```text
+CodeAgent can read the project.
+CodeAgent can propose code changes.
+CodeAgent cannot directly write files.
+CodeAgent cannot read secrets.
+CodeAgent cannot call the network.
+```
+
+That is the right kind of safety boundary.
+
+---
+
+# 3. A supervisor agent should control the others
+
+Do not let every agent talk to every other agent freely.
+
+Use a supervisor pattern:
+
+```logicn
+agent SupervisorAgent {
+  model "best:reasoning"
+
+  input UserRequest
+  output FinalResponse
+
+  permissions [
+    agent.call,
+    project.read,
+    report.write
+  ]
+
+  workflow {
+    call PlannerAgent
+    call CodeAgent
+    call SecurityAgent
+    call TestAgent
+    call ReviewAgent
+  }
+
+  limits {
+    max_steps 12
+    max_agent_calls 20
+    max_runtime 2 minutes
+  }
+}
+```
+
+This avoids uncontrolled loops.
+
+The supervisor decides:
+
+```text
+what needs doing
+which agent should do it
+when to stop
+whether the answer is safe
+whether a human needs to review
+```
+
+---
+
+# 4. Typed messages between agents
+
+Agents should not pass random text blobs around.
+
+Bad:
+
+```text
+"Here is some stuff, do something with it."
+```
+
+Better:
+
+```logicn
+type CodeTask = {
+  filePath: String
+  goal: String
+  constraints: List<String>
+  allowedChanges: List<String>
+}
+
+type CodePatch = {
+  filePath: String
+  summary: String
+  diff: String
+  riskLevel: RiskLevel
+}
+```
+
+Then:
+
+```logicn
+let patch = CodeAgent.run<CodeTask, CodePatch>({
+  filePath: "api/orders-api.ln",
+  goal: "Add webhook signature verification",
+  constraints: [
+    "Do not log secrets",
+    "Use HMAC SHA256",
+    "Return typed errors"
+  ],
+  allowedChanges: [
+    "api/orders-api.ln",
+    "domain/orders.ln"
+  ]
+})
+```
+
+This helps both humans and AI because every agent exchange has a known shape.
+
+---
+
+# 5. Example multi-agent workflow in LogicN
+
+```logicn
+multi_agent workflow BuildWebhookFeature {
+  input FeatureRequest
+  output FeatureResult
+
+  agents [
+    PlannerAgent,
+    CodeAgent,
+    SecurityAgent,
+    TestAgent,
+    DocsAgent,
+    ReviewAgent
+  ]
+
+  steps {
+    let plan = PlannerAgent.run(input)
+
+    let patch = CodeAgent.run({
+      plan: plan,
+      project: ProjectContext.current()
+    })
+
+    let security = SecurityAgent.review({
+      patch: patch,
+      rules: SecurityPolicy.current()
+    })
+
+    match security.decision {
+      case Decision.Deny {
+        return Err(SecurityRejected)
+      }
+
+      case Decision.Review {
+        return Err(HumanReviewRequired)
+      }
+
+      case Decision.Allow {
+        continue
+      }
+    }
+
+    let tests = TestAgent.createTests({
+      patch: patch
+    })
+
+    let docs = DocsAgent.updateDocs({
+      patch: patch,
+      tests: tests
+    })
+
+    let review = ReviewAgent.finalCheck({
+      patch: patch,
+      tests: tests,
+      docs: docs
+    })
+
+    return Ok({
+      patch: patch,
+      tests: tests,
+      docs: docs,
+      review: review
+    })
+  }
+}
+```
+
+This is much safer than one AI agent doing everything.
+
+---
+
+# 6. Agent permissions should be strict
+
+Each agent needs a permission boundary.
+
+Example:
+
+```logicn
+agent SecurityAgent {
+  model "best:security"
+
+  permissions [
+    project.read,
+    report.write,
+    policy.read
+  ]
+
+  deny [
+    file.write,
+    secret.read,
+    network.outbound,
+    database.write
+  ]
+}
+```
+
+SecurityAgent can inspect code and write reports, but cannot change the app directly.
+
+A DeploymentAgent would need stronger permissions:
+
+```logicn
+agent DeploymentAgent {
+  permissions [
+    build.run,
+    tests.run,
+    deploy.request
+  ]
+
+  require human_approval true
+
+  deny [
+    secret.read_raw,
+    file.delete,
+    production.deploy_without_review
+  ]
+}
+```
+
+This matters because AI agents can make mistakes.
+
+---
+
+# 7. Agent memory should be controlled
+
+LogicN should support different memory types:
+
+| Memory type | Meaning                            |
+| ----------- | ---------------------------------- |
+| `none`      | No memory                          |
+| `readonly`  | Can read context but not update it |
+| `session`   | Temporary memory for one task      |
+| `project`   | Project-level memory               |
+| `tenant`    | Customer/account-specific memory   |
+| `secure`    | Encrypted memory                   |
+| `redacted`  | Secret-safe memory only            |
+
+Example:
+
+```logicn
+agent DocsAgent {
+  memory {
+    read ProjectContext
+    write DocumentationMemory
+    deny SecretsMemory
+  }
+}
+```
+
+The important rule:
+
+```text
+Agents should not automatically remember secrets, personal data or raw user messages.
+```
+
+---
+
+# 8. LLM cache for agents
+
+This links to your earlier passive cache idea.
+
+Each agent can use passive caching:
+
+```logicn
+agent CodeReviewAgent {
+  cache {
+    mode passive
+    ttl 7 days
+    key include [
+      model,
+      model_version,
+      prompt_hash,
+      source_hash,
+      policy_hash,
+      output_schema_hash
+    ]
+
+    deny_if_secret_detected true
+    deny_if_personal_data_detected true
+  }
+}
+```
+
+This means repeated analysis can be faster and cheaper, but not unsafe.
+
+---
+
+# 9. Tool use should be declared
+
+Agents should not freely call tools.
+
+Example:
+
+```logicn
+tool GitRead {
+  allow commands [
+    "status",
+    "diff",
+    "log"
+  ]
+
+  deny commands [
+    "push",
+    "reset --hard",
+    "clean -fd",
+    "rebase"
+  ]
+}
+```
+
+Then:
+
+```logicn
+agent ReviewAgent {
+  tools [
+    GitRead,
+    ProjectGraphRead,
+    TestReportRead
+  ]
+}
+```
+
+This is a very LogicN-style advantage: agents become auditable.
+
+---
+
+# 10. Agent reports
+
+LogicN should generate a report for every multi-agent run:
+
+```json
+{
+  "workflow": "BuildWebhookFeature",
+  "agentsUsed": [
+    "PlannerAgent",
+    "CodeAgent",
+    "SecurityAgent",
+    "TestAgent",
+    "ReviewAgent"
+  ],
+  "toolCalls": 12,
+  "cacheHits": 4,
+  "cacheMisses": 3,
+  "secretsAccessed": false,
+  "filesChanged": [
+    "api/payment-webhook.ln",
+    "domain/payments.ln"
+  ],
+  "securityDecision": "Allow",
+  "humanApprovalRequired": false
+}
+```
+
+This would make LogicN much safer than normal agent systems.
+
+---
+
+# 11. Prevent agent loops
+
+Multi-agent systems can get stuck.
+
+LogicN should require limits:
+
+```logicn
+agent_runtime {
+  max_steps 20
+  max_agent_calls 40
+  max_retries 2
+  max_runtime 3 minutes
+
+  on_loop_detected {
+    stop
+    write_report
+    return Err(AgentLoopDetected)
+  }
+}
+```
+
+LogicN should detect:
+
+```text
+same agent calling same agent repeatedly
+same task being rewritten repeatedly
+same failed patch being retried
+no progress after N steps
+tool call cycle
+```
+
+---
+
+# 12. Human approval points
+
+Some actions should require human approval.
+
+Example:
+
+```logicn
+approval_policy {
+  require human for [
+    file.write,
+    dependency.install,
+    secret.create,
+    production.deploy,
+    database.migrate,
+    payment.refund,
+    email.send_bulk
+  ]
+}
+```
+
+Then agents can propose:
+
+```text
+CodeAgent proposes patch
+SecurityAgent approves patch
+TestAgent confirms tests
+Human approves write
+LogicN applies patch
+```
+
+That is much safer.
+
+---
+
+# 13. Agent roles for LogicN development itself
+
+For building LogicN, you could have:
+
+```text
+LanguageDesignAgent
+CompilerAgent
+RuntimeAgent
+SecurityAgent
+MemoryAgent
+ComputeAgent
+DocsAgent
+BenchmarkAgent
+TestAgent
+```
+
+Example:
+
+```logicn
+agent CompilerAgent {
+  input CompilerTask
+  output CompilerPatch
+
+  permissions [
+    project.read,
+    file.propose_change,
+    tests.run
+  ]
+
+  deny [
+    file.write_direct,
+    secret.read,
+    network.outbound
+  ]
+
+  focus [
+    lexer,
+    parser,
+    AST,
+    checker,
+    diagnostics,
+    source_maps
+  ]
+}
+```
+
+This would be very useful for LogicN because the language itself needs lots of reports, tests and documentation.
+
+---
+
+# 14. LogicN syntax idea
+
+A clean syntax could be:
+
+```logicn
+agent PlannerAgent {
+  model "best:reasoning"
+  input UserRequest
+  output WorkPlan
+  permissions [project.read]
+}
+
+agent CodeAgent {
+  model "best:code"
+  input WorkPlan
+  output CodePatch
+  permissions [project.read, file.propose_change]
+}
+
+agent SecurityAgent {
+  model "best:security"
+  input CodePatch
+  output SecurityReview
+  permissions [project.read, policy.read, report.write]
+}
+
+workflow ImplementFeature {
+  input UserRequest
+  output FeatureResult
+
+  run {
+    let plan = PlannerAgent(input)
+    let patch = CodeAgent(plan)
+    let review = SecurityAgent(patch)
+
+    match review.decision {
+      case Allow {
+        return Ok(FeatureResult.from(patch, review))
+      }
+
+      case Deny {
+        return Err(SecurityRejected)
+      }
+
+      case Review {
+        return Err(HumanReviewRequired)
+      }
+    }
+  }
+}
+```
+
+This is readable for humans and AI.
+
+---
+
+# 15. What LogicN should avoid
+
+LogicN should avoid this kind of agent design:
+
+```text
+agents can call any tool
+agents can read all files
+agents can read .env secrets
+agents can write files directly
+agents can install packages
+agents can deploy automatically
+agents pass untyped text around
+agents have unlimited loops
+agents store everything in memory
+agents send project secrets to LLMs
+```
+
+That would be dangerous.
+
+LogicN should instead use:
+
+```text
+typed messages
+agent permissions
+tool permissions
+secret boundaries
+safe memory
+passive cache
+crash boundaries
+human approval
+agent reports
+source maps
+audit logs
+```
+
+---
+
+# 16. Best architecture
+
+```text
+LogicN Multi-Agent Runtime
+├── Supervisor
+├── Agent Registry
+├── Typed Message Bus
+├── Tool Permission Layer
+├── Secret Guard
+├── Memory Manager
+├── Passive LLM Cache
+├── Policy Engine
+├── Crash Boundary
+├── Human Approval Gate
+└── Agent Report Generator
+```
+
+This would make agents part of the LogicN runtime, not just a library.
+
+---
+
+# 17. Final answer
+
+Yes, LogicN could be made to work as multiple AI agents.
+
+The best design is not “lots of AI bots talking freely”.
+
+The best design is:
+
+> supervised multi-agent workflows with typed inputs/outputs, strict permissions, safe memory, passive caching, secret protection, human approval gates and full audit reports.
+
+That would fit LogicN extremely well because LogicN’s main strengths are intended to be:
+
+```text
+security
+strict typing
+AI readability
+clear reports
+safe runtime behaviour
+controlled effects
+future compute support
+```
+
+So multi-agent LogicN could become a major feature, but only if it is built as a **safe, typed, policy-controlled agent system**, not as uncontrolled agent automation.
+
+Yes — LogicN can support multiple AI agents securely, but only if agents are treated as **untrusted workers by default**.
+
+The core rule should be:
+
+> Agents do not get direct access to files, secrets, tools, other agents, the network or runtime memory.
+> They only receive typed inputs and can only perform declared actions through a controlled LogicN runtime.
+
+---
+
+# 1. Secure agent architecture
+
+A safe LogicN multi-agent system should look like this:
+
+```text
+User Request
+    ↓
+Supervisor Agent
+    ↓
+LogicN Agent Runtime
+    ├── Agent Registry
+    ├── Policy Engine
+    ├── Typed Message Bus
+    ├── Tool Gateway
+    ├── Secret Guard
+    ├── Memory Guard
+    ├── Cache Guard
+    ├── Container/Sandbox Manager
+    └── Audit Report Generator
+        ↓
+Individual Agents
+```
+
+Agents should not directly call:
+
+```text
+files
+.env
+database
+network
+terminal
+Git
+other agents
+deployment tools
+LLM memory
+```
+
+They should ask the LogicN runtime, and the runtime decides whether it is allowed.
+
+---
+
+# 2. Every agent needs a manifest
+
+Each agent should have a strict declaration.
+
+Example:
+
+```logicn
+agent CodeAgent {
+  model "best:code"
+
+  input CodeTask
+  output CodePatch
+
+  visibility {
+    can_see [
+      "project.public_source",
+      "compiler.diagnostics",
+      "architecture_policy"
+    ]
+
+    cannot_see [
+      "env",
+      "secrets",
+      "private_user_data",
+      "payment_data",
+      "production_logs"
+    ]
+  }
+
+  permissions [
+    project.read,
+    file.propose_change,
+    report.read
+  ]
+
+  deny [
+    file.write_direct,
+    file.delete,
+    secret.read,
+    env.read,
+    network.outbound,
+    database.write,
+    deploy.run
+  ]
+
+  tools [
+    ProjectRead,
+    CompilerCheck,
+    DiffPropose
+  ]
+
+  limits {
+    max_steps 8
+    max_tokens 12000
+    max_runtime 60 seconds
+  }
+}
+```
+
+This makes the agent’s powers visible before it runs.
+
+---
+
+# 3. Use containers or sandboxes
+
+Each agent should run in an isolated execution environment.
+
+For LogicN, that could mean:
+
+```text
+container
+microVM
+WASM sandbox
+restricted process
+read-only filesystem
+no shell by default
+no network by default
+no .env mount
+temporary workspace
+```
+
+Example policy:
+
+```logicn
+sandbox_policy DefaultAgentSandbox {
+  filesystem {
+    mode readonly
+    allow_read [
+      "./src",
+      "./docs",
+      "./reports"
+    ]
+
+    deny_read [
+      ".env",
+      "./secrets",
+      "./private",
+      "./runtime/crashes/raw"
+    ]
+
+    allow_write [
+      "./agent-output"
+    ]
+
+    deny_write [
+      "./src",
+      "./packages",
+      "./deploy",
+      "./config"
+    ]
+  }
+
+  network {
+    default deny
+  }
+
+  process {
+    shell false
+    exec false
+    max_memory 512mb
+    max_cpu 1
+  }
+
+  environment {
+    expose_env false
+  }
+}
+```
+
+Important rule:
+
+> Agents should never receive the real `.env` file inside their container.
+
+If an agent needs to know a secret exists, it receives metadata only:
+
+```json
+{
+  "secretName": "PAYMENT_API_KEY",
+  "available": true,
+  "fingerprint": "sha256:7b31...c91a",
+  "value": "[REDACTED]"
+}
+```
+
+---
+
+# 4. Agent visibility should be limited
+
+Agents should not see the whole system unless required.
+
+Example:
+
+| Agent         | Can see                                | Cannot see                       |
+| ------------- | -------------------------------------- | -------------------------------- |
+| PlannerAgent  | user request, architecture summary     | secrets, raw files unless needed |
+| CodeAgent     | selected source files, compiler errors | `.env`, production data          |
+| SecurityAgent | source files, policy reports           | raw secrets                      |
+| TestAgent     | test files, proposed patch             | payment keys                     |
+| DocsAgent     | public docs, API types                 | private logs                     |
+| DeployAgent   | build reports, deployment request      | raw source unless needed         |
+
+LogicN could enforce this with visibility scopes:
+
+```logicn
+visibility_scope PublicProjectContext {
+  include [
+    "src/**/*.ln",
+    "docs/**/*.md",
+    "reports/compiler-report.json"
+  ]
+
+  exclude [
+    ".env",
+    "**/*.key",
+    "**/secrets/**",
+    "runtime/private/**"
+  ]
+
+  redact [
+    "api_key",
+    "token",
+    "password",
+    "authorization",
+    "cookie"
+  ]
+}
+```
+
+Then:
+
+```logicn
+agent CodeAgent {
+  visibility PublicProjectContext
+}
+```
+
+---
+
+# 5. Agents should not access each other directly
+
+Do not allow this:
+
+```text
+CodeAgent → SecurityAgent
+SecurityAgent → DeployAgent
+DocsAgent → CodeAgent
+```
+
+That becomes hard to control.
+
+Instead, use a **typed message bus** controlled by the supervisor.
+
+```text
+CodeAgent sends CodePatch to Runtime
+Runtime validates CodePatch
+Runtime passes CodePatch to SecurityAgent
+SecurityAgent returns SecurityReview
+Runtime decides next step
+```
+
+Example:
+
+```logicn
+message CodePatch {
+  from CodeAgent
+  to SecurityAgent
+
+  schema {
+    filePath: String
+    diff: String
+    summary: String
+    riskLevel: RiskLevel
+  }
+
+  allow_fields [
+    filePath,
+    diff,
+    summary,
+    riskLevel
+  ]
+
+  deny_fields [
+    secrets,
+    env,
+    rawCredentials,
+    privateUserData
+  ]
+}
+```
+
+Agents exchange **typed data**, not random hidden memory.
+
+---
+
+# 6. Data exchange needs classification
+
+LogicN should classify data before it is sent between agents.
+
+Example data classes:
+
+```logicn
+enum DataClass {
+  Public
+  ProjectInternal
+  UserPrivate
+  Secret
+  PaymentSensitive
+  LegalSensitive
+  SecuritySensitive
+  RuntimeOnly
+}
+```
+
+Example policy:
+
+```logicn
+data_exchange_policy AgentDataPolicy {
+  allow Public between all_agents
+  allow ProjectInternal between [PlannerAgent, CodeAgent, SecurityAgent, TestAgent]
+
+  deny Secret between all_agents
+  deny PaymentSensitive to [DocsAgent, CodeAgent]
+  deny UserPrivate to [DocsAgent] unless redacted
+
+  require redaction for [
+    UserPrivate,
+    SecuritySensitive
+  ]
+
+  require audit for [
+    ProjectInternal,
+    SecuritySensitive
+  ]
+}
+```
+
+So if CodeAgent tries to send `.env` data to another agent, LogicN blocks it.
+
+---
+
+# 7. Secrets must be handled by a Secret Guard
+
+Agents should never receive secrets directly.
+
+Bad:
+
+```logicn
+agent.input = Env.get("PAYMENT_API_KEY")
+```
+
+Good:
+
+```logicn
+SecretGuard.signRequest({
+  secret: "PAYMENT_API_KEY",
+  payload: requestBody,
+  algorithm: hmac_sha256
+})
+```
+
+The agent can request an operation, but not see the value.
+
+Example:
+
+```logicn
+secret_policy AgentSecretPolicy {
+  default deny
+
+  agents {
+    CodeAgent {
+      deny secret.read
+      deny env.read
+    }
+
+    SecurityAgent {
+      allow secret.metadata
+      deny secret.value
+    }
+
+    WebhookRuntime {
+      allow secret.use for [hmac_verify]
+      deny secret.export
+    }
+  }
+}
+```
+
+This means:
+
+```text
+SecurityAgent can check that a secret is declared.
+SecurityAgent cannot read the secret value.
+WebhookRuntime can use the secret to verify HMAC.
+Nobody can export the secret unless explicitly allowed.
+```
+
+---
+
+# 8. Tool access must go through a Tool Gateway
+
+Agents should not directly run tools.
+
+Bad:
+
+```text
+agent runs terminal command
+agent reads database
+agent installs package
+agent writes file
+```
+
+Good:
+
+```logicn
+tool ProjectRead {
+  allow read_files [
+    "src/**/*.ln",
+    "docs/**/*.md"
+  ]
+
+  deny read_files [
+    ".env",
+    "**/secrets/**"
+  ]
+}
+
+tool DiffPropose {
+  allow propose_patch true
+  deny write_direct true
+}
+
+tool GitRead {
+  allow commands [
+    "status",
+    "diff",
+    "log"
+  ]
+
+  deny commands [
+    "push",
+    "reset",
+    "clean",
+    "rebase"
+  ]
+}
+```
+
+Then:
+
+```logicn
+agent CodeAgent {
+  tools [
+    ProjectRead,
+    DiffPropose,
+    GitRead
+  ]
+}
+```
+
+The agent can propose changes, but cannot directly write them.
+
+---
+
+# 9. Separate “propose” from “apply”
+
+This is very important.
+
+Agents should usually only propose:
+
+```text
+code patch
+database migration
+deployment step
+config change
+package install
+```
+
+They should not apply dangerous actions directly.
+
+Example:
+
+```logicn
+approval_policy AgentApproval {
+  require human for [
+    file.write,
+    dependency.install,
+    database.migrate,
+    production.deploy,
+    secret.create,
+    secret.rotate,
+    email.send_bulk,
+    payment.refund
+  ]
+
+  allow automatic for [
+    report.write,
+    test.generate,
+    diff.propose,
+    docs.propose
+  ]
+}
+```
+
+So CodeAgent can produce:
+
+```json
+{
+  "type": "CodePatch",
+  "file": "api/orders-api.ln",
+  "diff": "...",
+  "requiresApproval": true
+}
+```
+
+But LogicN does not apply it until approved.
+
+---
+
+# 10. Define what agents can do, when and where
+
+LogicN should have context-aware permissions.
+
+Example:
+
+```logicn
+agent_permission_policy {
+  CodeAgent {
+    allow file.propose_change in development
+    deny file.write in all_environments
+    deny network.outbound in all_environments
+  }
+
+  TestAgent {
+    allow tests.run in development
+    allow tests.run in ci
+    deny production.database_access
+  }
+
+  DeployAgent {
+    allow deploy.request in ci
+    require human_approval in production
+    deny deploy.run from local_machine
+  }
+}
+```
+
+This gives answers to:
+
+```text
+what can the agent do?
+when can it do it?
+where can it do it?
+under what approval?
+```
+
+---
+
+# 11. Prevent agent privilege escalation
+
+An agent should not be able to create a more powerful agent.
+
+Bad:
+
+```text
+CodeAgent creates AdminAgent
+PlannerAgent gives itself file.write
+DocsAgent asks ToolGateway for shell access
+```
+
+LogicN should block this.
+
+```logicn
+privilege_policy {
+  deny agents from [
+    creating_agents,
+    modifying_own_permissions,
+    modifying_other_agent_permissions,
+    enabling_tools,
+    reading_policy_files_raw,
+    disabling_audit
+  ]
+
+  allow only SupervisorRuntime to request permission_change
+  require human_approval for permission_change
+}
+```
+
+---
+
+# 12. Agent memory must be controlled
+
+Agent memory is dangerous if it stores secrets or private data.
+
+LogicN should define memory types:
+
+```logicn
+memory_policy AgentMemory {
+  default session_only
+
+  deny_store [
+    Secret,
+    PaymentSensitive,
+    raw_user_messages,
+    env_values,
+    auth_headers,
+    cookies
+  ]
+
+  allow_store ProjectInternal if redacted
+  allow_store Public
+
+  ttl {
+    session 1 hour
+    project_summary 30 days
+    code_analysis 14 days
+  }
+
+  encryption required for [
+    ProjectInternal,
+    UserPrivate
+  ]
+}
+```
+
+Agents should not have uncontrolled long-term memory.
+
+---
+
+# 13. LLM cache must also be guarded
+
+For passive LLM caching:
+
+```logicn
+llm_cache_policy AgentCache {
+  mode passive
+
+  deny_if_contains [
+    Secret,
+    PaymentSensitive,
+    auth_header,
+    cookie,
+    env_value
+  ]
+
+  require_schema_validation true
+  require_redaction true
+  isolate_by_project true
+  isolate_by_tenant true
+
+  key include [
+    agent_name,
+    model,
+    model_version,
+    prompt_hash,
+    input_hash,
+    policy_hash,
+    output_schema_hash
+  ]
+}
+```
+
+So cached AI output cannot leak between:
+
+```text
+projects
+tenants
+users
+security contexts
+agent roles
+```
+
+---
+
+# 14. Runtime monitoring and audit reports
+
+Every agent run should produce an audit report.
+
+```json
+{
+  "agentRun": {
+    "workflow": "ImplementWebhook",
+    "agent": "CodeAgent",
+    "sandbox": "container",
+    "networkAccess": false,
+    "envAccess": false,
+    "secretsAccessed": false,
+    "toolsUsed": [
+      "ProjectRead",
+      "DiffPropose"
+    ],
+    "filesRead": [
+      "api/payment-webhook.ln",
+      "domain/payments.ln"
+    ],
+    "filesWritten": [],
+    "patchesProposed": [
+      "api/payment-webhook.ln"
+    ],
+    "messagesSent": [
+      "CodePatch"
+    ],
+    "policyViolations": [],
+    "humanApprovalRequired": true
+  }
+}
+```
+
+If something is blocked:
+
+```json
+{
+  "policyViolation": {
+    "agent": "CodeAgent",
+    "action": "env.read",
+    "target": ".env",
+    "decision": "blocked",
+    "reason": "Agents cannot read .env values"
+  }
+}
+```
+
+---
+
+# 15. Crash and loop protection
+
+Agents can loop, crash or produce repeated bad patches.
+
+LogicN should enforce:
+
+```logicn
+agent_runtime_policy {
+  max_steps 20
+  max_agent_calls 40
+  max_retries 2
+  max_runtime 3 minutes
+  max_patch_size 200kb
+
+  on_loop_detected {
+    stop
+    write_report
+    require_human_review
+  }
+
+  on_policy_violation {
+    stop_agent
+    preserve_evidence
+    write_security_report
+  }
+}
+```
+
+This prevents:
+
+```text
+infinite agent loops
+runaway tool calls
+repeated failed fixes
+large accidental rewrites
+uncontrolled cost
+```
+
+---
+
+# 16. Secure multi-agent workflow example
+
+```logicn
+multi_agent workflow ImplementFeature {
+  input FeatureRequest
+  output FeatureResult
+
+  supervisor SupervisorAgent
+
+  agents [
+    PlannerAgent,
+    CodeAgent,
+    SecurityAgent,
+    TestAgent,
+    ReviewAgent
+  ]
+
+  policy {
+    sandbox DefaultAgentSandbox
+    data_exchange AgentDataPolicy
+    secrets AgentSecretPolicy
+    approval AgentApproval
+    runtime AgentRuntimePolicy
+  }
+
+  run {
+    let plan = PlannerAgent.run(input)
+
+    let patch = CodeAgent.run(plan)
+
+    let securityReview = SecurityAgent.review(patch)
+
+    match securityReview.decision {
+      case Deny {
+        return Err(SecurityRejected)
+      }
+
+      case Review {
+        return Err(HumanReviewRequired)
+      }
+
+      case Allow {
+        continue
+      }
+    }
+
+    let tests = TestAgent.generate(patch)
+    let finalReview = ReviewAgent.check({
+      patch: patch,
+      tests: tests
+    })
+
+    return Ok({
+      patch: patch,
+      tests: tests,
+      review: finalReview
+    })
+  }
+}
+```
+
+Notice what is missing:
+
+```text
+No direct .env access
+No direct file writes
+No direct deployment
+No direct agent-to-agent communication
+No uncontrolled memory
+No untyped data exchange
+```
+
+---
+
+# 17. What agents must never do by default
+
+LogicN should deny this by default:
+
+```text
+read .env
+read raw secrets
+write source files directly
+delete files
+install dependencies
+run shell commands
+access production database
+deploy to production
+send emails to real users
+process payments
+refund payments
+modify their own permissions
+create more powerful agents
+send secrets to LLMs
+cache secret-containing prompts
+communicate with other agents directly
+disable audit logs
+```
+
+Any exception should require:
+
+```text
+explicit policy
+narrow scope
+runtime enforcement
+audit report
+human approval where necessary
+```
+
+---
+
+# 18. Best security model for LogicN agents
+
+The strongest model is:
+
+```text
+Zero-trust agents
+Capability-based permissions
+Typed message passing
+No direct secret access
+No direct tool access
+No direct file writes
+Sandboxed execution
+Human approval for dangerous actions
+Full audit trail
+Policy reports
+```
+
+In simple terms:
+
+> Agents can think and propose.
+> LogicN decides what they can see, do, exchange and apply.
+
+That keeps the agent system useful without giving it uncontrolled power.
