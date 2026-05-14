@@ -28,6 +28,10 @@ Provides:
 - RuntimeResult
 - RuntimeReport
 
+## logicn-core-network
+
+LogicN core network I/O policy, profile, permission and report contracts.
+
 ## logicn-core-security
 
 Reusable LogicN security primitives, redaction helpers, permission models and security report contracts.

@@ -47,6 +47,8 @@ LogicN Runtime executes compiled LogicN safely.
 
 LogicN App Kernel defines the secure application boundary.
 
+LogicN Core Network defines network policy, profile and report contracts.
+
 `logicn-framework-api-server` provides the HTTP server implementation that allows LogicN API routes
 to run as real services.
 
@@ -83,6 +85,7 @@ Recommended package layout:
   /logicn-core
   /logicn-core-compiler
   /logicn-core-runtime
+  /logicn-core-network
   /logicn-framework-app-kernel
   /logicn-framework-api-server
   /logicn-api-adapters
@@ -95,6 +98,7 @@ Responsibilities:
 | `logicn-core`         | Language rules, core types, syntax, diagnostics     |
 | `logicn-core-compiler`     | Parse, check, compile, generate reports             |
 | `logicn-core-runtime`      | Safe execution, memory limits, effects, permissions |
+| `logicn-core-network`      | Network policy, profiles, backend capabilities and reports |
 | `logicn-framework-app-kernel`   | API policy, auth, validation, route execution       |
 | `logicn-framework-api-server`   | Built-in HTTP server for LogicN APIs                    |
 | `logicn-api-adapters` | Express, Fastify, Lambda, Cloudflare, native adapters |
@@ -144,6 +148,8 @@ It may also provide:
 ```text
 TLS configuration
 HTTP/2 support later
+zero-copy send path where safe and supported
+platform I/O backend integration where safe and supported
 worker mode later
 cluster mode later
 serverless bridge later
@@ -174,6 +180,9 @@ large middleware ecosystem
 business logic
 payment logic
 email provider logic
+core network policy ownership
+kernel packet-filter implementation
+DPDK runtime bindings
 ```
 
 Those belong in packages, frameworks or user applications.
@@ -216,6 +225,8 @@ It should handle:
 ```text
 network socket
 port binding
+network policy loading
+TLS policy application
 HTTP request parsing
 connection timeout
 body stream handoff
@@ -227,6 +238,10 @@ server config
 ```
 
 The split should be strict.
+
+`logicn-core-network` defines the network policy contracts consumed by the
+server. The API server implements HTTP transport and emits transport facts for
+network reports; it does not own the whole LogicN network model.
 
 `logicn-framework-api-server` should not decide whether a user is authorised.
 

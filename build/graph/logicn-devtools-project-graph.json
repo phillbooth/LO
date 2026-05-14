@@ -1,6 +1,6 @@
 {
   "version": "0.1.0",
-  "generatedAt": "2026-05-14T13:13:40.049Z",
+  "generatedAt": "2026-05-14T13:24:14.446Z",
   "nodes": [
     {
       "id": "package:logicn-core",
@@ -28,6 +28,16 @@
       "label": "logicn-core-runtime",
       "sourcePath": "packages-logicn/logicn-core-runtime/README.md",
       "summary": "LogicN execution engine contracts for checked and compiled runtime execution.",
+      "tags": [
+        "package"
+      ]
+    },
+    {
+      "id": "package:logicn-core-network",
+      "kind": "Package",
+      "label": "logicn-core-network",
+      "sourcePath": "packages-logicn/logicn-core-network/README.md",
+      "summary": "LogicN core network I/O policy, profile, permission and report contracts.",
       "tags": [
         "package"
       ]
@@ -459,6 +469,15 @@
       "kind": "Document",
       "label": "LOWBIT_AI_BACKENDS.md",
       "sourcePath": "docs/LOWBIT_AI_BACKENDS.md",
+      "tags": [
+        "document"
+      ]
+    },
+    {
+      "id": "doc:docs/NETWORK_ETHERNET_IO.md",
+      "kind": "Document",
+      "label": "NETWORK_ETHERNET_IO.md",
+      "sourcePath": "docs/NETWORK_ETHERNET_IO.md",
       "tags": [
         "document"
       ]
@@ -2666,6 +2685,26 @@
       "tags": [
         "report",
         "logicn-core-runtime"
+      ]
+    },
+    {
+      "id": "doc:packages-logicn/logicn-core-network/package.json",
+      "kind": "Document",
+      "label": "package.json",
+      "sourcePath": "packages-logicn/logicn-core-network/package.json",
+      "tags": [
+        "report",
+        "logicn-core-network"
+      ]
+    },
+    {
+      "id": "doc:packages-logicn/logicn-core-network/README.md",
+      "kind": "Document",
+      "label": "README.md",
+      "sourcePath": "packages-logicn/logicn-core-network/README.md",
+      "tags": [
+        "document",
+        "logicn-core-network"
       ]
     },
     {
@@ -8109,6 +8148,16 @@
       ]
     },
     {
+      "id": "doc:packages-logicn/logicn-core-network",
+      "kind": "Document",
+      "label": "network",
+      "sourcePath": "packages-logicn/logicn-core-network",
+      "tags": [
+        "document",
+        "workspace-doc"
+      ]
+    },
+    {
       "id": "doc:packages-logicn/logicn-core-security",
       "kind": "Document",
       "label": "security",
@@ -8422,6 +8471,13 @@
     },
     {
       "from": "doc:README.md",
+      "to": "package:logicn-core-network",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "README.md"
+    },
+    {
+      "from": "doc:README.md",
       "to": "package:logicn-core-security",
       "kind": "documents",
       "confidence": "INFERRED",
@@ -8688,6 +8744,13 @@
     },
     {
       "from": "doc:docs/ARCHITECTURE.md",
+      "to": "package:logicn-core-network",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/ARCHITECTURE.md"
+    },
+    {
+      "from": "doc:docs/ARCHITECTURE.md",
       "to": "package:logicn-core-security",
       "kind": "documents",
       "confidence": "INFERRED",
@@ -8885,6 +8948,13 @@
     {
       "from": "doc:docs/CHANGELOG.md",
       "to": "package:logicn-core-runtime",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/CHANGELOG.md"
+    },
+    {
+      "from": "doc:docs/CHANGELOG.md",
+      "to": "package:logicn-core-network",
       "kind": "documents",
       "confidence": "INFERRED",
       "evidencePath": "docs/CHANGELOG.md"
@@ -9240,6 +9310,34 @@
       "evidencePath": "docs/LOWBIT_AI_BACKENDS.md"
     },
     {
+      "from": "doc:docs/NETWORK_ETHERNET_IO.md",
+      "to": "package:logicn-core",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/NETWORK_ETHERNET_IO.md"
+    },
+    {
+      "from": "doc:docs/NETWORK_ETHERNET_IO.md",
+      "to": "package:logicn-core-network",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/NETWORK_ETHERNET_IO.md"
+    },
+    {
+      "from": "doc:docs/NETWORK_ETHERNET_IO.md",
+      "to": "package:logicn-core-security",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/NETWORK_ETHERNET_IO.md"
+    },
+    {
+      "from": "doc:docs/NETWORK_ETHERNET_IO.md",
+      "to": "package:logicn-tools-benchmark",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/NETWORK_ETHERNET_IO.md"
+    },
+    {
       "from": "doc:docs/NEURAL_ACCELERATOR_PACKAGES.md",
       "to": "package:logicn-core",
       "kind": "documents",
@@ -9424,6 +9522,13 @@
     {
       "from": "doc:docs/PACKAGE_NAMING.md",
       "to": "package:logicn-core-runtime",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/PACKAGE_NAMING.md"
+    },
+    {
+      "from": "doc:docs/PACKAGE_NAMING.md",
+      "to": "package:logicn-core-network",
       "kind": "documents",
       "confidence": "INFERRED",
       "evidencePath": "docs/PACKAGE_NAMING.md"
@@ -9696,6 +9801,13 @@
     },
     {
       "from": "doc:docs/REQUIREMENTS.md",
+      "to": "package:logicn-core-network",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/REQUIREMENTS.md"
+    },
+    {
+      "from": "doc:docs/REQUIREMENTS.md",
       "to": "package:logicn-core-security",
       "kind": "documents",
       "confidence": "INFERRED",
@@ -9983,6 +10095,13 @@
     },
     {
       "from": "doc:docs/SECURITY.md",
+      "to": "package:logicn-core-network",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/SECURITY.md"
+    },
+    {
+      "from": "doc:docs/SECURITY.md",
       "to": "package:logicn-core-security",
       "kind": "documents",
       "confidence": "INFERRED",
@@ -10010,6 +10129,13 @@
       "evidencePath": "docs/SECURITY.md"
     },
     {
+      "from": "doc:docs/SECURITY.md",
+      "to": "package:logicn-framework-app-kernel",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/SECURITY.md"
+    },
+    {
       "from": "doc:docs/TASKS.md",
       "to": "package:logicn-core",
       "kind": "documents",
@@ -10026,6 +10152,13 @@
     {
       "from": "doc:docs/TASKS.md",
       "to": "package:logicn-core-runtime",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/TASKS.md"
+    },
+    {
+      "from": "doc:docs/TASKS.md",
+      "to": "package:logicn-core-network",
       "kind": "documents",
       "confidence": "INFERRED",
       "evidencePath": "docs/TASKS.md"
@@ -13378,6 +13511,13 @@
     },
     {
       "from": "doc:packages-logicn/logicn-core-runtime/README.md",
+      "to": "package:logicn-core-network",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-core-runtime/README.md"
+    },
+    {
+      "from": "doc:packages-logicn/logicn-core-runtime/README.md",
       "to": "package:logicn-framework-app-kernel",
       "kind": "documents",
       "confidence": "INFERRED",
@@ -13447,6 +13587,69 @@
       "evidencePath": "packages-logicn/logicn-core-runtime/tsconfig.json"
     },
     {
+      "from": "package:logicn-core-network",
+      "to": "doc:packages-logicn/logicn-core-network/package.json",
+      "kind": "owns",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-network/package.json"
+    },
+    {
+      "from": "package:logicn-core-network",
+      "to": "doc:packages-logicn/logicn-core-network/README.md",
+      "kind": "owns",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-network/README.md"
+    },
+    {
+      "from": "doc:packages-logicn/logicn-core-network/README.md",
+      "to": "package:logicn-core",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-core-network/README.md"
+    },
+    {
+      "from": "doc:packages-logicn/logicn-core-network/README.md",
+      "to": "package:logicn-core-network",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-core-network/README.md"
+    },
+    {
+      "from": "doc:packages-logicn/logicn-core-network/README.md",
+      "to": "package:logicn-core-security",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-core-network/README.md"
+    },
+    {
+      "from": "doc:packages-logicn/logicn-core-network/README.md",
+      "to": "package:logicn-core-reports",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-core-network/README.md"
+    },
+    {
+      "from": "doc:packages-logicn/logicn-core-network/README.md",
+      "to": "package:logicn-framework-app-kernel",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-core-network/README.md"
+    },
+    {
+      "from": "doc:packages-logicn/logicn-core-network/README.md",
+      "to": "package:logicn-framework-api-server",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-core-network/README.md"
+    },
+    {
+      "from": "doc:packages-logicn/logicn-core-network/README.md",
+      "to": "package:logicn-tools-benchmark",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-core-network/README.md"
+    },
+    {
       "from": "package:logicn-core-security",
       "to": "report:packages-logicn/logicn-core-security/examples/security-report.json",
       "kind": "owns",
@@ -13477,6 +13680,13 @@
     {
       "from": "doc:packages-logicn/logicn-core-security/README.md",
       "to": "package:logicn-core-compiler",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-core-security/README.md"
+    },
+    {
+      "from": "doc:packages-logicn/logicn-core-security/README.md",
+      "to": "package:logicn-core-network",
       "kind": "documents",
       "confidence": "INFERRED",
       "evidencePath": "packages-logicn/logicn-core-security/README.md"
@@ -14120,6 +14330,13 @@
     },
     {
       "from": "doc:packages-logicn/logicn-core-reports/README.md",
+      "to": "package:logicn-core-network",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-core-reports/README.md"
+    },
+    {
+      "from": "doc:packages-logicn/logicn-core-reports/README.md",
       "to": "package:logicn-core-security",
       "kind": "documents",
       "confidence": "INFERRED",
@@ -14128,6 +14345,20 @@
     {
       "from": "doc:packages-logicn/logicn-core-reports/README.md",
       "to": "package:logicn-core-reports",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-core-reports/README.md"
+    },
+    {
+      "from": "doc:packages-logicn/logicn-core-reports/README.md",
+      "to": "package:logicn-framework-app-kernel",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-core-reports/README.md"
+    },
+    {
+      "from": "doc:packages-logicn/logicn-core-reports/README.md",
+      "to": "package:logicn-framework-api-server",
       "kind": "documents",
       "confidence": "INFERRED",
       "evidencePath": "packages-logicn/logicn-core-reports/README.md"
@@ -17431,6 +17662,20 @@
     },
     {
       "from": "doc:packages-logicn/logicn-framework-app-kernel/README.md",
+      "to": "package:logicn-core",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-framework-app-kernel/README.md"
+    },
+    {
+      "from": "doc:packages-logicn/logicn-framework-app-kernel/README.md",
+      "to": "package:logicn-core-network",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-framework-app-kernel/README.md"
+    },
+    {
+      "from": "doc:packages-logicn/logicn-framework-app-kernel/README.md",
       "to": "package:logicn-framework-app-kernel",
       "kind": "documents",
       "confidence": "INFERRED",
@@ -17509,6 +17754,13 @@
     {
       "from": "doc:packages-logicn/logicn-framework-api-server/README.md",
       "to": "package:logicn-core-runtime",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-framework-api-server/README.md"
+    },
+    {
+      "from": "doc:packages-logicn/logicn-framework-api-server/README.md",
+      "to": "package:logicn-core-network",
       "kind": "documents",
       "confidence": "INFERRED",
       "evidencePath": "packages-logicn/logicn-framework-api-server/README.md"

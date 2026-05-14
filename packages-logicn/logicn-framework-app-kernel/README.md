@@ -50,6 +50,9 @@ Frameworks provide opinions and user-facing structure.
 - Strict input validation before handlers run.
 - Deny-by-default application effects for file, network, database, shell, AI,
   GPU and interop access unless declared by policy.
+- Network policy consumption from `logicn-core-network`, including inbound
+  ports, outbound host allowlists, TLS requirements, raw socket restrictions,
+  timeout policy and backpressure.
 - Production gates for auth, rate limits, typed input, secret-safe logging,
   unsafe interop, raw SQL and shell execution.
 - Auth provider boundaries for bearer tokens, JWT, OAuth2/OIDC, DPoP, mTLS,

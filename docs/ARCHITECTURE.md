@@ -6,7 +6,8 @@ This workspace separates the LogicN language core from the bespoke app that uses
 Language documentation, compiler notes, examples and schemas live in
 `packages-logicn/logicn-core/`. Compiler pipeline contracts live in
 `packages-logicn/logicn-core-compiler/`. Runtime execution contracts live in
-`packages-logicn/logicn-core-runtime/`. Security primitives live in `packages-logicn/logicn-core-security/`.
+`packages-logicn/logicn-core-runtime/`. Network I/O policy, profile, permission
+and report contracts live in `packages-logicn/logicn-core-network/`. Security primitives live in `packages-logicn/logicn-core-security/`.
 Configuration and shared reports live in `packages-logicn/logicn-core-config/` and
 `packages-logicn/logicn-core-reports/`. Multi-state logic concepts live in `packages-logicn/logicn-core-logic/`.
 Vector concepts live in `packages-logicn/logicn-core-vector/`. Compute planning concepts live in
@@ -59,6 +60,7 @@ the memory-safety model
 CPU target support
 WASM target support
 compiler, runtime, security, config, reports, CLI and task tooling
+core network policy contracts
 ```
 
 Everything beyond CPU and WASM targets is post-v1 unless it directly specifies
@@ -100,6 +102,7 @@ logicn-app/
 |   |-- logicn-core/
 |   |-- logicn-core-compiler/
 |   |-- logicn-core-runtime/
+|   |-- logicn-core-network/
 |   |-- logicn-core-security/
 |   |-- logicn-core-config/
 |   |-- logicn-core-reports/

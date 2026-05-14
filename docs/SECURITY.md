@@ -27,6 +27,14 @@ Rust, C++ and Python.
   are explicitly declared by package and application policy.
 - Treat raw SQL, raw shell execution, unsafe interop and untrusted
   deserialization as denied-by-default production risks.
+- Treat network access as a security-sensitive capability. Inbound ports,
+  outbound hosts, raw sockets, packet capture, promiscuous mode and shell
+  network tools must be denied unless declared and reported.
+- Require TLS policy, route-level rate limits, timeout policy and backpressure
+  for production public network routes unless a reviewed override exists.
+- Deny plaintext fallback, silent TLS downgrade, disabled certificate
+  validation, disabled hostname validation, debug proxying and secrets in URLs
+  for production networked apps.
 - Generate security reports that show risky permissions, secret flows, package
   effects, route policy gaps and production overrides.
 
@@ -115,6 +123,17 @@ Production policy must deny debug mode, unsafe interop, raw SQL, shell
 execution and wildcard network access unless an explicit, reviewed and reported
 override exists.
 
+Network policy should be defined through `logicn-core-network` contracts and
+enforced with `logicn-core-security`, `logicn-framework-app-kernel` and the
+HTTP/API transport layer. Network reports should show inbound ports, outbound
+hosts, TLS posture, rate limits, selected I/O backend, zero-copy availability
+raw socket or packet-filter permissions, secret URL checks, certificate
+validation, hostname validation and plaintext fallback posture.
+
+LogicN cannot prevent packets from being physically observed on a network. It
+must assume packets can be observed, copied, delayed, blocked or modified, then
+encrypt, authenticate, validate, minimise and report network communication.
+
 ## Security Checklist
 
 - [ ] `.env` is ignored by Git.
@@ -129,3 +148,7 @@ override exists.
       reviewed production override.
 - [ ] Security reports pass before production release.
 - [ ] AI-readable project context is redacted before use.
+- [ ] Network ports, outbound hosts, TLS policy, raw socket permissions and
+      backpressure are declared and reported.
+- [ ] Plaintext fallback, TLS downgrade, debug proxying and secrets in URLs are
+      denied in production.

@@ -25,6 +25,7 @@ security diagnostics
 security report contracts
 safe token/cookie/header handling helpers
 cryptographic policy types
+network permission decision integration
 security report creation
 ```
 
@@ -37,6 +38,7 @@ flows, route enforcement or HTTP parsing.
 auth provider workflows -> logicn-framework-app-kernel
 route auth enforcement  -> logicn-framework-app-kernel
 HTTP header parsing     -> logicn-framework-api-server
+network policy shape    -> logicn-core-network
 task permission checks  -> logicn-core-tasks
 compiler security rules -> logicn-core / logicn-core-compiler
 ```
@@ -76,6 +78,7 @@ redaction replacements that can re-emit full matches or surrounding context are 
 permission models deny by default
 explicit deny grants take precedence over allow grants
 default-allow and wildcard-allow permission models are diagnosed
+network.any, rawSocket, packetCapture and promiscuousMode are denied by default
 weak crypto algorithms must not appear in allowed algorithm lists
 raw SQL, shell execution and unsafe interop are production risks by default
 secret flows to logs, AI prompts, external APIs and errors are reported
@@ -88,6 +91,7 @@ Final rule:
 
 ```text
 logicn-core-security provides reusable security primitives.
+logicn-core-network defines network policy and report contracts.
 logicn-framework-app-kernel enforces application security policy.
 logicn-core and logicn-core-compiler check language-level security contracts.
 ```

@@ -23,6 +23,8 @@ timeout enforcement
 retry scheduling
 checkpoint and resume hooks
 target fallback execution
+network backend dispatch contracts
+network timeout and backpressure enforcement hooks
 runtime reports
 ```
 
@@ -40,6 +42,7 @@ enforce await and await-group timeouts
 propagate cancellation to unfinished children
 apply race policies such as firstSuccess and firstResult
 apply stream backpressure and max in-flight limits
+dispatch network auto plans to the selected platform backend
 emit runtime facts for async/concurrency reports
 release resources when scopes end
 ```
@@ -75,11 +78,15 @@ logicn-core-runtime
 
 logicn-framework-app-kernel
   validates requests, checks auth, controls idempotency, rate limits, jobs and API policy
+
+logicn-core-network
+  defines network policy, profile, backend capability and report contracts
 ```
 
 Final rule:
 
 ```text
 logicn-core-runtime runs LogicN.
+logicn-core-network describes network I/O contracts.
 logicn-framework-app-kernel governs application/API runtime boundaries.
 ```

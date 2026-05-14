@@ -44,6 +44,14 @@ GPU backend if available
 AI accelerator backend if available
 optical I/O interconnect if available
 JSON decode / validation / streaming
+TCP latency
+HTTP throughput
+TLS handshake cost
+zero-copy send path where available
+streaming upload behavior
+WebSocket throughput
+packet filtering overhead where available
+rate limit overhead
 hashing / byte processing
 memory pressure behaviour
 fallback behaviour
@@ -117,6 +125,8 @@ LogicN benchmark --target gpu
 LogicN benchmark --target ai_accelerator
 LogicN benchmark --target low_bit_ai
 LogicN benchmark --target optical_io
+LogicN benchmark --network --light
+LogicN benchmark --network --full
 LogicN benchmark --json
 LogicN benchmark --save
 LogicN benchmark --compare python

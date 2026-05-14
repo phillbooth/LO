@@ -11,6 +11,7 @@ These files describe the app being built, not the LogicN language itself.
 - `ARCHITECTURE.md` - technical structure
 - `SECURITY.md` - security rules, risks and controls
 - `APPLICATION_SECURITY_POSITIONING.md` - honest LogicN application-security positioning compared with Rust, C++ and Python
+- `NETWORK_ETHERNET_IO.md` - LogicN network and Ethernet I/O positioning, network policy and high-speed network planning
 - `API.md` - API routes and external services
 - `DATABASE.md` - database structure
 - `DEPLOYMENT.md` - deployment process

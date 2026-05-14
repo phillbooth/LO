@@ -10,6 +10,14 @@ All notable changes to this app should be documented here.
   security advantage as application policy, deployment checks, package
   permissions, typed APIs, security reports and AI-safe context rather than a
   claim of stronger memory safety than Rust.
+- Added `docs/NETWORK_ETHERNET_IO.md` and `packages-logicn/logicn-core-network/`
+  to define LogicN network and Ethernet I/O positioning, deny-by-default
+  network policy, TLS policy, backpressure, zero-copy planning, XDP/eBPF and
+  DPDK adapter boundaries, deployment profiles and network reports.
+- Expanded LogicN safe-networking policy to clarify that packets cannot be made
+  invisible, while packet contents should be encrypted, authenticated,
+  permissioned, minimised and auditable with TLS 1.3 policy, mTLS, service
+  identity, plaintext fallback denial and secret-safe URL handling.
 - Added `logicn-core-logic` Tri helpers, explicit Tri-to-Bool conversion policy,
   LogicN definition validation, truth-table validation and contract tests.
 - Added an initial `logicn-core-compiler` core syntax safety scan for unsafe

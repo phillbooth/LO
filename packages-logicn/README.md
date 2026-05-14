@@ -45,6 +45,7 @@ memory-safety model
 CPU target
 WASM target
 core reports, config, security, runtime, compiler and CLI tooling
+core network I/O policy and report contracts
 ```
 
 Everything beyond CPU and WASM target support is post-v1 unless it is required
@@ -71,6 +72,7 @@ not mistaken for production runtime dependencies.
 - `logicn-core/` - LogicN language rules, syntax, type system, examples and core docs.
 - `logicn-core-compiler/` - compiler pipeline contracts.
 - `logicn-core-runtime/` - execution contracts for checked or compiled LogicN code.
+- `logicn-core-network/` - network I/O policy, profile, permission and report contracts.
 - `logicn-core-security/` - security primitives, redaction, permissions and reports.
 - `logicn-core-config/` - project config and environment mode contracts.
 - `logicn-core-reports/` - shared report schemas and report-writing contracts.

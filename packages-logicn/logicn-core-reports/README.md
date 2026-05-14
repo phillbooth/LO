@@ -21,6 +21,7 @@ target report contracts
 runtime report contracts
 async/concurrency report contracts
 storage and build-cache report contracts
+network, TLS, port, firewall, packet-filter and network-performance report contracts
 task report contracts
 processing report contracts
 AI guide report contracts
@@ -36,6 +37,7 @@ not own package-specific analysis.
 ```text
 compiler analysis -> logicn-core-compiler
 security checks   -> logicn-core-security / logicn-core-compiler
+network facts     -> logicn-core-network / logicn-framework-api-server / logicn-framework-app-kernel
 runtime events    -> logicn-core-runtime
 task execution    -> logicn-core-tasks
 target analysis   -> target packages
@@ -62,6 +64,13 @@ AwaitSiteReport
 AwaitGroupReport
 StorageReport
 BuildCacheReport
+NetworkReport
+TlsReport
+PortReport
+RateLimitReport
+FirewallReport
+PacketFilterReport
+NetworkPerformanceReport
 AiGuideReport
 CustomReport
 ReportWriter
@@ -86,6 +95,12 @@ record optional storage facts, unknown-storage fallback, recommended bounded
 cache mode, cache hits, misses, bypasses, evictions and invalidations. Cache
 reports must make clear that cached data is not required for correctness and
 that secrets or sensitive payloads are denied by default.
+
+Network reports are for deployment and observability planning. They record
+inbound ports, outbound hosts, TLS policy, selected I/O backend, zero-copy
+availability, rate limits, firewall posture, packet-filter facts and network
+performance bottlenecks. `logicn-core-reports` owns the shared report shape;
+`logicn-core-network`, the API server and the app kernel produce the facts.
 
 Final rule:
 

@@ -1,21 +1,22 @@
 # LogicN Graph Report
 
 Workspace: LogicN-app
-Generated: 2026-05-14T13:13:40.049Z
+Generated: 2026-05-14T13:24:14.446Z
 
 ## Summary
 
-- Packages: 29
-- Documents: 345
+- Packages: 30
+- Documents: 349
 - Types/interfaces: 326
 - Functions: 113
-- Relationships: 1472
+- Relationships: 1501
 
 ## Package Nodes
 
 - logicn-core (packages-logicn/logicn-core/README.md)
 - logicn-core-compiler (packages-logicn/logicn-core-compiler/README.md)
 - logicn-core-runtime (packages-logicn/logicn-core-runtime/README.md)
+- logicn-core-network (packages-logicn/logicn-core-network/README.md)
 - logicn-core-security (packages-logicn/logicn-core-security/README.md)
 - logicn-core-config (packages-logicn/logicn-core-config/README.md)
 - logicn-core-reports (packages-logicn/logicn-core-reports/README.md)

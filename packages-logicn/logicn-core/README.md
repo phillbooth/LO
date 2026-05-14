@@ -62,6 +62,12 @@ security claim is application-level: deny-by-default effects, typed API
 boundaries, secret-safe reports, package permissions, controlled interop,
 production gates and AI-safe generated project context.
 
+LogicN should not claim to make Ethernet hardware faster. Network and Ethernet
+I/O improvements should be framed as safer and more efficient application use
+of the network: typed network APIs, deny-by-default network permissions, TLS
+policy, route limits, backpressure, timeout policy, zero-copy planning where
+available, platform-aware I/O backend selection and network reports.
+
 ## Layer Boundary
 
 LogicN core is the language, compiler and standard safety contract. It may define

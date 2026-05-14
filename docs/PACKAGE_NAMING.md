@@ -39,7 +39,7 @@ remove the stale ungrouped package folder.
 
 | Family | Meaning | Examples |
 |---|---|---|
-| `logicn-core-*` | Core language, toolchain, runtime and safe developer automation | `logicn-core-compiler`, `logicn-core-runtime`, `logicn-core-security`, `logicn-core-cli`, `logicn-core-tasks` |
+| `logicn-core-*` | Core language, toolchain, runtime, network policy and safe developer automation | `logicn-core-compiler`, `logicn-core-runtime`, `logicn-core-network`, `logicn-core-security`, `logicn-core-cli`, `logicn-core-tasks` |
 | `logicn-ai-*` | AI workload, model, agent and AI compute-model packages | `logicn-ai-agent`, `logicn-ai-neural`, `logicn-ai-neuromorphic`, `logicn-ai-lowbit` |
 | `logicn-target-*` | Compiler/output targets and backend planning | `logicn-target-cpu`, `logicn-target-gpu`, `logicn-target-wasm`, `logicn-target-photonic` |
 | `logicn-cpu-*` | CPU implementation and optimized kernel packages | `logicn-cpu-kernels`, future `logicn-cpu-photonic-sim` |
@@ -64,6 +64,7 @@ logicn-core-compiler
 logicn-core-compute
 logicn-core-config
 logicn-core-logic
+logicn-core-network
 logicn-core-photonic
 logicn-core-reports
 logicn-core-runtime
@@ -121,17 +122,21 @@ Do not rename target packages to I/O packages. For example, `logicn-target-binar
 means native or binary output planning. `logicn-target-photonic` means compiler
 mapping to photonic hardware, simulators or plans.
 
-I/O packages can be added later for data movement:
+I/O packages can be added later for data movement, but core network policy is
+owned by `logicn-core-network`:
 
 ```text
-LogicN-io-network
+logicn-core-network
+logicn-io-network
 LogicN-io-storage
 LogicN-io-binary
 LogicN-io-optical
 LogicN-io-photonic
 ```
 
-These should not replace compiler target packages.
+These should not replace compiler target packages. Prefer `logicn-core-network`
+for the shared network policy, permission, profile and report contracts used by
+the runtime, security package, app kernel and API server.
 
 ## Photonic Rule
 

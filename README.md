@@ -83,6 +83,12 @@ production gates and AI-safe project context. See
 `docs/APPLICATION_SECURITY_POSITIONING.md` for the full position compared with
 Rust, C++ and Python.
 
+LogicN should not claim to make Ethernet hardware faster. Its network position
+is application-level I/O governance: typed network APIs, deny-by-default network
+permissions, TLS policy, backpressure, timeouts, zero-copy planning where
+available, platform-aware async I/O, reports and deployment profiles. See
+`docs/NETWORK_ETHERNET_IO.md` and `packages-logicn/logicn-core-network/`.
+
 LogicN avoids:
 
 ```text
@@ -155,6 +161,7 @@ logicn-app/
 |   |-- logicn-core/
 |   |-- logicn-core-compiler/
 |   |-- logicn-core-runtime/
+|   |-- logicn-core-network/
 |   |-- logicn-core-security/
 |   |-- logicn-core-config/
 |   |-- logicn-core-reports/
@@ -194,6 +201,8 @@ logicn-app/
 - `packages-logicn/logicn-core-runtime/` - execution contracts for checked or compiled
   LogicN code, including Structured Await scopes, cancellation and timeout
   enforcement.
+- `packages-logicn/logicn-core-network/` - network I/O policy, profile,
+  permission, TLS, zero-copy planning, backpressure and report contracts.
 - `packages-logicn/logicn-core-security/` - reusable security primitives, redaction,
   permissions, crypto policy and security reports.
 - `packages-logicn/logicn-core-config/` - project configuration, environment mode and production
@@ -263,8 +272,8 @@ LogicN Core
   language, type system, effects, memory safety, Structured Await,
   storage-aware performance rules and core reports
 
-LogicN Compiler / Runtime / Security / Config / Reports
-  compiler pipeline, execution, shared security, configuration and report contracts
+LogicN Compiler / Runtime / Network / Security / Config / Reports
+  compiler pipeline, execution, network policy, shared security, configuration and report contracts
 
 LogicN Logic / Vector / Compute / AI / Neural / Photonic / Target Packages
   specialised concepts and target planning outside the core language package;
@@ -289,6 +298,8 @@ Important boundary rules:
 - `logicn-framework-app-kernel` is an optional secure application boundary. It must not become
   a CMS, admin dashboard, ORM or frontend framework.
 - `logicn-framework-api-server` serves HTTP and delegates typed policy decisions.
+- `logicn-core-network` defines network policy and report contracts. It does
+  not implement every protocol or replace the HTTP server package.
 - `logicn-ai`, `logicn-ai-agent`, `logicn-ai-neural`, `logicn-ai-neuromorphic` and `logicn-ai-lowbit` are
   optional AI package layers, not core syntax.
 - Parallel agents must be supervised, bounded, permissioned and reportable.

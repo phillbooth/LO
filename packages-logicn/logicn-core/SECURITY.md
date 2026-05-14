@@ -11,6 +11,11 @@ defensible security position is broader application policy: typed APIs,
 deny-by-default effects, secret-safe reporting, controlled interop, production
 gates and AI-safe project context.
 
+LogicN should not claim to make Ethernet hardware faster. Its network security
+position is typed, permissioned and reportable network use: deny-by-default
+network access, TLS policy, host and port allowlists, raw socket restrictions,
+timeouts, backpressure and deployment reports.
+
 ---
 
 ## Security Summary

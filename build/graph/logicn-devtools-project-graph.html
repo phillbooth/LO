@@ -7,11 +7,12 @@
 </head>
 <body>
 <h1>LogicN Project Graph</h1>
-<p>838 nodes, 1472 relationships.</p>
+<p>843 nodes, 1501 relationships.</p>
 <h2>Nodes</h2>
 <ul><li><strong>logicn-core</strong> <span>Package</span></li>
 <li><strong>logicn-core-compiler</strong> <span>Package</span></li>
 <li><strong>logicn-core-runtime</strong> <span>Package</span></li>
+<li><strong>logicn-core-network</strong> <span>Package</span></li>
 <li><strong>logicn-core-security</strong> <span>Package</span></li>
 <li><strong>logicn-core-config</strong> <span>Package</span></li>
 <li><strong>logicn-core-reports</strong> <span>Package</span></li>
@@ -57,6 +58,7 @@
 <li><strong>FINANCE_PACKAGES.md</strong> <span>Document</span></li>
 <li><strong>logicn-logic-compute-runtime-proposal.md</strong> <span>Document</span></li>
 <li><strong>LOWBIT_AI_BACKENDS.md</strong> <span>Document</span></li>
+<li><strong>NETWORK_ETHERNET_IO.md</strong> <span>Document</span></li>
 <li><strong>NEURAL_ACCELERATOR_PACKAGES.md</strong> <span>Document</span></li>
 <li><strong>OBSERVABILITY.md</strong> <span>Document</span></li>
 <li><strong>OPTICAL_IO.md</strong> <span>Document</span></li>
@@ -279,6 +281,8 @@
 <li><strong>RuntimeReport</strong> <span>Type</span></li>
 <li><strong>TODO.md</strong> <span>Document</span></li>
 <li><strong>tsconfig.json</strong> <span>Document</span></li>
+<li><strong>package.json</strong> <span>Document</span></li>
+<li><strong>README.md</strong> <span>Document</span></li>
 <li><strong>security-report.json</strong> <span>Report</span></li>
 <li><strong>package.json</strong> <span>Document</span></li>
 <li><strong>README.md</strong> <span>Document</span></li>
@@ -823,6 +827,7 @@
 <li><strong>language</strong> <span>Document</span></li>
 <li><strong>compiler</strong> <span>Document</span></li>
 <li><strong>runtime</strong> <span>Document</span></li>
+<li><strong>network</strong> <span>Document</span></li>
 <li><strong>security</strong> <span>Document</span></li>
 <li><strong>config</strong> <span>Document</span></li>
 <li><strong>reports</strong> <span>Document</span></li>
@@ -858,6 +863,7 @@
 <li>doc:README.md <code>documents</code> package:logicn-core</li>
 <li>doc:README.md <code>documents</code> package:logicn-core-compiler</li>
 <li>doc:README.md <code>documents</code> package:logicn-core-runtime</li>
+<li>doc:README.md <code>documents</code> package:logicn-core-network</li>
 <li>doc:README.md <code>documents</code> package:logicn-core-security</li>
 <li>doc:README.md <code>documents</code> package:logicn-core-config</li>
 <li>doc:README.md <code>documents</code> package:logicn-core-reports</li>
@@ -896,6 +902,7 @@
 <li>doc:docs/ARCHITECTURE.md <code>documents</code> package:logicn-core</li>
 <li>doc:docs/ARCHITECTURE.md <code>documents</code> package:logicn-core-compiler</li>
 <li>doc:docs/ARCHITECTURE.md <code>documents</code> package:logicn-core-runtime</li>
+<li>doc:docs/ARCHITECTURE.md <code>documents</code> package:logicn-core-network</li>
 <li>doc:docs/ARCHITECTURE.md <code>documents</code> package:logicn-core-security</li>
 <li>doc:docs/ARCHITECTURE.md <code>documents</code> package:logicn-core-config</li>
 <li>doc:docs/ARCHITECTURE.md <code>documents</code> package:logicn-core-reports</li>
@@ -925,6 +932,7 @@
 <li>doc:docs/CHANGELOG.md <code>documents</code> package:logicn-core</li>
 <li>doc:docs/CHANGELOG.md <code>documents</code> package:logicn-core-compiler</li>
 <li>doc:docs/CHANGELOG.md <code>documents</code> package:logicn-core-runtime</li>
+<li>doc:docs/CHANGELOG.md <code>documents</code> package:logicn-core-network</li>
 <li>doc:docs/CHANGELOG.md <code>documents</code> package:logicn-core-security</li>
 <li>doc:docs/CHANGELOG.md <code>documents</code> package:logicn-core-config</li>
 <li>doc:docs/CHANGELOG.md <code>documents</code> package:logicn-core-reports</li>
@@ -975,6 +983,10 @@
 <li>doc:docs/LOWBIT_AI_BACKENDS.md <code>documents</code> package:logicn-ai-lowbit</li>
 <li>doc:docs/LOWBIT_AI_BACKENDS.md <code>documents</code> package:logicn-target-cpu</li>
 <li>doc:docs/LOWBIT_AI_BACKENDS.md <code>documents</code> package:logicn-cpu-kernels</li>
+<li>doc:docs/NETWORK_ETHERNET_IO.md <code>documents</code> package:logicn-core</li>
+<li>doc:docs/NETWORK_ETHERNET_IO.md <code>documents</code> package:logicn-core-network</li>
+<li>doc:docs/NETWORK_ETHERNET_IO.md <code>documents</code> package:logicn-core-security</li>
+<li>doc:docs/NETWORK_ETHERNET_IO.md <code>documents</code> package:logicn-tools-benchmark</li>
 <li>doc:docs/NEURAL_ACCELERATOR_PACKAGES.md <code>documents</code> package:logicn-core</li>
 <li>doc:docs/NEURAL_ACCELERATOR_PACKAGES.md <code>documents</code> package:logicn-core-logic</li>
 <li>doc:docs/NEURAL_ACCELERATOR_PACKAGES.md <code>documents</code> package:logicn-core-vector</li>
@@ -1002,6 +1014,7 @@
 <li>doc:docs/PACKAGE_NAMING.md <code>documents</code> package:logicn-core</li>
 <li>doc:docs/PACKAGE_NAMING.md <code>documents</code> package:logicn-core-compiler</li>
 <li>doc:docs/PACKAGE_NAMING.md <code>documents</code> package:logicn-core-runtime</li>
+<li>doc:docs/PACKAGE_NAMING.md <code>documents</code> package:logicn-core-network</li>
 <li>doc:docs/PACKAGE_NAMING.md <code>documents</code> package:logicn-core-security</li>
 <li>doc:docs/PACKAGE_NAMING.md <code>documents</code> package:logicn-core-config</li>
 <li>doc:docs/PACKAGE_NAMING.md <code>documents</code> package:logicn-core-reports</li>
@@ -1040,6 +1053,7 @@
 <li>doc:docs/REQUIREMENTS.md <code>documents</code> package:logicn-core</li>
 <li>doc:docs/REQUIREMENTS.md <code>documents</code> package:logicn-core-compiler</li>
 <li>doc:docs/REQUIREMENTS.md <code>documents</code> package:logicn-core-runtime</li>
+<li>doc:docs/REQUIREMENTS.md <code>documents</code> package:logicn-core-network</li>
 <li>doc:docs/REQUIREMENTS.md <code>documents</code> package:logicn-core-security</li>
 <li>doc:docs/REQUIREMENTS.md <code>documents</code> package:logicn-core-config</li>
 <li>doc:docs/REQUIREMENTS.md <code>documents</code> package:logicn-core-reports</li>
@@ -1081,13 +1095,16 @@
 <li>doc:docs/RUST_FINANCIAL_MARKETS.md <code>documents</code> package:logicn-tools-benchmark</li>
 <li>doc:docs/SECURITY.md <code>documents</code> package:logicn-core</li>
 <li>doc:docs/SECURITY.md <code>documents</code> package:logicn-core-compiler</li>
+<li>doc:docs/SECURITY.md <code>documents</code> package:logicn-core-network</li>
 <li>doc:docs/SECURITY.md <code>documents</code> package:logicn-core-security</li>
 <li>doc:docs/SECURITY.md <code>documents</code> package:logicn-core-logic</li>
 <li>doc:docs/SECURITY.md <code>documents</code> package:logicn-ai</li>
 <li>doc:docs/SECURITY.md <code>documents</code> package:logicn-ai-lowbit</li>
+<li>doc:docs/SECURITY.md <code>documents</code> package:logicn-framework-app-kernel</li>
 <li>doc:docs/TASKS.md <code>documents</code> package:logicn-core</li>
 <li>doc:docs/TASKS.md <code>documents</code> package:logicn-core-compiler</li>
 <li>doc:docs/TASKS.md <code>documents</code> package:logicn-core-runtime</li>
+<li>doc:docs/TASKS.md <code>documents</code> package:logicn-core-network</li>
 <li>doc:docs/TASKS.md <code>documents</code> package:logicn-core-security</li>
 <li>doc:docs/TASKS.md <code>documents</code> package:logicn-core-config</li>
 <li>doc:docs/TASKS.md <code>documents</code> package:logicn-core-reports</li>
@@ -1335,18 +1352,6 @@
 <li>doc:packages-logicn/logicn-core/docs/package-use-registry.md <code>documents</code> package:logicn-framework-app-kernel</li>
 <li>doc:packages-logicn/logicn-core/docs/package-use-registry.md <code>documents</code> package:logicn-framework-api-server</li>
 <li>doc:packages-logicn/logicn-core/docs/package-use-registry.md <code>documents</code> package:logicn-core-cli</li>
-<li>doc:packages-logicn/logicn-core/docs/package-use-registry.md <code>documents</code> package:logicn-core-tasks</li>
-<li>doc:packages-logicn/logicn-core/docs/package-use-registry.md <code>documents</code> package:logicn-tools-benchmark</li>
-<li>doc:packages-logicn/logicn-core/docs/package-use-registry.md <code>documents</code> package:logicn-devtools-project-graph</li>
-<li>package:logicn-core <code>owns</code> doc:packages-logicn/logicn-core/docs/pending-additions.md</li>
-<li>doc:packages-logicn/logicn-core/docs/pending-additions.md <code>documents</code> package:logicn-core</li>
-<li>package:logicn-core <code>owns</code> doc:packages-logicn/logicn-core/docs/pending-logicn-additions.md</li>
-<li>doc:packages-logicn/logicn-core/docs/pending-logicn-additions.md <code>documents</code> package:logicn-core</li>
-<li>package:logicn-core <code>owns</code> doc:packages-logicn/logicn-core/docs/primary-lane-and-offload-nodes.md</li>
-<li>package:logicn-core <code>owns</code> doc:packages-logicn/logicn-core/docs/pure-flow-caching.md</li>
-<li>package:logicn-core <code>owns</code> doc:packages-logicn/logicn-core/docs/ransomware-resistant-design.md</li>
-<li>package:logicn-core <code>owns</code> doc:packages-logicn/logicn-core/docs/react-native-target.md</li>
-<li>package:logicn-core <code>owns</code> doc:packages-logicn/logicn-core/docs/README.md</li>
-<li>doc:packages-logicn/logicn-core/docs/README.md <code>documents</code> package:logicn-core</li></ul>
+<li>doc:packages-logicn/logicn-core/docs/package-use-registry.md <code>documents</code> package:logicn-core-tasks</li></ul>
 </body>
 </html>

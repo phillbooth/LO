@@ -52,6 +52,11 @@ must not be treated as implemented app functionality.
   must be framed as an application-level goal: stronger default policy for
   permissions, APIs, secrets, package effects, interop, deployment and
   AI-readable reports.
+- LogicN must not claim to make Ethernet hardware faster. Network positioning
+  must be framed as improving application network I/O through typed APIs,
+  deny-by-default network permissions, TLS policy, backpressure, timeout policy,
+  zero-copy planning, platform-aware I/O backend selection, reports and
+  deployment profiles.
 - Memory safety must be tied to an explicit mechanism. The current candidate is
   hybrid ownership: immutable sharing by default, one active mutable owner,
   read-only and mutable borrows, explicit moves for resources, bounds-checked
@@ -133,6 +138,19 @@ The app package must remain deliberately small until a product domain is chosen.
 - Errors must be explicit and safely reportable.
 - Application effects must be deny-by-default. File, network, database, shell,
   AI, GPU and interop access must be declared before use.
+- Network access must be denied by default. Inbound ports, outbound hosts, raw
+  sockets, packet capture, promiscuous mode, shell network tools and wildcard
+  network access must require explicit policy and report output.
+- Production networked apps must require TLS policy, request/body size limits,
+  route-level rate limits, timeout policy and stream backpressure for public
+  routes unless an explicit reviewed override exists.
+- Production networked apps must deny plaintext fallback, silent TLS downgrade,
+  disabled certificate validation, disabled hostname validation, weak ciphers,
+  expired certificates, debug proxying and secrets in URLs.
+- Enterprise service-call policy must support mutual TLS, service identity,
+  host allowlists and package-level network permissions.
+- Sensitive payload policy must support application-layer encryption and
+  metadata minimisation where transport encryption alone is not enough.
 - API handlers must receive typed, validated request values by default; unknown
   fields, oversized JSON and invalid payload shapes must be rejected at the
   boundary.
@@ -498,6 +516,14 @@ the active v1 build graph.
   non-exhaustive Tri matches, risky secure-flow unknown conversion, raw
   secret-like literals and unsafe dynamic execution forms.
 - `logicn-core-runtime` must own execution contracts for checked and compiled LogicN code.
+- `logicn-core-network` must own network I/O policy, profile, permission,
+  backend capability and report contracts. It must not own HTTP framework
+  behavior, TLS implementation, DNS resolver implementation, kernel driver code
+  or DPDK runtime bindings.
+- `logicn-core-network` must define safe-networking contracts for TLS 1.3
+  policy, plaintext denial, certificate and hostname validation, mutual TLS,
+  service identity, secret-safe URLs, metadata minimisation and packet-capture
+  restrictions.
 - `logicn-core-security` must own reusable security primitives, redaction rules,
   permission models, security diagnostics and security report contracts.
 - `logicn-core-security` must support application-security positioning where
