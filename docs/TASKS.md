@@ -92,6 +92,8 @@
 ## Phase 7: Logic and Photonic Packages
 
 - [ ] Define `lo-core-logic` syntax and reports for `Tri`, `Logic<N>` and Omni
+  - [x] Add initial Tri operations, explicit Tri-to-Bool conversion policy,
+    Logic<N> validation, truth-table diagnostics and tests
 - [ ] Define `lo-core-photonic` wavelength, phase and amplitude model
 - [ ] Define photonic mappings from `lo-core-logic`
 - [ ] Add examples and tests for logic and photonic package boundaries
@@ -122,11 +124,15 @@
 - [ ] Build a parser that accepts the v1 examples and rejects post-v1 syntax
   with clear diagnostics
 - [ ] Define `lo-core-compiler` compiler pipeline contracts
+  - [x] Add an initial core syntax safety scan for unsafe Tri conversions,
+    non-exhaustive Tri matches, raw secret literals and unsafe dynamic execution
 - [ ] Define `lo-core-runtime` execution contracts
 - [ ] Commit the v1 memory model as hybrid ownership, borrowing, moves,
   bounds-checking and explicit unsafe boundaries
 - [ ] Finalise `Bool`, `Tri`, `Decision`, `Option` and `Result` conversion and
   branch semantics
+  - [x] Add the initial runtime contract for explicit Tri-to-Bool conversion
+    policy in `lo-core-logic`
 - [ ] Define standard library baseline for JSON, HTTP, files, streams, crypto
   policy, dates, money and safe strings
 - [ ] Define IDE/LSP, debugger, source-map and test-framework roadmap
@@ -155,6 +161,8 @@
   folders after preserving the canonical `lo-core-*` package data
 - [ ] Define production versus development package resolution rules so
   production apps do not download staging packages by default
+- [x] Add host package manifest boundary validation so `package.json` remains
+  NPM/host tooling and LO package graph fields stay out of host manifests
 - [x] Define production boot/profile defaults that disable benchmark and
   development-only packages unless explicitly overridden and reported
 - [ ] Split `packages-lo/` into its own Git repository

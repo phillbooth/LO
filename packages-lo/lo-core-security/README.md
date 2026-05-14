@@ -58,6 +58,24 @@ sensitive values without storing the real value in source-controlled reports.
 Use redaction helpers before writing diagnostics, logs or report text that may
 include secrets.
 
+## Safety Contracts
+
+Security helpers must fail closed when a helper cannot prove that output is
+safe.
+
+```text
+redaction input over the configured maximum is fully redacted
+invalid redaction rules fully redact by default
+redaction replacements that can re-emit full matches or surrounding context are rejected
+permission models deny by default
+explicit deny grants take precedence over allow grants
+default-allow and wildcard-allow permission models are diagnosed
+weak crypto algorithms must not appear in allowed algorithm lists
+```
+
+Callers can choose `onInvalidRule: "skip"` or `"throw"` for compatibility, but
+the default redaction mode is `fail-closed`.
+
 Final rule:
 
 ```text

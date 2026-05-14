@@ -1,6 +1,6 @@
 {
   "version": "0.1.0",
-  "generatedAt": "2026-05-14T06:22:28.426Z",
+  "generatedAt": "2026-05-14T11:02:04.081Z",
   "nodes": [
     {
       "id": "package:lo-core",
@@ -464,10 +464,10 @@
       ]
     },
     {
-      "id": "doc:docs/OBSERVABILITY.md",
+      "id": "doc:docs/observability.md",
       "kind": "Document",
-      "label": "OBSERVABILITY.md",
-      "sourcePath": "docs/OBSERVABILITY.md",
+      "label": "observability.md",
+      "sourcePath": "docs/observability.md",
       "tags": [
         "document"
       ]
@@ -614,296 +614,6 @@
       "kind": "Document",
       "label": "ARCHITECTURE.md",
       "sourcePath": "packages-lo/lo-core/ARCHITECTURE.md",
-      "tags": [
-        "document",
-        "lo-core"
-      ]
-    },
-    {
-      "id": "doc:packages-lo/lo-core/build/examples/app.ai-context.json",
-      "kind": "Document",
-      "label": "app.ai-context.json",
-      "sourcePath": "packages-lo/lo-core/build/examples/app.ai-context.json",
-      "tags": [
-        "report",
-        "lo-core"
-      ]
-    },
-    {
-      "id": "doc:packages-lo/lo-core/build/examples/app.ai-context.md",
-      "kind": "Document",
-      "label": "app.ai-context.md",
-      "sourcePath": "packages-lo/lo-core/build/examples/app.ai-context.md",
-      "tags": [
-        "document",
-        "lo-core"
-      ]
-    },
-    {
-      "id": "doc:packages-lo/lo-core/build/examples/app.ai-guide.md",
-      "kind": "Document",
-      "label": "app.ai-guide.md",
-      "sourcePath": "packages-lo/lo-core/build/examples/app.ai-guide.md",
-      "tags": [
-        "document",
-        "lo-core"
-      ]
-    },
-    {
-      "id": "report:packages-lo/lo-core/build/examples/app.api-report.json",
-      "kind": "Report",
-      "label": "app.api-report.json",
-      "sourcePath": "packages-lo/lo-core/build/examples/app.api-report.json",
-      "tags": [
-        "report",
-        "lo-core"
-      ]
-    },
-    {
-      "id": "doc:packages-lo/lo-core/build/examples/app.build-manifest.json",
-      "kind": "Document",
-      "label": "app.build-manifest.json",
-      "sourcePath": "packages-lo/lo-core/build/examples/app.build-manifest.json",
-      "tags": [
-        "report",
-        "lo-core"
-      ]
-    },
-    {
-      "id": "report:packages-lo/lo-core/build/examples/app.execution-report.json",
-      "kind": "Report",
-      "label": "app.execution-report.json",
-      "sourcePath": "packages-lo/lo-core/build/examples/app.execution-report.json",
-      "tags": [
-        "report",
-        "lo-core"
-      ]
-    },
-    {
-      "id": "report:packages-lo/lo-core/build/examples/app.failure-report.json",
-      "kind": "Report",
-      "label": "app.failure-report.json",
-      "sourcePath": "packages-lo/lo-core/build/examples/app.failure-report.json",
-      "tags": [
-        "report",
-        "lo-core"
-      ]
-    },
-    {
-      "id": "report:packages-lo/lo-core/build/examples/app.global-report.json",
-      "kind": "Report",
-      "label": "app.global-report.json",
-      "sourcePath": "packages-lo/lo-core/build/examples/app.global-report.json",
-      "tags": [
-        "report",
-        "lo-core"
-      ]
-    },
-    {
-      "id": "doc:packages-lo/lo-core/build/examples/app.map-manifest.json",
-      "kind": "Document",
-      "label": "app.map-manifest.json",
-      "sourcePath": "packages-lo/lo-core/build/examples/app.map-manifest.json",
-      "tags": [
-        "report",
-        "lo-core"
-      ]
-    },
-    {
-      "id": "report:packages-lo/lo-core/build/examples/app.memory-report.json",
-      "kind": "Report",
-      "label": "app.memory-report.json",
-      "sourcePath": "packages-lo/lo-core/build/examples/app.memory-report.json",
-      "tags": [
-        "report",
-        "lo-core"
-      ]
-    },
-    {
-      "id": "doc:packages-lo/lo-core/build/examples/app.openapi.json",
-      "kind": "Document",
-      "label": "app.openapi.json",
-      "sourcePath": "packages-lo/lo-core/build/examples/app.openapi.json",
-      "tags": [
-        "report",
-        "lo-core"
-      ]
-    },
-    {
-      "id": "report:packages-lo/lo-core/build/examples/app.precision-report.json",
-      "kind": "Report",
-      "label": "app.precision-report.json",
-      "sourcePath": "packages-lo/lo-core/build/examples/app.precision-report.json",
-      "tags": [
-        "report",
-        "lo-core"
-      ]
-    },
-    {
-      "id": "report:packages-lo/lo-core/build/examples/app.runtime-report.json",
-      "kind": "Report",
-      "label": "app.runtime-report.json",
-      "sourcePath": "packages-lo/lo-core/build/examples/app.runtime-report.json",
-      "tags": [
-        "report",
-        "lo-core"
-      ]
-    },
-    {
-      "id": "doc:packages-lo/lo-core/build/examples/app.schemas.json",
-      "kind": "Document",
-      "label": "app.schemas.json",
-      "sourcePath": "packages-lo/lo-core/build/examples/app.schemas.json",
-      "tags": [
-        "report",
-        "lo-core"
-      ]
-    },
-    {
-      "id": "report:packages-lo/lo-core/build/examples/app.security-report.json",
-      "kind": "Report",
-      "label": "app.security-report.json",
-      "sourcePath": "packages-lo/lo-core/build/examples/app.security-report.json",
-      "tags": [
-        "report",
-        "lo-core"
-      ]
-    },
-    {
-      "id": "doc:packages-lo/lo-core/build/examples/app.source-map.json",
-      "kind": "Document",
-      "label": "app.source-map.json",
-      "sourcePath": "packages-lo/lo-core/build/examples/app.source-map.json",
-      "tags": [
-        "report",
-        "lo-core"
-      ]
-    },
-    {
-      "id": "report:packages-lo/lo-core/build/examples/app.target-report.json",
-      "kind": "Report",
-      "label": "app.target-report.json",
-      "sourcePath": "packages-lo/lo-core/build/examples/app.target-report.json",
-      "tags": [
-        "report",
-        "lo-core"
-      ]
-    },
-    {
-      "id": "doc:packages-lo/lo-core/build/examples/app.tokens.json",
-      "kind": "Document",
-      "label": "app.tokens.json",
-      "sourcePath": "packages-lo/lo-core/build/examples/app.tokens.json",
-      "tags": [
-        "report",
-        "lo-core"
-      ]
-    },
-    {
-      "id": "doc:packages-lo/lo-core/build/examples/docs/ai-summary.md",
-      "kind": "Document",
-      "label": "ai-summary.md",
-      "sourcePath": "packages-lo/lo-core/build/examples/docs/ai-summary.md",
-      "tags": [
-        "document",
-        "lo-core"
-      ]
-    },
-    {
-      "id": "doc:packages-lo/lo-core/build/examples/docs/api-guide.md",
-      "kind": "Document",
-      "label": "api-guide.md",
-      "sourcePath": "packages-lo/lo-core/build/examples/docs/api-guide.md",
-      "tags": [
-        "document",
-        "lo-core"
-      ]
-    },
-    {
-      "id": "doc:packages-lo/lo-core/build/examples/docs/deployment-guide.md",
-      "kind": "Document",
-      "label": "deployment-guide.md",
-      "sourcePath": "packages-lo/lo-core/build/examples/docs/deployment-guide.md",
-      "tags": [
-        "document",
-        "lo-core"
-      ]
-    },
-    {
-      "id": "doc:packages-lo/lo-core/build/examples/docs/docs-manifest.json",
-      "kind": "Document",
-      "label": "docs-manifest.json",
-      "sourcePath": "packages-lo/lo-core/build/examples/docs/docs-manifest.json",
-      "tags": [
-        "report",
-        "lo-core"
-      ]
-    },
-    {
-      "id": "doc:packages-lo/lo-core/build/examples/docs/global-registry-guide.md",
-      "kind": "Document",
-      "label": "global-registry-guide.md",
-      "sourcePath": "packages-lo/lo-core/build/examples/docs/global-registry-guide.md",
-      "tags": [
-        "document",
-        "lo-core"
-      ]
-    },
-    {
-      "id": "doc:packages-lo/lo-core/build/examples/docs/memory-pressure-guide.md",
-      "kind": "Document",
-      "label": "memory-pressure-guide.md",
-      "sourcePath": "packages-lo/lo-core/build/examples/docs/memory-pressure-guide.md",
-      "tags": [
-        "document",
-        "lo-core"
-      ]
-    },
-    {
-      "id": "doc:packages-lo/lo-core/build/examples/docs/run-compile-mode-guide.md",
-      "kind": "Document",
-      "label": "run-compile-mode-guide.md",
-      "sourcePath": "packages-lo/lo-core/build/examples/docs/run-compile-mode-guide.md",
-      "tags": [
-        "document",
-        "lo-core"
-      ]
-    },
-    {
-      "id": "doc:packages-lo/lo-core/build/examples/docs/runtime-guide.md",
-      "kind": "Document",
-      "label": "runtime-guide.md",
-      "sourcePath": "packages-lo/lo-core/build/examples/docs/runtime-guide.md",
-      "tags": [
-        "document",
-        "lo-core"
-      ]
-    },
-    {
-      "id": "doc:packages-lo/lo-core/build/examples/docs/security-guide.md",
-      "kind": "Document",
-      "label": "security-guide.md",
-      "sourcePath": "packages-lo/lo-core/build/examples/docs/security-guide.md",
-      "tags": [
-        "document",
-        "lo-core"
-      ]
-    },
-    {
-      "id": "doc:packages-lo/lo-core/build/examples/docs/type-reference.md",
-      "kind": "Document",
-      "label": "type-reference.md",
-      "sourcePath": "packages-lo/lo-core/build/examples/docs/type-reference.md",
-      "tags": [
-        "document",
-        "lo-core"
-      ]
-    },
-    {
-      "id": "doc:packages-lo/lo-core/build/examples/docs/webhook-guide.md",
-      "kind": "Document",
-      "label": "webhook-guide.md",
-      "sourcePath": "packages-lo/lo-core/build/examples/docs/webhook-guide.md",
       "tags": [
         "document",
         "lo-core"
@@ -2520,6 +2230,36 @@
       ]
     },
     {
+      "id": "type:lo-core-compiler:CompilerSourceText",
+      "kind": "Type",
+      "label": "CompilerSourceText",
+      "sourcePath": "packages-lo/lo-core-compiler/src/index.ts",
+      "tags": [
+        "type",
+        "lo-core-compiler"
+      ]
+    },
+    {
+      "id": "type:lo-core-compiler:CoreSyntaxSafetyOptions",
+      "kind": "Type",
+      "label": "CoreSyntaxSafetyOptions",
+      "sourcePath": "packages-lo/lo-core-compiler/src/index.ts",
+      "tags": [
+        "type",
+        "lo-core-compiler"
+      ]
+    },
+    {
+      "id": "flow:lo-core-compiler:validateCoreSyntaxSafety",
+      "kind": "Flow",
+      "label": "validateCoreSyntaxSafety",
+      "sourcePath": "packages-lo/lo-core-compiler/src/index.ts",
+      "tags": [
+        "function",
+        "lo-core-compiler"
+      ]
+    },
+    {
       "id": "doc:packages-lo/lo-core-compiler/TODO.md",
       "kind": "Document",
       "label": "TODO.md",
@@ -2760,6 +2500,26 @@
       ]
     },
     {
+      "id": "type:lo-core-security:RedactionFailureMode",
+      "kind": "Type",
+      "label": "RedactionFailureMode",
+      "sourcePath": "packages-lo/lo-core-security/src/index.ts",
+      "tags": [
+        "type",
+        "lo-core-security"
+      ]
+    },
+    {
+      "id": "type:lo-core-security:RedactionOptions",
+      "kind": "Type",
+      "label": "RedactionOptions",
+      "sourcePath": "packages-lo/lo-core-security/src/index.ts",
+      "tags": [
+        "type",
+        "lo-core-security"
+      ]
+    },
+    {
       "id": "type:lo-core-security:RedactionResult",
       "kind": "Type",
       "label": "RedactionResult",
@@ -2930,6 +2690,16 @@
       ]
     },
     {
+      "id": "flow:lo-core-security:validatePermissionModel",
+      "kind": "Flow",
+      "label": "validatePermissionModel",
+      "sourcePath": "packages-lo/lo-core-security/src/index.ts",
+      "tags": [
+        "function",
+        "lo-core-security"
+      ]
+    },
+    {
       "id": "flow:lo-core-security:createSafeTokenReference",
       "kind": "Flow",
       "label": "createSafeTokenReference",
@@ -2963,6 +2733,16 @@
       "id": "flow:lo-core-security:validateCryptographicPolicy",
       "kind": "Flow",
       "label": "validateCryptographicPolicy",
+      "sourcePath": "packages-lo/lo-core-security/src/index.ts",
+      "tags": [
+        "function",
+        "lo-core-security"
+      ]
+    },
+    {
+      "id": "flow:lo-core-security:validateRedactionRule",
+      "kind": "Flow",
+      "label": "validateRedactionRule",
       "sourcePath": "packages-lo/lo-core-security/src/index.ts",
       "tags": [
         "function",
@@ -3180,6 +2960,26 @@
       ]
     },
     {
+      "id": "type:lo-core-config:HostPackageManifestBoundaryPolicy",
+      "kind": "Type",
+      "label": "HostPackageManifestBoundaryPolicy",
+      "sourcePath": "packages-lo/lo-core-config/src/index.ts",
+      "tags": [
+        "type",
+        "lo-core-config"
+      ]
+    },
+    {
+      "id": "type:lo-core-config:DEFAULT_HOST_PACKAGE_MANIFEST_BOUNDARY_POLICY",
+      "kind": "Type",
+      "label": "DEFAULT_HOST_PACKAGE_MANIFEST_BOUNDARY_POLICY",
+      "sourcePath": "packages-lo/lo-core-config/src/index.ts",
+      "tags": [
+        "type",
+        "lo-core-config"
+      ]
+    },
+    {
       "id": "type:lo-core-config:DEFAULT_PRODUCTION_STRICTNESS_POLICY",
       "kind": "Type",
       "label": "DEFAULT_PRODUCTION_STRICTNESS_POLICY",
@@ -3283,6 +3083,16 @@
       "id": "flow:lo-core-config:loadConfigFromObjects",
       "kind": "Flow",
       "label": "loadConfigFromObjects",
+      "sourcePath": "packages-lo/lo-core-config/src/index.ts",
+      "tags": [
+        "function",
+        "lo-core-config"
+      ]
+    },
+    {
+      "id": "flow:lo-core-config:validateHostPackageManifestBoundary",
+      "kind": "Flow",
+      "label": "validateHostPackageManifestBoundary",
       "sourcePath": "packages-lo/lo-core-config/src/index.ts",
       "tags": [
         "function",
@@ -3930,6 +3740,66 @@
       ]
     },
     {
+      "id": "type:lo-core-logic:TRI_FALSE",
+      "kind": "Type",
+      "label": "TRI_FALSE",
+      "sourcePath": "packages-lo/lo-core-logic/src/index.ts",
+      "tags": [
+        "type",
+        "lo-core-logic"
+      ]
+    },
+    {
+      "id": "type:lo-core-logic:TRI_UNKNOWN",
+      "kind": "Type",
+      "label": "TRI_UNKNOWN",
+      "sourcePath": "packages-lo/lo-core-logic/src/index.ts",
+      "tags": [
+        "type",
+        "lo-core-logic"
+      ]
+    },
+    {
+      "id": "type:lo-core-logic:TRI_TRUE",
+      "kind": "Type",
+      "label": "TRI_TRUE",
+      "sourcePath": "packages-lo/lo-core-logic/src/index.ts",
+      "tags": [
+        "type",
+        "lo-core-logic"
+      ]
+    },
+    {
+      "id": "type:lo-core-logic:TriBoolPolicy",
+      "kind": "Type",
+      "label": "TriBoolPolicy",
+      "sourcePath": "packages-lo/lo-core-logic/src/index.ts",
+      "tags": [
+        "type",
+        "lo-core-logic"
+      ]
+    },
+    {
+      "id": "type:lo-core-logic:LogicDiagnosticSeverity",
+      "kind": "Type",
+      "label": "LogicDiagnosticSeverity",
+      "sourcePath": "packages-lo/lo-core-logic/src/index.ts",
+      "tags": [
+        "type",
+        "lo-core-logic"
+      ]
+    },
+    {
+      "id": "type:lo-core-logic:LogicDiagnostic",
+      "kind": "Type",
+      "label": "LogicDiagnostic",
+      "sourcePath": "packages-lo/lo-core-logic/src/index.ts",
+      "tags": [
+        "type",
+        "lo-core-logic"
+      ]
+    },
+    {
       "id": "type:lo-core-logic:LogicState",
       "kind": "Type",
       "label": "LogicState",
@@ -3966,6 +3836,126 @@
       "sourcePath": "packages-lo/lo-core-logic/src/index.ts",
       "tags": [
         "type",
+        "lo-core-logic"
+      ]
+    },
+    {
+      "id": "flow:lo-core-logic:isTri",
+      "kind": "Flow",
+      "label": "isTri",
+      "sourcePath": "packages-lo/lo-core-logic/src/index.ts",
+      "tags": [
+        "function",
+        "lo-core-logic"
+      ]
+    },
+    {
+      "id": "flow:lo-core-logic:triNot",
+      "kind": "Flow",
+      "label": "triNot",
+      "sourcePath": "packages-lo/lo-core-logic/src/index.ts",
+      "tags": [
+        "function",
+        "lo-core-logic"
+      ]
+    },
+    {
+      "id": "flow:lo-core-logic:triAnd",
+      "kind": "Flow",
+      "label": "triAnd",
+      "sourcePath": "packages-lo/lo-core-logic/src/index.ts",
+      "tags": [
+        "function",
+        "lo-core-logic"
+      ]
+    },
+    {
+      "id": "flow:lo-core-logic:triOr",
+      "kind": "Flow",
+      "label": "triOr",
+      "sourcePath": "packages-lo/lo-core-logic/src/index.ts",
+      "tags": [
+        "function",
+        "lo-core-logic"
+      ]
+    },
+    {
+      "id": "flow:lo-core-logic:triNor",
+      "kind": "Flow",
+      "label": "triNor",
+      "sourcePath": "packages-lo/lo-core-logic/src/index.ts",
+      "tags": [
+        "function",
+        "lo-core-logic"
+      ]
+    },
+    {
+      "id": "flow:lo-core-logic:triToBool",
+      "kind": "Flow",
+      "label": "triToBool",
+      "sourcePath": "packages-lo/lo-core-logic/src/index.ts",
+      "tags": [
+        "function",
+        "lo-core-logic"
+      ]
+    },
+    {
+      "id": "flow:lo-core-logic:createLogicDefinition",
+      "kind": "Flow",
+      "label": "createLogicDefinition",
+      "sourcePath": "packages-lo/lo-core-logic/src/index.ts",
+      "tags": [
+        "function",
+        "lo-core-logic"
+      ]
+    },
+    {
+      "id": "flow:lo-core-logic:validateLogicDefinition",
+      "kind": "Flow",
+      "label": "validateLogicDefinition",
+      "sourcePath": "packages-lo/lo-core-logic/src/index.ts",
+      "tags": [
+        "function",
+        "lo-core-logic"
+      ]
+    },
+    {
+      "id": "flow:lo-core-logic:createLogicState",
+      "kind": "Flow",
+      "label": "createLogicState",
+      "sourcePath": "packages-lo/lo-core-logic/src/index.ts",
+      "tags": [
+        "function",
+        "lo-core-logic"
+      ]
+    },
+    {
+      "id": "flow:lo-core-logic:isValidLogicState",
+      "kind": "Flow",
+      "label": "isValidLogicState",
+      "sourcePath": "packages-lo/lo-core-logic/src/index.ts",
+      "tags": [
+        "function",
+        "lo-core-logic"
+      ]
+    },
+    {
+      "id": "flow:lo-core-logic:createTruthTableReport",
+      "kind": "Flow",
+      "label": "createTruthTableReport",
+      "sourcePath": "packages-lo/lo-core-logic/src/index.ts",
+      "tags": [
+        "function",
+        "lo-core-logic"
+      ]
+    },
+    {
+      "id": "flow:lo-core-logic:validateTruthTable",
+      "kind": "Flow",
+      "label": "validateTruthTable",
+      "sourcePath": "packages-lo/lo-core-logic/src/index.ts",
+      "tags": [
+        "function",
         "lo-core-logic"
       ]
     },
@@ -9694,6 +9684,34 @@
     },
     {
       "from": "doc:docs/SECURITY.md",
+      "to": "package:lo-core",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/SECURITY.md"
+    },
+    {
+      "from": "doc:docs/SECURITY.md",
+      "to": "package:lo-core-compiler",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/SECURITY.md"
+    },
+    {
+      "from": "doc:docs/SECURITY.md",
+      "to": "package:lo-core-security",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/SECURITY.md"
+    },
+    {
+      "from": "doc:docs/SECURITY.md",
+      "to": "package:lo-core-logic",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/SECURITY.md"
+    },
+    {
+      "from": "doc:docs/SECURITY.md",
       "to": "package:lo-ai",
       "kind": "documents",
       "confidence": "INFERRED",
@@ -10048,209 +10066,6 @@
       "kind": "documents",
       "confidence": "INFERRED",
       "evidencePath": "packages-lo/lo-core/ARCHITECTURE.md"
-    },
-    {
-      "from": "package:lo-core",
-      "to": "doc:packages-lo/lo-core/build/examples/app.ai-context.json",
-      "kind": "owns",
-      "confidence": "EXTRACTED",
-      "evidencePath": "packages-lo/lo-core/build/examples/app.ai-context.json"
-    },
-    {
-      "from": "package:lo-core",
-      "to": "doc:packages-lo/lo-core/build/examples/app.ai-context.md",
-      "kind": "owns",
-      "confidence": "EXTRACTED",
-      "evidencePath": "packages-lo/lo-core/build/examples/app.ai-context.md"
-    },
-    {
-      "from": "package:lo-core",
-      "to": "doc:packages-lo/lo-core/build/examples/app.ai-guide.md",
-      "kind": "owns",
-      "confidence": "EXTRACTED",
-      "evidencePath": "packages-lo/lo-core/build/examples/app.ai-guide.md"
-    },
-    {
-      "from": "package:lo-core",
-      "to": "report:packages-lo/lo-core/build/examples/app.api-report.json",
-      "kind": "owns",
-      "confidence": "EXTRACTED",
-      "evidencePath": "packages-lo/lo-core/build/examples/app.api-report.json"
-    },
-    {
-      "from": "package:lo-core",
-      "to": "doc:packages-lo/lo-core/build/examples/app.build-manifest.json",
-      "kind": "owns",
-      "confidence": "EXTRACTED",
-      "evidencePath": "packages-lo/lo-core/build/examples/app.build-manifest.json"
-    },
-    {
-      "from": "package:lo-core",
-      "to": "report:packages-lo/lo-core/build/examples/app.execution-report.json",
-      "kind": "owns",
-      "confidence": "EXTRACTED",
-      "evidencePath": "packages-lo/lo-core/build/examples/app.execution-report.json"
-    },
-    {
-      "from": "package:lo-core",
-      "to": "report:packages-lo/lo-core/build/examples/app.failure-report.json",
-      "kind": "owns",
-      "confidence": "EXTRACTED",
-      "evidencePath": "packages-lo/lo-core/build/examples/app.failure-report.json"
-    },
-    {
-      "from": "package:lo-core",
-      "to": "report:packages-lo/lo-core/build/examples/app.global-report.json",
-      "kind": "owns",
-      "confidence": "EXTRACTED",
-      "evidencePath": "packages-lo/lo-core/build/examples/app.global-report.json"
-    },
-    {
-      "from": "package:lo-core",
-      "to": "doc:packages-lo/lo-core/build/examples/app.map-manifest.json",
-      "kind": "owns",
-      "confidence": "EXTRACTED",
-      "evidencePath": "packages-lo/lo-core/build/examples/app.map-manifest.json"
-    },
-    {
-      "from": "package:lo-core",
-      "to": "report:packages-lo/lo-core/build/examples/app.memory-report.json",
-      "kind": "owns",
-      "confidence": "EXTRACTED",
-      "evidencePath": "packages-lo/lo-core/build/examples/app.memory-report.json"
-    },
-    {
-      "from": "package:lo-core",
-      "to": "doc:packages-lo/lo-core/build/examples/app.openapi.json",
-      "kind": "owns",
-      "confidence": "EXTRACTED",
-      "evidencePath": "packages-lo/lo-core/build/examples/app.openapi.json"
-    },
-    {
-      "from": "package:lo-core",
-      "to": "report:packages-lo/lo-core/build/examples/app.precision-report.json",
-      "kind": "owns",
-      "confidence": "EXTRACTED",
-      "evidencePath": "packages-lo/lo-core/build/examples/app.precision-report.json"
-    },
-    {
-      "from": "package:lo-core",
-      "to": "report:packages-lo/lo-core/build/examples/app.runtime-report.json",
-      "kind": "owns",
-      "confidence": "EXTRACTED",
-      "evidencePath": "packages-lo/lo-core/build/examples/app.runtime-report.json"
-    },
-    {
-      "from": "package:lo-core",
-      "to": "doc:packages-lo/lo-core/build/examples/app.schemas.json",
-      "kind": "owns",
-      "confidence": "EXTRACTED",
-      "evidencePath": "packages-lo/lo-core/build/examples/app.schemas.json"
-    },
-    {
-      "from": "package:lo-core",
-      "to": "report:packages-lo/lo-core/build/examples/app.security-report.json",
-      "kind": "owns",
-      "confidence": "EXTRACTED",
-      "evidencePath": "packages-lo/lo-core/build/examples/app.security-report.json"
-    },
-    {
-      "from": "package:lo-core",
-      "to": "doc:packages-lo/lo-core/build/examples/app.source-map.json",
-      "kind": "owns",
-      "confidence": "EXTRACTED",
-      "evidencePath": "packages-lo/lo-core/build/examples/app.source-map.json"
-    },
-    {
-      "from": "package:lo-core",
-      "to": "report:packages-lo/lo-core/build/examples/app.target-report.json",
-      "kind": "owns",
-      "confidence": "EXTRACTED",
-      "evidencePath": "packages-lo/lo-core/build/examples/app.target-report.json"
-    },
-    {
-      "from": "package:lo-core",
-      "to": "doc:packages-lo/lo-core/build/examples/app.tokens.json",
-      "kind": "owns",
-      "confidence": "EXTRACTED",
-      "evidencePath": "packages-lo/lo-core/build/examples/app.tokens.json"
-    },
-    {
-      "from": "package:lo-core",
-      "to": "doc:packages-lo/lo-core/build/examples/docs/ai-summary.md",
-      "kind": "owns",
-      "confidence": "EXTRACTED",
-      "evidencePath": "packages-lo/lo-core/build/examples/docs/ai-summary.md"
-    },
-    {
-      "from": "package:lo-core",
-      "to": "doc:packages-lo/lo-core/build/examples/docs/api-guide.md",
-      "kind": "owns",
-      "confidence": "EXTRACTED",
-      "evidencePath": "packages-lo/lo-core/build/examples/docs/api-guide.md"
-    },
-    {
-      "from": "package:lo-core",
-      "to": "doc:packages-lo/lo-core/build/examples/docs/deployment-guide.md",
-      "kind": "owns",
-      "confidence": "EXTRACTED",
-      "evidencePath": "packages-lo/lo-core/build/examples/docs/deployment-guide.md"
-    },
-    {
-      "from": "package:lo-core",
-      "to": "doc:packages-lo/lo-core/build/examples/docs/docs-manifest.json",
-      "kind": "owns",
-      "confidence": "EXTRACTED",
-      "evidencePath": "packages-lo/lo-core/build/examples/docs/docs-manifest.json"
-    },
-    {
-      "from": "package:lo-core",
-      "to": "doc:packages-lo/lo-core/build/examples/docs/global-registry-guide.md",
-      "kind": "owns",
-      "confidence": "EXTRACTED",
-      "evidencePath": "packages-lo/lo-core/build/examples/docs/global-registry-guide.md"
-    },
-    {
-      "from": "package:lo-core",
-      "to": "doc:packages-lo/lo-core/build/examples/docs/memory-pressure-guide.md",
-      "kind": "owns",
-      "confidence": "EXTRACTED",
-      "evidencePath": "packages-lo/lo-core/build/examples/docs/memory-pressure-guide.md"
-    },
-    {
-      "from": "package:lo-core",
-      "to": "doc:packages-lo/lo-core/build/examples/docs/run-compile-mode-guide.md",
-      "kind": "owns",
-      "confidence": "EXTRACTED",
-      "evidencePath": "packages-lo/lo-core/build/examples/docs/run-compile-mode-guide.md"
-    },
-    {
-      "from": "package:lo-core",
-      "to": "doc:packages-lo/lo-core/build/examples/docs/runtime-guide.md",
-      "kind": "owns",
-      "confidence": "EXTRACTED",
-      "evidencePath": "packages-lo/lo-core/build/examples/docs/runtime-guide.md"
-    },
-    {
-      "from": "package:lo-core",
-      "to": "doc:packages-lo/lo-core/build/examples/docs/security-guide.md",
-      "kind": "owns",
-      "confidence": "EXTRACTED",
-      "evidencePath": "packages-lo/lo-core/build/examples/docs/security-guide.md"
-    },
-    {
-      "from": "package:lo-core",
-      "to": "doc:packages-lo/lo-core/build/examples/docs/type-reference.md",
-      "kind": "owns",
-      "confidence": "EXTRACTED",
-      "evidencePath": "packages-lo/lo-core/build/examples/docs/type-reference.md"
-    },
-    {
-      "from": "package:lo-core",
-      "to": "doc:packages-lo/lo-core/build/examples/docs/webhook-guide.md",
-      "kind": "owns",
-      "confidence": "EXTRACTED",
-      "evidencePath": "packages-lo/lo-core/build/examples/docs/webhook-guide.md"
     },
     {
       "from": "package:lo-core",
@@ -12998,6 +12813,27 @@
     },
     {
       "from": "package:lo-core-compiler",
+      "to": "type:lo-core-compiler:CompilerSourceText",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-lo/lo-core-compiler/src/index.ts"
+    },
+    {
+      "from": "package:lo-core-compiler",
+      "to": "type:lo-core-compiler:CoreSyntaxSafetyOptions",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-lo/lo-core-compiler/src/index.ts"
+    },
+    {
+      "from": "package:lo-core-compiler",
+      "to": "flow:lo-core-compiler:validateCoreSyntaxSafety",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-lo/lo-core-compiler/src/index.ts"
+    },
+    {
+      "from": "package:lo-core-compiler",
       "to": "doc:packages-lo/lo-core-compiler/TODO.md",
       "kind": "owns",
       "confidence": "EXTRACTED",
@@ -13257,6 +13093,20 @@
     },
     {
       "from": "package:lo-core-security",
+      "to": "type:lo-core-security:RedactionFailureMode",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-lo/lo-core-security/src/index.ts"
+    },
+    {
+      "from": "package:lo-core-security",
+      "to": "type:lo-core-security:RedactionOptions",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-lo/lo-core-security/src/index.ts"
+    },
+    {
+      "from": "package:lo-core-security",
       "to": "type:lo-core-security:RedactionResult",
       "kind": "provides",
       "confidence": "EXTRACTED",
@@ -13376,6 +13226,13 @@
     },
     {
       "from": "package:lo-core-security",
+      "to": "flow:lo-core-security:validatePermissionModel",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-lo/lo-core-security/src/index.ts"
+    },
+    {
+      "from": "package:lo-core-security",
       "to": "flow:lo-core-security:createSafeTokenReference",
       "kind": "provides",
       "confidence": "EXTRACTED",
@@ -13398,6 +13255,13 @@
     {
       "from": "package:lo-core-security",
       "to": "flow:lo-core-security:validateCryptographicPolicy",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-lo/lo-core-security/src/index.ts"
+    },
+    {
+      "from": "package:lo-core-security",
+      "to": "flow:lo-core-security:validateRedactionRule",
       "kind": "provides",
       "confidence": "EXTRACTED",
       "evidencePath": "packages-lo/lo-core-security/src/index.ts"
@@ -13600,6 +13464,20 @@
     },
     {
       "from": "package:lo-core-config",
+      "to": "type:lo-core-config:HostPackageManifestBoundaryPolicy",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-lo/lo-core-config/src/index.ts"
+    },
+    {
+      "from": "package:lo-core-config",
+      "to": "type:lo-core-config:DEFAULT_HOST_PACKAGE_MANIFEST_BOUNDARY_POLICY",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-lo/lo-core-config/src/index.ts"
+    },
+    {
+      "from": "package:lo-core-config",
       "to": "type:lo-core-config:DEFAULT_PRODUCTION_STRICTNESS_POLICY",
       "kind": "provides",
       "confidence": "EXTRACTED",
@@ -13671,6 +13549,13 @@
     {
       "from": "package:lo-core-config",
       "to": "flow:lo-core-config:loadConfigFromObjects",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-lo/lo-core-config/src/index.ts"
+    },
+    {
+      "from": "package:lo-core-config",
+      "to": "flow:lo-core-config:validateHostPackageManifestBoundary",
       "kind": "provides",
       "confidence": "EXTRACTED",
       "evidencePath": "packages-lo/lo-core-config/src/index.ts"
@@ -14230,6 +14115,48 @@
     },
     {
       "from": "package:lo-core-logic",
+      "to": "type:lo-core-logic:TRI_FALSE",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-lo/lo-core-logic/src/index.ts"
+    },
+    {
+      "from": "package:lo-core-logic",
+      "to": "type:lo-core-logic:TRI_UNKNOWN",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-lo/lo-core-logic/src/index.ts"
+    },
+    {
+      "from": "package:lo-core-logic",
+      "to": "type:lo-core-logic:TRI_TRUE",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-lo/lo-core-logic/src/index.ts"
+    },
+    {
+      "from": "package:lo-core-logic",
+      "to": "type:lo-core-logic:TriBoolPolicy",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-lo/lo-core-logic/src/index.ts"
+    },
+    {
+      "from": "package:lo-core-logic",
+      "to": "type:lo-core-logic:LogicDiagnosticSeverity",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-lo/lo-core-logic/src/index.ts"
+    },
+    {
+      "from": "package:lo-core-logic",
+      "to": "type:lo-core-logic:LogicDiagnostic",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-lo/lo-core-logic/src/index.ts"
+    },
+    {
+      "from": "package:lo-core-logic",
       "to": "type:lo-core-logic:LogicState",
       "kind": "provides",
       "confidence": "EXTRACTED",
@@ -14252,6 +14179,90 @@
     {
       "from": "package:lo-core-logic",
       "to": "type:lo-core-logic:LogicReport",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-lo/lo-core-logic/src/index.ts"
+    },
+    {
+      "from": "package:lo-core-logic",
+      "to": "flow:lo-core-logic:isTri",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-lo/lo-core-logic/src/index.ts"
+    },
+    {
+      "from": "package:lo-core-logic",
+      "to": "flow:lo-core-logic:triNot",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-lo/lo-core-logic/src/index.ts"
+    },
+    {
+      "from": "package:lo-core-logic",
+      "to": "flow:lo-core-logic:triAnd",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-lo/lo-core-logic/src/index.ts"
+    },
+    {
+      "from": "package:lo-core-logic",
+      "to": "flow:lo-core-logic:triOr",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-lo/lo-core-logic/src/index.ts"
+    },
+    {
+      "from": "package:lo-core-logic",
+      "to": "flow:lo-core-logic:triNor",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-lo/lo-core-logic/src/index.ts"
+    },
+    {
+      "from": "package:lo-core-logic",
+      "to": "flow:lo-core-logic:triToBool",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-lo/lo-core-logic/src/index.ts"
+    },
+    {
+      "from": "package:lo-core-logic",
+      "to": "flow:lo-core-logic:createLogicDefinition",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-lo/lo-core-logic/src/index.ts"
+    },
+    {
+      "from": "package:lo-core-logic",
+      "to": "flow:lo-core-logic:validateLogicDefinition",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-lo/lo-core-logic/src/index.ts"
+    },
+    {
+      "from": "package:lo-core-logic",
+      "to": "flow:lo-core-logic:createLogicState",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-lo/lo-core-logic/src/index.ts"
+    },
+    {
+      "from": "package:lo-core-logic",
+      "to": "flow:lo-core-logic:isValidLogicState",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-lo/lo-core-logic/src/index.ts"
+    },
+    {
+      "from": "package:lo-core-logic",
+      "to": "flow:lo-core-logic:createTruthTableReport",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-lo/lo-core-logic/src/index.ts"
+    },
+    {
+      "from": "package:lo-core-logic",
+      "to": "flow:lo-core-logic:validateTruthTable",
       "kind": "provides",
       "confidence": "EXTRACTED",
       "evidencePath": "packages-lo/lo-core-logic/src/index.ts"

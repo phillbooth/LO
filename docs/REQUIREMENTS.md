@@ -99,6 +99,10 @@ must not be treated as implemented app functionality.
   `package.json` for normal app/vendor packages, `package-lo.json` for LO
   package dependencies, `lo.lock.json` for locked LO package graphs,
   `packages/` for normal vendor packages and `packages-lo/` for LO packages.
+- NPM and `package.json` must remain host ecosystem tooling only. They may run
+  current JavaScript/TypeScript prototype checks and package generated JS/TS
+  interop, but they must not define LO package graph resolution, LO runtime
+  profiles, LO compiler target policy or LO production package overrides.
 - Generated documents and AI-suggested structures are advisory. Repository
   package boundaries, `AGENTS.md`, `lo.workspace.json`, package READMEs/TODOs
   and maintained docs take precedence when suggestions conflict.
@@ -397,6 +401,12 @@ the active v1 build graph.
 
 - `lo-core-logic` must own `Tri`, `Logic<N>`, future Omni logic, multi-state truth
   tables, conversion rules and logic reports.
+- `lo-core-logic` must validate declared logic widths, state names, state
+  indexes and truth-table coverage so malformed or incomplete logic definitions
+  cannot silently become accepted semantics.
+- `Tri` conversion helpers must require an explicit unknown policy. Unknown
+  values must never become `true`, `Allow` or other grant states through an
+  implicit conversion.
 - `lo-core-photonic` must own wavelength, phase, amplitude, optical signal,
   optical channel, photonic modelling and photonic simulation concepts.
 - `lo-core-photonic` may map logic states from `lo-core-logic` to photonic
@@ -469,6 +479,11 @@ the active v1 build graph.
 
 - `lo-core-compiler` must own compiler pipeline contracts for lexing, parsing, AST,
   checkers, IR, diagnostics, source maps and compiler reports.
+- Until the full parser/checker exists, `lo-core-compiler` must provide a
+  conservative syntax safety scan for the frozen v1 core risks: direct Tri
+  branch conditions, implicit Tri/Decision/Bool boundary assignments,
+  non-exhaustive Tri matches, risky secure-flow unknown conversion, raw
+  secret-like literals and unsafe dynamic execution forms.
 - `lo-core-runtime` must own execution contracts for checked and compiled LO code.
 - `lo-core-security` must own reusable security primitives, redaction rules,
   permission models, security diagnostics and security report contracts.
@@ -476,6 +491,12 @@ the active v1 build graph.
   reports and diagnostics, not as raw secret values.
 - Security helpers must provide reusable redaction, safe token/cookie/header
   references, permission decisions and cryptographic policy validation.
+- Redaction helpers must fail closed by default when a rule is malformed, an
+  input exceeds configured redaction limits or a replacement could re-emit the
+  matched secret or surrounding context.
+- Permission decisions must deny by default and must give matching deny grants
+  precedence over matching allow grants. Default-allow and wildcard-allow
+  models must be reportable diagnostics.
 - `lo-core-config` must own project config, environment mode and policy loading
   contracts.
 - `lo-core-config` must represent environment variables as safe references by name
@@ -486,6 +507,10 @@ the active v1 build graph.
 - `lo-core-config` must enforce production-disabled package defaults for
   development-only and benchmark packages, while supporting explicit reported
   production package overrides when policy allows them.
+- `lo-core-config` must validate the boundary between host package manifests
+  and LO package manifests. LO package graph keys must not be accepted from
+  `package.json`; they belong in `package-lo.json`, `lo.lock.json` or explicit
+  LO config once those schemas exist.
 - `lo-core-reports` must own shared report schemas and report-writing contracts.
 - Shared report contracts must include common metadata, generator metadata,
   diagnostic summaries and typed build, security, target, runtime, task and AI

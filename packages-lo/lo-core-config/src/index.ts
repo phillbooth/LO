@@ -103,6 +103,12 @@ export interface RuntimeConfigHandoffOptions {
   readonly productionPolicy?: Partial<ProductionStrictnessPolicy>;
 }
 
+export interface HostPackageManifestBoundaryPolicy {
+  readonly manifestPath: string;
+  readonly forbiddenLoKeys: readonly string[];
+  readonly dependencyFields: readonly string[];
+}
+
 const ENVIRONMENT_MODE_SET: ReadonlySet<string> = new Set(ENVIRONMENT_MODES);
 
 const ENVIRONMENT_VARIABLE_SCOPES: readonly EnvironmentVariableScope[] = [
@@ -117,6 +123,29 @@ const ENVIRONMENT_VARIABLE_SCOPE_SET: ReadonlySet<string> = new Set(
 );
 
 const ENVIRONMENT_VARIABLE_NAME_PATTERN = /^[A-Z_][A-Z0-9_]*$/;
+
+export const DEFAULT_HOST_PACKAGE_MANIFEST_BOUNDARY_POLICY:
+  HostPackageManifestBoundaryPolicy = {
+    manifestPath: "package.json",
+    forbiddenLoKeys: [
+      "lo",
+      "loPackages",
+      "loDependencies",
+      "loProfiles",
+      "loTargets",
+      "packageLo",
+      "package-lo",
+      "loLock",
+      "lo.lock",
+      "productionPackageOverrides",
+    ],
+    dependencyFields: [
+      "dependencies",
+      "devDependencies",
+      "optionalDependencies",
+      "peerDependencies",
+    ],
+  };
 
 export const DEFAULT_PRODUCTION_STRICTNESS_POLICY: ProductionStrictnessPolicy = {
   requireStrictProject: true,
@@ -474,6 +503,73 @@ export function loadConfigFromObjects(input: {
     runtime,
     diagnostics: runtime.diagnostics,
   };
+}
+
+export function validateHostPackageManifestBoundary(
+  input: unknown,
+  policy: HostPackageManifestBoundaryPolicy =
+    DEFAULT_HOST_PACKAGE_MANIFEST_BOUNDARY_POLICY,
+): readonly ConfigDiagnostic[] {
+  if (!isRecord(input)) {
+    return [
+      createConfigDiagnostic(
+        "LO_CONFIG_HOST_PACKAGE_MANIFEST_NOT_OBJECT",
+        "error",
+        "Host package manifest must be an object.",
+        policy.manifestPath,
+      ),
+    ];
+  }
+
+  const diagnostics: ConfigDiagnostic[] = [];
+
+  for (const key of policy.forbiddenLoKeys) {
+    if (Object.hasOwn(input, key)) {
+      diagnostics.push(
+        createConfigDiagnostic(
+          "LO_CONFIG_LO_PACKAGE_GRAPH_IN_HOST_MANIFEST",
+          "error",
+          `Host package manifest must not define LO package graph key "${key}". Use package-lo.json and lo.lock.json for LO packages.`,
+          `${policy.manifestPath}.${key}`,
+        ),
+      );
+    }
+  }
+
+  for (const field of policy.dependencyFields) {
+    const dependencies = input[field];
+
+    if (dependencies === undefined) {
+      continue;
+    }
+
+    if (!isRecord(dependencies)) {
+      diagnostics.push(
+        createConfigDiagnostic(
+          "LO_CONFIG_HOST_DEPENDENCIES_NOT_OBJECT",
+          "error",
+          `Host package manifest field "${field}" must be an object.`,
+          `${policy.manifestPath}.${field}`,
+        ),
+      );
+      continue;
+    }
+
+    for (const packageName of Object.keys(dependencies)) {
+      if (isLoPackageGraphAlias(packageName)) {
+        diagnostics.push(
+          createConfigDiagnostic(
+            "LO_CONFIG_LO_PACKAGE_ALIAS_IN_HOST_DEPENDENCIES",
+            "error",
+            `Host package dependency "${packageName}" looks like a LO package graph alias. Use package-lo.json for LO package resolution.`,
+            `${policy.manifestPath}.${field}.${packageName}`,
+          ),
+        );
+      }
+    }
+  }
+
+  return diagnostics;
 }
 
 function validateProductionStrictness(
@@ -947,4 +1043,10 @@ function readStringMap(
 
 function isRecord(value: unknown): value is Readonly<Record<string, unknown>> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+
+function isLoPackageGraphAlias(packageName: string): boolean {
+  return /^(?:package-lo|lo\.lock|lo-profile|lo-package-graph)$/i.test(
+    packageName,
+  );
 }

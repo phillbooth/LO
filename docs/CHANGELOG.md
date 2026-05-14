@@ -6,6 +6,17 @@ All notable changes to this app should be documented here.
 
 ### Added
 
+- Added `lo-core-logic` Tri helpers, explicit Tri-to-Bool conversion policy,
+  Logic<N> definition validation, truth-table validation and contract tests.
+- Added an initial `lo-core-compiler` core syntax safety scan for unsafe
+  Tri/Decision/Bool conversions, non-exhaustive Tri matches, risky secure-flow
+  unknown handling, raw secret literals and unsafe dynamic execution patterns.
+- Added `lo-core-security` validation for redaction rules and permission models,
+  including fail-closed malformed redaction handling, deny precedence and
+  diagnostics for default-allow or wildcard-allow permissions.
+- Added `lo-core-config` host package manifest boundary validation so
+  `package.json` remains NPM/host tooling and LO package graph fields stay in
+  future `package-lo.json`/`lo.lock.json` manifests.
 - Documented the completed move of LO packages from `packages/` to
   `packages-lo/`, with `packages/` reserved for normal app/vendor package
   space.

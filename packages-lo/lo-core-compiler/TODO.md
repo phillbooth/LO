@@ -10,12 +10,13 @@ adding post-v1 targets or domain package syntax.
 [x] Add TODO.md
 [x] Add package metadata
 [x] Add initial typed exports
-[ ] Define compiler input contract
+[x] Define compiler input contract
 [ ] Define lexer contract
 [ ] Define parser contract
 [ ] Define AST contract
 [ ] Define symbol table contract
-[ ] Define checker pipeline contract
+[x] Define initial core syntax safety checker contract
+[ ] Define full checker pipeline contract
 [ ] Define IR contract
 [ ] Define target handoff contract
 [ ] Define diagnostic format
@@ -24,5 +25,5 @@ adding post-v1 targets or domain package syntax.
 [ ] Parse at least 20 v1 .lo examples
 [ ] Reject post-v1 syntax with clear diagnostics
 [ ] Add examples
-[ ] Add tests
+[x] Add initial syntax safety tests
 ```

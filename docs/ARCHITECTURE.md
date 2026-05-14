@@ -75,6 +75,13 @@ The v1 priority order is:
 The working execution plan for these gates lives in
 `docs/CORE_FOUNDATION_ROADMAP.md`.
 
+The current compiler package includes an interim syntax safety scan for the
+highest-risk v1 core cases while the real parser and checker are pending. It
+flags direct Tri branch conditions, implicit Tri/Decision/Bool assignments,
+non-exhaustive Tri matches, `unknown_as: true` in secure flows, raw secret-like
+literals and unsafe dynamic execution calls. This scan is advisory compiler
+infrastructure, not a substitute for the future AST-based checker.
+
 ## Main Structure
 
 Current single-repository structure:
@@ -185,6 +192,13 @@ packages-lo/
 selection. This is a planned package-management boundary; current beta tooling
 does not yet resolve LO packages from those files.
 
+`package.json` and NPM remain host ecosystem tooling only. In the current beta,
+they may run JavaScript/TypeScript prototype checks, host adapter tests and
+generated JS/TS interop packaging. They must not define the LO package graph,
+runtime profiles, compiler target policy or production package overrides.
+`lo-core-config` owns validation for this boundary so package resolution policy
+does not leak into normal NPM manifests.
+
 ## Package Layers
 
 ```text
@@ -192,13 +206,15 @@ LO Core
   language/compiler/type system/effects/memory/compute
 
 LO Compiler
-  parser, checker pipeline, IR, diagnostics, source maps and compiler reports
+  parser, checker pipeline, core syntax safety scan, IR, diagnostics, source
+  maps and compiler reports
 
 LO Runtime
   execution engine for compiled or checked LO code
 
 LO Security
-  SecureString helpers, redaction, permission models and security report contracts
+  SecureString helpers, fail-closed redaction, deny-precedence permission models
+  and security report contracts
 
 LO Config
   project configuration, environment modes and production policy loading
@@ -207,7 +223,8 @@ LO Reports
   shared report schemas and report-writing contracts
 
 LO Logic
-  Tri, Logic<N>, Decision, RiskLevel, Omni logic and multi-state truth tables
+  Tri operations, explicit conversion policy, Logic<N> validation, Decision,
+  RiskLevel, Omni logic and multi-state truth tables
 
 LO Vector
   vector values, dimensions, lanes, operations and vector reports
@@ -326,6 +343,12 @@ finance and OT/electrical domains carry regulatory, protocol correctness,
 safety and cybersecurity requirements beyond the v1 language scope.
 
 `lo-core-logic` owns logic semantics such as `Tri`, `Logic<N>` and Omni.
+The first concrete logic contract provides deterministic Tri operations,
+explicit Tri-to-Bool conversion policy, Logic<N> definition validation, state
+bounds checks and truth-table diagnostics. This blocks common failure modes:
+unknown values silently becoming true, malformed widths escaping into reports,
+duplicate state names hiding policy errors and incomplete truth tables masking
+unhandled states.
 `lo-core-photonic` owns photonic concepts, representation models and simulation
 vocabulary. Photonic mappings may consume logic states, but logic semantics stay
 in `lo-core-logic`, and backend target planning stays in `lo-target-photonic`.
@@ -382,6 +405,10 @@ token and memory limits, thread limit and warnings.
 `lo-core-security` owns shared security primitives and report contracts. Runtime auth
 and API policy enforcement remain in `lo-framework-app-kernel`. `lo-core-config` owns
 configuration loading contracts, and `lo-core-reports` owns shared report shapes.
+Reusable security decisions deny by default, matching deny grants take precedence
+over matching allows and permissive default or wildcard models are diagnosed.
+Redaction fails closed by default when input or rules cannot be trusted, so
+reports do not leak raw secrets because a rule was malformed.
 
 `lo-core-config` validates project configuration, resolves environment modes and
 produces runtime handoff objects with structured diagnostics. It represents

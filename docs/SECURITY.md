@@ -47,6 +47,31 @@ The foLOwing must never be committed:
 - Access tokens
 - Production `.env` files
 
+## Core Security Primitives
+
+`packages-lo/lo-core-security/` owns reusable security primitives. Redaction
+must fail closed by default: malformed rules, oversized inputs or replacements
+that can re-emit matched secrets must produce redacted output instead of leaking
+raw text. Permission models must deny by default, and matching deny grants must
+win over matching allow grants.
+
+`packages-lo/lo-core-logic/` owns `Tri` and `Logic<N>` semantics used by core
+policy checks. `Tri` unknown states must not implicitly convert to `Bool` or
+security decisions; callers must choose an explicit conversion policy and should
+use `unknown_as_error` or `unknown_as_false` for security-sensitive decisions.
+
+`packages-lo/lo-core-compiler/` must catch the same risks before execution when
+source text is available. The interim syntax safety scan reports direct Tri
+branch conditions, implicit Tri/Decision/Bool conversions, non-exhaustive Tri
+matches, risky `unknown_as: true` use in secure flows, raw secret-like literals
+and unsafe dynamic execution patterns.
+
+NPM and `package.json` are host tooling only in this beta. LO package graph
+selection, runtime profiles, compiler target policy and production package
+overrides must not be hidden inside host manifests. Use the future
+`package-lo.json`/`lo.lock.json` boundary for LO packages once those schemas are
+implemented.
+
 ## AI Inference
 
 AI model output is untrusted by default.

@@ -13,6 +13,9 @@ Provides:
 - SourceLocation
 - CompilerDiagnostic
 - CompilerResult
+- CompilerSourceText
+- CoreSyntaxSafetyOptions
+- validateCoreSyntaxSafety
 
 ## lo-core-runtime
 
@@ -40,8 +43,8 @@ Provides:
 - SecurityDiagnostic
 - RedactionRule
 - RedactionMatch
-- RedactionResult
-- PermissionGrant
+- RedactionFailureMode
+- RedactionOptions
 
 ## lo-core-config
 
@@ -85,10 +88,17 @@ LO multi-state logic concepts including Tri, Logic<N> and future Omni logic.
 
 Provides:
 - Tri
+- TRI_FALSE
+- TRI_UNKNOWN
+- TRI_TRUE
+- TriBoolPolicy
+- LogicDiagnosticSeverity
+- LogicDiagnostic
 - LogicState
 - LogicDefinition
 - TruthTableRow
 - LogicReport
+- isTri
 
 ## lo-core-vector
 

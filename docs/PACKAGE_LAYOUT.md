@@ -33,6 +33,31 @@ my-lo-app/
 `package.json` remains the host ecosystem manifest. In a Node-hosted app, it
 should describe normal npm dependencies, scripts and app tooling.
 
+It must not become the LO package graph. Do not put LO package selection,
+profiles, target selection, production package overrides or LO lock metadata in
+`package.json`. Those fields belong in `package-lo.json`, `lo.lock.json` or
+LO runtime/config files once their schemas exist.
+
+Allowed `package.json` responsibilities during the beta:
+
+```text
+host scripts
+JavaScript/TypeScript prototype tooling
+normal npm dependencies for host adapters
+test runners for the current JS-hosted scaffolds
+generated JavaScript/TypeScript interop packaging
+```
+
+Disallowed `package.json` responsibilities:
+
+```text
+LO package graph resolution
+LO runtime profile selection
+LO production package overrides
+LO compiler target policy
+LO lockfile metadata
+```
+
 `package-lo.json` should become the LO package manifest. It should describe LO
 language, runtime, compiler, security and app-kernel dependencies. It should
 support explicit profiles such as:

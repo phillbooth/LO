@@ -69,10 +69,18 @@ export interface RedactionMatch {
   readonly count: number;
 }
 
+export type RedactionFailureMode = "fail-closed" | "skip" | "throw";
+
+export interface RedactionOptions {
+  readonly maxInputLength?: number;
+  readonly onInvalidRule?: RedactionFailureMode;
+}
+
 export interface RedactionResult {
   readonly text: string;
   readonly matches: readonly RedactionMatch[];
   readonly redacted: boolean;
+  readonly diagnostics?: readonly SecurityDiagnostic[];
 }
 
 export interface PermissionGrant {
@@ -227,12 +235,90 @@ export function createSecurityDiagnostic(
 export function redactText(
   input: string,
   rules: readonly RedactionRule[] = DEFAULT_REDACTION_RULES,
+  options: RedactionOptions = {},
 ): RedactionResult {
+  const maxInputLength = options.maxInputLength ?? 1024 * 1024;
+  const onInvalidRule = options.onInvalidRule ?? "fail-closed";
+  const diagnostics: SecurityDiagnostic[] = [];
+
+  if (input.length > maxInputLength) {
+    return {
+      text: "SecureString(redacted-redaction-input-too-large)",
+      matches: [
+        {
+          ruleName: "redaction-input-too-large",
+          classification: "secret",
+          count: 1,
+        },
+      ],
+      redacted: true,
+      diagnostics: [
+        createSecurityDiagnostic(
+          "LO_SECURITY_REDACTION_INPUT_TOO_LARGE",
+          "error",
+          "Redaction input exceeded the configured maximum length and was fully redacted.",
+          { path: "redaction.input" },
+        ),
+      ],
+    };
+  }
+
   let text = input;
   const matches: RedactionMatch[] = [];
 
   for (const rule of rules) {
-    const regex = new RegExp(rule.pattern, rule.flags ?? "g");
+    const ruleDiagnostics = validateRedactionRule(rule);
+
+    if (ruleDiagnostics.length > 0) {
+      diagnostics.push(...ruleDiagnostics);
+
+      if (
+        ruleDiagnostics.some((diagnostic) => diagnostic.severity === "error")
+      ) {
+        if (onInvalidRule === "throw") {
+          throw new Error("Invalid redaction rule.");
+        }
+
+        if (onInvalidRule === "fail-closed") {
+          return {
+            text: "SecureString(redacted-redaction-rule-error)",
+            matches: [
+              {
+                ruleName: rule.name,
+                classification: rule.classification,
+                count: 1,
+              },
+            ],
+            redacted: true,
+            diagnostics,
+          };
+        }
+
+        continue;
+      }
+    }
+
+    const regex = compileRedactionRule(rule, onInvalidRule);
+
+    if (regex === "fail-closed") {
+      return {
+        text: "SecureString(redacted-redaction-rule-error)",
+        matches: [
+          {
+            ruleName: rule.name,
+            classification: rule.classification,
+            count: 1,
+          },
+        ],
+        redacted: true,
+        diagnostics,
+      };
+    }
+
+    if (regex === undefined) {
+      continue;
+    }
+
     const found = text.match(regex);
 
     if (found === null || found.length === 0) {
@@ -251,6 +337,7 @@ export function redactText(
     text,
     matches,
     redacted: matches.length > 0,
+    ...(diagnostics.length === 0 ? {} : { diagnostics }),
   };
 }
 
@@ -269,11 +356,24 @@ export function decidePermission(
   action: PermissionAction,
   resource: string,
 ): PermissionDecision {
-  const grant = model.grants.find(
+  const matchingGrants = model.grants.filter(
     (item) =>
       item.action === action &&
       (item.resource === resource || item.resource === "*"),
   );
+  const explicitDeny = matchingGrants.find(
+    (item) => item.effect === "deny" && item.resource === resource,
+  );
+  const wildcardDeny = matchingGrants.find(
+    (item) => item.effect === "deny" && item.resource === "*",
+  );
+  const explicitAllow = matchingGrants.find(
+    (item) => item.effect === "allow" && item.resource === resource,
+  );
+  const wildcardAllow = matchingGrants.find(
+    (item) => item.effect === "allow" && item.resource === "*",
+  );
+  const grant = explicitDeny ?? wildcardDeny ?? explicitAllow ?? wildcardAllow;
 
   if (grant !== undefined) {
     return {
@@ -291,6 +391,66 @@ export function decidePermission(
     allowed: model.defaultEffect === "allow",
     reason: `No matching grant; default ${model.defaultEffect}.`,
   };
+}
+
+export function validatePermissionModel(
+  model: PermissionModel,
+): readonly SecurityDiagnostic[] {
+  const diagnostics: SecurityDiagnostic[] = [];
+
+  if (model.defaultEffect === "allow") {
+    diagnostics.push(
+      createSecurityDiagnostic(
+        "LO_SECURITY_PERMISSION_DEFAULT_ALLOW",
+        "critical",
+        "Permission models must deny by default unless a higher layer has explicitly justified a permissive compatibility mode.",
+        { path: "permissions.defaultEffect" },
+      ),
+    );
+  }
+
+  const seenGrants = new Set<string>();
+
+  model.grants.forEach((grant, index) => {
+    const grantKey = `${grant.action}:${grant.resource}:${grant.effect}`;
+
+    if (seenGrants.has(grantKey)) {
+      diagnostics.push(
+        createSecurityDiagnostic(
+          "LO_SECURITY_PERMISSION_DUPLICATE_GRANT",
+          "warning",
+          "Permission model contains a duplicate grant.",
+          { path: `permissions.grants.${index}` },
+        ),
+      );
+    }
+
+    seenGrants.add(grantKey);
+
+    if (grant.resource.trim() === "") {
+      diagnostics.push(
+        createSecurityDiagnostic(
+          "LO_SECURITY_PERMISSION_EMPTY_RESOURCE",
+          "error",
+          "Permission grants must declare a non-empty resource.",
+          { path: `permissions.grants.${index}.resource` },
+        ),
+      );
+    }
+
+    if (grant.effect === "allow" && grant.resource === "*") {
+      diagnostics.push(
+        createSecurityDiagnostic(
+          "LO_SECURITY_PERMISSION_WILDCARD_ALLOW",
+          isHighRiskPermissionAction(grant.action) ? "critical" : "warning",
+          "Wildcard allow grants are risky and should be replaced with explicit resources.",
+          { path: `permissions.grants.${index}.resource` },
+        ),
+      );
+    }
+  });
+
+  return diagnostics;
 }
 
 export function createSafeTokenReference(
@@ -381,6 +541,49 @@ export function validateCryptographicPolicy(
   return diagnostics;
 }
 
+export function validateRedactionRule(
+  rule: RedactionRule,
+): readonly SecurityDiagnostic[] {
+  const diagnostics: SecurityDiagnostic[] = [];
+
+  if (rule.name.trim() === "") {
+    diagnostics.push(
+      createSecurityDiagnostic(
+        "LO_SECURITY_REDACTION_RULE_NAME_EMPTY",
+        "error",
+        "Redaction rules must have a non-empty name.",
+        { path: "redaction.rule.name" },
+      ),
+    );
+  }
+
+  if (/\$(?:&|`|')/.test(rule.replacement)) {
+    diagnostics.push(
+      createSecurityDiagnostic(
+        "LO_SECURITY_REDACTION_REPLACEMENT_CAN_LEAK_CONTEXT",
+        "error",
+        "Redaction replacements must not use full-match, prefix or suffix replacement tokens.",
+        { path: `redaction.rules.${rule.name}.replacement` },
+      ),
+    );
+  }
+
+  try {
+    new RegExp(rule.pattern, normalizeRegexFlags(rule.flags));
+  } catch {
+    diagnostics.push(
+      createSecurityDiagnostic(
+        "LO_SECURITY_REDACTION_RULE_INVALID",
+        "error",
+        "Redaction rule pattern or flags are invalid.",
+        { path: `redaction.rules.${rule.name}` },
+      ),
+    );
+  }
+
+  return diagnostics;
+}
+
 export function createSecurityReport(input: {
   readonly diagnostics?: readonly SecurityDiagnostic[];
   readonly permissions?: PermissionModel;
@@ -416,6 +619,33 @@ function isAllowedWeakAlgorithm(
   algorithm: WeakCryptoAlgorithm,
 ): boolean {
   return (policy.allowedAlgorithms as readonly string[]).includes(algorithm);
+}
+
+function compileRedactionRule(
+  rule: RedactionRule,
+  onInvalidRule: RedactionFailureMode,
+): RegExp | "fail-closed" | undefined {
+  try {
+    return new RegExp(rule.pattern, normalizeRegexFlags(rule.flags));
+  } catch (error) {
+    if (onInvalidRule === "throw") {
+      throw error;
+    }
+
+    return onInvalidRule === "fail-closed" ? "fail-closed" : undefined;
+  }
+}
+
+function normalizeRegexFlags(flags: string | undefined): string {
+  const normalized = new Set((flags ?? "g").split(""));
+  normalized.add("g");
+  return [...normalized].join("");
+}
+
+function isHighRiskPermissionAction(action: PermissionAction): boolean {
+  return ["execute", "network", "environment", "native", "unsafe", "crypto"].includes(
+    action,
+  );
 }
 
 function selectSecurityStatus(

@@ -6,11 +6,11 @@
 [x] Add package metadata
 [x] Add initial typed exports
 [ ] Define LO language syntax for Tri
-[ ] Define Logic<N> rules
+[x] Define initial Logic<N> validation rules
 [ ] Define Omni logic rules
-[ ] Define conversion rules
-[ ] Define truth table report format
+[x] Define initial Tri conversion rules
+[x] Define initial truth table report format
 [ ] Move or cross-reference relevant lo-core logic docs when package extraction is ready
 [ ] Add examples
-[ ] Add tests
+[x] Add tests
 ```

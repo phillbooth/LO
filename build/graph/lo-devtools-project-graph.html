@@ -7,7 +7,7 @@
 </head>
 <body>
 <h1>LO Project Graph</h1>
-<p>809 nodes, 1442 relationships.</p>
+<p>808 nodes, 1445 relationships.</p>
 <h2>Nodes</h2>
 <ul><li><strong>lo-core</strong> <span>Package</span></li>
 <li><strong>lo-core-compiler</strong> <span>Package</span></li>
@@ -57,7 +57,7 @@
 <li><strong>lo-logic-compute-runtime-proposal.md</strong> <span>Document</span></li>
 <li><strong>LOWBIT_AI_BACKENDS.md</strong> <span>Document</span></li>
 <li><strong>NEURAL_ACCELERATOR_PACKAGES.md</strong> <span>Document</span></li>
-<li><strong>OBSERVABILITY.md</strong> <span>Document</span></li>
+<li><strong>observability.md</strong> <span>Document</span></li>
 <li><strong>OPTICAL_IO.md</strong> <span>Document</span></li>
 <li><strong>PACKAGE_LAYOUT.md</strong> <span>Document</span></li>
 <li><strong>PACKAGE_NAMING.md</strong> <span>Document</span></li>
@@ -74,35 +74,6 @@
 <li><strong>ABOUT.md</strong> <span>Document</span></li>
 <li><strong>AI-INSTRUCTIONS.md</strong> <span>Document</span></li>
 <li><strong>ARCHITECTURE.md</strong> <span>Document</span></li>
-<li><strong>app.ai-context.json</strong> <span>Document</span></li>
-<li><strong>app.ai-context.md</strong> <span>Document</span></li>
-<li><strong>app.ai-guide.md</strong> <span>Document</span></li>
-<li><strong>app.api-report.json</strong> <span>Report</span></li>
-<li><strong>app.build-manifest.json</strong> <span>Document</span></li>
-<li><strong>app.execution-report.json</strong> <span>Report</span></li>
-<li><strong>app.failure-report.json</strong> <span>Report</span></li>
-<li><strong>app.global-report.json</strong> <span>Report</span></li>
-<li><strong>app.map-manifest.json</strong> <span>Document</span></li>
-<li><strong>app.memory-report.json</strong> <span>Report</span></li>
-<li><strong>app.openapi.json</strong> <span>Document</span></li>
-<li><strong>app.precision-report.json</strong> <span>Report</span></li>
-<li><strong>app.runtime-report.json</strong> <span>Report</span></li>
-<li><strong>app.schemas.json</strong> <span>Document</span></li>
-<li><strong>app.security-report.json</strong> <span>Report</span></li>
-<li><strong>app.source-map.json</strong> <span>Document</span></li>
-<li><strong>app.target-report.json</strong> <span>Report</span></li>
-<li><strong>app.tokens.json</strong> <span>Document</span></li>
-<li><strong>ai-summary.md</strong> <span>Document</span></li>
-<li><strong>api-guide.md</strong> <span>Document</span></li>
-<li><strong>deployment-guide.md</strong> <span>Document</span></li>
-<li><strong>docs-manifest.json</strong> <span>Document</span></li>
-<li><strong>global-registry-guide.md</strong> <span>Document</span></li>
-<li><strong>memory-pressure-guide.md</strong> <span>Document</span></li>
-<li><strong>run-compile-mode-guide.md</strong> <span>Document</span></li>
-<li><strong>runtime-guide.md</strong> <span>Document</span></li>
-<li><strong>security-guide.md</strong> <span>Document</span></li>
-<li><strong>type-reference.md</strong> <span>Document</span></li>
-<li><strong>webhook-guide.md</strong> <span>Document</span></li>
 <li><strong>CHANGELOG.md</strong> <span>Document</span></li>
 <li><strong>CODE_OF_CONDUCT.md</strong> <span>Document</span></li>
 <li><strong>COMPATIBILITY.md</strong> <span>Document</span></li>
@@ -264,6 +235,9 @@
 <li><strong>SourceLocation</strong> <span>Type</span></li>
 <li><strong>CompilerDiagnostic</strong> <span>Type</span></li>
 <li><strong>CompilerResult</strong> <span>Type</span></li>
+<li><strong>CompilerSourceText</strong> <span>Type</span></li>
+<li><strong>CoreSyntaxSafetyOptions</strong> <span>Type</span></li>
+<li><strong>validateCoreSyntaxSafety</strong> <span>Flow</span></li>
 <li><strong>TODO.md</strong> <span>Document</span></li>
 <li><strong>tsconfig.json</strong> <span>Document</span></li>
 <li><strong>package.json</strong> <span>Document</span></li>
@@ -288,6 +262,8 @@
 <li><strong>SecurityDiagnostic</strong> <span>Type</span></li>
 <li><strong>RedactionRule</strong> <span>Type</span></li>
 <li><strong>RedactionMatch</strong> <span>Type</span></li>
+<li><strong>RedactionFailureMode</strong> <span>Type</span></li>
+<li><strong>RedactionOptions</strong> <span>Type</span></li>
 <li><strong>RedactionResult</strong> <span>Type</span></li>
 <li><strong>PermissionGrant</strong> <span>Type</span></li>
 <li><strong>PermissionModel</strong> <span>Type</span></li>
@@ -305,10 +281,12 @@
 <li><strong>redactText</strong> <span>Flow</span></li>
 <li><strong>definePermissionModel</strong> <span>Flow</span></li>
 <li><strong>decidePermission</strong> <span>Flow</span></li>
+<li><strong>validatePermissionModel</strong> <span>Flow</span></li>
 <li><strong>createSafeTokenReference</strong> <span>Flow</span></li>
 <li><strong>createSafeCookieReference</strong> <span>Flow</span></li>
 <li><strong>createSafeHeaderReference</strong> <span>Flow</span></li>
 <li><strong>validateCryptographicPolicy</strong> <span>Flow</span></li>
+<li><strong>validateRedactionRule</strong> <span>Flow</span></li>
 <li><strong>createSecurityReport</strong> <span>Flow</span></li>
 <li><strong>TODO.md</strong> <span>Document</span></li>
 <li><strong>tsconfig.json</strong> <span>Document</span></li>
@@ -330,6 +308,8 @@
 <li><strong>RuntimeConfigHandoff</strong> <span>Type</span></li>
 <li><strong>ConfigLoadResult</strong> <span>Type</span></li>
 <li><strong>RuntimeConfigHandoffOptions</strong> <span>Type</span></li>
+<li><strong>HostPackageManifestBoundaryPolicy</strong> <span>Type</span></li>
+<li><strong>DEFAULT_HOST_PACKAGE_MANIFEST_BOUNDARY_POLICY</strong> <span>Type</span></li>
 <li><strong>DEFAULT_PRODUCTION_STRICTNESS_POLICY</strong> <span>Type</span></li>
 <li><strong>isEnvironmentMode</strong> <span>Flow</span></li>
 <li><strong>createConfigDiagnostic</strong> <span>Flow</span></li>
@@ -341,6 +321,7 @@
 <li><strong>validateRuntimeEnvironment</strong> <span>Flow</span></li>
 <li><strong>createRuntimeConfigHandoff</strong> <span>Flow</span></li>
 <li><strong>loadConfigFromObjects</strong> <span>Flow</span></li>
+<li><strong>validateHostPackageManifestBoundary</strong> <span>Flow</span></li>
 <li><strong>TODO.md</strong> <span>Document</span></li>
 <li><strong>tsconfig.json</strong> <span>Document</span></li>
 <li><strong>build-report.json</strong> <span>Report</span></li>
@@ -405,10 +386,28 @@
 <li><strong>package.json</strong> <span>Document</span></li>
 <li><strong>README.md</strong> <span>Document</span></li>
 <li><strong>Tri</strong> <span>Type</span></li>
+<li><strong>TRI_FALSE</strong> <span>Type</span></li>
+<li><strong>TRI_UNKNOWN</strong> <span>Type</span></li>
+<li><strong>TRI_TRUE</strong> <span>Type</span></li>
+<li><strong>TriBoolPolicy</strong> <span>Type</span></li>
+<li><strong>LogicDiagnosticSeverity</strong> <span>Type</span></li>
+<li><strong>LogicDiagnostic</strong> <span>Type</span></li>
 <li><strong>LogicState</strong> <span>Type</span></li>
 <li><strong>LogicDefinition</strong> <span>Type</span></li>
 <li><strong>TruthTableRow</strong> <span>Type</span></li>
 <li><strong>LogicReport</strong> <span>Type</span></li>
+<li><strong>isTri</strong> <span>Flow</span></li>
+<li><strong>triNot</strong> <span>Flow</span></li>
+<li><strong>triAnd</strong> <span>Flow</span></li>
+<li><strong>triOr</strong> <span>Flow</span></li>
+<li><strong>triNor</strong> <span>Flow</span></li>
+<li><strong>triToBool</strong> <span>Flow</span></li>
+<li><strong>createLogicDefinition</strong> <span>Flow</span></li>
+<li><strong>validateLogicDefinition</strong> <span>Flow</span></li>
+<li><strong>createLogicState</strong> <span>Flow</span></li>
+<li><strong>isValidLogicState</strong> <span>Flow</span></li>
+<li><strong>createTruthTableReport</strong> <span>Flow</span></li>
+<li><strong>validateTruthTable</strong> <span>Flow</span></li>
 <li><strong>TODO.md</strong> <span>Document</span></li>
 <li><strong>tsconfig.json</strong> <span>Document</span></li>
 <li><strong>package.json</strong> <span>Document</span></li>
@@ -1052,6 +1051,10 @@
 <li>doc:docs/RUST_FINANCIAL_MARKETS.md <code>documents</code> package:lo-core-vector</li>
 <li>doc:docs/RUST_FINANCIAL_MARKETS.md <code>documents</code> package:lo-core-compute</li>
 <li>doc:docs/RUST_FINANCIAL_MARKETS.md <code>documents</code> package:lo-tools-benchmark</li>
+<li>doc:docs/SECURITY.md <code>documents</code> package:lo-core</li>
+<li>doc:docs/SECURITY.md <code>documents</code> package:lo-core-compiler</li>
+<li>doc:docs/SECURITY.md <code>documents</code> package:lo-core-security</li>
+<li>doc:docs/SECURITY.md <code>documents</code> package:lo-core-logic</li>
 <li>doc:docs/SECURITY.md <code>documents</code> package:lo-ai</li>
 <li>doc:docs/SECURITY.md <code>documents</code> package:lo-ai-lowbit</li>
 <li>doc:docs/TASKS.md <code>documents</code> package:lo-core</li>
@@ -1103,35 +1106,6 @@
 <li>doc:packages-lo/lo-core/ARCHITECTURE.md <code>documents</code> package:lo-framework-api-server</li>
 <li>doc:packages-lo/lo-core/ARCHITECTURE.md <code>documents</code> package:lo-core-cli</li>
 <li>doc:packages-lo/lo-core/ARCHITECTURE.md <code>documents</code> package:lo-core-tasks</li>
-<li>package:lo-core <code>owns</code> doc:packages-lo/lo-core/build/examples/app.ai-context.json</li>
-<li>package:lo-core <code>owns</code> doc:packages-lo/lo-core/build/examples/app.ai-context.md</li>
-<li>package:lo-core <code>owns</code> doc:packages-lo/lo-core/build/examples/app.ai-guide.md</li>
-<li>package:lo-core <code>owns</code> report:packages-lo/lo-core/build/examples/app.api-report.json</li>
-<li>package:lo-core <code>owns</code> doc:packages-lo/lo-core/build/examples/app.build-manifest.json</li>
-<li>package:lo-core <code>owns</code> report:packages-lo/lo-core/build/examples/app.execution-report.json</li>
-<li>package:lo-core <code>owns</code> report:packages-lo/lo-core/build/examples/app.failure-report.json</li>
-<li>package:lo-core <code>owns</code> report:packages-lo/lo-core/build/examples/app.global-report.json</li>
-<li>package:lo-core <code>owns</code> doc:packages-lo/lo-core/build/examples/app.map-manifest.json</li>
-<li>package:lo-core <code>owns</code> report:packages-lo/lo-core/build/examples/app.memory-report.json</li>
-<li>package:lo-core <code>owns</code> doc:packages-lo/lo-core/build/examples/app.openapi.json</li>
-<li>package:lo-core <code>owns</code> report:packages-lo/lo-core/build/examples/app.precision-report.json</li>
-<li>package:lo-core <code>owns</code> report:packages-lo/lo-core/build/examples/app.runtime-report.json</li>
-<li>package:lo-core <code>owns</code> doc:packages-lo/lo-core/build/examples/app.schemas.json</li>
-<li>package:lo-core <code>owns</code> report:packages-lo/lo-core/build/examples/app.security-report.json</li>
-<li>package:lo-core <code>owns</code> doc:packages-lo/lo-core/build/examples/app.source-map.json</li>
-<li>package:lo-core <code>owns</code> report:packages-lo/lo-core/build/examples/app.target-report.json</li>
-<li>package:lo-core <code>owns</code> doc:packages-lo/lo-core/build/examples/app.tokens.json</li>
-<li>package:lo-core <code>owns</code> doc:packages-lo/lo-core/build/examples/docs/ai-summary.md</li>
-<li>package:lo-core <code>owns</code> doc:packages-lo/lo-core/build/examples/docs/api-guide.md</li>
-<li>package:lo-core <code>owns</code> doc:packages-lo/lo-core/build/examples/docs/deployment-guide.md</li>
-<li>package:lo-core <code>owns</code> doc:packages-lo/lo-core/build/examples/docs/docs-manifest.json</li>
-<li>package:lo-core <code>owns</code> doc:packages-lo/lo-core/build/examples/docs/global-registry-guide.md</li>
-<li>package:lo-core <code>owns</code> doc:packages-lo/lo-core/build/examples/docs/memory-pressure-guide.md</li>
-<li>package:lo-core <code>owns</code> doc:packages-lo/lo-core/build/examples/docs/run-compile-mode-guide.md</li>
-<li>package:lo-core <code>owns</code> doc:packages-lo/lo-core/build/examples/docs/runtime-guide.md</li>
-<li>package:lo-core <code>owns</code> doc:packages-lo/lo-core/build/examples/docs/security-guide.md</li>
-<li>package:lo-core <code>owns</code> doc:packages-lo/lo-core/build/examples/docs/type-reference.md</li>
-<li>package:lo-core <code>owns</code> doc:packages-lo/lo-core/build/examples/docs/webhook-guide.md</li>
 <li>package:lo-core <code>owns</code> doc:packages-lo/lo-core/CHANGELOG.md</li>
 <li>doc:packages-lo/lo-core/CHANGELOG.md <code>documents</code> package:lo-core</li>
 <li>doc:packages-lo/lo-core/CHANGELOG.md <code>documents</code> package:lo-core-logic</li>
@@ -1318,6 +1292,31 @@
 <li>package:lo-core <code>owns</code> doc:packages-lo/lo-core/docs/README.md</li>
 <li>doc:packages-lo/lo-core/docs/README.md <code>documents</code> package:lo-core</li>
 <li>doc:packages-lo/lo-core/docs/README.md <code>documents</code> package:lo-core-compiler</li>
-<li>doc:packages-lo/lo-core/docs/README.md <code>documents</code> package:lo-core-runtime</li></ul>
+<li>doc:packages-lo/lo-core/docs/README.md <code>documents</code> package:lo-core-runtime</li>
+<li>doc:packages-lo/lo-core/docs/README.md <code>documents</code> package:lo-core-security</li>
+<li>doc:packages-lo/lo-core/docs/README.md <code>documents</code> package:lo-core-config</li>
+<li>doc:packages-lo/lo-core/docs/README.md <code>documents</code> package:lo-core-reports</li>
+<li>doc:packages-lo/lo-core/docs/README.md <code>documents</code> package:lo-core-logic</li>
+<li>doc:packages-lo/lo-core/docs/README.md <code>documents</code> package:lo-core-vector</li>
+<li>doc:packages-lo/lo-core/docs/README.md <code>documents</code> package:lo-core-compute</li>
+<li>doc:packages-lo/lo-core/docs/README.md <code>documents</code> package:lo-ai</li>
+<li>doc:packages-lo/lo-core/docs/README.md <code>documents</code> package:lo-ai-lowbit</li>
+<li>doc:packages-lo/lo-core/docs/README.md <code>documents</code> package:lo-core-photonic</li>
+<li>doc:packages-lo/lo-core/docs/README.md <code>documents</code> package:lo-target-cpu</li>
+<li>doc:packages-lo/lo-core/docs/README.md <code>documents</code> package:lo-cpu-kernels</li>
+<li>doc:packages-lo/lo-core/docs/README.md <code>documents</code> package:lo-target-binary</li>
+<li>doc:packages-lo/lo-core/docs/README.md <code>documents</code> package:lo-target-wasm</li>
+<li>doc:packages-lo/lo-core/docs/README.md <code>documents</code> package:lo-target-gpu</li>
+<li>doc:packages-lo/lo-core/docs/README.md <code>documents</code> package:lo-target-photonic</li>
+<li>doc:packages-lo/lo-core/docs/README.md <code>documents</code> package:lo-framework-app-kernel</li>
+<li>doc:packages-lo/lo-core/docs/README.md <code>documents</code> package:lo-framework-api-server</li>
+<li>doc:packages-lo/lo-core/docs/README.md <code>documents</code> package:lo-core-cli</li>
+<li>doc:packages-lo/lo-core/docs/README.md <code>documents</code> package:lo-core-tasks</li>
+<li>doc:packages-lo/lo-core/docs/README.md <code>documents</code> package:lo-tools-benchmark</li>
+<li>doc:packages-lo/lo-core/docs/README.md <code>documents</code> package:lo-devtools-project-graph</li>
+<li>package:lo-core <code>owns</code> doc:packages-lo/lo-core/docs/run-and-compile-modes.md</li>
+<li>package:lo-core <code>owns</code> doc:packages-lo/lo-core/docs/safe-pattern-matching-and-regex.md</li>
+<li>package:lo-core <code>owns</code> doc:packages-lo/lo-core/docs/search-and-translation-provider-boundaries.md</li>
+<li>package:lo-core <code>owns</code> doc:packages-lo/lo-core/docs/security-first-build-system.md</li></ul>
 </body>
 </html>

@@ -29,6 +29,26 @@ source maps
 AI context output
 ```
 
+## Early Safety Scan
+
+The current package includes a conservative compiler-facing syntax safety scan
+for the v1 core subset. It is not a replacement for the future parser, but it
+blocks several high-risk patterns while the parser and checker pipeline are
+being built:
+
+```text
+Tri used directly as an if condition
+Tri assigned directly to Bool or Decision
+Decision assigned directly to Tri
+non-exhaustive Tri matches
+unknown_as: true inside secure flow
+raw secret-like string literals
+unsafe dynamic code execution calls
+```
+
+The scan is intentionally fail-safe. It emits diagnostics for suspicious source
+instead of trying to infer intent from ambiguous syntax.
+
 ## Boundary
 
 `lo-core` owns language documentation, grammar contracts and core safety rules.

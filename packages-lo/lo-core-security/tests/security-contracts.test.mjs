@@ -12,6 +12,8 @@ import {
   definePermissionModel,
   redactText,
   validateCryptographicPolicy,
+  validatePermissionModel,
+  validateRedactionRule,
 } from "../dist/index.js";
 
 describe("lo-core-security contracts", () => {
@@ -54,6 +56,47 @@ describe("lo-core-security contracts", () => {
     assert.equal(decidePermission(model, "write", "config:public").allowed, false);
   });
 
+  it("gives deny grants precedence over broad allows", () => {
+    const model = definePermissionModel([
+      {
+        action: "network",
+        resource: "*",
+        effect: "allow",
+      },
+      {
+        action: "network",
+        resource: "https://metadata.internal",
+        effect: "deny",
+        reason: "Metadata endpoints must not be reachable by default.",
+      },
+    ]);
+    const diagnostics = validatePermissionModel(model);
+
+    assert.equal(
+      decidePermission(model, "network", "https://metadata.internal").allowed,
+      false,
+    );
+    assert.equal(
+      diagnostics.some(
+        (diagnostic) =>
+          diagnostic.code === "LO_SECURITY_PERMISSION_WILDCARD_ALLOW",
+      ),
+      true,
+    );
+  });
+
+  it("reports default-allow permission models as critical", () => {
+    const diagnostics = validatePermissionModel(
+      definePermissionModel([], "allow"),
+    );
+
+    assert.equal(diagnostics[0]?.severity, "critical");
+    assert.equal(
+      diagnostics[0]?.code,
+      "LO_SECURITY_PERMISSION_DEFAULT_ALLOW",
+    );
+  });
+
   it("models tokens, cookies and sensitive headers as redacted references", () => {
     const token = createSafeTokenReference("SESSION_TOKEN", ["api"]);
     const cookie = createSafeCookieReference("lo_session", {
@@ -93,5 +136,38 @@ describe("lo-core-security contracts", () => {
     assert.equal(report.status, "error");
     assert.equal(report.redactedSecrets, 1);
     assert.equal(report.warnings.length, 1);
+  });
+
+  it("fails closed when a redaction rule is malformed", () => {
+    const result = redactText("token=secret", [
+      {
+        name: "bad-rule",
+        pattern: "[",
+        replacement: "SecureString(redacted)",
+        classification: "token",
+      },
+    ]);
+
+    assert.equal(result.redacted, true);
+    assert.equal(result.text, "SecureString(redacted-redaction-rule-error)");
+    assert.equal(result.diagnostics?.[0]?.severity, "error");
+  });
+
+  it("rejects redaction replacements that can re-emit sensitive context", () => {
+    const diagnostics = validateRedactionRule({
+      name: "leaky-rule",
+      pattern: "token=[^\\s]+",
+      replacement: "$&",
+      classification: "token",
+    });
+
+    assert.equal(
+      diagnostics.some(
+        (diagnostic) =>
+          diagnostic.code ===
+          "LO_SECURITY_REDACTION_REPLACEMENT_CAN_LEAK_CONTEXT",
+      ),
+      true,
+    );
   });
 });

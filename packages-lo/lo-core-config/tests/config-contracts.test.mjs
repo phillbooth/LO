@@ -5,6 +5,7 @@ import {
   defineEnvironmentVariableReference,
   loadConfigFromObjects,
   parseEnvironmentConfig,
+  validateHostPackageManifestBoundary,
 } from "../dist/index.js";
 
 describe("lo-core-config contracts", () => {
@@ -199,5 +200,47 @@ describe("lo-core-config contracts", () => {
     assert.equal(result.environment?.variables[0]?.kind, "env");
     assert.equal(result.environment?.variables[0]?.secret, false);
     assert.equal(result.diagnostics.length, 0);
+  });
+
+  it("keeps LO package graph fields out of host package manifests", () => {
+    const diagnostics = validateHostPackageManifestBoundary({
+      name: "lo-host-app",
+      version: "0.1.0",
+      loPackages: ["packages-lo/lo-core"],
+      dependencies: {
+        "lo-package-graph": "1.0.0",
+      },
+    });
+
+    assert.equal(
+      diagnostics.some(
+        (diagnostic) =>
+          diagnostic.code === "LO_CONFIG_LO_PACKAGE_GRAPH_IN_HOST_MANIFEST",
+      ),
+      true,
+    );
+    assert.equal(
+      diagnostics.some(
+        (diagnostic) =>
+          diagnostic.code ===
+          "LO_CONFIG_LO_PACKAGE_ALIAS_IN_HOST_DEPENDENCIES",
+      ),
+      true,
+    );
+  });
+
+  it("allows package.json to remain a host tooling manifest", () => {
+    const diagnostics = validateHostPackageManifestBoundary({
+      name: "lo-host-app",
+      version: "0.1.0",
+      scripts: {
+        test: "node --test",
+      },
+      devDependencies: {
+        typescript: "^5.5.0",
+      },
+    });
+
+    assert.deepEqual(diagnostics, []);
   });
 });
