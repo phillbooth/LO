@@ -3,8 +3,7 @@
 ### LogicN, short for Logic<N>
 
 ```text
-Designed to be backwards compatible with binary while supporting photonic Tri logic
- represented as <N>.
+Designed to be backwards compatible with binary while supporting photonic Tri logic represented as <N>.
 
 Easy to code and learn for Humans
 

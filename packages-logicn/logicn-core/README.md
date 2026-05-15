@@ -2,8 +2,7 @@
 
 ```text
 
-LogicN, short for Logic<N>, designed to be backwards compatible with binary while supporting photonic Tri logic
-represented as <N>.
+LogicN, short for Logic<N>, designed to be backwards compatible with binary while supporting photonic Tri logic represented as <N>.
 
 A strict, memory-safe, security-first programming
 language concept for API-heavy, JSON-native, AI-readable and accelerator-aware
