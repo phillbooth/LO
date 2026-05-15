@@ -14,6 +14,8 @@ Use this package for:
 checked LogicN execution
 compiled LogicN execution contracts
 runtime memory policy
+memory hierarchy and cache fact reporting where available
+ECC/reliability fact reporting where available
 effect dispatch
 runtime error handling
 resilient flow supervision
@@ -67,6 +69,16 @@ Memory corruption, unsafe native failures and runtime integrity failures should
 not continue blindly. Memory pressure can use controlled recovery such as
 streaming mode, reduced batch size, backpressure, checkpointing or target
 fallback.
+
+## Memory Hierarchy and Reliability Facts
+
+The runtime may report memory hierarchy and reliability facts when the platform
+exposes them, such as cache line size, cache metadata or ECC status. It must not
+claim direct control over CPU cache levels or ECC hardware.
+
+When details are unavailable because the app is running in a container, VM,
+managed host or restricted runtime, the runtime should report `unknown` rather
+than guessing.
 
 ## Boundary
 

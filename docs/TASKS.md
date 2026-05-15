@@ -14,6 +14,20 @@
 - [x] Add LogicN logic, compute type and secure runtime future-support proposal
 - [x] Add `packages-logicn/logicn-framework-api-server/` HTTP API serving package documentation
 - [x] Add CSRF protection policy for cookie-authenticated state-changing routes
+- [x] Add API response/error-handling style guidance for `try`/`catch`,
+  `match`, `Result<T, E>` and route response contracts
+- [x] Add app crash-handling guidance for crash policies, route boundaries,
+  structured crash reports, checkpoints and supervised workers
+- [x] Add environment secret handling guidance for `Secret<T>`, taint tracking,
+  safe sinks, scope/lifetime rules, LLM/cache denial and secret reports
+- [x] Add memory hierarchy and reliability guidance for cache-aware layout,
+  L2/L3 reporting, IDE warnings and ECC-aware deployment policy
+- [x] Add server platform support guidance for Nginx/Apache/Caddy reverse proxy
+  generation, Node.js targets, Express adapters and LogicN-native API serving
+- [x] Add secure fast routing guidance for compiled route graphs, route
+  manifests, object/property authorization, effects and resource limits
+- [x] Add secure HTTP response guidance for typed response contracts, security
+  headers, cache/cookie policy, safe redirects, CSP and response reports
 - [x] Document route-first API policy and controller-style grouping as optional
   framework sugar rather than a core LogicN concept
 - [x] Document optional thin DDD guidance for domain, flow, infrastructure and

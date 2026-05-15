@@ -15,6 +15,7 @@ decode typed data
 control memory
 route to typed flows
 handle errors
+contain crashes
 queue heavy work
 generate reports
 ```
@@ -54,6 +55,9 @@ Frameworks provide opinions and user-facing structure.
 - Typed API request and response boundaries.
 - Route-first contract enforcement for route declarations, typed actions,
   policies, effects, limits and generated route reports.
+- Response policy enforcement for status/body contracts, content types,
+  cache rules, security header profiles, field filtering, safe errors, safe
+  cookies and safe redirects.
 - Runtime enforcement of `boot.lln` security policy.
 - Strict input validation before handlers run.
 - Deny-by-default application effects for file, network, database, shell, AI,
@@ -63,11 +67,17 @@ Frameworks provide opinions and user-facing structure.
   timeout policy and backpressure.
 - Production gates for auth, rate limits, typed input, secret-safe logging,
   unsafe interop, raw SQL and shell execution.
+- Runtime secret policy enforcement for declared `.env` secrets, protected
+  `Secret<T>` references, scope checks, secret lifetime blocks, safe sinks and
+  secret reports.
 - Auth provider boundaries for bearer tokens, JWT, OAuth2/OIDC, DPoP, mTLS,
   API keys, webhook signatures and capability tokens.
 - CSRF policy enforcement for cookie-authenticated state-changing browser
   routes, including token checks, Fetch Metadata checks, Origin/Referer checks,
   SameSite cookie posture and denial of state-changing read-safe methods.
+- Crash policy enforcement for routes, webhooks, workers and scheduled tasks,
+  including typed error mapping, safe panic/crash containment, safe responses,
+  secret-safe crash reports, checkpoint metadata and crash-loop detection.
 - Idempotency and replay protection policy.
 - Workload control for rate limits, concurrency limits, memory budgets,
   timeouts, queue handoff and backpressure.
@@ -104,8 +114,12 @@ Kernel-enabled builds should be able to generate:
 ```text
 app.api-manifest.json
 app.security-report.json
+app.response-security-report.json
+app.secret-report.json
 app.auth-report.json
 app.csrf-report.json
+app.crash-risk-report.json
+app.crash-report.json
 app.idempotency-report.json
 app.memory-report.json
 app.load-control-report.json

@@ -41,7 +41,6 @@ remove the stale ungrouped package folder.
 |---|---|---|
 | `logicn-core-*` | Core language, toolchain, runtime, network policy and safe developer automation | `logicn-core-compiler`, `logicn-core-runtime`, `logicn-core-network`, `logicn-core-security`, `logicn-core-cli`, `logicn-core-tasks` |
 | `logicn-ai-*` | AI workload, model, agent and AI compute-model packages | `logicn-ai-agent`, `logicn-ai-neural`, `logicn-ai-neuromorphic`, `logicn-ai-lowbit` |
-| `logicn-compliance-*` | Compliance, privacy, governance, audit, retention and policy report contracts | `logicn-compliance-privacy`, `logicn-compliance-audit`, `logicn-compliance-reports` |
 | `logicn-data-*` | Data processing, parsing, search, archive, typed database boundary, streaming and report contracts | `logicn-data-html`, `logicn-data-search`, `logicn-data-db`, `logicn-data-response` |
 | `logicn-web-*` | Browser-safe web rendering, state, component, router and event contracts | `logicn-web-render`, `logicn-web-state`, `logicn-web-components` |
 | `logicn-db-*` | Database provider adapter contract packages | `logicn-db-postgres`, `logicn-db-mysql`, `logicn-db-sqlite` |
@@ -80,16 +79,6 @@ logicn-ai-agent
 logicn-ai-lowbit
 logicn-ai-neural
 logicn-ai-neuromorphic
-logicn-compliance
-logicn-compliance-accessibility
-logicn-compliance-ai
-logicn-compliance-audit
-logicn-compliance-data
-logicn-compliance-deployment
-logicn-compliance-privacy
-logicn-compliance-reports
-logicn-compliance-retention
-logicn-compliance-security
 logicn-data
 logicn-data-archive
 logicn-data-database
@@ -151,6 +140,33 @@ release tooling that may run in development or staging.
 Production profiles must not enable `logicn-devtools-*` or `logicn-tools-benchmark` by
 default. A production build that includes one of these packages requires an
 explicit production package override with a reason and report output.
+
+## Enterprise Package Root
+
+Enterprise-only packages live outside the active package collection:
+
+```text
+packages-logicn-enterprise/
+```
+
+Do not add packages from `packages-logicn-enterprise/` to `logicn.workspace.json`
+or production package profiles unless the project owner explicitly unlocks the
+named enterprise package or feature area.
+
+Current enterprise package family:
+
+```text
+logicn-compliance
+logicn-compliance-accessibility
+logicn-compliance-ai
+logicn-compliance-audit
+logicn-compliance-data
+logicn-compliance-deployment
+logicn-compliance-privacy
+logicn-compliance-reports
+logicn-compliance-retention
+logicn-compliance-security
+```
 
 ## Target Rule
 

@@ -24,6 +24,10 @@ future serverless/cloud adapters
 It should not try to become Express, Laravel, Django, Rails, Symfony, Next.js,
 NestJS or a CMS.
 
+It should also not try to become Nginx, Apache or Caddy. Those are deployment
+and reverse-proxy targets. LogicN deployment tooling may generate config for
+them, while this package focuses on serving LogicN API route manifests.
+
 Its job is smaller and stricter:
 
 ```text
@@ -131,10 +135,12 @@ LogicN's built-in server.
 HTTP listening
 request normalisation
 route manifest loading
+precompiled method/path dispatch where available
 request size enforcement
 server timeout enforcement
 safe error responses
 safe response writing
+transport-level response header application
 health endpoint support
 runtime report output
 structured logging
@@ -142,6 +148,15 @@ graceful shutdown
 development reload support
 production-safe defaults
 ```
+
+It should work behind generated reverse-proxy config for Nginx, Apache or Caddy
+and expose enough route metadata for body limits, timeouts, health checks,
+security headers and raw-body webhook handling to be configured consistently.
+
+When the compiler emits a route trie or equivalent method-indexed lookup table,
+`logicn-framework-api-server` should use it instead of scanning route patterns
+one by one. Unknown methods and paths should be rejected before body parsing,
+auth work or handler execution.
 
 It may also provide:
 
@@ -291,6 +306,13 @@ api OrdersApi {
 The compiler should turn this into a route manifest.
 
 `logicn-framework-api-server` should load the manifest and serve it.
+
+The route manifest should preserve security and resource policy, including
+auth, CSRF, CORS, object/property authorization, declared effects, body limits,
+timeouts, concurrency limits, response filtering and audit requirements.
+It should also preserve response policy, including status/body contracts,
+content type, cache policy, security headers, cookie attributes, redirect
+safety, content negotiation and streaming requirements.
 
 ---
 

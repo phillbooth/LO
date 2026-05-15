@@ -20,6 +20,12 @@ services. Bespoke frameworks can use it directly, use `logicn-framework-app-kern
 or later use adapter packages such as Express, Fastify, Lambda or Cloudflare
 Workers.
 
+LogicN should support server ecosystems without becoming them. Nginx, Apache
+and Caddy are deployment/reverse-proxy targets; Node.js is a tooling platform
+and optional runtime target; Express and similar frameworks are optional
+adapters; the long-term preferred runtime is a LogicN-native secure API server.
+See `SERVER_PLATFORM_SUPPORT.md`.
+
 ## Runtime Flow
 
 ```text
@@ -75,6 +81,62 @@ source maps
 diagnostics
 security report contracts
 ```
+
+## Secure Fast Routing
+
+Routes should compile into a typed route graph and route manifest. The manifest
+should include method, path parameters, request/response types, auth, CSRF,
+CORS, rate limits, object/property authorization, declared effects, body limits,
+timeouts, concurrency limits and audit policy.
+
+At runtime, route matching should use method-indexed precompiled lookup rather
+than scanning loose route strings. Invalid requests should be rejected before
+expensive parsing, auth, database, network or handler work.
+
+See `SECURE_FAST_ROUTING.md`.
+
+## Response And Error Handling Style
+
+LogicN should support both readable `try`/`catch` style and explicit `match`
+style for `Result<T, E>` values:
+
+```text
+try/catch = simple readable application flow
+match     = explicit branch-by-branch logic
+```
+
+Future targets such as GPU, photonic or AI accelerator backends should not make
+either style legacy. They should affect internal compilation, not force
+developers to rewrite clear source code.
+
+Preferred naming:
+
+```text
+Http         = framework HTTP response builder
+AppResponses = app response body schemas
+```
+
+Example:
+
+```LogicN
+return Http.created(
+  AppResponses.Order.from(order)
+)
+```
+
+Routes should declare allowed HTTP responses, and handlers/actions should not
+return undeclared statuses or body schemas. Use `match` when every possible
+result branch matters; use `try`/`catch` for simple happy-path code with safe
+generic error mapping.
+
+See `API_RESPONSE_ERROR_HANDLING.md`.
+
+HTTP responses should also be typed security contracts. Each route response
+should declare status code, body type, content type, cache policy, security
+header profile, cookie policy where relevant and response field filtering.
+Raw responses should be denied by default outside trusted low-level packages.
+
+See `SECURE_HTTP_RESPONSES.md`.
 
 ## Controller Policy
 

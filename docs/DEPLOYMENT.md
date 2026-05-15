@@ -168,3 +168,8 @@ Kubernetes policy packs, advanced NetworkPolicy generation, RBAC minimisation,
 admission policy templates and multi-environment production overlays are
 reserved enterprise areas unless explicitly unlocked. See
 `KUBERNETES_DEPLOYMENT.md` and `ENTERPRISE.md`.
+
+Nginx, Apache and Caddy are reverse-proxy deployment targets, not LogicN
+language features. LogicN may generate inspectable configs for TLS, proxying,
+body limits, rate limits, hidden-file denial, security headers and health
+checks from route and deployment policy. See `SERVER_PLATFORM_SUPPORT.md`.

@@ -67,6 +67,11 @@ security claim is application-level: deny-by-default effects, typed API
 boundaries, secret-safe reports, package permissions, controlled interop,
 production gates and AI-safe generated project context.
 
+LogicN should not claim direct control over CPU L1/L2/L3 cache or ECC memory.
+Cache-aware work should be framed as memory layout, access-pattern, batching,
+copying and vectorisation guidance. ECC-aware work should be framed as
+deployment reliability policy and reporting where the platform exposes evidence.
+
 LogicN should not claim to make Ethernet hardware faster. Network and Ethernet
 I/O improvements should be framed as safer and more efficient application use
 of the network: typed network APIs, deny-by-default network permissions, TLS
@@ -82,8 +87,9 @@ baseline.
 
 LogicN should not claim legal or regulatory compliance automatically.
 `docs/compliance-and-privacy.md` defines the compliance and privacy framework
-direction, and the `logicn-compliance` package family owns related policy,
-evidence and report contracts.
+direction. The enterprise `logicn-compliance` package family owns related
+policy, evidence and report contracts under `packages-logicn-enterprise/` and is
+not part of the active v1 build graph unless explicitly unlocked.
 
 LogicN data processing belongs in packages, not directly in the core language.
 `docs/data-processing.md` defines the `logicn-data` package family for HTML,

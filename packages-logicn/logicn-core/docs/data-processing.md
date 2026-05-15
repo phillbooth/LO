@@ -338,8 +338,9 @@ model User {
 }
 ```
 
-Model permissions should integrate with `logicn-core-security`,
-`logicn-compliance-privacy` and the app kernel.
+Model permissions should integrate with `logicn-core-security`, the app kernel
+and enterprise `logicn-compliance-privacy` when that package is explicitly
+unlocked.
 
 ### Validation Before Insert Or Update
 
@@ -410,7 +411,8 @@ archive UserAuditArchive {
 }
 ```
 
-This fits `logicn-data-archive` and `logicn-compliance-retention`.
+This fits `logicn-data-archive` and enterprise `logicn-compliance-retention`
+when that package is explicitly unlocked.
 
 ## Streaming Pipelines
 

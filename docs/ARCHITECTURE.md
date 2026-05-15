@@ -16,9 +16,11 @@ Vector concepts live in `packages-logicn/logicn-core-vector/`. Compute planning 
 `packages-logicn/logicn-ai-lowbit/`. Supervised AI agent contracts live in
 `packages-logicn/logicn-ai-agent/`. Neural-network workload contracts live in
 `packages-logicn/logicn-ai-neural/`, and neuromorphic spike/event contracts live in
-`packages-logicn/logicn-ai-neuromorphic/`. Compliance and privacy policy
-contracts live in `packages-logicn/logicn-compliance/` and the
-`packages-logicn/logicn-compliance-*` package family. Data-processing contracts
+`packages-logicn/logicn-ai-neuromorphic/`. Enterprise compliance and privacy
+policy contracts live outside the active workspace in
+`packages-logicn-enterprise/logicn-compliance/` and the
+`packages-logicn-enterprise/logicn-compliance-*` package family. They are not
+part of the active v1 build graph unless explicitly unlocked. Data-processing contracts
 live in `packages-logicn/logicn-data/` and the
 `packages-logicn/logicn-data-*` package family. Database provider adapter
 contracts live in `packages-logicn/logicn-db-*`. BitNet is one optional backend for low-bit AI.
@@ -58,6 +60,40 @@ files, environment-derived values, headers, cookies, tokens, runtime metadata
 and build artifacts start untrusted until validated, typed, permissioned,
 provenance-checked or explicitly policy-reviewed. Trust transitions must be
 visible in types, policies or reports.
+
+Application crash handling is also policy-first. LogicN should distinguish
+expected errors, external failures and unexpected crashes in typed outcomes and
+reports. The core language owns `Result<T, E>`, panic/crash categories and
+source-map direction. `logicn-framework-app-kernel` owns route, webhook and
+worker crash boundaries, crash policies, safe responses, supervised restarts,
+health/readiness crash state and secret-safe crash reports. The canonical
+workspace note is `docs/APP_CRASH_HANDLING.md`.
+
+Environment secret handling is a typed security boundary. `.env` values must
+enter the app as declared secret references such as `Secret<T>`, not ordinary
+strings. `logicn-core-security` owns protected secret references, redaction,
+fingerprints, secret-derived taint tracking and safe sink decisions.
+`logicn-framework-app-kernel` consumes those rules for route, webhook, worker,
+LLM/cache, network and report enforcement. Secret metadata can appear in
+reports; secret values must not. The canonical workspace note is
+`docs/ENV_SECRETS.md`.
+
+Memory hierarchy and reliability must be framed carefully. LogicN does not
+directly control CPU cache levels or ECC hardware. `logicn-core` owns memory
+model vocabulary such as ownership, views, explicit clone and layout hints.
+`logicn-core-compiler` should own hot-loop, large-copy and layout diagnostics.
+`logicn-core-runtime` may collect memory/cache/reliability facts where the
+platform exposes them. `logicn-target-cpu` owns CPU capability and cache fact
+detection contracts, and `logicn-core-reports` owns shared report shapes. The
+canonical workspace note is `docs/MEMORY_HIERARCHY_RELIABILITY.md`.
+
+Server platform support is split by role. Nginx, Apache and Caddy are
+deployment/reverse-proxy targets that LogicN may generate safe config for.
+Node.js is both the current tooling platform and an optional runtime target.
+Express, Fastify, Hono and serverless/edge systems are adapters that must
+preserve the same route manifest and app-kernel enforcement. The built-in
+`logicn-framework-api-server` remains a focused HTTP serving package, not a
+full web framework. See `docs/SERVER_PLATFORM_SUPPORT.md`.
 
 ## V1 Surface Freeze
 
@@ -125,16 +161,6 @@ logicn-app/
 |   |-- logicn-ai-agent/
 |   |-- logicn-ai-neural/
 |   |-- logicn-ai-neuromorphic/
-|   |-- logicn-compliance/
-|   |-- logicn-compliance-privacy/
-|   |-- logicn-compliance-security/
-|   |-- logicn-compliance-data/
-|   |-- logicn-compliance-audit/
-|   |-- logicn-compliance-retention/
-|   |-- logicn-compliance-ai/
-|   |-- logicn-compliance-accessibility/
-|   |-- logicn-compliance-deployment/
-|   |-- logicn-compliance-reports/
 |   |-- logicn-data/
 |   |-- logicn-data-html/
 |   |-- logicn-data-search/
@@ -167,6 +193,9 @@ logicn-app/
 |   |-- logicn-tools-benchmark/
 |   |-- logicn-devtools-project-graph/
 |   |-- logicn-framework-example-app/
+|-- packages-logicn-enterprise/
+|   |-- logicn-compliance/
+|   `-- logicn-compliance-*/
 `-- tools/
 ```
 

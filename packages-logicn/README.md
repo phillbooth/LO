@@ -86,10 +86,6 @@ not mistaken for production runtime dependencies.
 - `logicn-ai-lowbit/` - post-v1 low-bit and ternary AI backend contracts.
 - `logicn-ai-neural/` - post-v1 neural workload contracts.
 - `logicn-ai-neuromorphic/` - post-v1 spike and event-signal workload contracts.
-- `logicn-compliance/` - post-v1 compliance framework policy, evidence and report index contracts.
-- `logicn-compliance-*` - post-v1 privacy, security, data governance, audit,
-  retention, AI governance, accessibility, deployment and compliance report
-  contracts.
 - `logicn-data/` - post-v1 data-processing package umbrella contracts.
 - `logicn-data-*` - post-v1 HTML, search, archive, JSON, database archive,
   typed database boundary, model, query, response, streaming pipeline and
@@ -117,3 +113,12 @@ C:\laragon\www\LogicN_Archive\packages-logicn\logicn-finance-core
 C:\laragon\www\LogicN_Archive\packages-logicn\logicn-electrical-core
 C:\laragon\www\LogicN_Archive\packages-logicn\logicn-ot-core
 ```
+
+Enterprise-only packages live outside this active package collection:
+
+```text
+../packages-logicn-enterprise/
+```
+
+The compliance package family has been moved there and must not be treated as
+part of the active v1 build graph unless explicitly unlocked.

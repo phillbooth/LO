@@ -31,6 +31,9 @@ must not be treated as implemented app functionality.
   instead of exposed future/promise plumbing.
 - Support controlled recovery for batch/data flows while stopping safely on
   unsafe system or runtime integrity failures.
+- Support safe application crash handling through typed errors, controlled
+  panic/crash categories, app-kernel crash boundaries, structured crash reports,
+  safe logging, health checks and supervised worker restart policy.
 - Support storage-aware performance planning without claiming direct support for
   SSD, NVMe, M.2 or other hardware. Storage detection must be optional,
   reportable and safe when unknown.
@@ -78,14 +81,55 @@ must not be treated as implemented app functionality.
   hybrid ownership: immutable sharing by default, one active mutable owner,
   read-only and mutable borrows, explicit moves for resources, bounds-checked
   collections and no raw pointers in normal application code.
+- LogicN must not claim direct control over L1/L2/L3 CPU cache or ECC memory.
+  Cache behaviour must be framed as optimisation through layout, access pattern,
+  batching, copying and vectorisation guidance. ECC must be framed as a
+  deployment reliability property that can only be detected or required when
+  the platform exposes trustworthy evidence.
+- Future cache-aware memory work should support contiguous arrays, fixed-size
+  buffers, read-only views, copy-on-write for large values, explicit clone
+  warnings, hot/cold data separation, structure-of-arrays layouts,
+  array-of-structures layouts, false-sharing warnings, hot-loop analysis and
+  memory/cache reports.
+- Future ECC-aware reliability policy may require ECC-capable environments for
+  high-integrity workloads, but it must fail closed or warn when ECC status is
+  unknown. Reports may include ECC detected/unknown status and corrected or
+  uncorrected error counts only when exposed by the OS, firmware, hardware or
+  runtime environment.
 - LogicN must define deterministic cleanup for explicit resources such as files,
   sockets, locks, GPU buffers, model handles, DB connections, streams and
   temporary secrets.
+- `.env` values must be treated as secrets, not normal strings. Secret values
+  must be declared, typed, scoped, redacted, tracked through secret-derived
+  values and denied from logs, errors, caches, LLM inputs, build output and
+  reports unless an explicit safe sink policy allows metadata or controlled use.
+- Environment secrets must use a protected form such as `Secret<T>` or a
+  secret reference. They must not silently become `String` values, be converted
+  with `toString()`, escape `with secret` lifetime blocks or be returned from
+  normal functions.
+- Secret reports may include names, required flags, scopes, allowed operations,
+  allowed destinations and fingerprints, but must never include secret values.
 - LogicN must define traits, protocols or generic constraints before building a
   large reusable library ecosystem.
 - Recoverable errors must be explicit in syntax and types through
   `Result<T, E>` or an equivalent typed result form. Hidden exceptions must not
   be the default application error model.
+- Expected application errors, external failures and unexpected runtime crashes
+  must be distinguishable in types, policies or reports.
+- Public routes, webhooks, scheduled tasks and workers must have a crash
+  boundary directly or through an app-level default when they can write data,
+  call external systems, process payments or perform other state-changing work.
+- Crash reports must be structured, source-mapped where possible, secret-safe,
+  request/job correlated and safe for operators or AI tools to inspect.
+- Runtime crash reports must not include raw secrets, cookies, authorization
+  headers, payment credentials, private customer data or unredacted payloads.
+- Workers and scheduled tasks must support supervised restart policy, bounded
+  retries, backoff and crash-loop detection.
+- LogicN may support `try`/`catch` as readable syntax over explicit
+  `Result<T, E>` flow, but `match` must remain available for branch-by-branch
+  handling where every outcome matters.
+- `Result<T, E>` must be documented as `Result<SuccessType, ErrorType>` for
+  learners and API authors.
 - Missing values must use `Option<T>` or another explicit typed missing-value
   form, not unchecked null.
 - `Tri` must not silently convert to `Bool`. Branch conditions must require
@@ -218,6 +262,43 @@ The app package must remain deliberately small until a product domain is chosen.
 - API handlers must receive typed, validated request values by default; unknown
   fields, oversized JSON and invalid payload shapes must be rejected at the
   boundary.
+- Routes must compile into a typed route graph and route manifest rather than
+  remaining loose runtime strings. Route manifests must include HTTP method,
+  typed path parameters, request body type, response type, auth policy,
+  authorization policy, CSRF/CORS policy where relevant, rate limits, timeout,
+  maximum body size, concurrency limits, declared effects, response filtering
+  and audit policy.
+- Route matching should use a method-indexed precompiled trie/radix-tree or
+  equivalent lookup structure so runtime routing does not scan long route lists
+  or build regexes on the hot path.
+- State-changing routes must not compile unless auth, CSRF or an explicit
+  non-cookie auth exemption, idempotency where risky, audit policy and resource
+  limits are declared.
+- Routes using user-supplied object identifiers must declare object-level
+  authorization. Routes returning sensitive response schemas must declare or
+  inherit property-level response filtering.
+- Route handlers must not perform effects outside the route's declared
+  database, network, file, AI, cache, secret or shell permissions.
+- API route contracts should declare allowed HTTP responses by status and body
+  schema, and handlers/actions must not return undeclared statuses or body
+  schemas.
+- HTTP responses must be typed security contracts. Each response must declare
+  status code, body type, content type, cache policy, security header profile,
+  cookie policy where relevant, redirect policy where relevant, field filtering
+  policy and safe error exposure policy.
+- Raw HTTP responses and mutable raw header maps must be denied by default
+  except inside trusted low-level transport packages.
+- Private/authenticated routes must not use public cache. HTML responses must
+  require a CSP/security-header profile. JSON responses must declare JSON
+  content type and `nosniff`. Redirects must target trusted routes or validated
+  allowlisted destinations.
+- API response helper naming should avoid confusing pairs such as `Response`
+  and `Responses`. Prefer a clear split such as `Http` for framework HTTP
+  response builders and `AppResponses` for app response body schemas.
+- API response checking should report unhandled `Result` values,
+  non-exhaustive known error matches, route responses returned but not declared,
+  declared responses that cannot be returned and unsafe raw error messages sent
+  to users.
 - LogicN must not require traditional MVC controllers as a core application
   concept. The secure API core must be route contracts, typed request/response
   objects, route actions or handlers, policies, effects and generated route
@@ -291,6 +372,11 @@ The app package must remain deliberately small until a product domain is chosen.
   `packages-logicn/logicn-target-photonic/`.
 - The optional LogicN Secure App Kernel must live in `packages-logicn/logicn-framework-app-kernel/`.
 - The built-in LogicN HTTP API server must live in `packages-logicn/logicn-framework-api-server/`.
+- Server platform support must distinguish deployment targets, runtime targets
+  and adapters. Nginx, Apache and Caddy must be treated as reverse-proxy
+  deployment targets; Node.js may be a tooling platform and optional runtime
+  target; Express/Fastify/Hono-style integrations must be optional adapters;
+  the LogicN-native API server remains the long-term preferred secure runtime.
 - Browser-safe web rendering contracts must live in `packages-logicn/logicn-web/`
   and focused `logicn-web-*` packages, not in `logicn-core`, the app kernel or
   the API server.
@@ -431,10 +517,15 @@ the active v1 build graph.
 
 - `logicn-framework-api-server` must be an HTTP serving package, not a full web framework.
 - `logicn-framework-api-server` must load route manifests generated from LogicN API contracts.
+- `logicn-framework-api-server` should use precompiled route lookup structures
+  generated from route manifests where available, such as method-indexed
+  tries/radix trees, and must reject unknown methods/paths early.
 - `logicn-framework-api-server` must normalise HTTP requests before passing them to
   `logicn-framework-app-kernel`.
 - `logicn-framework-api-server` must enforce server-level limits such as body size, timeout,
   connection shutdown and safe response writing.
+- `logicn-framework-api-server` must not try to become Nginx, Apache, Caddy,
+  Express, Fastify, Laravel, Django, Rails, a CMS, a template engine or an ORM.
 - `logicn-framework-api-server` must ask `logicn-framework-app-kernel` for auth, validation, idempotency and
   typed route execution decisions.
 - `logicn-framework-api-server` must redact secrets, bearer tokens, cookies and SecureString
@@ -549,13 +640,18 @@ the active v1 build graph.
 - `logicn-ai-lowbit` must own low-bit and ternary model references, GGUF metadata,
   quantization declarations, backend selection, CPU inference limits and low-bit
   AI inference reports.
-- `logicn-compliance` must own umbrella compliance profile, evidence manifest
-  and compliance report index contracts.
-- `logicn-compliance-*` packages must own focused policy/report contracts for
-  privacy, security control mapping, data governance, audit, retention, AI
-  governance, accessibility, deployment policy and compliance reports. They
-  must not provide legal advice, certification claims, audit databases,
-  identity providers, data warehouses, frontend frameworks or CI/CD systems.
+- Enterprise `logicn-compliance` must own umbrella compliance profile, evidence
+  manifest and compliance report index contracts when unlocked.
+- Enterprise `logicn-compliance-*` packages must own focused policy/report
+  contracts for privacy, security control mapping, data governance, audit,
+  retention, AI governance, accessibility, deployment policy and compliance
+  reports when unlocked. They must not provide legal advice, certification
+  claims, audit databases, identity providers, data warehouses, frontend
+  frameworks or CI/CD systems.
+- Compliance packages must live under `packages-logicn-enterprise/` and must
+  not be part of the active workspace, active v1 build graph, production
+  package resolution or default runtime profiles unless explicitly unlocked by
+  the project owner.
 - `logicn-data` must own umbrella data-processing vocabulary, package policy,
   memory-limit, archive-integrity and report index contracts.
 - `logicn-data-*` packages must own focused contracts for HTML processing,
@@ -593,8 +689,14 @@ the active v1 build graph.
 - `logicn-target-js` must own browser JavaScript output planning, ESM metadata,
   source-map rules, server-only import blocking, browser secret denial and
   JavaScript output reports.
+- `logicn-target-js` may also own JavaScript/Node.js output planning metadata
+  for server targets, but Node.js support must remain a target choice rather
+  than the identity of LogicN.
 - `logicn-target-cpu` must own CPU capability, feature, thread, memory and fallback
   planning contracts.
+- `logicn-target-cpu` should own CPU cache fact detection contracts where
+  available, including cache line size and exposed L1/L2/L3 metadata, while
+  reporting unknown when platform details are hidden.
 - `logicn-cpu-kernels` must own CPU kernel contracts for GEMM, GEMV, vector dot
   products, matrix multiplication, low-bit operations, ternary operations,
   tiling and threading plans.
@@ -662,6 +764,9 @@ the active v1 build graph.
   non-exhaustive Tri matches, risky secure-flow unknown conversion, raw
   secret-like literals and unsafe dynamic execution forms.
 - `logicn-core-runtime` must own execution contracts for checked and compiled LogicN code.
+- `logicn-core-runtime` may collect runtime memory, cache and hardware
+  reliability facts where the environment exposes them, but must report unknown
+  status honestly for containers, VMs and managed platforms.
 - `logicn-core-network` must own network I/O policy, profile, permission,
   backend capability and report contracts. It must not own HTTP framework
   behavior, TLS implementation, DNS resolver implementation, kernel driver code
@@ -679,6 +784,10 @@ the active v1 build graph.
   reports and diagnostics, not as raw secret values.
 - Security helpers must provide reusable redaction, safe token/cookie/header
   references, permission decisions and cryptographic policy validation.
+- Security primitives must support `Secret<T>` or equivalent protected secret
+  references, secret-derived taint tracking, secret fingerprint metadata,
+  secret-safe sink decisions and fail-closed denial for logs, errors, cache,
+  LLM input, build output and undeclared outbound destinations.
 - Redaction helpers must fail closed by default when a rule is malformed, an
   input exceeds configured redaction limits or a replacement could re-emit the
   matched secret or surrounding context.

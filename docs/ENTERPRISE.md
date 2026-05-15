@@ -37,6 +37,15 @@ individual developers and small teams adopt LogicN.
 Enterprise-only packages and features must remain documentation/planning items
 unless explicitly unlocked.
 
+Enterprise-only package folders must live under:
+
+```text
+packages-logicn-enterprise/
+```
+
+They must not live under the active `packages-logicn/` package collection unless
+explicitly unlocked and moved into the active workspace by the project owner.
+
 AI coding tools must not:
 
 - create enterprise package source code

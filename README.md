@@ -90,9 +90,11 @@ available, platform-aware async I/O, reports and deployment profiles. See
 `docs/NETWORK_ETHERNET_IO.md` and `packages-logicn/logicn-core-network/`.
 
 LogicN should not claim legal, privacy, security, accessibility, AI governance
-or deployment compliance automatically. The `logicn-compliance` package family
-defines policy, evidence and report contracts so compliance-relevant behavior
-can be reviewed before deployment.
+or deployment compliance automatically. The enterprise `logicn-compliance`
+package family defines policy, evidence and report contracts so
+compliance-relevant behavior can be reviewed before deployment, but those
+packages live under `packages-logicn-enterprise/` and are not part of the active
+v1 build graph unless explicitly unlocked.
 
 LogicN data processing should be package-owned rather than added directly to the
 language core. The `logicn-data` package family defines typed, streaming-capable,
@@ -182,16 +184,6 @@ logicn-app/
 |   |-- logicn-ai-agent/
 |   |-- logicn-ai-neural/
 |   |-- logicn-ai-neuromorphic/
-|   |-- logicn-compliance/
-|   |-- logicn-compliance-privacy/
-|   |-- logicn-compliance-security/
-|   |-- logicn-compliance-data/
-|   |-- logicn-compliance-audit/
-|   |-- logicn-compliance-retention/
-|   |-- logicn-compliance-ai/
-|   |-- logicn-compliance-accessibility/
-|   |-- logicn-compliance-deployment/
-|   |-- logicn-compliance-reports/
 |   |-- logicn-data/
 |   |-- logicn-data-html/
 |   |-- logicn-data-search/
@@ -224,6 +216,9 @@ logicn-app/
 |   |-- logicn-tools-benchmark/
 |   |-- logicn-devtools-project-graph/
 |   |-- logicn-framework-example-app/
+|-- packages-logicn-enterprise/
+|   |-- logicn-compliance/
+|   `-- logicn-compliance-*/
 `-- tools/
 ```
 
@@ -261,7 +256,7 @@ logicn-app/
   contracts.
 - `packages-logicn/logicn-ai-neuromorphic/` - spike, event-signal and spiking model
   contracts.
-- `packages-logicn/logicn-compliance/` and `packages-logicn/logicn-compliance-*` -
+- `packages-logicn-enterprise/logicn-compliance/` and `packages-logicn-enterprise/logicn-compliance-*` -
   compliance, privacy, governance, audit, retention, accessibility, AI governance,
   deployment policy and compliance report contracts.
 - `packages-logicn/logicn-data/` and `packages-logicn/logicn-data-*` - data

@@ -25,7 +25,9 @@ deployment.
 
 ## Package Family
 
-Compliance packages should use the lowercase LogicN package naming scheme:
+Compliance packages should use the lowercase LogicN package naming scheme and
+live under `packages-logicn-enterprise/` unless explicitly unlocked into the
+active workspace:
 
 ```text
 logicn-compliance

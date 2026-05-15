@@ -37,11 +37,21 @@ Rust, C++ and Python.
   network tools must be denied unless declared and reported.
 - Require TLS policy, route-level rate limits, timeout policy and backpressure
   for production public network routes unless a reviewed override exists.
+- Require routes to have compiled, typed and policy-checked security rules
+  before deployment. Route policy must include method/path, typed input/output,
+  auth, authorization, CSRF/CORS where relevant, rate limits, resource limits,
+  declared effects, response filtering and audit policy.
+- Require HTTP responses to have declared status codes, body types, content
+  types, cache policy, security headers, cookie policy where relevant and
+  safe error exposure policy.
 - Require CSRF protection for cookie-authenticated state-changing browser
   routes. State-changing routes must prove user intent through CSRF tokens,
   Fetch Metadata, Origin/Referer checks and SameSite cookie policy unless a
   safe non-cookie auth model explicitly exempts the route.
 - Deny state-changing `GET`, `HEAD` and `OPTIONS` routes.
+- Require crash boundaries for routes, webhooks, workers and scheduled tasks
+  that perform state-changing work, call external systems or handle sensitive
+  operations.
 - Deny plaintext fallback, silent TLS downgrade, disabled certificate
   validation, disabled hostname validation, debug proxying and secrets in URLs
   for production networked apps.
@@ -90,6 +100,15 @@ Real environment variables should be stored in `.env`.
 
 Example variables should be stored in `.env.example`.
 
+`.env` values must be treated as secrets. Application code should read them
+through declared secret policy and protected secret types, not as ordinary
+strings. Secret values must not be logged, cached, sent to AI, returned in
+errors, compiled into artifacts, written to reports or sent to undeclared
+external hosts.
+
+Secret reports may include names, scopes, required flags, allowed destinations
+and fingerprints, but must never include values. See `docs/ENV_SECRETS.md`.
+
 ## Input Validation
 
 All external input should be validated before use.
@@ -97,6 +116,12 @@ All external input should be validated before use.
 API inputs should decode into strict typed request contracts before application
 handler logic runs. Unknown fields, oversized JSON, invalid types and unsafe
 payload shapes should fail at the boundary.
+
+Routes should be represented as a compiled security graph, not loose runtime
+strings. See `docs/SECURE_FAST_ROUTING.md`.
+
+HTTP responses should be represented as typed response contracts, not raw
+objects or mutable header maps. See `docs/SECURE_HTTP_RESPONSES.md`.
 
 ## CSRF Protection
 
@@ -130,6 +155,17 @@ User-facing errors should be safe and simple.
 
 Internal logs may include more detail, but must not include passwords, API keys or sensitive tokens.
 
+## Crash Handling
+
+Application crashes should cross an explicit crash boundary instead of leaking
+raw runtime failures to users. Expected problems should use typed errors such as
+`Result<T, E>`. External failures and unexpected crashes should produce
+structured, source-mapped and secret-safe reports.
+
+Crash reports and AI-readable crash context must not include raw secrets,
+cookies, authorization headers, payment credentials, private customer data or
+unredacted request/response payloads. See `docs/APP_CRASH_HANDLING.md`.
+
 ## Secrets
 
 The following must never be committed:
@@ -147,6 +183,12 @@ must fail closed by default: malformed rules, oversized inputs or replacements
 that can re-emit matched secrets must produce redacted output instead of leaking
 raw text. Permission models must deny by default, and matching deny grants must
 win over matching allow grants.
+
+`logicn-core-security` also owns protected secret references such as `Secret<T>`
+or equivalent metadata-only handles, secret-derived taint tracking, secret
+fingerprints, safe sink decisions and report shapes for secret use. The app
+kernel and compiler should use those primitives to deny secret flow into logs,
+errors, cache, LLM input, build output and undeclared network destinations.
 
 `packages-logicn/logicn-core-logic/` owns `Tri` and `LogicN` semantics used by core
 policy checks. `Tri` unknown states must not implicitly convert to `Bool` or
@@ -208,9 +250,14 @@ encrypt, authenticate, validate, minimise and report network communication.
 
 - [ ] `.env` is ignored by Git.
 - [ ] `.env.example` exists.
+- [ ] `.env` values are declared as secrets, not read as normal strings.
+- [ ] Secret values are denied from logs, errors, cache, LLM input, build output
+      and reports.
 - [ ] Inputs are validated.
 - [ ] Errors are handled safely.
+- [ ] Routes, webhooks, workers and scheduled tasks have crash boundaries.
 - [ ] Secrets are not logged.
+- [ ] Crash reports and AI-readable crash context are redacted.
 - [ ] Build output does not contain secrets.
 - [ ] AI output cannot directly authorize high-impact actions.
 - [ ] Package and application effects are explicitly declared.

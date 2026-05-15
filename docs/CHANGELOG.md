@@ -15,6 +15,9 @@ All notable changes to this app should be documented here.
   `logicn-compliance` package family for privacy, security control mapping,
   data governance, audit, retention, AI governance, accessibility, deployment
   policy and compliance report contracts.
+- Moved the `logicn-compliance*` package family to
+  `packages-logicn-enterprise/` so enterprise-only compliance and audit package
+  contracts are no longer part of the active `packages-logicn/` workspace graph.
 - Added `packages-logicn/logicn-core/docs/data-processing.md` plus the
   `logicn-data` package family for HTML, search, archive, JSON, database
   archive, streaming pipeline, memory-limit, security and data-processing
@@ -37,6 +40,28 @@ All notable changes to this app should be documented here.
   cookie-authenticated state-changing routes, including token modes, Fetch
   Metadata, Origin/Referer checks, SameSite cookie policy, state-changing GET
   rejection and route-level reports.
+- Added `docs/API_RESPONSE_ERROR_HANDLING.md` documenting `try`/`catch` versus
+  `match`, `Result<T, E>` readability, `Http`/`AppResponses` naming, response
+  helpers and route response contract checks.
+- Added `docs/APP_CRASH_HANDLING.md` documenting app-kernel crash policies,
+  route and worker crash boundaries, typed errors versus crashes, structured
+  crash reports, checkpoints, safe logging and AI-readable crash context.
+- Added `docs/ENV_SECRETS.md` documenting `.env` values as `Secret<T>` values,
+  including central declaration, taint tracking, safe sinks, scope/lifetime
+  rules, LLM/cache denial, hard-coded secret scanning and secret reports.
+- Added `docs/MEMORY_HIERARCHY_RELIABILITY.md` documenting cache-aware memory
+  layout guidance, L2/L3 cache reporting, IDE warnings and ECC-aware deployment
+  reliability policy without claiming direct hardware control.
+- Added `docs/SERVER_PLATFORM_SUPPORT.md` documenting Nginx, Apache and Caddy
+  as reverse-proxy deployment targets, Node.js as tooling/runtime target,
+  Express-style adapters as optional interop and a LogicN-native API server as
+  the long-term preferred secure runtime.
+- Added `docs/SECURE_FAST_ROUTING.md` documenting compiled route graphs,
+  method-indexed trie dispatch, route manifests, object/property authorization,
+  route effects, response filtering and resource-limit enforcement.
+- Added `docs/SECURE_HTTP_RESPONSES.md` documenting typed response contracts,
+  secure headers, cache/cookie policy, CSP, safe redirects, response size limits
+  and response security reports.
 - Added `docs/APPLICATION_SECURITY_POSITIONING.md` to position LogicN's
   security advantage as application policy, deployment checks, package
   permissions, typed APIs, security reports and AI-safe context rather than a
