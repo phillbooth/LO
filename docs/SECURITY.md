@@ -75,6 +75,11 @@ This does not mean every internal value needs expensive runtime checks forever.
 It means trust should be earned at clear boundaries and then represented in
 types, policies and reports.
 
+Syntax follows the same rule. A syntax form is not trusted merely because it
+parses. New syntax must be governed by type contracts, effect declarations,
+permissions, policy, diagnostics, source maps, tests or generated reports before
+it can be treated as safe.
+
 Examples:
 
 | Source | Default status | How it earns trust |

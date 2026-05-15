@@ -1,0 +1,38 @@
+type ContractOrderId = String
+type ContractCustomerId = String
+
+type ContractOrderRequest {
+  customerId: ContractCustomerId
+  sku: String
+  quantity: Int
+}
+
+type ContractOrderResponse {
+  id: ContractOrderId
+  decision: Decision
+  status: String
+}
+
+enum Decision {
+  ALOw
+  Deny
+  Review
+}
+
+enum ContractOrderError {
+  InvalidQuantity
+  PaymentReviewRequired
+}
+
+/// @purpose Creates an order from a typed request contract.
+/// @input ContractOrderRequest
+/// @output Result<ContractOrderResponse, ContractOrderError>
+/// @effects [database.write]
+secure flow createContractOrder(input: ContractOrderRequest) -> Result<ContractOrderResponse, ContractOrderError>
+effects [database.write] {
+  return Ok(ContractOrderResponse {
+    id: "order_contract_example"
+    decision: Review
+    status: "review"
+  })
+}

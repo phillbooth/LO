@@ -52,6 +52,22 @@ Reported when changed.
 Source-mapped when broken.
 ```
 
+Syntax follows the same rule. A parser accepting a syntax form is not enough to
+make that form trusted. Every syntax surface starts untrusted and must earn use
+through explicit types, effects, permissions, policies, diagnostics, source maps,
+tests and generated reports.
+
+This means new syntax is automatically managed as:
+
+```text
+untrusted until typed
+untrusted until effect-checked
+untrusted until permissioned
+untrusted until bounded
+untrusted until source-mapped
+untrusted until reportable
+```
+
 ---
 
 ## Default Security Profile

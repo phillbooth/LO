@@ -1,6 +1,6 @@
 {
   "version": "0.1.0",
-  "generatedAt": "2026-05-15T18:07:02.216Z",
+  "generatedAt": "2026-05-15T18:50:57.084Z",
   "nodes": [
     {
       "id": "package:logicn-core",
@@ -2144,6 +2144,16 @@
       "kind": "Document",
       "label": "structured-await.md",
       "sourcePath": "packages-logicn/logicn-core/docs/structured-await.md",
+      "tags": [
+        "document",
+        "logicn-core"
+      ]
+    },
+    {
+      "id": "doc:packages-logicn/logicn-core/docs/syntax-logic-status.md",
+      "kind": "Document",
+      "label": "syntax-logic-status.md",
+      "sourcePath": "packages-logicn/logicn-core/docs/syntax-logic-status.md",
       "tags": [
         "document",
         "logicn-core"
@@ -15759,6 +15769,62 @@
       "kind": "documents",
       "confidence": "INFERRED",
       "evidencePath": "packages-logicn/logicn-core/docs/structured-await.md"
+    },
+    {
+      "from": "package:logicn-core",
+      "to": "doc:packages-logicn/logicn-core/docs/syntax-logic-status.md",
+      "kind": "owns",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core/docs/syntax-logic-status.md"
+    },
+    {
+      "from": "doc:packages-logicn/logicn-core/docs/syntax-logic-status.md",
+      "to": "package:logicn-core",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-core/docs/syntax-logic-status.md"
+    },
+    {
+      "from": "doc:packages-logicn/logicn-core/docs/syntax-logic-status.md",
+      "to": "package:logicn-core-network",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-core/docs/syntax-logic-status.md"
+    },
+    {
+      "from": "doc:packages-logicn/logicn-core/docs/syntax-logic-status.md",
+      "to": "package:logicn-core-logic",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-core/docs/syntax-logic-status.md"
+    },
+    {
+      "from": "doc:packages-logicn/logicn-core/docs/syntax-logic-status.md",
+      "to": "package:logicn-core-vector",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-core/docs/syntax-logic-status.md"
+    },
+    {
+      "from": "doc:packages-logicn/logicn-core/docs/syntax-logic-status.md",
+      "to": "package:logicn-ai",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-core/docs/syntax-logic-status.md"
+    },
+    {
+      "from": "doc:packages-logicn/logicn-core/docs/syntax-logic-status.md",
+      "to": "package:logicn-target-cpu",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-core/docs/syntax-logic-status.md"
+    },
+    {
+      "from": "doc:packages-logicn/logicn-core/docs/syntax-logic-status.md",
+      "to": "package:logicn-target-wasm",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-core/docs/syntax-logic-status.md"
     },
     {
       "from": "package:logicn-core",

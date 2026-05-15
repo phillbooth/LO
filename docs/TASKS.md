@@ -164,6 +164,8 @@
 - [ ] Follow `docs/CORE_FOUNDATION_ROADMAP.md` before adding new active package
   surfaces
 - [ ] Freeze v1 syntax and grammar around the supported examples
+- [x] Add a compact syntax and logic status table comparing LogicN with C++ and
+  Python
 - [x] Write at least 20 real `.lln` examples covering basic, intermediate and
   advanced v1 syntax
   - [x] Add the 20th core example, `logic-review-scale.lln`

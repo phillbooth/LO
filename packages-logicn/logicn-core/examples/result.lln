@@ -12,3 +12,12 @@ enum OrderError {
 flow loadOrder(id: OrderId) -> Result<Order, OrderError> {
   return Err(OrderError.NotFound)
 }
+
+secure flow requireOrder(id: OrderId) -> Result<Order, OrderError> {
+  let result: Result<Order, OrderError> = loadOrder(id)
+
+  match result {
+    Ok(order) => return Ok(order)
+    Err(error) => return Err(error)
+  }
+}

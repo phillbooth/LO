@@ -25,6 +25,7 @@ concurrency.md
 structured-await.md
 compute-blocks.md
 syntax.md
+syntax-logic-status.md
 sytax/
 dart-flutter-target.md
 react-native-target.md

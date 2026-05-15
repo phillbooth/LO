@@ -25,6 +25,23 @@ All notable changes to this app should be documented here.
   fallback reporting, on-device/no-network checks and tensor shape validation.
 - Added bounded Omni logic rules in `logicn-core-logic` and the 20th core
   `.lln` example, `logic-review-scale.lln`.
+- Added `packages-logicn/logicn-core/docs/syntax-logic-status.md` with a
+  compact LogicN syntax and logic status table compared with C++ and Python.
+- Expanded the syntax and logic status table with detailed entries for loops,
+  flow modifiers, vector flows, class/object-model decisions, I/O, memory,
+  package, target and tooling syntax status.
+- Updated the core `result.lln` example to include explicit
+  `match result { Ok(...) ... Err(...) ... }` handling.
+- Added security-risk grading to the LogicN syntax and logic status table,
+  including stable text grades and colour-rendering guidance.
+- Moved `Not core for v1` syntax items into a dedicated bottom table in the
+  LogicN syntax and logic status document.
+- Added `contracts.lln` to the core examples folder and documented how LogicN
+  contracts are represented through typed shapes, flow signatures, `Result`
+  errors, effects and strict comments.
+- Added an explicit untrusted-syntax governance rule: syntax starts untrusted
+  until it is typed, effect-checked, permissioned, bounded, source-mapped,
+  tested or reportable.
 - Added `packages-logicn/logicn-core/docs/logicn-language-core-maturity-gap.md` to track
   missing LogicN language-core maturity items compared with modern C++ and Rust,
   including compiler pipeline, traits/protocols, deterministic cleanup, FFI,

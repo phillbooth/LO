@@ -30,6 +30,7 @@ Update the matching examples file whenever syntax changes.
 Current syntax files:
 
 ```text
+docs/syntax-logic-status.md
 docs/sytax/api-data-security-and-load-control.md
 docs/sytax-examples/api-data-security-and-load-control.md
 docs/sytax/api-duplicate-detection-and-idempotency.md
@@ -37,6 +38,10 @@ docs/sytax-examples/api-duplicate-detection-and-idempotency.md
 docs/sytax/patterns-and-regex.md
 docs/sytax-examples/patterns-and-regex.md
 ```
+
+For a compact comparison with C++ and Python, including what LogicN has, what is
+TODO and what is intentionally not core syntax, see
+`docs/syntax-logic-status.md`.
 
 ---
 
@@ -57,6 +62,57 @@ not overly clever
 ```
 
 LogicN should avoid having many different ways to express the same idea.
+
+---
+
+## Untrusted Syntax Rule
+
+Every syntax feature starts untrusted.
+
+A syntax feature is not considered safe or production-ready just because it can
+be written in source. It must be managed by at least one explicit governance
+surface before it can be treated as usable:
+
+```text
+type contract
+effect declaration
+permission policy
+security policy
+target policy
+fallback policy
+strict comment
+compiler diagnostic
+generated report
+source map
+test fixture
+```
+
+This applies to core syntax and package-owned syntax. New syntax should therefore
+default to:
+
+```text
+untrusted until typed
+untrusted until effect-checked
+untrusted until permissioned
+untrusted until bounded
+untrusted until source-mapped
+untrusted until reportable
+```
+
+Examples:
+
+| Syntax | Default trust state | Required management |
+|---|---|---|
+| `flow` | Untrusted until typed | Parameters, return type and diagnostics |
+| `secure flow` | Security-sensitive | Effects, permissions, strict comments and reports |
+| `api` | Externally reachable | Request/response contracts, limits and security reports |
+| `webhook` | Externally controlled | Signature, replay, idempotency and body-size policy |
+| `await` | Scheduler-sensitive | Timeout, cancellation and effect rules |
+| `vector` | Target-sensitive | Purity, fallback and precision reports |
+| `unsafe` or native interop | Denied by default | Explicit trusted module and audit report |
+
+If a feature cannot be managed this way yet, it must remain documented as
+`Documented draft`, `TODO`, `Package-owned` or `Not core for v1`.
 
 ---
 

@@ -69,6 +69,10 @@ must not be treated as implemented app functionality.
   cookies, tokens, runtime metadata and build artifacts must earn trust through
   validation, typing, provenance, policy checks or explicit reviewed
   boundaries.
+- LogicN syntax itself must be treated as untrusted until governed. A parser
+  accepting a feature must not make that feature production-ready; each syntax
+  surface must be typed, effect-checked, permissioned, bounded, source-mapped,
+  tested or reportable before it is treated as safe.
 - Trust transitions must be represented in types, policies or reports. A value
   must not silently move from untrusted to trusted because it crossed an
   internal function boundary.
