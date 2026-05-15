@@ -33,6 +33,29 @@ models, tensor shapes, generic AI safety policy or CPU fallback kernels.
 AI accelerator support should stay passive and vendor-neutral. LogicN source should
 prefer `ai_accelerator`, not a vendor name such as `gaudi`.
 
+NPU support is specifically an AI inference target. It is for model graphs,
+tensors, matrix operations, embeddings, image/audio inference and similar neural
+workloads. It is not for normal API routing, string parsing, database queries,
+security checks or general business logic.
+
+The preferred source-level shape is generic:
+
+```text
+compute target ai_accelerator {
+  prefer npu
+  fallback gpu
+  fallback cpu
+  require on_device
+  allow network false
+  allow silent_fallback false
+}
+```
+
+Adapters may map that plan to ONNX Runtime execution providers, CoreML, WebNN,
+DirectML, QNN, TensorFlow Lite or other backend ecosystems, but those backend
+names remain capability/profile details rather than permanent LogicN syntax.
+Fallback must be declared and reported.
+
 Vendor devices should be represented as backend profiles selected by config,
 adapter policy or capability detection:
 

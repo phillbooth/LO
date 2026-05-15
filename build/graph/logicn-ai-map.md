@@ -23,14 +23,35 @@ LogicN execution engine contracts for checked and compiled runtime execution.
 
 Provides:
 - RuntimeMode
+- RuntimeEnvironment
+- RuntimeDiagnosticSeverity
 - RuntimeContext
+- RuntimeDiagnostic
 - RuntimeError
 - RuntimeResult
+- RuntimeEffectKind
+- RuntimeEffect
+- RuntimeEffectPolicy
+- RuntimeEffectDecision
 - RuntimeReport
 
 ## logicn-core-network
 
 LogicN core network I/O policy, profile, permission and report contracts.
+
+Provides:
+- NetworkDirection
+- NetworkProtocol
+- NetworkEffect
+- TlsVersion
+- NetworkBackend
+- NetworkDiagnosticSeverity
+- NetworkDiagnostic
+- TlsPolicy
+- NetworkEndpointRule
+- RateLimitRule
+- NetworkPrivacyPolicy
+- NetworkPolicy
 
 ## logicn-core-security
 
@@ -95,14 +116,14 @@ Provides:
 - TRI_FALSE
 - TRI_UNKNOWN
 - TRI_TRUE
+- TRI_LOGIC_STATES
+- DECISION_LOGIC_STATES
+- TriLogicStateName
+- DecisionLogicStateName
 - TriBoolPolicy
 - LogicDiagnosticSeverity
 - LogicDiagnostic
 - LogicState
-- LogicDefinition
-- TruthTableRow
-- LogicReport
-- isTri
 
 ## logicn-core-vector
 
@@ -120,6 +141,7 @@ Provides:
 - VectorOperation
 - TensorOperation
 - VectorReport
+- VectorDiagnosticSeverity
 
 ## logicn-core-compute
 
@@ -135,9 +157,9 @@ Provides:
 - ComputePlan
 - ComputeAutoPolicy
 - ComputeTargetSelection
+- ComputeTargetPreference
 - ComputeDataLocation
 - ComputeDataMovement
-- ComputeOffloadStage
 
 ## logicn-ai
 
@@ -207,6 +229,7 @@ Provides:
 - NeuralInferencePlan
 - NeuralTrainingPlan
 - NeuralReport
+- NeuralDiagnosticSeverity
 
 ## logicn-ai-neuromorphic
 
@@ -219,46 +242,6 @@ Provides:
 - SpikingModel
 - NeuromorphicPlan
 - NeuromorphicReport
-
-## logicn-compliance
-
-LogicN compliance framework policy, evidence and report index contracts.
-
-## logicn-compliance-privacy
-
-LogicN privacy classification, minimisation and privacy report contracts.
-
-## logicn-compliance-security
-
-LogicN compliance security control mapping and evidence contracts.
-
-## logicn-compliance-data
-
-LogicN data governance, lineage, classification and residency contracts.
-
-## logicn-compliance-audit
-
-LogicN audit event, evidence reference and exception approval contracts.
-
-## logicn-compliance-retention
-
-LogicN retention, deletion, legal hold and disposal evidence contracts.
-
-## logicn-compliance-ai
-
-LogicN AI governance, provenance, review and high-impact decision policy contracts.
-
-## logicn-compliance-accessibility
-
-LogicN accessibility requirement, check and report contracts.
-
-## logicn-compliance-deployment
-
-LogicN deployment approval, release attestation and runtime control contracts.
-
-## logicn-compliance-reports
-
-LogicN compliance, privacy, audit, retention, accessibility, AI and deployment report contracts.
 
 ## logicn-data
 
@@ -308,6 +291,30 @@ LogicN bounded streaming data pipeline, backpressure and checkpoint contracts.
 
 LogicN data processing, HTML, search, archive and pipeline report contracts.
 
+## logicn-web
+
+LogicN browser-safe web package umbrella contracts.
+
+## logicn-web-render
+
+LogicN typed safe browser rendering pipeline contracts.
+
+## logicn-web-state
+
+LogicN browser client state and state-diff contracts.
+
+## logicn-web-components
+
+LogicN typed browser component boundary contracts.
+
+## logicn-web-router
+
+LogicN browser route and navigation contracts.
+
+## logicn-web-events
+
+LogicN typed browser event contracts.
+
 ## logicn-db-postgres
 
 LogicN PostgreSQL adapter contract placeholder.
@@ -339,6 +346,12 @@ Provides:
 - OpticalSignal
 - OpticalChannel
 - PhotonicMapping
+- PhotonicMode
+- PhotonicDiagnosticSeverity
+- PhotonicDiagnostic
+- PhotonicPlan
+- PhotonicReport
+- defineOpticalSignal
 
 ## logicn-target-cpu
 
@@ -385,6 +398,10 @@ Provides:
 - BinaryArtefact
 - BinaryTargetReport
 
+## logicn-target-js
+
+LogicN JavaScript output target planning contracts.
+
 ## logicn-target-wasm
 
 LogicN WebAssembly target planning and output contracts.
@@ -412,13 +429,14 @@ Provides:
 - AiAcceleratorWorkloadKind
 - AiAcceleratorPrecision
 - AiAcceleratorFramework
+- AiAcceleratorModelFormat
+- AiAcceleratorAdapterId
+- AiAcceleratorDiagnosticSeverity
+- AiAcceleratorDiagnostic
 - AiAcceleratorTopology
 - AiAcceleratorMemoryProfile
 - AiAcceleratorBackendProfile
 - AiAcceleratorCapability
-- AiAcceleratorPlan
-- AiAcceleratorReport
-- INTEL_GAUDI3_HL338_PROFILE
 
 ## logicn-target-photonic
 
@@ -454,15 +472,15 @@ Provides:
 - parseEnvironment
 - commands
 - findCommand
+- createCoreCommandRunner
+- relativeCoreCompilerPath
+- spawn
 - Dirent
 - Stats
 - mkdir
 - readdir
 - readFile
 - stat
-- writeFile
-- dirname
-- join
 
 ## logicn-core-tasks
 

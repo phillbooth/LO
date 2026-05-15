@@ -70,6 +70,15 @@ export interface ComputeTargetSelection {
   readonly warnings: readonly string[];
 }
 
+export interface ComputeTargetPreference {
+  readonly prefer: ComputeTarget;
+  readonly fallback: readonly ComputeTarget[];
+  readonly allowSilentFallback: false;
+  readonly requireOnDevice?: boolean;
+  readonly allowNetwork?: boolean;
+  readonly reportFallback: true;
+}
+
 export type ComputeDataLocation =
   | "host"
   | "target"
@@ -200,6 +209,36 @@ export function selectComputeTarget(
         : "Compute target selection is plan-only.",
     ],
   };
+}
+
+export function selectPreferredComputeTarget(
+  preference: ComputeTargetPreference,
+  capabilities: readonly ComputeCapability[],
+): ComputeTargetSelection {
+  const orderedTargets = [preference.prefer, ...preference.fallback];
+  const autoSelection = selectComputeTarget(
+    {
+      workload: preference.prefer === "npu" || preference.prefer === "ai_accelerator"
+        ? "ai-inference"
+        : "general",
+      prefer: orderedTargets,
+      fallbackRequired: true,
+      report: preference.reportFallback,
+    },
+    capabilities,
+  );
+
+  if (autoSelection.selectedTarget !== preference.prefer) {
+    return {
+      ...autoSelection,
+      warnings: [
+        ...autoSelection.warnings,
+        "Compute fallback was explicit and reportable; silent fallback is not allowed.",
+      ],
+    };
+  }
+
+  return autoSelection;
 }
 
 export function createComputeOffloadReport(

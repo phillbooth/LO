@@ -1,8 +1,34 @@
 declare const process: {
   readonly argv: readonly string[];
+  readonly execPath: string;
   cwd(): string;
   exitCode?: number;
 };
+
+declare module "node:child_process" {
+  interface ChildProcessLike {
+    readonly stdout: {
+      setEncoding(encoding: "utf8"): void;
+      on(event: "data", listener: (chunk: string) => void): void;
+    };
+    readonly stderr: {
+      setEncoding(encoding: "utf8"): void;
+      on(event: "data", listener: (chunk: string) => void): void;
+    };
+    on(event: "error", listener: (error: Error) => void): void;
+    on(event: "close", listener: (code: number | null) => void): void;
+  }
+
+  export function spawn(
+    command: string,
+    args: readonly string[],
+    options: {
+      readonly cwd: string;
+      readonly windowsHide?: boolean;
+      readonly stdio?: readonly ["ignore", "pipe", "pipe"];
+    },
+  ): ChildProcessLike;
+}
 
 declare module "node:fs/promises" {
   export interface Dirent {
@@ -27,4 +53,8 @@ declare module "node:path" {
   export function join(...paths: readonly string[]): string;
   export function resolve(...paths: readonly string[]): string;
   export function relative(from: string, to: string): string;
+}
+
+declare module "node:url" {
+  export function fileURLToPath(url: string): string;
 }

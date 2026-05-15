@@ -104,6 +104,9 @@ export interface AiInferenceRequest {
   readonly prompt: AiPrompt;
   readonly task: AiTaskKind;
   readonly targetPreference: readonly AiInferenceTarget[];
+  readonly requireOnDevice?: boolean;
+  readonly allowNetwork?: boolean;
+  readonly allowSilentFallback?: false;
   readonly options: AiGenerationOptions;
 }
 
@@ -333,6 +336,28 @@ export function validateAiInferenceRequest(
       severity: "error",
       message: "AI inference requires non-empty prompt input.",
       path: "prompt.input",
+    });
+  }
+
+  if (request.requireOnDevice === true && request.allowNetwork === true) {
+    diagnostics.push({
+      code: "LogicN_AI_ON_DEVICE_DENIES_NETWORK",
+      severity: "error",
+      message: "On-device AI inference must not allow network execution.",
+      path: "allowNetwork",
+      suggestedFix: "Set allowNetwork to false or remove requireOnDevice.",
+    });
+  }
+
+  if (
+    request.targetPreference.includes("remote") &&
+    request.allowNetwork === false
+  ) {
+    diagnostics.push({
+      code: "LogicN_AI_REMOTE_TARGET_DENIED",
+      severity: "error",
+      message: "Remote AI target is denied when network execution is not allowed.",
+      path: "targetPreference",
     });
   }
 

@@ -3,6 +3,11 @@ export type Tri = -1 | 0 | 1;
 export const TRI_FALSE: Tri = -1;
 export const TRI_UNKNOWN: Tri = 0;
 export const TRI_TRUE: Tri = 1;
+export const TRI_LOGIC_STATES = ["Negative", "Neutral", "Positive"] as const;
+export const DECISION_LOGIC_STATES = ["Deny", "Review", "Allow"] as const;
+
+export type TriLogicStateName = (typeof TRI_LOGIC_STATES)[number];
+export type DecisionLogicStateName = (typeof DECISION_LOGIC_STATES)[number];
 
 export type TriBoolPolicy =
   | "unknown_as_false"
@@ -38,6 +43,12 @@ export interface LogicReport<N extends number> {
   readonly logic: LogicDefinition<N>;
   readonly truthTable: readonly TruthTableRow<N>[];
   readonly warnings: readonly string[];
+}
+
+export interface OmniLogicDefinition<N extends number> extends LogicDefinition<N> {
+  readonly kind: "Omni";
+  readonly bounded: true;
+  readonly description?: string;
 }
 
 export function isTri(value: unknown): value is Tri {
@@ -97,6 +108,62 @@ export function createLogicDefinition<N extends number>(
   }
 
   return { name, width, states: [...states] };
+}
+
+export function createTriLogicDefinition(): LogicDefinition<3> {
+  return createLogicDefinition("Tri", 3, TRI_LOGIC_STATES);
+}
+
+export function createDecisionLogicDefinition(): LogicDefinition<3> {
+  return createLogicDefinition("Decision", 3, DECISION_LOGIC_STATES);
+}
+
+export function createOmniLogicDefinition<N extends number>(
+  name: string,
+  states: readonly string[],
+  options: { readonly description?: string } = {},
+): OmniLogicDefinition<N> {
+  const width = states.length as N;
+  const definition = createLogicDefinition(name, width, states);
+
+  if (states.length > 256) {
+    throw new RangeError("Omni logic definitions must stay bounded to 256 states or fewer.");
+  }
+
+  return {
+    ...definition,
+    kind: "Omni",
+    bounded: true,
+    ...(options.description === undefined
+      ? {}
+      : { description: options.description }),
+  };
+}
+
+export function validateOmniLogicDefinition<N extends number>(
+  definition: OmniLogicDefinition<N>,
+): readonly LogicDiagnostic[] {
+  const diagnostics: LogicDiagnostic[] = [...validateLogicDefinition(definition)];
+
+  if (definition.kind !== "Omni" || definition.bounded !== true) {
+    diagnostics.push({
+      code: "LogicN_LOGIC_OMNI_MUST_BE_BOUNDED",
+      severity: "error",
+      message: "Omni logic definitions must be explicitly bounded.",
+      path: "bounded",
+    });
+  }
+
+  if (definition.width > 256) {
+    diagnostics.push({
+      code: "LogicN_LOGIC_OMNI_WIDTH_TOO_LARGE",
+      severity: "error",
+      message: "Omni logic definitions must declare 256 states or fewer.",
+      path: "width",
+    });
+  }
+
+  return diagnostics;
 }
 
 export function validateLogicDefinition<N extends number>(
@@ -175,6 +242,34 @@ export function createLogicState<N extends number>(
   }
 
   return { width: definition.width, state };
+}
+
+export function triToLogicState(value: Tri): LogicState<3> {
+  const definition = createTriLogicDefinition();
+  return createLogicState(definition, assertTri(value) + 1);
+}
+
+export function logicStateToTri(state: LogicState<3>): Tri {
+  const definition = createTriLogicDefinition();
+
+  if (!isValidLogicState(definition, state)) {
+    throw new RangeError("Logic state is not a valid Tri state.");
+  }
+
+  return (state.state - 1) as Tri;
+}
+
+export function createDecisionLogicState(
+  state: DecisionLogicStateName,
+): LogicState<3> {
+  const definition = createDecisionLogicDefinition();
+  const index = DECISION_LOGIC_STATES.indexOf(state);
+
+  if (index < 0) {
+    throw new RangeError("Unknown Decision state.");
+  }
+
+  return createLogicState(definition, index);
 }
 
 export function isValidLogicState<N extends number>(

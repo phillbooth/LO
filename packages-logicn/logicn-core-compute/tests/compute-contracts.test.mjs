@@ -4,6 +4,7 @@ import { describe, it } from "node:test";
 import {
   createComputeOffloadReport,
   createComputeReport,
+  selectPreferredComputeTarget,
   selectComputeTarget,
   validateComputePlan,
 } from "../dist/index.js";
@@ -112,5 +113,27 @@ describe("logicn-core-compute contracts", () => {
 
     assert.equal(report.plans.length, 1);
     assert.equal(report.diagnostics.length, 0);
+  });
+
+  it("selects explicit NPU fallback without silent fallback", () => {
+    const selection = selectPreferredComputeTarget(
+      {
+        prefer: "npu",
+        fallback: ["gpu", "cpu.generic"],
+        allowSilentFallback: false,
+        requireOnDevice: true,
+        allowNetwork: false,
+        reportFallback: true,
+      },
+      [
+        { target: "npu", features: ["onnx"], available: false },
+        { target: "gpu", features: ["onnx"], available: true },
+        { target: "cpu.generic", features: ["onnx"], available: true },
+      ],
+    );
+
+    assert.equal(selection.selectedTarget, "gpu");
+    assert.equal(selection.fallback, true);
+    assert.match(selection.warnings.join("\n"), /silent fallback is not allowed/);
   });
 });

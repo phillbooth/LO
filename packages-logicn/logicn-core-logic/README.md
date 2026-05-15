@@ -46,6 +46,35 @@ incomplete or duplicate truth table rows hiding unhandled states
 LogicN definitions whose state count does not match their width
 ```
 
+## Canonical States
+
+The package exposes canonical `Tri` and `Decision` state definitions:
+
+```text
+Tri      = [Negative, Neutral, Positive]
+Decision = [Deny, Review, Allow]
+```
+
+The runtime value `Tri` remains `-1 | 0 | 1` for deterministic operations.
+`triToLogicState` maps those runtime values onto the reportable state indexes:
+
+```text
+-1 -> Negative
+ 0 -> Neutral
+ 1 -> Positive
+```
+
+LogicN source should branch on `Tri` with exhaustive `match`, not by treating
+`Tri` as `Bool`:
+
+```text
+match signal {
+  Negative => deny()
+  Neutral => review()
+  Positive => allow()
+}
+```
+
 `triToBool` requires a policy such as `unknown_as_false`,
 `unknown_as_true` or `unknown_as_error`. Security-sensitive callers should use
 `unknown_as_error` or `unknown_as_false`; they must not allow unknown values to
@@ -55,6 +84,11 @@ become access grants by default.
 
 `Tri` is a language-level logic model. `Omni` is a wider logic model. Photonic
 support is a hardware or compute mapping.
+
+`Omni` support is planning-only and must remain bounded. `logicn-core-logic`
+models Omni as a named finite state set with explicit state names, not as an
+unlimited truth space. This lets reports, truth tables and match coverage stay
+auditable.
 
 Some low-bit AI backends, including BitNet-style ternary models, also use
 `-1`, `0` and `+1`, but they are model weights for AI inference, not LogicN logic

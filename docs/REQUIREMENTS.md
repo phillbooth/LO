@@ -153,6 +153,8 @@ must not be treated as implemented app functionality.
   not be returned by public routes.
 - Before adding more active packages, the project must include at least 20 real
   `.lln` example programs covering basic, intermediate and advanced syntax.
+  This requirement is currently satisfied by the 20 source fixtures in
+  `packages-logicn/logicn-core/examples/`.
 
 ## Users
 
@@ -178,6 +180,20 @@ must not be treated as implemented app functionality.
 - Generated project graph outputs must be refreshable from the repository root.
 - The workspace must keep generated compiler output out of Git unless a file is
   intentionally committed as an example or report artefact.
+- Active core packages must provide typed contract exports and focused tests
+  before downstream framework or target packages depend on them. The current
+  core package baseline covers network policy/TLS/backend reports, runtime
+  context/results/effects/reports, vector/matrix/tensor validation and bounded
+  photonic planning contracts.
+- Core package examples must be validated by package tests when they are used
+  as contract examples rather than prose-only documentation.
+- `logicn-core-cli` must route core developer commands to the current
+  `logicn-core` prototype compiler until those commands have native package
+  implementations.
+- NPU support must be treated as AI inference target planning, not as
+  general-purpose LogicN execution. Model files remain external, fallback must
+  be explicit and reportable, and on-device inference must deny network
+  execution unless policy explicitly changes that boundary.
 - The workspace must keep secrets out of source control.
 - Package READMEs and TODOs must describe package responsibility and remaining
   implementation work.

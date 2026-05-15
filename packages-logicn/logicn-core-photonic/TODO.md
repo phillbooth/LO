@@ -9,16 +9,16 @@ piece is required to clarify core `Tri` or `LogicN` semantics.
 [x] Add package metadata
 [x] Add initial typed exports
 [x] Clarify that logicn-core-photonic owns concepts, types, models and APIs
-[ ] Define wavelength model
-[ ] Define phase and amplitude model
-[ ] Define PhotonicMode
-[ ] Define PhotonicPlan as a developer-facing model concept
+[x] Define wavelength model
+[x] Define phase and amplitude model
+[x] Define PhotonicMode
+[x] Define PhotonicPlan as a developer-facing model concept
 [ ] Define Mach-Zehnder model helpers
 [ ] Define wavelength-division multiplexing model helpers
 [ ] Define optical matrix multiplication model helpers
-[ ] Define optical signal reports
-[ ] Define mappings from logicn-core-logic states
+[x] Define optical signal reports
+[x] Define mappings from logicn-core-logic states
 [ ] Define photonic simulation helper APIs
-[ ] Add examples
-[ ] Add tests
+[x] Add examples
+[x] Add tests
 ```

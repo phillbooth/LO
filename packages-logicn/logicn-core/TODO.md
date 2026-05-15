@@ -17,7 +17,7 @@ Use this file as a practical checklist while the project moves from concept to d
 [ ] Work actively on core syntax, grammar and logic semantics
 [ ] Commit the hybrid ownership memory-safety model
 [ ] Finalise Bool, Tri, Decision, Option and Result semantics
-[ ] Add at least 20 real .lln examples for the v1 syntax subset
+[x] Add at least 20 real .lln examples for the v1 syntax subset
 [ ] Build parser coverage for those examples
 [ ] Reject post-v1 syntax with clear diagnostics
 [ ] Use docs/logicn-language-core-maturity-gap.md as the maturity checklist before claiming
@@ -1091,6 +1091,7 @@ Reason for additions:
 [x] examples/ternary-sim.lln
 [x] examples/source-map-error.lln
 [x] examples/ai-context.lln
+[x] examples/logic-review-scale.lln
 ```
 
 ---

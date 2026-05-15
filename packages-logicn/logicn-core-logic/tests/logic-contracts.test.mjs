@@ -5,14 +5,21 @@ import {
   TRI_FALSE,
   TRI_TRUE,
   TRI_UNKNOWN,
+  createDecisionLogicDefinition,
+  createDecisionLogicState,
   createLogicDefinition,
   createLogicState,
+  createOmniLogicDefinition,
+  createTriLogicDefinition,
   triAnd,
+  triToLogicState,
+  logicStateToTri,
   triNor,
   triNot,
   triOr,
   triToBool,
   validateLogicDefinition,
+  validateOmniLogicDefinition,
   validateTruthTable,
 } from "../dist/index.js";
 
@@ -69,6 +76,23 @@ describe("logicn-core-logic contracts", () => {
     assert.throws(() => createLogicState(definition, 3), /outside/);
   });
 
+  it("defines canonical Tri and Decision logic states", () => {
+    assert.deepEqual(createTriLogicDefinition(), {
+      name: "Tri",
+      width: 3,
+      states: ["Negative", "Neutral", "Positive"],
+    });
+    assert.deepEqual(triToLogicState(TRI_FALSE), { width: 3, state: 0 });
+    assert.deepEqual(triToLogicState(TRI_UNKNOWN), { width: 3, state: 1 });
+    assert.equal(logicStateToTri({ width: 3, state: 2 }), TRI_TRUE);
+    assert.deepEqual(createDecisionLogicDefinition(), {
+      name: "Decision",
+      width: 3,
+      states: ["Deny", "Review", "Allow"],
+    });
+    assert.deepEqual(createDecisionLogicState("Review"), { width: 3, state: 1 });
+  });
+
   it("reports duplicate, invalid and incomplete truth table rows", () => {
     const definition = createLogicDefinition("Decision", 3, [
       "Deny",
@@ -102,6 +126,39 @@ describe("logicn-core-logic contracts", () => {
         (diagnostic) => diagnostic.code === "LogicN_LOGIC_INCOMPLETE_TRUTH_TABLE",
       ),
       true,
+    );
+  });
+
+  it("loads the Decision truth table example", async () => {
+    const example = JSON.parse(
+      await (await import("node:fs/promises")).readFile(
+        new URL("../examples/decision-truth-table.json", import.meta.url),
+        "utf8",
+      ),
+    );
+    const diagnostics = validateTruthTable(example.logic, example.truthTable);
+
+    assert.equal(diagnostics.length, 0);
+  });
+
+  it("defines bounded Omni logic contracts", () => {
+    const omni = createOmniLogicDefinition("ReviewScale", [
+      "Reject",
+      "Escalate",
+      "Approve",
+      "Audit",
+    ]);
+
+    assert.equal(omni.kind, "Omni");
+    assert.equal(omni.bounded, true);
+    assert.equal(validateOmniLogicDefinition(omni).length, 0);
+    assert.throws(
+      () =>
+        createOmniLogicDefinition(
+          "TooWide",
+          Array.from({ length: 257 }, (_value, index) => `State${index}`),
+        ),
+      /256 states/,
     );
   });
 });

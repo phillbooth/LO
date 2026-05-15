@@ -90,4 +90,29 @@ describe("logicn-ai contracts", () => {
       "LogicN_AI_PROMPT_LOGGING_REQUIRES_REDACTION",
     );
   });
+
+  it("denies network targets for required on-device NPU inference", () => {
+    const request = {
+      model,
+      prompt: { input: "Embed this text." },
+      task: "summarisation",
+      targetPreference: ["npu", "remote"],
+      requireOnDevice: true,
+      allowNetwork: false,
+      allowSilentFallback: false,
+      options: {
+        maxOutputTokens: 128,
+        contextTokens: 1024,
+        timeoutMs: 30_000,
+        stream: false,
+      },
+    };
+
+    assert.equal(
+      validateAiInferenceRequest(request).some(
+        (diagnostic) => diagnostic.code === "LogicN_AI_REMOTE_TARGET_DENIED",
+      ),
+      true,
+    );
+  });
 });

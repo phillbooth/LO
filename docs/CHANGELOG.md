@@ -6,6 +6,25 @@ All notable changes to this app should be documented here.
 
 ### Added
 
+- Added typed contract implementations and tests for core package completion:
+  `logicn-core-network` now has policy, TLS, endpoint, backend-selection and
+  report contracts; `logicn-core-runtime` has context, result, effect-decision
+  and report helpers; `logicn-core-vector` has vector/matrix/tensor validation
+  and reports; `logicn-core-photonic` has optical signal, mapping, plan and
+  report validation.
+- Added tested example contract payloads for `logicn-core-network`,
+  `logicn-core-runtime`, `logicn-core-vector` and `logicn-core-photonic`.
+- Added `logicn-core-cli` integrations for `check`, `build`, `run`, `serve`,
+  `reports`, `security:check` and `routes` by delegating to the current
+  `logicn-core` prototype compiler.
+- Added canonical `Tri` and `Decision` logic-state helpers plus a tested
+  `logicn-core-logic` Decision truth-table example.
+- Added NPU-as-AI-inference target planning contracts across
+  `logicn-target-ai-accelerator`, `logicn-core-compute`, `logicn-ai` and
+  `logicn-ai-neural`, including ONNX model profile validation, explicit
+  fallback reporting, on-device/no-network checks and tensor shape validation.
+- Added bounded Omni logic rules in `logicn-core-logic` and the 20th core
+  `.lln` example, `logic-review-scale.lln`.
 - Added `packages-logicn/logicn-core/docs/logicn-language-core-maturity-gap.md` to track
   missing LogicN language-core maturity items compared with modern C++ and Rust,
   including compiler pipeline, traits/protocols, deterministic cleanup, FFI,

@@ -11,11 +11,11 @@ must not be part of the active v1 build surface.
 [x] Add initial typed exports
 [x] Define accelerator capability and plan placeholders
 [x] Define passive Intel Gaudi 3 backend profile concept
-[ ] Define NPU/TPU/AI-chip capability detection contracts
-[ ] Define precision compatibility checks
-[ ] Define framework adapter planning examples
+[x] Define NPU/TPU/AI-chip capability detection contracts
+[x] Define precision compatibility checks
+[x] Define framework adapter planning examples
 [ ] Define HBM and topology report examples
-[ ] Define fallback report examples
-[ ] Add examples
-[ ] Add tests
+[x] Define fallback report examples
+[x] Add examples
+[x] Add tests
 ```

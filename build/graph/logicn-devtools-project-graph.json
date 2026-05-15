@@ -1,6 +1,6 @@
 {
   "version": "0.1.0",
-  "generatedAt": "2026-05-14T16:39:42.227Z",
+  "generatedAt": "2026-05-15T18:07:02.216Z",
   "nodes": [
     {
       "id": "package:logicn-core",
@@ -153,106 +153,6 @@
       ]
     },
     {
-      "id": "package:logicn-compliance",
-      "kind": "Package",
-      "label": "logicn-compliance",
-      "sourcePath": "packages-logicn/logicn-compliance/README.md",
-      "summary": "LogicN compliance framework policy, evidence and report index contracts.",
-      "tags": [
-        "package"
-      ]
-    },
-    {
-      "id": "package:logicn-compliance-privacy",
-      "kind": "Package",
-      "label": "logicn-compliance-privacy",
-      "sourcePath": "packages-logicn/logicn-compliance-privacy/README.md",
-      "summary": "LogicN privacy classification, minimisation and privacy report contracts.",
-      "tags": [
-        "package"
-      ]
-    },
-    {
-      "id": "package:logicn-compliance-security",
-      "kind": "Package",
-      "label": "logicn-compliance-security",
-      "sourcePath": "packages-logicn/logicn-compliance-security/README.md",
-      "summary": "LogicN compliance security control mapping and evidence contracts.",
-      "tags": [
-        "package"
-      ]
-    },
-    {
-      "id": "package:logicn-compliance-data",
-      "kind": "Package",
-      "label": "logicn-compliance-data",
-      "sourcePath": "packages-logicn/logicn-compliance-data/README.md",
-      "summary": "LogicN data governance, lineage, classification and residency contracts.",
-      "tags": [
-        "package"
-      ]
-    },
-    {
-      "id": "package:logicn-compliance-audit",
-      "kind": "Package",
-      "label": "logicn-compliance-audit",
-      "sourcePath": "packages-logicn/logicn-compliance-audit/README.md",
-      "summary": "LogicN audit event, evidence reference and exception approval contracts.",
-      "tags": [
-        "package"
-      ]
-    },
-    {
-      "id": "package:logicn-compliance-retention",
-      "kind": "Package",
-      "label": "logicn-compliance-retention",
-      "sourcePath": "packages-logicn/logicn-compliance-retention/README.md",
-      "summary": "LogicN retention, deletion, legal hold and disposal evidence contracts.",
-      "tags": [
-        "package"
-      ]
-    },
-    {
-      "id": "package:logicn-compliance-ai",
-      "kind": "Package",
-      "label": "logicn-compliance-ai",
-      "sourcePath": "packages-logicn/logicn-compliance-ai/README.md",
-      "summary": "LogicN AI governance, provenance, review and high-impact decision policy contracts.",
-      "tags": [
-        "package"
-      ]
-    },
-    {
-      "id": "package:logicn-compliance-accessibility",
-      "kind": "Package",
-      "label": "logicn-compliance-accessibility",
-      "sourcePath": "packages-logicn/logicn-compliance-accessibility/README.md",
-      "summary": "LogicN accessibility requirement, check and report contracts.",
-      "tags": [
-        "package"
-      ]
-    },
-    {
-      "id": "package:logicn-compliance-deployment",
-      "kind": "Package",
-      "label": "logicn-compliance-deployment",
-      "sourcePath": "packages-logicn/logicn-compliance-deployment/README.md",
-      "summary": "LogicN deployment approval, release attestation and runtime control contracts.",
-      "tags": [
-        "package"
-      ]
-    },
-    {
-      "id": "package:logicn-compliance-reports",
-      "kind": "Package",
-      "label": "logicn-compliance-reports",
-      "sourcePath": "packages-logicn/logicn-compliance-reports/README.md",
-      "summary": "LogicN compliance, privacy, audit, retention, accessibility, AI and deployment report contracts.",
-      "tags": [
-        "package"
-      ]
-    },
-    {
       "id": "package:logicn-data",
       "kind": "Package",
       "label": "logicn-data",
@@ -373,6 +273,66 @@
       ]
     },
     {
+      "id": "package:logicn-web",
+      "kind": "Package",
+      "label": "logicn-web",
+      "sourcePath": "packages-logicn/logicn-web/README.md",
+      "summary": "LogicN browser-safe web package umbrella contracts.",
+      "tags": [
+        "package"
+      ]
+    },
+    {
+      "id": "package:logicn-web-render",
+      "kind": "Package",
+      "label": "logicn-web-render",
+      "sourcePath": "packages-logicn/logicn-web-render/README.md",
+      "summary": "LogicN typed safe browser rendering pipeline contracts.",
+      "tags": [
+        "package"
+      ]
+    },
+    {
+      "id": "package:logicn-web-state",
+      "kind": "Package",
+      "label": "logicn-web-state",
+      "sourcePath": "packages-logicn/logicn-web-state/README.md",
+      "summary": "LogicN browser client state and state-diff contracts.",
+      "tags": [
+        "package"
+      ]
+    },
+    {
+      "id": "package:logicn-web-components",
+      "kind": "Package",
+      "label": "logicn-web-components",
+      "sourcePath": "packages-logicn/logicn-web-components/README.md",
+      "summary": "LogicN typed browser component boundary contracts.",
+      "tags": [
+        "package"
+      ]
+    },
+    {
+      "id": "package:logicn-web-router",
+      "kind": "Package",
+      "label": "logicn-web-router",
+      "sourcePath": "packages-logicn/logicn-web-router/README.md",
+      "summary": "LogicN browser route and navigation contracts.",
+      "tags": [
+        "package"
+      ]
+    },
+    {
+      "id": "package:logicn-web-events",
+      "kind": "Package",
+      "label": "logicn-web-events",
+      "sourcePath": "packages-logicn/logicn-web-events/README.md",
+      "summary": "LogicN typed browser event contracts.",
+      "tags": [
+        "package"
+      ]
+    },
+    {
       "id": "package:logicn-db-postgres",
       "kind": "Package",
       "label": "logicn-db-postgres",
@@ -458,6 +418,16 @@
       "label": "logicn-target-binary",
       "sourcePath": "packages-logicn/logicn-target-binary/README.md",
       "summary": "LogicN binary and native target planning concepts.",
+      "tags": [
+        "package"
+      ]
+    },
+    {
+      "id": "package:logicn-target-js",
+      "kind": "Package",
+      "label": "logicn-target-js",
+      "sourcePath": "packages-logicn/logicn-target-js/README.md",
+      "summary": "LogicN JavaScript output target planning contracts.",
       "tags": [
         "package"
       ]
@@ -618,10 +588,28 @@
       ]
     },
     {
+      "id": "doc:docs/API_RESPONSE_ERROR_HANDLING.md",
+      "kind": "Document",
+      "label": "API_RESPONSE_ERROR_HANDLING.md",
+      "sourcePath": "docs/API_RESPONSE_ERROR_HANDLING.md",
+      "tags": [
+        "document"
+      ]
+    },
+    {
       "id": "doc:docs/APPLICATION_SECURITY_POSITIONING.md",
       "kind": "Document",
       "label": "APPLICATION_SECURITY_POSITIONING.md",
       "sourcePath": "docs/APPLICATION_SECURITY_POSITIONING.md",
+      "tags": [
+        "document"
+      ]
+    },
+    {
+      "id": "doc:docs/APP_CRASH_HANDLING.md",
+      "kind": "Document",
+      "label": "APP_CRASH_HANDLING.md",
+      "sourcePath": "docs/APP_CRASH_HANDLING.md",
       "tags": [
         "document"
       ]
@@ -663,6 +651,15 @@
       ]
     },
     {
+      "id": "doc:docs/CSRF_PROTECTION.md",
+      "kind": "Document",
+      "label": "CSRF_PROTECTION.md",
+      "sourcePath": "docs/CSRF_PROTECTION.md",
+      "tags": [
+        "document"
+      ]
+    },
+    {
       "id": "doc:docs/DATABASE.md",
       "kind": "Document",
       "label": "DATABASE.md",
@@ -690,6 +687,15 @@
       ]
     },
     {
+      "id": "doc:docs/DEPLOYMENT_AUTOCONFIG.md",
+      "kind": "Document",
+      "label": "DEPLOYMENT_AUTOCONFIG.md",
+      "sourcePath": "docs/DEPLOYMENT_AUTOCONFIG.md",
+      "tags": [
+        "document"
+      ]
+    },
+    {
       "id": "doc:docs/DESIGN.md",
       "kind": "Document",
       "label": "DESIGN.md",
@@ -699,10 +705,37 @@
       ]
     },
     {
+      "id": "doc:docs/DOMAIN_DRIVEN_DESIGN.md",
+      "kind": "Document",
+      "label": "DOMAIN_DRIVEN_DESIGN.md",
+      "sourcePath": "docs/DOMAIN_DRIVEN_DESIGN.md",
+      "tags": [
+        "document"
+      ]
+    },
+    {
       "id": "doc:docs/ELECTRICAL_INFRASTRUCTURE.md",
       "kind": "Document",
       "label": "ELECTRICAL_INFRASTRUCTURE.md",
       "sourcePath": "docs/ELECTRICAL_INFRASTRUCTURE.md",
+      "tags": [
+        "document"
+      ]
+    },
+    {
+      "id": "doc:docs/ENTERPRISE.md",
+      "kind": "Document",
+      "label": "ENTERPRISE.md",
+      "sourcePath": "docs/ENTERPRISE.md",
+      "tags": [
+        "document"
+      ]
+    },
+    {
+      "id": "doc:docs/ENV_SECRETS.md",
+      "kind": "Document",
+      "label": "ENV_SECRETS.md",
+      "sourcePath": "docs/ENV_SECRETS.md",
       "tags": [
         "document"
       ]
@@ -726,6 +759,24 @@
       ]
     },
     {
+      "id": "doc:docs/KUBERNETES_DEPLOYMENT.md",
+      "kind": "Document",
+      "label": "KUBERNETES_DEPLOYMENT.md",
+      "sourcePath": "docs/KUBERNETES_DEPLOYMENT.md",
+      "tags": [
+        "document"
+      ]
+    },
+    {
+      "id": "doc:docs/LEARNING_MODE.md",
+      "kind": "Document",
+      "label": "LEARNING_MODE.md",
+      "sourcePath": "docs/LEARNING_MODE.md",
+      "tags": [
+        "document"
+      ]
+    },
+    {
       "id": "doc:docs/logicn-logic-compute-runtime-proposal.md",
       "kind": "Document",
       "label": "logicn-logic-compute-runtime-proposal.md",
@@ -735,10 +786,46 @@
       ]
     },
     {
+      "id": "doc:docs/LOGICN_CHARTER_STATEMENT.md",
+      "kind": "Document",
+      "label": "LOGICN_CHARTER_STATEMENT.md",
+      "sourcePath": "docs/LOGICN_CHARTER_STATEMENT.md",
+      "tags": [
+        "document"
+      ]
+    },
+    {
+      "id": "doc:docs/LOGICN_FINANCIAL_MARKETS.md",
+      "kind": "Document",
+      "label": "LOGICN_FINANCIAL_MARKETS.md",
+      "sourcePath": "docs/LOGICN_FINANCIAL_MARKETS.md",
+      "tags": [
+        "document"
+      ]
+    },
+    {
       "id": "doc:docs/LOWBIT_AI_BACKENDS.md",
       "kind": "Document",
       "label": "LOWBIT_AI_BACKENDS.md",
       "sourcePath": "docs/LOWBIT_AI_BACKENDS.md",
+      "tags": [
+        "document"
+      ]
+    },
+    {
+      "id": "doc:docs/MEMORY_HIERARCHY_RELIABILITY.md",
+      "kind": "Document",
+      "label": "MEMORY_HIERARCHY_RELIABILITY.md",
+      "sourcePath": "docs/MEMORY_HIERARCHY_RELIABILITY.md",
+      "tags": [
+        "document"
+      ]
+    },
+    {
+      "id": "doc:docs/MULTI_AGENT_RUNTIME.md",
+      "kind": "Document",
+      "label": "MULTI_AGENT_RUNTIME.md",
+      "sourcePath": "docs/MULTI_AGENT_RUNTIME.md",
       "tags": [
         "document"
       ]
@@ -798,6 +885,24 @@
       ]
     },
     {
+      "id": "doc:docs/PASSIVE_LLM_CACHE.md",
+      "kind": "Document",
+      "label": "PASSIVE_LLM_CACHE.md",
+      "sourcePath": "docs/PASSIVE_LLM_CACHE.md",
+      "tags": [
+        "document"
+      ]
+    },
+    {
+      "id": "doc:docs/PROFILE_INSTALLERS.md",
+      "kind": "Document",
+      "label": "PROFILE_INSTALLERS.md",
+      "sourcePath": "docs/PROFILE_INSTALLERS.md",
+      "tags": [
+        "document"
+      ]
+    },
+    {
       "id": "doc:docs/PROJECT_GRAPH.md",
       "kind": "Document",
       "label": "PROJECT_GRAPH.md",
@@ -834,10 +939,19 @@
       ]
     },
     {
-      "id": "doc:docs/LOGICN_FINANCIAL_MARKETS.md",
+      "id": "doc:docs/SECURE_FAST_ROUTING.md",
       "kind": "Document",
-      "label": "LOGICN_FINANCIAL_MARKETS.md",
-      "sourcePath": "docs/LOGICN_FINANCIAL_MARKETS.md",
+      "label": "SECURE_FAST_ROUTING.md",
+      "sourcePath": "docs/SECURE_FAST_ROUTING.md",
+      "tags": [
+        "document"
+      ]
+    },
+    {
+      "id": "doc:docs/SECURE_HTTP_RESPONSES.md",
+      "kind": "Document",
+      "label": "SECURE_HTTP_RESPONSES.md",
+      "sourcePath": "docs/SECURE_HTTP_RESPONSES.md",
       "tags": [
         "document"
       ]
@@ -847,6 +961,15 @@
       "kind": "Document",
       "label": "SECURITY.md",
       "sourcePath": "docs/SECURITY.md",
+      "tags": [
+        "document"
+      ]
+    },
+    {
+      "id": "doc:docs/SERVER_PLATFORM_SUPPORT.md",
+      "kind": "Document",
+      "label": "SERVER_PLATFORM_SUPPORT.md",
+      "sourcePath": "docs/SERVER_PLATFORM_SUPPORT.md",
       "tags": [
         "document"
       ]
@@ -874,6 +997,15 @@
       "kind": "Document",
       "label": "TODO.md",
       "sourcePath": "docs/TODO.md",
+      "tags": [
+        "document"
+      ]
+    },
+    {
+      "id": "doc:docs/WEB_RENDERING.md",
+      "kind": "Document",
+      "label": "WEB_RENDERING.md",
+      "sourcePath": "docs/WEB_RENDERING.md",
       "tags": [
         "document"
       ]
@@ -1428,16 +1560,6 @@
       ]
     },
     {
-      "id": "doc:packages-logicn/logicn-core/docs/logicn-language-core-maturity-gap.md",
-      "kind": "Document",
-      "label": "logicn-language-core-maturity-gap.md",
-      "sourcePath": "packages-logicn/logicn-core/docs/logicn-language-core-maturity-gap.md",
-      "tags": [
-        "document",
-        "logicn-core"
-      ]
-    },
-    {
       "id": "doc:packages-logicn/logicn-core/docs/dart-flutter-target.md",
       "kind": "Document",
       "label": "dart-flutter-target.md",
@@ -1702,6 +1824,16 @@
       "kind": "Document",
       "label": "logic-widths.md",
       "sourcePath": "packages-logicn/logicn-core/docs/logic-widths.md",
+      "tags": [
+        "document",
+        "logicn-core"
+      ]
+    },
+    {
+      "id": "doc:packages-logicn/logicn-core/docs/logicn-language-core-maturity-gap.md",
+      "kind": "Document",
+      "label": "logicn-language-core-maturity-gap.md",
+      "sourcePath": "packages-logicn/logicn-core/docs/logicn-language-core-maturity-gap.md",
       "tags": [
         "document",
         "logicn-core"
@@ -2898,6 +3030,16 @@
       ]
     },
     {
+      "id": "doc:packages-logicn/logicn-core-runtime/examples/checked-runtime-context.json",
+      "kind": "Document",
+      "label": "checked-runtime-context.json",
+      "sourcePath": "packages-logicn/logicn-core-runtime/examples/checked-runtime-context.json",
+      "tags": [
+        "report",
+        "logicn-core-runtime"
+      ]
+    },
+    {
       "id": "doc:packages-logicn/logicn-core-runtime/package.json",
       "kind": "Document",
       "label": "package.json",
@@ -2928,9 +3070,39 @@
       ]
     },
     {
+      "id": "type:logicn-core-runtime:RuntimeEnvironment",
+      "kind": "Type",
+      "label": "RuntimeEnvironment",
+      "sourcePath": "packages-logicn/logicn-core-runtime/src/index.ts",
+      "tags": [
+        "type",
+        "logicn-core-runtime"
+      ]
+    },
+    {
+      "id": "type:logicn-core-runtime:RuntimeDiagnosticSeverity",
+      "kind": "Type",
+      "label": "RuntimeDiagnosticSeverity",
+      "sourcePath": "packages-logicn/logicn-core-runtime/src/index.ts",
+      "tags": [
+        "type",
+        "logicn-core-runtime"
+      ]
+    },
+    {
       "id": "type:logicn-core-runtime:RuntimeContext",
       "kind": "Type",
       "label": "RuntimeContext",
+      "sourcePath": "packages-logicn/logicn-core-runtime/src/index.ts",
+      "tags": [
+        "type",
+        "logicn-core-runtime"
+      ]
+    },
+    {
+      "id": "type:logicn-core-runtime:RuntimeDiagnostic",
+      "kind": "Type",
+      "label": "RuntimeDiagnostic",
       "sourcePath": "packages-logicn/logicn-core-runtime/src/index.ts",
       "tags": [
         "type",
@@ -2958,12 +3130,122 @@
       ]
     },
     {
+      "id": "type:logicn-core-runtime:RuntimeEffectKind",
+      "kind": "Type",
+      "label": "RuntimeEffectKind",
+      "sourcePath": "packages-logicn/logicn-core-runtime/src/index.ts",
+      "tags": [
+        "type",
+        "logicn-core-runtime"
+      ]
+    },
+    {
+      "id": "type:logicn-core-runtime:RuntimeEffect",
+      "kind": "Type",
+      "label": "RuntimeEffect",
+      "sourcePath": "packages-logicn/logicn-core-runtime/src/index.ts",
+      "tags": [
+        "type",
+        "logicn-core-runtime"
+      ]
+    },
+    {
+      "id": "type:logicn-core-runtime:RuntimeEffectPolicy",
+      "kind": "Type",
+      "label": "RuntimeEffectPolicy",
+      "sourcePath": "packages-logicn/logicn-core-runtime/src/index.ts",
+      "tags": [
+        "type",
+        "logicn-core-runtime"
+      ]
+    },
+    {
+      "id": "type:logicn-core-runtime:RuntimeEffectDecision",
+      "kind": "Type",
+      "label": "RuntimeEffectDecision",
+      "sourcePath": "packages-logicn/logicn-core-runtime/src/index.ts",
+      "tags": [
+        "type",
+        "logicn-core-runtime"
+      ]
+    },
+    {
       "id": "type:logicn-core-runtime:RuntimeReport",
       "kind": "Type",
       "label": "RuntimeReport",
       "sourcePath": "packages-logicn/logicn-core-runtime/src/index.ts",
       "tags": [
         "type",
+        "logicn-core-runtime"
+      ]
+    },
+    {
+      "id": "type:logicn-core-runtime:DEFAULT_RUNTIME_EFFECT_POLICY",
+      "kind": "Type",
+      "label": "DEFAULT_RUNTIME_EFFECT_POLICY",
+      "sourcePath": "packages-logicn/logicn-core-runtime/src/index.ts",
+      "tags": [
+        "type",
+        "logicn-core-runtime"
+      ]
+    },
+    {
+      "id": "flow:logicn-core-runtime:createRuntimeContext",
+      "kind": "Flow",
+      "label": "createRuntimeContext",
+      "sourcePath": "packages-logicn/logicn-core-runtime/src/index.ts",
+      "tags": [
+        "function",
+        "logicn-core-runtime"
+      ]
+    },
+    {
+      "id": "flow:logicn-core-runtime:validateRuntimeContext",
+      "kind": "Flow",
+      "label": "validateRuntimeContext",
+      "sourcePath": "packages-logicn/logicn-core-runtime/src/index.ts",
+      "tags": [
+        "function",
+        "logicn-core-runtime"
+      ]
+    },
+    {
+      "id": "flow:logicn-core-runtime:okRuntimeResult",
+      "kind": "Flow",
+      "label": "okRuntimeResult",
+      "sourcePath": "packages-logicn/logicn-core-runtime/src/index.ts",
+      "tags": [
+        "function",
+        "logicn-core-runtime"
+      ]
+    },
+    {
+      "id": "flow:logicn-core-runtime:errorRuntimeResult",
+      "kind": "Flow",
+      "label": "errorRuntimeResult",
+      "sourcePath": "packages-logicn/logicn-core-runtime/src/index.ts",
+      "tags": [
+        "function",
+        "logicn-core-runtime"
+      ]
+    },
+    {
+      "id": "flow:logicn-core-runtime:decideRuntimeEffect",
+      "kind": "Flow",
+      "label": "decideRuntimeEffect",
+      "sourcePath": "packages-logicn/logicn-core-runtime/src/index.ts",
+      "tags": [
+        "function",
+        "logicn-core-runtime"
+      ]
+    },
+    {
+      "id": "flow:logicn-core-runtime:createRuntimeReport",
+      "kind": "Flow",
+      "label": "createRuntimeReport",
+      "sourcePath": "packages-logicn/logicn-core-runtime/src/index.ts",
+      "tags": [
+        "function",
         "logicn-core-runtime"
       ]
     },
@@ -2988,6 +3270,16 @@
       ]
     },
     {
+      "id": "doc:packages-logicn/logicn-core-network/examples/secure-api-network-policy.json",
+      "kind": "Document",
+      "label": "secure-api-network-policy.json",
+      "sourcePath": "packages-logicn/logicn-core-network/examples/secure-api-network-policy.json",
+      "tags": [
+        "report",
+        "logicn-core-network"
+      ]
+    },
+    {
       "id": "doc:packages-logicn/logicn-core-network/package.json",
       "kind": "Document",
       "label": "package.json",
@@ -3004,6 +3296,246 @@
       "sourcePath": "packages-logicn/logicn-core-network/README.md",
       "tags": [
         "document",
+        "logicn-core-network"
+      ]
+    },
+    {
+      "id": "type:logicn-core-network:NetworkDirection",
+      "kind": "Type",
+      "label": "NetworkDirection",
+      "sourcePath": "packages-logicn/logicn-core-network/src/index.ts",
+      "tags": [
+        "type",
+        "logicn-core-network"
+      ]
+    },
+    {
+      "id": "type:logicn-core-network:NetworkProtocol",
+      "kind": "Type",
+      "label": "NetworkProtocol",
+      "sourcePath": "packages-logicn/logicn-core-network/src/index.ts",
+      "tags": [
+        "type",
+        "logicn-core-network"
+      ]
+    },
+    {
+      "id": "type:logicn-core-network:NetworkEffect",
+      "kind": "Type",
+      "label": "NetworkEffect",
+      "sourcePath": "packages-logicn/logicn-core-network/src/index.ts",
+      "tags": [
+        "type",
+        "logicn-core-network"
+      ]
+    },
+    {
+      "id": "type:logicn-core-network:TlsVersion",
+      "kind": "Type",
+      "label": "TlsVersion",
+      "sourcePath": "packages-logicn/logicn-core-network/src/index.ts",
+      "tags": [
+        "type",
+        "logicn-core-network"
+      ]
+    },
+    {
+      "id": "type:logicn-core-network:NetworkBackend",
+      "kind": "Type",
+      "label": "NetworkBackend",
+      "sourcePath": "packages-logicn/logicn-core-network/src/index.ts",
+      "tags": [
+        "type",
+        "logicn-core-network"
+      ]
+    },
+    {
+      "id": "type:logicn-core-network:NetworkDiagnosticSeverity",
+      "kind": "Type",
+      "label": "NetworkDiagnosticSeverity",
+      "sourcePath": "packages-logicn/logicn-core-network/src/index.ts",
+      "tags": [
+        "type",
+        "logicn-core-network"
+      ]
+    },
+    {
+      "id": "type:logicn-core-network:NetworkDiagnostic",
+      "kind": "Type",
+      "label": "NetworkDiagnostic",
+      "sourcePath": "packages-logicn/logicn-core-network/src/index.ts",
+      "tags": [
+        "type",
+        "logicn-core-network"
+      ]
+    },
+    {
+      "id": "type:logicn-core-network:TlsPolicy",
+      "kind": "Type",
+      "label": "TlsPolicy",
+      "sourcePath": "packages-logicn/logicn-core-network/src/index.ts",
+      "tags": [
+        "type",
+        "logicn-core-network"
+      ]
+    },
+    {
+      "id": "type:logicn-core-network:NetworkEndpointRule",
+      "kind": "Type",
+      "label": "NetworkEndpointRule",
+      "sourcePath": "packages-logicn/logicn-core-network/src/index.ts",
+      "tags": [
+        "type",
+        "logicn-core-network"
+      ]
+    },
+    {
+      "id": "type:logicn-core-network:RateLimitRule",
+      "kind": "Type",
+      "label": "RateLimitRule",
+      "sourcePath": "packages-logicn/logicn-core-network/src/index.ts",
+      "tags": [
+        "type",
+        "logicn-core-network"
+      ]
+    },
+    {
+      "id": "type:logicn-core-network:NetworkPrivacyPolicy",
+      "kind": "Type",
+      "label": "NetworkPrivacyPolicy",
+      "sourcePath": "packages-logicn/logicn-core-network/src/index.ts",
+      "tags": [
+        "type",
+        "logicn-core-network"
+      ]
+    },
+    {
+      "id": "type:logicn-core-network:NetworkPolicy",
+      "kind": "Type",
+      "label": "NetworkPolicy",
+      "sourcePath": "packages-logicn/logicn-core-network/src/index.ts",
+      "tags": [
+        "type",
+        "logicn-core-network"
+      ]
+    },
+    {
+      "id": "type:logicn-core-network:NetworkBackendCapability",
+      "kind": "Type",
+      "label": "NetworkBackendCapability",
+      "sourcePath": "packages-logicn/logicn-core-network/src/index.ts",
+      "tags": [
+        "type",
+        "logicn-core-network"
+      ]
+    },
+    {
+      "id": "type:logicn-core-network:NetworkAutoPolicy",
+      "kind": "Type",
+      "label": "NetworkAutoPolicy",
+      "sourcePath": "packages-logicn/logicn-core-network/src/index.ts",
+      "tags": [
+        "type",
+        "logicn-core-network"
+      ]
+    },
+    {
+      "id": "type:logicn-core-network:NetworkBackendSelection",
+      "kind": "Type",
+      "label": "NetworkBackendSelection",
+      "sourcePath": "packages-logicn/logicn-core-network/src/index.ts",
+      "tags": [
+        "type",
+        "logicn-core-network"
+      ]
+    },
+    {
+      "id": "type:logicn-core-network:NetworkReport",
+      "kind": "Type",
+      "label": "NetworkReport",
+      "sourcePath": "packages-logicn/logicn-core-network/src/index.ts",
+      "tags": [
+        "type",
+        "logicn-core-network"
+      ]
+    },
+    {
+      "id": "type:logicn-core-network:DEFAULT_TLS_POLICY",
+      "kind": "Type",
+      "label": "DEFAULT_TLS_POLICY",
+      "sourcePath": "packages-logicn/logicn-core-network/src/index.ts",
+      "tags": [
+        "type",
+        "logicn-core-network"
+      ]
+    },
+    {
+      "id": "type:logicn-core-network:DEFAULT_NETWORK_PRIVACY_POLICY",
+      "kind": "Type",
+      "label": "DEFAULT_NETWORK_PRIVACY_POLICY",
+      "sourcePath": "packages-logicn/logicn-core-network/src/index.ts",
+      "tags": [
+        "type",
+        "logicn-core-network"
+      ]
+    },
+    {
+      "id": "flow:logicn-core-network:defineNetworkPolicy",
+      "kind": "Flow",
+      "label": "defineNetworkPolicy",
+      "sourcePath": "packages-logicn/logicn-core-network/src/index.ts",
+      "tags": [
+        "function",
+        "logicn-core-network"
+      ]
+    },
+    {
+      "id": "flow:logicn-core-network:validateNetworkPolicy",
+      "kind": "Flow",
+      "label": "validateNetworkPolicy",
+      "sourcePath": "packages-logicn/logicn-core-network/src/index.ts",
+      "tags": [
+        "function",
+        "logicn-core-network"
+      ]
+    },
+    {
+      "id": "flow:logicn-core-network:selectNetworkBackend",
+      "kind": "Flow",
+      "label": "selectNetworkBackend",
+      "sourcePath": "packages-logicn/logicn-core-network/src/index.ts",
+      "tags": [
+        "function",
+        "logicn-core-network"
+      ]
+    },
+    {
+      "id": "flow:logicn-core-network:createNetworkReport",
+      "kind": "Flow",
+      "label": "createNetworkReport",
+      "sourcePath": "packages-logicn/logicn-core-network/src/index.ts",
+      "tags": [
+        "function",
+        "logicn-core-network"
+      ]
+    },
+    {
+      "id": "doc:packages-logicn/logicn-core-network/TODO.md",
+      "kind": "Document",
+      "label": "TODO.md",
+      "sourcePath": "packages-logicn/logicn-core-network/TODO.md",
+      "tags": [
+        "document",
+        "logicn-core-network"
+      ]
+    },
+    {
+      "id": "doc:packages-logicn/logicn-core-network/tsconfig.json",
+      "kind": "Document",
+      "label": "tsconfig.json",
+      "sourcePath": "packages-logicn/logicn-core-network/tsconfig.json",
+      "tags": [
+        "report",
         "logicn-core-network"
       ]
     },
@@ -4348,6 +4880,16 @@
       ]
     },
     {
+      "id": "doc:packages-logicn/logicn-core-logic/examples/decision-truth-table.json",
+      "kind": "Document",
+      "label": "decision-truth-table.json",
+      "sourcePath": "packages-logicn/logicn-core-logic/examples/decision-truth-table.json",
+      "tags": [
+        "report",
+        "logicn-core-logic"
+      ]
+    },
+    {
       "id": "doc:packages-logicn/logicn-core-logic/package.json",
       "kind": "Document",
       "label": "package.json",
@@ -4401,6 +4943,46 @@
       "id": "type:logicn-core-logic:TRI_TRUE",
       "kind": "Type",
       "label": "TRI_TRUE",
+      "sourcePath": "packages-logicn/logicn-core-logic/src/index.ts",
+      "tags": [
+        "type",
+        "logicn-core-logic"
+      ]
+    },
+    {
+      "id": "type:logicn-core-logic:TRI_LOGIC_STATES",
+      "kind": "Type",
+      "label": "TRI_LOGIC_STATES",
+      "sourcePath": "packages-logicn/logicn-core-logic/src/index.ts",
+      "tags": [
+        "type",
+        "logicn-core-logic"
+      ]
+    },
+    {
+      "id": "type:logicn-core-logic:DECISION_LOGIC_STATES",
+      "kind": "Type",
+      "label": "DECISION_LOGIC_STATES",
+      "sourcePath": "packages-logicn/logicn-core-logic/src/index.ts",
+      "tags": [
+        "type",
+        "logicn-core-logic"
+      ]
+    },
+    {
+      "id": "type:logicn-core-logic:TriLogicStateName",
+      "kind": "Type",
+      "label": "TriLogicStateName",
+      "sourcePath": "packages-logicn/logicn-core-logic/src/index.ts",
+      "tags": [
+        "type",
+        "logicn-core-logic"
+      ]
+    },
+    {
+      "id": "type:logicn-core-logic:DecisionLogicStateName",
+      "kind": "Type",
+      "label": "DecisionLogicStateName",
       "sourcePath": "packages-logicn/logicn-core-logic/src/index.ts",
       "tags": [
         "type",
@@ -4478,6 +5060,16 @@
       ]
     },
     {
+      "id": "type:logicn-core-logic:OmniLogicDefinition",
+      "kind": "Type",
+      "label": "OmniLogicDefinition",
+      "sourcePath": "packages-logicn/logicn-core-logic/src/index.ts",
+      "tags": [
+        "type",
+        "logicn-core-logic"
+      ]
+    },
+    {
       "id": "flow:logicn-core-logic:isTri",
       "kind": "Flow",
       "label": "isTri",
@@ -4548,6 +5140,46 @@
       ]
     },
     {
+      "id": "flow:logicn-core-logic:createTriLogicDefinition",
+      "kind": "Flow",
+      "label": "createTriLogicDefinition",
+      "sourcePath": "packages-logicn/logicn-core-logic/src/index.ts",
+      "tags": [
+        "function",
+        "logicn-core-logic"
+      ]
+    },
+    {
+      "id": "flow:logicn-core-logic:createDecisionLogicDefinition",
+      "kind": "Flow",
+      "label": "createDecisionLogicDefinition",
+      "sourcePath": "packages-logicn/logicn-core-logic/src/index.ts",
+      "tags": [
+        "function",
+        "logicn-core-logic"
+      ]
+    },
+    {
+      "id": "flow:logicn-core-logic:createOmniLogicDefinition",
+      "kind": "Flow",
+      "label": "createOmniLogicDefinition",
+      "sourcePath": "packages-logicn/logicn-core-logic/src/index.ts",
+      "tags": [
+        "function",
+        "logicn-core-logic"
+      ]
+    },
+    {
+      "id": "flow:logicn-core-logic:validateOmniLogicDefinition",
+      "kind": "Flow",
+      "label": "validateOmniLogicDefinition",
+      "sourcePath": "packages-logicn/logicn-core-logic/src/index.ts",
+      "tags": [
+        "function",
+        "logicn-core-logic"
+      ]
+    },
+    {
       "id": "flow:logicn-core-logic:validateLogicDefinition",
       "kind": "Flow",
       "label": "validateLogicDefinition",
@@ -4561,6 +5193,36 @@
       "id": "flow:logicn-core-logic:createLogicState",
       "kind": "Flow",
       "label": "createLogicState",
+      "sourcePath": "packages-logicn/logicn-core-logic/src/index.ts",
+      "tags": [
+        "function",
+        "logicn-core-logic"
+      ]
+    },
+    {
+      "id": "flow:logicn-core-logic:triToLogicState",
+      "kind": "Flow",
+      "label": "triToLogicState",
+      "sourcePath": "packages-logicn/logicn-core-logic/src/index.ts",
+      "tags": [
+        "function",
+        "logicn-core-logic"
+      ]
+    },
+    {
+      "id": "flow:logicn-core-logic:logicStateToTri",
+      "kind": "Flow",
+      "label": "logicStateToTri",
+      "sourcePath": "packages-logicn/logicn-core-logic/src/index.ts",
+      "tags": [
+        "function",
+        "logicn-core-logic"
+      ]
+    },
+    {
+      "id": "flow:logicn-core-logic:createDecisionLogicState",
+      "kind": "Flow",
+      "label": "createDecisionLogicState",
       "sourcePath": "packages-logicn/logicn-core-logic/src/index.ts",
       "tags": [
         "function",
@@ -4615,6 +5277,16 @@
       "tags": [
         "report",
         "logicn-core-logic"
+      ]
+    },
+    {
+      "id": "doc:packages-logicn/logicn-core-vector/examples/float32-vector-operation.json",
+      "kind": "Document",
+      "label": "float32-vector-operation.json",
+      "sourcePath": "packages-logicn/logicn-core-vector/examples/float32-vector-operation.json",
+      "tags": [
+        "report",
+        "logicn-core-vector"
       ]
     },
     {
@@ -4744,6 +5416,96 @@
       "sourcePath": "packages-logicn/logicn-core-vector/src/index.ts",
       "tags": [
         "type",
+        "logicn-core-vector"
+      ]
+    },
+    {
+      "id": "type:logicn-core-vector:VectorDiagnosticSeverity",
+      "kind": "Type",
+      "label": "VectorDiagnosticSeverity",
+      "sourcePath": "packages-logicn/logicn-core-vector/src/index.ts",
+      "tags": [
+        "type",
+        "logicn-core-vector"
+      ]
+    },
+    {
+      "id": "type:logicn-core-vector:VectorDiagnostic",
+      "kind": "Type",
+      "label": "VectorDiagnostic",
+      "sourcePath": "packages-logicn/logicn-core-vector/src/index.ts",
+      "tags": [
+        "type",
+        "logicn-core-vector"
+      ]
+    },
+    {
+      "id": "flow:logicn-core-vector:defineVectorType",
+      "kind": "Flow",
+      "label": "defineVectorType",
+      "sourcePath": "packages-logicn/logicn-core-vector/src/index.ts",
+      "tags": [
+        "function",
+        "logicn-core-vector"
+      ]
+    },
+    {
+      "id": "flow:logicn-core-vector:validateVectorType",
+      "kind": "Flow",
+      "label": "validateVectorType",
+      "sourcePath": "packages-logicn/logicn-core-vector/src/index.ts",
+      "tags": [
+        "function",
+        "logicn-core-vector"
+      ]
+    },
+    {
+      "id": "flow:logicn-core-vector:validateMatrixType",
+      "kind": "Flow",
+      "label": "validateMatrixType",
+      "sourcePath": "packages-logicn/logicn-core-vector/src/index.ts",
+      "tags": [
+        "function",
+        "logicn-core-vector"
+      ]
+    },
+    {
+      "id": "flow:logicn-core-vector:validateTensorType",
+      "kind": "Flow",
+      "label": "validateTensorType",
+      "sourcePath": "packages-logicn/logicn-core-vector/src/index.ts",
+      "tags": [
+        "function",
+        "logicn-core-vector"
+      ]
+    },
+    {
+      "id": "flow:logicn-core-vector:validateVectorOperation",
+      "kind": "Flow",
+      "label": "validateVectorOperation",
+      "sourcePath": "packages-logicn/logicn-core-vector/src/index.ts",
+      "tags": [
+        "function",
+        "logicn-core-vector"
+      ]
+    },
+    {
+      "id": "flow:logicn-core-vector:validateTensorOperation",
+      "kind": "Flow",
+      "label": "validateTensorOperation",
+      "sourcePath": "packages-logicn/logicn-core-vector/src/index.ts",
+      "tags": [
+        "function",
+        "logicn-core-vector"
+      ]
+    },
+    {
+      "id": "flow:logicn-core-vector:createVectorReport",
+      "kind": "Flow",
+      "label": "createVectorReport",
+      "sourcePath": "packages-logicn/logicn-core-vector/src/index.ts",
+      "tags": [
+        "function",
         "logicn-core-vector"
       ]
     },
@@ -4888,6 +5650,16 @@
       ]
     },
     {
+      "id": "type:logicn-core-compute:ComputeTargetPreference",
+      "kind": "Type",
+      "label": "ComputeTargetPreference",
+      "sourcePath": "packages-logicn/logicn-core-compute/src/index.ts",
+      "tags": [
+        "type",
+        "logicn-core-compute"
+      ]
+    },
+    {
       "id": "type:logicn-core-compute:ComputeDataLocation",
       "kind": "Type",
       "label": "ComputeDataLocation",
@@ -4961,6 +5733,16 @@
       "id": "flow:logicn-core-compute:selectComputeTarget",
       "kind": "Flow",
       "label": "selectComputeTarget",
+      "sourcePath": "packages-logicn/logicn-core-compute/src/index.ts",
+      "tags": [
+        "function",
+        "logicn-core-compute"
+      ]
+    },
+    {
+      "id": "flow:logicn-core-compute:selectPreferredComputeTarget",
+      "kind": "Flow",
+      "label": "selectPreferredComputeTarget",
       "sourcePath": "packages-logicn/logicn-core-compute/src/index.ts",
       "tags": [
         "function",
@@ -5858,6 +6640,66 @@
       ]
     },
     {
+      "id": "type:logicn-ai-neural:NeuralDiagnosticSeverity",
+      "kind": "Type",
+      "label": "NeuralDiagnosticSeverity",
+      "sourcePath": "packages-logicn/logicn-ai-neural/src/index.ts",
+      "tags": [
+        "type",
+        "logicn-ai-neural"
+      ]
+    },
+    {
+      "id": "type:logicn-ai-neural:NeuralDiagnostic",
+      "kind": "Type",
+      "label": "NeuralDiagnostic",
+      "sourcePath": "packages-logicn/logicn-ai-neural/src/index.ts",
+      "tags": [
+        "type",
+        "logicn-ai-neural"
+      ]
+    },
+    {
+      "id": "flow:logicn-ai-neural:validateNeuralTensor",
+      "kind": "Flow",
+      "label": "validateNeuralTensor",
+      "sourcePath": "packages-logicn/logicn-ai-neural/src/index.ts",
+      "tags": [
+        "function",
+        "logicn-ai-neural"
+      ]
+    },
+    {
+      "id": "flow:logicn-ai-neural:validateNeuralModel",
+      "kind": "Flow",
+      "label": "validateNeuralModel",
+      "sourcePath": "packages-logicn/logicn-ai-neural/src/index.ts",
+      "tags": [
+        "function",
+        "logicn-ai-neural"
+      ]
+    },
+    {
+      "id": "flow:logicn-ai-neural:isSameTensorShape",
+      "kind": "Flow",
+      "label": "isSameTensorShape",
+      "sourcePath": "packages-logicn/logicn-ai-neural/src/index.ts",
+      "tags": [
+        "function",
+        "logicn-ai-neural"
+      ]
+    },
+    {
+      "id": "flow:logicn-ai-neural:createNeuralReport",
+      "kind": "Flow",
+      "label": "createNeuralReport",
+      "sourcePath": "packages-logicn/logicn-ai-neural/src/index.ts",
+      "tags": [
+        "function",
+        "logicn-ai-neural"
+      ]
+    },
+    {
       "id": "doc:packages-logicn/logicn-ai-neural/TODO.md",
       "kind": "Document",
       "label": "TODO.md",
@@ -5975,206 +6817,6 @@
       "tags": [
         "report",
         "logicn-ai-neuromorphic"
-      ]
-    },
-    {
-      "id": "doc:packages-logicn/logicn-compliance/package.json",
-      "kind": "Document",
-      "label": "package.json",
-      "sourcePath": "packages-logicn/logicn-compliance/package.json",
-      "tags": [
-        "report",
-        "logicn-compliance"
-      ]
-    },
-    {
-      "id": "doc:packages-logicn/logicn-compliance/README.md",
-      "kind": "Document",
-      "label": "README.md",
-      "sourcePath": "packages-logicn/logicn-compliance/README.md",
-      "tags": [
-        "document",
-        "logicn-compliance"
-      ]
-    },
-    {
-      "id": "doc:packages-logicn/logicn-compliance-privacy/package.json",
-      "kind": "Document",
-      "label": "package.json",
-      "sourcePath": "packages-logicn/logicn-compliance-privacy/package.json",
-      "tags": [
-        "report",
-        "logicn-compliance-privacy"
-      ]
-    },
-    {
-      "id": "doc:packages-logicn/logicn-compliance-privacy/README.md",
-      "kind": "Document",
-      "label": "README.md",
-      "sourcePath": "packages-logicn/logicn-compliance-privacy/README.md",
-      "tags": [
-        "document",
-        "logicn-compliance-privacy"
-      ]
-    },
-    {
-      "id": "doc:packages-logicn/logicn-compliance-security/package.json",
-      "kind": "Document",
-      "label": "package.json",
-      "sourcePath": "packages-logicn/logicn-compliance-security/package.json",
-      "tags": [
-        "report",
-        "logicn-compliance-security"
-      ]
-    },
-    {
-      "id": "doc:packages-logicn/logicn-compliance-security/README.md",
-      "kind": "Document",
-      "label": "README.md",
-      "sourcePath": "packages-logicn/logicn-compliance-security/README.md",
-      "tags": [
-        "document",
-        "logicn-compliance-security"
-      ]
-    },
-    {
-      "id": "doc:packages-logicn/logicn-compliance-data/package.json",
-      "kind": "Document",
-      "label": "package.json",
-      "sourcePath": "packages-logicn/logicn-compliance-data/package.json",
-      "tags": [
-        "report",
-        "logicn-compliance-data"
-      ]
-    },
-    {
-      "id": "doc:packages-logicn/logicn-compliance-data/README.md",
-      "kind": "Document",
-      "label": "README.md",
-      "sourcePath": "packages-logicn/logicn-compliance-data/README.md",
-      "tags": [
-        "document",
-        "logicn-compliance-data"
-      ]
-    },
-    {
-      "id": "doc:packages-logicn/logicn-compliance-audit/package.json",
-      "kind": "Document",
-      "label": "package.json",
-      "sourcePath": "packages-logicn/logicn-compliance-audit/package.json",
-      "tags": [
-        "report",
-        "logicn-compliance-audit"
-      ]
-    },
-    {
-      "id": "doc:packages-logicn/logicn-compliance-audit/README.md",
-      "kind": "Document",
-      "label": "README.md",
-      "sourcePath": "packages-logicn/logicn-compliance-audit/README.md",
-      "tags": [
-        "document",
-        "logicn-compliance-audit"
-      ]
-    },
-    {
-      "id": "doc:packages-logicn/logicn-compliance-retention/package.json",
-      "kind": "Document",
-      "label": "package.json",
-      "sourcePath": "packages-logicn/logicn-compliance-retention/package.json",
-      "tags": [
-        "report",
-        "logicn-compliance-retention"
-      ]
-    },
-    {
-      "id": "doc:packages-logicn/logicn-compliance-retention/README.md",
-      "kind": "Document",
-      "label": "README.md",
-      "sourcePath": "packages-logicn/logicn-compliance-retention/README.md",
-      "tags": [
-        "document",
-        "logicn-compliance-retention"
-      ]
-    },
-    {
-      "id": "doc:packages-logicn/logicn-compliance-ai/package.json",
-      "kind": "Document",
-      "label": "package.json",
-      "sourcePath": "packages-logicn/logicn-compliance-ai/package.json",
-      "tags": [
-        "report",
-        "logicn-compliance-ai"
-      ]
-    },
-    {
-      "id": "doc:packages-logicn/logicn-compliance-ai/README.md",
-      "kind": "Document",
-      "label": "README.md",
-      "sourcePath": "packages-logicn/logicn-compliance-ai/README.md",
-      "tags": [
-        "document",
-        "logicn-compliance-ai"
-      ]
-    },
-    {
-      "id": "doc:packages-logicn/logicn-compliance-accessibility/package.json",
-      "kind": "Document",
-      "label": "package.json",
-      "sourcePath": "packages-logicn/logicn-compliance-accessibility/package.json",
-      "tags": [
-        "report",
-        "logicn-compliance-accessibility"
-      ]
-    },
-    {
-      "id": "doc:packages-logicn/logicn-compliance-accessibility/README.md",
-      "kind": "Document",
-      "label": "README.md",
-      "sourcePath": "packages-logicn/logicn-compliance-accessibility/README.md",
-      "tags": [
-        "document",
-        "logicn-compliance-accessibility"
-      ]
-    },
-    {
-      "id": "doc:packages-logicn/logicn-compliance-deployment/package.json",
-      "kind": "Document",
-      "label": "package.json",
-      "sourcePath": "packages-logicn/logicn-compliance-deployment/package.json",
-      "tags": [
-        "report",
-        "logicn-compliance-deployment"
-      ]
-    },
-    {
-      "id": "doc:packages-logicn/logicn-compliance-deployment/README.md",
-      "kind": "Document",
-      "label": "README.md",
-      "sourcePath": "packages-logicn/logicn-compliance-deployment/README.md",
-      "tags": [
-        "document",
-        "logicn-compliance-deployment"
-      ]
-    },
-    {
-      "id": "report:packages-logicn/logicn-compliance-reports/package.json",
-      "kind": "Report",
-      "label": "package.json",
-      "sourcePath": "packages-logicn/logicn-compliance-reports/package.json",
-      "tags": [
-        "report",
-        "logicn-compliance-reports"
-      ]
-    },
-    {
-      "id": "doc:packages-logicn/logicn-compliance-reports/README.md",
-      "kind": "Document",
-      "label": "README.md",
-      "sourcePath": "packages-logicn/logicn-compliance-reports/README.md",
-      "tags": [
-        "document",
-        "logicn-compliance-reports"
       ]
     },
     {
@@ -6418,6 +7060,126 @@
       ]
     },
     {
+      "id": "doc:packages-logicn/logicn-web/package.json",
+      "kind": "Document",
+      "label": "package.json",
+      "sourcePath": "packages-logicn/logicn-web/package.json",
+      "tags": [
+        "report",
+        "logicn-web"
+      ]
+    },
+    {
+      "id": "doc:packages-logicn/logicn-web/README.md",
+      "kind": "Document",
+      "label": "README.md",
+      "sourcePath": "packages-logicn/logicn-web/README.md",
+      "tags": [
+        "document",
+        "logicn-web"
+      ]
+    },
+    {
+      "id": "doc:packages-logicn/logicn-web-render/package.json",
+      "kind": "Document",
+      "label": "package.json",
+      "sourcePath": "packages-logicn/logicn-web-render/package.json",
+      "tags": [
+        "report",
+        "logicn-web-render"
+      ]
+    },
+    {
+      "id": "doc:packages-logicn/logicn-web-render/README.md",
+      "kind": "Document",
+      "label": "README.md",
+      "sourcePath": "packages-logicn/logicn-web-render/README.md",
+      "tags": [
+        "document",
+        "logicn-web-render"
+      ]
+    },
+    {
+      "id": "doc:packages-logicn/logicn-web-state/package.json",
+      "kind": "Document",
+      "label": "package.json",
+      "sourcePath": "packages-logicn/logicn-web-state/package.json",
+      "tags": [
+        "report",
+        "logicn-web-state"
+      ]
+    },
+    {
+      "id": "doc:packages-logicn/logicn-web-state/README.md",
+      "kind": "Document",
+      "label": "README.md",
+      "sourcePath": "packages-logicn/logicn-web-state/README.md",
+      "tags": [
+        "document",
+        "logicn-web-state"
+      ]
+    },
+    {
+      "id": "doc:packages-logicn/logicn-web-components/package.json",
+      "kind": "Document",
+      "label": "package.json",
+      "sourcePath": "packages-logicn/logicn-web-components/package.json",
+      "tags": [
+        "report",
+        "logicn-web-components"
+      ]
+    },
+    {
+      "id": "doc:packages-logicn/logicn-web-components/README.md",
+      "kind": "Document",
+      "label": "README.md",
+      "sourcePath": "packages-logicn/logicn-web-components/README.md",
+      "tags": [
+        "document",
+        "logicn-web-components"
+      ]
+    },
+    {
+      "id": "doc:packages-logicn/logicn-web-router/package.json",
+      "kind": "Document",
+      "label": "package.json",
+      "sourcePath": "packages-logicn/logicn-web-router/package.json",
+      "tags": [
+        "report",
+        "logicn-web-router"
+      ]
+    },
+    {
+      "id": "doc:packages-logicn/logicn-web-router/README.md",
+      "kind": "Document",
+      "label": "README.md",
+      "sourcePath": "packages-logicn/logicn-web-router/README.md",
+      "tags": [
+        "document",
+        "logicn-web-router"
+      ]
+    },
+    {
+      "id": "doc:packages-logicn/logicn-web-events/package.json",
+      "kind": "Document",
+      "label": "package.json",
+      "sourcePath": "packages-logicn/logicn-web-events/package.json",
+      "tags": [
+        "report",
+        "logicn-web-events"
+      ]
+    },
+    {
+      "id": "doc:packages-logicn/logicn-web-events/README.md",
+      "kind": "Document",
+      "label": "README.md",
+      "sourcePath": "packages-logicn/logicn-web-events/README.md",
+      "tags": [
+        "document",
+        "logicn-web-events"
+      ]
+    },
+    {
       "id": "doc:packages-logicn/logicn-db-postgres/package.json",
       "kind": "Document",
       "label": "package.json",
@@ -6518,6 +7280,16 @@
       ]
     },
     {
+      "id": "doc:packages-logicn/logicn-core-photonic/examples/tri-optical-mapping-plan.json",
+      "kind": "Document",
+      "label": "tri-optical-mapping-plan.json",
+      "sourcePath": "packages-logicn/logicn-core-photonic/examples/tri-optical-mapping-plan.json",
+      "tags": [
+        "report",
+        "logicn-core-photonic"
+      ]
+    },
+    {
       "id": "doc:packages-logicn/logicn-core-photonic/package.json",
       "kind": "Document",
       "label": "package.json",
@@ -6594,6 +7366,106 @@
       "sourcePath": "packages-logicn/logicn-core-photonic/src/index.ts",
       "tags": [
         "type",
+        "logicn-core-photonic"
+      ]
+    },
+    {
+      "id": "type:logicn-core-photonic:PhotonicMode",
+      "kind": "Type",
+      "label": "PhotonicMode",
+      "sourcePath": "packages-logicn/logicn-core-photonic/src/index.ts",
+      "tags": [
+        "type",
+        "logicn-core-photonic"
+      ]
+    },
+    {
+      "id": "type:logicn-core-photonic:PhotonicDiagnosticSeverity",
+      "kind": "Type",
+      "label": "PhotonicDiagnosticSeverity",
+      "sourcePath": "packages-logicn/logicn-core-photonic/src/index.ts",
+      "tags": [
+        "type",
+        "logicn-core-photonic"
+      ]
+    },
+    {
+      "id": "type:logicn-core-photonic:PhotonicDiagnostic",
+      "kind": "Type",
+      "label": "PhotonicDiagnostic",
+      "sourcePath": "packages-logicn/logicn-core-photonic/src/index.ts",
+      "tags": [
+        "type",
+        "logicn-core-photonic"
+      ]
+    },
+    {
+      "id": "type:logicn-core-photonic:PhotonicPlan",
+      "kind": "Type",
+      "label": "PhotonicPlan",
+      "sourcePath": "packages-logicn/logicn-core-photonic/src/index.ts",
+      "tags": [
+        "type",
+        "logicn-core-photonic"
+      ]
+    },
+    {
+      "id": "type:logicn-core-photonic:PhotonicReport",
+      "kind": "Type",
+      "label": "PhotonicReport",
+      "sourcePath": "packages-logicn/logicn-core-photonic/src/index.ts",
+      "tags": [
+        "type",
+        "logicn-core-photonic"
+      ]
+    },
+    {
+      "id": "flow:logicn-core-photonic:defineOpticalSignal",
+      "kind": "Flow",
+      "label": "defineOpticalSignal",
+      "sourcePath": "packages-logicn/logicn-core-photonic/src/index.ts",
+      "tags": [
+        "function",
+        "logicn-core-photonic"
+      ]
+    },
+    {
+      "id": "flow:logicn-core-photonic:validateOpticalSignal",
+      "kind": "Flow",
+      "label": "validateOpticalSignal",
+      "sourcePath": "packages-logicn/logicn-core-photonic/src/index.ts",
+      "tags": [
+        "function",
+        "logicn-core-photonic"
+      ]
+    },
+    {
+      "id": "flow:logicn-core-photonic:validatePhotonicMapping",
+      "kind": "Flow",
+      "label": "validatePhotonicMapping",
+      "sourcePath": "packages-logicn/logicn-core-photonic/src/index.ts",
+      "tags": [
+        "function",
+        "logicn-core-photonic"
+      ]
+    },
+    {
+      "id": "flow:logicn-core-photonic:createPhotonicReport",
+      "kind": "Flow",
+      "label": "createPhotonicReport",
+      "sourcePath": "packages-logicn/logicn-core-photonic/src/index.ts",
+      "tags": [
+        "function",
+        "logicn-core-photonic"
+      ]
+    },
+    {
+      "id": "flow:logicn-core-photonic:validatePhotonicPlan",
+      "kind": "Flow",
+      "label": "validatePhotonicPlan",
+      "sourcePath": "packages-logicn/logicn-core-photonic/src/index.ts",
+      "tags": [
+        "function",
         "logicn-core-photonic"
       ]
     },
@@ -7108,6 +7980,26 @@
       ]
     },
     {
+      "id": "doc:packages-logicn/logicn-target-js/package.json",
+      "kind": "Document",
+      "label": "package.json",
+      "sourcePath": "packages-logicn/logicn-target-js/package.json",
+      "tags": [
+        "report",
+        "logicn-target-js"
+      ]
+    },
+    {
+      "id": "doc:packages-logicn/logicn-target-js/README.md",
+      "kind": "Document",
+      "label": "README.md",
+      "sourcePath": "packages-logicn/logicn-target-js/README.md",
+      "tags": [
+        "document",
+        "logicn-target-js"
+      ]
+    },
+    {
       "id": "doc:packages-logicn/logicn-target-wasm/package.json",
       "kind": "Document",
       "label": "package.json",
@@ -7248,6 +8140,16 @@
       ]
     },
     {
+      "id": "doc:packages-logicn/logicn-target-ai-accelerator/examples/npu-target-selection.json",
+      "kind": "Document",
+      "label": "npu-target-selection.json",
+      "sourcePath": "packages-logicn/logicn-target-ai-accelerator/examples/npu-target-selection.json",
+      "tags": [
+        "report",
+        "logicn-target-ai-accelerator"
+      ]
+    },
+    {
       "id": "doc:packages-logicn/logicn-target-ai-accelerator/package.json",
       "kind": "Document",
       "label": "package.json",
@@ -7308,6 +8210,46 @@
       ]
     },
     {
+      "id": "type:logicn-target-ai-accelerator:AiAcceleratorModelFormat",
+      "kind": "Type",
+      "label": "AiAcceleratorModelFormat",
+      "sourcePath": "packages-logicn/logicn-target-ai-accelerator/src/index.ts",
+      "tags": [
+        "type",
+        "logicn-target-ai-accelerator"
+      ]
+    },
+    {
+      "id": "type:logicn-target-ai-accelerator:AiAcceleratorAdapterId",
+      "kind": "Type",
+      "label": "AiAcceleratorAdapterId",
+      "sourcePath": "packages-logicn/logicn-target-ai-accelerator/src/index.ts",
+      "tags": [
+        "type",
+        "logicn-target-ai-accelerator"
+      ]
+    },
+    {
+      "id": "type:logicn-target-ai-accelerator:AiAcceleratorDiagnosticSeverity",
+      "kind": "Type",
+      "label": "AiAcceleratorDiagnosticSeverity",
+      "sourcePath": "packages-logicn/logicn-target-ai-accelerator/src/index.ts",
+      "tags": [
+        "type",
+        "logicn-target-ai-accelerator"
+      ]
+    },
+    {
+      "id": "type:logicn-target-ai-accelerator:AiAcceleratorDiagnostic",
+      "kind": "Type",
+      "label": "AiAcceleratorDiagnostic",
+      "sourcePath": "packages-logicn/logicn-target-ai-accelerator/src/index.ts",
+      "tags": [
+        "type",
+        "logicn-target-ai-accelerator"
+      ]
+    },
+    {
       "id": "type:logicn-target-ai-accelerator:AiAcceleratorTopology",
       "kind": "Type",
       "label": "AiAcceleratorTopology",
@@ -7348,6 +8290,36 @@
       ]
     },
     {
+      "id": "type:logicn-target-ai-accelerator:AiAcceleratorModelProfile",
+      "kind": "Type",
+      "label": "AiAcceleratorModelProfile",
+      "sourcePath": "packages-logicn/logicn-target-ai-accelerator/src/index.ts",
+      "tags": [
+        "type",
+        "logicn-target-ai-accelerator"
+      ]
+    },
+    {
+      "id": "type:logicn-target-ai-accelerator:AiAcceleratorTargetPreference",
+      "kind": "Type",
+      "label": "AiAcceleratorTargetPreference",
+      "sourcePath": "packages-logicn/logicn-target-ai-accelerator/src/index.ts",
+      "tags": [
+        "type",
+        "logicn-target-ai-accelerator"
+      ]
+    },
+    {
+      "id": "type:logicn-target-ai-accelerator:AiAcceleratorTargetSelection",
+      "kind": "Type",
+      "label": "AiAcceleratorTargetSelection",
+      "sourcePath": "packages-logicn/logicn-target-ai-accelerator/src/index.ts",
+      "tags": [
+        "type",
+        "logicn-target-ai-accelerator"
+      ]
+    },
+    {
       "id": "type:logicn-target-ai-accelerator:AiAcceleratorPlan",
       "kind": "Type",
       "label": "AiAcceleratorPlan",
@@ -7374,6 +8346,46 @@
       "sourcePath": "packages-logicn/logicn-target-ai-accelerator/src/index.ts",
       "tags": [
         "type",
+        "logicn-target-ai-accelerator"
+      ]
+    },
+    {
+      "id": "type:logicn-target-ai-accelerator:GENERIC_ONNX_NPU_PROFILE",
+      "kind": "Type",
+      "label": "GENERIC_ONNX_NPU_PROFILE",
+      "sourcePath": "packages-logicn/logicn-target-ai-accelerator/src/index.ts",
+      "tags": [
+        "type",
+        "logicn-target-ai-accelerator"
+      ]
+    },
+    {
+      "id": "flow:logicn-target-ai-accelerator:selectAiAcceleratorTarget",
+      "kind": "Flow",
+      "label": "selectAiAcceleratorTarget",
+      "sourcePath": "packages-logicn/logicn-target-ai-accelerator/src/index.ts",
+      "tags": [
+        "function",
+        "logicn-target-ai-accelerator"
+      ]
+    },
+    {
+      "id": "flow:logicn-target-ai-accelerator:createAiAcceleratorTargetReport",
+      "kind": "Flow",
+      "label": "createAiAcceleratorTargetReport",
+      "sourcePath": "packages-logicn/logicn-target-ai-accelerator/src/index.ts",
+      "tags": [
+        "function",
+        "logicn-target-ai-accelerator"
+      ]
+    },
+    {
+      "id": "flow:logicn-target-ai-accelerator:validateAiAcceleratorModel",
+      "kind": "Flow",
+      "label": "validateAiAcceleratorModel",
+      "sourcePath": "packages-logicn/logicn-target-ai-accelerator/src/index.ts",
+      "tags": [
+        "function",
         "logicn-target-ai-accelerator"
       ]
     },
@@ -7778,6 +8790,36 @@
       ]
     },
     {
+      "id": "flow:logicn-core-cli:createCoreCommandRunner",
+      "kind": "Flow",
+      "label": "createCoreCommandRunner",
+      "sourcePath": "packages-logicn/logicn-core-cli/src/core-command.ts",
+      "tags": [
+        "function",
+        "logicn-core-cli"
+      ]
+    },
+    {
+      "id": "flow:logicn-core-cli:relativeCoreCompilerPath",
+      "kind": "Flow",
+      "label": "relativeCoreCompilerPath",
+      "sourcePath": "packages-logicn/logicn-core-cli/src/core-command.ts",
+      "tags": [
+        "function",
+        "logicn-core-cli"
+      ]
+    },
+    {
+      "id": "flow:logicn-core-cli:spawn",
+      "kind": "Flow",
+      "label": "spawn",
+      "sourcePath": "packages-logicn/logicn-core-cli/src/node-globals.d.ts",
+      "tags": [
+        "function",
+        "logicn-core-cli"
+      ]
+    },
+    {
       "id": "type:logicn-core-cli:Dirent",
       "kind": "Type",
       "label": "Dirent",
@@ -7881,6 +8923,16 @@
       "id": "flow:logicn-core-cli:relative",
       "kind": "Flow",
       "label": "relative",
+      "sourcePath": "packages-logicn/logicn-core-cli/src/node-globals.d.ts",
+      "tags": [
+        "function",
+        "logicn-core-cli"
+      ]
+    },
+    {
+      "id": "flow:logicn-core-cli:fileURLToPath",
+      "kind": "Flow",
+      "label": "fileURLToPath",
       "sourcePath": "packages-logicn/logicn-core-cli/src/node-globals.d.ts",
       "tags": [
         "function",
@@ -9108,106 +10160,6 @@
       ]
     },
     {
-      "id": "doc:packages-logicn/logicn-compliance",
-      "kind": "Document",
-      "label": "compliance",
-      "sourcePath": "packages-logicn/logicn-compliance",
-      "tags": [
-        "document",
-        "workspace-doc"
-      ]
-    },
-    {
-      "id": "doc:packages-logicn/logicn-compliance-privacy",
-      "kind": "Document",
-      "label": "compliancePrivacy",
-      "sourcePath": "packages-logicn/logicn-compliance-privacy",
-      "tags": [
-        "document",
-        "workspace-doc"
-      ]
-    },
-    {
-      "id": "doc:packages-logicn/logicn-compliance-security",
-      "kind": "Document",
-      "label": "complianceSecurity",
-      "sourcePath": "packages-logicn/logicn-compliance-security",
-      "tags": [
-        "document",
-        "workspace-doc"
-      ]
-    },
-    {
-      "id": "doc:packages-logicn/logicn-compliance-data",
-      "kind": "Document",
-      "label": "complianceData",
-      "sourcePath": "packages-logicn/logicn-compliance-data",
-      "tags": [
-        "document",
-        "workspace-doc"
-      ]
-    },
-    {
-      "id": "doc:packages-logicn/logicn-compliance-audit",
-      "kind": "Document",
-      "label": "complianceAudit",
-      "sourcePath": "packages-logicn/logicn-compliance-audit",
-      "tags": [
-        "document",
-        "workspace-doc"
-      ]
-    },
-    {
-      "id": "doc:packages-logicn/logicn-compliance-retention",
-      "kind": "Document",
-      "label": "complianceRetention",
-      "sourcePath": "packages-logicn/logicn-compliance-retention",
-      "tags": [
-        "document",
-        "workspace-doc"
-      ]
-    },
-    {
-      "id": "doc:packages-logicn/logicn-compliance-ai",
-      "kind": "Document",
-      "label": "complianceAi",
-      "sourcePath": "packages-logicn/logicn-compliance-ai",
-      "tags": [
-        "document",
-        "workspace-doc"
-      ]
-    },
-    {
-      "id": "doc:packages-logicn/logicn-compliance-accessibility",
-      "kind": "Document",
-      "label": "complianceAccessibility",
-      "sourcePath": "packages-logicn/logicn-compliance-accessibility",
-      "tags": [
-        "document",
-        "workspace-doc"
-      ]
-    },
-    {
-      "id": "doc:packages-logicn/logicn-compliance-deployment",
-      "kind": "Document",
-      "label": "complianceDeployment",
-      "sourcePath": "packages-logicn/logicn-compliance-deployment",
-      "tags": [
-        "document",
-        "workspace-doc"
-      ]
-    },
-    {
-      "id": "doc:packages-logicn/logicn-compliance-reports",
-      "kind": "Document",
-      "label": "complianceReports",
-      "sourcePath": "packages-logicn/logicn-compliance-reports",
-      "tags": [
-        "document",
-        "workspace-doc"
-      ]
-    },
-    {
       "id": "doc:packages-logicn/logicn-data",
       "kind": "Document",
       "label": "data",
@@ -9328,6 +10280,66 @@
       ]
     },
     {
+      "id": "doc:packages-logicn/logicn-web",
+      "kind": "Document",
+      "label": "web",
+      "sourcePath": "packages-logicn/logicn-web",
+      "tags": [
+        "document",
+        "workspace-doc"
+      ]
+    },
+    {
+      "id": "doc:packages-logicn/logicn-web-render",
+      "kind": "Document",
+      "label": "webRender",
+      "sourcePath": "packages-logicn/logicn-web-render",
+      "tags": [
+        "document",
+        "workspace-doc"
+      ]
+    },
+    {
+      "id": "doc:packages-logicn/logicn-web-state",
+      "kind": "Document",
+      "label": "webState",
+      "sourcePath": "packages-logicn/logicn-web-state",
+      "tags": [
+        "document",
+        "workspace-doc"
+      ]
+    },
+    {
+      "id": "doc:packages-logicn/logicn-web-components",
+      "kind": "Document",
+      "label": "webComponents",
+      "sourcePath": "packages-logicn/logicn-web-components",
+      "tags": [
+        "document",
+        "workspace-doc"
+      ]
+    },
+    {
+      "id": "doc:packages-logicn/logicn-web-router",
+      "kind": "Document",
+      "label": "webRouter",
+      "sourcePath": "packages-logicn/logicn-web-router",
+      "tags": [
+        "document",
+        "workspace-doc"
+      ]
+    },
+    {
+      "id": "doc:packages-logicn/logicn-web-events",
+      "kind": "Document",
+      "label": "webEvents",
+      "sourcePath": "packages-logicn/logicn-web-events",
+      "tags": [
+        "document",
+        "workspace-doc"
+      ]
+    },
+    {
       "id": "doc:packages-logicn/logicn-db-postgres",
       "kind": "Document",
       "label": "dbPostgres",
@@ -9412,6 +10424,16 @@
       "kind": "Document",
       "label": "targetBinary",
       "sourcePath": "packages-logicn/logicn-target-binary",
+      "tags": [
+        "document",
+        "workspace-doc"
+      ]
+    },
+    {
+      "id": "doc:packages-logicn/logicn-target-js",
+      "kind": "Document",
+      "label": "targetJs",
+      "sourcePath": "packages-logicn/logicn-target-js",
       "tags": [
         "document",
         "workspace-doc"
@@ -9665,76 +10687,6 @@
     },
     {
       "from": "doc:README.md",
-      "to": "package:logicn-compliance",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "README.md"
-    },
-    {
-      "from": "doc:README.md",
-      "to": "package:logicn-compliance-privacy",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "README.md"
-    },
-    {
-      "from": "doc:README.md",
-      "to": "package:logicn-compliance-security",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "README.md"
-    },
-    {
-      "from": "doc:README.md",
-      "to": "package:logicn-compliance-data",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "README.md"
-    },
-    {
-      "from": "doc:README.md",
-      "to": "package:logicn-compliance-audit",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "README.md"
-    },
-    {
-      "from": "doc:README.md",
-      "to": "package:logicn-compliance-retention",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "README.md"
-    },
-    {
-      "from": "doc:README.md",
-      "to": "package:logicn-compliance-ai",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "README.md"
-    },
-    {
-      "from": "doc:README.md",
-      "to": "package:logicn-compliance-accessibility",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "README.md"
-    },
-    {
-      "from": "doc:README.md",
-      "to": "package:logicn-compliance-deployment",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "README.md"
-    },
-    {
-      "from": "doc:README.md",
-      "to": "package:logicn-compliance-reports",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "README.md"
-    },
-    {
-      "from": "doc:README.md",
       "to": "package:logicn-data",
       "kind": "documents",
       "confidence": "INFERRED",
@@ -10127,76 +11079,6 @@
     },
     {
       "from": "doc:docs/ARCHITECTURE.md",
-      "to": "package:logicn-compliance",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "docs/ARCHITECTURE.md"
-    },
-    {
-      "from": "doc:docs/ARCHITECTURE.md",
-      "to": "package:logicn-compliance-privacy",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "docs/ARCHITECTURE.md"
-    },
-    {
-      "from": "doc:docs/ARCHITECTURE.md",
-      "to": "package:logicn-compliance-security",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "docs/ARCHITECTURE.md"
-    },
-    {
-      "from": "doc:docs/ARCHITECTURE.md",
-      "to": "package:logicn-compliance-data",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "docs/ARCHITECTURE.md"
-    },
-    {
-      "from": "doc:docs/ARCHITECTURE.md",
-      "to": "package:logicn-compliance-audit",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "docs/ARCHITECTURE.md"
-    },
-    {
-      "from": "doc:docs/ARCHITECTURE.md",
-      "to": "package:logicn-compliance-retention",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "docs/ARCHITECTURE.md"
-    },
-    {
-      "from": "doc:docs/ARCHITECTURE.md",
-      "to": "package:logicn-compliance-ai",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "docs/ARCHITECTURE.md"
-    },
-    {
-      "from": "doc:docs/ARCHITECTURE.md",
-      "to": "package:logicn-compliance-accessibility",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "docs/ARCHITECTURE.md"
-    },
-    {
-      "from": "doc:docs/ARCHITECTURE.md",
-      "to": "package:logicn-compliance-deployment",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "docs/ARCHITECTURE.md"
-    },
-    {
-      "from": "doc:docs/ARCHITECTURE.md",
-      "to": "package:logicn-compliance-reports",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "docs/ARCHITECTURE.md"
-    },
-    {
-      "from": "doc:docs/ARCHITECTURE.md",
       "to": "package:logicn-data",
       "kind": "documents",
       "confidence": "INFERRED",
@@ -10281,6 +11163,48 @@
     },
     {
       "from": "doc:docs/ARCHITECTURE.md",
+      "to": "package:logicn-web",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/ARCHITECTURE.md"
+    },
+    {
+      "from": "doc:docs/ARCHITECTURE.md",
+      "to": "package:logicn-web-render",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/ARCHITECTURE.md"
+    },
+    {
+      "from": "doc:docs/ARCHITECTURE.md",
+      "to": "package:logicn-web-state",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/ARCHITECTURE.md"
+    },
+    {
+      "from": "doc:docs/ARCHITECTURE.md",
+      "to": "package:logicn-web-components",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/ARCHITECTURE.md"
+    },
+    {
+      "from": "doc:docs/ARCHITECTURE.md",
+      "to": "package:logicn-web-router",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/ARCHITECTURE.md"
+    },
+    {
+      "from": "doc:docs/ARCHITECTURE.md",
+      "to": "package:logicn-web-events",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/ARCHITECTURE.md"
+    },
+    {
+      "from": "doc:docs/ARCHITECTURE.md",
       "to": "package:logicn-db-postgres",
       "kind": "documents",
       "confidence": "INFERRED",
@@ -10338,6 +11262,13 @@
     {
       "from": "doc:docs/ARCHITECTURE.md",
       "to": "package:logicn-target-binary",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/ARCHITECTURE.md"
+    },
+    {
+      "from": "doc:docs/ARCHITECTURE.md",
+      "to": "package:logicn-target-js",
       "kind": "documents",
       "confidence": "INFERRED",
       "evidencePath": "docs/ARCHITECTURE.md"
@@ -10526,13 +11457,6 @@
     },
     {
       "from": "doc:docs/CHANGELOG.md",
-      "to": "package:logicn-compliance",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "docs/CHANGELOG.md"
-    },
-    {
-      "from": "doc:docs/CHANGELOG.md",
       "to": "package:logicn-data",
       "kind": "documents",
       "confidence": "INFERRED",
@@ -10568,6 +11492,13 @@
     },
     {
       "from": "doc:docs/CHANGELOG.md",
+      "to": "package:logicn-web",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/CHANGELOG.md"
+    },
+    {
+      "from": "doc:docs/CHANGELOG.md",
       "to": "package:logicn-core-photonic",
       "kind": "documents",
       "confidence": "INFERRED",
@@ -10590,6 +11521,13 @@
     {
       "from": "doc:docs/CHANGELOG.md",
       "to": "package:logicn-target-binary",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/CHANGELOG.md"
+    },
+    {
+      "from": "doc:docs/CHANGELOG.md",
+      "to": "package:logicn-target-js",
       "kind": "documents",
       "confidence": "INFERRED",
       "evidencePath": "docs/CHANGELOG.md"
@@ -10679,6 +11617,55 @@
       "evidencePath": "docs/CORE_FOUNDATION_ROADMAP.md"
     },
     {
+      "from": "doc:docs/CSRF_PROTECTION.md",
+      "to": "package:logicn-core",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/CSRF_PROTECTION.md"
+    },
+    {
+      "from": "doc:docs/CSRF_PROTECTION.md",
+      "to": "package:logicn-core-compiler",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/CSRF_PROTECTION.md"
+    },
+    {
+      "from": "doc:docs/CSRF_PROTECTION.md",
+      "to": "package:logicn-core-network",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/CSRF_PROTECTION.md"
+    },
+    {
+      "from": "doc:docs/CSRF_PROTECTION.md",
+      "to": "package:logicn-core-security",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/CSRF_PROTECTION.md"
+    },
+    {
+      "from": "doc:docs/CSRF_PROTECTION.md",
+      "to": "package:logicn-core-reports",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/CSRF_PROTECTION.md"
+    },
+    {
+      "from": "doc:docs/CSRF_PROTECTION.md",
+      "to": "package:logicn-framework-app-kernel",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/CSRF_PROTECTION.md"
+    },
+    {
+      "from": "doc:docs/CSRF_PROTECTION.md",
+      "to": "package:logicn-framework-api-server",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/CSRF_PROTECTION.md"
+    },
+    {
       "from": "doc:docs/DECISIONS.md",
       "to": "package:logicn-core",
       "kind": "documents",
@@ -10777,6 +11764,27 @@
       "evidencePath": "docs/DESIGN.md"
     },
     {
+      "from": "doc:docs/ENTERPRISE.md",
+      "to": "package:logicn-core",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/ENTERPRISE.md"
+    },
+    {
+      "from": "doc:docs/ENTERPRISE.md",
+      "to": "package:logicn-web",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/ENTERPRISE.md"
+    },
+    {
+      "from": "doc:docs/ENTERPRISE.md",
+      "to": "package:logicn-web-render",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/ENTERPRISE.md"
+    },
+    {
       "from": "doc:docs/FINANCE_PACKAGES.md",
       "to": "package:logicn-core",
       "kind": "documents",
@@ -10789,6 +11797,132 @@
       "kind": "documents",
       "confidence": "INFERRED",
       "evidencePath": "docs/FINANCE_PACKAGES.md"
+    },
+    {
+      "from": "doc:docs/LEARNING_MODE.md",
+      "to": "package:logicn-core",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/LEARNING_MODE.md"
+    },
+    {
+      "from": "doc:docs/LEARNING_MODE.md",
+      "to": "package:logicn-core-runtime",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/LEARNING_MODE.md"
+    },
+    {
+      "from": "doc:docs/LEARNING_MODE.md",
+      "to": "package:logicn-core-security",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/LEARNING_MODE.md"
+    },
+    {
+      "from": "doc:docs/LEARNING_MODE.md",
+      "to": "package:logicn-core-reports",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/LEARNING_MODE.md"
+    },
+    {
+      "from": "doc:docs/LEARNING_MODE.md",
+      "to": "package:logicn-web",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/LEARNING_MODE.md"
+    },
+    {
+      "from": "doc:docs/LEARNING_MODE.md",
+      "to": "package:logicn-target-js",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/LEARNING_MODE.md"
+    },
+    {
+      "from": "doc:docs/LEARNING_MODE.md",
+      "to": "package:logicn-target-wasm",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/LEARNING_MODE.md"
+    },
+    {
+      "from": "doc:docs/LEARNING_MODE.md",
+      "to": "package:logicn-core-cli",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/LEARNING_MODE.md"
+    },
+    {
+      "from": "doc:docs/LOGICN_CHARTER_STATEMENT.md",
+      "to": "package:logicn-core",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/LOGICN_CHARTER_STATEMENT.md"
+    },
+    {
+      "from": "doc:docs/LOGICN_CHARTER_STATEMENT.md",
+      "to": "package:logicn-ai",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/LOGICN_CHARTER_STATEMENT.md"
+    },
+    {
+      "from": "doc:docs/LOGICN_CHARTER_STATEMENT.md",
+      "to": "package:logicn-data",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/LOGICN_CHARTER_STATEMENT.md"
+    },
+    {
+      "from": "doc:docs/LOGICN_FINANCIAL_MARKETS.md",
+      "to": "package:logicn-core",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/LOGICN_FINANCIAL_MARKETS.md"
+    },
+    {
+      "from": "doc:docs/LOGICN_FINANCIAL_MARKETS.md",
+      "to": "package:logicn-core-runtime",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/LOGICN_FINANCIAL_MARKETS.md"
+    },
+    {
+      "from": "doc:docs/LOGICN_FINANCIAL_MARKETS.md",
+      "to": "package:logicn-core-security",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/LOGICN_FINANCIAL_MARKETS.md"
+    },
+    {
+      "from": "doc:docs/LOGICN_FINANCIAL_MARKETS.md",
+      "to": "package:logicn-core-reports",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/LOGICN_FINANCIAL_MARKETS.md"
+    },
+    {
+      "from": "doc:docs/LOGICN_FINANCIAL_MARKETS.md",
+      "to": "package:logicn-core-vector",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/LOGICN_FINANCIAL_MARKETS.md"
+    },
+    {
+      "from": "doc:docs/LOGICN_FINANCIAL_MARKETS.md",
+      "to": "package:logicn-core-compute",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/LOGICN_FINANCIAL_MARKETS.md"
+    },
+    {
+      "from": "doc:docs/LOGICN_FINANCIAL_MARKETS.md",
+      "to": "package:logicn-tools-benchmark",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/LOGICN_FINANCIAL_MARKETS.md"
     },
     {
       "from": "doc:docs/LOWBIT_AI_BACKENDS.md",
@@ -10838,6 +11972,48 @@
       "kind": "documents",
       "confidence": "INFERRED",
       "evidencePath": "docs/LOWBIT_AI_BACKENDS.md"
+    },
+    {
+      "from": "doc:docs/MEMORY_HIERARCHY_RELIABILITY.md",
+      "to": "package:logicn-core",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/MEMORY_HIERARCHY_RELIABILITY.md"
+    },
+    {
+      "from": "doc:docs/MEMORY_HIERARCHY_RELIABILITY.md",
+      "to": "package:logicn-core-compiler",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/MEMORY_HIERARCHY_RELIABILITY.md"
+    },
+    {
+      "from": "doc:docs/MEMORY_HIERARCHY_RELIABILITY.md",
+      "to": "package:logicn-core-runtime",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/MEMORY_HIERARCHY_RELIABILITY.md"
+    },
+    {
+      "from": "doc:docs/MEMORY_HIERARCHY_RELIABILITY.md",
+      "to": "package:logicn-core-reports",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/MEMORY_HIERARCHY_RELIABILITY.md"
+    },
+    {
+      "from": "doc:docs/MEMORY_HIERARCHY_RELIABILITY.md",
+      "to": "package:logicn-target-cpu",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/MEMORY_HIERARCHY_RELIABILITY.md"
+    },
+    {
+      "from": "doc:docs/MEMORY_HIERARCHY_RELIABILITY.md",
+      "to": "package:logicn-cpu-kernels",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/MEMORY_HIERARCHY_RELIABILITY.md"
     },
     {
       "from": "doc:docs/NETWORK_ETHERNET_IO.md",
@@ -10953,6 +12129,13 @@
     },
     {
       "from": "doc:docs/OPTICAL_IO.md",
+      "to": "package:logicn-core-network",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/OPTICAL_IO.md"
+    },
+    {
+      "from": "doc:docs/OPTICAL_IO.md",
       "to": "package:logicn-core-security",
       "kind": "documents",
       "confidence": "INFERRED",
@@ -10975,6 +12158,13 @@
     {
       "from": "doc:docs/OPTICAL_IO.md",
       "to": "package:logicn-core-compute",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/OPTICAL_IO.md"
+    },
+    {
+      "from": "doc:docs/OPTICAL_IO.md",
+      "to": "package:logicn-ai",
       "kind": "documents",
       "confidence": "INFERRED",
       "evidencePath": "docs/OPTICAL_IO.md"
@@ -11136,76 +12326,6 @@
     {
       "from": "doc:docs/PACKAGE_NAMING.md",
       "to": "package:logicn-ai-neuromorphic",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "docs/PACKAGE_NAMING.md"
-    },
-    {
-      "from": "doc:docs/PACKAGE_NAMING.md",
-      "to": "package:logicn-compliance",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "docs/PACKAGE_NAMING.md"
-    },
-    {
-      "from": "doc:docs/PACKAGE_NAMING.md",
-      "to": "package:logicn-compliance-privacy",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "docs/PACKAGE_NAMING.md"
-    },
-    {
-      "from": "doc:docs/PACKAGE_NAMING.md",
-      "to": "package:logicn-compliance-security",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "docs/PACKAGE_NAMING.md"
-    },
-    {
-      "from": "doc:docs/PACKAGE_NAMING.md",
-      "to": "package:logicn-compliance-data",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "docs/PACKAGE_NAMING.md"
-    },
-    {
-      "from": "doc:docs/PACKAGE_NAMING.md",
-      "to": "package:logicn-compliance-audit",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "docs/PACKAGE_NAMING.md"
-    },
-    {
-      "from": "doc:docs/PACKAGE_NAMING.md",
-      "to": "package:logicn-compliance-retention",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "docs/PACKAGE_NAMING.md"
-    },
-    {
-      "from": "doc:docs/PACKAGE_NAMING.md",
-      "to": "package:logicn-compliance-ai",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "docs/PACKAGE_NAMING.md"
-    },
-    {
-      "from": "doc:docs/PACKAGE_NAMING.md",
-      "to": "package:logicn-compliance-accessibility",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "docs/PACKAGE_NAMING.md"
-    },
-    {
-      "from": "doc:docs/PACKAGE_NAMING.md",
-      "to": "package:logicn-compliance-deployment",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "docs/PACKAGE_NAMING.md"
-    },
-    {
-      "from": "doc:docs/PACKAGE_NAMING.md",
-      "to": "package:logicn-compliance-reports",
       "kind": "documents",
       "confidence": "INFERRED",
       "evidencePath": "docs/PACKAGE_NAMING.md"
@@ -11296,6 +12416,48 @@
     },
     {
       "from": "doc:docs/PACKAGE_NAMING.md",
+      "to": "package:logicn-web",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/PACKAGE_NAMING.md"
+    },
+    {
+      "from": "doc:docs/PACKAGE_NAMING.md",
+      "to": "package:logicn-web-render",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/PACKAGE_NAMING.md"
+    },
+    {
+      "from": "doc:docs/PACKAGE_NAMING.md",
+      "to": "package:logicn-web-state",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/PACKAGE_NAMING.md"
+    },
+    {
+      "from": "doc:docs/PACKAGE_NAMING.md",
+      "to": "package:logicn-web-components",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/PACKAGE_NAMING.md"
+    },
+    {
+      "from": "doc:docs/PACKAGE_NAMING.md",
+      "to": "package:logicn-web-router",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/PACKAGE_NAMING.md"
+    },
+    {
+      "from": "doc:docs/PACKAGE_NAMING.md",
+      "to": "package:logicn-web-events",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/PACKAGE_NAMING.md"
+    },
+    {
+      "from": "doc:docs/PACKAGE_NAMING.md",
       "to": "package:logicn-db-postgres",
       "kind": "documents",
       "confidence": "INFERRED",
@@ -11359,6 +12521,13 @@
     },
     {
       "from": "doc:docs/PACKAGE_NAMING.md",
+      "to": "package:logicn-target-js",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/PACKAGE_NAMING.md"
+    },
+    {
+      "from": "doc:docs/PACKAGE_NAMING.md",
       "to": "package:logicn-target-wasm",
       "kind": "documents",
       "confidence": "INFERRED",
@@ -11433,6 +12602,139 @@
       "kind": "documents",
       "confidence": "INFERRED",
       "evidencePath": "docs/PACKAGE_NAMING.md"
+    },
+    {
+      "from": "doc:docs/PROFILE_INSTALLERS.md",
+      "to": "package:logicn-core",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/PROFILE_INSTALLERS.md"
+    },
+    {
+      "from": "doc:docs/PROFILE_INSTALLERS.md",
+      "to": "package:logicn-core-compiler",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/PROFILE_INSTALLERS.md"
+    },
+    {
+      "from": "doc:docs/PROFILE_INSTALLERS.md",
+      "to": "package:logicn-core-runtime",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/PROFILE_INSTALLERS.md"
+    },
+    {
+      "from": "doc:docs/PROFILE_INSTALLERS.md",
+      "to": "package:logicn-core-network",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/PROFILE_INSTALLERS.md"
+    },
+    {
+      "from": "doc:docs/PROFILE_INSTALLERS.md",
+      "to": "package:logicn-core-security",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/PROFILE_INSTALLERS.md"
+    },
+    {
+      "from": "doc:docs/PROFILE_INSTALLERS.md",
+      "to": "package:logicn-core-config",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/PROFILE_INSTALLERS.md"
+    },
+    {
+      "from": "doc:docs/PROFILE_INSTALLERS.md",
+      "to": "package:logicn-core-reports",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/PROFILE_INSTALLERS.md"
+    },
+    {
+      "from": "doc:docs/PROFILE_INSTALLERS.md",
+      "to": "package:logicn-ai",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/PROFILE_INSTALLERS.md"
+    },
+    {
+      "from": "doc:docs/PROFILE_INSTALLERS.md",
+      "to": "package:logicn-ai-lowbit",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/PROFILE_INSTALLERS.md"
+    },
+    {
+      "from": "doc:docs/PROFILE_INSTALLERS.md",
+      "to": "package:logicn-ai-agent",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/PROFILE_INSTALLERS.md"
+    },
+    {
+      "from": "doc:docs/PROFILE_INSTALLERS.md",
+      "to": "package:logicn-ai-neural",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/PROFILE_INSTALLERS.md"
+    },
+    {
+      "from": "doc:docs/PROFILE_INSTALLERS.md",
+      "to": "package:logicn-ai-neuromorphic",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/PROFILE_INSTALLERS.md"
+    },
+    {
+      "from": "doc:docs/PROFILE_INSTALLERS.md",
+      "to": "package:logicn-data",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/PROFILE_INSTALLERS.md"
+    },
+    {
+      "from": "doc:docs/PROFILE_INSTALLERS.md",
+      "to": "package:logicn-target-cpu",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/PROFILE_INSTALLERS.md"
+    },
+    {
+      "from": "doc:docs/PROFILE_INSTALLERS.md",
+      "to": "package:logicn-target-binary",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/PROFILE_INSTALLERS.md"
+    },
+    {
+      "from": "doc:docs/PROFILE_INSTALLERS.md",
+      "to": "package:logicn-target-wasm",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/PROFILE_INSTALLERS.md"
+    },
+    {
+      "from": "doc:docs/PROFILE_INSTALLERS.md",
+      "to": "package:logicn-target-ai-accelerator",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/PROFILE_INSTALLERS.md"
+    },
+    {
+      "from": "doc:docs/PROFILE_INSTALLERS.md",
+      "to": "package:logicn-framework-app-kernel",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/PROFILE_INSTALLERS.md"
+    },
+    {
+      "from": "doc:docs/PROFILE_INSTALLERS.md",
+      "to": "package:logicn-framework-api-server",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/PROFILE_INSTALLERS.md"
     },
     {
       "from": "doc:docs/PROJECT_GRAPH.md",
@@ -11605,13 +12907,6 @@
     {
       "from": "doc:docs/REQUIREMENTS.md",
       "to": "package:logicn-ai-neuromorphic",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "docs/REQUIREMENTS.md"
-    },
-    {
-      "from": "doc:docs/REQUIREMENTS.md",
-      "to": "package:logicn-compliance",
       "kind": "documents",
       "confidence": "INFERRED",
       "evidencePath": "docs/REQUIREMENTS.md"
@@ -11653,6 +12948,48 @@
     },
     {
       "from": "doc:docs/REQUIREMENTS.md",
+      "to": "package:logicn-web",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/REQUIREMENTS.md"
+    },
+    {
+      "from": "doc:docs/REQUIREMENTS.md",
+      "to": "package:logicn-web-render",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/REQUIREMENTS.md"
+    },
+    {
+      "from": "doc:docs/REQUIREMENTS.md",
+      "to": "package:logicn-web-state",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/REQUIREMENTS.md"
+    },
+    {
+      "from": "doc:docs/REQUIREMENTS.md",
+      "to": "package:logicn-web-components",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/REQUIREMENTS.md"
+    },
+    {
+      "from": "doc:docs/REQUIREMENTS.md",
+      "to": "package:logicn-web-router",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/REQUIREMENTS.md"
+    },
+    {
+      "from": "doc:docs/REQUIREMENTS.md",
+      "to": "package:logicn-web-events",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/REQUIREMENTS.md"
+    },
+    {
+      "from": "doc:docs/REQUIREMENTS.md",
       "to": "package:logicn-core-photonic",
       "kind": "documents",
       "confidence": "INFERRED",
@@ -11675,6 +13012,13 @@
     {
       "from": "doc:docs/REQUIREMENTS.md",
       "to": "package:logicn-target-binary",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/REQUIREMENTS.md"
+    },
+    {
+      "from": "doc:docs/REQUIREMENTS.md",
+      "to": "package:logicn-target-js",
       "kind": "documents",
       "confidence": "INFERRED",
       "evidencePath": "docs/REQUIREMENTS.md"
@@ -11799,53 +13143,81 @@
       "evidencePath": "docs/RESILIENT_FLOWS.md"
     },
     {
-      "from": "doc:docs/LOGICN_FINANCIAL_MARKETS.md",
+      "from": "doc:docs/SECURE_FAST_ROUTING.md",
       "to": "package:logicn-core",
       "kind": "documents",
       "confidence": "INFERRED",
-      "evidencePath": "docs/LOGICN_FINANCIAL_MARKETS.md"
+      "evidencePath": "docs/SECURE_FAST_ROUTING.md"
     },
     {
-      "from": "doc:docs/LOGICN_FINANCIAL_MARKETS.md",
-      "to": "package:logicn-core-runtime",
+      "from": "doc:docs/SECURE_FAST_ROUTING.md",
+      "to": "package:logicn-core-compiler",
       "kind": "documents",
       "confidence": "INFERRED",
-      "evidencePath": "docs/LOGICN_FINANCIAL_MARKETS.md"
+      "evidencePath": "docs/SECURE_FAST_ROUTING.md"
     },
     {
-      "from": "doc:docs/LOGICN_FINANCIAL_MARKETS.md",
-      "to": "package:logicn-core-security",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "docs/LOGICN_FINANCIAL_MARKETS.md"
-    },
-    {
-      "from": "doc:docs/LOGICN_FINANCIAL_MARKETS.md",
+      "from": "doc:docs/SECURE_FAST_ROUTING.md",
       "to": "package:logicn-core-reports",
       "kind": "documents",
       "confidence": "INFERRED",
-      "evidencePath": "docs/LOGICN_FINANCIAL_MARKETS.md"
+      "evidencePath": "docs/SECURE_FAST_ROUTING.md"
     },
     {
-      "from": "doc:docs/LOGICN_FINANCIAL_MARKETS.md",
-      "to": "package:logicn-core-vector",
+      "from": "doc:docs/SECURE_FAST_ROUTING.md",
+      "to": "package:logicn-framework-app-kernel",
       "kind": "documents",
       "confidence": "INFERRED",
-      "evidencePath": "docs/LOGICN_FINANCIAL_MARKETS.md"
+      "evidencePath": "docs/SECURE_FAST_ROUTING.md"
     },
     {
-      "from": "doc:docs/LOGICN_FINANCIAL_MARKETS.md",
-      "to": "package:logicn-core-compute",
+      "from": "doc:docs/SECURE_FAST_ROUTING.md",
+      "to": "package:logicn-framework-api-server",
       "kind": "documents",
       "confidence": "INFERRED",
-      "evidencePath": "docs/LOGICN_FINANCIAL_MARKETS.md"
+      "evidencePath": "docs/SECURE_FAST_ROUTING.md"
     },
     {
-      "from": "doc:docs/LOGICN_FINANCIAL_MARKETS.md",
-      "to": "package:logicn-tools-benchmark",
+      "from": "doc:docs/SECURE_HTTP_RESPONSES.md",
+      "to": "package:logicn-core",
       "kind": "documents",
       "confidence": "INFERRED",
-      "evidencePath": "docs/LOGICN_FINANCIAL_MARKETS.md"
+      "evidencePath": "docs/SECURE_HTTP_RESPONSES.md"
+    },
+    {
+      "from": "doc:docs/SECURE_HTTP_RESPONSES.md",
+      "to": "package:logicn-core-compiler",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/SECURE_HTTP_RESPONSES.md"
+    },
+    {
+      "from": "doc:docs/SECURE_HTTP_RESPONSES.md",
+      "to": "package:logicn-core-security",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/SECURE_HTTP_RESPONSES.md"
+    },
+    {
+      "from": "doc:docs/SECURE_HTTP_RESPONSES.md",
+      "to": "package:logicn-core-reports",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/SECURE_HTTP_RESPONSES.md"
+    },
+    {
+      "from": "doc:docs/SECURE_HTTP_RESPONSES.md",
+      "to": "package:logicn-framework-app-kernel",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/SECURE_HTTP_RESPONSES.md"
+    },
+    {
+      "from": "doc:docs/SECURE_HTTP_RESPONSES.md",
+      "to": "package:logicn-framework-api-server",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/SECURE_HTTP_RESPONSES.md"
     },
     {
       "from": "doc:docs/SECURITY.md",
@@ -11902,6 +13274,34 @@
       "kind": "documents",
       "confidence": "INFERRED",
       "evidencePath": "docs/SECURITY.md"
+    },
+    {
+      "from": "doc:docs/SERVER_PLATFORM_SUPPORT.md",
+      "to": "package:logicn-target-js",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/SERVER_PLATFORM_SUPPORT.md"
+    },
+    {
+      "from": "doc:docs/SERVER_PLATFORM_SUPPORT.md",
+      "to": "package:logicn-target-wasm",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/SERVER_PLATFORM_SUPPORT.md"
+    },
+    {
+      "from": "doc:docs/SERVER_PLATFORM_SUPPORT.md",
+      "to": "package:logicn-framework-app-kernel",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/SERVER_PLATFORM_SUPPORT.md"
+    },
+    {
+      "from": "doc:docs/SERVER_PLATFORM_SUPPORT.md",
+      "to": "package:logicn-framework-api-server",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/SERVER_PLATFORM_SUPPORT.md"
     },
     {
       "from": "doc:docs/TASKS.md",
@@ -12010,13 +13410,6 @@
     },
     {
       "from": "doc:docs/TASKS.md",
-      "to": "package:logicn-compliance",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "docs/TASKS.md"
-    },
-    {
-      "from": "doc:docs/TASKS.md",
       "to": "package:logicn-data",
       "kind": "documents",
       "confidence": "INFERRED",
@@ -12025,6 +13418,13 @@
     {
       "from": "doc:docs/TASKS.md",
       "to": "package:logicn-data-db",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/TASKS.md"
+    },
+    {
+      "from": "doc:docs/TASKS.md",
+      "to": "package:logicn-web",
       "kind": "documents",
       "confidence": "INFERRED",
       "evidencePath": "docs/TASKS.md"
@@ -12053,6 +13453,13 @@
     {
       "from": "doc:docs/TASKS.md",
       "to": "package:logicn-target-binary",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/TASKS.md"
+    },
+    {
+      "from": "doc:docs/TASKS.md",
+      "to": "package:logicn-target-js",
       "kind": "documents",
       "confidence": "INFERRED",
       "evidencePath": "docs/TASKS.md"
@@ -12147,6 +13554,97 @@
       "kind": "documents",
       "confidence": "INFERRED",
       "evidencePath": "docs/testing.md"
+    },
+    {
+      "from": "doc:docs/WEB_RENDERING.md",
+      "to": "package:logicn-core",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/WEB_RENDERING.md"
+    },
+    {
+      "from": "doc:docs/WEB_RENDERING.md",
+      "to": "package:logicn-core-security",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/WEB_RENDERING.md"
+    },
+    {
+      "from": "doc:docs/WEB_RENDERING.md",
+      "to": "package:logicn-data",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/WEB_RENDERING.md"
+    },
+    {
+      "from": "doc:docs/WEB_RENDERING.md",
+      "to": "package:logicn-data-html",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/WEB_RENDERING.md"
+    },
+    {
+      "from": "doc:docs/WEB_RENDERING.md",
+      "to": "package:logicn-data-json",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/WEB_RENDERING.md"
+    },
+    {
+      "from": "doc:docs/WEB_RENDERING.md",
+      "to": "package:logicn-web",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/WEB_RENDERING.md"
+    },
+    {
+      "from": "doc:docs/WEB_RENDERING.md",
+      "to": "package:logicn-web-render",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/WEB_RENDERING.md"
+    },
+    {
+      "from": "doc:docs/WEB_RENDERING.md",
+      "to": "package:logicn-web-state",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/WEB_RENDERING.md"
+    },
+    {
+      "from": "doc:docs/WEB_RENDERING.md",
+      "to": "package:logicn-web-components",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/WEB_RENDERING.md"
+    },
+    {
+      "from": "doc:docs/WEB_RENDERING.md",
+      "to": "package:logicn-web-router",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/WEB_RENDERING.md"
+    },
+    {
+      "from": "doc:docs/WEB_RENDERING.md",
+      "to": "package:logicn-web-events",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/WEB_RENDERING.md"
+    },
+    {
+      "from": "doc:docs/WEB_RENDERING.md",
+      "to": "package:logicn-target-js",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/WEB_RENDERING.md"
+    },
+    {
+      "from": "doc:docs/WEB_RENDERING.md",
+      "to": "package:logicn-target-wasm",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/WEB_RENDERING.md"
     },
     {
       "from": "package:logicn-core",
@@ -12849,76 +14347,6 @@
       "evidencePath": "packages-logicn/logicn-core/docs/compliance-and-privacy.md"
     },
     {
-      "from": "doc:packages-logicn/logicn-core/docs/compliance-and-privacy.md",
-      "to": "package:logicn-compliance",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "packages-logicn/logicn-core/docs/compliance-and-privacy.md"
-    },
-    {
-      "from": "doc:packages-logicn/logicn-core/docs/compliance-and-privacy.md",
-      "to": "package:logicn-compliance-privacy",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "packages-logicn/logicn-core/docs/compliance-and-privacy.md"
-    },
-    {
-      "from": "doc:packages-logicn/logicn-core/docs/compliance-and-privacy.md",
-      "to": "package:logicn-compliance-security",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "packages-logicn/logicn-core/docs/compliance-and-privacy.md"
-    },
-    {
-      "from": "doc:packages-logicn/logicn-core/docs/compliance-and-privacy.md",
-      "to": "package:logicn-compliance-data",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "packages-logicn/logicn-core/docs/compliance-and-privacy.md"
-    },
-    {
-      "from": "doc:packages-logicn/logicn-core/docs/compliance-and-privacy.md",
-      "to": "package:logicn-compliance-audit",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "packages-logicn/logicn-core/docs/compliance-and-privacy.md"
-    },
-    {
-      "from": "doc:packages-logicn/logicn-core/docs/compliance-and-privacy.md",
-      "to": "package:logicn-compliance-retention",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "packages-logicn/logicn-core/docs/compliance-and-privacy.md"
-    },
-    {
-      "from": "doc:packages-logicn/logicn-core/docs/compliance-and-privacy.md",
-      "to": "package:logicn-compliance-ai",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "packages-logicn/logicn-core/docs/compliance-and-privacy.md"
-    },
-    {
-      "from": "doc:packages-logicn/logicn-core/docs/compliance-and-privacy.md",
-      "to": "package:logicn-compliance-accessibility",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "packages-logicn/logicn-core/docs/compliance-and-privacy.md"
-    },
-    {
-      "from": "doc:packages-logicn/logicn-core/docs/compliance-and-privacy.md",
-      "to": "package:logicn-compliance-deployment",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "packages-logicn/logicn-core/docs/compliance-and-privacy.md"
-    },
-    {
-      "from": "doc:packages-logicn/logicn-core/docs/compliance-and-privacy.md",
-      "to": "package:logicn-compliance-reports",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "packages-logicn/logicn-core/docs/compliance-and-privacy.md"
-    },
-    {
       "from": "package:logicn-core",
       "to": "doc:packages-logicn/logicn-core/docs/compute-blocks.md",
       "kind": "owns",
@@ -13025,13 +14453,6 @@
     },
     {
       "from": "package:logicn-core",
-      "to": "doc:packages-logicn/logicn-core/docs/logicn-language-core-maturity-gap.md",
-      "kind": "owns",
-      "confidence": "EXTRACTED",
-      "evidencePath": "packages-logicn/logicn-core/docs/logicn-language-core-maturity-gap.md"
-    },
-    {
-      "from": "package:logicn-core",
       "to": "doc:packages-logicn/logicn-core/docs/dart-flutter-target.md",
       "kind": "owns",
       "confidence": "EXTRACTED",
@@ -13054,27 +14475,6 @@
     {
       "from": "doc:packages-logicn/logicn-core/docs/data-processing.md",
       "to": "package:logicn-core-security",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "packages-logicn/logicn-core/docs/data-processing.md"
-    },
-    {
-      "from": "doc:packages-logicn/logicn-core/docs/data-processing.md",
-      "to": "package:logicn-compliance",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "packages-logicn/logicn-core/docs/data-processing.md"
-    },
-    {
-      "from": "doc:packages-logicn/logicn-core/docs/data-processing.md",
-      "to": "package:logicn-compliance-privacy",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "packages-logicn/logicn-core/docs/data-processing.md"
-    },
-    {
-      "from": "doc:packages-logicn/logicn-core/docs/data-processing.md",
-      "to": "package:logicn-compliance-retention",
       "kind": "documents",
       "confidence": "INFERRED",
       "evidencePath": "packages-logicn/logicn-core/docs/data-processing.md"
@@ -13498,6 +14898,13 @@
       "kind": "owns",
       "confidence": "EXTRACTED",
       "evidencePath": "packages-logicn/logicn-core/docs/logic-widths.md"
+    },
+    {
+      "from": "package:logicn-core",
+      "to": "doc:packages-logicn/logicn-core/docs/logicn-language-core-maturity-gap.md",
+      "kind": "owns",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core/docs/logicn-language-core-maturity-gap.md"
     },
     {
       "from": "package:logicn-core",
@@ -14676,6 +16083,13 @@
       "evidencePath": "packages-logicn/logicn-core/examples/README.md"
     },
     {
+      "from": "doc:packages-logicn/logicn-core/examples/README.md",
+      "to": "package:logicn-core",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-core/examples/README.md"
+    },
+    {
       "from": "package:logicn-core",
       "to": "doc:packages-logicn/logicn-core/GETTING_STARTED.md",
       "kind": "owns",
@@ -14860,13 +16274,6 @@
     {
       "from": "doc:packages-logicn/logicn-core/README.md",
       "to": "package:logicn-ai-neuromorphic",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "packages-logicn/logicn-core/README.md"
-    },
-    {
-      "from": "doc:packages-logicn/logicn-core/README.md",
-      "to": "package:logicn-compliance",
       "kind": "documents",
       "confidence": "INFERRED",
       "evidencePath": "packages-logicn/logicn-core/README.md"
@@ -15594,6 +17001,13 @@
     },
     {
       "from": "package:logicn-core-runtime",
+      "to": "doc:packages-logicn/logicn-core-runtime/examples/checked-runtime-context.json",
+      "kind": "owns",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-runtime/examples/checked-runtime-context.json"
+    },
+    {
+      "from": "package:logicn-core-runtime",
       "to": "doc:packages-logicn/logicn-core-runtime/package.json",
       "kind": "owns",
       "confidence": "EXTRACTED",
@@ -15643,7 +17057,28 @@
     },
     {
       "from": "package:logicn-core-runtime",
+      "to": "type:logicn-core-runtime:RuntimeEnvironment",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-runtime/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-runtime",
+      "to": "type:logicn-core-runtime:RuntimeDiagnosticSeverity",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-runtime/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-runtime",
       "to": "type:logicn-core-runtime:RuntimeContext",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-runtime/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-runtime",
+      "to": "type:logicn-core-runtime:RuntimeDiagnostic",
       "kind": "provides",
       "confidence": "EXTRACTED",
       "evidencePath": "packages-logicn/logicn-core-runtime/src/index.ts"
@@ -15664,7 +17099,84 @@
     },
     {
       "from": "package:logicn-core-runtime",
+      "to": "type:logicn-core-runtime:RuntimeEffectKind",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-runtime/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-runtime",
+      "to": "type:logicn-core-runtime:RuntimeEffect",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-runtime/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-runtime",
+      "to": "type:logicn-core-runtime:RuntimeEffectPolicy",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-runtime/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-runtime",
+      "to": "type:logicn-core-runtime:RuntimeEffectDecision",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-runtime/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-runtime",
       "to": "type:logicn-core-runtime:RuntimeReport",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-runtime/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-runtime",
+      "to": "type:logicn-core-runtime:DEFAULT_RUNTIME_EFFECT_POLICY",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-runtime/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-runtime",
+      "to": "flow:logicn-core-runtime:createRuntimeContext",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-runtime/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-runtime",
+      "to": "flow:logicn-core-runtime:validateRuntimeContext",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-runtime/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-runtime",
+      "to": "flow:logicn-core-runtime:okRuntimeResult",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-runtime/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-runtime",
+      "to": "flow:logicn-core-runtime:errorRuntimeResult",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-runtime/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-runtime",
+      "to": "flow:logicn-core-runtime:decideRuntimeEffect",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-runtime/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-runtime",
+      "to": "flow:logicn-core-runtime:createRuntimeReport",
       "kind": "provides",
       "confidence": "EXTRACTED",
       "evidencePath": "packages-logicn/logicn-core-runtime/src/index.ts"
@@ -15696,6 +17208,13 @@
       "kind": "owns",
       "confidence": "EXTRACTED",
       "evidencePath": "packages-logicn/logicn-core-runtime/tsconfig.json"
+    },
+    {
+      "from": "package:logicn-core-network",
+      "to": "doc:packages-logicn/logicn-core-network/examples/secure-api-network-policy.json",
+      "kind": "owns",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-network/examples/secure-api-network-policy.json"
     },
     {
       "from": "package:logicn-core-network",
@@ -15759,6 +17278,202 @@
       "kind": "documents",
       "confidence": "INFERRED",
       "evidencePath": "packages-logicn/logicn-core-network/README.md"
+    },
+    {
+      "from": "package:logicn-core-network",
+      "to": "type:logicn-core-network:NetworkDirection",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-network/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-network",
+      "to": "type:logicn-core-network:NetworkProtocol",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-network/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-network",
+      "to": "type:logicn-core-network:NetworkEffect",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-network/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-network",
+      "to": "type:logicn-core-network:TlsVersion",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-network/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-network",
+      "to": "type:logicn-core-network:NetworkBackend",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-network/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-network",
+      "to": "type:logicn-core-network:NetworkDiagnosticSeverity",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-network/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-network",
+      "to": "type:logicn-core-network:NetworkDiagnostic",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-network/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-network",
+      "to": "type:logicn-core-network:TlsPolicy",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-network/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-network",
+      "to": "type:logicn-core-network:NetworkEndpointRule",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-network/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-network",
+      "to": "type:logicn-core-network:RateLimitRule",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-network/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-network",
+      "to": "type:logicn-core-network:NetworkPrivacyPolicy",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-network/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-network",
+      "to": "type:logicn-core-network:NetworkPolicy",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-network/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-network",
+      "to": "type:logicn-core-network:NetworkBackendCapability",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-network/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-network",
+      "to": "type:logicn-core-network:NetworkAutoPolicy",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-network/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-network",
+      "to": "type:logicn-core-network:NetworkBackendSelection",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-network/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-network",
+      "to": "type:logicn-core-network:NetworkReport",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-network/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-network",
+      "to": "type:logicn-core-network:DEFAULT_TLS_POLICY",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-network/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-network",
+      "to": "type:logicn-core-network:DEFAULT_NETWORK_PRIVACY_POLICY",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-network/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-network",
+      "to": "flow:logicn-core-network:defineNetworkPolicy",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-network/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-network",
+      "to": "flow:logicn-core-network:validateNetworkPolicy",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-network/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-network",
+      "to": "flow:logicn-core-network:selectNetworkBackend",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-network/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-network",
+      "to": "flow:logicn-core-network:createNetworkReport",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-network/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-network",
+      "to": "doc:packages-logicn/logicn-core-network/TODO.md",
+      "kind": "owns",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-network/TODO.md"
+    },
+    {
+      "from": "doc:packages-logicn/logicn-core-network/TODO.md",
+      "to": "package:logicn-core",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-core-network/TODO.md"
+    },
+    {
+      "from": "doc:packages-logicn/logicn-core-network/TODO.md",
+      "to": "package:logicn-core-network",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-core-network/TODO.md"
+    },
+    {
+      "from": "doc:packages-logicn/logicn-core-network/TODO.md",
+      "to": "package:logicn-framework-app-kernel",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-core-network/TODO.md"
+    },
+    {
+      "from": "doc:packages-logicn/logicn-core-network/TODO.md",
+      "to": "package:logicn-framework-api-server",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-core-network/TODO.md"
+    },
+    {
+      "from": "package:logicn-core-network",
+      "to": "doc:packages-logicn/logicn-core-network/tsconfig.json",
+      "kind": "owns",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-network/tsconfig.json"
     },
     {
       "from": "package:logicn-core-security",
@@ -16889,6 +18604,13 @@
     },
     {
       "from": "package:logicn-core-logic",
+      "to": "doc:packages-logicn/logicn-core-logic/examples/decision-truth-table.json",
+      "kind": "owns",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-logic/examples/decision-truth-table.json"
+    },
+    {
+      "from": "package:logicn-core-logic",
       "to": "doc:packages-logicn/logicn-core-logic/package.json",
       "kind": "owns",
       "confidence": "EXTRACTED",
@@ -16966,6 +18688,34 @@
     },
     {
       "from": "package:logicn-core-logic",
+      "to": "type:logicn-core-logic:TRI_LOGIC_STATES",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-logic/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-logic",
+      "to": "type:logicn-core-logic:DECISION_LOGIC_STATES",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-logic/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-logic",
+      "to": "type:logicn-core-logic:TriLogicStateName",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-logic/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-logic",
+      "to": "type:logicn-core-logic:DecisionLogicStateName",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-logic/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-logic",
       "to": "type:logicn-core-logic:TriBoolPolicy",
       "kind": "provides",
       "confidence": "EXTRACTED",
@@ -17009,6 +18759,13 @@
     {
       "from": "package:logicn-core-logic",
       "to": "type:logicn-core-logic:LogicReport",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-logic/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-logic",
+      "to": "type:logicn-core-logic:OmniLogicDefinition",
       "kind": "provides",
       "confidence": "EXTRACTED",
       "evidencePath": "packages-logicn/logicn-core-logic/src/index.ts"
@@ -17064,6 +18821,34 @@
     },
     {
       "from": "package:logicn-core-logic",
+      "to": "flow:logicn-core-logic:createTriLogicDefinition",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-logic/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-logic",
+      "to": "flow:logicn-core-logic:createDecisionLogicDefinition",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-logic/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-logic",
+      "to": "flow:logicn-core-logic:createOmniLogicDefinition",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-logic/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-logic",
+      "to": "flow:logicn-core-logic:validateOmniLogicDefinition",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-logic/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-logic",
       "to": "flow:logicn-core-logic:validateLogicDefinition",
       "kind": "provides",
       "confidence": "EXTRACTED",
@@ -17072,6 +18857,27 @@
     {
       "from": "package:logicn-core-logic",
       "to": "flow:logicn-core-logic:createLogicState",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-logic/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-logic",
+      "to": "flow:logicn-core-logic:triToLogicState",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-logic/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-logic",
+      "to": "flow:logicn-core-logic:logicStateToTri",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-logic/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-logic",
+      "to": "flow:logicn-core-logic:createDecisionLogicState",
       "kind": "provides",
       "confidence": "EXTRACTED",
       "evidencePath": "packages-logicn/logicn-core-logic/src/index.ts"
@@ -17124,6 +18930,13 @@
       "kind": "owns",
       "confidence": "EXTRACTED",
       "evidencePath": "packages-logicn/logicn-core-logic/tsconfig.json"
+    },
+    {
+      "from": "package:logicn-core-vector",
+      "to": "doc:packages-logicn/logicn-core-vector/examples/float32-vector-operation.json",
+      "kind": "owns",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-vector/examples/float32-vector-operation.json"
     },
     {
       "from": "package:logicn-core-vector",
@@ -17261,6 +19074,69 @@
     {
       "from": "package:logicn-core-vector",
       "to": "type:logicn-core-vector:VectorReport",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-vector/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-vector",
+      "to": "type:logicn-core-vector:VectorDiagnosticSeverity",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-vector/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-vector",
+      "to": "type:logicn-core-vector:VectorDiagnostic",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-vector/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-vector",
+      "to": "flow:logicn-core-vector:defineVectorType",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-vector/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-vector",
+      "to": "flow:logicn-core-vector:validateVectorType",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-vector/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-vector",
+      "to": "flow:logicn-core-vector:validateMatrixType",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-vector/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-vector",
+      "to": "flow:logicn-core-vector:validateTensorType",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-vector/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-vector",
+      "to": "flow:logicn-core-vector:validateVectorOperation",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-vector/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-vector",
+      "to": "flow:logicn-core-vector:validateTensorOperation",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-vector/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-vector",
+      "to": "flow:logicn-core-vector:createVectorReport",
       "kind": "provides",
       "confidence": "EXTRACTED",
       "evidencePath": "packages-logicn/logicn-core-vector/src/index.ts"
@@ -17442,6 +19318,13 @@
     },
     {
       "from": "package:logicn-core-compute",
+      "to": "type:logicn-core-compute:ComputeTargetPreference",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-compute/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-compute",
       "to": "type:logicn-core-compute:ComputeDataLocation",
       "kind": "provides",
       "confidence": "EXTRACTED",
@@ -17492,6 +19375,13 @@
     {
       "from": "package:logicn-core-compute",
       "to": "flow:logicn-core-compute:selectComputeTarget",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-compute/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-compute",
+      "to": "flow:logicn-core-compute:selectPreferredComputeTarget",
       "kind": "provides",
       "confidence": "EXTRACTED",
       "evidencePath": "packages-logicn/logicn-core-compute/src/index.ts"
@@ -17562,6 +19452,20 @@
     {
       "from": "doc:packages-logicn/logicn-ai/README.md",
       "to": "package:logicn-core",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-ai/README.md"
+    },
+    {
+      "from": "doc:packages-logicn/logicn-ai/README.md",
+      "to": "package:logicn-core-security",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-ai/README.md"
+    },
+    {
+      "from": "doc:packages-logicn/logicn-ai/README.md",
+      "to": "package:logicn-core-reports",
       "kind": "documents",
       "confidence": "INFERRED",
       "evidencePath": "packages-logicn/logicn-ai/README.md"
@@ -18345,6 +20249,48 @@
     },
     {
       "from": "package:logicn-ai-neural",
+      "to": "type:logicn-ai-neural:NeuralDiagnosticSeverity",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-ai-neural/src/index.ts"
+    },
+    {
+      "from": "package:logicn-ai-neural",
+      "to": "type:logicn-ai-neural:NeuralDiagnostic",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-ai-neural/src/index.ts"
+    },
+    {
+      "from": "package:logicn-ai-neural",
+      "to": "flow:logicn-ai-neural:validateNeuralTensor",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-ai-neural/src/index.ts"
+    },
+    {
+      "from": "package:logicn-ai-neural",
+      "to": "flow:logicn-ai-neural:validateNeuralModel",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-ai-neural/src/index.ts"
+    },
+    {
+      "from": "package:logicn-ai-neural",
+      "to": "flow:logicn-ai-neural:isSameTensorShape",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-ai-neural/src/index.ts"
+    },
+    {
+      "from": "package:logicn-ai-neural",
+      "to": "flow:logicn-ai-neural:createNeuralReport",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-ai-neural/src/index.ts"
+    },
+    {
+      "from": "package:logicn-ai-neural",
       "to": "doc:packages-logicn/logicn-ai-neural/TODO.md",
       "kind": "owns",
       "confidence": "EXTRACTED",
@@ -18503,398 +20449,6 @@
       "kind": "owns",
       "confidence": "EXTRACTED",
       "evidencePath": "packages-logicn/logicn-ai-neuromorphic/tsconfig.json"
-    },
-    {
-      "from": "package:logicn-compliance",
-      "to": "doc:packages-logicn/logicn-compliance/package.json",
-      "kind": "owns",
-      "confidence": "EXTRACTED",
-      "evidencePath": "packages-logicn/logicn-compliance/package.json"
-    },
-    {
-      "from": "package:logicn-compliance",
-      "to": "doc:packages-logicn/logicn-compliance/README.md",
-      "kind": "owns",
-      "confidence": "EXTRACTED",
-      "evidencePath": "packages-logicn/logicn-compliance/README.md"
-    },
-    {
-      "from": "doc:packages-logicn/logicn-compliance/README.md",
-      "to": "package:logicn-compliance",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "packages-logicn/logicn-compliance/README.md"
-    },
-    {
-      "from": "doc:packages-logicn/logicn-compliance/README.md",
-      "to": "package:logicn-compliance-privacy",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "packages-logicn/logicn-compliance/README.md"
-    },
-    {
-      "from": "doc:packages-logicn/logicn-compliance/README.md",
-      "to": "package:logicn-compliance-security",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "packages-logicn/logicn-compliance/README.md"
-    },
-    {
-      "from": "doc:packages-logicn/logicn-compliance/README.md",
-      "to": "package:logicn-compliance-data",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "packages-logicn/logicn-compliance/README.md"
-    },
-    {
-      "from": "doc:packages-logicn/logicn-compliance/README.md",
-      "to": "package:logicn-compliance-audit",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "packages-logicn/logicn-compliance/README.md"
-    },
-    {
-      "from": "doc:packages-logicn/logicn-compliance/README.md",
-      "to": "package:logicn-compliance-retention",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "packages-logicn/logicn-compliance/README.md"
-    },
-    {
-      "from": "doc:packages-logicn/logicn-compliance/README.md",
-      "to": "package:logicn-compliance-ai",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "packages-logicn/logicn-compliance/README.md"
-    },
-    {
-      "from": "doc:packages-logicn/logicn-compliance/README.md",
-      "to": "package:logicn-compliance-accessibility",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "packages-logicn/logicn-compliance/README.md"
-    },
-    {
-      "from": "doc:packages-logicn/logicn-compliance/README.md",
-      "to": "package:logicn-compliance-deployment",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "packages-logicn/logicn-compliance/README.md"
-    },
-    {
-      "from": "doc:packages-logicn/logicn-compliance/README.md",
-      "to": "package:logicn-compliance-reports",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "packages-logicn/logicn-compliance/README.md"
-    },
-    {
-      "from": "package:logicn-compliance-privacy",
-      "to": "doc:packages-logicn/logicn-compliance-privacy/package.json",
-      "kind": "owns",
-      "confidence": "EXTRACTED",
-      "evidencePath": "packages-logicn/logicn-compliance-privacy/package.json"
-    },
-    {
-      "from": "package:logicn-compliance-privacy",
-      "to": "doc:packages-logicn/logicn-compliance-privacy/README.md",
-      "kind": "owns",
-      "confidence": "EXTRACTED",
-      "evidencePath": "packages-logicn/logicn-compliance-privacy/README.md"
-    },
-    {
-      "from": "doc:packages-logicn/logicn-compliance-privacy/README.md",
-      "to": "package:logicn-compliance",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "packages-logicn/logicn-compliance-privacy/README.md"
-    },
-    {
-      "from": "doc:packages-logicn/logicn-compliance-privacy/README.md",
-      "to": "package:logicn-compliance-privacy",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "packages-logicn/logicn-compliance-privacy/README.md"
-    },
-    {
-      "from": "package:logicn-compliance-security",
-      "to": "doc:packages-logicn/logicn-compliance-security/package.json",
-      "kind": "owns",
-      "confidence": "EXTRACTED",
-      "evidencePath": "packages-logicn/logicn-compliance-security/package.json"
-    },
-    {
-      "from": "package:logicn-compliance-security",
-      "to": "doc:packages-logicn/logicn-compliance-security/README.md",
-      "kind": "owns",
-      "confidence": "EXTRACTED",
-      "evidencePath": "packages-logicn/logicn-compliance-security/README.md"
-    },
-    {
-      "from": "doc:packages-logicn/logicn-compliance-security/README.md",
-      "to": "package:logicn-core",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "packages-logicn/logicn-compliance-security/README.md"
-    },
-    {
-      "from": "doc:packages-logicn/logicn-compliance-security/README.md",
-      "to": "package:logicn-core-network",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "packages-logicn/logicn-compliance-security/README.md"
-    },
-    {
-      "from": "doc:packages-logicn/logicn-compliance-security/README.md",
-      "to": "package:logicn-core-security",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "packages-logicn/logicn-compliance-security/README.md"
-    },
-    {
-      "from": "doc:packages-logicn/logicn-compliance-security/README.md",
-      "to": "package:logicn-compliance",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "packages-logicn/logicn-compliance-security/README.md"
-    },
-    {
-      "from": "doc:packages-logicn/logicn-compliance-security/README.md",
-      "to": "package:logicn-compliance-security",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "packages-logicn/logicn-compliance-security/README.md"
-    },
-    {
-      "from": "doc:packages-logicn/logicn-compliance-security/README.md",
-      "to": "package:logicn-framework-app-kernel",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "packages-logicn/logicn-compliance-security/README.md"
-    },
-    {
-      "from": "package:logicn-compliance-data",
-      "to": "doc:packages-logicn/logicn-compliance-data/package.json",
-      "kind": "owns",
-      "confidence": "EXTRACTED",
-      "evidencePath": "packages-logicn/logicn-compliance-data/package.json"
-    },
-    {
-      "from": "package:logicn-compliance-data",
-      "to": "doc:packages-logicn/logicn-compliance-data/README.md",
-      "kind": "owns",
-      "confidence": "EXTRACTED",
-      "evidencePath": "packages-logicn/logicn-compliance-data/README.md"
-    },
-    {
-      "from": "doc:packages-logicn/logicn-compliance-data/README.md",
-      "to": "package:logicn-compliance",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "packages-logicn/logicn-compliance-data/README.md"
-    },
-    {
-      "from": "doc:packages-logicn/logicn-compliance-data/README.md",
-      "to": "package:logicn-compliance-data",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "packages-logicn/logicn-compliance-data/README.md"
-    },
-    {
-      "from": "package:logicn-compliance-audit",
-      "to": "doc:packages-logicn/logicn-compliance-audit/package.json",
-      "kind": "owns",
-      "confidence": "EXTRACTED",
-      "evidencePath": "packages-logicn/logicn-compliance-audit/package.json"
-    },
-    {
-      "from": "package:logicn-compliance-audit",
-      "to": "doc:packages-logicn/logicn-compliance-audit/README.md",
-      "kind": "owns",
-      "confidence": "EXTRACTED",
-      "evidencePath": "packages-logicn/logicn-compliance-audit/README.md"
-    },
-    {
-      "from": "doc:packages-logicn/logicn-compliance-audit/README.md",
-      "to": "package:logicn-compliance",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "packages-logicn/logicn-compliance-audit/README.md"
-    },
-    {
-      "from": "doc:packages-logicn/logicn-compliance-audit/README.md",
-      "to": "package:logicn-compliance-audit",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "packages-logicn/logicn-compliance-audit/README.md"
-    },
-    {
-      "from": "package:logicn-compliance-retention",
-      "to": "doc:packages-logicn/logicn-compliance-retention/package.json",
-      "kind": "owns",
-      "confidence": "EXTRACTED",
-      "evidencePath": "packages-logicn/logicn-compliance-retention/package.json"
-    },
-    {
-      "from": "package:logicn-compliance-retention",
-      "to": "doc:packages-logicn/logicn-compliance-retention/README.md",
-      "kind": "owns",
-      "confidence": "EXTRACTED",
-      "evidencePath": "packages-logicn/logicn-compliance-retention/README.md"
-    },
-    {
-      "from": "doc:packages-logicn/logicn-compliance-retention/README.md",
-      "to": "package:logicn-compliance",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "packages-logicn/logicn-compliance-retention/README.md"
-    },
-    {
-      "from": "doc:packages-logicn/logicn-compliance-retention/README.md",
-      "to": "package:logicn-compliance-retention",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "packages-logicn/logicn-compliance-retention/README.md"
-    },
-    {
-      "from": "package:logicn-compliance-ai",
-      "to": "doc:packages-logicn/logicn-compliance-ai/package.json",
-      "kind": "owns",
-      "confidence": "EXTRACTED",
-      "evidencePath": "packages-logicn/logicn-compliance-ai/package.json"
-    },
-    {
-      "from": "package:logicn-compliance-ai",
-      "to": "doc:packages-logicn/logicn-compliance-ai/README.md",
-      "kind": "owns",
-      "confidence": "EXTRACTED",
-      "evidencePath": "packages-logicn/logicn-compliance-ai/README.md"
-    },
-    {
-      "from": "doc:packages-logicn/logicn-compliance-ai/README.md",
-      "to": "package:logicn-core",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "packages-logicn/logicn-compliance-ai/README.md"
-    },
-    {
-      "from": "doc:packages-logicn/logicn-compliance-ai/README.md",
-      "to": "package:logicn-core-security",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "packages-logicn/logicn-compliance-ai/README.md"
-    },
-    {
-      "from": "doc:packages-logicn/logicn-compliance-ai/README.md",
-      "to": "package:logicn-ai",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "packages-logicn/logicn-compliance-ai/README.md"
-    },
-    {
-      "from": "doc:packages-logicn/logicn-compliance-ai/README.md",
-      "to": "package:logicn-ai-agent",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "packages-logicn/logicn-compliance-ai/README.md"
-    },
-    {
-      "from": "doc:packages-logicn/logicn-compliance-ai/README.md",
-      "to": "package:logicn-compliance",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "packages-logicn/logicn-compliance-ai/README.md"
-    },
-    {
-      "from": "doc:packages-logicn/logicn-compliance-ai/README.md",
-      "to": "package:logicn-compliance-ai",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "packages-logicn/logicn-compliance-ai/README.md"
-    },
-    {
-      "from": "package:logicn-compliance-accessibility",
-      "to": "doc:packages-logicn/logicn-compliance-accessibility/package.json",
-      "kind": "owns",
-      "confidence": "EXTRACTED",
-      "evidencePath": "packages-logicn/logicn-compliance-accessibility/package.json"
-    },
-    {
-      "from": "package:logicn-compliance-accessibility",
-      "to": "doc:packages-logicn/logicn-compliance-accessibility/README.md",
-      "kind": "owns",
-      "confidence": "EXTRACTED",
-      "evidencePath": "packages-logicn/logicn-compliance-accessibility/README.md"
-    },
-    {
-      "from": "doc:packages-logicn/logicn-compliance-accessibility/README.md",
-      "to": "package:logicn-compliance",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "packages-logicn/logicn-compliance-accessibility/README.md"
-    },
-    {
-      "from": "doc:packages-logicn/logicn-compliance-accessibility/README.md",
-      "to": "package:logicn-compliance-accessibility",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "packages-logicn/logicn-compliance-accessibility/README.md"
-    },
-    {
-      "from": "package:logicn-compliance-deployment",
-      "to": "doc:packages-logicn/logicn-compliance-deployment/package.json",
-      "kind": "owns",
-      "confidence": "EXTRACTED",
-      "evidencePath": "packages-logicn/logicn-compliance-deployment/package.json"
-    },
-    {
-      "from": "package:logicn-compliance-deployment",
-      "to": "doc:packages-logicn/logicn-compliance-deployment/README.md",
-      "kind": "owns",
-      "confidence": "EXTRACTED",
-      "evidencePath": "packages-logicn/logicn-compliance-deployment/README.md"
-    },
-    {
-      "from": "doc:packages-logicn/logicn-compliance-deployment/README.md",
-      "to": "package:logicn-compliance",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "packages-logicn/logicn-compliance-deployment/README.md"
-    },
-    {
-      "from": "doc:packages-logicn/logicn-compliance-deployment/README.md",
-      "to": "package:logicn-compliance-deployment",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "packages-logicn/logicn-compliance-deployment/README.md"
-    },
-    {
-      "from": "package:logicn-compliance-reports",
-      "to": "report:packages-logicn/logicn-compliance-reports/package.json",
-      "kind": "owns",
-      "confidence": "EXTRACTED",
-      "evidencePath": "packages-logicn/logicn-compliance-reports/package.json"
-    },
-    {
-      "from": "package:logicn-compliance-reports",
-      "to": "doc:packages-logicn/logicn-compliance-reports/README.md",
-      "kind": "owns",
-      "confidence": "EXTRACTED",
-      "evidencePath": "packages-logicn/logicn-compliance-reports/README.md"
-    },
-    {
-      "from": "doc:packages-logicn/logicn-compliance-reports/README.md",
-      "to": "package:logicn-compliance",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "packages-logicn/logicn-compliance-reports/README.md"
-    },
-    {
-      "from": "doc:packages-logicn/logicn-compliance-reports/README.md",
-      "to": "package:logicn-compliance-reports",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "packages-logicn/logicn-compliance-reports/README.md"
     },
     {
       "from": "package:logicn-data",
@@ -19275,6 +20829,307 @@
       "evidencePath": "packages-logicn/logicn-data-reports/README.md"
     },
     {
+      "from": "package:logicn-web",
+      "to": "doc:packages-logicn/logicn-web/package.json",
+      "kind": "owns",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-web/package.json"
+    },
+    {
+      "from": "package:logicn-web",
+      "to": "doc:packages-logicn/logicn-web/README.md",
+      "kind": "owns",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-web/README.md"
+    },
+    {
+      "from": "doc:packages-logicn/logicn-web/README.md",
+      "to": "package:logicn-core",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-web/README.md"
+    },
+    {
+      "from": "doc:packages-logicn/logicn-web/README.md",
+      "to": "package:logicn-core-security",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-web/README.md"
+    },
+    {
+      "from": "doc:packages-logicn/logicn-web/README.md",
+      "to": "package:logicn-data",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-web/README.md"
+    },
+    {
+      "from": "doc:packages-logicn/logicn-web/README.md",
+      "to": "package:logicn-data-html",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-web/README.md"
+    },
+    {
+      "from": "doc:packages-logicn/logicn-web/README.md",
+      "to": "package:logicn-data-json",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-web/README.md"
+    },
+    {
+      "from": "doc:packages-logicn/logicn-web/README.md",
+      "to": "package:logicn-web",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-web/README.md"
+    },
+    {
+      "from": "doc:packages-logicn/logicn-web/README.md",
+      "to": "package:logicn-web-render",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-web/README.md"
+    },
+    {
+      "from": "doc:packages-logicn/logicn-web/README.md",
+      "to": "package:logicn-web-state",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-web/README.md"
+    },
+    {
+      "from": "doc:packages-logicn/logicn-web/README.md",
+      "to": "package:logicn-web-components",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-web/README.md"
+    },
+    {
+      "from": "doc:packages-logicn/logicn-web/README.md",
+      "to": "package:logicn-web-router",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-web/README.md"
+    },
+    {
+      "from": "doc:packages-logicn/logicn-web/README.md",
+      "to": "package:logicn-web-events",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-web/README.md"
+    },
+    {
+      "from": "doc:packages-logicn/logicn-web/README.md",
+      "to": "package:logicn-target-js",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-web/README.md"
+    },
+    {
+      "from": "doc:packages-logicn/logicn-web/README.md",
+      "to": "package:logicn-target-wasm",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-web/README.md"
+    },
+    {
+      "from": "package:logicn-web-render",
+      "to": "doc:packages-logicn/logicn-web-render/package.json",
+      "kind": "owns",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-web-render/package.json"
+    },
+    {
+      "from": "package:logicn-web-render",
+      "to": "doc:packages-logicn/logicn-web-render/README.md",
+      "kind": "owns",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-web-render/README.md"
+    },
+    {
+      "from": "doc:packages-logicn/logicn-web-render/README.md",
+      "to": "package:logicn-core",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-web-render/README.md"
+    },
+    {
+      "from": "doc:packages-logicn/logicn-web-render/README.md",
+      "to": "package:logicn-core-security",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-web-render/README.md"
+    },
+    {
+      "from": "doc:packages-logicn/logicn-web-render/README.md",
+      "to": "package:logicn-data",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-web-render/README.md"
+    },
+    {
+      "from": "doc:packages-logicn/logicn-web-render/README.md",
+      "to": "package:logicn-data-html",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-web-render/README.md"
+    },
+    {
+      "from": "doc:packages-logicn/logicn-web-render/README.md",
+      "to": "package:logicn-data-json",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-web-render/README.md"
+    },
+    {
+      "from": "doc:packages-logicn/logicn-web-render/README.md",
+      "to": "package:logicn-web",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-web-render/README.md"
+    },
+    {
+      "from": "doc:packages-logicn/logicn-web-render/README.md",
+      "to": "package:logicn-web-render",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-web-render/README.md"
+    },
+    {
+      "from": "doc:packages-logicn/logicn-web-render/README.md",
+      "to": "package:logicn-web-state",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-web-render/README.md"
+    },
+    {
+      "from": "package:logicn-web-state",
+      "to": "doc:packages-logicn/logicn-web-state/package.json",
+      "kind": "owns",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-web-state/package.json"
+    },
+    {
+      "from": "package:logicn-web-state",
+      "to": "doc:packages-logicn/logicn-web-state/README.md",
+      "kind": "owns",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-web-state/README.md"
+    },
+    {
+      "from": "doc:packages-logicn/logicn-web-state/README.md",
+      "to": "package:logicn-web",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-web-state/README.md"
+    },
+    {
+      "from": "doc:packages-logicn/logicn-web-state/README.md",
+      "to": "package:logicn-web-state",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-web-state/README.md"
+    },
+    {
+      "from": "package:logicn-web-components",
+      "to": "doc:packages-logicn/logicn-web-components/package.json",
+      "kind": "owns",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-web-components/package.json"
+    },
+    {
+      "from": "package:logicn-web-components",
+      "to": "doc:packages-logicn/logicn-web-components/README.md",
+      "kind": "owns",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-web-components/README.md"
+    },
+    {
+      "from": "doc:packages-logicn/logicn-web-components/README.md",
+      "to": "package:logicn-web",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-web-components/README.md"
+    },
+    {
+      "from": "doc:packages-logicn/logicn-web-components/README.md",
+      "to": "package:logicn-web-components",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-web-components/README.md"
+    },
+    {
+      "from": "package:logicn-web-router",
+      "to": "doc:packages-logicn/logicn-web-router/package.json",
+      "kind": "owns",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-web-router/package.json"
+    },
+    {
+      "from": "package:logicn-web-router",
+      "to": "doc:packages-logicn/logicn-web-router/README.md",
+      "kind": "owns",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-web-router/README.md"
+    },
+    {
+      "from": "doc:packages-logicn/logicn-web-router/README.md",
+      "to": "package:logicn-web",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-web-router/README.md"
+    },
+    {
+      "from": "doc:packages-logicn/logicn-web-router/README.md",
+      "to": "package:logicn-web-render",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-web-router/README.md"
+    },
+    {
+      "from": "doc:packages-logicn/logicn-web-router/README.md",
+      "to": "package:logicn-web-router",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-web-router/README.md"
+    },
+    {
+      "from": "doc:packages-logicn/logicn-web-router/README.md",
+      "to": "package:logicn-framework-api-server",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-web-router/README.md"
+    },
+    {
+      "from": "package:logicn-web-events",
+      "to": "doc:packages-logicn/logicn-web-events/package.json",
+      "kind": "owns",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-web-events/package.json"
+    },
+    {
+      "from": "package:logicn-web-events",
+      "to": "doc:packages-logicn/logicn-web-events/README.md",
+      "kind": "owns",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-web-events/README.md"
+    },
+    {
+      "from": "doc:packages-logicn/logicn-web-events/README.md",
+      "to": "package:logicn-web",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-web-events/README.md"
+    },
+    {
+      "from": "doc:packages-logicn/logicn-web-events/README.md",
+      "to": "package:logicn-web-events",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-web-events/README.md"
+    },
+    {
       "from": "package:logicn-db-postgres",
       "to": "doc:packages-logicn/logicn-db-postgres/package.json",
       "kind": "owns",
@@ -19500,6 +21355,13 @@
     },
     {
       "from": "package:logicn-core-photonic",
+      "to": "doc:packages-logicn/logicn-core-photonic/examples/tri-optical-mapping-plan.json",
+      "kind": "owns",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-photonic/examples/tri-optical-mapping-plan.json"
+    },
+    {
+      "from": "package:logicn-core-photonic",
       "to": "doc:packages-logicn/logicn-core-photonic/package.json",
       "kind": "owns",
       "confidence": "EXTRACTED",
@@ -19620,6 +21482,76 @@
     {
       "from": "package:logicn-core-photonic",
       "to": "type:logicn-core-photonic:PhotonicMapping",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-photonic/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-photonic",
+      "to": "type:logicn-core-photonic:PhotonicMode",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-photonic/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-photonic",
+      "to": "type:logicn-core-photonic:PhotonicDiagnosticSeverity",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-photonic/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-photonic",
+      "to": "type:logicn-core-photonic:PhotonicDiagnostic",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-photonic/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-photonic",
+      "to": "type:logicn-core-photonic:PhotonicPlan",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-photonic/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-photonic",
+      "to": "type:logicn-core-photonic:PhotonicReport",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-photonic/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-photonic",
+      "to": "flow:logicn-core-photonic:defineOpticalSignal",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-photonic/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-photonic",
+      "to": "flow:logicn-core-photonic:validateOpticalSignal",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-photonic/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-photonic",
+      "to": "flow:logicn-core-photonic:validatePhotonicMapping",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-photonic/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-photonic",
+      "to": "flow:logicn-core-photonic:createPhotonicReport",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-photonic/src/index.ts"
+    },
+    {
+      "from": "package:logicn-core-photonic",
+      "to": "flow:logicn-core-photonic:validatePhotonicPlan",
       "kind": "provides",
       "confidence": "EXTRACTED",
       "evidencePath": "packages-logicn/logicn-core-photonic/src/index.ts"
@@ -20087,6 +22019,34 @@
       "evidencePath": "packages-logicn/logicn-target-binary/tsconfig.json"
     },
     {
+      "from": "package:logicn-target-js",
+      "to": "doc:packages-logicn/logicn-target-js/package.json",
+      "kind": "owns",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-target-js/package.json"
+    },
+    {
+      "from": "package:logicn-target-js",
+      "to": "doc:packages-logicn/logicn-target-js/README.md",
+      "kind": "owns",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-target-js/README.md"
+    },
+    {
+      "from": "doc:packages-logicn/logicn-target-js/README.md",
+      "to": "package:logicn-target-js",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-target-js/README.md"
+    },
+    {
+      "from": "doc:packages-logicn/logicn-target-js/README.md",
+      "to": "package:logicn-target-wasm",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-target-js/README.md"
+    },
+    {
       "from": "package:logicn-target-wasm",
       "to": "doc:packages-logicn/logicn-target-wasm/package.json",
       "kind": "owns",
@@ -20270,6 +22230,13 @@
     },
     {
       "from": "package:logicn-target-ai-accelerator",
+      "to": "doc:packages-logicn/logicn-target-ai-accelerator/examples/npu-target-selection.json",
+      "kind": "owns",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-target-ai-accelerator/examples/npu-target-selection.json"
+    },
+    {
+      "from": "package:logicn-target-ai-accelerator",
       "to": "doc:packages-logicn/logicn-target-ai-accelerator/package.json",
       "kind": "owns",
       "confidence": "EXTRACTED",
@@ -20389,6 +22356,34 @@
     },
     {
       "from": "package:logicn-target-ai-accelerator",
+      "to": "type:logicn-target-ai-accelerator:AiAcceleratorModelFormat",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-target-ai-accelerator/src/index.ts"
+    },
+    {
+      "from": "package:logicn-target-ai-accelerator",
+      "to": "type:logicn-target-ai-accelerator:AiAcceleratorAdapterId",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-target-ai-accelerator/src/index.ts"
+    },
+    {
+      "from": "package:logicn-target-ai-accelerator",
+      "to": "type:logicn-target-ai-accelerator:AiAcceleratorDiagnosticSeverity",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-target-ai-accelerator/src/index.ts"
+    },
+    {
+      "from": "package:logicn-target-ai-accelerator",
+      "to": "type:logicn-target-ai-accelerator:AiAcceleratorDiagnostic",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-target-ai-accelerator/src/index.ts"
+    },
+    {
+      "from": "package:logicn-target-ai-accelerator",
       "to": "type:logicn-target-ai-accelerator:AiAcceleratorTopology",
       "kind": "provides",
       "confidence": "EXTRACTED",
@@ -20417,6 +22412,27 @@
     },
     {
       "from": "package:logicn-target-ai-accelerator",
+      "to": "type:logicn-target-ai-accelerator:AiAcceleratorModelProfile",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-target-ai-accelerator/src/index.ts"
+    },
+    {
+      "from": "package:logicn-target-ai-accelerator",
+      "to": "type:logicn-target-ai-accelerator:AiAcceleratorTargetPreference",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-target-ai-accelerator/src/index.ts"
+    },
+    {
+      "from": "package:logicn-target-ai-accelerator",
+      "to": "type:logicn-target-ai-accelerator:AiAcceleratorTargetSelection",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-target-ai-accelerator/src/index.ts"
+    },
+    {
+      "from": "package:logicn-target-ai-accelerator",
       "to": "type:logicn-target-ai-accelerator:AiAcceleratorPlan",
       "kind": "provides",
       "confidence": "EXTRACTED",
@@ -20432,6 +22448,34 @@
     {
       "from": "package:logicn-target-ai-accelerator",
       "to": "type:logicn-target-ai-accelerator:INTEL_GAUDI3_HL338_PROFILE",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-target-ai-accelerator/src/index.ts"
+    },
+    {
+      "from": "package:logicn-target-ai-accelerator",
+      "to": "type:logicn-target-ai-accelerator:GENERIC_ONNX_NPU_PROFILE",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-target-ai-accelerator/src/index.ts"
+    },
+    {
+      "from": "package:logicn-target-ai-accelerator",
+      "to": "flow:logicn-target-ai-accelerator:selectAiAcceleratorTarget",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-target-ai-accelerator/src/index.ts"
+    },
+    {
+      "from": "package:logicn-target-ai-accelerator",
+      "to": "flow:logicn-target-ai-accelerator:createAiAcceleratorTargetReport",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-target-ai-accelerator/src/index.ts"
+    },
+    {
+      "from": "package:logicn-target-ai-accelerator",
+      "to": "flow:logicn-target-ai-accelerator:validateAiAcceleratorModel",
       "kind": "provides",
       "confidence": "EXTRACTED",
       "evidencePath": "packages-logicn/logicn-target-ai-accelerator/src/index.ts"
@@ -20984,6 +23028,27 @@
     },
     {
       "from": "package:logicn-core-cli",
+      "to": "flow:logicn-core-cli:createCoreCommandRunner",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-cli/src/core-command.ts"
+    },
+    {
+      "from": "package:logicn-core-cli",
+      "to": "flow:logicn-core-cli:relativeCoreCompilerPath",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-cli/src/core-command.ts"
+    },
+    {
+      "from": "package:logicn-core-cli",
+      "to": "flow:logicn-core-cli:spawn",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-cli/src/node-globals.d.ts"
+    },
+    {
+      "from": "package:logicn-core-cli",
       "to": "type:logicn-core-cli:Dirent",
       "kind": "provides",
       "confidence": "EXTRACTED",
@@ -21055,6 +23120,13 @@
     {
       "from": "package:logicn-core-cli",
       "to": "flow:logicn-core-cli:relative",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-cli/src/node-globals.d.ts"
+    },
+    {
+      "from": "package:logicn-core-cli",
+      "to": "flow:logicn-core-cli:fileURLToPath",
       "kind": "provides",
       "confidence": "EXTRACTED",
       "evidencePath": "packages-logicn/logicn-core-cli/src/node-globals.d.ts"

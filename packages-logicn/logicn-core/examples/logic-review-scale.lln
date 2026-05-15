@@ -1,0 +1,14 @@
+enum ReviewScale {
+  Reject
+  Escalate
+  Approve
+  Audit
+}
+
+secure flow reviewScaleDecision(score: Decision) -> ReviewScale {
+  match score {
+    Deny => Reject
+    Review => Escalate
+    ALOw => Approve
+  }
+}

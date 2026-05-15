@@ -1,15 +1,15 @@
 # LogicN Graph Report
 
 Workspace: LogicN-app
-Generated: 2026-05-14T16:39:42.227Z
+Generated: 2026-05-15T18:07:02.216Z
 
 ## Summary
 
-- Packages: 57
-- Documents: 431
-- Types/interfaces: 326
-- Functions: 113
-- Relationships: 1786
+- Packages: 54
+- Documents: 449
+- Types/interfaces: 375
+- Functions: 154
+- Relationships: 1936
 
 ## Package Nodes
 
@@ -28,16 +28,6 @@ Generated: 2026-05-14T16:39:42.227Z
 - logicn-ai-agent (packages-logicn/logicn-ai-agent/README.md)
 - logicn-ai-neural (packages-logicn/logicn-ai-neural/README.md)
 - logicn-ai-neuromorphic (packages-logicn/logicn-ai-neuromorphic/README.md)
-- logicn-compliance (packages-logicn/logicn-compliance/README.md)
-- logicn-compliance-privacy (packages-logicn/logicn-compliance-privacy/README.md)
-- logicn-compliance-security (packages-logicn/logicn-compliance-security/README.md)
-- logicn-compliance-data (packages-logicn/logicn-compliance-data/README.md)
-- logicn-compliance-audit (packages-logicn/logicn-compliance-audit/README.md)
-- logicn-compliance-retention (packages-logicn/logicn-compliance-retention/README.md)
-- logicn-compliance-ai (packages-logicn/logicn-compliance-ai/README.md)
-- logicn-compliance-accessibility (packages-logicn/logicn-compliance-accessibility/README.md)
-- logicn-compliance-deployment (packages-logicn/logicn-compliance-deployment/README.md)
-- logicn-compliance-reports (packages-logicn/logicn-compliance-reports/README.md)
 - logicn-data (packages-logicn/logicn-data/README.md)
 - logicn-data-html (packages-logicn/logicn-data-html/README.md)
 - logicn-data-search (packages-logicn/logicn-data-search/README.md)
@@ -50,6 +40,12 @@ Generated: 2026-05-14T16:39:42.227Z
 - logicn-data-database (packages-logicn/logicn-data-database/README.md)
 - logicn-data-pipeline (packages-logicn/logicn-data-pipeline/README.md)
 - logicn-data-reports (packages-logicn/logicn-data-reports/README.md)
+- logicn-web (packages-logicn/logicn-web/README.md)
+- logicn-web-render (packages-logicn/logicn-web-render/README.md)
+- logicn-web-state (packages-logicn/logicn-web-state/README.md)
+- logicn-web-components (packages-logicn/logicn-web-components/README.md)
+- logicn-web-router (packages-logicn/logicn-web-router/README.md)
+- logicn-web-events (packages-logicn/logicn-web-events/README.md)
 - logicn-db-postgres (packages-logicn/logicn-db-postgres/README.md)
 - logicn-db-mysql (packages-logicn/logicn-db-mysql/README.md)
 - logicn-db-sqlite (packages-logicn/logicn-db-sqlite/README.md)
@@ -59,6 +55,7 @@ Generated: 2026-05-14T16:39:42.227Z
 - logicn-target-cpu (packages-logicn/logicn-target-cpu/README.md)
 - logicn-cpu-kernels (packages-logicn/logicn-cpu-kernels/README.md)
 - logicn-target-binary (packages-logicn/logicn-target-binary/README.md)
+- logicn-target-js (packages-logicn/logicn-target-js/README.md)
 - logicn-target-wasm (packages-logicn/logicn-target-wasm/README.md)
 - logicn-target-gpu (packages-logicn/logicn-target-gpu/README.md)
 - logicn-target-ai-accelerator (packages-logicn/logicn-target-ai-accelerator/README.md)

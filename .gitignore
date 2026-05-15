@@ -1,0 +1,3 @@
+build/target-cache/
+.logicn/capabilities.local.json
+.logicn/capabilities.local.*

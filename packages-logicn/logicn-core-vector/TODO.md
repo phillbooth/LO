@@ -7,10 +7,10 @@
 [x] Add initial typed exports
 [x] Define Vector<T, N> language rules
 [x] Define Matrix<T, R, C> and Tensor<T, Shape> contract placeholders
-[ ] Define vector lane and dimension rules
-[ ] Define vector operation safety rules
-[ ] Define tensor shape compatibility rules
-[ ] Define vector report format
-[ ] Add examples
-[ ] Add tests
+[x] Define vector lane and dimension rules
+[x] Define vector operation safety rules
+[x] Define tensor shape compatibility rules
+[x] Define vector report format
+[x] Add examples
+[x] Add tests
 ```

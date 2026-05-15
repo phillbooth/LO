@@ -110,6 +110,16 @@ compiler, runtime, security, config, reports, CLI and task tooling
 core network policy contracts
 ```
 
+The active core package set must expose testable contracts before broader
+framework or target work depends on it. `logicn-core-network` owns network
+policy shape, TLS requirements, endpoint allow/deny rules, backend capability
+selection and network reports. `logicn-core-runtime` owns execution context,
+runtime result/error shapes, effect decisions and runtime reports.
+`logicn-core-vector` owns vector, matrix and tensor shape validation plus vector
+operation reports. `logicn-core-photonic` remains post-v1 planning, but its
+concept surface is now bounded to optical signals, logic-state mappings and
+plan/report validation.
+
 Everything beyond CPU and WASM targets is post-v1 unless it directly specifies
 core type-system semantics. AI, GPU, AI accelerator, photonic, optical I/O,
 finance, electrical, OT and other domain-specific packages must not define the

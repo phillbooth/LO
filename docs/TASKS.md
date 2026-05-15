@@ -107,7 +107,7 @@
 
 ## Phase 6: Tooling Packages
 
-- [ ] Implement `logicn-core-cli` command integrations
+- [x] Implement `logicn-core-cli` command integrations
 - [x] Add `LogicN task` CLI integration with `logicn-core-tasks`
 - [x] Implement `logicn-core-tasks` task file loading
 - [x] Implement `logicn-core-tasks` dependency graph and cycle detection
@@ -128,9 +128,13 @@
 - [ ] Define `logicn-core-logic` syntax and reports for `Tri`, `LogicN` and Omni
   - [x] Add initial Tri operations, explicit Tri-to-Bool conversion policy,
     LogicN validation, truth-table diagnostics and tests
+  - [x] Add canonical Tri and Decision logic-state helpers plus tested examples
+  - [x] Add bounded Omni logic contract rules
 - [ ] Define `logicn-core-photonic` wavelength, phase and amplitude model
-- [ ] Define photonic mappings from `logicn-core-logic`
-- [ ] Add examples and tests for logic and photonic package boundaries
+- [x] Define photonic mappings from `logicn-core-logic`
+- [x] Add examples for photonic package boundaries
+- [x] Add examples for logic package boundaries
+- [x] Add tests for logic and photonic package boundaries
 - [x] Define `logicn-core-vector` vector, matrix and tensor value contracts
 - [x] Define `logicn-ai-agent` supervised AI agent orchestration contracts
 - [x] Define `logicn-ai-neural` neural-network workload contracts
@@ -149,6 +153,7 @@
 - [ ] Define `logicn-target-gpu` GPU target plans
 - [x] Define `logicn-target-ai-accelerator` target planning contracts
 - [x] Define Intel Gaudi 3 as a passive AI accelerator backend profile
+- [x] Define NPU as a generic AI inference target with explicit fallback reports
 - [x] Define `optical_io` as a high-speed interconnect/data-movement target
 - [x] Expand optical I/O planning with topology, secure transfer, fallback,
   benchmark and AI-cluster data-movement rules
@@ -159,20 +164,23 @@
 - [ ] Follow `docs/CORE_FOUNDATION_ROADMAP.md` before adding new active package
   surfaces
 - [ ] Freeze v1 syntax and grammar around the supported examples
-- [ ] Write at least 20 real `.lln` examples covering basic, intermediate and
+- [x] Write at least 20 real `.lln` examples covering basic, intermediate and
   advanced v1 syntax
+  - [x] Add the 20th core example, `logic-review-scale.lln`
 - [ ] Build a parser that accepts the v1 examples and rejects post-v1 syntax
   with clear diagnostics
 - [ ] Define `logicn-core-compiler` compiler pipeline contracts
   - [x] Add an initial core syntax safety scan for unsafe Tri conversions,
     non-exhaustive Tri matches, raw secret literals and unsafe dynamic execution
-- [ ] Define `logicn-core-runtime` execution contracts
+- [x] Define `logicn-core-runtime` execution contracts
 - [ ] Commit the v1 memory model as hybrid ownership, borrowing, moves,
   bounds-checking and explicit unsafe boundaries
 - [ ] Finalise `Bool`, `Tri`, `Decision`, `Option` and `Result` conversion and
   branch semantics
   - [x] Add the initial runtime contract for explicit Tri-to-Bool conversion
     policy in `logicn-core-logic`
+  - [x] Add canonical `Tri` and `Decision` state definitions in
+    `logicn-core-logic`
 - [ ] Define standard library baseline for JSON, HTTP, files, streams, crypto
   policy, dates, money and safe strings
 - [ ] Define IDE/LSP, debugger, source-map and test-framework roadmap
@@ -190,6 +198,9 @@
 - [x] Define `logicn-core-security` primitives, redaction and permission models
 - [x] Define `logicn-core-config` project config and environment mode contracts
 - [x] Define `logicn-core-reports` shared report schemas
+- [x] Define `logicn-core-network` network policy, TLS, backend-selection and report contracts
+- [x] Add tested examples for `logicn-core-network`, `logicn-core-runtime`,
+  `logicn-core-vector` and `logicn-core-photonic`
 
 ## Phase 9: Package Collection Split
 

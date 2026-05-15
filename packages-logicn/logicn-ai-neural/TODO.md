@@ -7,11 +7,11 @@
 [x] Add package metadata
 [x] Add initial typed exports
 [x] Define neural model, layer, inference and training contract placeholders
-[ ] Define tensor shape compatibility with logicn-core-vector
+[x] Define tensor shape compatibility with logicn-core-vector
 [ ] Define inference result and confidence policy contracts
 [ ] Define training data policy contracts
 [ ] Define model verification and loading contracts
 [ ] Define neural report examples
 [ ] Add examples
-[ ] Add tests
+[x] Add tests
 ```
