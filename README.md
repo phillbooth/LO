@@ -199,7 +199,7 @@ logicn-app/
 |   |-- logicn-core-photonic/
 |   |-- logicn-target-cpu/
 |   |-- logicn-cpu-kernels/
-|   |-- logicn-target-binary/
+|   |-- logicn-target-native/
 |   |-- logicn-target-wasm/
 |   |-- logicn-target-gpu/
 |   |-- logicn-target-ai-accelerator/
@@ -267,8 +267,8 @@ logicn-app/
   and fallback planning.
 - `packages-logicn/logicn-cpu-kernels/` - optimized CPU kernel contracts for vector,
   matrix, low-bit and ternary workloads.
-- `packages-logicn/logicn-target-binary/` - binary/native target planning and artefact
-  metadata.
+- `packages-logicn/logicn-target-native/` - future native executable target
+  planning and artifact metadata.
 - `packages-logicn/logicn-target-wasm/` - WebAssembly target planning and module metadata.
 - `packages-logicn/logicn-target-gpu/` - GPU target planning, kernel mapping and data
   movement reports.

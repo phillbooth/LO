@@ -1,7 +1,7 @@
 {
-  "name": "@logicn/target-binary",
+  "name": "@logicn/target-native",
   "version": "0.1.0-beta.0",
-  "description": "LogicN binary and native target planning concepts.",
+  "description": "LogicN future native executable and ABI target planning concepts.",
   "license": "Apache-2.0",
   "private": true,
   "type": "module",

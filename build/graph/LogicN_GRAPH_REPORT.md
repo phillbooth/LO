@@ -1,15 +1,15 @@
 # LogicN Graph Report
 
 Workspace: LogicN-app
-Generated: 2026-05-16T08:58:21.780Z
+Generated: 2026-05-17T11:44:55.844Z
 
 ## Summary
 
 - Packages: 54
-- Documents: 450
-- Types/interfaces: 375
+- Documents: 482
+- Types/interfaces: 376
 - Functions: 154
-- Relationships: 1942
+- Relationships: 1956
 
 ## Package Nodes
 
@@ -54,7 +54,7 @@ Generated: 2026-05-16T08:58:21.780Z
 - logicn-core-photonic (packages-logicn/logicn-core-photonic/README.md)
 - logicn-target-cpu (packages-logicn/logicn-target-cpu/README.md)
 - logicn-cpu-kernels (packages-logicn/logicn-cpu-kernels/README.md)
-- logicn-target-binary (packages-logicn/logicn-target-binary/README.md)
+- logicn-target-native (packages-logicn/logicn-target-native/README.md)
 - logicn-target-js (packages-logicn/logicn-target-js/README.md)
 - logicn-target-wasm (packages-logicn/logicn-target-wasm/README.md)
 - logicn-target-gpu (packages-logicn/logicn-target-gpu/README.md)

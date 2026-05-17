@@ -69,7 +69,7 @@ packages-logicn/logicn-ai-lowbit
 packages-logicn/logicn-core-photonic
 packages-logicn/logicn-target-cpu
 packages-logicn/logicn-cpu-kernels
-packages-logicn/logicn-target-binary
+packages-logicn/logicn-target-native
 packages-logicn/logicn-target-photonic
 packages-logicn/logicn-framework-app-kernel
 packages-logicn/logicn-framework-api-server
@@ -1913,7 +1913,7 @@ logicn-ai-lowbit            = low-bit and ternary AI inference contracts
 logicn-core-photonic     = wavelength, phase, amplitude and optical signal concepts
 logicn-target-cpu        = CPU target capability and fallback planning
 logicn-cpu-kernels       = optimized CPU kernel contracts
-logicn-target-binary     = binary/native target planning and artefact metadata
+logicn-target-native     = future native executable target planning and artifact metadata
 logicn-target-photonic   = photonic backend target planning
 logicn-framework-app-kernel        = secure application/API runtime boundary
 logicn-framework-api-server        = built-in HTTP transport package

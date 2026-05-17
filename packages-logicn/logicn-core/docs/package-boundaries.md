@@ -155,12 +155,12 @@ packages-logicn/logicn-cpu-kernels
   ternary operation contracts
   tiling and threading plans
 
-packages-logicn/logicn-target-binary
-  binary target metadata
-  native artefact planning
+packages-logicn/logicn-target-native
+  native target metadata
+  native artifact planning
   platform triples
   ABI requirements
-  binary target reports
+  native target reports
 
 packages-logicn/logicn-target-wasm
   WASM target metadata

@@ -3,15 +3,15 @@
 LogicN's first serious milestone should be a memory-safe, security-first,
 AI-readable language and runtime for secure web apps, APIs and agent workflows.
 
-The first milestone should not depend on native binary compilation. LogicN should
-be useful for normal web applications through a LogicN-native secure runtime that
-can check, serve and run typed application code with reports.
+The first milestone should not depend on native executable compilation. LogicN
+should be useful for normal web applications through a LogicN secure runtime
+that can check, serve and run typed application code with reports.
 
 ## Primary Direction
 
 ```text
 secure web runtime first
-native binary output later
+native executable output later
 accelerator and systems targets later
 ```
 
@@ -46,12 +46,31 @@ secure admin/API backends
 ```
 
 This is application runtime work. Low-level systems targets, embedded targets,
-accelerator targets and binary packaging can remain future output paths.
+accelerator targets and native executable packaging can remain future output
+paths.
+
+## V1 Milestone
+
+The main v1 milestone is:
+
+```text
+logicn serve / secure web runtime
+```
+
+The secondary v1 milestone is:
+
+```text
+compile to a simple portable build target
+```
+
+This means LogicN v1 should be useful for web applications without requiring a
+native executable build. Native and WASM targets can stay visible in reports and
+package planning, but they should not block the first secure runtime slice.
 
 ## Faster Web Apps Without Binary Compilation
 
-LogicN can become fast for web apps before native binary output by making the
-runtime do less work per request.
+LogicN can become fast for web apps before native executable output by making
+the runtime do less work per request.
 
 Runtime-first performance rules:
 
@@ -68,6 +87,7 @@ cache source maps and diagnostics
 keep hot route metadata in compact runtime tables
 support worker pools for safe background work
 make compute-heavy paths eligible for optional WASM later
+specialise runtime plans from local machine capability profiles
 ```
 
 The fast path should be:
@@ -85,6 +105,113 @@ copying large payloads unnecessarily
 running security discovery after handler code starts
 loading dev-only packages in production mode
 ```
+
+## Machine Profile Bridge
+
+LogicN should keep developer code high-level while still allowing the runtime to
+specialise for the machine it is installed on. The draft name for this layer is
+the **Machine Profile Bridge**.
+
+The bridge sits between checked LogicN source and machine-specific execution:
+
+```text
+high-level LogicN source
+  -> checked typed IR
+  -> Machine Profile Bridge
+  -> local runtime plan
+  -> secure web runtime / target adapter
+```
+
+The bridge should:
+
+```text
+detect local OS, architecture, runtime, CPU features and available adapters
+write a local capability profile that is not committed to source control
+specialise boot/main runtime settings for the deployment machine
+choose safe runtime adapters from declared policy
+preserve the developer's high-level source syntax
+report every local selection and fallback
+fail closed when a required capability or permission is missing
+```
+
+Example direction:
+
+```logicn
+machine profile local_runtime {
+  detect os
+  detect architecture
+  detect runtime
+  detect cpu_features
+
+  cache ".logicn/capabilities.local.json"
+  commit false
+}
+
+runtime bridge web_runtime {
+  from local_runtime
+  serve AppServer
+  fallback cpu
+  report "runtime-bridge-report.json"
+}
+```
+
+This is a tooling/runtime concept, not an invitation to write low-level app
+code. Normal LogicN source should stay readable and policy-first.
+
+## Native Layout And Interop Wording
+
+LogicN should use `layout native` and `interop native` as the official draft
+wording for low-level boundaries. A native block must still declare a concrete
+ABI, because calling convention, layout and ownership rules cannot be guessed.
+
+```logicn
+layout native UserRecord {
+  abi c
+
+  fields {
+    id: UInt64
+    email: CString
+    active: Bool8
+  }
+
+  alignment auto
+  padding explicit
+}
+```
+
+```logicn
+interop native sqlite {
+  abi c
+  library "sqlite3"
+
+  functions {
+    sqlite3_open(filename: CString, db: Out<NativeHandle>) -> CInt
+    sqlite3_close(db: NativeHandle) -> CInt
+  }
+
+  memory {
+    ownership explicit
+    nulls denied
+    bounds checked
+  }
+
+  effects {
+    allow file.read
+    allow file.write
+    deny network.external
+  }
+}
+```
+
+The rule is:
+
+```text
+Use native as the official LogicN category.
+Use abi c, abi wasm, abi system or abi plugin for the concrete boundary rules.
+```
+
+Native interop must remain controlled, source-mapped, permissioned and
+reportable. It is not normal application code.
 
 ## Security Model
 
@@ -191,7 +318,7 @@ Staged target order:
 2. Cached typed IR for faster local serve/run.
 3. Web-safe module output for selected code.
 4. WASM for isolated compute-heavy functions.
-5. Native/system output where deployment needs it.
+5. Native executable output where deployment needs it.
 6. Accelerator planning and reports for AI/vector workloads.
 ```
 

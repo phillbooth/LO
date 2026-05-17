@@ -74,6 +74,6 @@ logicn-core-compute plans work.
 logicn-ai describes AI inference.
 logicn-ai-lowbit describes low-bit AI backend inference.
 logicn-target-ai-accelerator describes passive accelerator backend profiles.
-logicn-target-binary emits binary/native target plans.
+logicn-target-native emits future native executable target plans.
 logicn-target-photonic emits photonic target plans and optical I/O reports.
 ```

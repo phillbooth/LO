@@ -64,7 +64,7 @@ It should generate:
 JSON benchmark report
 short command-line summary
 optional shareable benchmark payload
-optional comparison output against C++ / Python later
+optional external-runtime comparison output later
 ```
 
 ## When Benchmark Runs
@@ -195,8 +195,8 @@ larger matrix workloads
 longer GPU tests
 low-bit AI inference tests
 streaming 1GB generated JSON test
-comparison with Python
-comparison with C++
+external runtime comparison
+external compiled-output comparison
 ```
 
 Full mode should clearly warn the user:
@@ -670,34 +670,33 @@ fallback.ai_accelerator_to_gpu_or_cpu
 fallback.lowbit_to_cpu
 fallback.optical_io_to_network
 
-compare.python_json_100mb_optional
-compare.cpp_json_100mb_optional
+compare.external_runtime_json_100mb_optional
+compare.external_compiled_json_100mb_optional
 ```
 
-## C++ And Python Comparisons
+## External Runtime Comparisons
 
 Future benchmark comparison should be optional.
 
 Commands:
 
 ```bash
-LogicN benchmark --compare python
-LogicN benchmark --compare cpp
-LogicN benchmark --compare python,cpp
+LogicN benchmark --compare runtime
+LogicN benchmark --compare compiled
+LogicN benchmark --compare runtime,compiled
 ```
 
 Purpose:
 
 ```text
-compare LogicN behaviour with common existing languages
+compare LogicN behaviour with selected external runtimes
 show where LogicN is faster/slower
 show memory usage differences
 show safety/reporting differences
 ```
 
-The comparison must use the same generated input data, record language/runtime
-versions, record C++ compiler flags and remain optional for normal benchmark
-runs.
+The comparison must use the same generated input data, record runtime or
+compiler versions and remain optional for normal benchmark runs.
 
 ## Command-Line Summary
 

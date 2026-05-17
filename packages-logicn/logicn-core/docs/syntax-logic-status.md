@@ -73,6 +73,7 @@ HTML or CSS badges may be added later by the documentation renderer.
 | Manual pointer-like access | not core LogicN syntax | Not core | High | Unsafe memory access must go through audited interop/trusted modules. |
 | Native-compatible layout | `layout native struct` at ABI/systems boundaries | Documented draft | High | Must declare alignment, ownership and report risk. |
 | Systems profile | future `profile systems_safe` / `profile interop_native` | TODO | High | Low-level buffers and ABI work need memory model maturity first. |
+| Machine profile bridge | runtime/tooling bridge from checked source to local machine capability profile | Documented draft | Managed | Keeps app syntax high-level while setup adapts to the deployment machine. |
 | Dynamic code execution | rejected or gated | Implemented prototype check | High | Avoids code injection and AI-generated executable text risks. |
 | Runtime mutation | forbidden in normal code; use adapters, interfaces, pipelines, test mocks or signed hotfix packages | Documented draft | High | Hidden mutation breaks type, effect, source-map and report guarantees. |
 | Imports/modules | `imports { use ... }` direction | Documented draft | Potential | Final module syntax remains open. |
@@ -80,7 +81,7 @@ HTML or CSS badges may be added later by the documentation renderer.
 | Classes/inheritance | not the initial core model | Not core | Potential | v1 favours records, enums, flows and explicit composition. |
 | Generics | `Array<T>`, `Result<T,E>`, typed contracts | Documented draft | Potential | Generic constraints/protocols remain production-readiness work. |
 | Protocols/interfaces | protocol/constraint model pending | TODO | Potential | Needed before mature generic libraries. |
-| Native interop | audited trusted module/native ABI contracts | TODO | High | Interop must declare ownership, nullability, layout and audit reports. |
+| Native interop | `interop native` with explicit `abi` and audited contracts | TODO | High | Interop must declare ownership, nullability, layout and audit reports. |
 | Systems backend output | generated backend artifacts from checked IR | TODO/package-owned | High | Future output target, not normal unsafe source style. |
 | Vector/matrix/tensor | `Vector`, `Matrix`, `Tensor` contracts | Package-owned | Potential | `logicn-core-vector` owns validation and reports. |
 | AI inference | `ai.infer` package contracts, generic targets | Package-owned | High | AI is package/runtime work, not normal app control-flow syntax. |
@@ -147,15 +148,16 @@ invented as core syntax later.
 | Memory | ownership/borrow/move | TODO | Core v1 maturity blocker. |
 | Memory | clone | Documented draft | Large clone warnings are part of the direction. |
 | Memory | managed cleanup | Not decided | Must not hide resource cleanup. |
-| Memory | native-compatible layout | Documented draft | Use only for ABI/generated backend boundaries. |
+| Memory | native-compatible layout | Documented draft | Use `layout native` with explicit ABI only for ABI/generated backend boundaries. |
 | Profiles | secure app profile | Documented draft | Normal app code should deny unsafe effects. |
 | Profiles | systems-safe profile | TODO | Needed later for runtime internals, ABI and buffers. |
 | Profiles | native interop profile | TODO | Requires ownership, nullability, allocator and ABI report rules. |
 | Modules | import/use, visibility | Documented draft | Module/visibility docs exist; parser work pending. |
 | Metaprogramming | reflection/code generation | TODO/package-owned | Must be strict, source-mapped and reportable. |
 | Targets | CPU/runtime target | Documented draft/package-owned | Target packages own detailed contracts. |
-| Targets | secure web runtime | Documented draft | First production-value target direction. |
-| Targets | systems output target | TODO/package-owned | Future target after ABI rules stabilise. |
+| Targets | secure web runtime | Documented draft | Main v1 milestone through `logicn serve`. |
+| Targets | machine profile bridge | Documented draft | Runtime setup adapts boot/main plans to local capabilities without changing source meaning. |
+| Targets | native executable target | TODO/package-owned | Future `logicn-target-native` target after ABI rules stabilise. |
 | Targets | WASM target | TODO/package-owned | Needs target plans. |
 | Targets | GPU/NPU/photonic targets | Package-owned | Planning/report targets, not normal control flow. |
 | Vector | vector/matrix/tensor | Package-owned | Vector and AI packages own shape/precision checks. |

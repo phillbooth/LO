@@ -281,7 +281,7 @@ logicn-target-photonic
 | `logicn-target-photonic` | Compiler backend, output target and hardware or simulator mapping |
 | `logicn-core-vector` | Vector, matrix, tensor types and operations |
 | `logicn-core-compute` | `compute auto`, target selection and fallback planning |
-| `logicn-target-binary` | Normal CPU/native binary output |
+| `logicn-target-native` | Future native executable output |
 | `logicn-target-gpu` | GPU target planning and output contracts |
 | `logicn-tools-benchmark` | Benchmark diagnostics for optical I/O and fallback paths |
 | `logicn-core-reports` | Shared report schemas and report-writing contracts |

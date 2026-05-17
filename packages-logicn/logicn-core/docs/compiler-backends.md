@@ -59,7 +59,7 @@ Implementation order:
 15. GPU, photonic, wavelength and omni-logic backends as planning/report targets first.
 ```
 
-This means early LogicN should run through a checked interpreter/prototype first, not compile directly to WASM or a native binary as the first production path.
+This means early LogicN should run through a checked interpreter/prototype first, not compile directly to WASM or a native executable as the first production path.
 
 The final long-term compiler implementation language remains a separate decision.
 
@@ -91,7 +91,7 @@ Raw pointer-like access, unchecked casts, null pointer behaviour, macro-heavy
 generation, manual free everywhere and implicit integer conversions remain
 outside normal LogicN code.
 
-Future systems-output planning may remain staged in `logicn-target-binary` until
+Future systems-output planning may remain staged in `logicn-target-native` until
 it is stable enough to split. Shared ABI and systems-profile rules may later
 justify separate packages, but those packages should not be added before the
 core parser, checker, memory model and interop report contracts are credible.

@@ -123,7 +123,7 @@ build/node/security-report.json
 Node.js is a target, not the identity of LogicN. Long-term targets may include:
 
 ```text
-native binary
+native executable
 WASM/WASI
 container runtime
 server runtime

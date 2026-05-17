@@ -47,11 +47,25 @@ All notable changes to this app should be documented here.
 - Added a first-class monkey-patching ban for normal LogicN code, with adapter,
   interface/protocol, pipeline, test-mock and signed-hotfix alternatives.
 - Clarified LogicN's first product direction as secure web runtime code, while
-  keeping low-level systems targets, embedded targets and native binary output
-  as later target paths.
+  keeping low-level systems targets, embedded targets and native executable
+  output as later target paths.
 - Documented LogicN's systems direction: portable systems output and native ABI
   work are future generated backend/interop targets, while normal LogicN source
   remains high-level, strict, source-mapped, permissioned and reportable.
+- Set `logicn serve` / secure web runtime as the main v1 milestone, with a
+  simple portable build target as secondary v1 work and native executable output
+  as future target planning.
+- Renamed the future native executable target package direction to
+  `logicn-target-native` and updated its package metadata and contracts.
+- Added the Machine Profile Bridge draft for adapting checked LogicN source to
+  local machine capability profiles without making application syntax low-level.
+- Adopted `layout native` and `interop native` as official draft wording for
+  low-level boundaries, with explicit ABI declarations such as `abi c`.
+- Added the layered docs structure under `docs/framework`, `docs/contracts`,
+  `docs/reports` and `docs/rules`, plus a Knowledge Base concept note for the
+  documentation layer model.
+- Reworked `docs/README.md` into a navigation page for framework concepts,
+  contract types, generated reports, rules and package-level references.
 - Added `packages-logicn/logicn-core/docs/language-core-maturity-roadmap.md` to
   track missing LogicN language-core maturity items, including compiler
   pipeline, protocols, deterministic cleanup, trusted interop, package
@@ -197,7 +211,8 @@ All notable changes to this app should be documented here.
 - Added `packages-logicn/logicn-core-vector/` for vector value, lane and operation concepts.
 - Added `packages-logicn/logicn-core-compute/` for compute planning and target selection
   concepts.
-- Added `packages-logicn/logicn-target-binary/` for binary/native target planning.
+- Added `packages-logicn/logicn-target-native/` for future native executable
+  target planning.
 - Added `packages-logicn/logicn-target-wasm/` for WebAssembly target planning.
 - Added `packages-logicn/logicn-target-gpu/` for GPU target planning.
 - Added `packages-logicn/logicn-target-photonic/` for photonic backend target planning.

@@ -161,8 +161,8 @@ packages-logicn/logicn-target-cpu/
 packages-logicn/logicn-cpu-kernels/
   optimized CPU kernel contracts for vector, matrix, low-bit and ternary work
 
-packages-logicn/logicn-target-binary/
-  binary/native target planning and artefact metadata
+packages-logicn/logicn-target-native/
+  future native executable target planning and artifact metadata
 
 packages-logicn/logicn-target-wasm/
   WebAssembly target planning, module metadata and import/export contracts

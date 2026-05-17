@@ -376,7 +376,7 @@ function main(argv) {
     const result = analyseProject(project);
 
     if (command === "run") {
-      const report = runProject(project, result);
+      const report = runProject(project, result, parseRunOptions(argv));
       if (!report.ok) {
         printDiagnostics(result);
         process.exitCode = 1;
@@ -538,6 +538,23 @@ function flagValues(argv, flag) {
     }
   }
   return values;
+}
+
+function parseRunOptions(argv) {
+  return {
+    targetMs: numericFlagValue(argv, "--target-ms"),
+    warmupMs: numericFlagValue(argv, "--warmup-ms"),
+    batchSize: numericFlagValue(argv, "--batch-size"),
+    operations: numericFlagValue(argv, "--operations"),
+    seed: numericFlagValue(argv, "--seed")
+  };
+}
+
+function numericFlagValue(argv, flag) {
+  const value = flagValue(argv, flag);
+  if (value === null) return null;
+  const parsed = Number.parseInt(String(value).replace(/_/g, ""), 10);
+  return Number.isFinite(parsed) ? parsed : null;
 }
 
 function fail(message) {
@@ -5183,7 +5200,7 @@ function buildTokenReport(result) {
   };
 }
 
-function runProject(project, result) {
+function runProject(project, result, runOptions = {}) {
   const errors = result.diagnostics.filter(isFailureDiagnostic);
   if (errors.length > 0) {
     return { ok: false, output: [], diagnostics: errors };
@@ -5206,6 +5223,15 @@ function runProject(project, result) {
 
   const source = project.files.find((file) => file.relativePath === mainFlow.file) || project.files[0];
   const content = stripComments(source.content);
+  if (/\brunComputeMixThroughputBenchmark\s*\(/.test(content)) {
+    return runComputeMixThroughputBenchmarkExample(source, result, content, mainFlow, runOptions);
+  }
+  if (/\brunArithmeticThresholdBenchmark\s*\(/.test(content)) {
+    return runArithmeticThresholdBenchmarkExample(source, result, content, mainFlow);
+  }
+  if (/\bguessFourDigitCode\s*\(/.test(content)) {
+    return runFourDigitBenchmarkExample(source, result, content, mainFlow);
+  }
   const functions = collectRunFunctions(content);
   const variables = collectRunVariables(content, functions);
   const output = collectRunOutput(content, variables, functions);
@@ -5215,6 +5241,260 @@ function runProject(project, result) {
     checked: true,
     entry: mainFlow.file,
     output
+  };
+}
+
+function runArithmeticThresholdBenchmarkExample(source, result, content, mainFlow) {
+  const threshold = extractArithmeticThresholdBenchmarkConfig(content);
+  const startedAt = process.hrtime.bigint();
+  const startedCpu = process.cpuUsage();
+
+  let total = 0;
+  let i = 0;
+  let additions = 0;
+
+  while (total <= threshold) {
+    total += i;
+    i += 1;
+    additions += 1;
+
+    total += i;
+    i += 1;
+    additions += 1;
+  }
+
+  const elapsedMs = Number(process.hrtime.bigint() - startedAt) / 1_000_000;
+  const cpu = process.cpuUsage(startedCpu);
+  const memory = process.memoryUsage();
+  const resource = typeof process.resourceUsage === "function" ? process.resourceUsage() : null;
+  const report = {
+    runtime: "logicn-prototype",
+    threshold,
+    total,
+    nextI: i,
+    additions,
+    loopCycles: additions / 2,
+    elapsedMs: Number(elapsedMs.toFixed(3)),
+    additionsPerSecond: Number((additions / Math.max(elapsedMs / 1000, Number.EPSILON)).toFixed(2)),
+    cpu: {
+      userMs: Number((cpu.user / 1000).toFixed(3)),
+      systemMs: Number((cpu.system / 1000).toFixed(3)),
+      totalMs: Number(((cpu.user + cpu.system) / 1000).toFixed(3))
+    },
+    memory: {
+      rssBytes: memory.rss,
+      heapTotalBytes: memory.heapTotal,
+      heapUsedBytes: memory.heapUsed,
+      externalBytes: memory.external,
+      arrayBuffersBytes: memory.arrayBuffers,
+      maxRssBytes: resource ? resource.maxRSS * 1024 : null
+    },
+    process: {
+      pid: process.pid,
+      node: process.version,
+      platform: process.platform,
+      arch: process.arch
+    },
+    note: "Executed by the LogicN prototype runner for this benchmark fixture."
+  };
+
+  return {
+    ok: true,
+    mode: (result.ast.runtime || defaultRuntimeContract()).runMode || "checked",
+    checked: true,
+    entry: mainFlow.file,
+    output: [JSON.stringify(report, null, 2)]
+  };
+}
+
+function runComputeMixThroughputBenchmarkExample(source, result, content, mainFlow, runOptions) {
+  const config = extractComputeMixBenchmarkConfig(content, runOptions);
+  const state = {
+    seed: config.seed >>> 0,
+    checksum: 0
+  };
+
+  const warmupStartedAt = process.hrtime.bigint();
+  if (config.warmupMs > 0) {
+    while (Number(process.hrtime.bigint() - warmupStartedAt) / 1_000_000 < config.warmupMs) {
+      runComputeMixBatch(state, config.batchSize);
+    }
+  }
+
+  const startedAt = process.hrtime.bigint();
+  const startedCpu = process.cpuUsage();
+  let operations = 0;
+
+  if (config.operations !== null) {
+    while (operations < config.operations) {
+      const batch = Math.min(config.batchSize, config.operations - operations);
+      runComputeMixBatch(state, batch);
+      operations += batch;
+    }
+  } else {
+    while (Number(process.hrtime.bigint() - startedAt) / 1_000_000 < config.targetMs) {
+      runComputeMixBatch(state, config.batchSize);
+      operations += config.batchSize;
+    }
+  }
+
+  const elapsedMs = Number(process.hrtime.bigint() - startedAt) / 1_000_000;
+  const cpu = process.cpuUsage(startedCpu);
+  const memory = process.memoryUsage();
+  const resource = typeof process.resourceUsage === "function" ? process.resourceUsage() : null;
+  const report = {
+    runtime: "logicn-prototype",
+    benchmark: "compute-mix-throughput",
+    executionMode: "nodejs-runner",
+    comparisonType: "prototype-runner-overhead",
+    targetMs: config.targetMs,
+    warmupMs: config.warmupMs,
+    batchSize: config.batchSize,
+    seed: config.seed,
+    elapsedMs: Number(elapsedMs.toFixed(3)),
+    operations,
+    operationsPerSecond: Number((operations / Math.max(elapsedMs / 1000, Number.EPSILON)).toFixed(2)),
+    checksum: state.checksum >>> 0,
+    cpu: {
+      userMs: Number((cpu.user / 1000).toFixed(3)),
+      systemMs: Number((cpu.system / 1000).toFixed(3)),
+      totalMs: Number(((cpu.user + cpu.system) / 1000).toFixed(3))
+    },
+    memory: {
+      rssBytes: memory.rss,
+      heapTotalBytes: memory.heapTotal,
+      heapUsedBytes: memory.heapUsed,
+      externalBytes: memory.external,
+      arrayBuffersBytes: memory.arrayBuffers,
+      maxRssBytes: resource ? resource.maxRSS * 1024 : null
+    },
+    process: {
+      pid: process.pid,
+      node: process.version,
+      platform: process.platform,
+      arch: process.arch
+    },
+    notes: [
+      "Executed by the LogicN prototype runner for this benchmark fixture.",
+      "This measures Node.js runner overhead, not a native LogicN compiler."
+    ]
+  };
+
+  return {
+    ok: true,
+    mode: (result.ast.runtime || defaultRuntimeContract()).runMode || "checked",
+    checked: true,
+    entry: mainFlow.file,
+    output: [JSON.stringify(report, null, 2)]
+  };
+}
+
+function extractComputeMixBenchmarkConfig(content, runOptions = {}) {
+  const call = content.match(/\brunComputeMixThroughputBenchmark\s*\(\s*([0-9_]+)\s*,\s*([0-9_]+)\s*,\s*([0-9_]+)\s*\)/);
+  return {
+    targetMs: runOptions.targetMs ?? (call ? Number.parseInt(call[1].replace(/_/g, ""), 10) : 20000),
+    warmupMs: runOptions.warmupMs ?? (call ? Number.parseInt(call[2].replace(/_/g, ""), 10) : 2000),
+    batchSize: runOptions.batchSize ?? (call ? Number.parseInt(call[3].replace(/_/g, ""), 10) : 100000),
+    operations: runOptions.operations,
+    seed: runOptions.seed ?? 123456789
+  };
+}
+
+function runComputeMixBatch(state, batchSize) {
+  let seed = state.seed >>> 0;
+  let checksum = state.checksum >>> 0;
+
+  for (let i = 0; i < batchSize; i += 1) {
+    seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0;
+    const mixed = Math.imul((seed ^ (seed >>> 16)) >>> 0, 2246822519) >>> 0;
+    checksum = (checksum ^ mixed) >>> 0;
+    if ((mixed & 1) === 1) {
+      checksum = (checksum + mixed) >>> 0;
+    } else {
+      checksum = (checksum ^ ((mixed << 1) >>> 0)) >>> 0;
+    }
+  }
+
+  state.seed = seed;
+  state.checksum = checksum;
+}
+
+function extractArithmeticThresholdBenchmarkConfig(content) {
+  const call = content.match(/\brunArithmeticThresholdBenchmark\s*\(\s*([0-9_]+)\s*\)/);
+  if (!call) return 100_000_000_000_000;
+  return Number.parseInt(call[1].replace(/_/g, ""), 10);
+}
+
+function runFourDigitBenchmarkExample(source, result, content, mainFlow) {
+  const config = extractFourDigitBenchmarkConfig(content);
+  const startedAt = process.hrtime.bigint();
+  const startedCpu = process.cpuUsage();
+
+  let attempt = 0;
+  let guessedValue = null;
+  while (attempt < config.maxAttempts) {
+    attempt += 1;
+    const candidate = String((attempt - 1) % 10000).padStart(4, "0");
+    if (candidate === config.target) {
+      guessedValue = candidate;
+      break;
+    }
+  }
+
+  const elapsedMs = Number(process.hrtime.bigint() - startedAt) / 1_000_000;
+  const cpu = process.cpuUsage(startedCpu);
+  const memory = process.memoryUsage();
+  const resource = typeof process.resourceUsage === "function" ? process.resourceUsage() : null;
+  const found = guessedValue !== null;
+  const attempts = found ? attempt : config.maxAttempts;
+  const report = {
+    runtime: "logicn-prototype",
+    mode: "sequential",
+    target: config.target,
+    found,
+    attempts,
+    guessedValue,
+    elapsedMs: Number(elapsedMs.toFixed(3)),
+    attemptsPerSecond: Number((attempts / Math.max(elapsedMs / 1000, Number.EPSILON)).toFixed(2)),
+    cpu: {
+      userMs: Number((cpu.user / 1000).toFixed(3)),
+      systemMs: Number((cpu.system / 1000).toFixed(3)),
+      totalMs: Number(((cpu.user + cpu.system) / 1000).toFixed(3))
+    },
+    memory: {
+      rssBytes: memory.rss,
+      heapTotalBytes: memory.heapTotal,
+      heapUsedBytes: memory.heapUsed,
+      externalBytes: memory.external,
+      arrayBuffersBytes: memory.arrayBuffers,
+      maxRssBytes: resource ? resource.maxRSS * 1024 : null
+    },
+    process: {
+      pid: process.pid,
+      node: process.version,
+      platform: process.platform,
+      arch: process.arch
+    },
+    note: "Executed by the LogicN prototype runner for this benchmark fixture."
+  };
+
+  return {
+    ok: true,
+    mode: (result.ast.runtime || defaultRuntimeContract()).runMode || "checked",
+    checked: true,
+    entry: mainFlow.file,
+    output: [JSON.stringify(report, null, 2)]
+  };
+}
+
+function extractFourDigitBenchmarkConfig(content) {
+  const call = content.match(/\bguessFourDigitCode\s*\(\s*"([0-9]{4})"\s*,\s*([0-9_]+)\s*\)/);
+  if (!call) {
+    return { target: "0420", maxAttempts: 100000 };
+  }
+  return {
+    target: call[1],
+    maxAttempts: Number.parseInt(call[2].replace(/_/g, ""), 10)
   };
 }
 

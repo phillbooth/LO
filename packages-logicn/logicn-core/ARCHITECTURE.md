@@ -79,8 +79,8 @@ LogicN Target CPU
 LogicN CPU Kernels
   low-bit, ternary, vector and matrix CPU kernel contracts
 
-LogicN Target Binary
-  binary/native target planning and artefact metadata
+LogicN Target Native
+  future native executable target planning and artifact metadata
 
 LogicN Target Photonic
   photonic backend target plans that use logicn-core-photonic concepts
@@ -123,7 +123,7 @@ Low-bit AI backend         -> packages-logicn/logicn-ai-lowbit
 photonic concepts          -> packages-logicn/logicn-core-photonic
 CPU target planning        -> packages-logicn/logicn-target-cpu
 CPU kernel contracts       -> packages-logicn/logicn-cpu-kernels
-binary target backend      -> packages-logicn/logicn-target-binary
+binary target backend      -> packages-logicn/logicn-target-native
 photonic target backend    -> packages-logicn/logicn-target-photonic
 developer commands         -> packages-logicn/logicn-core-cli
 safe automation tasks      -> packages-logicn/logicn-core-tasks
@@ -1541,7 +1541,7 @@ packages-logicn/logicn-core-logic
 packages-logicn/logicn-core-vector
 packages-logicn/logicn-core-compute
 packages-logicn/logicn-core-photonic
-packages-logicn/logicn-target-binary
+packages-logicn/logicn-target-native
 packages-logicn/logicn-target-photonic
 packages-logicn/logicn-framework-app-kernel
 packages-logicn/logicn-framework-api-server
@@ -1686,7 +1686,7 @@ example .lln files
 Not required:
 
 ```text
-real native binary compiler
+real native executable compiler
 real GPU backend
 real photonic backend
 real package manager

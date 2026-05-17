@@ -2,7 +2,7 @@
 
 Ownership note: `logicn-core` may document target declaration syntax and compiler
 report contracts. Binary/native target planning belongs in
-`packages-logicn/logicn-target-binary/`; future systems output planning may start
+`packages-logicn/logicn-target-native/`; future systems output planning may start
 there and split only after the ABI and memory rules stabilise;
 photonic backend target planning belongs in
 `packages-logicn/logicn-target-photonic/`; compute target selection belongs in

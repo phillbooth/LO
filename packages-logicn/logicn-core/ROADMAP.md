@@ -624,7 +624,7 @@ Long-term ideas include:
 LLVM backend
 MLIR backend
 WASM backend
-native binary compiler
+native executable compiler
 real GPU backend
 ONNX support
 AI model pipeline support

@@ -34,6 +34,8 @@
   policy boundaries without making DDD mandatory or weakening security
 - [x] Add financial markets runtime safety design note
 - [x] Add secure web runtime positioning
+- [x] Confirm `logicn serve` / secure web runtime as the main v1 milestone,
+  with a simple portable build target as the secondary v1 milestone
 - [x] Add network and Ethernet I/O positioning plus `logicn-core-network` package
 - [x] Add language-core maturity roadmap for missing compiler/runtime work
 - [x] Add compliance and privacy framework docs plus `logicn-compliance-*`
@@ -55,6 +57,9 @@
 - [x] Document Kubernetes as an optional deployment target without creating the
   locked enterprise Kubernetes package
 - [x] Add Learning Mode design for students, children, teachers and beginners
+- [x] Add layered documentation structure for framework, contracts, reports and
+  rules
+- [x] Add Knowledge Base concept note for the documentation layer model
 - [ ] Complete `docs/ARCHITECTURE.md`
 - [ ] Complete `docs/SECURITY.md`
 
@@ -78,7 +83,7 @@
 - [x] Add package scaffolds for `logicn-core-cli`, `logicn-core-tasks`, `logicn-core-logic` and
   `logicn-core-photonic`
 - [x] Add package scaffolds for `logicn-core-vector`, `logicn-core-compute`,
-  `logicn-target-binary` and `logicn-target-photonic`
+  `logicn-target-native` and `logicn-target-photonic`
 - [x] Add package scaffolds for `logicn-core-compiler`, `logicn-core-runtime`, `logicn-core-security`,
   `logicn-core-config`, `logicn-core-reports`, `logicn-target-wasm` and `logicn-target-gpu`
 - [x] Add package scaffolds for `logicn-ai`, `logicn-ai-lowbit`, `logicn-target-cpu` and
@@ -148,7 +153,7 @@
   tool gateways, secret guards, sandboxing, approval gates and audit reports
 - [x] Define `logicn-target-cpu` CPU capability and fallback report contracts
 - [x] Define `logicn-cpu-kernels` low-bit CPU kernel planning contracts
-- [ ] Define `logicn-target-binary` binary/native target plans
+- [ ] Define `logicn-target-native` native executable target plans
 - [ ] Define `logicn-target-wasm` WebAssembly target plans
 - [ ] Define `logicn-target-gpu` GPU target plans
 - [x] Define `logicn-target-ai-accelerator` target planning contracts
@@ -168,6 +173,10 @@
   not low-level systems programming
 - [x] Document systems-layer direction as generated backend/ABI work,
   not normal unsafe LogicN source style
+- [x] Rename future native executable package direction to `logicn-target-native`
+  and document `layout native` / `interop native` ABI wording
+- [x] Add Machine Profile Bridge direction for local capability detection and
+  runtime setup without low-level application syntax
 - [x] Add a compact LogicN syntax and logic status table
 - [x] Write at least 20 real `.lln` examples covering basic, intermediate and
   advanced v1 syntax

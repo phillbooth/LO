@@ -389,14 +389,15 @@ Provides:
 - CpuKernelDiagnosticSeverity
 - CpuKernelDiagnostic
 
-## logicn-target-binary
+## logicn-target-native
 
-LogicN binary and native target planning concepts.
+LogicN future native executable and ABI target planning concepts.
 
 Provides:
-- BinaryTarget
-- BinaryArtefact
-- BinaryTargetReport
+- NativeAbi
+- NativeTarget
+- NativeArtifact
+- NativeTargetReport
 
 ## logicn-target-js
 

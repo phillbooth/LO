@@ -142,7 +142,7 @@ Compute planning work should update packages-logicn/logicn-core-compute first.
 AI inference work should update packages-logicn/logicn-ai first.
 Low-bit AI backend work should update packages-logicn/logicn-ai-lowbit first.
 Photonic vocabulary should update packages-logicn/logicn-core-photonic first.
-Target backend work should update packages-logicn/logicn-target-binary or
+Target backend work should update packages-logicn/logicn-target-native or
 packages-logicn/logicn-target-cpu, packages-logicn/logicn-target-wasm, packages-logicn/logicn-target-gpu or
 packages-logicn/logicn-target-photonic first.
 CPU kernel work should update packages-logicn/logicn-cpu-kernels first.
@@ -168,7 +168,7 @@ Low-bit AI backend -> packages-logicn/logicn-ai-lowbit/TODO.md
 Photonic concepts and simulation helpers -> packages-logicn/logicn-core-photonic/TODO.md
 CPU target planning -> packages-logicn/logicn-target-cpu/TODO.md
 CPU kernel planning -> packages-logicn/logicn-cpu-kernels/TODO.md
-Binary/native target output -> packages-logicn/logicn-target-binary/TODO.md
+Binary/native target output -> packages-logicn/logicn-target-native/TODO.md
 WASM target output -> packages-logicn/logicn-target-wasm/TODO.md
 GPU target output -> packages-logicn/logicn-target-gpu/TODO.md
 Photonic target output -> packages-logicn/logicn-target-photonic/TODO.md

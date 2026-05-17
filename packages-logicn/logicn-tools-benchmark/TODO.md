@@ -95,13 +95,13 @@
 [ ] Add fallback tests
 ```
 
-## Phase 9: Language Comparisons
+## Phase 9: External Runtime Comparisons
 
 ```text
-[ ] Add optional Python comparison runner
-[ ] Add optional C++ comparison runner
+[ ] Add optional external runtime comparison runner
+[ ] Add optional external compiled-output comparison runner
 [ ] Use same generated input data
-[ ] Record Python version
-[ ] Record C++ compiler and flags
+[ ] Record runtime version
+[ ] Record compiler version and flags where applicable
 [ ] Write comparison report
 ```

@@ -19,9 +19,11 @@ must not be treated as implemented app functionality.
   documentation in `docs/`.
 - Support CPU-compatible checked execution and deterministic reports as the
   practical baseline.
-- Keep v1 target support limited to CPU and WASM. GPU, photonic, low-bit AI,
-  AI accelerator, optical I/O and other accelerator support are post-v1 planning
-  unless needed to explain core type-system semantics.
+- Keep v1 focused on `logicn serve` and the secure web runtime.
+  CPU-compatible checked execution remains the baseline, with a simple portable
+  build target as a secondary v1 milestone. WASM, GPU, photonic, low-bit AI,
+  AI accelerator, optical I/O and native executable support remain target
+  planning unless needed to explain core type-system semantics.
 - Support neural-network workloads through typed packages and target planning,
   not by making neural networks part of normal app syntax.
 - Support parallel AI agents only as supervised, bounded, permissioned,
@@ -47,10 +49,11 @@ must not be treated as implemented app functionality.
 ## V1 Language Requirements
 
 - The v1 surface must freeze around core syntax, the core type system,
-  `Result<T, E>`, `Option<T>`, the memory-safety model, CPU target support and
-  WASM target support.
-- Everything beyond CPU and WASM targets must be labelled post-v1 unless it is
-  necessary to define the core type system.
+  `Result<T, E>`, `Option<T>`, the memory-safety model, `logicn serve`, secure
+  web runtime policy and CPU-compatible checked execution.
+- Everything beyond secure runtime execution and the simple portable build
+  target must be labelled post-v1 or target planning unless it is necessary to
+  define the core type system.
 - LogicN must not make measured performance claims until the compiler, memory
   model, runtime and benchmark methodology exist. Current performance wording
   must be framed as a goal or opportunity, not a measured fact.
@@ -64,7 +67,18 @@ must not be treated as implemented app functionality.
 - LogicN's first product target is secure web-application runtime code:
   APIs, webhooks, service workers, queue workers, typed JSON services,
   auth-heavy applications and agent/tool gateway backends. Low-level systems
-  targets, embedded targets and native binary output remain later target paths.
+  targets, embedded targets and native executable output remain later target
+  paths.
+- LogicN must keep normal source high-level while still allowing local machine
+  setup to specialise runtime plans. The Machine Profile Bridge must sit between
+  checked LogicN source and machine-specific execution, detect local
+  capabilities, cache uncommitted local profiles, configure boot/main runtime
+  settings for the deployment machine and report every adapter, fallback and
+  permission decision.
+- Low-level boundary syntax must use `layout native` and `interop native` as
+  the official draft wording. Native blocks must declare a concrete ABI such as
+  `abi c`, `abi wasm`, `abi system` or `abi plugin`; the ABI must drive layout,
+  ownership, nullability, allocator and audit checks.
 - LogicN must treat data and behavior as untrusted by default within reason.
   External input, dependency output, generated AI content, cached data, network
   data, database data, uploaded files, environment-derived values, headers,
@@ -393,9 +407,9 @@ The app package must remain deliberately small until a product domain is chosen.
 - CPU target planning, feature detection and fallback reports must live in
   `packages-logicn/logicn-target-cpu/`.
 - Optimized CPU kernel contracts must live in `packages-logicn/logicn-cpu-kernels/`.
-- Binary/native target planning must live in `packages-logicn/logicn-target-binary/`.
+- Native executable target planning must live in `packages-logicn/logicn-target-native/`.
 - Portable systems output planning may start in
-  `packages-logicn/logicn-target-binary/` only after ABI, layout and memory
+  `packages-logicn/logicn-target-native/` only after ABI, layout and memory
   report rules stabilise.
 - LogicN must treat systems output as a generated backend/interop target, not
   as normal unsafe application source style.
@@ -459,7 +473,7 @@ The app package must remain deliberately small until a product domain is chosen.
   code runs or compiles to, `logicn-io-*` for how data moves, `logicn-ai-*` for
   AI-specific workloads, `logicn-kernel-*` for low-level execution kernels and
   `logicn-app-*` for runtime/application framework layers.
-- `logicn-target-binary` and `logicn-target-photonic` must not be renamed to I/O
+- `logicn-target-native` and `logicn-target-photonic` must not be renamed to I/O
   package names; binary and photonic I/O should be added later as separate
   `logicn-io-*` packages.
 
@@ -722,8 +736,8 @@ the active v1 build graph.
   MySQL, SQLite, OpenSearch and Firestore adapters must not bypass typed
   models, validation, permissions, parameterised access, safe response mapping,
   archive policy or report output.
-- `logicn-target-binary` must own binary/native target planning and artefact
-  metadata.
+- `logicn-target-native` must own future native executable target planning,
+  native ABI boundary planning and artifact metadata.
 - `logicn-target-js` must own browser JavaScript output planning, ESM metadata,
   source-map rules, server-only import blocking, browser secret denial and
   JavaScript output reports.

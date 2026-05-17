@@ -1,7 +1,7 @@
 # LogicN Examples
 
 These examples are source fixtures for the prototype CLI, package tests and
-documentation. The directory currently contains 21 `.lln` fixtures covering the
+documentation. The directory currently contains 24 `.lln` fixtures covering the
 v1 syntax subset and target/report planning examples.
 
 Run from `packages-logicn/logicn-core`:
@@ -37,16 +37,109 @@ The focused example is `contracts.lln`. It shows how typed data shapes, a secure
 flow contract, recoverable errors, strict comments and effect declarations fit
 together. `api-orders.lln` shows the route-level API contract form.
 
+## Four-Digit Guess Benchmark
+
+`four-digit-guess-benchmark.lln` is a LogicN-style local-only benchmark contract
+for finding a four-digit code. The companion runnable scripts do the same work
+and print JSON reports with elapsed time, attempt rate, CPU and memory fields.
+The default mode is `sequential` so every runtime performs the same number of
+attempts for a given target:
+
+```bash
+node packages-logicn/logicn-core/compiler/logicn.js run packages-logicn/logicn-core/examples/four-digit-guess-benchmark.lln
+node packages-logicn/logicn-core/examples/four-digit-guess-benchmark.node.js --target 9999 --max 100000 --mode sequential
+python packages-logicn/logicn-core/examples/four-digit-guess-benchmark.py --target 9999 --max 100000 --mode sequential
+```
+
+Use a four-digit `--target` only. This intentionally does not guess full UUIDs.
+
+## Arithmetic Threshold Benchmark
+
+`arithmetic-threshold-benchmark.lln` is a deterministic local benchmark. It
+repeatedly performs:
+
+```text
+total += i
+i += 1
+total += i
+i += 1
+```
+
+until `total` is greater than `100_000_000_000_000`. The companion Node.js and
+Python scripts perform the same loop and emit JSON reports with elapsed time,
+addition rate, CPU and memory fields:
+
+```bash
+node packages-logicn/logicn-core/compiler/logicn.js run packages-logicn/logicn-core/examples/arithmetic-threshold-benchmark.lln
+node packages-logicn/logicn-core/examples/arithmetic-threshold-benchmark.node.js --threshold 100000000000000
+python packages-logicn/logicn-core/examples/arithmetic-threshold-benchmark.py --threshold 100000000000000
+```
+
+For Python raw loop speed without allocation tracing overhead:
+
+```bash
+python packages-logicn/logicn-core/examples/arithmetic-threshold-benchmark.py --threshold 100000000000000 --no-tracemalloc
+```
+
+## Compute Mix Throughput Benchmark
+
+`compute-mix-throughput-benchmark.lln` is the fairer timed benchmark fixture. It
+runs a deterministic UInt32 workload with addition, multiplication, shift, xor,
+branching and checksum output. The default measured window is 20 seconds after a
+2 second warm-up:
+
+```bash
+node packages-logicn/logicn-core/compiler/logicn.js run packages-logicn/logicn-core/examples/compute-mix-throughput-benchmark.lln --target-ms 20000 --warmup-ms 2000 --batch-size 100000
+node packages-logicn/logicn-core/examples/compute-mix-throughput-benchmark.node.js --target-ms 20000 --warmup-ms 2000 --batch-size 100000
+python packages-logicn/logicn-core/examples/compute-mix-throughput-benchmark.py --target-ms 20000 --warmup-ms 2000 --batch-size 100000 --no-tracemalloc
+```
+
+For a quick correctness smoke test, use fixed-work mode. With `--warmup-ms 0`,
+all runtimes should produce the same checksum for the same operation count:
+
+```bash
+node packages-logicn/logicn-core/compiler/logicn.js run packages-logicn/logicn-core/examples/compute-mix-throughput-benchmark.lln --operations 100000 --warmup-ms 0 --batch-size 10000
+node packages-logicn/logicn-core/examples/compute-mix-throughput-benchmark.node.js --operations 100000 --warmup-ms 0 --batch-size 10000
+python packages-logicn/logicn-core/examples/compute-mix-throughput-benchmark.py --operations 100000 --warmup-ms 0 --batch-size 10000 --no-tracemalloc
+```
+
+Run the three runtimes repeatedly and write a local JSON result summary:
+
+```bash
+node packages-logicn/logicn-core/examples/benchmark-runner.node.js --runs 5 --target-ms 20000 --warmup-ms 2000 --batch-size 100000
+```
+
+Results are written under `benchmark-results/`. These files are machine-local
+benchmark outputs and should not be treated as language source.
+
+### Benchmark Fairness Rules
+
+1. Each runtime must use the same algorithm.
+2. Each runtime must use the same seed.
+3. Each runtime must produce a checksum.
+4. The measured section must exclude file loading where possible.
+5. The benchmark must include a warm-up phase.
+6. The benchmark must run for 10-30 seconds.
+7. The clock must not be checked inside every operation.
+8. Memory tracing must not be enabled during speed tests.
+9. Each benchmark should be run at least 5 times.
+10. The median result is the official score.
+11. Results must include CPU, memory, runtime version, OS, architecture and timestamp.
+12. LogicN prototype results must state that the current backend is a Node.js runner.
+
 Current fixtures:
 
 - `ai-context.lln`
 - `api-orders.lln`
+- `arithmetic-threshold-benchmark.lln` - deterministic arithmetic threshold benchmark contract
 - `boot.lln`
 - `browser-form.lln`
 - `compute-block.lln`
+- `compute-mix-throughput-benchmark.lln` - timed deterministic UInt32 throughput benchmark
 - `contracts.lln` - typed flow contract with strict comments, `Result` errors and effects
 - `decision.lln`
 - `gpu-plan.lln`
+- `four-digit-guess-benchmark.lln` - local-only four-digit benchmark contract with runtime metrics
 - `hello.lln`
 - `json-decode.lln`
 - `logic-review-scale.lln`

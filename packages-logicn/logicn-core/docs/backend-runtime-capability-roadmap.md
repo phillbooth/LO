@@ -68,7 +68,7 @@ production gates
 ```
 
 The runtime should be able to serve checked LogicN API code without first
-requiring a native binary.
+requiring a native executable.
 
 ## Performance Direction
 

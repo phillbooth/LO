@@ -22,6 +22,7 @@ language-core-maturity-roadmap.md
 generated-output-and-runtime-ergonomics.md
 memory-safety-and-developer-experience.md
 language-positioning-principles.md
+machine-profile-bridge.md
 compliance-and-privacy.md
 data-processing.md
 concurrency.md
@@ -65,7 +66,7 @@ updated first:
 ../../logicn-core-photonic/README.md
 ../../logicn-target-cpu/README.md
 ../../logicn-cpu-kernels/README.md
-../../logicn-target-binary/README.md
+../../logicn-target-native/README.md
 ../../logicn-target-wasm/README.md
 ../../logicn-target-gpu/README.md
 ../../../docs/AI_ACCELERATOR_TARGETS.md

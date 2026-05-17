@@ -60,7 +60,7 @@ secure web runtime
 
 ## Required Runtime Work
 
-The first runtime should support secure web applications without native binary
+The first runtime should support secure web applications without native executable
 compilation.
 
 Required runtime capabilities:

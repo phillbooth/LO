@@ -105,7 +105,7 @@ logicn-core-config
 logicn-core-reports
 logicn-target-cpu
 logicn-target-wasm
-logicn-target-binary
+logicn-target-native
 ```
 
 Server apps may share most web-app packages, but should not require route/API
@@ -148,7 +148,7 @@ Allowed package families:
 
 ```text
 logicn-core-*
-logicn-target-binary
+logicn-target-native
 logicn-target-cpu
 logicn-core-network
 logicn-core-security
@@ -182,7 +182,7 @@ Allowed future package families:
 logicn-core
 logicn-core-compiler
 logicn-core-security
-logicn-target-binary
+logicn-target-native
 future systems packages
 future OS/kernel packages
 ```

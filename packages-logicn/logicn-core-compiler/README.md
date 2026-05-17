@@ -54,7 +54,7 @@ instead of trying to infer intent from ambiguous syntax.
 `logicn-core` owns language documentation, grammar contracts and core safety rules.
 `logicn-core-compiler` should own the implementation-oriented compiler pipeline.
 
-Target-specific output belongs in target packages such as `logicn-target-binary`,
+Target-specific output belongs in target packages such as `logicn-target-native`,
 `logicn-target-wasm`, `logicn-target-gpu` and `logicn-target-photonic`.
 
 Final rule:

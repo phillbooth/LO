@@ -1,0 +1,136 @@
+type ComputeMixBenchmarkReport {
+  runtime: String
+  benchmark: String
+  executionMode: String
+  comparisonType: String
+  targetMs: Int
+  warmupMs: Int
+  batchSize: Int
+  seed: UInt32
+  elapsedMs: Float
+  operations: Int
+  operationsPerSecond: Float
+  checksum: UInt32
+  cpuUserMs: Float
+  cpuSystemMs: Float
+  memoryRssBytes: Int
+  memoryHeapUsedBytes: Int
+}
+
+enum ComputeMixBenchmarkError {
+  InvalidTargetMs
+  InvalidWarmupMs
+  InvalidBatchSize
+}
+
+/// @purpose Timed deterministic compute benchmark using UInt32 arithmetic.
+/// @input Int targetMs, Int warmupMs, Int batchSize
+/// @output Result<ComputeMixBenchmarkReport, ComputeMixBenchmarkError>
+/// @effects [runtime.clock, runtime.metrics]
+secure flow runComputeMixThroughputBenchmark(
+targetMs: Int,
+warmupMs: Int,
+batchSize: Int
+) -> Result<ComputeMixBenchmarkReport, ComputeMixBenchmarkError>
+effects [runtime.clock, runtime.metrics] {
+  if targetMs < 10_000 {
+    return Err(ComputeMixBenchmarkError.InvalidTargetMs)
+  }
+
+  if targetMs > 30_000 {
+    return Err(ComputeMixBenchmarkError.InvalidTargetMs)
+  }
+
+  if warmupMs < 0 {
+    return Err(ComputeMixBenchmarkError.InvalidWarmupMs)
+  }
+
+  if batchSize <= 0 {
+    return Err(ComputeMixBenchmarkError.InvalidBatchSize)
+  }
+
+  mut seed: UInt32 = 123_456_789
+  mut checksum: UInt32 = 0
+  mut operations: Int = 0
+
+  let warmupStartedAt: Float = Time.nowMs()
+
+  while Time.nowMs() - warmupStartedAt < warmupMs {
+    mut warmupIndex: Int = 0
+
+    while warmupIndex < batchSize {
+      seed = seed * 1_664_525 + 1_013_904_223
+
+      let mixed: UInt32 = (seed xor (seed >> 16)) * 2_246_822_519
+
+      checksum = checksum xor mixed
+
+      if mixed.isOdd() {
+        checksum = checksum + mixed
+      } else {
+        checksum = checksum xor (mixed << 1)
+      }
+
+      warmupIndex = warmupIndex + 1
+    }
+  }
+
+  let startedAt: Float = Time.nowMs()
+  let startedCpu: CpuUsage = Runtime.cpuUsage()
+
+  while Time.nowMs() - startedAt < targetMs {
+    mut index: Int = 0
+
+    while index < batchSize {
+      seed = seed * 1_664_525 + 1_013_904_223
+
+      let mixed: UInt32 = (seed xor (seed >> 16)) * 2_246_822_519
+
+      checksum = checksum xor mixed
+
+      if mixed.isOdd() {
+        checksum = checksum + mixed
+      } else {
+        checksum = checksum xor (mixed << 1)
+      }
+
+      index = index + 1
+      operations = operations + 1
+    }
+  }
+
+  let elapsed: Float = Time.nowMs() - startedAt
+  let cpu: CpuUsage = Runtime.cpuUsageSince(startedCpu)
+  let memory: MemoryUsage = Runtime.memoryUsage()
+
+  return Ok(ComputeMixBenchmarkReport {
+    runtime: "logicn-prototype"
+    benchmark: "compute-mix-throughput"
+    executionMode: "nodejs-runner"
+    comparisonType: "prototype-runner-overhead"
+    targetMs: targetMs
+    warmupMs: warmupMs
+    batchSize: batchSize
+    seed: seed
+    elapsedMs: elapsed
+    operations: operations
+    operationsPerSecond: operations / (elapsed / 1000)
+    checksum: checksum
+    cpuUserMs: cpu.userMs
+    cpuSystemMs: cpu.systemMs
+    memoryRssBytes: memory.rssBytes
+    memoryHeapUsedBytes: memory.heapUsedBytes
+  })
+}
+
+secure flow main() -> Result<Void, Error> {
+  let result: Result<ComputeMixBenchmarkReport, ComputeMixBenchmarkError> =
+  runComputeMixThroughputBenchmark(20_000, 2_000, 100_000)
+
+  match result {
+    Ok(report) => print(report)
+    Err(error) => return Err(error)
+  }
+
+  return Ok()
+}

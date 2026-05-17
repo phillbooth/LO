@@ -103,7 +103,7 @@ logicn-db-opensearch
 logicn-db-postgres
 logicn-db-sqlite
 logicn-target-ai-accelerator
-logicn-target-binary
+logicn-target-native
 logicn-target-cpu
 logicn-target-gpu
 logicn-target-js
@@ -172,8 +172,8 @@ logicn-compliance-security
 
 `logicn-target-*` packages describe where compiled LogicN code is going.
 
-Do not rename target packages to I/O packages. For example, `logicn-target-binary`
-means native or binary output planning. `logicn-target-photonic` means compiler
+Do not rename target packages to I/O packages. For example, `logicn-target-native`
+means future native executable output planning. `logicn-target-photonic` means compiler
 mapping to photonic hardware, simulators or plans.
 
 I/O packages can be added later for data movement, but core network policy is

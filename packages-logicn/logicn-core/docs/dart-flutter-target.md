@@ -23,7 +23,7 @@ Impeller is the default rendering engine on iOS and Android API 29+.
 Flutter web currently offers CanvasKit and Skwasm renderers.
 Flutter UI is described with widgets; widget state changes rebuild widget descriptions.
 Flutter supports platform-specific code through platform channels and Pigeon.
-Flutter mobile and desktop apps can use dart:ffi for native C APIs.
+Flutter mobile and desktop apps can use native FFI APIs.
 Flutter package/plugin projects can target android, ios, web, linux, macos and windows.
 ```
 

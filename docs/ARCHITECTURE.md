@@ -66,10 +66,10 @@ Photonic and wavelength concepts live in
 
 CPU target planning lives in
 `packages-logicn/logicn-target-cpu/`, optimized CPU kernel contracts live in
-`packages-logicn/logicn-cpu-kernels/`, and binary/native target planning lives in
-`packages-logicn/logicn-target-binary/`. Future portable systems output planning
-should start as binary/native target work only after ABI, layout, memory and
-report rules stabilise. WebAssembly target planning lives in
+`packages-logicn/logicn-cpu-kernels/`, and future native executable target
+planning lives in `packages-logicn/logicn-target-native/`. Future portable
+systems output planning should start as native target work only after ABI,
+layout, memory and report rules stabilise. WebAssembly target planning lives in
 `packages-logicn/logicn-target-wasm/`, GPU target planning lives in
 `packages-logicn/logicn-target-gpu/`, AI accelerator target planning lives in
 `packages-logicn/logicn-target-ai-accelerator/` with passive backend profiles for devices
@@ -118,7 +118,7 @@ context generation.
 LogicN's first practical target is secure web application runtime code: typed
 HTTP APIs, webhooks, queue workers, auth-heavy services, agent/tool gateways,
 safe JSON boundaries and deployment policy. Low-level systems targets, embedded
-targets and native binary output remain later output paths.
+targets and native executable output remain later output paths.
 
 The detailed direction lives in `docs/SECURE_WEB_RUNTIME_FIRST.md`.
 
@@ -364,7 +364,7 @@ logicn-app/
 |   |-- logicn-core-photonic/
 |   |-- logicn-target-cpu/
 |   |-- logicn-cpu-kernels/
-|   |-- logicn-target-binary/
+|   |-- logicn-target-native/
 |   |-- logicn-target-wasm/
 |   |-- logicn-target-gpu/
 |   |-- logicn-target-ai-accelerator/
@@ -412,7 +412,7 @@ git
 |   |-- logicn-core-photonic/
 |   |-- logicn-target-cpu/
 |   |-- logicn-cpu-kernels/
-|   |-- logicn-target-binary/
+|   |-- logicn-target-native/
 |   |-- logicn-target-wasm/
 |   |-- logicn-target-gpu/
 |   |-- logicn-target-ai-accelerator/
@@ -564,7 +564,7 @@ LogicN CPU Kernels
   GEMM, GEMV, vector, matrix, low-bit and ternary CPU kernel contracts
 
 LogicN Target Binary
-  binary/native target planning, platform triples, ABI constraints, future
+  native executable target planning, platform triples, ABI constraints, future
   portable systems output staging and artefacts
 
 LogicN Target WASM
@@ -816,9 +816,9 @@ plans.
  `logicn-target-cpu` owns CPU capability and fallback planning, while
 `logicn-cpu-kernels` owns optimized CPU kernel contracts.
 
- `logicn-target-binary`,
+ `logicn-target-native`,
 `logicn-target-wasm`, `logicn-target-gpu`, `logicn-target-ai-accelerator` and
-`logicn-target-photonic` own target-specific planning for binary/native,
+`logicn-target-photonic` own target-specific planning for native executable,
 WebAssembly, GPU, AI accelerator, optical I/O and photonic backends.
 
 Portable systems output is a generated backend direction, not normal application
@@ -827,6 +827,17 @@ layer, which owns APIs, JSON, security policy and business flows, and a future
 systems layer, which may own runtime internals, native ABI interop, layout-safe
 buffers and accelerator bindings. Native ABI bindings must remain explicit,
 source-mapped and reportable.
+
+The Machine Profile Bridge is the planned runtime/tooling layer between
+high-level LogicN source and machine-specific execution. It should detect local
+capabilities, write local uncommitted capability profiles, specialise boot/main
+runtime settings for the deployment machine and report every adapter, fallback
+and permission decision. It must not make application source look like low-level
+systems code.
+
+Official draft wording for low-level boundaries is `layout native` and
+`interop native`, with a required ABI declaration such as `abi c`, `abi wasm`,
+`abi system` or `abi plugin`. The category is native; the ABI is explicit.
 
 
 `logicn-tools-benchmark` may consume these packages to test target behavior, but target

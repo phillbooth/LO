@@ -4,7 +4,7 @@ This document defines the LogicN core language contract for `compute` blocks.
 
 Status: draft language and compiler contract. Detailed compute planning belongs
 in `packages-logicn/logicn-core-compute/`. Target-specific output belongs in target packages
-such as `packages-logicn/logicn-target-binary/`, `packages-logicn/logicn-target-wasm/`,
+such as `packages-logicn/logicn-target-native/`, `packages-logicn/logicn-target-wasm/`,
 `packages-logicn/logicn-target-gpu/` and `packages-logicn/logicn-target-photonic/`.
 
 ## Purpose
@@ -196,8 +196,8 @@ logicn-core-compute
 logicn-core-vector
   vector, matrix and tensor operation semantics
 
-logicn-target-binary
-  binary/native output planning
+logicn-target-native
+  native executable output planning
 
 logicn-target-wasm
   WebAssembly output planning
@@ -229,7 +229,7 @@ It should not require:
 ```text
 real GPU execution
 real photonic execution
-native binary compilation
+native executable compilation
 vendor SDK integration
 opaque accelerator precision claims
 ```

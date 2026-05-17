@@ -5,7 +5,7 @@ Status: Draft.
 Ownership note: `logicn-core` may document compute block syntax, compiler checks and
 report contracts. Detailed compute planning, capabilities, budgets, offload and
 target selection belong in `packages-logicn/logicn-core-compute/`. Target-specific planning
-belongs in `packages-logicn/logicn-target-cpu/`, `packages-logicn/logicn-target-binary/`,
+belongs in `packages-logicn/logicn-target-cpu/`, `packages-logicn/logicn-target-native/`,
 `packages-logicn/logicn-target-gpu/` and `packages-logicn/logicn-target-photonic/`. Optimized CPU
 kernel contracts belong in `packages-logicn/logicn-cpu-kernels/`. AI inference contracts
 belong in `packages-logicn/logicn-ai/`, with low-bit and ternary AI backend planning in

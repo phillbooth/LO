@@ -121,7 +121,7 @@ Example:
 - Added `packages-logicn/logicn-framework-api-server/` positioning across LogicN core docs as the built-in HTTP API server that delegates to the Secure App Kernel.
 - Added `docs/package-boundaries.md` and cross-references from LogicN core docs to
   sibling packages: `logicn-core-logic`, `logicn-core-vector`, `logicn-core-compute`, `logicn-core-photonic`,
-  `logicn-target-binary`, `logicn-target-photonic`, `logicn-framework-app-kernel`, `logicn-framework-api-server`,
+  `logicn-target-native`, `logicn-target-photonic`, `logicn-framework-app-kernel`, `logicn-framework-api-server`,
   `logicn-core-cli` and `logicn-core-tasks`.
 - Added LogicN core package-boundary references for `logicn-ai`, `logicn-ai-lowbit`,
   `logicn-target-cpu` and `logicn-cpu-kernels` so AI inference and CPU fallback stay

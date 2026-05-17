@@ -116,7 +116,7 @@ execution and generates the target plan/report.
 | `logicn-target-photonic` | Compiler backend, output target and hardware or simulator mapping |
 | `logicn-core-vector` | Vector, matrix, tensor types and operations |
 | `logicn-core-compute` | `compute auto`, target selection and fallback planning |
-| `logicn-target-binary` | Normal CPU/native binary output |
+| `logicn-target-native` | Future native executable output |
 | `logicn-ai-neural` | Neural model, layer, inference and training boundaries |
 | `logicn-target-ai-accelerator` | NPU, TPU and AI-chip target planning |
 

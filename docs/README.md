@@ -1,59 +1,70 @@
-# App Documentation
+# LogicN Documentation
 
-This folder contains documentation for the bespoke LogicN application.
+LogicN is a memory-safe, security-first, AI-readable language/runtime direction
+for secure web apps, APIs, agents and governed data systems.
 
-These files describe the app being built, not the LogicN language itself.
+This folder contains framework and app/workspace documentation. Language-core
+documentation lives in `../packages-logicn/logicn-core/`.
 
-## Files
+## Start Here
 
-- `REQUIREMENTS.md` - what the app must do
-- `DESIGN.md` - user interface, user flow and experience
-- `DOMAIN_DRIVEN_DESIGN.md` - optional thin DDD guidance for domain, flow, infrastructure and policy boundaries
-- `ARCHITECTURE.md` - technical structure
-- `SECURITY.md` - security rules, risks and controls
-- `CSRF_PROTECTION.md` - route-level CSRF defaults for cookie-authenticated browser apps and state-changing requests
-- `why-controllers-not-used-in-LogicN.md` - route-first API policy and why controllers are optional framework sugar rather than a core LogicN concept
-- `SECURE_WEB_RUNTIME_FIRST.md` - secure web runtime first direction for LogicN
-- `ENV_SECRETS.md` - `.env` secret declarations, `Secret<T>` handling, taint tracking, safe sinks, secret reports and redaction
-- `NETWORK_ETHERNET_IO.md` - LogicN network and Ethernet I/O positioning, network policy and high-speed network planning
-- `API.md` - API routes and external services
-- `API_RESPONSE_ERROR_HANDLING.md` - API response helpers, `Result<T, E>`, `try`/`catch`, `match` and route response contracts
-- `APP_CRASH_HANDLING.md` - crash policies, route crash boundaries, structured crash reports, checkpoints and worker supervision
-- `DATABASE.md` - database structure
-- `DEPLOYMENT.md` - deployment process
-- `DEPLOYMENT_AUTOCONFIG.md` - deployment auto-configuration, target detection, runtime capability profiles, gates, health checks and rollback reports
-- `KUBERNETES_DEPLOYMENT.md` - Kubernetes as an optional deployment target, with secure manifest generation and enterprise policy-pack boundaries
-- `TESTING.md` - testing strategy
-- `LEARNING_MODE.md` - safe LogicN learning mode for students, children, teachers and beginners
-- `TASKS.md` - planned work
-- `TODO.md` - smaller reminders
-- `DECISIONS.md` - technical decisions
-- `CHANGELOG.md` - project changes
-- `ENTERPRISE.md` - enterprise package lock-down objectives and free/open versus enterprise split
-- `LOWBIT_AI_BACKENDS.md` - low-bit AI backend architecture note
-- `MEMORY_HIERARCHY_RELIABILITY.md` - cache-aware memory layout guidance, L2/L3 reporting and ECC-aware reliability policy
-- `AI_ACCELERATOR_TARGETS.md` - passive AI accelerator target profiles, including Intel Gaudi 3 as a backend profile rather than LogicN syntax
-- `NEURAL_ACCELERATOR_PACKAGES.md` - neural, neuromorphic and AI accelerator package split
-- `OPTICAL_IO.md` - optical I/O, Intel Silicon Photonics/OCI direction and data-movement-aware compute planning
-- `PASSIVE_LLM_CACHE.md` - passive generic LLM and embedding cache policy, strict cache keys, safety gates, invalidation and reports
-- `PROJECT_GRAPH.md` - project knowledge graph tooling note
-- `PROFILE_INSTALLERS.md` - profile-aware installer model for web, server, agent, systems and future kernel project types
-- `SERVER_PLATFORM_SUPPORT.md` - Nginx/Apache/Caddy reverse proxy generation, Node.js targets, Express adapters and LogicN-native API server direction
-- `SECURE_FAST_ROUTING.md` - compiled route graphs, route manifests, object/property authorization, route effects, fast trie dispatch and resource limits
-- `SECURE_HTTP_RESPONSES.md` - typed response contracts, secure headers, cache/cookie policy, safe redirects, CSP, response filtering and response security reports
-- `MULTI_AGENT_RUNTIME.md` - zero-trust multi-agent runtime model with typed messages, tool gateways, secret guards, memory/cache policy, approval gates and audit reports
-- `RESILIENT_FLOWS.md` - controlled recovery, resilient flows and partial success reporting
-- `LOGICN_FINANCIAL_MARKETS.md` - LogicN-centered financial market contracts, runtime direction, safety rules and adapter boundaries
-- `WEB_RENDERING.md` - typed browser rendering pipeline, safe HTML, client state, streaming render and web package boundaries
-- `../packages-logicn/logicn-core/docs/language-core-maturity-roadmap.md` - LogicN language-core maturity roadmap
-- `../packages-logicn/logicn-core/docs/compliance-and-privacy.md` - LogicN compliance and privacy framework direction
-- `../packages-logicn/logicn-core/docs/data-processing.md` - LogicN data-processing package family direction
+1. [Framework Overview](framework/framework-overview.md)
+2. [Project Structure](framework/framework-project-structure.md)
+3. [Non-Negotiable Rules](rules/rules-non-negotiable.md)
+4. [Secure Runtime](framework/framework-secure-runtime.md)
+5. [Documentation Layer Model](Knowledge-Bases/documentation-layer-model.md)
 
-## Package-Level Architecture Notes
+## Core Framework Concepts
 
-- `../packages-logicn/logicn-ai-agent-parallel-compute.md` - parallel AI agents, CPU/GPU compute and supervised orchestration
-- `../packages-logicn/logicn-tools-benchmark/README.md` - benchmark diagnostics, fallback checks, privacy-safe reports and future sharing payloads
+- [Models](framework/framework-models.md)
+- [Requests](framework/framework-requests.md)
+- [Responses](framework/framework-responses.md)
+- [Secure Flows](framework/framework-secure-flows.md)
+- [Policies](framework/framework-policies.md)
+- [Contracts](framework/framework-contracts.md)
+- [Effects](framework/framework-effects.md)
+- [Capabilities](framework/framework-capabilities.md)
+- [Reports](framework/framework-reports.md)
 
-## Language and Runtime Proposals
+## Contract Types
 
-- `logicn-logic-compute-runtime-proposal.md` - future LogicN logic, compute type and secure runtime support proposal.
+- [Contracts Overview](contracts/contracts-overview.md)
+- [Request Contracts](contracts/contracts-request.md)
+- [Response Contracts](contracts/contracts-response.md)
+- [Model Contracts](contracts/contracts-model.md)
+- [Flow Contracts](contracts/contracts-flow.md)
+- [Policy Contracts](contracts/contracts-policy.md)
+- [Package Contracts](contracts/contracts-package.md)
+
+## Reports
+
+- [Reports Overview](reports/reports-overview.md)
+- [Policy Index Report](reports/reports-policy-index.md)
+- [Model Index Report](reports/reports-model-index.md)
+- [Contract Index Report](reports/reports-contract-index.md)
+- [AI Context Report](reports/reports-ai-context.md)
+
+## Rules
+
+- [Non-Negotiable Rules](rules/rules-non-negotiable.md)
+- [Unsupported Legacy Patterns](rules/rules-unsupported-legacy.md)
+- [Bool, Tri And Photonic Logic](rules/rules-bool-tri-photonic.md)
+
+## Existing App And Workspace Docs
+
+- [Requirements](REQUIREMENTS.md)
+- [Architecture](ARCHITECTURE.md)
+- [Security](SECURITY.md)
+- [Secure Web Runtime First](SECURE_WEB_RUNTIME_FIRST.md)
+- [API](API.md)
+- [Deployment](DEPLOYMENT.md)
+- [Tasks](TASKS.md)
+- [Decisions](DECISIONS.md)
+- [Changelog](CHANGELOG.md)
+
+## Package-Level References
+
+- [Language Core Maturity Roadmap](../packages-logicn/logicn-core/docs/language-core-maturity-roadmap.md)
+- [Syntax And Logic Status](../packages-logicn/logicn-core/docs/syntax-logic-status.md)
+- [Machine Profile Bridge](../packages-logicn/logicn-core/docs/machine-profile-bridge.md)
+- [Benchmark Diagnostics](../packages-logicn/logicn-tools-benchmark/README.md)

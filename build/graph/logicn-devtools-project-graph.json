@@ -1,6 +1,6 @@
 {
   "version": "0.1.0",
-  "generatedAt": "2026-05-16T08:58:21.780Z",
+  "generatedAt": "2026-05-17T11:44:55.844Z",
   "nodes": [
     {
       "id": "package:logicn-core",
@@ -413,11 +413,11 @@
       ]
     },
     {
-      "id": "package:logicn-target-binary",
+      "id": "package:logicn-target-native",
       "kind": "Package",
-      "label": "logicn-target-binary",
-      "sourcePath": "packages-logicn/logicn-target-binary/README.md",
-      "summary": "LogicN binary and native target planning concepts.",
+      "label": "logicn-target-native",
+      "sourcePath": "packages-logicn/logicn-target-native/README.md",
+      "summary": "LogicN future native executable and ABI target planning concepts.",
       "tags": [
         "package"
       ]
@@ -633,6 +633,69 @@
       ]
     },
     {
+      "id": "doc:docs/contracts/contracts-flow.md",
+      "kind": "Document",
+      "label": "contracts-flow.md",
+      "sourcePath": "docs/contracts/contracts-flow.md",
+      "tags": [
+        "document"
+      ]
+    },
+    {
+      "id": "doc:docs/contracts/contracts-model.md",
+      "kind": "Document",
+      "label": "contracts-model.md",
+      "sourcePath": "docs/contracts/contracts-model.md",
+      "tags": [
+        "document"
+      ]
+    },
+    {
+      "id": "doc:docs/contracts/contracts-overview.md",
+      "kind": "Document",
+      "label": "contracts-overview.md",
+      "sourcePath": "docs/contracts/contracts-overview.md",
+      "tags": [
+        "document"
+      ]
+    },
+    {
+      "id": "doc:docs/contracts/contracts-package.md",
+      "kind": "Document",
+      "label": "contracts-package.md",
+      "sourcePath": "docs/contracts/contracts-package.md",
+      "tags": [
+        "document"
+      ]
+    },
+    {
+      "id": "doc:docs/contracts/contracts-policy.md",
+      "kind": "Document",
+      "label": "contracts-policy.md",
+      "sourcePath": "docs/contracts/contracts-policy.md",
+      "tags": [
+        "document"
+      ]
+    },
+    {
+      "id": "doc:docs/contracts/contracts-request.md",
+      "kind": "Document",
+      "label": "contracts-request.md",
+      "sourcePath": "docs/contracts/contracts-request.md",
+      "tags": [
+        "document"
+      ]
+    },
+    {
+      "id": "doc:docs/contracts/contracts-response.md",
+      "kind": "Document",
+      "label": "contracts-response.md",
+      "sourcePath": "docs/contracts/contracts-response.md",
+      "tags": [
+        "document"
+      ]
+    },
+    {
       "id": "doc:docs/CORE_FOUNDATION_ROADMAP.md",
       "kind": "Document",
       "label": "CORE_FOUNDATION_ROADMAP.md",
@@ -745,6 +808,123 @@
       "kind": "Document",
       "label": "FINANCE_PACKAGES.md",
       "sourcePath": "docs/FINANCE_PACKAGES.md",
+      "tags": [
+        "document"
+      ]
+    },
+    {
+      "id": "doc:docs/framework/framework-capabilities.md",
+      "kind": "Document",
+      "label": "framework-capabilities.md",
+      "sourcePath": "docs/framework/framework-capabilities.md",
+      "tags": [
+        "document"
+      ]
+    },
+    {
+      "id": "doc:docs/framework/framework-contracts.md",
+      "kind": "Document",
+      "label": "framework-contracts.md",
+      "sourcePath": "docs/framework/framework-contracts.md",
+      "tags": [
+        "document"
+      ]
+    },
+    {
+      "id": "doc:docs/framework/framework-effects.md",
+      "kind": "Document",
+      "label": "framework-effects.md",
+      "sourcePath": "docs/framework/framework-effects.md",
+      "tags": [
+        "document"
+      ]
+    },
+    {
+      "id": "doc:docs/framework/framework-models.md",
+      "kind": "Document",
+      "label": "framework-models.md",
+      "sourcePath": "docs/framework/framework-models.md",
+      "tags": [
+        "document"
+      ]
+    },
+    {
+      "id": "doc:docs/framework/framework-overview.md",
+      "kind": "Document",
+      "label": "framework-overview.md",
+      "sourcePath": "docs/framework/framework-overview.md",
+      "tags": [
+        "document"
+      ]
+    },
+    {
+      "id": "doc:docs/framework/framework-policies.md",
+      "kind": "Document",
+      "label": "framework-policies.md",
+      "sourcePath": "docs/framework/framework-policies.md",
+      "tags": [
+        "document"
+      ]
+    },
+    {
+      "id": "doc:docs/framework/framework-project-structure.md",
+      "kind": "Document",
+      "label": "framework-project-structure.md",
+      "sourcePath": "docs/framework/framework-project-structure.md",
+      "tags": [
+        "document"
+      ]
+    },
+    {
+      "id": "doc:docs/framework/framework-reports.md",
+      "kind": "Document",
+      "label": "framework-reports.md",
+      "sourcePath": "docs/framework/framework-reports.md",
+      "tags": [
+        "document"
+      ]
+    },
+    {
+      "id": "doc:docs/framework/framework-requests.md",
+      "kind": "Document",
+      "label": "framework-requests.md",
+      "sourcePath": "docs/framework/framework-requests.md",
+      "tags": [
+        "document"
+      ]
+    },
+    {
+      "id": "doc:docs/framework/framework-responses.md",
+      "kind": "Document",
+      "label": "framework-responses.md",
+      "sourcePath": "docs/framework/framework-responses.md",
+      "tags": [
+        "document"
+      ]
+    },
+    {
+      "id": "doc:docs/framework/framework-secure-flows.md",
+      "kind": "Document",
+      "label": "framework-secure-flows.md",
+      "sourcePath": "docs/framework/framework-secure-flows.md",
+      "tags": [
+        "document"
+      ]
+    },
+    {
+      "id": "doc:docs/framework/framework-secure-runtime.md",
+      "kind": "Document",
+      "label": "framework-secure-runtime.md",
+      "sourcePath": "docs/framework/framework-secure-runtime.md",
+      "tags": [
+        "document"
+      ]
+    },
+    {
+      "id": "doc:docs/Knowledge-Bases/documentation-layer-model.md",
+      "kind": "Document",
+      "label": "documentation-layer-model.md",
+      "sourcePath": "docs/Knowledge-Bases/documentation-layer-model.md",
       "tags": [
         "document"
       ]
@@ -912,6 +1092,51 @@
       ]
     },
     {
+      "id": "doc:docs/reports/reports-ai-context.md",
+      "kind": "Document",
+      "label": "reports-ai-context.md",
+      "sourcePath": "docs/reports/reports-ai-context.md",
+      "tags": [
+        "document"
+      ]
+    },
+    {
+      "id": "doc:docs/reports/reports-contract-index.md",
+      "kind": "Document",
+      "label": "reports-contract-index.md",
+      "sourcePath": "docs/reports/reports-contract-index.md",
+      "tags": [
+        "document"
+      ]
+    },
+    {
+      "id": "doc:docs/reports/reports-model-index.md",
+      "kind": "Document",
+      "label": "reports-model-index.md",
+      "sourcePath": "docs/reports/reports-model-index.md",
+      "tags": [
+        "document"
+      ]
+    },
+    {
+      "id": "doc:docs/reports/reports-overview.md",
+      "kind": "Document",
+      "label": "reports-overview.md",
+      "sourcePath": "docs/reports/reports-overview.md",
+      "tags": [
+        "document"
+      ]
+    },
+    {
+      "id": "doc:docs/reports/reports-policy-index.md",
+      "kind": "Document",
+      "label": "reports-policy-index.md",
+      "sourcePath": "docs/reports/reports-policy-index.md",
+      "tags": [
+        "document"
+      ]
+    },
+    {
       "id": "doc:docs/REQUIREMENTS.md",
       "kind": "Document",
       "label": "REQUIREMENTS.md",
@@ -925,6 +1150,33 @@
       "kind": "Document",
       "label": "RESILIENT_FLOWS.md",
       "sourcePath": "docs/RESILIENT_FLOWS.md",
+      "tags": [
+        "document"
+      ]
+    },
+    {
+      "id": "doc:docs/rules/rules-bool-tri-photonic.md",
+      "kind": "Document",
+      "label": "rules-bool-tri-photonic.md",
+      "sourcePath": "docs/rules/rules-bool-tri-photonic.md",
+      "tags": [
+        "document"
+      ]
+    },
+    {
+      "id": "doc:docs/rules/rules-non-negotiable.md",
+      "kind": "Document",
+      "label": "rules-non-negotiable.md",
+      "sourcePath": "docs/rules/rules-non-negotiable.md",
+      "tags": [
+        "document"
+      ]
+    },
+    {
+      "id": "doc:docs/rules/rules-unsupported-legacy.md",
+      "kind": "Document",
+      "label": "rules-unsupported-legacy.md",
+      "sourcePath": "docs/rules/rules-unsupported-legacy.md",
       "tags": [
         "document"
       ]
@@ -1850,6 +2102,16 @@
       ]
     },
     {
+      "id": "doc:packages-logicn/logicn-core/docs/machine-profile-bridge.md",
+      "kind": "Document",
+      "label": "machine-profile-bridge.md",
+      "sourcePath": "packages-logicn/logicn-core/docs/machine-profile-bridge.md",
+      "tags": [
+        "document",
+        "logicn-core"
+      ]
+    },
+    {
       "id": "doc:packages-logicn/logicn-core/docs/memory-and-variable-use.md",
       "kind": "Document",
       "label": "memory-and-variable-use.md",
@@ -2506,6 +2768,26 @@
       "sourcePath": "packages-logicn/logicn-core/docs/xml-support.md",
       "tags": [
         "document",
+        "logicn-core"
+      ]
+    },
+    {
+      "id": "doc:packages-logicn/logicn-core/examples/benchmark-results/compute-mix-throughput-2026-05-17T11-20-57-851Z.json",
+      "kind": "Document",
+      "label": "compute-mix-throughput-2026-05-17T11-20-57-851Z.json",
+      "sourcePath": "packages-logicn/logicn-core/examples/benchmark-results/compute-mix-throughput-2026-05-17T11-20-57-851Z.json",
+      "tags": [
+        "report",
+        "logicn-core"
+      ]
+    },
+    {
+      "id": "doc:packages-logicn/logicn-core/examples/benchmark-results/compute-mix-throughput-2026-05-17T11-43-52-543Z.json",
+      "kind": "Document",
+      "label": "compute-mix-throughput-2026-05-17T11-43-52-543Z.json",
+      "sourcePath": "packages-logicn/logicn-core/examples/benchmark-results/compute-mix-throughput-2026-05-17T11-43-52-543Z.json",
+      "tags": [
+        "report",
         "logicn-core"
       ]
     },
@@ -4887,6 +5169,16 @@
       "tags": [
         "report",
         "logicn-core-reports"
+      ]
+    },
+    {
+      "id": "doc:packages-logicn/logicn-core-logic/examples/BENCHMARK-V2-README.md",
+      "kind": "Document",
+      "label": "BENCHMARK-V2-README.md",
+      "sourcePath": "packages-logicn/logicn-core-logic/examples/BENCHMARK-V2-README.md",
+      "tags": [
+        "document",
+        "logicn-core-logic"
       ]
     },
     {
@@ -7920,73 +8212,83 @@
       ]
     },
     {
-      "id": "doc:packages-logicn/logicn-target-binary/package.json",
+      "id": "doc:packages-logicn/logicn-target-native/package.json",
       "kind": "Document",
       "label": "package.json",
-      "sourcePath": "packages-logicn/logicn-target-binary/package.json",
+      "sourcePath": "packages-logicn/logicn-target-native/package.json",
       "tags": [
         "report",
-        "logicn-target-binary"
+        "logicn-target-native"
       ]
     },
     {
-      "id": "doc:packages-logicn/logicn-target-binary/README.md",
+      "id": "doc:packages-logicn/logicn-target-native/README.md",
       "kind": "Document",
       "label": "README.md",
-      "sourcePath": "packages-logicn/logicn-target-binary/README.md",
+      "sourcePath": "packages-logicn/logicn-target-native/README.md",
       "tags": [
         "document",
-        "logicn-target-binary"
+        "logicn-target-native"
       ]
     },
     {
-      "id": "type:logicn-target-binary:BinaryTarget",
+      "id": "type:logicn-target-native:NativeAbi",
       "kind": "Type",
-      "label": "BinaryTarget",
-      "sourcePath": "packages-logicn/logicn-target-binary/src/index.ts",
+      "label": "NativeAbi",
+      "sourcePath": "packages-logicn/logicn-target-native/src/index.ts",
       "tags": [
         "type",
-        "logicn-target-binary"
+        "logicn-target-native"
       ]
     },
     {
-      "id": "type:logicn-target-binary:BinaryArtefact",
+      "id": "type:logicn-target-native:NativeTarget",
       "kind": "Type",
-      "label": "BinaryArtefact",
-      "sourcePath": "packages-logicn/logicn-target-binary/src/index.ts",
+      "label": "NativeTarget",
+      "sourcePath": "packages-logicn/logicn-target-native/src/index.ts",
       "tags": [
         "type",
-        "logicn-target-binary"
+        "logicn-target-native"
       ]
     },
     {
-      "id": "type:logicn-target-binary:BinaryTargetReport",
+      "id": "type:logicn-target-native:NativeArtifact",
       "kind": "Type",
-      "label": "BinaryTargetReport",
-      "sourcePath": "packages-logicn/logicn-target-binary/src/index.ts",
+      "label": "NativeArtifact",
+      "sourcePath": "packages-logicn/logicn-target-native/src/index.ts",
       "tags": [
         "type",
-        "logicn-target-binary"
+        "logicn-target-native"
       ]
     },
     {
-      "id": "doc:packages-logicn/logicn-target-binary/TODO.md",
+      "id": "type:logicn-target-native:NativeTargetReport",
+      "kind": "Type",
+      "label": "NativeTargetReport",
+      "sourcePath": "packages-logicn/logicn-target-native/src/index.ts",
+      "tags": [
+        "type",
+        "logicn-target-native"
+      ]
+    },
+    {
+      "id": "doc:packages-logicn/logicn-target-native/TODO.md",
       "kind": "Document",
       "label": "TODO.md",
-      "sourcePath": "packages-logicn/logicn-target-binary/TODO.md",
+      "sourcePath": "packages-logicn/logicn-target-native/TODO.md",
       "tags": [
         "document",
-        "logicn-target-binary"
+        "logicn-target-native"
       ]
     },
     {
-      "id": "doc:packages-logicn/logicn-target-binary/tsconfig.json",
+      "id": "doc:packages-logicn/logicn-target-native/tsconfig.json",
       "kind": "Document",
       "label": "tsconfig.json",
-      "sourcePath": "packages-logicn/logicn-target-binary/tsconfig.json",
+      "sourcePath": "packages-logicn/logicn-target-native/tsconfig.json",
       "tags": [
         "report",
-        "logicn-target-binary"
+        "logicn-target-native"
       ]
     },
     {
@@ -10430,10 +10732,10 @@
       ]
     },
     {
-      "id": "doc:packages-logicn/logicn-target-binary",
+      "id": "doc:packages-logicn/logicn-target-native",
       "kind": "Document",
-      "label": "targetBinary",
-      "sourcePath": "packages-logicn/logicn-target-binary",
+      "label": "targetNative",
+      "sourcePath": "packages-logicn/logicn-target-native",
       "tags": [
         "document",
         "workspace-doc"
@@ -10837,7 +11139,7 @@
     },
     {
       "from": "doc:README.md",
-      "to": "package:logicn-target-binary",
+      "to": "package:logicn-target-native",
       "kind": "documents",
       "confidence": "INFERRED",
       "evidencePath": "README.md"
@@ -11271,7 +11573,7 @@
     },
     {
       "from": "doc:docs/ARCHITECTURE.md",
-      "to": "package:logicn-target-binary",
+      "to": "package:logicn-target-native",
       "kind": "documents",
       "confidence": "INFERRED",
       "evidencePath": "docs/ARCHITECTURE.md"
@@ -11530,7 +11832,7 @@
     },
     {
       "from": "doc:docs/CHANGELOG.md",
-      "to": "package:logicn-target-binary",
+      "to": "package:logicn-target-native",
       "kind": "documents",
       "confidence": "INFERRED",
       "evidencePath": "docs/CHANGELOG.md"
@@ -11809,6 +12111,69 @@
       "evidencePath": "docs/FINANCE_PACKAGES.md"
     },
     {
+      "from": "doc:docs/framework/framework-overview.md",
+      "to": "package:logicn-framework-app-kernel",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/framework/framework-overview.md"
+    },
+    {
+      "from": "doc:docs/framework/framework-overview.md",
+      "to": "package:logicn-framework-api-server",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/framework/framework-overview.md"
+    },
+    {
+      "from": "doc:docs/framework/framework-overview.md",
+      "to": "package:logicn-framework-example-app",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/framework/framework-overview.md"
+    },
+    {
+      "from": "doc:docs/framework/framework-project-structure.md",
+      "to": "package:logicn-core",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/framework/framework-project-structure.md"
+    },
+    {
+      "from": "doc:docs/framework/framework-project-structure.md",
+      "to": "package:logicn-ai",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/framework/framework-project-structure.md"
+    },
+    {
+      "from": "doc:docs/framework/framework-project-structure.md",
+      "to": "package:logicn-framework-app-kernel",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/framework/framework-project-structure.md"
+    },
+    {
+      "from": "doc:docs/framework/framework-project-structure.md",
+      "to": "package:logicn-framework-api-server",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/framework/framework-project-structure.md"
+    },
+    {
+      "from": "doc:docs/framework/framework-project-structure.md",
+      "to": "package:logicn-devtools-project-graph",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/framework/framework-project-structure.md"
+    },
+    {
+      "from": "doc:docs/framework/framework-project-structure.md",
+      "to": "package:logicn-framework-example-app",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "docs/framework/framework-project-structure.md"
+    },
+    {
       "from": "doc:docs/LEARNING_MODE.md",
       "to": "package:logicn-core",
       "kind": "documents",
@@ -12524,7 +12889,7 @@
     },
     {
       "from": "doc:docs/PACKAGE_NAMING.md",
-      "to": "package:logicn-target-binary",
+      "to": "package:logicn-target-native",
       "kind": "documents",
       "confidence": "INFERRED",
       "evidencePath": "docs/PACKAGE_NAMING.md"
@@ -12713,7 +13078,7 @@
     },
     {
       "from": "doc:docs/PROFILE_INSTALLERS.md",
-      "to": "package:logicn-target-binary",
+      "to": "package:logicn-target-native",
       "kind": "documents",
       "confidence": "INFERRED",
       "evidencePath": "docs/PROFILE_INSTALLERS.md"
@@ -12791,20 +13156,6 @@
     {
       "from": "doc:docs/README.md",
       "to": "package:logicn-core",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "docs/README.md"
-    },
-    {
-      "from": "doc:docs/README.md",
-      "to": "package:logicn-ai",
-      "kind": "documents",
-      "confidence": "INFERRED",
-      "evidencePath": "docs/README.md"
-    },
-    {
-      "from": "doc:docs/README.md",
-      "to": "package:logicn-ai-agent",
       "kind": "documents",
       "confidence": "INFERRED",
       "evidencePath": "docs/README.md"
@@ -13021,7 +13372,7 @@
     },
     {
       "from": "doc:docs/REQUIREMENTS.md",
-      "to": "package:logicn-target-binary",
+      "to": "package:logicn-target-native",
       "kind": "documents",
       "confidence": "INFERRED",
       "evidencePath": "docs/REQUIREMENTS.md"
@@ -13462,7 +13813,7 @@
     },
     {
       "from": "doc:docs/TASKS.md",
-      "to": "package:logicn-target-binary",
+      "to": "package:logicn-target-native",
       "kind": "documents",
       "confidence": "INFERRED",
       "evidencePath": "docs/TASKS.md"
@@ -13742,7 +14093,7 @@
     },
     {
       "from": "doc:packages-logicn/logicn-core/ARCHITECTURE.md",
-      "to": "package:logicn-target-binary",
+      "to": "package:logicn-target-native",
       "kind": "documents",
       "confidence": "INFERRED",
       "evidencePath": "packages-logicn/logicn-core/ARCHITECTURE.md"
@@ -14057,7 +14408,7 @@
     },
     {
       "from": "doc:packages-logicn/logicn-core/CHANGELOG.md",
-      "to": "package:logicn-target-binary",
+      "to": "package:logicn-target-native",
       "kind": "documents",
       "confidence": "INFERRED",
       "evidencePath": "packages-logicn/logicn-core/CHANGELOG.md"
@@ -14274,7 +14625,7 @@
     },
     {
       "from": "doc:packages-logicn/logicn-core/docs/backend-compute-support-targets.md",
-      "to": "package:logicn-target-binary",
+      "to": "package:logicn-target-native",
       "kind": "documents",
       "confidence": "INFERRED",
       "evidencePath": "packages-logicn/logicn-core/docs/backend-compute-support-targets.md"
@@ -14316,7 +14667,7 @@
     },
     {
       "from": "doc:packages-logicn/logicn-core/docs/compiler-backends.md",
-      "to": "package:logicn-target-binary",
+      "to": "package:logicn-target-native",
       "kind": "documents",
       "confidence": "INFERRED",
       "evidencePath": "packages-logicn/logicn-core/docs/compiler-backends.md"
@@ -14400,7 +14751,7 @@
     },
     {
       "from": "doc:packages-logicn/logicn-core/docs/compute-blocks.md",
-      "to": "package:logicn-target-binary",
+      "to": "package:logicn-target-native",
       "kind": "documents",
       "confidence": "INFERRED",
       "evidencePath": "packages-logicn/logicn-core/docs/compute-blocks.md"
@@ -14939,6 +15290,13 @@
     },
     {
       "from": "package:logicn-core",
+      "to": "doc:packages-logicn/logicn-core/docs/machine-profile-bridge.md",
+      "kind": "owns",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core/docs/machine-profile-bridge.md"
+    },
+    {
+      "from": "package:logicn-core",
       "to": "doc:packages-logicn/logicn-core/docs/memory-and-variable-use.md",
       "kind": "owns",
       "confidence": "EXTRACTED",
@@ -15135,7 +15493,7 @@
     },
     {
       "from": "doc:packages-logicn/logicn-core/docs/package-boundaries.md",
-      "to": "package:logicn-target-binary",
+      "to": "package:logicn-target-native",
       "kind": "documents",
       "confidence": "INFERRED",
       "evidencePath": "packages-logicn/logicn-core/docs/package-boundaries.md"
@@ -15338,7 +15696,7 @@
     },
     {
       "from": "doc:packages-logicn/logicn-core/docs/package-use-registry.md",
-      "to": "package:logicn-target-binary",
+      "to": "package:logicn-target-native",
       "kind": "documents",
       "confidence": "INFERRED",
       "evidencePath": "packages-logicn/logicn-core/docs/package-use-registry.md"
@@ -15576,7 +15934,7 @@
     },
     {
       "from": "doc:packages-logicn/logicn-core/docs/README.md",
-      "to": "package:logicn-target-binary",
+      "to": "package:logicn-target-native",
       "kind": "documents",
       "confidence": "INFERRED",
       "evidencePath": "packages-logicn/logicn-core/docs/README.md"
@@ -15813,6 +16171,13 @@
       "evidencePath": "packages-logicn/logicn-core/docs/syntax-logic-status.md"
     },
     {
+      "from": "doc:packages-logicn/logicn-core/docs/syntax-logic-status.md",
+      "to": "package:logicn-target-native",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-core/docs/syntax-logic-status.md"
+    },
+    {
       "from": "package:logicn-core",
       "to": "doc:packages-logicn/logicn-core/docs/syntax.md",
       "kind": "owns",
@@ -16003,7 +16368,7 @@
     },
     {
       "from": "doc:packages-logicn/logicn-core/docs/target-and-capability-model.md",
-      "to": "package:logicn-target-binary",
+      "to": "package:logicn-target-native",
       "kind": "documents",
       "confidence": "INFERRED",
       "evidencePath": "packages-logicn/logicn-core/docs/target-and-capability-model.md"
@@ -16126,6 +16491,20 @@
       "kind": "owns",
       "confidence": "EXTRACTED",
       "evidencePath": "packages-logicn/logicn-core/docs/xml-support.md"
+    },
+    {
+      "from": "package:logicn-core",
+      "to": "doc:packages-logicn/logicn-core/examples/benchmark-results/compute-mix-throughput-2026-05-17T11-20-57-851Z.json",
+      "kind": "owns",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core/examples/benchmark-results/compute-mix-throughput-2026-05-17T11-20-57-851Z.json"
+    },
+    {
+      "from": "package:logicn-core",
+      "to": "doc:packages-logicn/logicn-core/examples/benchmark-results/compute-mix-throughput-2026-05-17T11-43-52-543Z.json",
+      "kind": "owns",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core/examples/benchmark-results/compute-mix-throughput-2026-05-17T11-43-52-543Z.json"
     },
     {
       "from": "package:logicn-core",
@@ -16388,7 +16767,7 @@
     },
     {
       "from": "doc:packages-logicn/logicn-core/README.md",
-      "to": "package:logicn-target-binary",
+      "to": "package:logicn-target-native",
       "kind": "documents",
       "confidence": "INFERRED",
       "evidencePath": "packages-logicn/logicn-core/README.md"
@@ -16521,7 +16900,7 @@
     },
     {
       "from": "doc:packages-logicn/logicn-core/REQUIREMENTS.md",
-      "to": "package:logicn-target-binary",
+      "to": "package:logicn-target-native",
       "kind": "documents",
       "confidence": "INFERRED",
       "evidencePath": "packages-logicn/logicn-core/REQUIREMENTS.md"
@@ -16836,7 +17215,7 @@
     },
     {
       "from": "doc:packages-logicn/logicn-core/TASKS.md",
-      "to": "package:logicn-target-binary",
+      "to": "package:logicn-target-native",
       "kind": "documents",
       "confidence": "INFERRED",
       "evidencePath": "packages-logicn/logicn-core/TASKS.md"
@@ -16948,7 +17327,7 @@
     },
     {
       "from": "doc:packages-logicn/logicn-core-compiler/README.md",
-      "to": "package:logicn-target-binary",
+      "to": "package:logicn-target-native",
       "kind": "documents",
       "confidence": "INFERRED",
       "evidencePath": "packages-logicn/logicn-core-compiler/README.md"
@@ -18656,6 +19035,20 @@
     },
     {
       "from": "package:logicn-core-logic",
+      "to": "doc:packages-logicn/logicn-core-logic/examples/BENCHMARK-V2-README.md",
+      "kind": "owns",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-core-logic/examples/BENCHMARK-V2-README.md"
+    },
+    {
+      "from": "doc:packages-logicn/logicn-core-logic/examples/BENCHMARK-V2-README.md",
+      "to": "package:logicn-core",
+      "kind": "documents",
+      "confidence": "INFERRED",
+      "evidencePath": "packages-logicn/logicn-core-logic/examples/BENCHMARK-V2-README.md"
+    },
+    {
+      "from": "package:logicn-core-logic",
       "to": "doc:packages-logicn/logicn-core-logic/examples/decision-truth-table.json",
       "kind": "owns",
       "confidence": "EXTRACTED",
@@ -19286,7 +19679,7 @@
     },
     {
       "from": "doc:packages-logicn/logicn-core-compute/README.md",
-      "to": "package:logicn-target-binary",
+      "to": "package:logicn-target-native",
       "kind": "documents",
       "confidence": "INFERRED",
       "evidencePath": "packages-logicn/logicn-core-compute/README.md"
@@ -21477,7 +21870,7 @@
     },
     {
       "from": "doc:packages-logicn/logicn-core-photonic/README.md",
-      "to": "package:logicn-target-binary",
+      "to": "package:logicn-target-native",
       "kind": "documents",
       "confidence": "INFERRED",
       "evidencePath": "packages-logicn/logicn-core-photonic/README.md"
@@ -22008,67 +22401,74 @@
       "evidencePath": "packages-logicn/logicn-cpu-kernels/tsconfig.json"
     },
     {
-      "from": "package:logicn-target-binary",
-      "to": "doc:packages-logicn/logicn-target-binary/package.json",
+      "from": "package:logicn-target-native",
+      "to": "doc:packages-logicn/logicn-target-native/package.json",
       "kind": "owns",
       "confidence": "EXTRACTED",
-      "evidencePath": "packages-logicn/logicn-target-binary/package.json"
+      "evidencePath": "packages-logicn/logicn-target-native/package.json"
     },
     {
-      "from": "package:logicn-target-binary",
-      "to": "doc:packages-logicn/logicn-target-binary/README.md",
+      "from": "package:logicn-target-native",
+      "to": "doc:packages-logicn/logicn-target-native/README.md",
       "kind": "owns",
       "confidence": "EXTRACTED",
-      "evidencePath": "packages-logicn/logicn-target-binary/README.md"
+      "evidencePath": "packages-logicn/logicn-target-native/README.md"
     },
     {
-      "from": "doc:packages-logicn/logicn-target-binary/README.md",
-      "to": "package:logicn-target-binary",
+      "from": "doc:packages-logicn/logicn-target-native/README.md",
+      "to": "package:logicn-target-native",
       "kind": "documents",
       "confidence": "INFERRED",
-      "evidencePath": "packages-logicn/logicn-target-binary/README.md"
+      "evidencePath": "packages-logicn/logicn-target-native/README.md"
     },
     {
-      "from": "package:logicn-target-binary",
-      "to": "type:logicn-target-binary:BinaryTarget",
+      "from": "package:logicn-target-native",
+      "to": "type:logicn-target-native:NativeAbi",
       "kind": "provides",
       "confidence": "EXTRACTED",
-      "evidencePath": "packages-logicn/logicn-target-binary/src/index.ts"
+      "evidencePath": "packages-logicn/logicn-target-native/src/index.ts"
     },
     {
-      "from": "package:logicn-target-binary",
-      "to": "type:logicn-target-binary:BinaryArtefact",
+      "from": "package:logicn-target-native",
+      "to": "type:logicn-target-native:NativeTarget",
       "kind": "provides",
       "confidence": "EXTRACTED",
-      "evidencePath": "packages-logicn/logicn-target-binary/src/index.ts"
+      "evidencePath": "packages-logicn/logicn-target-native/src/index.ts"
     },
     {
-      "from": "package:logicn-target-binary",
-      "to": "type:logicn-target-binary:BinaryTargetReport",
+      "from": "package:logicn-target-native",
+      "to": "type:logicn-target-native:NativeArtifact",
       "kind": "provides",
       "confidence": "EXTRACTED",
-      "evidencePath": "packages-logicn/logicn-target-binary/src/index.ts"
+      "evidencePath": "packages-logicn/logicn-target-native/src/index.ts"
     },
     {
-      "from": "package:logicn-target-binary",
-      "to": "doc:packages-logicn/logicn-target-binary/TODO.md",
+      "from": "package:logicn-target-native",
+      "to": "type:logicn-target-native:NativeTargetReport",
+      "kind": "provides",
+      "confidence": "EXTRACTED",
+      "evidencePath": "packages-logicn/logicn-target-native/src/index.ts"
+    },
+    {
+      "from": "package:logicn-target-native",
+      "to": "doc:packages-logicn/logicn-target-native/TODO.md",
       "kind": "owns",
       "confidence": "EXTRACTED",
-      "evidencePath": "packages-logicn/logicn-target-binary/TODO.md"
+      "evidencePath": "packages-logicn/logicn-target-native/TODO.md"
     },
     {
-      "from": "doc:packages-logicn/logicn-target-binary/TODO.md",
-      "to": "package:logicn-target-binary",
+      "from": "doc:packages-logicn/logicn-target-native/TODO.md",
+      "to": "package:logicn-target-native",
       "kind": "documents",
       "confidence": "INFERRED",
-      "evidencePath": "packages-logicn/logicn-target-binary/TODO.md"
+      "evidencePath": "packages-logicn/logicn-target-native/TODO.md"
     },
     {
-      "from": "package:logicn-target-binary",
-      "to": "doc:packages-logicn/logicn-target-binary/tsconfig.json",
+      "from": "package:logicn-target-native",
+      "to": "doc:packages-logicn/logicn-target-native/tsconfig.json",
       "kind": "owns",
       "confidence": "EXTRACTED",
-      "evidencePath": "packages-logicn/logicn-target-binary/tsconfig.json"
+      "evidencePath": "packages-logicn/logicn-target-native/tsconfig.json"
     },
     {
       "from": "package:logicn-target-js",
@@ -22625,7 +23025,7 @@
     },
     {
       "from": "doc:packages-logicn/logicn-target-photonic/README.md",
-      "to": "package:logicn-target-binary",
+      "to": "package:logicn-target-native",
       "kind": "documents",
       "confidence": "INFERRED",
       "evidencePath": "packages-logicn/logicn-target-photonic/README.md"
